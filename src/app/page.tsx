@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PageComments } from "@/components/comments";
 
 export default function Home() {
   return (
@@ -110,6 +111,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <PageComments pageId="home" />
     </>
   );
 }
