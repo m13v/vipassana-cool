@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageComments } from "@/components/comments";
 
 export const metadata: Metadata = {
   title: "How to Use dhamma.org — Step-by-Step Guide",
@@ -184,6 +185,7 @@ export default function GuidePage() {
           Browse Course Schedule
         </a>
       </div>
+      <PageComments pageId="guide" />
     </article>
   );
 }

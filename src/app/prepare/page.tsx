@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageComments } from "@/components/comments";
 
 export const metadata: Metadata = {
   title: "How to Prepare for a Vipassana Course",
@@ -184,6 +185,8 @@ export default function PreparePage() {
           Find a Center
         </a>
       </div>
+
+      <PageComments pageId="prepare" />
     </article>
   );
 }

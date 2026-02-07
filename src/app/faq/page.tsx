@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageComments } from "@/components/comments";
 
 export const metadata: Metadata = {
   title: "Vipassana FAQ — Honest Answers to Common Questions",
@@ -150,6 +151,8 @@ export default function FAQPage() {
           Learn More on dhamma.org
         </a>
       </div>
+
+      <PageComments pageId="faq" />
     </article>
   );
 }

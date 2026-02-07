@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { PageComments } from "@/components/comments";
 
 export const metadata: Metadata = {
   title: "Personal Vipassana Experience — 60 Days of Courses, 881+ Days of Practice",
@@ -225,6 +226,8 @@ export default function ExperiencePage() {
           Find a Course
         </a>
       </div>
+
+      <PageComments pageId="experience" />
     </article>
   );
 }

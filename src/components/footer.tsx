@@ -56,6 +56,14 @@ export function Footer() {
               >
                 Center Directory
               </a>
+              <a
+                href="https://www.reddit.com/r/vipassana"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted hover:text-foreground"
+              >
+                r/vipassana
+              </a>
             </div>
           </div>
         </div>
