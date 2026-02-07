@@ -70,7 +70,7 @@ export default function GuidePage() {
             courses&rdquo; — these are held at rented facilities and are equally legitimate.
             Check{" "}
             <a
-              href="https://www.dhamma.org/en/schedules/noncenter"
+              href="https://www.dhamma.org/en-US/courses/search"
               target="_blank"
               rel="noopener noreferrer"
               className="text-accent underline hover:text-foreground"
@@ -176,7 +176,7 @@ export default function GuidePage() {
           Visit dhamma.org to find a center near you and check the course schedule.
         </p>
         <a
-          href="https://www.dhamma.org/en/schedules/schall"
+          href="https://www.dhamma.org/en-US/courses/search"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"

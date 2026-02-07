@@ -41,12 +41,12 @@ export function Footer() {
                 dhamma.org
               </a>
               <a
-                href="https://www.dhamma.org/en/schedules/noncenter"
+                href="https://www.dhamma.org/en-US/courses/search"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted hover:text-foreground"
               >
-                Course Schedule
+                Find a Course
               </a>
               <a
                 href="https://www.dhamma.org/en/locations/directory"

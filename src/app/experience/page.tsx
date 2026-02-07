@@ -196,7 +196,7 @@ export default function ExperiencePage() {
           Find a center near you and sign up for a 10-day course.
         </p>
         <a
-          href="https://www.dhamma.org/en/schedules/schall"
+          href="https://www.dhamma.org/en-US/courses/search"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
