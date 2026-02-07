@@ -8,7 +8,7 @@ const links = [
   { href: "/guide", label: "Guide to dhamma.org" },
   { href: "/faq", label: "FAQ" },
   { href: "/prepare", label: "Preparation" },
-  { href: "/experience", label: "My Experience" },
+  { href: "/experience", label: "Personal Experience", bold: true },
 ];
 
 export function Navigation() {
@@ -27,7 +27,7 @@ export function Navigation() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-muted transition-colors hover:text-foreground"
+              className={`text-sm transition-colors hover:text-foreground ${link.bold ? "font-bold text-foreground" : "text-muted"}`}
             >
               {link.label}
             </Link>
@@ -58,7 +58,7 @@ export function Navigation() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="block py-2 text-sm text-muted transition-colors hover:text-foreground"
+              className={`block py-2 text-sm transition-colors hover:text-foreground ${link.bold ? "font-bold text-foreground" : "text-muted"}`}
             >
               {link.label}
             </Link>

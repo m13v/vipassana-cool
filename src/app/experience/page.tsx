@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageComments } from "@/components/comments";
+import { DayCounter } from "@/components/day-counter";
 
 export const metadata: Metadata = {
   title: "Personal Vipassana Experience — 60 Days of Courses, 881+ Days of Practice",
@@ -32,7 +33,7 @@ export default function ExperiencePage() {
           <p className="text-sm text-muted">
             Engineer, startup founder, Vipassana practitioner.
             <br />
-            60 days of courses. 881+ days of daily practice.
+            60 days of courses. <DayCounter /> days of daily practice.
           </p>
           <div className="mt-2 flex gap-3">
             <a href="https://m13v.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-accent" aria-label="Website">
@@ -139,7 +140,7 @@ export default function ExperiencePage() {
           </h2>
           <p>
             The courses are powerful, but the daily practice is where the transformation
-            actually happens. 881+ days of sitting, morning and evening. Some days
+            actually happens. <DayCounter /> days of sitting, morning and evening. Some days
             it&apos;s 20 minutes. Some days it&apos;s the full hour. The important
             thing is continuity.
           </p>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DayCounter } from "@/components/day-counter";
 
 export function Footer() {
   return (
@@ -25,7 +26,7 @@ export function Footer() {
                 Preparation
               </Link>
               <Link href="/experience" className="text-sm text-muted hover:text-foreground">
-                My Experience
+                Personal Experience
               </Link>
             </div>
           </div>
@@ -78,7 +79,7 @@ export function Footer() {
             >
               Matthew Diakonov
             </a>{" "}
-            — a practitioner with 60 days of courses and 881+ days of daily practice.
+            — a practitioner with 60 days of courses and <DayCounter /> days of daily practice.
           </p>
           <div className="mt-3 flex justify-center gap-4">
             <a href="https://m13v.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-accent" aria-label="Website">
