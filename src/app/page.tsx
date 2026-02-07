@@ -91,6 +91,11 @@ export default function Home() {
               description="What to pack, how to prepare mentally and physically, and tips from someone who has done six courses."
             />
             <Card
+              href="/resources"
+              title="Useful Resources"
+              description="200+ curated links — books, documentaries, podcasts, research papers, apps, blogs, and official Goenka/dhamma.org resources."
+            />
+            <Card
               href="/experience"
               title="Personal Experience"
               description="An honest account of doing Vipassana as a tech professional — the good, the hard, and the transformative."

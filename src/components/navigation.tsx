@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 
 const links = [
-  { href: "/", label: "Home" },
   { href: "/guide", label: "Guide to dhamma.org" },
   { href: "/faq", label: "FAQ" },
   { href: "/prepare", label: "Preparation" },
+  { href: "/resources", label: "Resources" },
   { href: "/experience", label: "Personal Experience", bold: true },
 ];
 

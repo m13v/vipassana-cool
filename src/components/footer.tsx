@@ -25,6 +25,9 @@ export function Footer() {
               <Link href="/prepare" className="text-sm text-muted hover:text-foreground">
                 Preparation
               </Link>
+              <Link href="/resources" className="text-sm text-muted hover:text-foreground">
+                Resources
+              </Link>
               <Link href="/experience" className="text-sm text-muted hover:text-foreground">
                 Personal Experience
               </Link>
