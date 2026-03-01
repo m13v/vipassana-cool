@@ -126,6 +126,12 @@ export default function AfterRetreatPage() {
               </Link>{" "}
               for details.
             </li>
+            <li><strong>Find a group sitting</strong> &mdash; Committing to a weekly{" "}
+              <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">
+                group sitting
+              </Link>{" "}
+              is one of the best structural anchors for post-retreat integration. The accountability of sitting with others, even once a week, keeps the practice alive during the critical transition period.
+            </li>
           </ul>
         </section>
 
@@ -142,7 +148,11 @@ export default function AfterRetreatPage() {
             <Link href="/guide/daily-practice" className="text-accent underline hover:text-foreground">
               complete guide to daily Vipassana practice at home
             </Link>{" "}
-            that covers scheduling, obstacles, and building consistency.
+            that covers scheduling, obstacles, and building consistency. And if you&apos;re wondering whether the practice is actually working, our guide to{" "}
+            <Link href="/guide/recognizing-progress" className="text-accent underline hover:text-foreground">
+              recognizing progress
+            </Link>{" "}
+            covers what deepening actually looks like over months and years.
           </p>
         </section>
 
@@ -163,7 +173,7 @@ export default function AfterRetreatPage() {
             <div className="border-l-2 border-accent/30 pl-4">
               <h3 className="mb-1 font-semibold text-foreground">The people who get it</h3>
               <p>
-                The only people who will truly understand what you went through are other Vipassana meditators and your teachers. Seek them out. Many centers offer group sittings for old students, and connecting with fellow practitioners provides a kind of validation that no one else can offer.
+                The only people who will truly understand what you went through are other Vipassana meditators and your teachers. Seek them out. Many centers offer <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">group sittings</Link> for old students, and connecting with fellow practitioners provides a kind of validation that no one else can offer.
               </p>
             </div>
 
@@ -178,6 +188,15 @@ export default function AfterRetreatPage() {
               <h3 className="mb-1 font-semibold text-foreground">Partners and family</h3>
               <p>
                 If your partner or family didn&apos;t understand why you went, your return might be complicated. They may feel excluded, confused, or worried. The best approach is to show rather than tell &mdash; let them see the changes in your patience, presence, and emotional balance. Over time, the practice speaks for itself.
+              </p>
+              <p>
+                <strong>Before the retreat:</strong> &quot;I&apos;m doing a 10-day silent meditation retreat. It&apos;s something I need to try. I won&apos;t have my phone, but I&apos;ll be safe and well-fed. I&apos;ll be back on [date].&quot; Keep it simple and factual. Don&apos;t over-explain or seek permission.
+              </p>
+              <p>
+                <strong>Coming home:</strong> &quot;It was really intense and valuable. I&apos;m still processing. I need a day or two to ease back in.&quot; Resist the urge to download the entire experience in one conversation. Share gradually as they ask.
+              </p>
+              <p>
+                <strong>The daily practice conversation:</strong> Frame it as an exchange, not a demand. &quot;I&apos;d like to sit for 30 minutes every morning. I&apos;ll set an alarm before anyone&apos;s up, and it won&apos;t affect the morning routine.&quot; Make the logistics clear and the disruption minimal. When your partner sees you handling stress better, the conversation gets easier.
               </p>
             </div>
           </div>

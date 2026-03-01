@@ -135,7 +135,7 @@ export default function CourseProgressionPage() {
             maintaining daily practice (ideally two hours per day, one morning and one evening),
             observing the five precepts, and not mixing other meditation techniques with Vipassana.
             These aren&apos;t enforced with a checklist, but they&apos;re the foundation that
-            makes deeper courses meaningful.
+            makes deeper courses meaningful. For a complete look at what the old student path includes — expectations, what unlocks, community, and common challenges — see our <Link href="/guide/old-student-path" className="text-accent underline hover:text-foreground">old student path guide</Link>.
           </p>
         </section>
 

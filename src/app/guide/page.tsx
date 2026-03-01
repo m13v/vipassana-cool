@@ -62,6 +62,21 @@ export default function GuidePage() {
             desc: "How to get back on the cushion after a break.",
           },
           {
+            href: "/guide/group-sittings",
+            title: "Group Sittings",
+            desc: "How to find, attend, or start a group sitting.",
+          },
+          {
+            href: "/guide/old-student-path",
+            title: "Old Student Path",
+            desc: "Life as an old student — expectations and what unlocks.",
+          },
+          {
+            href: "/guide/recognizing-progress",
+            title: "Recognizing Progress",
+            desc: "What deepening actually looks like over months and years.",
+          },
+          {
             href: "/guide/course-application-tips",
             title: "Application Tips",
             desc: "How to fill out the course application.",

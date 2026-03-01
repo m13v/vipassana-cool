@@ -46,6 +46,18 @@ export default function DailyPracticePage() {
           <p>
             Designate a spot for meditation. It doesn&apos;t need to be a dedicated room — a corner of your bedroom works. The key is consistency: sitting in the same place creates a mental association that helps you settle in faster. Keep your cushion, bench, or chair there permanently so there&apos;s zero setup friction.
           </p>
+          <p>
+            <strong>Choosing your spot:</strong> If you live with others, a corner with your back to the room works well. A visual boundary — even a small rug or a folded blanket marking your space — signals to housemates that this is your practice area. Consistency matters more than aesthetics: the same spot, every day, creates a gravitational pull that makes sitting easier.
+          </p>
+          <p>
+            <strong>Cushion vs bench vs chair:</strong> Use whatever allows you to sit upright with a straight spine. If your hips are tight, a higher cushion or a bench helps. If your knees are an issue, a chair is perfectly fine — Goenka himself says the technique works regardless of posture. The worst option is your bed or a couch; too much comfort leads to drowsiness.
+          </p>
+          <p>
+            <strong>Managing noise:</strong> Early morning is naturally quieter. If noise is a persistent issue, simple earplugs or a white noise machine can help. That said, some meditators treat noise as part of the practice — observe the sound, notice your aversion to it, and return to the body scan. External silence is helpful but not required.
+          </p>
+          <p>
+            <strong>Temperature:</strong> Slightly cool is better than warm. A warm room makes you drowsy. Keep a blanket nearby for cold mornings — your body temperature drops during extended sitting. The blanket-over-legs approach from the meditation hall works well at home too.
+          </p>
 
           <h3 className="mb-2 mt-6 font-semibold text-foreground">Choose Your Time</h3>
           <p>
@@ -180,7 +192,7 @@ export default function DailyPracticePage() {
             Sometimes the best way to restart is to take another course. A 10-day course is like pressing a reset button on your practice. If you&apos;ve been struggling to maintain daily practice for months, signing up for a course can reignite the motivation and deepen the technique in ways that home practice alone cannot.
           </p>
           <p>
-            Group sittings are another powerful accountability tool. Many Vipassana centers host weekly group sittings for old students. Having a regular appointment with other meditators creates gentle external structure. You&apos;re less likely to skip when others are expecting you. And sitting with a group, even in silence, reinforces that you&apos;re part of something larger than your individual practice.
+            <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">Group sittings</Link> are another powerful accountability tool. Many Vipassana centers host weekly group sittings for old students. Having a regular appointment with other meditators creates gentle external structure. You&apos;re less likely to skip when others are expecting you. And sitting with a group, even in silence, reinforces that you&apos;re part of something larger than your individual practice.
           </p>
         </section>
 
@@ -191,9 +203,39 @@ export default function DailyPracticePage() {
             <li><strong>Start small if you need to.</strong> Twenty minutes is better than zero. You can always extend later.</li>
             <li><strong>Don&apos;t negotiate with resistance.</strong> The mind will generate excellent reasons to skip. Sit anyway. You&apos;ve never regretted a sit.</li>
             <li><strong>Take a course annually.</strong> One course per year recharges the practice significantly. It&apos;s like a deep reset that sustains the daily work.</li>
-            <li><strong>Connect with other meditators.</strong> Group sittings are offered at most Vipassana centers. Sitting with others, even once a week, reinforces the practice.</li>
+            <li><strong>Connect with other meditators.</strong> <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">Group sittings</Link> are offered at most Vipassana centers. Sitting with others, even once a week, reinforces the practice.</li>
             <li><strong>Use the Goenka recordings.</strong> As an old student, you have access to guided group sittings and chanting recordings. These can add structure to home sessions.</li>
           </ul>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Practice and Family Life</h2>
+          <p>
+            One of the most common practical challenges isn&apos;t the technique itself — it&apos;s fitting meditation into a household with other people.
+          </p>
+
+          <div className="mt-4 space-y-6">
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground">When you have a partner</h3>
+              <p>
+                Communicate your schedule matter-of-factly, not apologetically. &quot;I sit from 6 to 7 every morning&quot; is better than &quot;I hope you don&apos;t mind if I meditate.&quot; Use a vibrating watch or phone alarm so you don&apos;t wake them. And let the benefits speak — when your partner notices you&apos;re calmer, more patient, and more present, the meditation time becomes easier to protect.
+              </p>
+            </div>
+
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground">When you have young children</h3>
+              <p>
+                Early morning before they wake is the most reliable window. If that&apos;s not possible, negotiate with your partner: &quot;I sit for 30 minutes while you handle morning routine, then I take over.&quot; When interruptions happen — and they will — handle them gently, then return to the cushion. A closed door with a simple rule (&quot;unless someone is hurt, please wait&quot;) works for older children.
+              </p>
+            </div>
+
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground">Shared spaces</h3>
+              <p>
+                If you don&apos;t have a private room, a corner with your back to the room creates enough separation. Early morning solves most shared-space problems — you sit while the house is asleep. If morning isn&apos;t an option, a visual boundary (a specific mat, a folded blanket) and a consistent time create the same effect as a dedicated room.
+              </p>
+            </div>
+          </div>
         </section>
 
         <section>
@@ -202,7 +244,7 @@ export default function DailyPracticePage() {
             I sit every morning, usually for 45-60 minutes. Evening sittings happen maybe four days a week. Some days the practice is deep and focused. Many days my mind wanders and I spend the session gently bringing it back. Both kinds of sitting count.
           </p>
           <p>
-            The cumulative effect over hundreds of days is unmistakable. Not dramatic, single moments of transformation — but a gradual, steady shift in how I relate to difficulty, uncertainty, and my own reactive patterns. That shift is what keeps me coming back to the cushion.
+            The cumulative effect over hundreds of days is unmistakable. Not dramatic, single moments of transformation — but a gradual, steady shift in how I relate to difficulty, uncertainty, and my own reactive patterns. That shift is what keeps me coming back to the cushion. For more on what this looks like over time, see our guide to <Link href="/guide/recognizing-progress" className="text-accent underline hover:text-foreground">recognizing progress</Link>.
           </p>
         </section>
       </div>

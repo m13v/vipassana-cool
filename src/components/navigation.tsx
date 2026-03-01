@@ -31,6 +31,9 @@ const links: NavLink[] = [
       { href: "/guide/how-vipassana-changes-you", label: "How It Changes You" },
       { href: "/guide/vipassana-and-relationships", label: "Relationships" },
       { href: "/guide/restarting-your-practice", label: "Restart Your Practice" },
+      { href: "/guide/group-sittings", label: "Group Sittings" },
+      { href: "/guide/old-student-path", label: "Old Student Path" },
+      { href: "/guide/recognizing-progress", label: "Recognizing Progress" },
     ],
   },
   {

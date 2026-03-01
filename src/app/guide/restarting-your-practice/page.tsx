@@ -123,8 +123,32 @@ export default function RestartingPracticePage() {
             If you&apos;re struggling to restart, committing to one group sitting per week can be the anchor that holds your practice together while you rebuild the daily habit.
           </p>
           <p>
-            Check your nearest Vipassana center&apos;s website for group sitting schedules. Many are listed on <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>.
+            Check your nearest Vipassana center&apos;s website for group sitting schedules. Many are listed on <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>. For the full guide on finding, attending, or starting a group sitting, see our <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">group sittings page</Link>.
           </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Refresh Your Environment</h2>
+          <p>
+            Your physical space shapes your practice more than you think. If you haven&apos;t sat in months, reclaiming the space is a concrete, immediate action that signals your intention to restart.
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-6">
+            <li><strong>Clear the spot</strong> — If your cushion has been buried under laundry, reclaim it. Dust it off. Put it back in position. Having a visible, ready meditation space removes one layer of friction.</li>
+            <li><strong>Remove obstacles</strong> — Is the alarm clock across the room? Move it closer. Do you need to find your timer app every morning? Pin it to your home screen. Every small friction point is an excuse your mind will use.</li>
+            <li><strong>Small upgrades</strong> — A dedicated timer (instead of your phone), earplugs if noise is an issue, a blanket for cold mornings. These small investments signal commitment and remove excuses. You don&apos;t need to spend much — you just need your space to be ready and waiting.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Navigating Family When Restarting</h2>
+          <p>
+            If you live with others, restarting your practice means reintroducing a routine they may have gotten used to not having. A few approaches that work:
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-6">
+            <li><strong>Start with minimal disruption</strong> — Begin with 15 minutes before anyone else is awake. There&apos;s nothing to negotiate or explain. You&apos;re just getting up a bit earlier.</li>
+            <li><strong>Don&apos;t make a big announcement</strong> — &quot;I&apos;m restarting my meditation practice&quot; invites discussion and potential resistance. Just sit. If anyone asks, keep it simple: &quot;Yeah, I&apos;m meditating again in the mornings.&quot;</li>
+            <li><strong>Let results convince skeptics</strong> — The best argument for your meditation time is your improved patience, presence, and emotional balance. This takes a few weeks to become visible, but it&apos;s more persuasive than any explanation.</li>
+          </ul>
         </section>
 
         <section>

@@ -75,7 +75,7 @@ export default function HowVipassanaChangesYouPage() {
             <li>You catch yourself mid-reaction more often</li>
           </ul>
           <p>
-            The plateau is not a sign to quit. It&apos;s a sign that the initial novelty-driven motivation has been replaced by something deeper. The practice is shifting from exciting to essential — from something you do for experiences to something you do because it fundamentally supports your wellbeing.
+            The plateau is not a sign to quit. It&apos;s a sign that the initial novelty-driven motivation has been replaced by something deeper. The practice is shifting from exciting to essential — from something you do for experiences to something you do because it fundamentally supports your wellbeing. For a detailed look at what progress looks like at different stages and how to recognize it, see our guide to <Link href="/guide/recognizing-progress" className="text-accent underline hover:text-foreground">recognizing progress</Link>.
           </p>
         </section>
 
