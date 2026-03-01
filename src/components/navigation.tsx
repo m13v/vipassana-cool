@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import posthog from "posthog-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { SearchModal } from "./search-modal";
 
 type NavLink = {
   href: string;
@@ -48,6 +49,7 @@ const links: NavLink[] = [
   },
   { href: "/prepare", label: "Preparation" },
   { href: "/resources", label: "Resources" },
+  { href: "/practice-buddy", label: "Practice Buddy", bold: true },
   {
     href: "/experience",
     label: "Personal Experience",
@@ -109,13 +111,32 @@ function DesktopDropdown({ link }: { link: NavLink }) {
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
+  const [isMac, setIsMac] = useState(true);
 
   const toggleMobileSubmenu = (href: string) => {
     setExpandedMobile(expandedMobile === href ? null : href);
   };
 
+  useEffect(() => {
+    setIsMac(navigator.platform.toUpperCase().includes("MAC"));
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
+    <>
+    <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     <nav className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
         <Link href="/" onClick={() => posthog.capture("nav_click", { label: "vipassana.cool", href: "/" })} className="text-lg font-semibold tracking-tight text-accent">
@@ -123,7 +144,7 @@ export function Navigation() {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden gap-6 md:flex">
+        <div className="hidden gap-6 items-center md:flex">
           {links.map((link) =>
             link.children ? (
               <DesktopDropdown key={link.href} link={link} />
@@ -138,22 +159,45 @@ export function Navigation() {
               </Link>
             )
           )}
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-muted transition-colors hover:text-foreground hover:border-foreground/30"
+            aria-label="Search"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <kbd className="text-[10px] font-mono">{isMac ? "\u2318" : "Ctrl+"}K</kbd>
+          </button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="text-muted md:hidden"
-          aria-label="Toggle menu"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? (
-              <path d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path d="M3 12h18M3 6h18M3 18h18" />
-            )}
-          </svg>
-        </button>
+        {/* Mobile: search + toggle */}
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="p-2 text-muted"
+            aria-label="Search"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+          <button
+            onClick={() => setOpen(!open)}
+            className="text-muted"
+            aria-label="Toggle menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              {open ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M3 12h18M3 6h18M3 18h18" />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -208,5 +252,6 @@ export function Navigation() {
         </div>
       )}
     </nav>
+    </>
   );
 }
