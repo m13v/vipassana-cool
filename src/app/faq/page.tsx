@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { FaqSchema } from "@/components/faq-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana FAQ — Honest Answers to Common Questions",
@@ -122,6 +124,57 @@ export default function FAQPage() {
         Honest answers from someone who has completed six 10-day Vipassana courses and
         maintained a daily practice for over 881 days.
       </p>
+
+      <FaqSchema
+        faqs={faqs.map((faq) => ({
+          question: faq.q,
+          answer: faq.a.join(" "),
+        }))}
+      />
+
+      {/* Featured deep-dive FAQ articles */}
+      <div className="mb-12 grid gap-4 sm:grid-cols-2">
+        {[
+          {
+            href: "/faq/is-vipassana-safe",
+            title: "Is Vipassana Safe?",
+            desc: "Risks, side effects, and who should avoid it.",
+          },
+          {
+            href: "/faq/why-is-vipassana-free",
+            title: "Why Is It Free?",
+            desc: "The donation model and how it actually works.",
+          },
+          {
+            href: "/faq/can-i-leave-early",
+            title: "Can I Leave Early?",
+            desc: "What happens if you want to quit mid-course.",
+          },
+          {
+            href: "/faq/is-vipassana-a-cult",
+            title: "Is Vipassana a Cult?",
+            desc: "An honest look at the Goenka organization.",
+          },
+          {
+            href: "/faq/vipassana-vs-therapy",
+            title: "Vipassana vs Therapy",
+            desc: "How they compare and when to choose which.",
+          },
+        ].map((card) => (
+          <Link
+            key={card.href}
+            href={card.href}
+            className="group rounded-lg border border-border bg-card p-5 transition-colors hover:border-accent/50 hover:bg-card-hover"
+          >
+            <h2 className="font-semibold text-foreground group-hover:text-accent">
+              {card.title}
+            </h2>
+            <p className="mt-1 text-sm text-muted">{card.desc}</p>
+          </Link>
+        ))}
+      </div>
+
+      <h2 className="mb-6 text-2xl font-bold">Quick Answers</h2>
 
       <div className="space-y-8">
         {faqs.map((faq, i) => (

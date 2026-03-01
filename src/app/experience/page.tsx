@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { DayCounter } from "@/components/day-counter";
 
@@ -76,38 +77,40 @@ export default function ExperiencePage() {
 
         <section>
           <h2 className="mb-4 text-xl font-bold text-foreground">
-            The First Course: Survival Mode
+            The First Course: Day by Day
           </h2>
           <p>
             I&apos;m not going to romanticize it. The first course was one of the hardest
-            things I&apos;ve ever done.
+            things I&apos;ve ever done. Here&apos;s what each day was actually like:
           </p>
-          <p className="mt-4">
-            Day 1: Okay, this is fine. Sit, breathe, observe. Simple.
-          </p>
-          <p className="mt-4">
-            Day 2: My knees are screaming. My mind won&apos;t shut up. I&apos;ve
-            replayed every conversation I&apos;ve had in the last 5 years. I want my phone.
-          </p>
-          <p className="mt-4">
-            Day 3: Existential crisis. Why am I here? This is pointless. I could be
-            shipping code right now. I seriously considered leaving.
-          </p>
-          <p className="mt-4">
-            Day 4: Something shifted. The technique deepened. For the first time, I could
-            feel sensations throughout my body that I&apos;d never noticed. It was like
-            discovering a new sense.
-          </p>
-          <p className="mt-4">
-            Days 5–9: A strange oscillation between profound peace and intense
-            discomfort. Not always pleasant, but always interesting. The evening
-            discourses by Goenka became something I genuinely looked forward to —
-            the man has a wonderful sense of humor.
-          </p>
-          <p className="mt-4">
-            Day 10: Silence breaks. Talking felt alien. I realized how much noise I
-            normally fill my life with. A deep sense of gratitude for the experience.
-          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {[
+              { day: 1, title: "Arrival & Anapana", desc: "Sit, breathe, observe. Simple — until it isn't." },
+              { day: 2, title: "Knee Pain & Monkey Mind", desc: "Knees screaming. Mind replaying every conversation from the last 5 years." },
+              { day: 3, title: "The Urge to Leave", desc: "Existential crisis. Why am I here? I seriously considered leaving." },
+              { day: 4, title: "The Technique Changes", desc: "Something shifted. Sensations I'd never noticed. Like discovering a new sense." },
+              { day: 5, title: "Settling In", desc: "Finding rhythm. Pain becomes workable. The practice deepens." },
+              { day: 6, title: "Deep Sensations", desc: "Emotional waves. Deeper layers surface. Equanimity tested." },
+              { day: 7, title: "Finding Flow", desc: "Mental quiet. Extended concentration. Peace that surprises you." },
+              { day: 8, title: "Deepening Equanimity", desc: "Subtle sensations, subtle cravings. The refinement continues." },
+              { day: 9, title: "Last Day of Silence", desc: "Bittersweet. Best sittings. Not ready to leave this space." },
+              { day: 10, title: "Silence Breaks", desc: "Talking felt alien. Gratitude for the experience. Metta bhavana." },
+            ].map((d) => (
+              <Link
+                key={d.day}
+                href={`/experience/day-${d.day}`}
+                className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-accent/50 hover:bg-card-hover"
+              >
+                <span className="text-xs font-medium uppercase tracking-wider text-accent">
+                  Day {d.day}
+                </span>
+                <h3 className="mt-1 font-semibold text-foreground group-hover:text-accent">
+                  {d.title}
+                </h3>
+                <p className="mt-1 text-sm">{d.desc}</p>
+              </Link>
+            ))}
+          </div>
         </section>
 
         <section>

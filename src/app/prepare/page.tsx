@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageComments } from "@/components/comments";
 
 export const metadata: Metadata = {
@@ -24,7 +25,15 @@ export default function PreparePage() {
       <div className="space-y-12">
         {/* Packing list */}
         <section>
-          <h2 className="mb-6 text-2xl font-bold">What to Pack</h2>
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold">What to Pack</h2>
+            <Link
+              href="/prepare/packing-list"
+              className="text-sm font-medium text-accent hover:text-foreground"
+            >
+              Full packing list &rarr;
+            </Link>
+          </div>
 
           <div className="grid gap-6 sm:grid-cols-2">
             <PackingCategory
