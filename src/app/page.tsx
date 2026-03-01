@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { TrackedLink } from "@/components/tracked-events";
+import { EmailCapture } from "@/components/email-capture";
 
 export default function Home() {
   return (
@@ -106,6 +107,13 @@ export default function Home() {
               description="An honest account of doing Vipassana as a tech professional — the good, the hard, and the transformative."
             />
           </div>
+        </div>
+      </section>
+
+      {/* Email capture */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-4xl px-6 py-16">
+          <EmailCapture location="home" />
         </div>
       </section>
 

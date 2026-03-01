@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
+import { EmailCapture } from "@/components/email-capture";
 
 export const metadata: Metadata = {
   title: "How to Prepare for a Vipassana Course",
@@ -183,7 +184,11 @@ export default function PreparePage() {
         </section>
       </div>
 
-      <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
+      <div className="mt-16">
+        <EmailCapture location="prepare" />
+      </div>
+
+      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Ready?</h2>
         <p className="mb-6 text-muted">
           Find a center and check available course dates.
