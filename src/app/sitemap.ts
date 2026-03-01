@@ -56,5 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/guide/how-vipassana-changes-you`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/guide/restarting-your-practice`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/guide/first-course-tips`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    // Practice Buddy
+    { url: `${baseUrl}/practice-buddy`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
   ];
 }

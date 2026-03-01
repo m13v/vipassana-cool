@@ -106,6 +106,11 @@ export default function Home() {
               title="Personal Experience"
               description="An honest account of doing Vipassana as a tech professional — the good, the hard, and the transformative."
             />
+            <Card
+              href="/practice-buddy"
+              title="Practice Buddy"
+              description="Get matched with a fellow meditator for daily practice accountability. Coming soon — join the waitlist."
+            />
           </div>
         </div>
       </section>
