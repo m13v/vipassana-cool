@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 
   try {
     // Fetch stats in parallel
-    const [pageviewStats, topPages, subscriberData, eventBreakdown] =
+    const [pageviewStats, topPages, subscriberData, eventBreakdown, waitlistWeek, waitlistTotal] =
       await Promise.all([
         hogqlQuery(projectId, phKey, `
           SELECT
@@ -53,13 +53,24 @@ export async function GET(request: NextRequest) {
           ORDER BY total DESC
           LIMIT 10
         `),
+        hogqlQuery(projectId, phKey, `
+          SELECT count() as signups
+          FROM events
+          WHERE timestamp > now() - interval 7 day
+            AND event = 'waitlist_signup'
+        `),
+        hogqlQuery(projectId, phKey, `
+          SELECT count() as signups
+          FROM events
+          WHERE event = 'waitlist_signup'
+        `),
       ]);
 
     const totalPageviews = pageviewStats.results?.[0]?.[0] ?? 0;
     const uniqueVisitors = pageviewStats.results?.[0]?.[1] ?? 0;
-    const subscriberCount = eventBreakdown.results?.length
-      ? subscriberData?.data?.length ?? 0
-      : subscriberData?.data?.length ?? 0;
+    const subscriberCount = subscriberData?.data?.length ?? 0;
+    const waitlistNewThisWeek = waitlistWeek.results?.[0]?.[0] ?? 0;
+    const waitlistAllTime = waitlistTotal.results?.[0]?.[0] ?? 0;
 
     // Format top pages
     const topPagesRows = (topPages.results ?? [])
@@ -115,6 +126,20 @@ export async function GET(request: NextRequest) {
     </div>
 
     <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:20px;margin-bottom:24px;">
+      <h2 style="font-size:16px;margin:0 0 12px;color:#8b7355;">Practice Buddy Waitlist</h2>
+      <div style="display:flex;gap:24px;">
+        <div>
+          <span style="font-size:24px;font-weight:700;color:#8b7355;">${waitlistNewThisWeek}</span>
+          <span style="font-size:13px;color:#6b6b6b;margin-left:6px;">new this week</span>
+        </div>
+        <div>
+          <span style="font-size:24px;font-weight:700;color:#8b7355;">${waitlistAllTime}</span>
+          <span style="font-size:13px;color:#6b6b6b;margin-left:6px;">total all-time</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:20px;margin-bottom:24px;">
       <h2 style="font-size:16px;margin:0 0 12px;color:#8b7355;">Top Pages</h2>
       <table style="width:100%;border-collapse:collapse;">
         <thead>
@@ -158,11 +183,11 @@ export async function GET(request: NextRequest) {
     await resend.emails.send({
       from: "Vipassana.cool <hello@vipassana.cool>",
       to: "i@m13v.com",
-      subject: `Vipassana.cool Weekly — ${totalPageviews} pageviews, ${subscriberCount} subscribers`,
+      subject: `Vipassana.cool Weekly — ${totalPageviews} views, ${subscriberCount} subs, ${waitlistAllTime} waitlist`,
       html,
     });
 
-    return NextResponse.json({ success: true, totalPageviews, uniqueVisitors, subscriberCount });
+    return NextResponse.json({ success: true, totalPageviews, uniqueVisitors, subscriberCount, waitlistNewThisWeek, waitlistAllTime });
   } catch (error) {
     console.error("Weekly report error:", error);
     return NextResponse.json(
