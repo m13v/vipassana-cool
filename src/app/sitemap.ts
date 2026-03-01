@@ -44,5 +44,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/guide/vipassana-for-addiction`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/guide/vipassana-and-sleep`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/guide/vipassana-for-pain`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    // New FAQ pages — Batch 2
+    { url: `${baseUrl}/faq/is-vipassana-right-for-me`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/faq/vipassana-and-depression`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/faq/what-to-expect`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/faq/can-i-do-shorter-sessions`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    // New guide pages — Batch 2
+    { url: `${baseUrl}/guide/anapana-and-vipassana-explained`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/guide/sensations-and-experiences`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/guide/vipassana-and-relationships`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/guide/how-vipassana-changes-you`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/guide/restarting-your-practice`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/guide/first-course-tips`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
   ];
 }

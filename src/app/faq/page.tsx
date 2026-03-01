@@ -161,6 +161,26 @@ export default function FAQPage() {
             title: "Vipassana vs Therapy",
             desc: "How they compare and when to choose which.",
           },
+          {
+            href: "/faq/is-vipassana-right-for-me",
+            title: "Is It Right for Me?",
+            desc: "A self-assessment to help you decide.",
+          },
+          {
+            href: "/faq/vipassana-and-depression",
+            title: "Vipassana & Depression",
+            desc: "When it helps, when to wait, what to expect.",
+          },
+          {
+            href: "/faq/what-to-expect",
+            title: "What to Expect",
+            desc: "High-level overview of the 10-day course.",
+          },
+          {
+            href: "/faq/can-i-do-shorter-sessions",
+            title: "Shorter Sessions",
+            desc: "Do 20 or 30-minute sessions still work?",
+          },
         ].map((card) => (
           <TrackedLink
             key={card.href}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageComments } from "@/components/comments";
-import { TrackedCTA } from "@/components/tracked-events";
+import { TrackedCTA, TrackedLink } from "@/components/tracked-events";
 
 export const metadata: Metadata = {
   title: "How to Use dhamma.org — Step-by-Step Guide",
@@ -22,6 +22,77 @@ export default function GuidePage() {
         of S.N. Goenka. It can feel a bit overwhelming the first time. Here&apos;s a
         clear walkthrough.
       </p>
+
+      {/* Guide articles */}
+      <div className="mb-12 grid gap-4 sm:grid-cols-2">
+        {[
+          {
+            href: "/guide/first-course-tips",
+            title: "First Course Tips",
+            desc: "15 things I wish I knew before my first retreat.",
+          },
+          {
+            href: "/guide/daily-practice",
+            title: "Daily Practice",
+            desc: "How to maintain your practice at home.",
+          },
+          {
+            href: "/guide/anapana-and-vipassana-explained",
+            title: "Anapana & Vipassana",
+            desc: "Two techniques, one practice — explained.",
+          },
+          {
+            href: "/guide/sensations-and-experiences",
+            title: "Sensations Explained",
+            desc: "Gross, subtle, bhanga, and free flow.",
+          },
+          {
+            href: "/guide/how-vipassana-changes-you",
+            title: "How It Changes You",
+            desc: "The gradual, real shift that practice creates.",
+          },
+          {
+            href: "/guide/vipassana-and-relationships",
+            title: "Relationships",
+            desc: "Coming home different and navigating the impact.",
+          },
+          {
+            href: "/guide/restarting-your-practice",
+            title: "Restart Your Practice",
+            desc: "How to get back on the cushion after a break.",
+          },
+          {
+            href: "/guide/course-application-tips",
+            title: "Application Tips",
+            desc: "How to fill out the course application.",
+          },
+          {
+            href: "/guide/vipassana-vs-other-meditation",
+            title: "Vipassana vs Others",
+            desc: "How Vipassana compares to other techniques.",
+          },
+          {
+            href: "/guide/risks-and-safety",
+            title: "Risks & Safety",
+            desc: "What to know about safety and side effects.",
+          },
+        ].map((card) => (
+          <TrackedLink
+            key={card.href}
+            href={card.href}
+            event="guide_card_click"
+            properties={{ topic: card.title }}
+            className="group rounded-lg border border-border bg-card p-5 transition-colors hover:border-accent/50 hover:bg-card-hover"
+          >
+            <h2 className="font-semibold text-foreground group-hover:text-accent">
+              {card.title}
+            </h2>
+            <p className="mt-1 text-sm text-muted">{card.desc}</p>
+          </TrackedLink>
+        ))}
+      </div>
+
+      <h2 className="mb-6 text-2xl font-bold">How to Use dhamma.org</h2>
 
       <div className="space-y-12">
         <Section number="1" title="Understand What You're Signing Up For">
