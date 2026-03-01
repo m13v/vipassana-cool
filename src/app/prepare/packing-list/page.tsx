@@ -94,6 +94,55 @@ export default function PackingListPage() {
         </section>
 
         <section>
+          <h2 className="mb-4 text-xl font-bold text-foreground">Why Each Item Matters</h2>
+          <p>
+            Some packing list items seem obvious until you&apos;re on Day 3 without them. Here&apos;s why certain items are more important than they appear:
+          </p>
+          <ul className="mt-4 list-disc space-y-2 pl-6">
+            <li><strong>Earplugs</strong> — Roommates snore. The 4 AM gong is loud. Shared dormitories mean you have zero control over noise. Quality earplugs can be the difference between getting six hours of sleep and getting four. Foam earplugs from any pharmacy work fine; bring extras in case you lose a pair.</li>
+            <li><strong>Layers</strong> — Meditation halls are cold at 4:30 AM and warm by afternoon. The temperature swing can be 15-20 degrees over the course of a day. Without layers, you&apos;re either freezing during early sessions or overheating during midday sittings. A zip-up fleece that you can easily remove mid-session is ideal.</li>
+            <li><strong>Loose pants</strong> — You&apos;ll sit cross-legged for 10+ hours daily. Tight fabric around the hips, knees, or waist becomes genuine pain by Day 2. This isn&apos;t a comfort preference — it&apos;s a practical necessity. Joggers with drawstring waists, loose cotton pants, or Thai fisherman pants are popular choices among experienced meditators.</li>
+            <li><strong>Alarm clock</strong> — Phones are stored away on Day 1. Without an independent alarm, you&apos;re relying on the 4 AM gong to wake you. But the gong means meditation starts soon — you need to wake before the gong to use the bathroom, brush your teeth, and settle in. A basic battery-powered travel alarm clock solves this.</li>
+            <li><strong>Unscented products</strong> — In silence, smell sensitivity increases dramatically. A scent that would go unnoticed in daily life becomes overwhelming when you&apos;re sitting motionless in a quiet hall with 30 other people. Strong fragrances — perfume, scented lotion, heavily fragranced shampoo — can genuinely distract other meditators from their practice. Switch to unscented everything for the course.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="mb-4 text-xl font-bold text-foreground">Seasonal &amp; Climate Tips</h2>
+          <p>
+            What you pack depends heavily on when and where your course takes place. Adjust your packing list based on the season and climate:
+          </p>
+
+          <h3 className="mb-2 mt-6 font-semibold text-foreground">Summer Courses</h3>
+          <ul className="mt-2 list-disc space-y-2 pl-6">
+            <li>Bring breathable, lightweight fabrics — cotton and linen are ideal for long sitting sessions in warm weather.</li>
+            <li>A sun hat for walking breaks between sessions. You&apos;ll spend breaks outdoors, and shade isn&apos;t always available.</li>
+            <li>Don&apos;t skip the light blanket or shawl — meditation halls can still be cold from air conditioning, even in the middle of summer.</li>
+          </ul>
+
+          <h3 className="mb-2 mt-6 font-semibold text-foreground">Winter Courses</h3>
+          <ul className="mt-2 list-disc space-y-2 pl-6">
+            <li>Thermal base layers are essential for 4:30 AM sessions. The hall may have heating, but it takes time to warm up, and you&apos;ll be sitting still.</li>
+            <li>Thick wool socks — cold feet are one of the biggest distractions during winter courses. Bring at least two pairs of your warmest socks.</li>
+            <li>A warm meditation shawl or blanket to wrap around yourself during longer sessions.</li>
+            <li>A hot water bottle, if your center allows them. Check in advance — some centers provide them, some allow you to bring your own.</li>
+          </ul>
+
+          <h3 className="mb-2 mt-6 font-semibold text-foreground">Tropical / Humid Centers</h3>
+          <ul className="mt-2 list-disc space-y-2 pl-6">
+            <li>Quick-dry clothing is invaluable — humidity means nothing dries overnight on a clothesline.</li>
+            <li>Mosquito repellent is essential, not optional. Tropical centers often have mosquitoes in walking areas and sometimes in dormitories.</li>
+            <li>Flip-flops or waterproof sandals for wet pathways and shower areas.</li>
+          </ul>
+
+          <h3 className="mb-2 mt-6 font-semibold text-foreground">Desert / Dry Centers</h3>
+          <ul className="mt-2 list-disc space-y-2 pl-6">
+            <li>Lip balm and moisturizer — dry air combined with hours of sitting in heated or air-conditioned halls can leave your skin cracked and uncomfortable.</li>
+            <li>A refillable water bottle for breaks between sessions. Staying hydrated in dry climates requires conscious effort, and the walk to the water station is your only chance to drink.</li>
+          </ul>
+        </section>
+
+        <section>
           <h2 className="mb-4 text-xl font-bold text-foreground">What I Wish I&apos;d Known</h2>
           <p>
             After six courses, here are the things I always bring now that I didn&apos;t on my first:

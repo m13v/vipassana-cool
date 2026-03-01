@@ -116,6 +116,75 @@ export default function DailyPracticePage() {
         </section>
 
         <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Realistic Schedules</h2>
+          <p>
+            The &quot;ideal&quot; Vipassana schedule is two hours daily — one hour morning, one hour evening. That&apos;s what Goenka recommends, and it&apos;s a worthy goal. But for most people, especially those new to daily practice, jumping straight to two hours is a recipe for burnout and abandonment.
+          </p>
+          <p>
+            Here are practical schedule tiers. Start where you can be consistent, and build from there:
+          </p>
+
+          <div className="mt-6 space-y-4">
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground">Starter: 20 minutes morning only</h3>
+              <p>
+                Perfect for the first weeks after your course. Just sit every morning for 20 minutes. No evening session. The goal is to establish the habit before extending the duration. Twenty minutes is enough to do a meaningful body scan and build the daily groove.
+              </p>
+            </div>
+
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground">Building: 30 minutes morning, 15 minutes evening</h3>
+              <p>
+                Once the morning habit is solid, add a short evening sit. Fifteen minutes before bed helps you process the day and creates a natural bookend. Your morning session becomes the main practice; the evening session is a lighter supplement.
+              </p>
+            </div>
+
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground">Committed: 45 minutes morning, 30 minutes evening</h3>
+              <p>
+                This is where the practice starts to deepen noticeably. Forty-five minutes gives you time to settle, do a thorough body scan, and sit with whatever arises. The 30-minute evening sit becomes a real practice session, not just a check-in.
+              </p>
+            </div>
+
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground">Full: 1 hour morning, 1 hour evening</h3>
+              <p>
+                The recommended practice. Two hours daily is what sustains deep progress over months and years. If you can reach this level consistently, you&apos;ll notice a significant difference in your equanimity, awareness, and the quality of your sittings during courses.
+              </p>
+            </div>
+          </div>
+
+          <p className="mt-6">
+            The key message: any consistent practice beats an inconsistent &quot;ideal&quot; practice. Sitting for 20 minutes every single day will take you further than sitting for an hour three times a week. Build the habit first, then extend the duration. Your practice should feel sustainable, not heroic.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">When You Fall Off</h2>
+          <p>
+            It happens to everyone. Including me. You miss a day, then two, then a week, and suddenly it&apos;s been a month since you last sat. The cushion gathers dust. The habit feels like a distant memory.
+          </p>
+          <p>
+            This is normal. It&apos;s not a failure — it&apos;s part of the long arc of practice. The question isn&apos;t whether you&apos;ll fall off. The question is how you come back.
+          </p>
+          <p>
+            If you&apos;ve been away for days, just sit tomorrow morning. Start with 10 or 15 minutes if a full session feels intimidating. Don&apos;t try to &quot;make up&quot; for lost time. Just begin again.
+          </p>
+          <p>
+            If you&apos;ve been away for weeks or months, the same applies — but be gentle with yourself. Your concentration will have weakened, sensations may be less clear, and your mind will be noisier than you remember. That&apos;s okay. Every meditator who has practiced for decades has gone through stretches like this. The practice is always there, exactly where you left it.
+          </p>
+          <p>
+            There&apos;s no need for guilt. Guilt is just another form of aversion — exactly what the practice teaches you to observe and release. Instead of beating yourself up for not sitting, channel that energy into sitting right now.
+          </p>
+          <p>
+            Sometimes the best way to restart is to take another course. A 10-day course is like pressing a reset button on your practice. If you&apos;ve been struggling to maintain daily practice for months, signing up for a course can reignite the motivation and deepen the technique in ways that home practice alone cannot.
+          </p>
+          <p>
+            Group sittings are another powerful accountability tool. Many Vipassana centers host weekly group sittings for old students. Having a regular appointment with other meditators creates gentle external structure. You&apos;re less likely to skip when others are expecting you. And sitting with a group, even in silence, reinforces that you&apos;re part of something larger than your individual practice.
+          </p>
+        </section>
+
+        <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">Building Consistency</h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Same time, same place, every day.</strong> Remove decisions from the equation. It&apos;s not &quot;should I meditate today?&quot; — it&apos;s &quot;it&apos;s 6 AM, so I sit.&quot;</li>

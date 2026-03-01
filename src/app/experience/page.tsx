@@ -6,9 +6,9 @@ import { DayCounter } from "@/components/day-counter";
 import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
 
 export const metadata: Metadata = {
-  title: "Personal Vipassana Experience — 60 Days of Courses, 881+ Days of Practice",
+  title: "What to Expect at a Vipassana Retreat — 60 Days of Courses, 881+ Days of Practice",
   description:
-    "An honest personal account of doing six 10-day Vipassana courses as a tech professional. What changed, what was hard, and why I keep going back.",
+    "A day-by-day personal account of what actually happens during a 10-day Vipassana course. What to expect, what was hard, and honest insights from six retreats.",
 };
 
 export default function ExperiencePage() {

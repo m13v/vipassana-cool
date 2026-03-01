@@ -22,7 +22,7 @@ export default function WhyIsVipassanaFreePage() {
         {
           question: "How much should I donate after a Vipassana course?",
           answer:
-            "There is no suggested or expected amount. Donate whatever you can comfortably afford, or nothing at all. The principle is that your donation helps future students attend, just as a previous student's donation helped you.",
+            "The estimated cost per student per course is roughly $250-375 covering accommodation, food, and center operations. However, there is no expected amount — donate whatever feels right, or nothing at all. Many people donate the equivalent of what a retreat would cost elsewhere ($1,000-5,000), while others give what they can. Your donation funds future students, just as a previous student funded your course.",
         },
         {
           question: "Is there a catch to free Vipassana courses?",
@@ -82,6 +82,34 @@ export default function WhyIsVipassanaFreePage() {
         </p>
         <p>
           There&apos;s no suggested amount. Some people donate the equivalent of what a retreat would cost elsewhere. Some donate a small amount. Some donate nothing. All are equally welcome to return for future courses.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="mb-3 text-xl font-bold text-foreground">How Much Should I Donate?</h2>
+        <p>
+          This is the question everyone wants answered but feels awkward asking. Let&apos;s address it directly.
+        </p>
+        <p>
+          The estimated cost to a center per student for a 10-day course is roughly $250-375. This covers accommodation, food, utilities, and ongoing maintenance. That&apos;s the baseline of what it takes to keep a seat available.
+        </p>
+        <p>
+          For context, commercial meditation retreats charge $1,000-5,000+ for a similar duration — and they don&apos;t come with the depth of instruction or the lineage that Vipassana offers. Vipassana centers provide all of this at no cost to the student.
+        </p>
+        <p>
+          What do people actually donate? The range varies enormously. Some donate $50. Some donate $500. Some donate nothing. All of these are fine. There is no receipt checking, no judgment, no tiered access based on donation amount.
+        </p>
+        <p>
+          The Goenka perspective is simple: donate whatever you can, from a place of genuine generosity, not obligation. If you can afford to cover your own seat cost and contribute toward someone else&apos;s, wonderful. If you can only give a small amount, that&apos;s equally valued. If you can&apos;t give anything right now, that&apos;s completely acceptable.
+        </p>
+        <p>
+          You can donate at any time — at the center after your course, online weeks or months later, through monthly recurring contributions, or during future visits. There&apos;s no deadline and no pressure.
+        </p>
+        <p>
+          Non-monetary donations count too. Volunteering your time through seva (service), donating supplies to a center, or offering professional skills like accounting, construction, or IT support are all meaningful ways to give back.
+        </p>
+        <p>
+          The key principle to understand: your donation isn&apos;t paying for YOUR course. That was already funded by a previous student&apos;s generosity. Your donation is paying for a FUTURE student&apos;s course — someone you&apos;ll never meet, continuing the chain of generosity that made your own experience possible.
         </p>
       </section>
 
