@@ -33,14 +33,19 @@ export async function POST(request: NextRequest) {
     const firstName = nameParts[0] || "";
     const lastName = nameParts.slice(1).join(" ") || "";
 
-    // Add to audience
-    await resend.contacts.create({
-      email: data.email,
-      audienceId: AUDIENCE_ID,
-      firstName,
-      lastName,
-      unsubscribed: false,
-    });
+    // Add to audience (ignore "already exists" errors)
+    try {
+      await resend.contacts.create({
+        email: data.email,
+        audienceId: AUDIENCE_ID,
+        firstName,
+        lastName,
+        unsubscribed: false,
+      });
+    } catch (contactError: unknown) {
+      const msg = contactError instanceof Error ? contactError.message : "";
+      if (!msg.includes("already exists")) throw contactError;
+    }
 
     // Send confirmation email to the user
     await resend.emails.send({
@@ -50,37 +55,9 @@ export async function POST(request: NextRequest) {
       html: getWaitlistEmail(data),
     });
 
-    // Send the full intake data to yourself for matching later
-    await resend.emails.send({
-      from: "Vipassana.cool <hello@vipassana.cool>",
-      to: "i@m13v.com",
-      subject: `Practice Buddy signup: ${data.name} (${data.city})`,
-      html: getAdminNotificationEmail(data),
-    });
-
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Unknown error";
-    if (message.includes("already exists")) {
-      try {
-        const data: WaitlistData = await request.clone().json();
-        await resend.emails.send({
-          from: "Vipassana.cool <hello@vipassana.cool>",
-          to: data.email,
-          subject: "You're on the Practice Buddy waitlist",
-          html: getWaitlistEmail(data),
-        });
-        await resend.emails.send({
-          from: "Vipassana.cool <hello@vipassana.cool>",
-          to: "i@m13v.com",
-          subject: `Practice Buddy signup: ${data.name} (${data.city})`,
-          html: getAdminNotificationEmail(data),
-        });
-        return NextResponse.json({ success: true });
-      } catch {
-        return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
-      }
-    }
+    console.error("Waitlist API error:", error);
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }
@@ -146,27 +123,3 @@ function getWaitlistEmail(data: WaitlistData): string {
 </html>`;
 }
 
-function getAdminNotificationEmail(data: WaitlistData): string {
-  return `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#2c2c2c;padding:24px;">
-  <h2 style="margin:0 0 16px;">New Practice Buddy signup</h2>
-  <table style="font-size:14px;line-height:1.8;border-collapse:collapse;">
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Name</td><td>${data.name || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Email</td><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Old student</td><td>${data.isOldStudent || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Goenka / U Ba Khin</td><td>${data.isGoenkatradition || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">City</td><td>${data.city || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Timezone</td><td>${data.timezone || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Frequency</td><td>${data.frequency || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Session duration</td><td>${data.sessionDuration || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Morning time</td><td>${data.morningTime || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Evening time</td><td>${data.eveningTime || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Days</td><td>${data.days.join(", ") || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Maintained practice</td><td>${data.hasMaintainedPractice || "—"}</td></tr>
-    <tr><td style="padding:4px 16px 4px 0;font-weight:600;">Practice length</td><td>${data.practiceLength || "—"}</td></tr>
-  </table>
-</body>
-</html>`;
-}
