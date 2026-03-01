@@ -12,7 +12,20 @@ type NavLink = {
 };
 
 const links: NavLink[] = [
-  { href: "/guide", label: "Guide to dhamma.org" },
+  {
+    href: "/guide",
+    label: "Guide",
+    children: [
+      { href: "/guide/course-application-tips", label: "Application Tips" },
+      { href: "/guide/after-retreat", label: "After Your Retreat" },
+      { href: "/guide/daily-practice", label: "Daily Practice" },
+      { href: "/guide/course-progression", label: "Course Progression" },
+      { href: "/guide/dhamma-service", label: "Dhamma Service" },
+      { href: "/guide/vipassana-vs-other-meditation", label: "Vipassana vs Others" },
+      { href: "/guide/scientific-evidence", label: "Scientific Evidence" },
+      { href: "/guide/risks-and-safety", label: "Risks & Safety" },
+    ],
+  },
   {
     href: "/faq",
     label: "FAQ",
@@ -22,6 +35,7 @@ const links: NavLink[] = [
       { href: "/faq/can-i-leave-early", label: "Can I Leave Early?" },
       { href: "/faq/is-vipassana-a-cult", label: "Is It a Cult?" },
       { href: "/faq/vipassana-vs-therapy", label: "Vipassana vs Therapy" },
+      { href: "/faq/vipassana-with-adhd-anxiety", label: "ADHD, Anxiety & Meds" },
     ],
   },
   { href: "/prepare", label: "Preparation" },

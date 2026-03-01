@@ -30,5 +30,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // New content pages
     { url: `${baseUrl}/prepare/packing-list`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/guide/daily-practice`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    // New FAQ detail pages
+    { url: `${baseUrl}/faq/vipassana-with-adhd-anxiety`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    // New guide pages — Tier 1
+    { url: `${baseUrl}/guide/after-retreat`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/guide/risks-and-safety`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/guide/vipassana-vs-other-meditation`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/guide/course-application-tips`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/guide/scientific-evidence`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    // New guide pages — Tier 3
+    { url: `${baseUrl}/guide/course-progression`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/guide/dhamma-service`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/guide/vipassana-for-addiction`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/guide/vipassana-and-sleep`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/guide/vipassana-for-pain`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
   ];
 }
