@@ -19,10 +19,14 @@ export default function PreparePage() {
       <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
         How to Prepare for Your Course
       </h1>
-      <p className="mb-12 text-lg text-muted">
+      <p className="mb-8 text-lg text-muted">
         You don&apos;t need much to prepare — but a little preparation goes a long way
         in making the experience smoother.
       </p>
+
+      <div className="mb-12">
+        <EmailCapture location="prepare" />
+      </div>
 
       <div className="space-y-12">
         {/* Packing list */}
@@ -184,11 +188,7 @@ export default function PreparePage() {
         </section>
       </div>
 
-      <div className="mt-16">
-        <EmailCapture location="prepare" />
-      </div>
-
-      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
+      <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Ready?</h2>
         <p className="mb-6 text-muted">
           Find a center and check available course dates.
