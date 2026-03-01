@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TrackedLink } from "@/components/tracked-events";
 
 const days = [
   { num: 1, slug: "day-1" },
@@ -30,13 +31,15 @@ export default function ExperienceLayout({
           </Link>
           <span className="text-border">|</span>
           {days.map((day) => (
-            <Link
+            <TrackedLink
               key={day.slug}
               href={`/experience/${day.slug}`}
+              event="day_strip_click"
+              properties={{ day: day.num }}
               className="shrink-0 rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-card hover:text-foreground"
             >
               {day.num}
-            </Link>
+            </TrackedLink>
           ))}
         </div>
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
 
 export const metadata: Metadata = {
   title: "How to Prepare for a Vipassana Course",
@@ -27,12 +28,14 @@ export default function PreparePage() {
         <section>
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-bold">What to Pack</h2>
-            <Link
+            <TrackedLink
               href="/prepare/packing-list"
+              event="internal_link_click"
+              properties={{ label: "Full packing list", location: "prepare" }}
               className="text-sm font-medium text-accent hover:text-foreground"
             >
               Full packing list &rarr;
-            </Link>
+            </TrackedLink>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2">
@@ -185,14 +188,14 @@ export default function PreparePage() {
         <p className="mb-6 text-muted">
           Find a center and check available course dates.
         </p>
-        <a
+        <TrackedCTA
           href="https://www.dhamma.org/en/locations/directory"
-          target="_blank"
-          rel="noopener noreferrer"
+          event="cta_click"
+          properties={{ label: "Find a Center", location: "prepare" }}
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
           Find a Center
-        </a>
+        </TrackedCTA>
       </div>
 
       <PageComments pageId="prepare" />

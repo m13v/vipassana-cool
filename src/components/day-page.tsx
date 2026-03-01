@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { TrackedLink } from "@/components/tracked-events";
 
 const days = [
   { num: 1, slug: "day-1", label: "Day 1" },
@@ -46,29 +47,35 @@ export function DayPage({
       {/* Prev / Next navigation */}
       <div className="mt-16 flex items-center justify-between border-t border-border pt-8">
         {prev ? (
-          <Link
+          <TrackedLink
             href={`/experience/${prev.slug}`}
+            event="day_nav_click"
+            properties={{ from: day, to: prev.num, direction: "prev" }}
             className="text-sm font-medium text-accent hover:text-foreground"
           >
             &larr; {prev.label}
-          </Link>
+          </TrackedLink>
         ) : (
           <span />
         )}
         {next ? (
-          <Link
+          <TrackedLink
             href={`/experience/${next.slug}`}
+            event="day_nav_click"
+            properties={{ from: day, to: next.num, direction: "next" }}
             className="text-sm font-medium text-accent hover:text-foreground"
           >
             {next.label} &rarr;
-          </Link>
+          </TrackedLink>
         ) : (
-          <Link
+          <TrackedLink
             href="/experience"
+            event="day_nav_click"
+            properties={{ from: day, to: 0, direction: "next" }}
             className="text-sm font-medium text-accent hover:text-foreground"
           >
             Full Experience &rarr;
-          </Link>
+          </TrackedLink>
         )}
       </div>
 

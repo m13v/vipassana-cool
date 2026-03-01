@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { FaqSchema } from "@/components/faq-schema";
+import { TrackedLink } from "@/components/tracked-events";
 
 export function FaqDetailPage({
   pageId,
@@ -42,13 +43,15 @@ export function FaqDetailPage({
           <h2 className="mb-4 font-semibold text-foreground">Related</h2>
           <div className="flex flex-wrap gap-3">
             {relatedLinks.map((link) => (
-              <Link
+              <TrackedLink
                 key={link.href}
                 href={link.href}
+                event="related_link_click"
+                properties={{ from: pageId, to: link.href }}
                 className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
               >
                 {link.label}
-              </Link>
+              </TrackedLink>
             ))}
           </div>
         </div>

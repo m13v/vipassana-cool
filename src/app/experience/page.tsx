@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { DayCounter } from "@/components/day-counter";
+import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
 
 export const metadata: Metadata = {
   title: "Personal Vipassana Experience — 60 Days of Courses, 881+ Days of Practice",
@@ -96,9 +97,11 @@ export default function ExperiencePage() {
               { day: 9, title: "Last Day of Silence", desc: "Bittersweet. Best sittings. Not ready to leave this space." },
               { day: 10, title: "Silence Breaks", desc: "Talking felt alien. Gratitude for the experience. Metta bhavana." },
             ].map((d) => (
-              <Link
+              <TrackedLink
                 key={d.day}
                 href={`/experience/day-${d.day}`}
+                event="day_card_click"
+                properties={{ day: d.day }}
                 className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-accent/50 hover:bg-card-hover"
               >
                 <span className="text-xs font-medium uppercase tracking-wider text-accent">
@@ -108,7 +111,7 @@ export default function ExperiencePage() {
                   {d.title}
                 </h3>
                 <p className="mt-1 text-sm">{d.desc}</p>
-              </Link>
+              </TrackedLink>
             ))}
           </div>
         </section>
@@ -221,14 +224,14 @@ export default function ExperiencePage() {
         <p className="mb-6 text-muted">
           Find a center near you and sign up for a 10-day course.
         </p>
-        <a
+        <TrackedCTA
           href="https://www.dhamma.org/en-US/courses/search"
-          target="_blank"
-          rel="noopener noreferrer"
+          event="cta_click"
+          properties={{ label: "Find a Course", location: "experience" }}
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
           Find a Course
-        </a>
+        </TrackedCTA>
       </div>
 
       <PageComments pageId="experience" />

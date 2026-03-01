@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { DayCounter } from "@/components/day-counter";
+import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
 
 export function Footer() {
   return (
@@ -16,58 +17,58 @@ export function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-semibold">Pages</h3>
             <div className="flex flex-col gap-2">
-              <Link href="/guide" className="text-sm text-muted hover:text-foreground">
+              <TrackedLink href="/guide" event="footer_link_click" properties={{ label: "Guide to dhamma.org", href: "/guide" }} className="text-sm text-muted hover:text-foreground">
                 Guide to dhamma.org
-              </Link>
-              <Link href="/faq" className="text-sm text-muted hover:text-foreground">
+              </TrackedLink>
+              <TrackedLink href="/faq" event="footer_link_click" properties={{ label: "FAQ", href: "/faq" }} className="text-sm text-muted hover:text-foreground">
                 FAQ
-              </Link>
-              <Link href="/prepare" className="text-sm text-muted hover:text-foreground">
+              </TrackedLink>
+              <TrackedLink href="/prepare" event="footer_link_click" properties={{ label: "Preparation", href: "/prepare" }} className="text-sm text-muted hover:text-foreground">
                 Preparation
-              </Link>
-              <Link href="/resources" className="text-sm text-muted hover:text-foreground">
+              </TrackedLink>
+              <TrackedLink href="/resources" event="footer_link_click" properties={{ label: "Resources", href: "/resources" }} className="text-sm text-muted hover:text-foreground">
                 Resources
-              </Link>
-              <Link href="/experience" className="text-sm text-muted hover:text-foreground">
+              </TrackedLink>
+              <TrackedLink href="/experience" event="footer_link_click" properties={{ label: "Personal Experience", href: "/experience" }} className="text-sm text-muted hover:text-foreground">
                 Personal Experience
-              </Link>
+              </TrackedLink>
             </div>
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold">Official Resources</h3>
             <div className="flex flex-col gap-2">
-              <a
+              <TrackedCTA
                 href="https://www.dhamma.org"
-                target="_blank"
-                rel="noopener noreferrer"
+                event="footer_link_click"
+                properties={{ label: "dhamma.org", href: "https://www.dhamma.org" }}
                 className="text-sm text-muted hover:text-foreground"
               >
                 dhamma.org
-              </a>
-              <a
+              </TrackedCTA>
+              <TrackedCTA
                 href="https://www.dhamma.org/en-US/courses/search"
-                target="_blank"
-                rel="noopener noreferrer"
+                event="footer_link_click"
+                properties={{ label: "Find a Course", href: "https://www.dhamma.org/en-US/courses/search" }}
                 className="text-sm text-muted hover:text-foreground"
               >
                 Find a Course
-              </a>
-              <a
+              </TrackedCTA>
+              <TrackedCTA
                 href="https://www.dhamma.org/en/locations/directory"
-                target="_blank"
-                rel="noopener noreferrer"
+                event="footer_link_click"
+                properties={{ label: "Center Directory", href: "https://www.dhamma.org/en/locations/directory" }}
                 className="text-sm text-muted hover:text-foreground"
               >
                 Center Directory
-              </a>
-              <a
+              </TrackedCTA>
+              <TrackedCTA
                 href="https://www.reddit.com/r/vipassana"
-                target="_blank"
-                rel="noopener noreferrer"
+                event="footer_link_click"
+                properties={{ label: "r/vipassana", href: "https://www.reddit.com/r/vipassana" }}
                 className="text-sm text-muted hover:text-foreground"
               >
                 r/vipassana
-              </a>
+              </TrackedCTA>
             </div>
           </div>
         </div>

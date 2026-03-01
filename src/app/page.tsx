@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { TrackedLink } from "@/components/tracked-events";
 
 export default function Home() {
   return (
@@ -29,18 +30,22 @@ export default function Home() {
           from a practitioner with 60 days of courses completed.
         </p>
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
-          <Link
+          <TrackedLink
             href="/guide"
+            event="cta_click"
+            properties={{ label: "How to Use dhamma.org", location: "hero" }}
             className="rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
           >
             How to Use dhamma.org
-          </Link>
-          <Link
+          </TrackedLink>
+          <TrackedLink
             href="/faq"
+            event="cta_click"
+            properties={{ label: "Read the FAQ", location: "hero" }}
             className="rounded-lg border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-card-hover"
           >
             Read the FAQ
-          </Link>
+          </TrackedLink>
         </div>
       </section>
 
@@ -132,13 +137,15 @@ function Card({
   description: string;
 }) {
   return (
-    <Link
+    <TrackedLink
       href={href}
+      event="feature_card_click"
+      properties={{ section: title }}
       className="group rounded-xl border border-border bg-card p-6 transition-colors hover:bg-card-hover"
     >
       <h3 className="mb-2 font-semibold group-hover:text-accent">{title}</h3>
       <p className="text-sm text-muted">{description}</p>
-    </Link>
+    </TrackedLink>
   );
 }
 

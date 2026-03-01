@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { FaqSchema } from "@/components/faq-schema";
+import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
 
 export const metadata: Metadata = {
   title: "Vipassana FAQ — Honest Answers to Common Questions",
@@ -161,16 +162,18 @@ export default function FAQPage() {
             desc: "How they compare and when to choose which.",
           },
         ].map((card) => (
-          <Link
+          <TrackedLink
             key={card.href}
             href={card.href}
+            event="faq_card_click"
+            properties={{ topic: card.title }}
             className="group rounded-lg border border-border bg-card p-5 transition-colors hover:border-accent/50 hover:bg-card-hover"
           >
             <h2 className="font-semibold text-foreground group-hover:text-accent">
               {card.title}
             </h2>
             <p className="mt-1 text-sm text-muted">{card.desc}</p>
-          </Link>
+          </TrackedLink>
         ))}
       </div>
 
@@ -195,14 +198,14 @@ export default function FAQPage() {
           The official dhamma.org site has additional information, or you can contact
           your nearest center directly.
         </p>
-        <a
+        <TrackedCTA
           href="https://www.dhamma.org/en/about/vipassana"
-          target="_blank"
-          rel="noopener noreferrer"
+          event="cta_click"
+          properties={{ label: "Learn More on dhamma.org", location: "faq" }}
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
           Learn More on dhamma.org
-        </a>
+        </TrackedCTA>
       </div>
 
       <PageComments pageId="faq" />

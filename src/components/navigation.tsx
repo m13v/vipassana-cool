@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import posthog from "posthog-js";
 import { useState } from "react";
 
 type NavLink = {
@@ -49,7 +50,9 @@ function DesktopDropdown({ link }: { link: NavLink }) {
     <div className="group relative">
       <Link
         href={link.href}
+        onClick={() => posthog.capture("nav_click", { label: link.label, href: link.href })}
         className={`text-sm transition-colors hover:text-foreground ${link.bold ? "font-bold text-foreground" : "text-muted"}`}
+        onMouseEnter={() => posthog.capture("nav_dropdown_open", { section: link.label })}
       >
         {link.label}
         <svg
@@ -70,6 +73,7 @@ function DesktopDropdown({ link }: { link: NavLink }) {
             <Link
               key={child.href}
               href={child.href}
+              onClick={() => posthog.capture("nav_click", { label: child.label, href: child.href })}
               className="block px-4 py-1.5 text-sm text-muted transition-colors hover:bg-card hover:text-foreground"
             >
               {child.label}
@@ -92,7 +96,7 @@ export function Navigation() {
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-lg font-semibold tracking-tight text-accent">
+        <Link href="/" onClick={() => posthog.capture("nav_click", { label: "vipassana.cool", href: "/" })} className="text-lg font-semibold tracking-tight text-accent">
           vipassana.cool
         </Link>
 
@@ -105,6 +109,7 @@ export function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={() => posthog.capture("nav_click", { label: link.label, href: link.href })}
                 className={`text-sm transition-colors hover:text-foreground ${link.bold ? "font-bold text-foreground" : "text-muted"}`}
               >
                 {link.label}
@@ -137,14 +142,14 @@ export function Navigation() {
               <div className="flex items-center justify-between">
                 <Link
                   href={link.href}
-                  onClick={() => setOpen(false)}
+                  onClick={() => { posthog.capture("nav_click", { label: link.label, href: link.href }); setOpen(false); }}
                   className={`block py-2 text-sm transition-colors hover:text-foreground ${link.bold ? "font-bold text-foreground" : "text-muted"}`}
                 >
                   {link.label}
                 </Link>
                 {link.children && (
                   <button
-                    onClick={() => toggleMobileSubmenu(link.href)}
+                    onClick={() => { posthog.capture("nav_dropdown_open", { section: link.label }); toggleMobileSubmenu(link.href); }}
                     className="p-2 text-muted"
                     aria-label={`Expand ${link.label} submenu`}
                   >
@@ -168,7 +173,7 @@ export function Navigation() {
                     <Link
                       key={child.href}
                       href={child.href}
-                      onClick={() => setOpen(false)}
+                      onClick={() => { posthog.capture("nav_click", { label: child.label, href: child.href }); setOpen(false); }}
                       className="block py-1.5 text-sm text-muted transition-colors hover:text-foreground"
                     >
                       {child.label}

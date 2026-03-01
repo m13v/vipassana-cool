@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageComments } from "@/components/comments";
+import { TrackedCTA } from "@/components/tracked-events";
 
 export const metadata: Metadata = {
   title: "How to Use dhamma.org — Step-by-Step Guide",
@@ -176,14 +177,14 @@ export default function GuidePage() {
         <p className="mb-6 text-muted">
           Visit dhamma.org to find a center near you and check the course schedule.
         </p>
-        <a
+        <TrackedCTA
           href="https://www.dhamma.org/en-US/courses/search"
-          target="_blank"
-          rel="noopener noreferrer"
+          event="cta_click"
+          properties={{ label: "Browse Course Schedule", location: "guide" }}
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
           Browse Course Schedule
-        </a>
+        </TrackedCTA>
       </div>
       <PageComments pageId="guide" />
     </article>
