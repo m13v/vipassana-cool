@@ -67,6 +67,8 @@ export default function CourseApplicationTipsPage() {
             <li><strong>Bookmark the center&apos;s schedule page</strong> &mdash; Check it regularly. Courses are often posted before registration opens, so you can see the dates coming.</li>
             <li><strong>Sign up for the center&apos;s mailing list</strong> &mdash; Many centers send email notifications when registration opens. Not all do, so don&apos;t rely on this exclusively.</li>
             <li><strong>Check frequently when it gets close</strong> &mdash; If you know a course is coming up in 2&ndash;3 months, start checking the schedule page weekly, then daily as the expected opening window approaches.</li>
+            <li><strong>Be ready at 7 AM center local time</strong> &mdash; Courses typically appear on the schedule right when the application window opens, often around 7 AM in the center&apos;s local timezone. Set an alarm, have the page open, and be ready to click &quot;Apply&quot; the moment the course listing appears. Spots can start filling within minutes.</li>
+            <li><strong>Fill out the form quickly</strong> &mdash; Have your information ready beforehand. Know what you&apos;ll write for the meditation experience, health, and mental health sections so you&apos;re not drafting answers while other people are submitting ahead of you. Speed matters on popular courses.</li>
             <li><strong>Apply the day registration opens</strong> &mdash; Applications are generally processed in the order received. Being among the first applicants gives you the best shot.</li>
           </ul>
         </section>
@@ -214,6 +216,7 @@ export default function CourseApplicationTipsPage() {
             <li><strong>Midweek start dates</strong> &mdash; Some courses start midweek rather than on a Wednesday. These sometimes get less attention and may be easier to get into.</li>
             <li><strong>Fill out the application completely</strong> &mdash; Incomplete applications may be delayed for follow-up questions, pushing you further down the queue. Take the time to answer every question thoroughly the first time.</li>
             <li><strong>Use the online form, not the paper form</strong> &mdash; Online applications are processed faster than mailed paper forms. Submit electronically for the quickest turnaround.</li>
+            <li><strong>Don&apos;t hesitate &mdash; you can always cancel</strong> &mdash; If you&apos;re on the fence about dates or not 100% sure you can make it, apply anyway. There&apos;s no penalty for canceling, and canceling early frees your spot for someone on the waitlist. It&apos;s much easier to cancel a confirmed spot than to get one after the course fills up. Apply first, figure out logistics later.</li>
           </ul>
         </section>
 
