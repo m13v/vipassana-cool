@@ -129,7 +129,7 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             <Stat number="200+" label="Centers worldwide" />
             <Stat number="100+" label="Countries" />
-            <Stat number="0" label="Cost per course" />
+            <Stat number="Dāna" label="Funded by generosity" />
             <Stat number="10" label="Days of silence" />
           </div>
         </div>
