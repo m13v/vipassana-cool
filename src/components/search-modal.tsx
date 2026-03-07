@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import posthog from "posthog-js";
+import { posthog } from "@/components/posthog-provider";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { search } from "@/lib/fuzzy-search";
 import { type SearchEntry, type Section, searchEntries } from "@/lib/search-data";
