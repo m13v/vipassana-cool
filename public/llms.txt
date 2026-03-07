@@ -1,0 +1,70 @@
+# Vipassana.cool
+
+> An unofficial guide to Vipassana meditation and dhamma.org, written by a practitioner with 60 days of courses completed.
+
+## What is Vipassana.cool?
+
+Vipassana.cool is a companion guide to dhamma.org covering everything a person needs to know before, during, and after a 10-day silent Vipassana meditation retreat in the tradition of S.N. Goenka. The site provides honest FAQ answers, preparation tips, curated resources, day-by-day personal experience accounts, and practical guidance for navigating the dhamma.org application process. It is not affiliated with the Vipassana Research Institute.
+
+## Content
+
+The site offers in-depth guides on using dhamma.org, preparing for a course, and maintaining a daily practice afterward. It includes a detailed FAQ addressing common concerns (safety, cost, leaving early, mental health considerations), a 200+ link resource library (books, documentaries, podcasts, research papers), and a full day-by-day account of what a 10-day course is actually like. Topical guides cover subjects like Vipassana vs. other meditation styles, scientific evidence, addiction recovery, pain management, sleep, relationships, and the old student path.
+
+## Key Pages
+
+- [Homepage](https://vipassana.cool): Overview of the site and entry points to all sections
+- [Guide to dhamma.org](https://vipassana.cool/guide): Step-by-step walkthrough of finding a center, understanding course types, and completing an application
+- [FAQ](https://vipassana.cool/faq): Honest answers about noble silence, the daily schedule, physical challenges, and what happens during 10 days
+- [Preparation Guide](https://vipassana.cool/prepare): What to pack, how to prepare mentally and physically
+- [Packing List](https://vipassana.cool/prepare/packing-list): Detailed packing checklist
+- [Resources](https://vipassana.cool/resources): 200+ curated links — books, documentaries, podcasts, research papers, apps, blogs, and official resources
+- [Personal Experience](https://vipassana.cool/experience): An honest account of doing Vipassana as a tech professional
+- [Day-by-Day Experience](https://vipassana.cool/experience/day-1): Individual pages for each of the 10 days (day-1 through day-10)
+- [Practice Buddy](https://vipassana.cool/practice-buddy): Get matched with a fellow meditator for daily practice accountability
+
+### FAQ Detail Pages
+
+- [Is Vipassana Safe?](https://vipassana.cool/faq/is-vipassana-safe)
+- [Why Is Vipassana Free?](https://vipassana.cool/faq/why-is-vipassana-free)
+- [Can I Leave Early?](https://vipassana.cool/faq/can-i-leave-early)
+- [Is Vipassana a Cult?](https://vipassana.cool/faq/is-vipassana-a-cult)
+- [Vipassana vs Therapy](https://vipassana.cool/faq/vipassana-vs-therapy)
+- [Vipassana with ADHD/Anxiety](https://vipassana.cool/faq/vipassana-with-adhd-anxiety)
+- [Is Vipassana Right for Me?](https://vipassana.cool/faq/is-vipassana-right-for-me)
+- [Vipassana and Depression](https://vipassana.cool/faq/vipassana-and-depression)
+- [What to Expect](https://vipassana.cool/faq/what-to-expect)
+- [Can I Do Shorter Sessions?](https://vipassana.cool/faq/can-i-do-shorter-sessions)
+
+### Guide Detail Pages
+
+- [Daily Practice](https://vipassana.cool/guide/daily-practice): Maintaining practice at home
+- [After the Retreat](https://vipassana.cool/guide/after-retreat): Reintegrating into daily life
+- [Risks and Safety](https://vipassana.cool/guide/risks-and-safety): Honest assessment of risks
+- [Vipassana vs Other Meditation](https://vipassana.cool/guide/vipassana-vs-other-meditation): Comparing traditions
+- [Course Application Tips](https://vipassana.cool/guide/course-application-tips): Getting accepted
+- [Scientific Evidence](https://vipassana.cool/guide/scientific-evidence): Research on Vipassana
+- [Anapana and Vipassana Explained](https://vipassana.cool/guide/anapana-and-vipassana-explained): The two core techniques
+- [Sensations and Experiences](https://vipassana.cool/guide/sensations-and-experiences): What you feel during practice
+- [First Course Tips](https://vipassana.cool/guide/first-course-tips): Practical advice for beginners
+- [Course Progression](https://vipassana.cool/guide/course-progression): Beyond the first 10-day course
+- [Dhamma Service](https://vipassana.cool/guide/dhamma-service): Volunteering at centers
+- [Vipassana for Addiction](https://vipassana.cool/guide/vipassana-for-addiction)
+- [Vipassana and Sleep](https://vipassana.cool/guide/vipassana-and-sleep)
+- [Vipassana for Pain](https://vipassana.cool/guide/vipassana-for-pain)
+- [Vipassana and Relationships](https://vipassana.cool/guide/vipassana-and-relationships)
+- [How Vipassana Changes You](https://vipassana.cool/guide/how-vipassana-changes-you)
+- [Restarting Your Practice](https://vipassana.cool/guide/restarting-your-practice)
+- [Group Sittings](https://vipassana.cool/guide/group-sittings)
+- [Old Student Path](https://vipassana.cool/guide/old-student-path)
+- [Recognizing Progress](https://vipassana.cool/guide/recognizing-progress)
+
+## Links
+
+- [Homepage](https://vipassana.cool)
+- [Official dhamma.org](https://www.dhamma.org)
+- [Find a Course](https://www.dhamma.org/en-US/courses/search)
+- [Center Directory](https://www.dhamma.org/en/locations/directory)
+
+## Contact
+
+Created by Matthew Diakonov — [m13v.com](https://m13v.com), [@MatthewHeartful on X](https://twitter.com/MatthewHeartful), [Telegram](https://t.me/matthew_ddi).
