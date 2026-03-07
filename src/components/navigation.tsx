@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import posthog from "posthog-js";
+import { posthog } from "@/components/posthog-provider";
 import { useEffect, useState } from "react";
 import { SearchModal } from "./search-modal";
 
