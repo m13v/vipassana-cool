@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import posthog from "posthog-js";
+import { posthog } from "@/components/posthog-provider";
 
 type FormData = {
   name: string;
