@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import posthog from "posthog-js";
+import { posthog } from "@/components/posthog-provider";
 
 export function EmailCapture({ location = "prepare" }: { location?: string }) {
   const [email, setEmail] = useState("");
