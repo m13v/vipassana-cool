@@ -14,9 +14,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const matches = getAllMatches();
+  const matches = await getAllMatches();
 
-  // Strip emails from response
   const safe = matches.map((m) => ({
     id: m.id,
     status: m.status,
@@ -54,14 +53,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "personAId and personBId required" }, { status: 400 });
   }
 
-  const personA = getEntry(personAId);
-  const personB = getEntry(personBId);
+  const personA = await getEntry(personAId);
+  const personB = await getEntry(personBId);
 
   if (!personA || !personB) {
     return NextResponse.json({ error: "One or both entries not found" }, { status: 404 });
   }
 
-  const match = createMatch(personAId, personBId);
+  const match = await createMatch(personAId, personBId);
 
   if (sendEmail) {
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -119,7 +118,6 @@ export async function POST(request: NextRequest) {
       html,
     });
 
-    // Log outbound email to database
     try {
       const sql = neon(process.env.DATABASE_URL!);
       await sql`

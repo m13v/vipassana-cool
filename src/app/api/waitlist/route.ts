@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { PostHog } from "posthog-node";
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
+import { upsertEntry, getEntryByEmail } from "@/lib/db";
 
 type WaitlistData = {
   name: string;
@@ -77,30 +78,25 @@ export async function POST(request: NextRequest) {
     });
     await posthog.flush();
 
-    // Save to local database for matching (best-effort — SQLite may not be available on serverless)
-    try {
-      const { upsertEntry, getEntryByEmail } = await import("@/lib/db");
-      const existing = getEntryByEmail(data.email);
-      upsertEntry({
-        id: existing?.id ?? crypto.randomUUID(),
-        email: data.email,
-        name: data.name,
-        is_old_student: data.isOldStudent,
-        is_goenka_tradition: data.isGoenkatradition,
-        timezone: data.timezone,
-        city: data.city,
-        frequency: data.frequency,
-        morning_time: data.morningTime,
-        evening_time: data.eveningTime,
-        days: JSON.stringify(data.days),
-        session_duration: data.sessionDuration,
-        has_maintained_practice: data.hasMaintainedPractice,
-        practice_length: data.practiceLength,
-        created_at: new Date().toISOString(),
-      });
-    } catch (dbErr) {
-      console.error("SQLite save failed (expected on serverless):", dbErr);
-    }
+    // Save to Neon database
+    const existing = await getEntryByEmail(data.email);
+    await upsertEntry({
+      id: existing?.id ?? crypto.randomUUID(),
+      email: data.email,
+      name: data.name,
+      is_old_student: data.isOldStudent,
+      is_goenka_tradition: data.isGoenkatradition,
+      timezone: data.timezone,
+      city: data.city,
+      frequency: data.frequency,
+      morning_time: data.morningTime,
+      evening_time: data.eveningTime,
+      days: JSON.stringify(data.days),
+      session_duration: data.sessionDuration,
+      has_maintained_practice: data.hasMaintainedPractice,
+      practice_length: data.practiceLength,
+      created_at: new Date().toISOString(),
+    });
 
     // Send confirmation email to the user
     const emailHtml = getWaitlistEmail(data);
@@ -189,4 +185,3 @@ function getWaitlistEmail(data: WaitlistData): string {
 </body>
 </html>`;
 }
-

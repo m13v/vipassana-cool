@@ -18,7 +18,6 @@ export async function POST(request: NextRequest) {
   const phKey = process.env.POSTHOG_PERSONAL_API_KEY!;
 
   try {
-    // Fetch all waitlist_signup_server events from PostHog
     const res = await fetch(`${POSTHOG_HOST}/api/projects/${projectId}/query/`, {
       method: "POST",
       headers: {
@@ -49,10 +48,10 @@ export async function POST(request: NextRequest) {
       const email = props.email;
       if (!email) continue;
 
-      const existing = getEntryByEmail(email);
+      const existing = await getEntryByEmail(email);
       if (!existing) created++;
 
-      upsertEntry({
+      await upsertEntry({
         id: existing?.id ?? crypto.randomUUID(),
         email,
         name: props.name ?? null,
