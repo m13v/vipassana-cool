@@ -37,7 +37,7 @@ const DURATION_OPTIONS = [
   "1 hour",
 ];
 
-export function WaitlistSignup({ location = "practice-buddy" }: { location?: string }) {
+export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, requestedMatchName }: { location?: string; requestedMatchId?: string; requestedMatchName?: string }) {
   const [form, setForm] = useState<FormData>({
     name: "",
     email: "",
@@ -86,7 +86,7 @@ export function WaitlistSignup({ location = "practice-buddy" }: { location?: str
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, requestedMatchId: requestedMatchId || undefined }),
       });
 
       if (!res.ok) {
@@ -131,7 +131,9 @@ export function WaitlistSignup({ location = "practice-buddy" }: { location?: str
   return (
     <div id="waitlist-form" className="rounded-xl border border-border bg-card p-8">
       <div className="mb-8 text-center">
-        <h3 className="mb-2 text-xl font-bold">Join the Waitlist</h3>
+        <h3 className="mb-2 text-xl font-bold">
+          {requestedMatchName ? `Request to match with ${requestedMatchName}` : "Apply to Be Matched"}
+        </h3>
         <p className="text-sm text-muted">
           Tell us about your practice so we can find the right match for you.
         </p>
@@ -398,7 +400,7 @@ export function WaitlistSignup({ location = "practice-buddy" }: { location?: str
           disabled={status === "loading"}
           className="w-full rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-60"
         >
-          {status === "loading" ? "Joining..." : "Join the waitlist"}
+          {status === "loading" ? "Submitting..." : requestedMatchName ? `Request to match with ${requestedMatchName}` : "Apply to be matched"}
         </button>
 
         {status === "error" && (
