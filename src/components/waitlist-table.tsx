@@ -23,7 +23,7 @@ const STATUS_CONFIG: Record<string, { bg: string; text: string; label: string }>
 
 type Filter = "all" | "pending" | "matched";
 
-export function WaitlistTable() {
+export function WaitlistTable({ onRequestMatch }: { onRequestMatch?: (personId: string, personName: string) => void }) {
   const [entries, setEntries] = useState<WaitlistPerson[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<Filter>("all");
@@ -108,8 +108,8 @@ export function WaitlistTable() {
         })}
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-xl border border-border">
+      {/* Table - Desktop */}
+      <div className="hidden sm:block overflow-x-auto rounded-xl border border-border">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border bg-card text-left">
@@ -117,6 +117,7 @@ export function WaitlistTable() {
               <th className="px-4 py-3 font-medium">Location</th>
               <th className="px-4 py-3 font-medium">Practice</th>
               <th className="px-4 py-3 font-medium">Status</th>
+              {onRequestMatch && <th className="px-4 py-3 font-medium" />}
             </tr>
           </thead>
           <tbody>
@@ -150,6 +151,16 @@ export function WaitlistTable() {
                       {st.label}
                     </span>
                   </td>
+                  {onRequestMatch && (
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={() => onRequestMatch(e.id, e.name || e.city || "this person")}
+                        className="whitespace-nowrap rounded-lg border border-accent/30 bg-accent/5 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-accent/15"
+                      >
+                        Request to match
+                      </button>
+                    </td>
+                  )}
                 </tr>
               );
             })}
@@ -157,9 +168,46 @@ export function WaitlistTable() {
         </table>
       </div>
 
+      {/* Cards - Mobile */}
+      <div className="sm:hidden space-y-3">
+        {filtered.map((e) => {
+          const st = STATUS_CONFIG[e.status] ?? STATUS_CONFIG.pending;
+          return (
+            <div key={e.id} className="rounded-xl border border-border bg-card p-4">
+              <div className="flex items-start justify-between mb-2">
+                <div>
+                  <div className="font-medium">{e.name || "Anonymous"}</div>
+                  <div className="text-xs text-muted">{e.city || "—"}{e.timezone ? ` · ${shortTz(e.timezone)}` : ""}</div>
+                </div>
+                <span
+                  className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${st.bg} ${st.text}`}
+                >
+                  {st.label}
+                </span>
+              </div>
+              <div className="text-xs text-muted mb-3">
+                {e.frequency || "—"}, {e.sessionDuration || "—"}
+                {e.isOldStudent === "Yes" && " · Old student"}
+                {e.hasMaintainedPractice && e.hasMaintainedPractice !== "—" && (
+                  <> · {e.hasMaintainedPractice} maintained</>
+                )}
+              </div>
+              {onRequestMatch && (
+                <button
+                  onClick={() => onRequestMatch(e.id, e.name || e.city || "this person")}
+                  className="w-full rounded-lg border border-accent/30 bg-accent/5 px-3 py-2 text-xs font-medium text-accent transition-colors hover:bg-accent/15"
+                >
+                  Request to match
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
       {counts.pending > 0 && (
         <p className="text-center text-xs text-muted">
-          Join the waitlist below to get matched with a compatible practice partner.
+          Apply below to get matched with a compatible practice partner.
         </p>
       )}
     </div>
