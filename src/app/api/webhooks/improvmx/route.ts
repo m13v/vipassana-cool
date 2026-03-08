@@ -38,8 +38,8 @@ export async function POST(request: Request) {
 
     const sql = neon(process.env.DATABASE_URL!);
     await sql`
-      INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_text, body_html, status)
-      VALUES (${messageId}, 'inbound', ${fromEmail}, ${toEmail}, ${subject}, ${bodyText}, ${bodyHtml}, 'received')
+      INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_text, body_html, status, raw_payload)
+      VALUES (${messageId}, 'inbound', ${fromEmail}, ${toEmail}, ${subject}, ${bodyText}, ${bodyHtml}, 'received', ${raw})
     `;
 
     return NextResponse.json({ success: true });
