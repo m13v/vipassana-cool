@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { WaitlistSignup } from "@/components/waitlist-signup";
+import { WaitlistTable } from "@/components/waitlist-table";
 
 export const metadata: Metadata = {
   title: "Practice Buddy — Find an Accountability Partner for Daily Vipassana",
@@ -182,6 +183,14 @@ export default function PracticeBuddyPage() {
             <MatchCriteria title="Current Struggles" description="Consistency, restlessness, doubt, integrating practice into daily life" />
             <MatchCriteria title="Language" description="So you can discuss subtle meditation experiences in a language you're comfortable with" />
           </div>
+        </div>
+      </section>
+
+      {/* Who's Waiting */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-3xl px-6 py-16">
+          <h2 className="mb-8 text-2xl font-bold">Who&apos;s Waiting</h2>
+          <WaitlistTable />
         </div>
       </section>
 

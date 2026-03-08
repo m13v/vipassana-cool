@@ -46,6 +46,9 @@ next-env.d.ts
 # Local scripts
 /scripts/
 
+# SQLite data
+/data/
+
 # Stray screenshots and images in repo root
 /*.png
 /*.jpeg
