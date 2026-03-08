@@ -51,10 +51,16 @@ export async function POST(request: Request) {
     const content = await fetchInboundContent(data.email_id);
 
     const sql = neon(process.env.DATABASE_URL!);
+
+    // Check if already processed (dedup by resend_id)
+    const existing = await sql`SELECT id FROM vipassana_emails WHERE resend_id = ${data.email_id} LIMIT 1`;
+    if (existing.length > 0) {
+      return NextResponse.json({ success: true, message: "already processed" });
+    }
+
     await sql`
       INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_text, body_html, status)
       VALUES (${data.email_id}, 'inbound', ${data.from}, ${data.to[0] || ""}, ${data.subject || ""}, ${content?.text || data.text || null}, ${content?.html || data.html || null}, 'received')
-      ON CONFLICT (resend_id) DO NOTHING
     `;
 
     return NextResponse.json({ success: true });
