@@ -202,13 +202,13 @@ export function PracticeBuddyClient() {
       <section className="border-t border-border">
         <div ref={formRef} className="mx-auto max-w-3xl px-6 py-16">
           {matchRequest && (
-            <div className="mb-4 flex items-center justify-between rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm">
-              <span>
-                Requesting to match with <strong>{matchRequest.name}</strong>
+            <div className="mb-6 flex items-center justify-between rounded-xl bg-accent px-5 py-4 text-white shadow-lg">
+              <span className="text-base font-medium">
+                Requesting to match with <strong className="font-bold">{matchRequest.name}</strong>
               </span>
               <button
                 onClick={clearMatchRequest}
-                className="text-muted hover:text-foreground transition-colors"
+                className="ml-4 rounded-full bg-white/20 px-2 py-0.5 text-white/90 hover:bg-white/30 transition-colors"
               >
                 ✕
               </button>
