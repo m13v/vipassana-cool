@@ -10,10 +10,6 @@ export function PracticeBuddyClient() {
 
   function handleRequestMatch(personId: string, personName: string) {
     setMatchRequest({ id: personId, name: personName });
-    // Scroll to form
-    setTimeout(() => {
-      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
   }
 
   function clearMatchRequest() {
@@ -201,26 +197,31 @@ export function PracticeBuddyClient() {
       {/* Signup Form */}
       <section className="border-t border-border">
         <div ref={formRef} className="mx-auto max-w-3xl px-6 py-16">
-          {matchRequest && (
-            <div className="mb-4 flex items-center justify-between rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm animate-[pop_0.4s_ease-out]">
-              <span>
-                Requesting to match with <strong>{matchRequest.name}</strong>
-              </span>
-              <button
-                onClick={clearMatchRequest}
-                className="text-muted hover:text-foreground transition-colors"
-              >
-                ✕
-              </button>
-            </div>
-          )}
-          <WaitlistSignup
-            location="bottom-cta"
-            requestedMatchId={matchRequest?.id}
-            requestedMatchName={matchRequest?.name}
-          />
+          <WaitlistSignup location="bottom-cta" />
         </div>
       </section>
+
+      {/* Match Request Modal */}
+      {matchRequest && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-[fadeIn_0.2s_ease-out]"
+          onClick={(e) => { if (e.target === e.currentTarget) clearMatchRequest(); }}
+        >
+          <div className="relative mx-4 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-background p-6 shadow-2xl animate-[pop_0.3s_ease-out]">
+            <button
+              onClick={clearMatchRequest}
+              className="absolute right-4 top-4 text-muted hover:text-foreground transition-colors text-xl"
+            >
+              ✕
+            </button>
+            <WaitlistSignup
+              location="match-modal"
+              requestedMatchId={matchRequest.id}
+              requestedMatchName={matchRequest.name}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
