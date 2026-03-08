@@ -57,24 +57,6 @@ export async function POST(request: Request) {
       ON CONFLICT (resend_id) DO NOTHING
     `;
 
-    // Forward to inbox
-    const apiKey = process.env.RESEND_API_KEY;
-    if (apiKey) {
-      await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "Vipassana Inbound <hello@vipassana.cool>",
-          to: "i@m13v.com",
-          subject: `[Vipassana Inbound] ${data.subject || "(no subject)"}`,
-          text: `From: ${data.from}\nTo: ${data.to.join(", ")}\n\n${content?.text || data.text || "(no body)"}`,
-        }),
-      });
-    }
-
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("[Vipassana Webhook] Error:", error);
