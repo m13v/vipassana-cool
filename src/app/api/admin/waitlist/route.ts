@@ -12,9 +12,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const entries = getAllEntries();
+  const entries = await getAllEntries();
 
-  // Strip sensitive data - no email, truncate name to first name only
   const safe = entries.map((e) => ({
     id: e.id,
     firstName: e.name?.split(/\s+/)[0] || null,
