@@ -27,14 +27,14 @@ export async function POST(request: Request) {
       payload = Object.fromEntries(params.entries());
     }
 
-    // ImprovMX uses nested headers object and different field names
-    const headers = (payload.headers || {}) as Record<string, string>;
-    const fromEmail = headers.from || headers.From || payload.from || (payload as Record<string, unknown>).envelope_from as string || "";
-    const toEmail = headers.to || headers.To || payload.to || (payload as Record<string, unknown>).envelope_to as string || "";
-    const subject = headers.subject || headers.Subject || payload.subject || "";
-    const bodyText = (payload as Record<string, unknown>).text as string || (payload as Record<string, unknown>)["body-plain"] as string || null;
-    const bodyHtml = payload.html || (payload as Record<string, unknown>)["body-html"] as string || null;
-    const messageId = headers["message-id"] || headers["Message-ID"] || payload.message_id || null;
+    // ImprovMX webhook payload structure: { domain, email: { id, subject, sender, recipient }, event: { status, ... }, action }
+    const email = (payload as Record<string, unknown>).email as Record<string, string> | undefined;
+    const fromEmail = email?.sender || payload.from || "";
+    const toEmail = email?.recipient || payload.to || "";
+    const subject = email?.subject || payload.subject || "";
+    const bodyText = payload.text || null;
+    const bodyHtml = payload.html || null;
+    const messageId = email?.id || payload.message_id || null;
 
     const sql = neon(process.env.DATABASE_URL!);
     await sql`
