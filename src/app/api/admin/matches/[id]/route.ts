@@ -22,6 +22,6 @@ export async function PATCH(
     return NextResponse.json({ error: "Invalid status" }, { status: 400 });
   }
 
-  updateMatchStatus(id, status);
+  await updateMatchStatus(id, status);
   return NextResponse.json({ success: true });
 }
