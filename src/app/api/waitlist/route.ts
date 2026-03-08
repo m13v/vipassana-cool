@@ -18,6 +18,7 @@ type WaitlistData = {
   sessionDuration: string;
   hasMaintainedPractice: string;
   practiceLength: string;
+  requestedMatchId?: string;
 };
 
 const posthog = new PostHog("phc_68Zsbot2eLcQQgtNZTXlHrl7SEFwW1lwbzrYxsUuo1P", {
@@ -74,6 +75,7 @@ export async function POST(request: NextRequest) {
         session_duration: data.sessionDuration,
         has_maintained_practice: data.hasMaintainedPractice,
         practice_length: data.practiceLength,
+        requested_match_id: data.requestedMatchId || null,
       },
     });
     await posthog.flush();
@@ -95,6 +97,7 @@ export async function POST(request: NextRequest) {
       session_duration: data.sessionDuration,
       has_maintained_practice: data.hasMaintainedPractice,
       practice_length: data.practiceLength,
+      requested_match_id: data.requestedMatchId || null,
       created_at: new Date().toISOString(),
     });
 

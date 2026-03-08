@@ -19,6 +19,7 @@ export type WaitlistEntry = {
   session_duration: string | null;
   has_maintained_practice: string | null;
   practice_length: string | null;
+  requested_match_id: string | null;
   status: string;
   created_at: string | null;
   updated_at: string | null;
@@ -61,8 +62,8 @@ export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated
   const sql = getSql();
   const now = new Date().toISOString();
   await sql`
-    INSERT INTO waitlist_entries (id, email, name, is_old_student, is_goenka_tradition, timezone, city, frequency, morning_time, evening_time, days, session_duration, has_maintained_practice, practice_length, status, created_at, updated_at)
-    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${entry.morning_time}, ${entry.evening_time}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, 'pending', ${entry.created_at}, ${now})
+    INSERT INTO waitlist_entries (id, email, name, is_old_student, is_goenka_tradition, timezone, city, frequency, morning_time, evening_time, days, session_duration, has_maintained_practice, practice_length, requested_match_id, status, created_at, updated_at)
+    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${entry.morning_time}, ${entry.evening_time}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, ${entry.requested_match_id}, 'pending', ${entry.created_at}, ${now})
     ON CONFLICT(email) DO UPDATE SET
       name = COALESCE(EXCLUDED.name, waitlist_entries.name),
       is_old_student = COALESCE(EXCLUDED.is_old_student, waitlist_entries.is_old_student),
@@ -76,6 +77,7 @@ export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated
       session_duration = COALESCE(EXCLUDED.session_duration, waitlist_entries.session_duration),
       has_maintained_practice = COALESCE(EXCLUDED.has_maintained_practice, waitlist_entries.has_maintained_practice),
       practice_length = COALESCE(EXCLUDED.practice_length, waitlist_entries.practice_length),
+      requested_match_id = COALESCE(EXCLUDED.requested_match_id, waitlist_entries.requested_match_id),
       updated_at = ${now}
   `;
 }
