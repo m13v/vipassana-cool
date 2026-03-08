@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { PostHog } from "posthog-node";
 import { NextRequest, NextResponse } from "next/server";
 
 type WaitlistData = {
@@ -16,6 +17,12 @@ type WaitlistData = {
   hasMaintainedPractice: string;
   practiceLength: string;
 };
+
+const posthog = new PostHog("phc_68Zsbot2eLcQQgtNZTXlHrl7SEFwW1lwbzrYxsUuo1P", {
+  host: "https://us.i.posthog.com",
+  flushAt: 1,
+  flushInterval: 0,
+});
 
 export async function POST(request: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -46,6 +53,28 @@ export async function POST(request: NextRequest) {
       const msg = contactError instanceof Error ? contactError.message : "";
       if (!msg.includes("already exists")) throw contactError;
     }
+
+    // Capture full waitlist data in PostHog
+    posthog.capture({
+      distinctId: data.email,
+      event: "waitlist_signup_server",
+      properties: {
+        name: data.name,
+        email: data.email,
+        is_old_student: data.isOldStudent,
+        is_goenka_tradition: data.isGoenkatradition,
+        timezone: data.timezone,
+        city: data.city,
+        frequency: data.frequency,
+        morning_time: data.morningTime,
+        evening_time: data.eveningTime,
+        days: data.days,
+        session_duration: data.sessionDuration,
+        has_maintained_practice: data.hasMaintainedPractice,
+        practice_length: data.practiceLength,
+      },
+    });
+    await posthog.flush();
 
     // Send confirmation email to the user
     await resend.emails.send({

@@ -20,7 +20,8 @@ export async function POST(request: NextRequest) {
 
     // Send the checklist email
     await resend.emails.send({
-      from: "Vipassana.cool <hello@vipassana.cool>",
+      from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+      replyTo: "matt@vipassana.cool",
       to: email,
       subject: "Your 10-Day Vipassana Retreat Checklist",
       html: getChecklistEmail(),
@@ -34,7 +35,8 @@ export async function POST(request: NextRequest) {
       try {
         const { email } = await request.clone().json();
         await resend.emails.send({
-          from: "Vipassana.cool <hello@vipassana.cool>",
+          from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+      replyTo: "matt@vipassana.cool",
           to: email,
           subject: "Your 10-Day Vipassana Retreat Checklist",
           html: getChecklistEmail(),
@@ -63,6 +65,15 @@ function getChecklistEmail(): string {
       <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#8b7355;margin:0 0 8px;">Vipassana.cool</p>
       <h1 style="font-size:28px;font-weight:700;margin:0;line-height:1.3;">Your 10-Day Retreat Checklist</h1>
       <p style="color:#6b6b6b;margin:12px 0 0;font-size:15px;">From a practitioner with 60 days of courses completed</p>
+    </div>
+
+    <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
+      <p style="font-size:15px;line-height:1.7;margin:0;">
+        Hey — I'm Matt, a real person behind this site. I've sat six 10-day courses and I'm always happy to chat about the meditation journey. Hit reply anytime.
+      </p>
+      <p style="font-size:15px;line-height:1.7;margin:16px 0 0;">
+        I'm curious — how did you first find out about Vipassana?
+      </p>
     </div>
 
     <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
