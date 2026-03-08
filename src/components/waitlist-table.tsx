@@ -216,6 +216,13 @@ export function WaitlistTable({ onRequestMatch }: { onRequestMatch?: (personId: 
 
 function shortTz(tz: string | null): string {
   if (!tz) return "";
-  const parts = tz.split("/");
-  return parts[parts.length - 1].replace(/_/g, " ");
+  try {
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat("en-US", { timeZone: tz, timeZoneName: "shortOffset" });
+    const parts = fmt.formatToParts(now);
+    const offsetPart = parts.find((p) => p.type === "timeZoneName");
+    return offsetPart?.value ?? tz;
+  } catch {
+    return tz;
+  }
 }
