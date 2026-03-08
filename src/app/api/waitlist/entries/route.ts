@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getAllEntries } from "@/lib/db";
 
 function maskEmail(email: string): string {
   const [local, domain] = email.split("@");
@@ -17,8 +18,7 @@ function maskName(name: string | null): string | null {
 
 export async function GET() {
   try {
-    const { getAllEntries } = await import("@/lib/db");
-    const entries = getAllEntries();
+    const entries = await getAllEntries();
 
     const publicEntries = entries.map((e) => ({
       id: e.id,
@@ -35,8 +35,8 @@ export async function GET() {
     }));
 
     return NextResponse.json({ entries: publicEntries });
-  } catch {
-    // SQLite not available on serverless — return empty
+  } catch (err) {
+    console.error("Failed to fetch waitlist entries:", err);
     return NextResponse.json({ entries: [] });
   }
 }
