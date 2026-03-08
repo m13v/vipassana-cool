@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { getAllEntries } from "@/lib/db";
 
 function maskEmail(email: string): string {
   const [local, domain] = email.split("@");
@@ -17,21 +16,27 @@ function maskName(name: string | null): string | null {
 }
 
 export async function GET() {
-  const entries = getAllEntries();
+  try {
+    const { getAllEntries } = await import("@/lib/db");
+    const entries = getAllEntries();
 
-  const publicEntries = entries.map((e) => ({
-    id: e.id,
-    name: maskName(e.name),
-    email: maskEmail(e.email),
-    city: e.city,
-    timezone: e.timezone,
-    frequency: e.frequency,
-    sessionDuration: e.session_duration,
-    isOldStudent: e.is_old_student,
-    hasMaintainedPractice: e.has_maintained_practice,
-    status: e.status,
-    createdAt: e.created_at,
-  }));
+    const publicEntries = entries.map((e) => ({
+      id: e.id,
+      name: maskName(e.name),
+      email: maskEmail(e.email),
+      city: e.city,
+      timezone: e.timezone,
+      frequency: e.frequency,
+      sessionDuration: e.session_duration,
+      isOldStudent: e.is_old_student,
+      hasMaintainedPractice: e.has_maintained_practice,
+      status: e.status,
+      createdAt: e.created_at,
+    }));
 
-  return NextResponse.json({ entries: publicEntries });
+    return NextResponse.json({ entries: publicEntries });
+  } catch {
+    // SQLite not available on serverless — return empty
+    return NextResponse.json({ entries: [] });
+  }
 }
