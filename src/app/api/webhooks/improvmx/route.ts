@@ -15,15 +15,26 @@ interface ImprovMXWebhookPayload {
 
 export async function POST(request: Request) {
   try {
-    const payload: ImprovMXWebhookPayload = await request.json();
-    console.log("[Vipassana ImprovMX Webhook]", payload.subject, payload.from);
+    const raw = await request.text();
+    console.log("[Vipassana ImprovMX Webhook] raw payload:", raw.slice(0, 2000));
 
-    const fromEmail = payload.from || "";
-    const toEmail = payload.to || "";
-    const subject = payload.subject || "";
-    const bodyText = payload.text || null;
-    const bodyHtml = payload.html || null;
-    const messageId = payload.message_id || null;
+    let payload: ImprovMXWebhookPayload;
+    try {
+      payload = JSON.parse(raw);
+    } catch {
+      // ImprovMX may send form-encoded data
+      const params = new URLSearchParams(raw);
+      payload = Object.fromEntries(params.entries());
+    }
+
+    // ImprovMX uses nested headers object and different field names
+    const headers = (payload.headers || {}) as Record<string, string>;
+    const fromEmail = headers.from || headers.From || payload.from || (payload as Record<string, unknown>).envelope_from as string || "";
+    const toEmail = headers.to || headers.To || payload.to || (payload as Record<string, unknown>).envelope_to as string || "";
+    const subject = headers.subject || headers.Subject || payload.subject || "";
+    const bodyText = (payload as Record<string, unknown>).text as string || (payload as Record<string, unknown>)["body-plain"] as string || null;
+    const bodyHtml = payload.html || (payload as Record<string, unknown>)["body-html"] as string || null;
+    const messageId = headers["message-id"] || headers["Message-ID"] || payload.message_id || null;
 
     const sql = neon(process.env.DATABASE_URL!);
     await sql`
