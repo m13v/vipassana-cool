@@ -132,6 +132,14 @@ export default function ExperiencePage() {
             learned any other way.
           </p>
           <p className="mt-4">
+            Now I go to a centre twice a year, and every time it&apos;s a massive
+            mind reset. The depth of meditation at a centre is night and day
+            compared to home practice — you just can&apos;t reach that same level
+            on your own. I come back making important decisions about my personal
+            life, business, partnerships, everything. That clarity is something I
+            can&apos;t get any other way.
+          </p>
+          <p className="mt-4">
             What keeps me returning is simple: it works. Not in a mystical way.
             In a very practical, observable way. I react less impulsively.
             I&apos;m more present in conversations. I sleep better. When something
@@ -146,15 +154,25 @@ export default function ExperiencePage() {
           </h2>
           <p>
             The courses are powerful, but the daily practice is where the transformation
-            actually happens. <DayCounter /> days of sitting, morning and evening. Some days
-            it&apos;s 20 minutes. Some days it&apos;s the full hour. The important
-            thing is continuity.
+            actually happens. <DayCounter /> days of sitting — every day at 6 AM and
+            9 PM. I currently sit with one other buddy, which helps with
+            accountability. Some days the full hour flies by. Some days every minute
+            is a battle with distraction.
           </p>
           <p className="mt-4">
-            As a tech person, I appreciate that Vipassana is essentially a debugging
-            tool for the mind. You observe your mental processes with the same rigor
-            you&apos;d apply to debugging code. No stories, no interpretations — just
-            direct observation of what&apos;s actually happening.
+            Honestly, the meditation itself is still quite challenging. My main struggle
+            is distraction — the mind just wants to wander. But it&apos;s a very gradual
+            path. You definitely see improvement over time if you&apos;re consistent.
+            It&apos;s a very long journey to master, and I&apos;m nowhere near mastery.
+          </p>
+          <p className="mt-4">
+            The biggest insight I&apos;ve had is that the real practice happens off
+            the cushion. You have to actually pay attention to how you behave in
+            normal life and actively apply your meditation skills — observing your
+            reactions, maintaining equanimity in difficult conversations, noticing
+            cravings and aversions as they arise. When you do that, you start seeing
+            so many benefits in your real life early on that it naturally motivates
+            you to keep up the two hours daily.
           </p>
           <p className="mt-4">
             The hardest part isn&apos;t the sitting. It&apos;s the consistency.
