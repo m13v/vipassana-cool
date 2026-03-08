@@ -40,6 +40,7 @@ export async function POST(request: Request) {
     await sql`
       INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_text, body_html, status, raw_payload)
       VALUES (${messageId}, 'inbound', ${fromEmail}, ${toEmail}, ${subject}, ${bodyText}, ${bodyHtml}, 'received', ${raw})
+      ON CONFLICT (resend_id) DO NOTHING
     `;
 
     return NextResponse.json({ success: true });

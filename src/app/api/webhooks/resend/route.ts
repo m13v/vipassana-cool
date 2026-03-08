@@ -54,6 +54,7 @@ export async function POST(request: Request) {
     await sql`
       INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_text, body_html, status)
       VALUES (${data.email_id}, 'inbound', ${data.from}, ${data.to[0] || ""}, ${data.subject || ""}, ${content?.text || data.text || null}, ${content?.html || data.html || null}, 'received')
+      ON CONFLICT (resend_id) DO NOTHING
     `;
 
     // Forward to inbox
