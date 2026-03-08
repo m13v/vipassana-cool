@@ -59,8 +59,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("[Vipassana Webhook] Error:", error);
-    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    const msg = error instanceof Error ? error.message : String(error);
+    console.error("[Vipassana Webhook] Error:", msg, error);
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
 
