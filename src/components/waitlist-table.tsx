@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 type WaitlistPerson = {
   id: string;
@@ -16,9 +16,17 @@ type WaitlistPerson = {
   createdAt: string | null;
 };
 
+const STATUS_CONFIG: Record<string, { bg: string; text: string; label: string }> = {
+  matched: { bg: "bg-green-100 dark:bg-green-900/30", text: "text-green-700 dark:text-green-400", label: "Matched" },
+  pending: { bg: "bg-yellow-100 dark:bg-yellow-900/30", text: "text-yellow-700 dark:text-yellow-400", label: "Waiting" },
+};
+
+type Filter = "all" | "pending" | "matched";
+
 export function WaitlistTable() {
   const [entries, setEntries] = useState<WaitlistPerson[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState<Filter>("all");
 
   useEffect(() => {
     fetch("/api/waitlist/entries")
@@ -29,6 +37,17 @@ export function WaitlistTable() {
       })
       .catch(() => setLoading(false));
   }, []);
+
+  const counts = useMemo(() => ({
+    all: entries.length,
+    pending: entries.filter((e) => e.status === "pending").length,
+    matched: entries.filter((e) => e.status === "matched").length,
+  }), [entries]);
+
+  const filtered = useMemo(
+    () => (filter === "all" ? entries : entries.filter((e) => e.status === filter)),
+    [entries, filter]
+  );
 
   if (loading) {
     return (
@@ -46,22 +65,50 @@ export function WaitlistTable() {
     );
   }
 
-  const pending = entries.filter((e) => e.status === "pending");
-  const matched = entries.filter((e) => e.status === "matched");
+  const filters: { key: Filter; label: string }[] = [
+    { key: "all", label: "All" },
+    { key: "pending", label: "Waiting" },
+    { key: "matched", label: "Matched" },
+  ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
+      {/* Stats */}
       <div className="flex items-baseline justify-between">
         <h3 className="text-lg font-semibold">
           {entries.length} {entries.length === 1 ? "person" : "people"} on the waitlist
         </h3>
-        {matched.length > 0 && (
+        {counts.matched > 0 && (
           <span className="text-sm text-muted">
-            {matched.length} already matched
+            {counts.matched} already matched
           </span>
         )}
       </div>
 
+      {/* Filter Tabs */}
+      <div className="flex gap-2 overflow-x-auto pb-1">
+        {filters.map((f) => {
+          const count = counts[f.key];
+          if (f.key !== "all" && count === 0) return null;
+          const active = filter === f.key;
+          return (
+            <button
+              key={f.key}
+              onClick={() => setFilter(f.key)}
+              className={`px-3.5 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                active
+                  ? "bg-accent/15 text-accent border border-accent/30"
+                  : "bg-card text-muted border border-border hover:border-accent/30"
+              }`}
+            >
+              {f.label}
+              <span className="ml-1.5 text-xs opacity-70">{count}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Table */}
       <div className="overflow-x-auto rounded-xl border border-border">
         <table className="w-full text-sm">
           <thead>
@@ -73,45 +120,44 @@ export function WaitlistTable() {
             </tr>
           </thead>
           <tbody>
-            {entries.map((e) => (
-              <tr key={e.id} className="border-b border-border last:border-0">
-                <td className="px-4 py-3">
-                  <div className="font-medium">{e.name || "Anonymous"}</div>
-                  <div className="text-xs text-muted">{e.email}</div>
-                </td>
-                <td className="px-4 py-3">
-                  <div>{e.city || "—"}</div>
-                  <div className="text-xs text-muted">{shortTz(e.timezone)}</div>
-                </td>
-                <td className="px-4 py-3">
-                  <div className="text-xs">
-                    {e.frequency || "—"}, {e.sessionDuration || "—"}
-                  </div>
-                  <div className="text-xs text-muted">
-                    {e.isOldStudent === "Yes" ? "Old student" : e.isOldStudent === "No" ? "New student" : "—"}
-                    {e.hasMaintainedPractice && e.hasMaintainedPractice !== "—" && (
-                      <> · {e.hasMaintainedPractice} maintained</>
-                    )}
-                  </div>
-                </td>
-                <td className="px-4 py-3">
-                  <span
-                    className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                      e.status === "matched"
-                        ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                        : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
-                    }`}
-                  >
-                    {e.status === "matched" ? "Matched" : "Waiting"}
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {filtered.map((e) => {
+              const st = STATUS_CONFIG[e.status] ?? STATUS_CONFIG.pending;
+              return (
+                <tr key={e.id} className="border-b border-border last:border-0 transition-colors hover:bg-card-hover">
+                  <td className="px-4 py-3">
+                    <div className="font-medium">{e.name || "Anonymous"}</div>
+                    <div className="text-xs text-muted">{e.email}</div>
+                  </td>
+                  <td className="px-4 py-3">
+                    <div>{e.city || "—"}</div>
+                    <div className="text-xs text-muted">{shortTz(e.timezone)}</div>
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="text-xs">
+                      {e.frequency || "—"}, {e.sessionDuration || "—"}
+                    </div>
+                    <div className="text-xs text-muted">
+                      {e.isOldStudent === "Yes" ? "Old student" : e.isOldStudent === "No" ? "New student" : "—"}
+                      {e.hasMaintainedPractice && e.hasMaintainedPractice !== "—" && (
+                        <> · {e.hasMaintainedPractice} maintained</>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-4 py-3">
+                    <span
+                      className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${st.bg} ${st.text}`}
+                    >
+                      {st.label}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
 
-      {pending.length > 0 && (
+      {counts.pending > 0 && (
         <p className="text-center text-xs text-muted">
           Join the waitlist below to get matched with a compatible practice partner.
         </p>
