@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { neon } from "@neondatabase/serverless";
 import { getAllMatches, createMatch, getEntry } from "@/lib/db";
 
 function checkAuth(request: NextRequest): boolean {
@@ -111,12 +112,23 @@ export async function POST(request: NextRequest) {
   </div>
 </body></html>`;
 
-    await resend.emails.send({
+    const emailResult = await resend.emails.send({
       from: "Matt from Vipassana.cool <matt@vipassana.cool>",
       to: [personA.email, personB.email],
       subject: "Your Practice Buddy match is here",
       html,
     });
+
+    // Log outbound email to database
+    try {
+      const sql = neon(process.env.DATABASE_URL!);
+      await sql`
+        INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+        VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+      `;
+    } catch (dbErr) {
+      console.error("Failed to log outbound email:", dbErr);
+    }
   }
 
   return NextResponse.json({ success: true, matchId: match.id });

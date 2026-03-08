@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 import { PostHog } from "posthog-node";
 import { NextRequest, NextResponse } from "next/server";
+import { neon } from "@neondatabase/serverless";
 import { upsertEntry, getEntryByEmail } from "@/lib/db";
 
 type WaitlistData = {
@@ -98,12 +99,24 @@ export async function POST(request: NextRequest) {
     });
 
     // Send confirmation email to the user
-    await resend.emails.send({
+    const emailHtml = getWaitlistEmail(data);
+    const emailResult = await resend.emails.send({
       from: "Vipassana.cool <hello@vipassana.cool>",
       to: data.email,
       subject: "You're on the Practice Buddy waitlist",
-      html: getWaitlistEmail(data),
+      html: emailHtml,
     });
+
+    // Log outbound email to database
+    try {
+      const sql = neon(process.env.DATABASE_URL!);
+      await sql`
+        INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+        VALUES (${emailResult.data?.id || null}, 'outbound', 'Vipassana.cool <hello@vipassana.cool>', ${data.email}, ${"You're on the Practice Buddy waitlist"}, ${emailHtml}, 'sent')
+      `;
+    } catch (dbErr) {
+      console.error("Failed to log outbound email:", dbErr);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
