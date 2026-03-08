@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID!;
+  const AUDIENCE_ID = process.env.RESEND_PACKING_LIST_AUDIENCE_ID!;
 
   try {
     const { email } = await request.json();
@@ -71,9 +71,7 @@ function getChecklistEmail(): string {
       <ul style="list-style:none;padding:0;margin:0;">
         <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Sign up for a course at <a href="https://www.dhamma.org" style="color:#8b7355;">dhamma.org</a> — try to go with a teacher you know as course manager</li>
         <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Reserve transportation — give specific instructions to drivers, GPS can mislead on rural center roads</li>
-        <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Charge laptop before leaving (and before coming back)</li>
-        <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Arrive before 1 PM for check-in</li>
-        <li style="padding:8px 0;font-size:14px;">&#9744; Consider room options: private rooms offer deeper focus, shared rooms add a social element — weigh what matters more to you</li>
+        <li style="padding:8px 0;font-size:14px;">&#9744; Arrive before 1 PM for check-in</li>
       </ul>
     </div>
 
@@ -83,8 +81,8 @@ function getChecklistEmail(): string {
       <ul style="list-style:none;padding:0;margin:0;">
         <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Floor chair for your room setup</li>
         <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Floor mat for your room</li>
-        <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; A meditation bench to try (in addition to cushions)</li>
-        <li style="padding:8px 0;font-size:14px;">&#9744; Treats for the servers — a small gesture they appreciate</li>
+        <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; A meditation bench to try alongside cushions</li>
+        <li style="padding:8px 0;font-size:14px;">&#9744; Treats for the servers</li>
       </ul>
     </div>
 
@@ -137,9 +135,9 @@ function getChecklistEmail(): string {
       <ul style="list-style:none;padding:0;margin:0;">
         <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Winter shoes (quick to put on for outdoor breaks)</li>
         <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Flashlight (for early morning / evening walks)</li>
-        <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Umbrellas x2</li>
+        <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Umbrellas x2 (one for your room, one for the meditation hall — saves carrying back and forth)</li>
         <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Insect repellent</li>
-        <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Water bottles x2</li>
+        <li style="padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px;">&#9744; Water bottles x2 (one for your room, one for the hall)</li>
         <li style="padding:8px 0;font-size:14px;">&#9744; Charger(s)</li>
       </ul>
     </div>

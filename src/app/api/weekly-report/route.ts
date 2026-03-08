@@ -13,7 +13,8 @@ export async function GET(request: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const projectId = process.env.POSTHOG_PROJECT_ID!;
   const phKey = process.env.POSTHOG_PERSONAL_API_KEY!;
-  const audienceId = process.env.RESEND_AUDIENCE_ID!;
+  const packingListAudienceId = process.env.RESEND_PACKING_LIST_AUDIENCE_ID!;
+  const waitlistAudienceId = process.env.RESEND_WAITLIST_AUDIENCE_ID!;
 
   try {
     // Fetch stats in parallel
@@ -39,7 +40,7 @@ export async function GET(request: NextRequest) {
           ORDER BY views DESC
           LIMIT 10
         `),
-        fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
+        fetch(`https://api.resend.com/audiences/${packingListAudienceId}/contacts`, {
           headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
         }).then((r) => r.json()),
         hogqlQuery(projectId, phKey, `
@@ -121,7 +122,7 @@ export async function GET(request: NextRequest) {
       </div>
       <div style="flex:1;background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:20px;text-align:center;">
         <div style="font-size:32px;font-weight:700;color:#8b7355;">${subscriberCount}</div>
-        <div style="font-size:12px;color:#6b6b6b;margin-top:4px;">Subscribers</div>
+        <div style="font-size:12px;color:#6b6b6b;margin-top:4px;">Packing List</div>
       </div>
     </div>
 

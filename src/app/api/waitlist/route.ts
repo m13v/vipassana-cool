@@ -19,7 +19,7 @@ type WaitlistData = {
 
 export async function POST(request: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID!;
+  const AUDIENCE_ID = process.env.RESEND_WAITLIST_AUDIENCE_ID!;
 
   try {
     const data: WaitlistData = await request.json();
