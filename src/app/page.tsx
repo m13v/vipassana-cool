@@ -56,21 +56,33 @@ export default function Home() {
           <h2 className="mb-6 text-2xl font-bold">What is Vipassana?</h2>
           <div className="space-y-4 text-muted">
             <p>
-              Vipassana means &ldquo;to see things as they really are.&rdquo; It is one of
-              India&apos;s most ancient meditation techniques, rediscovered by Gotama the
-              Buddha more than 2,500 years ago. It was taught as a universal remedy
-              for universal ills — an Art of Living.
+              The word &ldquo;Vipassana&rdquo; means seeing things as they actually are. It&apos;s
+              an ancient meditation practice from India with roots going back over 2,500 years
+              to the time of Gotama Buddha, who taught it as a practical path toward living
+              with greater clarity and freedom from suffering.
             </p>
             <p>
-              The technique is taught through 10-day residential courses at centers around
-              the world. During these courses, participants follow a prescribed Code of
-              Discipline, learn the basics of the method, and practice sufficiently to
-              experience its beneficial results.
+              Today the technique is offered through intensive 10-day silent residential
+              retreats at over 200 centers worldwide. You learn through direct experience —
+              observing your own breath and bodily sensations under a structured daily schedule
+              with clear ethical guidelines.
             </p>
             <p>
-              The courses are entirely free. There are no charges — not even to cover food
-              and accommodation. All expenses are met by donations from people who have
-              completed a course and wish to give others the same opportunity.
+              Every course runs on a donation-only model: there are zero fees for tuition,
+              food, or lodging. The entire operation is sustained by voluntary contributions
+              from past participants who want to pay it forward.
+            </p>
+            <p className="text-sm">
+              For official information, course schedules, and registration, visit{" "}
+              <a
+                href="https://www.dhamma.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent underline decoration-accent-light hover:text-foreground"
+              >
+                dhamma.org
+              </a>
+              .
             </p>
           </div>
         </div>
