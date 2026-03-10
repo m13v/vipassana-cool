@@ -504,8 +504,14 @@ function ThreadCell({ person, emails, onOpen }: { person: WaitlistPerson; emails
 
 function shortTz(tz: string | null): string {
   if (!tz) return "—";
-  const parts = tz.split("/");
-  return parts[parts.length - 1].replace(/_/g, " ");
+  try {
+    const offset = new Intl.DateTimeFormat("en", { timeZone: tz, timeZoneName: "shortOffset" })
+      .formatToParts(new Date())
+      .find((p) => p.type === "timeZoneName")?.value ?? tz;
+    return offset.replace("GMT+0", "GMT").replace("UTC", "GMT");
+  } catch {
+    return tz.split("/").pop()?.replace(/_/g, " ") ?? tz;
+  }
 }
 
 function StatusBadge({ value }: { value: string | null }) {
