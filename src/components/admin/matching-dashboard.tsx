@@ -190,8 +190,10 @@ export function MatchingDashboard() {
     );
   }
 
-  const pending = entries.filter((e) => e.status === "pending");
-  const nonPending = entries.filter((e) => e.status !== "pending");
+  const sortedEntries = [...entries].sort((a, b) => {
+    const order = { pending: 0, matched: 1, ended: 2 };
+    return (order[a.status as keyof typeof order] ?? 9) - (order[b.status as keyof typeof order] ?? 9);
+  });
 
   return (
     <div className="space-y-8">
@@ -221,13 +223,13 @@ export function MatchingDashboard() {
         )}
       </div>
 
-      {/* Pending entries table */}
+      {/* Unified people table */}
       <div>
         <h2 className="mb-3 text-lg font-semibold">
-          Pending ({pending.length})
+          All People ({entries.length})
         </h2>
-        {pending.length === 0 ? (
-          <p className="text-sm text-muted">No pending entries. Try syncing from PostHog.</p>
+        {entries.length === 0 ? (
+          <p className="text-sm text-muted">No entries. Try syncing from PostHog.</p>
         ) : (
           <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
@@ -235,6 +237,7 @@ export function MatchingDashboard() {
                 <tr className="border-b border-border bg-card text-left">
                   <th className="px-3 py-2 font-medium"></th>
                   <th className="px-3 py-2 font-medium">Name</th>
+                  <th className="px-3 py-2 font-medium">Status</th>
                   <th className="px-3 py-2 font-medium">City</th>
                   <th className="px-3 py-2 font-medium">Timezone</th>
                   <th className="px-3 py-2 font-medium">Frequency</th>
@@ -247,40 +250,55 @@ export function MatchingDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {pending.map((e) => (
+                {sortedEntries.map((e) => (
                   <tr
                     key={e.id}
-                    onClick={() => toggleSelect(e.id)}
-                    className={`cursor-pointer border-b border-border transition-colors ${
+                    onClick={() => e.status === "pending" && toggleSelect(e.id)}
+                    className={`border-b border-border transition-colors ${
+                      e.status === "pending" ? "cursor-pointer" : "opacity-60"
+                    } ${
                       selected.has(e.id)
                         ? "bg-accent/10"
-                        : isRequestedBy(e.id, pending)
+                        : isRequestedBy(e.id, entries)
                         ? "bg-blue-50/60 hover:bg-blue-50"
-                        : "hover:bg-card"
+                        : e.status === "pending"
+                        ? "hover:bg-card"
+                        : ""
                     }`}
                   >
                     <td className="px-3 py-2">
-                      <input
-                        type="checkbox"
-                        checked={selected.has(e.id)}
-                        onChange={() => toggleSelect(e.id)}
-                        className="accent-accent"
-                      />
+                      {e.status === "pending" && (
+                        <input
+                          type="checkbox"
+                          checked={selected.has(e.id)}
+                          onChange={() => toggleSelect(e.id)}
+                          className="accent-accent"
+                        />
+                      )}
                     </td>
                     <td className="px-3 py-2 font-medium">
                       <div className="flex flex-col gap-0.5">
                         <span>{e.firstName || "—"}</span>
                         {e.requestedMatchId && (
                           <span className="text-xs font-normal text-blue-600">
-                            → requested {pending.find(p => p.id === e.requestedMatchId)?.firstName || e.requestedMatchId.slice(0, 8)}
+                            → requested {entries.find(p => p.id === e.requestedMatchId)?.firstName || e.requestedMatchId.slice(0, 8)}
                           </span>
                         )}
-                        {isRequestedBy(e.id, pending) && (
+                        {isRequestedBy(e.id, entries) && (
                           <span className="text-xs font-normal text-purple-600">
-                            ← requested by {pending.find(p => p.requestedMatchId === e.id)?.firstName || "someone"}
+                            ← requested by {entries.find(p => p.requestedMatchId === e.id)?.firstName || "someone"}
                           </span>
                         )}
                       </div>
+                    </td>
+                    <td className="px-3 py-2">
+                      <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                        e.status === "pending" ? "bg-yellow-100 text-yellow-700" :
+                        e.status === "matched" ? "bg-green-100 text-green-700" :
+                        "bg-red-100 text-red-700"
+                      }`}>
+                        {e.status}
+                      </span>
                     </td>
                     <td className="px-3 py-2">{e.city || "—"}</td>
                     <td className="px-3 py-2 text-xs">{shortTz(e.timezone)}</td>
@@ -331,45 +349,6 @@ export function MatchingDashboard() {
           </div>
         )}
       </div>
-
-      {/* Already matched */}
-      {nonPending.length > 0 && (
-        <div>
-          <h2 className="mb-3 text-lg font-semibold">
-            Matched ({nonPending.length})
-          </h2>
-          <div className="overflow-x-auto rounded-xl border border-border">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border bg-card text-left">
-                  <th className="px-3 py-2 font-medium">Name</th>
-                  <th className="px-3 py-2 font-medium">City</th>
-                  <th className="px-3 py-2 font-medium">Timezone</th>
-                  <th className="px-3 py-2 font-medium">Frequency</th>
-                  <th className="px-3 py-2 font-medium">Duration</th>
-                  <th className="px-3 py-2 font-medium">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {nonPending.map((e) => (
-                  <tr key={e.id} className="border-b border-border">
-                    <td className="px-3 py-2 font-medium">{e.firstName || "—"}</td>
-                    <td className="px-3 py-2">{e.city || "—"}</td>
-                    <td className="px-3 py-2 text-xs">{shortTz(e.timezone)}</td>
-                    <td className="px-3 py-2">{e.frequency || "—"}</td>
-                    <td className="px-3 py-2">{e.sessionDuration || "—"}</td>
-                    <td className="px-3 py-2">
-                      <span className="rounded-full bg-accent/10 px-2 py-0.5 text-xs font-medium text-accent">
-                        {e.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
 
       {/* Matches */}
       {matches.length > 0 && (
