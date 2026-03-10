@@ -20,6 +20,7 @@ export type WaitlistEntry = {
   has_maintained_practice: string | null;
   practice_length: string | null;
   requested_match_id: string | null;
+  research_notes: string | null;
   status: string;
   created_at: string | null;
   updated_at: string | null;
