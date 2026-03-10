@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAllEntries } from "@/lib/db";
+import { neon } from "@neondatabase/serverless";
 
 function checkAuth(request: NextRequest): boolean {
   const secret = request.headers.get("authorization")?.replace("Bearer ", "")
@@ -29,9 +30,24 @@ export async function GET(request: NextRequest) {
     hasMaintainedPractice: e.has_maintained_practice,
     practiceLength: e.practice_length,
     requestedMatchId: e.requested_match_id,
+    researchNotes: e.research_notes,
     status: e.status,
     createdAt: e.created_at,
   }));
 
   return NextResponse.json({ entries: safe });
+}
+
+export async function PATCH(request: NextRequest) {
+  if (!checkAuth(request)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id, researchNotes } = await request.json();
+  if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
+
+  const sql = neon(process.env.DATABASE_URL!);
+  await sql`UPDATE waitlist_entries SET research_notes = ${researchNotes ?? null}, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
+
+  return NextResponse.json({ ok: true });
 }
