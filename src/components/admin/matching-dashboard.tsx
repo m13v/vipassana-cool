@@ -16,6 +16,7 @@ type WaitlistPerson = {
   isGoenkatradition: string | null;
   hasMaintainedPractice: string | null;
   practiceLength: string | null;
+  requestedMatchId: string | null;
   status: string;
   createdAt: string | null;
 };
@@ -237,6 +238,8 @@ export function MatchingDashboard() {
                     className={`cursor-pointer border-b border-border transition-colors ${
                       selected.has(e.id)
                         ? "bg-accent/10"
+                        : isRequestedBy(e.id, pending)
+                        ? "bg-blue-50/60 hover:bg-blue-50"
                         : "hover:bg-card"
                     }`}
                   >
@@ -248,7 +251,21 @@ export function MatchingDashboard() {
                         className="accent-accent"
                       />
                     </td>
-                    <td className="px-3 py-2 font-medium">{e.firstName || "—"}</td>
+                    <td className="px-3 py-2 font-medium">
+                      <div className="flex flex-col gap-0.5">
+                        <span>{e.firstName || "—"}</span>
+                        {e.requestedMatchId && (
+                          <span className="text-xs font-normal text-blue-600">
+                            → requested {pending.find(p => p.id === e.requestedMatchId)?.firstName || e.requestedMatchId.slice(0, 8)}
+                          </span>
+                        )}
+                        {isRequestedBy(e.id, pending) && (
+                          <span className="text-xs font-normal text-purple-600">
+                            ← requested by {pending.find(p => p.requestedMatchId === e.id)?.firstName || "someone"}
+                          </span>
+                        )}
+                      </div>
+                    </td>
                     <td className="px-3 py-2">{e.city || "—"}</td>
                     <td className="px-3 py-2 text-xs">{shortTz(e.timezone)}</td>
                     <td className="px-3 py-2">{e.frequency || "—"}</td>
@@ -373,6 +390,10 @@ export function MatchingDashboard() {
       )}
     </div>
   );
+}
+
+function isRequestedBy(id: string, entries: WaitlistPerson[]): boolean {
+  return entries.some(e => e.requestedMatchId === id);
 }
 
 function shortTz(tz: string | null): string {
