@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
         has_maintained_practice: props.has_maintained_practice ?? null,
         practice_length: props.practice_length ?? null,
         requested_match_id: props.requested_match_id ?? null,
+        research_notes: null,
         created_at: row.timestamp ?? new Date().toISOString(),
       });
       synced++;
