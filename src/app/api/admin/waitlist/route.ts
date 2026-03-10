@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
 
   const safe = entries.map((e) => ({
     id: e.id,
+    email: e.email,
     firstName: e.name?.split(/\s+/)[0] || null,
     city: e.city,
     timezone: e.timezone,
