@@ -29,6 +29,14 @@ const DAYS_OF_WEEK = [
   "Sunday",
 ];
 
+const GMT_OFFSETS = [
+  "GMT-12", "GMT-11", "GMT-10", "GMT-9", "GMT-8", "GMT-7", "GMT-6", "GMT-5",
+  "GMT-4", "GMT-3", "GMT-2", "GMT-1", "GMT+0", "GMT+1", "GMT+2", "GMT+3",
+  "GMT+3:30", "GMT+4", "GMT+4:30", "GMT+5", "GMT+5:30", "GMT+5:45", "GMT+6",
+  "GMT+6:30", "GMT+7", "GMT+8", "GMT+8:30", "GMT+9", "GMT+9:30", "GMT+10",
+  "GMT+10:30", "GMT+11", "GMT+12", "GMT+13", "GMT+14",
+];
+
 const DURATION_OPTIONS = [
   "15 minutes",
   "20 minutes",
@@ -60,11 +68,16 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
 
   useEffect(() => {
     try {
-      const tz = prefill?.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
-      if (tz) setForm((f) => ({ ...f, timezone: tz }));
-    } catch {
-      // ignore
-    }
+      if (prefill?.timezone) {
+        setForm((f) => ({ ...f, timezone: prefill.timezone! }));
+      } else {
+        const ianaZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const parts = new Intl.DateTimeFormat("en", { timeZone: ianaZone, timeZoneName: "shortOffset" }).formatToParts(new Date());
+        const offset = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
+        const gmt = offset.replace("UTC", "GMT+0") || "";
+        if (gmt) setForm((f) => ({ ...f, timezone: gmt }));
+      }
+    } catch { /* ignore */ }
   }, [prefill?.timezone]);
 
   function update(field: keyof FormData, value: string | string[]) {
@@ -242,15 +255,18 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
             <label htmlFor="wb-timezone" className={labelClass}>
               Time zone
             </label>
-            <input
+            <select
               id="wb-timezone"
-              type="text"
               required
-              placeholder="e.g. America/New_York"
               value={form.timezone}
               onChange={(e) => update("timezone", e.target.value)}
               className={inputClass}
-            />
+            >
+              <option value="">Select timezone</option>
+              {GMT_OFFSETS.map((o) => (
+                <option key={o} value={o}>{o}</option>
+              ))}
+            </select>
             <p className="mt-1 text-xs text-muted/60">Auto-detected — change if incorrect</p>
           </div>
         </div>
