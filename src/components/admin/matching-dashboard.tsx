@@ -474,6 +474,34 @@ function isRequestedBy(id: string, entries: WaitlistPerson[]): boolean {
   return entries.some(e => e.requestedMatchId === id);
 }
 
+function ThreadCell({ person, emails, onOpen }: { person: WaitlistPerson; emails: EmailRecord[]; onOpen: (thread: EmailRecord[]) => void }) {
+  const thread = emails.filter(em =>
+    em.from_email.includes(person.email) || em.to_email.includes(person.email)
+  );
+  const inbound = thread.filter(em => em.direction === "inbound");
+  const last = thread[thread.length - 1];
+
+  if (thread.length === 0) {
+    return <span className="text-xs text-muted">—</span>;
+  }
+
+  return (
+    <button
+      onClick={() => onOpen(thread)}
+      className="flex flex-col gap-0.5 text-left hover:opacity-80"
+    >
+      <span className="text-xs font-medium">
+        {inbound.length > 0 ? `💬 ${inbound.length} repl${inbound.length === 1 ? "y" : "ies"}` : "📧 sent"}
+      </span>
+      {last && (
+        <span className="text-xs text-muted">
+          {new Date(last.created_at).toLocaleDateString()}
+        </span>
+      )}
+    </button>
+  );
+}
+
 function shortTz(tz: string | null): string {
   if (!tz) return "—";
   const parts = tz.split("/");
