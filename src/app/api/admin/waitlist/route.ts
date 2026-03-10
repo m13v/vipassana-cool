@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
     isGoenkatradition: e.is_goenka_tradition,
     hasMaintainedPractice: e.has_maintained_practice,
     practiceLength: e.practice_length,
+    requestedMatchId: e.requested_match_id,
     status: e.status,
     createdAt: e.created_at,
   }));
