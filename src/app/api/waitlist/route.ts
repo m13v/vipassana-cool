@@ -98,6 +98,7 @@ export async function POST(request: NextRequest) {
       has_maintained_practice: data.hasMaintainedPractice,
       practice_length: data.practiceLength,
       requested_match_id: data.requestedMatchId || null,
+      research_notes: null,
       created_at: new Date().toISOString(),
     });
 
