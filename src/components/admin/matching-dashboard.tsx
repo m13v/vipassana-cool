@@ -2,8 +2,20 @@
 
 import { useState, useEffect, useCallback } from "react";
 
+type EmailRecord = {
+  id: number;
+  direction: string;
+  from_email: string;
+  to_email: string;
+  subject: string;
+  body_text: string | null;
+  status: string;
+  created_at: string;
+};
+
 type WaitlistPerson = {
   id: string;
+  email: string;
   firstName: string | null;
   city: string | null;
   timezone: string | null;
@@ -46,11 +58,13 @@ export function MatchingDashboard() {
   const [entries, setEntries] = useState<WaitlistPerson[]>([]);
   const [matches, setMatches] = useState<MatchRecord[]>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [emails, setEmails] = useState<EmailRecord[]>([]);
   const [syncing, setSyncing] = useState(false);
   const [matching, setMatching] = useState(false);
   const [message, setMessage] = useState("");
   const [editingNotes, setEditingNotes] = useState<Record<string, string>>({});
   const [savingNotes, setSavingNotes] = useState<Set<string>>(new Set());
+  const [threadModal, setThreadModal] = useState<{ person: WaitlistPerson; thread: EmailRecord[] } | null>(null);
 
   const headers = useCallback(() => ({
     Authorization: `Bearer ${secret}`,
@@ -62,6 +76,7 @@ export function MatchingDashboard() {
       fetch("/api/admin/waitlist", { headers: headers() }),
       fetch("/api/admin/matches", { headers: headers() }),
     ]);
+    const eRes = await fetch("/api/admin/emails", { headers: headers() });
     if (wRes.ok) {
       const wData = await wRes.json();
       setEntries(wData.entries);
@@ -69,6 +84,10 @@ export function MatchingDashboard() {
     if (mRes.ok) {
       const mData = await mRes.json();
       setMatches(mData.matches);
+    }
+    if (eRes.ok) {
+      const eData = await eRes.json();
+      setEmails(eData.emails);
     }
   }, [headers]);
 
@@ -246,6 +265,7 @@ export function MatchingDashboard() {
                   <th className="px-3 py-2 font-medium">Old Student</th>
                   <th className="px-3 py-2 font-medium">Practice</th>
                   <th className="px-3 py-2 font-medium">Signed Up</th>
+                  <th className="px-3 py-2 font-medium">Thread</th>
                   <th className="px-3 py-2 font-medium">Research Notes</th>
                 </tr>
               </thead>
@@ -323,6 +343,9 @@ export function MatchingDashboard() {
                       {e.createdAt ? new Date(e.createdAt).toLocaleDateString() : "—"}
                     </td>
                     <td className="px-3 py-2" onClick={(ev) => ev.stopPropagation()}>
+                      <ThreadCell person={e} emails={emails} onOpen={(thread) => setThreadModal({ person: e, thread })} />
+                    </td>
+                    <td className="px-3 py-2" onClick={(ev) => ev.stopPropagation()}>
                       <div className="flex items-start gap-1">
                         <textarea
                           rows={2}
@@ -349,6 +372,46 @@ export function MatchingDashboard() {
           </div>
         )}
       </div>
+
+      {/* Thread modal */}
+      {threadModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setThreadModal(null)}>
+          <div className="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-border bg-background p-6 shadow-xl" onClick={(ev) => ev.stopPropagation()}>
+            <div className="mb-4 flex items-start justify-between">
+              <div>
+                <h3 className="font-semibold">{threadModal.person.firstName} — email thread</h3>
+                <p className="text-xs text-muted">{threadModal.person.email}</p>
+              </div>
+              <button onClick={() => setThreadModal(null)} className="text-muted hover:text-foreground text-lg leading-none">✕</button>
+            </div>
+            {threadModal.thread.length === 0 ? (
+              <p className="text-sm text-muted">No emails yet.</p>
+            ) : (
+              <div className="space-y-4">
+                {threadModal.thread.map((em) => (
+                  <div key={em.id} className={`rounded-xl border p-4 text-sm ${em.direction === "inbound" ? "border-blue-200 bg-blue-50" : "border-border bg-card"}`}>
+                    <div className="mb-2 flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${em.direction === "inbound" ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-600"}`}>
+                          {em.direction === "inbound" ? "↩ reply" : "→ sent"}
+                        </span>
+                        <span className="font-medium">{em.subject}</span>
+                      </div>
+                      <span className="whitespace-nowrap text-xs text-muted">{new Date(em.created_at).toLocaleString()}</span>
+                    </div>
+                    <p className="text-xs text-muted mb-1">{em.direction === "inbound" ? `From: ${em.from_email}` : `To: ${em.to_email}`}</p>
+                    {em.body_text && (
+                      <pre className="mt-2 whitespace-pre-wrap text-xs leading-relaxed text-foreground/80 font-sans">
+                        {em.body_text.split("\n\nOn ")[0].trim()}
+                      </pre>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Matches */}
       {matches.length > 0 && (
