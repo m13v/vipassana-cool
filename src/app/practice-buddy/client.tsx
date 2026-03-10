@@ -4,8 +4,11 @@ import { useState, useRef } from "react";
 import { WaitlistTable } from "@/components/waitlist-table";
 import { WaitlistSignup } from "@/components/waitlist-signup";
 
+type QuickSetup = { timezone: string; morningTime: string; frequency: string };
+
 export function PracticeBuddyClient() {
   const [matchRequest, setMatchRequest] = useState<{ id: string; name: string } | null>(null);
+  const [prefill, setPrefill] = useState<QuickSetup | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
   function handleRequestMatch(personId: string, personName: string) {
@@ -14,6 +17,12 @@ export function PracticeBuddyClient() {
 
   function clearMatchRequest() {
     setMatchRequest(null);
+  }
+
+  function handleSetup(setup: QuickSetup) {
+    setPrefill(setup);
+    // Scroll to form
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   return (
@@ -42,7 +51,7 @@ export function PracticeBuddyClient() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-16">
           <h2 className="mb-8 text-2xl font-bold">Who&apos;s Waiting</h2>
-          <WaitlistTable onRequestMatch={handleRequestMatch} />
+          <WaitlistTable onRequestMatch={handleRequestMatch} onSetup={handleSetup} />
         </div>
       </section>
 
@@ -197,7 +206,7 @@ export function PracticeBuddyClient() {
       {/* Signup Form */}
       <section className="border-t border-border">
         <div ref={formRef} className="mx-auto max-w-3xl px-6 py-16">
-          <WaitlistSignup location="bottom-cta" />
+          <WaitlistSignup location="bottom-cta" prefill={prefill ?? undefined} />
         </div>
       </section>
 
