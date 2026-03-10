@@ -10,11 +10,14 @@ type WaitlistPerson = {
   timezone: string | null;
   frequency: string | null;
   sessionDuration: string | null;
+  morningTime: string | null;
   isOldStudent: string | null;
   hasMaintainedPractice: string | null;
   status: string;
   createdAt: string | null;
 };
+
+type QuickSetup = { timezone: string; morningTime: string; frequency: string };
 
 const STATUS_CONFIG: Record<string, { bg: string; text: string; label: string }> = {
   matched: { bg: "bg-green-100 dark:bg-green-900/30", text: "text-green-700 dark:text-green-400", label: "Matched" },
@@ -23,10 +26,27 @@ const STATUS_CONFIG: Record<string, { bg: string; text: string; label: string }>
 
 type Filter = "all" | "pending" | "matched";
 
-export function WaitlistTable({ onRequestMatch }: { onRequestMatch?: (personId: string, personName: string) => void }) {
+function tzOffsetMinutes(tz: string): number {
+  try {
+    const now = new Date();
+    const utc = now.getTime();
+    const local = new Date(now.toLocaleString("en-US", { timeZone: tz })).getTime();
+    return Math.round((local - utc) / 60000);
+  } catch { return 0; }
+}
+
+function timeToMinutes(t: string | null): number | null {
+  if (!t) return null;
+  const [h, m] = t.split(":").map(Number);
+  return isNaN(h) ? null : h * 60 + (m || 0);
+}
+
+export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (personId: string, personName: string) => void; onSetup?: (setup: QuickSetup) => void }) {
   const [entries, setEntries] = useState<WaitlistPerson[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<Filter>("all");
+  const [setup, setSetup] = useState<QuickSetup>({ timezone: "", morningTime: "", frequency: "" });
+  const [setupActive, setSetupActive] = useState(false);
 
   useEffect(() => {
     fetch("/api/waitlist/entries")
@@ -36,6 +56,10 @@ export function WaitlistTable({ onRequestMatch }: { onRequestMatch?: (personId: 
         setLoading(false);
       })
       .catch(() => setLoading(false));
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      if (tz) setSetup((s) => ({ ...s, timezone: tz }));
+    } catch { /* ignore */ }
   }, []);
 
   const counts = useMemo(() => ({
@@ -44,10 +68,24 @@ export function WaitlistTable({ onRequestMatch }: { onRequestMatch?: (personId: 
     matched: entries.filter((e) => e.status === "matched").length,
   }), [entries]);
 
-  const filtered = useMemo(
-    () => (filter === "all" ? entries : entries.filter((e) => e.status === filter)),
-    [entries, filter]
-  );
+  const filtered = useMemo(() => {
+    let list = filter === "all" ? entries : entries.filter((e) => e.status === filter);
+    if (!setupActive) return list;
+    const myOffset = setup.timezone ? tzOffsetMinutes(setup.timezone) : null;
+    const myTime = timeToMinutes(setup.morningTime);
+    return list.filter((e) => {
+      if (myOffset !== null && e.timezone) {
+        const diff = Math.abs(tzOffsetMinutes(e.timezone) - myOffset);
+        if (diff > 180) return false; // >3hrs apart
+      }
+      if (myTime !== null && e.morningTime) {
+        const theirTime = timeToMinutes(e.morningTime);
+        if (theirTime !== null && Math.abs(theirTime - myTime) > 120) return false; // >2hrs apart
+      }
+      if (setup.frequency && e.frequency && e.frequency !== setup.frequency) return false;
+      return true;
+    });
+  }, [entries, filter, setup, setupActive]);
 
   if (loading) {
     return (
@@ -82,6 +120,65 @@ export function WaitlistTable({ onRequestMatch }: { onRequestMatch?: (personId: 
           <span className="text-sm text-muted">
             {counts.matched} already matched
           </span>
+        )}
+      </div>
+
+      {/* Quick Setup */}
+      <div className="rounded-xl border border-border bg-card p-4 space-y-3">
+        <p className="text-sm font-medium">Find compatible partners</p>
+        <div className="flex flex-wrap gap-3 items-end">
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-muted">When do you meditate?</label>
+            <input
+              type="time"
+              value={setup.morningTime}
+              onChange={(e) => setSetup((s) => ({ ...s, morningTime: e.target.value }))}
+              className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent w-32"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-muted">Frequency</label>
+            <select
+              value={setup.frequency}
+              onChange={(e) => setSetup((s) => ({ ...s, frequency: e.target.value }))}
+              className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
+            >
+              <option value="">Any</option>
+              <option value="Once a day">Once a day</option>
+              <option value="Twice a day">Twice a day</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-muted">Your timezone</label>
+            <div className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-muted w-24">
+              {setup.timezone ? shortTz(setup.timezone) : "detecting…"}
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              const next = !setupActive;
+              setSetupActive(next);
+              if (next && onSetup) onSetup(setup);
+            }}
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              setupActive
+                ? "bg-accent text-white hover:opacity-90"
+                : "border border-accent/30 bg-accent/5 text-accent hover:bg-accent/15"
+            }`}
+          >
+            {setupActive ? `Filtering (${filtered.length})` : "Filter & Apply"}
+          </button>
+          {setupActive && (
+            <button onClick={() => setSetupActive(false)} className="text-xs text-muted hover:text-foreground">
+              Clear
+            </button>
+          )}
+        </div>
+        {setupActive && (
+          <p className="text-xs text-muted">
+            Showing people within 3h of your timezone{setup.morningTime ? ` and 2h of ${setup.morningTime}` : ""}.
+            Your settings will pre-fill the application form below.
+          </p>
         )}
       </div>
 
