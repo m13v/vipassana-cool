@@ -4,11 +4,12 @@ import { useState, useRef } from "react";
 import { WaitlistTable } from "@/components/waitlist-table";
 import { WaitlistSignup } from "@/components/waitlist-signup";
 
-type QuickSetup = { timezone: string; morningTime: string; frequency: string };
+type QuickSetup = { timezone: string; morningHour: string };
+type SignupPrefill = { timezone?: string; morningTime?: string; frequency?: string };
 
 export function PracticeBuddyClient() {
   const [matchRequest, setMatchRequest] = useState<{ id: string; name: string } | null>(null);
-  const [prefill, setPrefill] = useState<QuickSetup | null>(null);
+  const [prefill, setPrefill] = useState<SignupPrefill | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
   function handleRequestMatch(personId: string, personName: string) {
@@ -20,7 +21,9 @@ export function PracticeBuddyClient() {
   }
 
   function handleSetup(setup: QuickSetup) {
-    setPrefill(setup);
+    // Convert hour number to HH:00 for the signup form's time input
+    const morningTime = setup.morningHour !== "" ? `${setup.morningHour.padStart(2, "0")}:00` : "";
+    setPrefill({ timezone: setup.timezone, morningTime, frequency: "" });
     // Scroll to form
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
