@@ -17,7 +17,32 @@ type WaitlistPerson = {
   createdAt: string | null;
 };
 
-type QuickSetup = { timezone: string; morningTime: string; frequency: string };
+type QuickSetup = { timezone: string; morningHour: string };
+
+const GMT_OFFSETS = [
+  "GMT-12", "GMT-11", "GMT-10", "GMT-9", "GMT-8", "GMT-7", "GMT-6", "GMT-5",
+  "GMT-4", "GMT-3", "GMT-2", "GMT-1", "GMT+0", "GMT+1", "GMT+2", "GMT+3",
+  "GMT+3:30", "GMT+4", "GMT+4:30", "GMT+5", "GMT+5:30", "GMT+5:45", "GMT+6",
+  "GMT+6:30", "GMT+7", "GMT+8", "GMT+8:30", "GMT+9", "GMT+9:30", "GMT+10",
+  "GMT+10:30", "GMT+11", "GMT+12", "GMT+13", "GMT+14",
+];
+
+const HOUR_OPTIONS = [
+  { value: "", label: "Any time" },
+  ...Array.from({ length: 24 }, (_, i) => ({
+    value: String(i),
+    label: i === 0 ? "12 AM" : i < 12 ? `${i} AM` : i === 12 ? "12 PM" : `${i - 12} PM`,
+  })),
+];
+
+function detectedGmtOffset(): string {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const parts = new Intl.DateTimeFormat("en", { timeZone: tz, timeZoneName: "shortOffset" }).formatToParts(new Date());
+    const raw = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
+    return raw.replace("UTC", "GMT+0").replace("GMT+0", "GMT+0") || "";
+  } catch { return ""; }
+}
 
 const STATUS_CONFIG: Record<string, { bg: string; text: string; label: string }> = {
   matched: { bg: "bg-green-100 dark:bg-green-900/30", text: "text-green-700 dark:text-green-400", label: "Matched" },
@@ -26,26 +51,11 @@ const STATUS_CONFIG: Record<string, { bg: string; text: string; label: string }>
 
 type Filter = "all" | "pending" | "matched";
 
-function tzOffsetMinutes(tz: string): number {
-  try {
-    const now = new Date();
-    const utc = now.getTime();
-    const local = new Date(now.toLocaleString("en-US", { timeZone: tz })).getTime();
-    return Math.round((local - utc) / 60000);
-  } catch { return 0; }
-}
-
-function timeToMinutes(t: string | null): number | null {
-  if (!t) return null;
-  const [h, m] = t.split(":").map(Number);
-  return isNaN(h) ? null : h * 60 + (m || 0);
-}
-
 export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (personId: string, personName: string) => void; onSetup?: (setup: QuickSetup) => void }) {
   const [entries, setEntries] = useState<WaitlistPerson[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<Filter>("all");
-  const [setup, setSetup] = useState<QuickSetup>({ timezone: "", morningTime: "", frequency: "" });
+  const [setup, setSetup] = useState<QuickSetup>({ timezone: "", morningHour: "" });
   const [setupActive, setSetupActive] = useState(false);
 
   useEffect(() => {
@@ -56,10 +66,8 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
         setLoading(false);
       })
       .catch(() => setLoading(false));
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      if (tz) setSetup((s) => ({ ...s, timezone: tz }));
-    } catch { /* ignore */ }
+    const offset = detectedGmtOffset();
+    if (offset) setSetup((s) => ({ ...s, timezone: offset }));
   }, []);
 
   const counts = useMemo(() => ({
@@ -71,18 +79,16 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
   const filtered = useMemo(() => {
     let list = filter === "all" ? entries : entries.filter((e) => e.status === filter);
     if (!setupActive) return list;
-    const myOffset = setup.timezone ? tzOffsetMinutes(setup.timezone) : null;
-    const myTime = timeToMinutes(setup.morningTime);
+    const myHour = setup.morningHour !== "" ? parseInt(setup.morningHour) : null;
     return list.filter((e) => {
-      if (myOffset !== null && e.timezone) {
-        const diff = Math.abs(tzOffsetMinutes(e.timezone) - myOffset);
-        if (diff > 180) return false; // >3hrs apart
+      if (myHour !== null && e.morningTime) {
+        const theirHour = parseInt(e.morningTime.split(":")[0]);
+        if (!isNaN(theirHour)) {
+          const diff = Math.abs(theirHour - myHour);
+          const wrappedDiff = Math.min(diff, 24 - diff);
+          if (wrappedDiff > 2) return false;
+        }
       }
-      if (myTime !== null && e.morningTime) {
-        const theirTime = timeToMinutes(e.morningTime);
-        if (theirTime !== null && Math.abs(theirTime - myTime) > 120) return false; // >2hrs apart
-      }
-      if (setup.frequency && e.frequency && e.frequency !== setup.frequency) return false;
       return true;
     });
   }, [entries, filter, setup, setupActive]);
@@ -129,30 +135,28 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
         <div className="flex flex-wrap gap-3 items-end">
           <div className="flex flex-col gap-1">
             <label className="text-xs text-muted">When do you meditate?</label>
-            <input
-              type="time"
-              value={setup.morningTime}
-              onChange={(e) => setSetup((s) => ({ ...s, morningTime: e.target.value }))}
-              className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent w-32"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-muted">Frequency</label>
             <select
-              value={setup.frequency}
-              onChange={(e) => setSetup((s) => ({ ...s, frequency: e.target.value }))}
+              value={setup.morningHour}
+              onChange={(e) => setSetup((s) => ({ ...s, morningHour: e.target.value }))}
               className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
             >
-              <option value="">Any</option>
-              <option value="Once a day">Once a day</option>
-              <option value="Twice a day">Twice a day</option>
+              {HOUR_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
             </select>
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-xs text-muted">Your timezone</label>
-            <div className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-muted w-24">
-              {setup.timezone ? shortTz(setup.timezone) : "detecting…"}
-            </div>
+            <select
+              value={setup.timezone}
+              onChange={(e) => setSetup((s) => ({ ...s, timezone: e.target.value }))}
+              className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
+            >
+              <option value="">—</option>
+              {GMT_OFFSETS.map((o) => (
+                <option key={o} value={o}>{o}</option>
+              ))}
+            </select>
           </div>
           <button
             onClick={() => {
@@ -176,7 +180,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
         </div>
         {setupActive && (
           <p className="text-xs text-muted">
-            Showing people within 3h of your timezone{setup.morningTime ? ` and 2h of ${setup.morningTime}` : ""}.
+            Showing people who meditate within 2 hours of your time.
             Your settings will pre-fill the application form below.
           </p>
         )}
