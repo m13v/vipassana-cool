@@ -17,6 +17,7 @@ type WaitlistPerson = {
   hasMaintainedPractice: string | null;
   practiceLength: string | null;
   requestedMatchId: string | null;
+  researchNotes: string | null;
   status: string;
   createdAt: string | null;
 };
@@ -48,6 +49,8 @@ export function MatchingDashboard() {
   const [syncing, setSyncing] = useState(false);
   const [matching, setMatching] = useState(false);
   const [message, setMessage] = useState("");
+  const [editingNotes, setEditingNotes] = useState<Record<string, string>>({});
+  const [savingNotes, setSavingNotes] = useState<Set<string>>(new Set());
 
   const headers = useCallback(() => ({
     Authorization: `Bearer ${secret}`,
@@ -145,6 +148,18 @@ export function MatchingDashboard() {
     setMatching(false);
   }
 
+  async function saveNotes(id: string) {
+    const notes = editingNotes[id] ?? "";
+    setSavingNotes((prev) => new Set(prev).add(id));
+    await fetch("/api/admin/waitlist", {
+      method: "PATCH",
+      headers: headers(),
+      body: JSON.stringify({ id, researchNotes: notes }),
+    });
+    setSavingNotes((prev) => { const n = new Set(prev); n.delete(id); return n; });
+    fetchData();
+  }
+
   async function handleMatchStatus(matchId: string, status: string) {
     await fetch(`/api/admin/matches/${matchId}`, {
       method: "PATCH",
@@ -228,6 +243,7 @@ export function MatchingDashboard() {
                   <th className="px-3 py-2 font-medium">Old Student</th>
                   <th className="px-3 py-2 font-medium">Practice</th>
                   <th className="px-3 py-2 font-medium">Signed Up</th>
+                  <th className="px-3 py-2 font-medium">Research Notes</th>
                 </tr>
               </thead>
               <tbody>
@@ -287,6 +303,26 @@ export function MatchingDashboard() {
                     </td>
                     <td className="px-3 py-2 text-xs text-muted">
                       {e.createdAt ? new Date(e.createdAt).toLocaleDateString() : "—"}
+                    </td>
+                    <td className="px-3 py-2" onClick={(ev) => ev.stopPropagation()}>
+                      <div className="flex items-start gap-1">
+                        <textarea
+                          rows={2}
+                          className="w-48 rounded border border-border bg-background px-2 py-1 text-xs outline-none focus:border-accent resize-none"
+                          placeholder="Add research notes…"
+                          value={editingNotes[e.id] ?? e.researchNotes ?? ""}
+                          onChange={(ev) => setEditingNotes((prev) => ({ ...prev, [e.id]: ev.target.value }))}
+                        />
+                        {(editingNotes[e.id] !== undefined && editingNotes[e.id] !== (e.researchNotes ?? "")) && (
+                          <button
+                            onClick={() => saveNotes(e.id)}
+                            disabled={savingNotes.has(e.id)}
+                            className="rounded bg-accent px-2 py-1 text-xs text-white hover:opacity-90 disabled:opacity-50 whitespace-nowrap"
+                          >
+                            {savingNotes.has(e.id) ? "…" : "Save"}
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
