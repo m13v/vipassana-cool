@@ -170,7 +170,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
                 : "border border-accent/30 bg-accent/5 text-accent hover:bg-accent/15"
             }`}
           >
-            {setupActive ? `Filtering (${filtered.length})` : "Filter & Apply"}
+            {setupActive ? `Filtering (${filtered.length})` : "Filter"}
           </button>
           {setupActive && (
             <button onClick={() => setSetupActive(false)} className="text-xs text-muted hover:text-foreground">
