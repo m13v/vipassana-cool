@@ -28,6 +28,7 @@ export async function GET() {
       timezone: e.timezone,
       frequency: e.frequency,
       sessionDuration: e.session_duration,
+      morningTime: e.morning_time,
       isOldStudent: e.is_old_student,
       hasMaintainedPractice: e.has_maintained_practice,
       status: e.status,
