@@ -37,7 +37,9 @@ const DURATION_OPTIONS = [
   "1 hour",
 ];
 
-export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, requestedMatchName }: { location?: string; requestedMatchId?: string; requestedMatchName?: string }) {
+type Prefill = { timezone?: string; morningTime?: string; frequency?: string };
+
+export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, requestedMatchName, prefill }: { location?: string; requestedMatchId?: string; requestedMatchName?: string; prefill?: Prefill }) {
   const [form, setForm] = useState<FormData>({
     name: "",
     email: "",
@@ -45,8 +47,8 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
     isGoenkatradition: "",
     timezone: "",
     city: "",
-    frequency: "",
-    morningTime: "",
+    frequency: prefill?.frequency ?? "",
+    morningTime: prefill?.morningTime ?? "",
     eveningTime: "",
     days: [],
     sessionDuration: "",
@@ -58,12 +60,12 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
 
   useEffect(() => {
     try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const tz = prefill?.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
       if (tz) setForm((f) => ({ ...f, timezone: tz }));
     } catch {
       // ignore
     }
-  }, []);
+  }, [prefill?.timezone]);
 
   function update(field: keyof FormData, value: string | string[]) {
     setForm((f) => ({ ...f, [field]: value }));
