@@ -33,6 +33,10 @@ export type Match = {
   status: string;
   created_at: string | null;
   notes: string | null;
+  person_a_token: string | null;
+  person_b_token: string | null;
+  person_a_confirmed: boolean;
+  person_b_confirmed: boolean;
 };
 
 export async function getAllEntries(): Promise<WaitlistEntry[]> {
@@ -116,7 +120,7 @@ export async function createMatch(personAId: string, personBId: string): Promise
 export async function updateMatchStatus(id: string, status: string): Promise<void> {
   const sql = getSql();
   await sql`UPDATE matches SET status = ${status} WHERE id = ${id}`;
-  if (status === "ended") {
+  if (status === "ended" || status === "declined") {
     const rows = await sql`SELECT * FROM matches WHERE id = ${id}`;
     const match = rows[0] as Match | undefined;
     if (match) {
@@ -124,4 +128,35 @@ export async function updateMatchStatus(id: string, status: string): Promise<voi
       await updateEntryStatus(match.person_b_id, "pending");
     }
   }
+}
+
+export async function createMatchWithTokens(personAId: string, personBId: string): Promise<Match> {
+  const sql = getSql();
+  const id = crypto.randomUUID();
+  const tokenA = crypto.randomUUID();
+  const tokenB = crypto.randomUUID();
+  const now = new Date().toISOString();
+  await sql`
+    INSERT INTO matches (id, person_a_id, person_b_id, status, created_at, person_a_token, person_b_token, person_a_confirmed, person_b_confirmed)
+    VALUES (${id}, ${personAId}, ${personBId}, 'confirming', ${now}, ${tokenA}, ${tokenB}, false, false)
+  `;
+  return { id, person_a_id: personAId, person_b_id: personBId, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false };
+}
+
+export async function getMatchByToken(token: string): Promise<Match | undefined> {
+  const sql = getSql();
+  const rows = await sql`SELECT * FROM matches WHERE person_a_token = ${token} OR person_b_token = ${token} LIMIT 1`;
+  return rows[0] as Match | undefined;
+}
+
+export async function confirmMatchPerson(matchId: string, side: "a" | "b"): Promise<{ bothConfirmed: boolean }> {
+  const sql = getSql();
+  if (side === "a") {
+    await sql`UPDATE matches SET person_a_confirmed = true WHERE id = ${matchId}`;
+  } else {
+    await sql`UPDATE matches SET person_b_confirmed = true WHERE id = ${matchId}`;
+  }
+  const rows = await sql`SELECT person_a_confirmed, person_b_confirmed FROM matches WHERE id = ${matchId}`;
+  const m = rows[0] as { person_a_confirmed: boolean; person_b_confirmed: boolean } | undefined;
+  return { bothConfirmed: !!(m?.person_a_confirmed && m?.person_b_confirmed) };
 }
