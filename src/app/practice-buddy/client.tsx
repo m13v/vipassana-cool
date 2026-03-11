@@ -50,6 +50,33 @@ export function PracticeBuddyClient() {
         </a>
       </section>
 
+      {/* Social Proof */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-3xl px-6 py-16">
+          <h2 className="mb-8 text-2xl font-bold">What People Are Saying</h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Quote
+              text="Thank you so much for the initiative, the connections and beautiful tool. It is a very helpful thing that you built here."
+              attribution="Marine, Paris"
+            />
+            <Quote
+              text="Having an accountability partner in meditation goes a long way in ensuring that you continue on this journey continuously."
+              attribution="Vikas, Delhi"
+            />
+            <Quote
+              text="What an amazing initiative! Thank you for doing this 🙏"
+              attribution="u/salothedud on Reddit"
+              href="https://old.reddit.com/r/vipassana/comments/1roib8y/the_real_reason_most_of_us_lose_our_practice/o9i937f/"
+            />
+            <Quote
+              text="This is actually awesome, thank you very much for sharing!"
+              attribution="u/fronku on Reddit"
+              href="https://old.reddit.com/r/vipassana/comments/1roib8y/the_real_reason_most_of_us_lose_our_practice/o9gtvrj/"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Who's Waiting — right after hero */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-16">
@@ -235,6 +262,26 @@ export function PracticeBuddyClient() {
         </div>
       )}
     </>
+  );
+}
+
+function Quote({ text, attribution, href }: { text: string; attribution: string; href?: string }) {
+  return (
+    <div className="rounded-xl border border-border bg-card p-6">
+      <p className="mb-4 text-sm leading-relaxed text-foreground">&ldquo;{text}&rdquo;</p>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-accent hover:underline"
+        >
+          — {attribution}
+        </a>
+      ) : (
+        <p className="text-xs text-muted">— {attribution}</p>
+      )}
+    </div>
   );
 }
 
