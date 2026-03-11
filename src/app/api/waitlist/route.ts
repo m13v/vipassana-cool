@@ -82,6 +82,30 @@ export async function POST(request: NextRequest) {
 
     // Save to Neon database
     const existing = await getEntryByEmail(data.email);
+    const isNew = !existing;
+
+    // Detect changes to matching-relevant fields on resubmission
+    let updatedNotes = existing?.research_notes ?? null;
+    if (!isNew && existing) {
+      const matchingFields: Array<[string, string | null, string | null]> = [
+        ["frequency",       existing.frequency,        data.frequency],
+        ["morning_time",    existing.morning_time,     data.morningTime],
+        ["evening_time",    existing.evening_time,     data.eveningTime],
+        ["timezone",        existing.timezone,         data.timezone],
+        ["session_duration",existing.session_duration, data.sessionDuration],
+      ];
+      const diffs = matchingFields
+        .filter(([, before, after]) => before !== after && (before || after))
+        .map(([field, before, after]) => `${field} ${before || "—"}→${after || "—"}`);
+
+      if (diffs.length > 0) {
+        const date = new Date().toISOString().substring(0, 10);
+        const diffNote = `[${date}] Preferences updated: ${diffs.join(", ")}`;
+        updatedNotes = updatedNotes ? `${updatedNotes}\n${diffNote}` : diffNote;
+        console.log("[Waitlist] Matching fields changed for", data.email, "—", diffNote);
+      }
+    }
+
     await upsertEntry({
       id: existing?.id ?? crypto.randomUUID(),
       email: data.email,
@@ -98,31 +122,32 @@ export async function POST(request: NextRequest) {
       has_maintained_practice: data.hasMaintainedPractice,
       practice_length: data.practiceLength,
       requested_match_id: data.requestedMatchId || null,
-      research_notes: null,
-      created_at: new Date().toISOString(),
+      research_notes: updatedNotes,
+      created_at: existing?.created_at ?? new Date().toISOString(),
     });
 
-    // Send confirmation email to the user
-    const emailHtml = getWaitlistEmail(data);
-    const emailResult = await resend.emails.send({
-      from: "Vipassana.cool <hello@vipassana.cool>",
-      to: data.email,
-      subject: "You're on the Practice Buddy waitlist",
-      html: emailHtml,
-    });
+    // Only send confirmation email for new signups
+    if (isNew) {
+      const emailHtml = getWaitlistEmail(data);
+      const emailResult = await resend.emails.send({
+        from: "Vipassana.cool <hello@vipassana.cool>",
+        to: data.email,
+        subject: "You're on the Practice Buddy waitlist",
+        html: emailHtml,
+      });
 
-    // Log outbound email to database
-    try {
-      const sql = neon(process.env.DATABASE_URL!);
-      await sql`
-        INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-        VALUES (${emailResult.data?.id || null}, 'outbound', 'Vipassana.cool <hello@vipassana.cool>', ${data.email}, ${"You're on the Practice Buddy waitlist"}, ${emailHtml}, 'sent')
-      `;
-    } catch (dbErr) {
-      console.error("Failed to log outbound email:", dbErr);
+      try {
+        const sql = neon(process.env.DATABASE_URL!);
+        await sql`
+          INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Vipassana.cool <hello@vipassana.cool>', ${data.email}, ${"You're on the Practice Buddy waitlist"}, ${emailHtml}, 'sent')
+        `;
+      } catch (dbErr) {
+        console.error("Failed to log outbound email:", dbErr);
+      }
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, isNew });
   } catch (error: unknown) {
     console.error("Waitlist API error:", error);
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
