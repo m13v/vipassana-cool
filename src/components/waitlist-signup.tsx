@@ -67,6 +67,7 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [lookupStatus, setLookupStatus] = useState<LookupStatus>("idle");
+  const [rematching, setRematching] = useState(false);
 
   async function handleEmailBlur() {
     const email = form.email.trim();
@@ -140,10 +141,12 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
       });
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Something went wrong");
+        const errData = await res.json();
+        throw new Error(errData.error || "Something went wrong");
       }
 
+      const resData = await res.json();
+      setRematching(resData.rematching === true);
       setStatus("success");
       posthog.capture("waitlist_signup", {
         location,
@@ -163,7 +166,14 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
     return (
       <div id="waitlist-form" className="rounded-xl border border-accent/30 bg-accent/5 p-8 text-center">
         <div className="mb-3 text-2xl">&#10003;</div>
-        {isReturning ? (
+        {rematching ? (
+          <>
+            <h3 className="mb-2 text-lg font-bold">We&apos;ll find you a new match</h3>
+            <p className="text-sm text-muted">
+              Your schedule preferences have changed, so we&apos;ll reconsider your match and reach out to <strong>{form.email}</strong> when we find the right person.
+            </p>
+          </>
+        ) : isReturning ? (
           <>
             <h3 className="mb-2 text-lg font-bold">Preferences updated</h3>
             <p className="text-sm text-muted">
@@ -244,7 +254,7 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
         {lookupStatus === "returning_matched" && (
           <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm">
             <p className="font-medium text-green-800">You&apos;re already matched!</p>
-            <p className="mt-0.5 text-green-700">Your current preferences are filled in below. You can still update them — your match won&apos;t be affected, but we&apos;ll use the new information for future matching if needed.</p>
+            <p className="mt-0.5 text-green-700">Your current preferences are filled in below. If you update your schedule, timezone, or session length, we&apos;ll reconsider your match and find someone who fits your new preferences.</p>
           </div>
         )}
 
