@@ -14,6 +14,21 @@ interface ResendWebhookPayload {
   };
 }
 
+const DELIVERY_EVENTS = new Set([
+  "email.sent",
+  "email.delivered",
+  "email.delivery_delayed",
+  "email.bounced",
+  "email.complained",
+  "email.opened",
+  "email.clicked",
+]);
+
+// Map Resend event type to a status string
+function eventToStatus(type: string): string {
+  return type.replace("email.", ""); // e.g. "email.delivered" → "delivered"
+}
+
 async function fetchInboundContent(emailId: string) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return null;
@@ -35,6 +50,19 @@ export async function POST(request: Request) {
     const payload: ResendWebhookPayload = await request.json();
     console.log("[Vipassana Webhook]", payload.type, payload.data.email_id);
 
+    const sql = neon(process.env.DATABASE_URL!);
+
+    // Handle delivery status updates for outbound emails
+    if (DELIVERY_EVENTS.has(payload.type)) {
+      const { email_id } = payload.data;
+      const status = eventToStatus(payload.type);
+      await sql`
+        UPDATE vipassana_emails SET status = ${status} WHERE resend_id = ${email_id}
+      `;
+      console.log("[Vipassana Webhook] Updated status", email_id, "→", status);
+      return NextResponse.json({ success: true, message: `status updated to ${status}` });
+    }
+
     if (payload.type !== "email.received") {
       return NextResponse.json({ success: true, message: "ignored" });
     }
@@ -49,8 +77,6 @@ export async function POST(request: Request) {
     }
 
     const content = await fetchInboundContent(data.email_id);
-
-    const sql = neon(process.env.DATABASE_URL!);
 
     // Check if already processed (dedup by resend_id)
     const existing = await sql`SELECT id FROM vipassana_emails WHERE resend_id = ${data.email_id} LIMIT 1`;
