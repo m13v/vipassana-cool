@@ -18,7 +18,7 @@ export async function PATCH(
   const { id } = await params;
   const { status } = await request.json();
 
-  if (!["pending", "active", "ended"].includes(status)) {
+  if (!["pending", "active", "ended", "confirming", "declined"].includes(status)) {
     return NextResponse.json({ error: "Invalid status" }, { status: 400 });
   }
 
