@@ -397,6 +397,7 @@ export function MatchingDashboard() {
                         <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${em.direction === "inbound" ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-600"}`}>
                           {em.direction === "inbound" ? "↩ reply" : "→ sent"}
                         </span>
+                        {em.direction === "outbound" && <DeliveryBadge status={em.status} />}
                         <span className="font-medium">{em.subject}</span>
                       </div>
                       <span className="whitespace-nowrap text-xs text-muted">{new Date(em.created_at).toLocaleString()}</span>
@@ -476,6 +477,42 @@ function isRequestedBy(id: string, entries: WaitlistPerson[]): boolean {
   return entries.some(e => e.requestedMatchId === id);
 }
 
+const STATUS_RANK: Record<string, number> = {
+  clicked: 6, opened: 5, delivered: 4, sent: 3, delivery_delayed: 2, bounced: 1, complained: 1,
+};
+
+function DeliveryBadge({ status }: { status: string }) {
+  const cfg: Record<string, { label: string; cls: string }> = {
+    delivered:        { label: "delivered",  cls: "bg-green-100 text-green-700" },
+    opened:           { label: "opened",     cls: "bg-emerald-100 text-emerald-700" },
+    clicked:          { label: "clicked",    cls: "bg-emerald-100 text-emerald-700" },
+    sent:             { label: "sent",       cls: "bg-gray-100 text-gray-500" },
+    delivery_delayed: { label: "delayed",    cls: "bg-yellow-100 text-yellow-700" },
+    bounced:          { label: "⚠ bounced",  cls: "bg-red-100 text-red-700" },
+    complained:       { label: "⚠ spam",     cls: "bg-red-100 text-red-700" },
+  };
+  const c = cfg[status];
+  if (!c) return null;
+  return (
+    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${c.cls}`}>
+      {c.label}
+    </span>
+  );
+}
+
+function threadSummaryLabel(thread: EmailRecord[]): string {
+  const outbound = thread.filter(em => em.direction === "outbound");
+  if (outbound.length === 0) return "📧 sent";
+  const hasBounce = outbound.some(em => em.status === "bounced" || em.status === "complained");
+  if (hasBounce) return "⚠️ bounced";
+  const best = outbound.reduce((a, b) =>
+    (STATUS_RANK[b.status] ?? 0) > (STATUS_RANK[a.status] ?? 0) ? b : a
+  );
+  if (best.status === "opened" || best.status === "clicked") return "👁 opened";
+  if (best.status === "delivered") return "✓ delivered";
+  return "📧 sent";
+}
+
 function ThreadCell({ person, emails, onOpen }: { person: WaitlistPerson; emails: EmailRecord[]; onOpen: (thread: EmailRecord[]) => void }) {
   const thread = emails.filter(em =>
     em.from_email.includes(person.email) || em.to_email.includes(person.email)
@@ -493,7 +530,7 @@ function ThreadCell({ person, emails, onOpen }: { person: WaitlistPerson; emails
       className="flex flex-col gap-0.5 text-left hover:opacity-80"
     >
       <span className="text-xs font-medium">
-        {inbound.length > 0 ? `💬 ${inbound.length} repl${inbound.length === 1 ? "y" : "ies"}` : "📧 sent"}
+        {inbound.length > 0 ? `💬 ${inbound.length} repl${inbound.length === 1 ? "y" : "ies"}` : threadSummaryLabel(thread)}
       </span>
       {last && (
         <span className="text-xs text-muted">
