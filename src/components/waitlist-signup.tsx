@@ -46,6 +46,7 @@ const DURATION_OPTIONS = [
 ];
 
 type Prefill = { timezone?: string; morningTime?: string; frequency?: string };
+type LookupStatus = "idle" | "checking" | "new" | "returning_pending" | "returning_matched";
 
 export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, requestedMatchName, prefill }: { location?: string; requestedMatchId?: string; requestedMatchName?: string; prefill?: Prefill }) {
   const [form, setForm] = useState<FormData>({
@@ -65,6 +66,40 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [lookupStatus, setLookupStatus] = useState<LookupStatus>("idle");
+
+  async function handleEmailBlur() {
+    const email = form.email.trim();
+    if (!email.includes("@")) return;
+    setLookupStatus("checking");
+    try {
+      const res = await fetch(`/api/waitlist/lookup?email=${encodeURIComponent(email)}`);
+      const data = await res.json();
+      if (!data.found) {
+        setLookupStatus("new");
+        return;
+      }
+      // Pre-fill form with existing data
+      setForm((f) => ({
+        ...f,
+        name: data.name ?? f.name,
+        isOldStudent: data.isOldStudent ?? f.isOldStudent,
+        isGoenkatradition: data.isGoenkatradition ?? f.isGoenkatradition,
+        timezone: data.timezone ?? f.timezone,
+        city: data.city ?? f.city,
+        frequency: data.frequency ?? f.frequency,
+        morningTime: data.morningTime ?? f.morningTime,
+        eveningTime: data.eveningTime ?? f.eveningTime,
+        days: data.days?.length ? data.days : f.days,
+        sessionDuration: data.sessionDuration ?? f.sessionDuration,
+        hasMaintainedPractice: data.hasMaintainedPractice ?? f.hasMaintainedPractice,
+        practiceLength: data.practiceLength ?? f.practiceLength,
+      }));
+      setLookupStatus(data.status === "matched" ? "returning_matched" : "returning_pending");
+    } catch {
+      setLookupStatus("new");
+    }
+  }
 
   useEffect(() => {
     try {
@@ -124,14 +159,26 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
   }
 
   if (status === "success") {
+    const isReturning = lookupStatus === "returning_pending" || lookupStatus === "returning_matched";
     return (
       <div id="waitlist-form" className="rounded-xl border border-accent/30 bg-accent/5 p-8 text-center">
         <div className="mb-3 text-2xl">&#10003;</div>
-        <h3 className="mb-2 text-lg font-bold">You&apos;re on the list, {form.name.split(" ")[0] || "friend"}!</h3>
-        <p className="text-sm text-muted">
-          We&apos;ll reach out to <strong>{form.email}</strong> when Practice Buddy is ready
-          to match you with a fellow meditator.
-        </p>
+        {isReturning ? (
+          <>
+            <h3 className="mb-2 text-lg font-bold">Preferences updated</h3>
+            <p className="text-sm text-muted">
+              We&apos;ve saved your updated preferences for <strong>{form.email}</strong>.
+            </p>
+          </>
+        ) : (
+          <>
+            <h3 className="mb-2 text-lg font-bold">You&apos;re on the list, {form.name.split(" ")[0] || "friend"}!</h3>
+            <p className="text-sm text-muted">
+              We&apos;ll reach out to <strong>{form.email}</strong> when Practice Buddy is ready
+              to match you with a fellow meditator.
+            </p>
+          </>
+        )}
       </div>
     );
   }
@@ -182,10 +229,24 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
               placeholder="your@email.com"
               value={form.email}
               onChange={(e) => update("email", e.target.value)}
+              onBlur={handleEmailBlur}
               className={inputClass}
             />
           </div>
         </div>
+
+        {lookupStatus === "returning_pending" && (
+          <div className="rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm">
+            <p className="font-medium">Welcome back — we found your application.</p>
+            <p className="mt-0.5 text-muted">Your current preferences are filled in below. Update anything that&apos;s changed and resubmit.</p>
+          </div>
+        )}
+        {lookupStatus === "returning_matched" && (
+          <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm">
+            <p className="font-medium text-green-800">You&apos;re already matched!</p>
+            <p className="mt-0.5 text-green-700">Your current preferences are filled in below. You can still update them — your match won&apos;t be affected, but we&apos;ll use the new information for future matching if needed.</p>
+          </div>
+        )}
 
         {/* Old student */}
         <fieldset>
@@ -418,7 +479,14 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
           disabled={status === "loading"}
           className="w-full rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-60"
         >
-          {status === "loading" ? "Submitting..." : requestedMatchName ? `Request to match with ${requestedMatchName}` : "Apply to be matched"}
+          {status === "loading"
+            ? "Submitting..."
+            : requestedMatchName
+              ? `Request to match with ${requestedMatchName}`
+              : (lookupStatus === "returning_pending" || lookupStatus === "returning_matched")
+                ? "Update my preferences"
+                : "Apply to be matched"
+          }
         </button>
 
         {status === "error" && (
