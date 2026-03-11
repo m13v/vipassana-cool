@@ -126,6 +126,21 @@ export function PracticeBuddyClient() {
         </div>
       </section>
 
+      {/* Social proof one-liner */}
+      <section className="border-t border-border bg-accent/5">
+        <div className="mx-auto max-w-3xl px-6 py-5 text-center text-sm text-muted">
+          12 meditators matched so far — from Paris to Delhi to Berlin.{" "}
+          <a
+            href="https://old.reddit.com/r/vipassana/comments/1roib8y/the_real_reason_most_of_us_lose_our_practice/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline"
+          >
+            See the conversation on Reddit →
+          </a>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-16">
