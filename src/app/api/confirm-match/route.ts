@@ -7,9 +7,8 @@ import {
   confirmMatchPerson,
   updateMatchStatus,
   updateEntryStatus,
-  type WaitlistEntry,
 } from "@/lib/db";
-import { buildIntroEmailHtml, buildCommonTraits } from "@/lib/emails";
+import { buildIntroEmailHtml } from "@/lib/emails";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://vipassana.cool";
 
@@ -59,7 +58,7 @@ export async function GET(request: NextRequest) {
       const emailResult = await resend.emails.send({
         from: "Matt from Vipassana.cool <matt@vipassana.cool>",
         to: [personA.email, personB.email],
-        reply_to: [personA.email, personB.email],
+        replyTo: [personA.email, personB.email],
         subject: "Your Practice Buddy match is here",
         html,
         headers: { "X-Entity-Ref-ID": match.id },
