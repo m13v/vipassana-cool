@@ -118,7 +118,7 @@ export function PracticeBuddyClient() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-10">
           <h2 className="mb-5 text-lg font-semibold">What People Are Saying</h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2">
             <Quote
               text="Thank you so much for the initiative, the connections and beautiful tool. It is a very helpful thing that you built here."
               attribution="Marine, Paris"
