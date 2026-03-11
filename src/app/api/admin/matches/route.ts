@@ -114,8 +114,10 @@ export async function POST(request: NextRequest) {
     const emailResult = await resend.emails.send({
       from: "Matt from Vipassana.cool <matt@vipassana.cool>",
       to: [personA.email, personB.email],
+      reply_to: [personA.email, personB.email],
       subject: "Your Practice Buddy match is here",
       html,
+      headers: { "X-Entity-Ref-ID": match.id },
     });
 
     try {
