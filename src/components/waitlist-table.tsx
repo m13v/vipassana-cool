@@ -40,8 +40,33 @@ function detectedGmtOffset(): string {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const parts = new Intl.DateTimeFormat("en", { timeZone: tz, timeZoneName: "shortOffset" }).formatToParts(new Date());
     const raw = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
-    return raw.replace("UTC", "GMT+0").replace("GMT+0", "GMT+0") || "";
+    return raw.replace("UTC", "GMT+0") || "";
   } catch { return ""; }
+}
+
+function tzToOffsetMinutes(tz: string): number {
+  if (!tz) return 0;
+  if (tz.startsWith("GMT") || tz.startsWith("UTC")) {
+    const match = tz.match(/([+-])(\d{1,2})(?::(\d{2}))?/);
+    if (!match) return 0;
+    const sign = match[1] === "+" ? 1 : -1;
+    return sign * (parseInt(match[2]) * 60 + parseInt(match[3] || "0"));
+  }
+  try {
+    const now = new Date();
+    const utc = now.getTime();
+    const local = new Date(now.toLocaleString("en-US", { timeZone: tz })).getTime();
+    return Math.round((local - utc) / 60000);
+  } catch { return 0; }
+}
+
+function toUtcHour(localTime: string | null, tz: string): number | null {
+  if (!localTime || !tz) return null;
+  const [h, m] = localTime.split(":").map(Number);
+  if (isNaN(h)) return null;
+  const offsetMins = tzToOffsetMinutes(tz);
+  const utcMins = (((h * 60 + (m || 0)) - offsetMins) % 1440 + 1440) % 1440;
+  return Math.floor(utcMins / 60);
 }
 
 const STATUS_CONFIG: Record<string, { bg: string; text: string; label: string }> = {
@@ -79,14 +104,17 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
   const filtered = useMemo(() => {
     let list = filter === "all" ? entries : entries.filter((e) => e.status === filter);
     if (!setupActive) return list;
-    const myHour = setup.morningHour !== "" ? parseInt(setup.morningHour) : null;
+    // Convert my selected hour + GMT offset to UTC hour for comparison
+    const myUtcHour = setup.morningHour !== "" && setup.timezone
+      ? toUtcHour(`${setup.morningHour.padStart(2, "0")}:00`, setup.timezone)
+      : null;
     return list.filter((e) => {
-      if (myHour !== null && e.morningTime) {
-        const theirHour = parseInt(e.morningTime.split(":")[0]);
-        if (!isNaN(theirHour)) {
-          const diff = Math.abs(theirHour - myHour);
+      if (myUtcHour !== null && e.morningTime && e.timezone) {
+        const theirUtcHour = toUtcHour(e.morningTime, e.timezone);
+        if (theirUtcHour !== null) {
+          const diff = Math.abs(theirUtcHour - myUtcHour);
           const wrappedDiff = Math.min(diff, 24 - diff);
-          if (wrappedDiff > 2) return false;
+          if (wrappedDiff > 1) return false;
         }
       }
       return true;
@@ -180,7 +208,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
         </div>
         {setupActive && (
           <p className="text-xs text-muted">
-            Showing people who meditate within 2 hours of your time.
+            Showing people who meditate within 1 hour of your time (UTC-adjusted).
             Your settings will pre-fill the application form below.
           </p>
         )}
@@ -216,6 +244,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
             <tr className="border-b border-border bg-card text-left">
               <th className="px-4 py-3 font-medium">Person</th>
               <th className="px-4 py-3 font-medium">Location</th>
+              <th className="px-4 py-3 font-medium">Meditates at</th>
               <th className="px-4 py-3 font-medium">Practice</th>
               <th className="px-4 py-3 font-medium">Status</th>
               {onRequestMatch && <th className="px-4 py-3 font-medium" />}
@@ -231,8 +260,21 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
                     <div className="text-xs text-muted">{e.email}</div>
                   </td>
                   <td className="px-4 py-3">
-                    <div>{e.city || "—"}</div>
+                    <div className="text-sm">{e.city || "—"}</div>
                     <div className="text-xs text-muted">{shortTz(e.timezone)}</div>
+                  </td>
+                  <td className="px-4 py-3">
+                    {e.morningTime ? (
+                      <>
+                        <div className="text-sm font-medium">{e.morningTime} local</div>
+                        <div className="text-xs text-muted">
+                          {(() => {
+                            const utcH = toUtcHour(e.morningTime, e.timezone || "");
+                            return utcH !== null ? `${String(utcH).padStart(2,"0")}:00 UTC` : "—";
+                          })()}
+                        </div>
+                      </>
+                    ) : <span className="text-muted">—</span>}
                   </td>
                   <td className="px-4 py-3">
                     <div className="text-xs">
