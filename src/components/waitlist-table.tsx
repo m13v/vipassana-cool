@@ -267,7 +267,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
                   <td className="px-4 py-3">
                     {e.morningTime ? (
                       <>
-                        <div className="text-sm font-medium">{e.morningTime} local</div>
+                        <div className="text-sm font-medium">{e.morningTime} {shortTz(e.timezone)}</div>
                         <div className="text-xs text-muted">
                           {(() => {
                             const utcH = toUtcHour(e.morningTime, e.timezone || "");
@@ -294,17 +294,17 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
                     >
                       {st.label}
                     </span>
+                    {onRequestMatch && (
+                      <div className="mt-1.5">
+                        <button
+                          onClick={() => onRequestMatch(e.id, e.name || e.city || "this person")}
+                          className="whitespace-nowrap rounded-lg border border-accent/30 bg-accent/5 px-2.5 py-1 text-xs font-medium text-accent transition-colors hover:bg-accent/15"
+                        >
+                          Request
+                        </button>
+                      </div>
+                    )}
                   </td>
-                  {onRequestMatch && (
-                    <td className="px-4 py-3">
-                      <button
-                        onClick={() => onRequestMatch(e.id, e.name || e.city || "this person")}
-                        className="whitespace-nowrap rounded-lg border border-accent/30 bg-accent/5 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-accent/15"
-                      >
-                        Request to match
-                      </button>
-                    </td>
-                  )}
                 </tr>
               );
             })}
