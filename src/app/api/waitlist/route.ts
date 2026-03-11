@@ -2,7 +2,7 @@ import { Resend } from "resend";
 import { PostHog } from "posthog-node";
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
-import { upsertEntry, getEntryByEmail } from "@/lib/db";
+import { upsertEntry, getEntryByEmail, updateEntryStatus } from "@/lib/db";
 
 type WaitlistData = {
   name: string;
@@ -86,6 +86,7 @@ export async function POST(request: NextRequest) {
 
     // Detect changes to matching-relevant fields on resubmission
     let updatedNotes = existing?.research_notes ?? null;
+    let matchingFieldsChanged = false;
     if (!isNew && existing) {
       const matchingFields: Array<[string, string | null, string | null]> = [
         ["frequency",       existing.frequency,        data.frequency],
@@ -99,15 +100,18 @@ export async function POST(request: NextRequest) {
         .map(([field, before, after]) => `${field} ${before || "—"}→${after || "—"}`);
 
       if (diffs.length > 0) {
+        matchingFieldsChanged = true;
         const date = new Date().toISOString().substring(0, 10);
-        const diffNote = `[${date}] Preferences updated: ${diffs.join(", ")}`;
+        const prefix = existing.status === "matched" ? "Re-queued for matching" : "Preferences updated";
+        const diffNote = `[${date}] ${prefix}: ${diffs.join(", ")}`;
         updatedNotes = updatedNotes ? `${updatedNotes}\n${diffNote}` : diffNote;
         console.log("[Waitlist] Matching fields changed for", data.email, "—", diffNote);
       }
     }
 
+    const entryId = existing?.id ?? crypto.randomUUID();
     await upsertEntry({
-      id: existing?.id ?? crypto.randomUUID(),
+      id: entryId,
       email: data.email,
       name: data.name,
       is_old_student: data.isOldStudent,
@@ -125,6 +129,11 @@ export async function POST(request: NextRequest) {
       research_notes: updatedNotes,
       created_at: existing?.created_at ?? new Date().toISOString(),
     });
+
+    // If matched user changed matching-relevant fields, re-queue them for matching
+    if (!isNew && existing?.status === "matched" && matchingFieldsChanged) {
+      await updateEntryStatus(entryId, "pending");
+    }
 
     // Only send confirmation email for new signups
     if (isNew) {
@@ -147,7 +156,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true, isNew });
+    return NextResponse.json({ success: true, isNew, rematching: !isNew && existing?.status === "matched" && matchingFieldsChanged });
   } catch (error: unknown) {
     console.error("Waitlist API error:", error);
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
