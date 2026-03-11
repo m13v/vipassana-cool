@@ -242,12 +242,13 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border bg-card text-left">
-              <th className="px-4 py-3 font-medium">Person</th>
-              <th className="px-4 py-3 font-medium">Location</th>
-              <th className="px-4 py-3 font-medium">Meditates at</th>
+              <th className="px-4 py-3 font-medium w-36">Person</th>
+              <th className="px-4 py-3 font-medium w-28">Location</th>
+              <th className="px-4 py-3 font-medium w-28">Meditates at</th>
               <th className="px-4 py-3 font-medium">Practice</th>
-              <th className="px-4 py-3 font-medium">Status</th>
-              {onRequestMatch && <th className="px-4 py-3 font-medium" />}
+              <th className="px-4 py-3 font-medium w-28">
+                {onRequestMatch ? "Status / Request" : "Status"}
+              </th>
             </tr>
           </thead>
           <tbody>
