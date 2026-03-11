@@ -258,12 +258,13 @@ export function MatchingDashboard() {
                   <th className="px-3 py-2 font-medium">Name</th>
                   <th className="px-3 py-2 font-medium">Status</th>
                   <th className="px-3 py-2 font-medium">City</th>
-                  <th className="px-3 py-2 font-medium">Timezone</th>
-                  <th className="px-3 py-2 font-medium">Frequency</th>
-                  <th className="px-3 py-2 font-medium">Duration</th>
-                  <th className="px-3 py-2 font-medium">Times</th>
-                  <th className="px-3 py-2 font-medium">Old Student</th>
-                  <th className="px-3 py-2 font-medium">Practice</th>
+                  <th className="px-3 py-2 font-medium">TZ</th>
+                  <th className="px-3 py-2 font-medium">Freq</th>
+                  <th className="px-3 py-2 font-medium">Dur</th>
+                  <th className="px-3 py-2 font-medium">Local</th>
+                  <th className="px-3 py-2 font-medium text-accent cursor-pointer select-none" title="Sort by UTC time">UTC ↕</th>
+                  <th className="px-3 py-2 font-medium">Old?</th>
+                  <th className="px-3 py-2 font-medium max-w-[120px]">Practice</th>
                   <th className="px-3 py-2 font-medium">Signed Up</th>
                   <th className="px-3 py-2 font-medium">Thread</th>
                   <th className="px-3 py-2 font-medium">Research Notes</th>
@@ -325,18 +326,19 @@ export function MatchingDashboard() {
                     <td className="px-3 py-2">{e.frequency || "—"}</td>
                     <td className="px-3 py-2">{e.sessionDuration || "—"}</td>
                     <td className="px-3 py-2 text-xs">
-                      {e.morningTime && `AM ${e.morningTime}`}
-                      {e.morningTime && e.eveningTime && " · "}
-                      {e.eveningTime && `PM ${e.eveningTime}`}
-                      {!e.morningTime && !e.eveningTime && "—"}
+                      {e.morningTime || "—"}
+                      {e.eveningTime && ` / ${e.eveningTime}`}
+                    </td>
+                    <td className="px-3 py-2 text-xs font-mono font-medium text-accent">
+                      {toUtcTime(e.morningTime, e.timezone)}
                     </td>
                     <td className="px-3 py-2">
                       <StatusBadge value={e.isOldStudent} />
                     </td>
-                    <td className="px-3 py-2">
+                    <td className="px-3 py-2 max-w-[120px]">
                       <span className="text-xs">
                         {e.hasMaintainedPractice || "—"}
-                        {e.practiceLength && ` (${e.practiceLength})`}
+                        {e.practiceLength && <><br /><span className="text-muted">{e.practiceLength}</span></>}
                       </span>
                     </td>
                     <td className="px-3 py-2 text-xs text-muted">
@@ -512,6 +514,35 @@ function shortTz(tz: string | null): string {
   } catch {
     return tz.split("/").pop()?.replace(/_/g, " ") ?? tz;
   }
+}
+
+function tzOffsetMinutes(tz: string): number {
+  // Handles both IANA timezones and GMT offset strings like "GMT+5:30"
+  if (tz.startsWith("GMT") || tz.startsWith("UTC")) {
+    const match = tz.match(/([+-])(\d{1,2})(?::(\d{2}))?/);
+    if (!match) return 0;
+    const sign = match[1] === "+" ? 1 : -1;
+    return sign * (parseInt(match[2]) * 60 + parseInt(match[3] || "0"));
+  }
+  try {
+    const now = new Date();
+    const utc = now.getTime();
+    const local = new Date(now.toLocaleString("en-US", { timeZone: tz })).getTime();
+    return Math.round((local - utc) / 60000);
+  } catch { return 0; }
+}
+
+function toUtcTime(localTime: string | null, timezone: string | null): string {
+  if (!localTime || !timezone) return "—";
+  try {
+    const [h, m] = localTime.split(":").map(Number);
+    if (isNaN(h)) return "—";
+    const offsetMins = tzOffsetMinutes(timezone);
+    const utcMins = (((h * 60 + (m || 0)) - offsetMins) % 1440 + 1440) % 1440;
+    const uh = Math.floor(utcMins / 60);
+    const um = utcMins % 60;
+    return `${String(uh).padStart(2, "0")}:${String(um).padStart(2, "0")}`;
+  } catch { return "—"; }
 }
 
 function StatusBadge({ value }: { value: string | null }) {
