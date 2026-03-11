@@ -114,7 +114,7 @@ export async function createMatch(personAId: string, personBId: string): Promise
   await sql`INSERT INTO matches (id, person_a_id, person_b_id, status, created_at) VALUES (${id}, ${personAId}, ${personBId}, 'pending', ${now})`;
   await updateEntryStatus(personAId, "matched");
   await updateEntryStatus(personBId, "matched");
-  return { id, person_a_id: personAId, person_b_id: personBId, status: "pending", created_at: now, notes: null };
+  return { id, person_a_id: personAId, person_b_id: personBId, status: "pending", created_at: now, notes: null, person_a_token: null, person_b_token: null, person_a_confirmed: false, person_b_confirmed: false };
 }
 
 export async function updateMatchStatus(id: string, status: string): Promise<void> {
