@@ -118,7 +118,7 @@ export function PracticeBuddyClient() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-10">
           <h2 className="mb-5 text-lg font-semibold">What People Are Saying</h2>
-          <div className="space-y-3">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <Quote
               text="Thank you so much for the initiative, the connections and beautiful tool. It is a very helpful thing that you built here."
               attribution="Marine, Paris"
@@ -282,16 +282,16 @@ export function PracticeBuddyClient() {
 
 function Quote({ text, attribution, href }: { text: string; attribution: string; href?: string }) {
   return (
-    <p className="text-sm text-muted">
-      &ldquo;{text}&rdquo;{" "}
+    <div className="rounded-xl border border-border bg-card p-6">
+      <p className="mb-4 text-sm leading-relaxed text-foreground">&ldquo;{text}&rdquo;</p>
       {href ? (
-        <a href={href} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+        <a href={href} target="_blank" rel="noopener noreferrer" className="text-xs text-accent hover:underline">
           — {attribution}
         </a>
       ) : (
-        <span>— {attribution}</span>
+        <p className="text-xs text-muted">— {attribution}</p>
       )}
-    </p>
+    </div>
   );
 }
 
