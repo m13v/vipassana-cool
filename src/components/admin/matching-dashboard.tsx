@@ -321,7 +321,7 @@ export function MatchingDashboard() {
                         {e.status}
                       </span>
                     </td>
-                    <td className="px-3 py-2">{e.city || "—"}</td>
+                    <td className="px-3 py-2 max-w-[100px] truncate text-xs" title={e.city || ""}>{e.city || "—"}</td>
                     <td className="px-3 py-2 text-xs">{shortTz(e.timezone)}</td>
                     <td className="px-3 py-2">{e.frequency || "—"}</td>
                     <td className="px-3 py-2">{e.sessionDuration || "—"}</td>
