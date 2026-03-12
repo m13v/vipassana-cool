@@ -140,8 +140,6 @@ export async function createMatchWithTokens(personAId: string, personBId: string
     INSERT INTO matches (id, person_a_id, person_b_id, status, created_at, person_a_token, person_b_token, person_a_confirmed, person_b_confirmed)
     VALUES (${id}, ${personAId}, ${personBId}, 'confirming', ${now}, ${tokenA}, ${tokenB}, false, false)
   `;
-  await updateEntryStatus(personAId, "engaged");
-  await updateEntryStatus(personBId, "engaged");
   return { id, person_a_id: personAId, person_b_id: personBId, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false };
 }
 
