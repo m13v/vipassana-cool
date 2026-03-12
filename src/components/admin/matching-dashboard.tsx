@@ -425,7 +425,10 @@ export function MatchingDashboard() {
             Matches ({matches.length})
           </h2>
           <div className="space-y-3">
-            {matches.map((m) => (
+            {[...matches].sort((a, b) => {
+              const order: Record<string, number> = { confirming: 0, pending: 1, active: 2, ended: 3 };
+              return (order[a.status] ?? 9) - (order[b.status] ?? 9);
+            }).map((m) => (
               <div
                 key={m.id}
                 className="flex items-center justify-between rounded-xl border border-border p-4"
