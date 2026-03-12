@@ -22,6 +22,8 @@ export async function GET(request: NextRequest) {
     status: m.status,
     createdAt: m.created_at,
     notes: m.notes,
+    personAConfirmed: m.person_a_confirmed ?? false,
+    personBConfirmed: m.person_b_confirmed ?? false,
     personA: {
       id: m.person_a.id,
       firstName: m.person_a.name?.split(/\s+/)[0] || null,
