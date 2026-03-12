@@ -48,6 +48,8 @@ type MatchRecord = {
   status: string;
   createdAt: string | null;
   notes: string | null;
+  personAConfirmed: boolean;
+  personBConfirmed: boolean;
   personA: MatchPerson;
   personB: MatchPerson;
 };
@@ -440,11 +442,23 @@ export function MatchingDashboard() {
                   </div>
                   <span className={`ml-2 rounded-full px-2 py-0.5 text-xs font-medium ${
                     m.status === "active" ? "bg-green-100 text-green-700" :
+                    m.status === "confirming" ? "bg-blue-100 text-blue-700" :
                     m.status === "ended" ? "bg-red-100 text-red-700" :
                     "bg-yellow-100 text-yellow-700"
                   }`}>
                     {m.status}
                   </span>
+                  {m.status === "confirming" && (
+                    <span className="ml-2 text-xs text-muted">
+                      <span title={`${m.personA.firstName}: ${m.personAConfirmed ? "confirmed" : "pending"}`}>
+                        {m.personA.firstName?.charAt(0)} {m.personAConfirmed ? "✓" : "⏳"}
+                      </span>
+                      {" · "}
+                      <span title={`${m.personB.firstName}: ${m.personBConfirmed ? "confirmed" : "pending"}`}>
+                        {m.personB.firstName?.charAt(0)} {m.personBConfirmed ? "✓" : "⏳"}
+                      </span>
+                    </span>
+                  )}
                 </div>
                 <div className="flex gap-2">
                   {m.status === "pending" && (
