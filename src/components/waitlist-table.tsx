@@ -257,7 +257,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
               return (
                 <tr key={e.id} className="border-b border-border last:border-0 transition-colors hover:bg-card-hover">
                   <td className="px-4 py-3">
-                    <div className="font-medium">{e.name || "Anonymous"}</div>
+                    <div className="font-medium">{e.name || e.email}</div>
                     <div className="text-xs text-muted">{e.email}</div>
                   </td>
                   <td className="px-4 py-3">
@@ -320,7 +320,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
             <div key={e.id} className="rounded-xl border border-border bg-card p-4">
               <div className="flex items-start justify-between mb-2">
                 <div>
-                  <div className="font-medium">{e.name || "Anonymous"}</div>
+                  <div className="font-medium">{e.name || e.email}</div>
                   <div className="text-xs text-muted">{e.city || "—"}{e.timezone ? ` · ${shortTz(e.timezone)}` : ""}</div>
                 </div>
                 <span
