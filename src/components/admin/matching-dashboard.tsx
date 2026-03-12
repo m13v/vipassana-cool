@@ -212,8 +212,8 @@ export function MatchingDashboard() {
   }
 
   const sortedEntries = [...entries].sort((a, b) => {
-    const order = { pending: 0, matched: 1, ended: 2 };
-    return (order[a.status as keyof typeof order] ?? 9) - (order[b.status as keyof typeof order] ?? 9);
+    const order: Record<string, number> = { pending: 0, engaged: 1, matched: 2, ended: 3 };
+    return (order[a.status] ?? 9) - (order[b.status] ?? 9);
   });
 
   return (
@@ -317,6 +317,7 @@ export function MatchingDashboard() {
                     <td className="px-3 py-2">
                       <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                         e.status === "pending" ? "bg-yellow-100 text-yellow-700" :
+                        e.status === "engaged" ? "bg-orange-100 text-orange-700" :
                         e.status === "matched" ? "bg-green-100 text-green-700" :
                         "bg-red-100 text-red-700"
                       }`}>
@@ -426,7 +427,7 @@ export function MatchingDashboard() {
           </h2>
           <div className="space-y-3">
             {[...matches].sort((a, b) => {
-              const order: Record<string, number> = { confirming: 0, pending: 1, active: 2, ended: 3 };
+              const order: Record<string, number> = { pending: 0, confirming: 0, active: 1, ended: 2 };
               return (order[a.status] ?? 9) - (order[b.status] ?? 9);
             }).map((m) => (
               <div
@@ -445,23 +446,11 @@ export function MatchingDashboard() {
                   </div>
                   <span className={`ml-2 rounded-full px-2 py-0.5 text-xs font-medium ${
                     m.status === "active" ? "bg-green-100 text-green-700" :
-                    m.status === "confirming" ? "bg-blue-100 text-blue-700" :
                     m.status === "ended" ? "bg-red-100 text-red-700" :
                     "bg-yellow-100 text-yellow-700"
                   }`}>
-                    {m.status}
+                    {m.status === "confirming" ? "pending" : m.status}
                   </span>
-                  {m.status === "confirming" && (
-                    <span className="ml-2 text-xs text-muted">
-                      <span title={`${m.personA.firstName}: ${m.personAConfirmed ? "confirmed" : "pending"}`}>
-                        {m.personA.firstName?.charAt(0)} {m.personAConfirmed ? "✓" : "⏳"}
-                      </span>
-                      {" · "}
-                      <span title={`${m.personB.firstName}: ${m.personBConfirmed ? "confirmed" : "pending"}`}>
-                        {m.personB.firstName?.charAt(0)} {m.personBConfirmed ? "✓" : "⏳"}
-                      </span>
-                    </span>
-                  )}
                 </div>
                 <div className="flex gap-2">
                   {m.status === "pending" && (
