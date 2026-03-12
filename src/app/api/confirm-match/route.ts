@@ -46,7 +46,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(new URL("/match-confirmed?response=no", BASE_URL));
   }
 
-  // response === "yes"
+  // response === "yes" — mark this person as engaged
+  const confirmerId = isA ? match.person_a_id : match.person_b_id;
+  await updateEntryStatus(confirmerId, "engaged");
+
   const { bothConfirmed } = await confirmMatchPerson(match.id, side);
 
   if (bothConfirmed) {
@@ -70,7 +73,7 @@ export async function GET(request: NextRequest) {
           VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
         `;
       } catch { /* non-critical */ }
-      await updateMatchStatus(match.id, "active");
+      await updateMatchStatus(match.id, "pending");
       await updateEntryStatus(match.person_a_id, "matched");
       await updateEntryStatus(match.person_b_id, "matched");
     }
