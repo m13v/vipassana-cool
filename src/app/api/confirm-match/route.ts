@@ -30,6 +30,9 @@ export async function GET(request: NextRequest) {
 
   if (response === "no") {
     await updateMatchStatus(match.id, "declined");
+    // Reset both people back to pending (the other may have already clicked yes → engaged)
+    await updateEntryStatus(match.person_a_id, "pending");
+    await updateEntryStatus(match.person_b_id, "pending");
     // Notify admin
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
