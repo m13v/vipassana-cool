@@ -29,10 +29,10 @@ export async function GET(request: NextRequest) {
   const side = isA ? "a" : "b";
 
   if (response === "no") {
-    await updateMatchStatus(match.id, "declined");
+    await updateMatchStatus(match.id, "declined", "user_click");
     // Reset both people back to pending (the other may have already clicked yes → engaged)
-    await updateEntryStatus(match.person_a_id, "pending");
-    await updateEntryStatus(match.person_b_id, "pending");
+    await updateEntryStatus(match.person_a_id, "pending", "user_click", match.id, "partner declined");
+    await updateEntryStatus(match.person_b_id, "pending", "user_click", match.id, "partner declined");
     // Notify admin
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
 
   // response === "yes" — mark this person as engaged
   const confirmerId = isA ? match.person_a_id : match.person_b_id;
-  await updateEntryStatus(confirmerId, "engaged");
+  await updateEntryStatus(confirmerId, "engaged", "user_click", match.id, "clicked yes on confirmation");
 
   const { bothConfirmed } = await confirmMatchPerson(match.id, side);
 
