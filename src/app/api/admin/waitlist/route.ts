@@ -15,6 +15,15 @@ export async function GET(request: NextRequest) {
 
   const entries = await getAllEntries();
 
+  // Build a map of personId -> [all IDs they've ever been matched with]
+  const sql = neon(process.env.DATABASE_URL!);
+  const allMatchPairs = await sql`SELECT person_a_id, person_b_id FROM matches` as { person_a_id: string; person_b_id: string }[];
+  const priorMatchMap: Record<string, string[]> = {};
+  for (const { person_a_id, person_b_id } of allMatchPairs) {
+    (priorMatchMap[person_a_id] ??= []).push(person_b_id);
+    (priorMatchMap[person_b_id] ??= []).push(person_a_id);
+  }
+
   const safe = entries.map((e) => ({
     id: e.id,
     email: e.email,
@@ -34,6 +43,7 @@ export async function GET(request: NextRequest) {
     researchNotes: e.research_notes,
     status: e.status,
     createdAt: e.created_at,
+    priorMatchedIds: priorMatchMap[e.id] ?? [],
   }));
 
   return NextResponse.json({ entries: safe });
