@@ -65,7 +65,7 @@ export async function getEntryByEmail(email: string): Promise<WaitlistEntry | un
   return rows[0] as WaitlistEntry | undefined;
 }
 
-export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated_at">): Promise<void> {
+export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated_at" | "pass_count">): Promise<void> {
   const sql = getSql();
   const now = new Date().toISOString();
   await sql`
