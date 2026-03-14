@@ -22,6 +22,7 @@ export type WaitlistEntry = {
   requested_match_id: string | null;
   research_notes: string | null;
   status: string;
+  pass_count: number;
   created_at: string | null;
   updated_at: string | null;
 };
@@ -37,6 +38,7 @@ export type Match = {
   person_b_token: string | null;
   person_a_confirmed: boolean;
   person_b_confirmed: boolean;
+  declined_by_id: string | null;
 };
 
 export async function getAllEntries(): Promise<WaitlistEntry[]> {
@@ -92,7 +94,11 @@ export async function updateEntryStatus(id: string, status: string, triggeredBy 
   const sql = getSql();
   const current = await sql`SELECT status FROM waitlist_entries WHERE id = ${id}`;
   const oldStatus = current[0]?.status ?? null;
-  await sql`UPDATE waitlist_entries SET status = ${status}, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
+  if (status === "passed") {
+    await sql`UPDATE waitlist_entries SET status = ${status}, pass_count = pass_count + 1, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
+  } else {
+    await sql`UPDATE waitlist_entries SET status = ${status}, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
+  }
   await sql`
     INSERT INTO vipassana_activity_log (person_id, match_id, event_type, old_value, new_value, triggered_by, note)
     VALUES (${id}, ${matchId ?? null}, 'status_change', ${oldStatus}, ${status}, ${triggeredBy}, ${note ?? null})
@@ -122,7 +128,7 @@ export async function createMatch(personAId: string, personBId: string): Promise
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personBId}, ${id}, 'match_created', 'pending', 'admin')`;
   await updateEntryStatus(personAId, "matched", "admin", id);
   await updateEntryStatus(personBId, "matched", "admin", id);
-  return { id, person_a_id: personAId, person_b_id: personBId, status: "pending", created_at: now, notes: null, person_a_token: null, person_b_token: null, person_a_confirmed: false, person_b_confirmed: false };
+  return { id, person_a_id: personAId, person_b_id: personBId, status: "pending", created_at: now, notes: null, person_a_token: null, person_b_token: null, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
 }
 
 export async function updateMatchStatus(id: string, status: string, triggeredBy = "system"): Promise<void> {
@@ -134,7 +140,7 @@ export async function updateMatchStatus(id: string, status: string, triggeredBy 
     INSERT INTO vipassana_activity_log (match_id, event_type, old_value, new_value, triggered_by)
     VALUES (${id}, 'match_status_change', ${oldStatus}, ${status}, ${triggeredBy})
   `;
-  if (status === "ended" || status === "declined") {
+  if (status === "ended") {
     const rows = await sql`SELECT * FROM matches WHERE id = ${id}`;
     const match = rows[0] as Match | undefined;
     if (match) {
@@ -142,6 +148,24 @@ export async function updateMatchStatus(id: string, status: string, triggeredBy 
       await updateEntryStatus(match.person_b_id, "pending", triggeredBy, id);
     }
   }
+}
+
+// Decline a match: record who said no, set decliner → passed, partner → contacted
+export async function declineMatch(matchId: string, declinerId: string): Promise<void> {
+  const sql = getSql();
+  const current = await sql`SELECT status FROM matches WHERE id = ${matchId}`;
+  const oldStatus = current[0]?.status ?? null;
+  await sql`UPDATE matches SET status = 'declined', declined_by_id = ${declinerId} WHERE id = ${matchId}`;
+  await sql`
+    INSERT INTO vipassana_activity_log (match_id, event_type, old_value, new_value, triggered_by)
+    VALUES (${matchId}, 'match_status_change', ${oldStatus}, 'declined', 'user_click')
+  `;
+  const rows = await sql`SELECT * FROM matches WHERE id = ${matchId}`;
+  const match = rows[0] as Match | undefined;
+  if (!match) return;
+  const partnerId = match.person_a_id === declinerId ? match.person_b_id : match.person_a_id;
+  await updateEntryStatus(declinerId, "passed", "user_click", matchId, "clicked no on confirmation");
+  await updateEntryStatus(partnerId, "contacted", "user_click", matchId, "partner declined");
 }
 
 export async function createMatchWithTokens(personAId: string, personBId: string): Promise<Match> {
@@ -156,7 +180,7 @@ export async function createMatchWithTokens(personAId: string, personBId: string
   `;
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personAId}, ${id}, 'match_created', 'confirming', 'admin')`;
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personBId}, ${id}, 'match_created', 'confirming', 'admin')`;
-  return { id, person_a_id: personAId, person_b_id: personBId, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false };
+  return { id, person_a_id: personAId, person_b_id: personBId, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
 }
 
 // Returns all person IDs that have ever been matched with this person (any status)
