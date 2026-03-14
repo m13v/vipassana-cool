@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
 
   const isA = match.person_a_token === token;
   const side = isA ? "a" : "b";
+  const confirmerId = isA ? match.person_a_id : match.person_b_id;
 
   if (response === "no") {
     // declineMatch: decliner → passed (pass_count++), partner → contacted
@@ -49,7 +50,6 @@ export async function GET(request: NextRequest) {
   }
 
   // response === "yes" — mark this person as engaged
-  const confirmerId = isA ? match.person_a_id : match.person_b_id;
   await updateEntryStatus(confirmerId, "engaged", "user_click", match.id, "clicked yes on confirmation");
 
   const { bothConfirmed } = await confirmMatchPerson(match.id, side);
