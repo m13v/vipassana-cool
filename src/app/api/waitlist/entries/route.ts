@@ -32,6 +32,7 @@ export async function GET() {
       isOldStudent: e.is_old_student,
       hasMaintainedPractice: e.has_maintained_practice,
       status: e.status,
+      passCount: e.pass_count ?? 0,
       createdAt: e.created_at,
     }));
 
