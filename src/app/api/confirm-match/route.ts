@@ -7,6 +7,7 @@ import {
   confirmMatchPerson,
   updateMatchStatus,
   updateEntryStatus,
+  declineMatch,
 } from "@/lib/db";
 import { buildIntroEmailHtml } from "@/lib/emails";
 
@@ -29,10 +30,8 @@ export async function GET(request: NextRequest) {
   const side = isA ? "a" : "b";
 
   if (response === "no") {
-    await updateMatchStatus(match.id, "declined", "user_click");
-    // Reset both people back to pending (the other may have already clicked yes → engaged)
-    await updateEntryStatus(match.person_a_id, "pending", "user_click", match.id, "partner declined");
-    await updateEntryStatus(match.person_b_id, "pending", "user_click", match.id, "partner declined");
+    // declineMatch: decliner → passed (pass_count++), partner → contacted
+    await declineMatch(match.id, confirmerId);
     // Notify admin
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
