@@ -88,9 +88,15 @@ export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated
   `;
 }
 
-export async function updateEntryStatus(id: string, status: string): Promise<void> {
+export async function updateEntryStatus(id: string, status: string, triggeredBy = "system", matchId?: string, note?: string): Promise<void> {
   const sql = getSql();
+  const current = await sql`SELECT status FROM waitlist_entries WHERE id = ${id}`;
+  const oldStatus = current[0]?.status ?? null;
   await sql`UPDATE waitlist_entries SET status = ${status}, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
+  await sql`
+    INSERT INTO vipassana_activity_log (person_id, match_id, event_type, old_value, new_value, triggered_by, note)
+    VALUES (${id}, ${matchId ?? null}, 'status_change', ${oldStatus}, ${status}, ${triggeredBy}, ${note ?? null})
+  `;
 }
 
 export async function getAllMatches(): Promise<(Match & { person_a: WaitlistEntry; person_b: WaitlistEntry })[]> {
@@ -112,20 +118,28 @@ export async function createMatch(personAId: string, personBId: string): Promise
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
   await sql`INSERT INTO matches (id, person_a_id, person_b_id, status, created_at) VALUES (${id}, ${personAId}, ${personBId}, 'pending', ${now})`;
-  await updateEntryStatus(personAId, "matched");
-  await updateEntryStatus(personBId, "matched");
+  await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personAId}, ${id}, 'match_created', 'pending', 'admin')`;
+  await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personBId}, ${id}, 'match_created', 'pending', 'admin')`;
+  await updateEntryStatus(personAId, "matched", "admin", id);
+  await updateEntryStatus(personBId, "matched", "admin", id);
   return { id, person_a_id: personAId, person_b_id: personBId, status: "pending", created_at: now, notes: null, person_a_token: null, person_b_token: null, person_a_confirmed: false, person_b_confirmed: false };
 }
 
-export async function updateMatchStatus(id: string, status: string): Promise<void> {
+export async function updateMatchStatus(id: string, status: string, triggeredBy = "system"): Promise<void> {
   const sql = getSql();
+  const current = await sql`SELECT status FROM matches WHERE id = ${id}`;
+  const oldStatus = current[0]?.status ?? null;
   await sql`UPDATE matches SET status = ${status} WHERE id = ${id}`;
+  await sql`
+    INSERT INTO vipassana_activity_log (match_id, event_type, old_value, new_value, triggered_by)
+    VALUES (${id}, 'match_status_change', ${oldStatus}, ${status}, ${triggeredBy})
+  `;
   if (status === "ended" || status === "declined") {
     const rows = await sql`SELECT * FROM matches WHERE id = ${id}`;
     const match = rows[0] as Match | undefined;
     if (match) {
-      await updateEntryStatus(match.person_a_id, "pending");
-      await updateEntryStatus(match.person_b_id, "pending");
+      await updateEntryStatus(match.person_a_id, "pending", triggeredBy, id);
+      await updateEntryStatus(match.person_b_id, "pending", triggeredBy, id);
     }
   }
 }
@@ -140,6 +154,8 @@ export async function createMatchWithTokens(personAId: string, personBId: string
     INSERT INTO matches (id, person_a_id, person_b_id, status, created_at, person_a_token, person_b_token, person_a_confirmed, person_b_confirmed)
     VALUES (${id}, ${personAId}, ${personBId}, 'confirming', ${now}, ${tokenA}, ${tokenB}, false, false)
   `;
+  await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personAId}, ${id}, 'match_created', 'confirming', 'admin')`;
+  await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personBId}, ${id}, 'match_created', 'confirming', 'admin')`;
   return { id, person_a_id: personAId, person_b_id: personBId, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false };
 }
 
