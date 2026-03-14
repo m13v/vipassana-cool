@@ -42,6 +42,7 @@ export async function GET(request: NextRequest) {
     requestedMatchId: e.requested_match_id,
     researchNotes: e.research_notes,
     status: e.status,
+    passCount: e.pass_count ?? 0,
     createdAt: e.created_at,
     priorMatchedIds: priorMatchMap[e.id] ?? [],
   }));
