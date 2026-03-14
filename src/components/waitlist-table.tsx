@@ -14,6 +14,7 @@ type WaitlistPerson = {
   isOldStudent: string | null;
   hasMaintainedPractice: string | null;
   status: string;
+  passCount: number;
   createdAt: string | null;
 };
 
@@ -74,6 +75,7 @@ const STATUS_CONFIG: Record<string, { bg: string; text: string; label: string }>
   pending:   { bg: "bg-yellow-100 dark:bg-yellow-900/30", text: "text-yellow-700 dark:text-yellow-400", label: "Waiting" },
   contacted: { bg: "bg-blue-100 dark:bg-blue-900/30",    text: "text-blue-700 dark:text-blue-400",    label: "Contacted" },
   engaged:   { bg: "bg-orange-100 dark:bg-orange-900/30", text: "text-orange-700 dark:text-orange-400", label: "Engaged" },
+  passed:    { bg: "bg-gray-100 dark:bg-gray-800/50",    text: "text-gray-500 dark:text-gray-400",    label: "Passed" },
 };
 
 type Filter = "all" | "pending" | "matched";
@@ -122,6 +124,11 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
       return true;
     });
   }, [entries, filter, setup, setupActive]);
+
+  function statusLabel(e: WaitlistPerson): string {
+    if (e.status === "passed") return e.passCount > 1 ? `Passed (${e.passCount})` : "Passed";
+    return (STATUS_CONFIG[e.status] ?? STATUS_CONFIG.pending).label;
+  }
 
   if (loading) {
     return (
@@ -294,7 +301,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
                     <span
                       className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${st.bg} ${st.text}`}
                     >
-                      {st.label}
+                      {statusLabel(e)}
                     </span>
                     {onRequestMatch && (
                       <div className="mt-1.5">
