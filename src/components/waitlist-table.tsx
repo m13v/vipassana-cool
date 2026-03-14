@@ -70,9 +70,10 @@ function toUtcHour(localTime: string | null, tz: string): number | null {
 }
 
 const STATUS_CONFIG: Record<string, { bg: string; text: string; label: string }> = {
-  matched: { bg: "bg-green-100 dark:bg-green-900/30", text: "text-green-700 dark:text-green-400", label: "Matched" },
-  pending: { bg: "bg-yellow-100 dark:bg-yellow-900/30", text: "text-yellow-700 dark:text-yellow-400", label: "Waiting" },
-  engaged: { bg: "bg-yellow-100 dark:bg-yellow-900/30", text: "text-yellow-700 dark:text-yellow-400", label: "Waiting" },
+  matched:   { bg: "bg-green-100 dark:bg-green-900/30",  text: "text-green-700 dark:text-green-400",  label: "Matched" },
+  pending:   { bg: "bg-yellow-100 dark:bg-yellow-900/30", text: "text-yellow-700 dark:text-yellow-400", label: "Waiting" },
+  contacted: { bg: "bg-blue-100 dark:bg-blue-900/30",    text: "text-blue-700 dark:text-blue-400",    label: "Contacted" },
+  engaged:   { bg: "bg-orange-100 dark:bg-orange-900/30", text: "text-orange-700 dark:text-orange-400", label: "Engaged" },
 };
 
 type Filter = "all" | "pending" | "matched";
