@@ -90,6 +90,7 @@ export async function POST(request: NextRequest) {
         html,
         headers: { "X-Entity-Ref-ID": match.id },
       });
+      await updateEntryStatus(recipient.id, "contacted", "admin", match.id, "confirmation email sent");
       try {
         await sql`
           INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
