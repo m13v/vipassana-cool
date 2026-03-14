@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { neon } from "@neondatabase/serverless";
-import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds } from "@/lib/db";
+import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, updateEntryStatus } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml } from "@/lib/emails";
 
 function checkAuth(request: NextRequest): boolean {
