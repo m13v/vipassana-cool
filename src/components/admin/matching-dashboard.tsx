@@ -32,6 +32,7 @@ type WaitlistPerson = {
   researchNotes: string | null;
   status: string;
   createdAt: string | null;
+  priorMatchedIds: string[];
 };
 
 type MatchPerson = {
@@ -161,7 +162,7 @@ export function MatchingDashboard() {
         setSelected(new Set());
         fetchData();
       } else {
-        setMessage(`Match failed: ${data.error}`);
+        setMessage(`⚠ ${data.error}`);
       }
     } catch {
       setMessage("Match failed");
@@ -310,6 +311,11 @@ export function MatchingDashboard() {
                         {isRequestedBy(e.id, entries) && (
                           <span className="text-xs font-normal text-purple-600">
                             ← requested by {entries.find(p => p.requestedMatchId === e.id)?.firstName || "someone"}
+                          </span>
+                        )}
+                        {getPriorMatchWarning(e.id, selected, entries) && (
+                          <span className="text-xs font-normal text-red-500" title={getPriorMatchWarning(e.id, selected, entries)!}>
+                            ⚠ matched before
                           </span>
                         )}
                       </div>
@@ -481,6 +487,19 @@ export function MatchingDashboard() {
 
 function isRequestedBy(id: string, entries: WaitlistPerson[]): boolean {
   return entries.some(e => e.requestedMatchId === id);
+}
+
+// Returns a warning string if this person was previously matched with any currently selected person
+function getPriorMatchWarning(id: string, selected: Set<string>, entries: WaitlistPerson[]): string | null {
+  const me = entries.find(e => e.id === id);
+  if (!me || selected.has(id)) return null;
+  for (const selectedId of selected) {
+    if (me.priorMatchedIds.includes(selectedId)) {
+      const name = entries.find(e => e.id === selectedId)?.firstName || "selected";
+      return `Previously matched with ${name}`;
+    }
+  }
+  return null;
 }
 
 const STATUS_RANK: Record<string, number> = {
