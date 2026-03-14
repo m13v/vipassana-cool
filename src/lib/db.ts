@@ -143,6 +143,18 @@ export async function createMatchWithTokens(personAId: string, personBId: string
   return { id, person_a_id: personAId, person_b_id: personBId, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false };
 }
 
+// Returns all person IDs that have ever been matched with this person (any status)
+export async function getPriorMatchedIds(personId: string): Promise<string[]> {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT person_a_id, person_b_id FROM matches
+    WHERE person_a_id = ${personId} OR person_b_id = ${personId}
+  `;
+  return rows.map((r) =>
+    r.person_a_id === personId ? r.person_b_id : r.person_a_id
+  ) as string[];
+}
+
 export async function getMatchByToken(token: string): Promise<Match | undefined> {
   const sql = getSql();
   const rows = await sql`SELECT * FROM matches WHERE person_a_token = ${token} OR person_b_token = ${token} LIMIT 1`;
