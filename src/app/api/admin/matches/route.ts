@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { neon } from "@neondatabase/serverless";
-import { getAllMatches, createMatch, createMatchWithTokens, getEntry } from "@/lib/db";
+import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml } from "@/lib/emails";
 
 function checkAuth(request: NextRequest): boolean {
@@ -61,6 +61,15 @@ export async function POST(request: NextRequest) {
 
   if (!personA || !personB) {
     return NextResponse.json({ error: "One or both entries not found" }, { status: 404 });
+  }
+
+  // Block re-matching people who have been paired before
+  const priorIds = await getPriorMatchedIds(personAId);
+  if (priorIds.includes(personBId)) {
+    return NextResponse.json(
+      { error: `${personA.name} and ${personB.name} have been matched before. Choose different partners.` },
+      { status: 409 }
+    );
   }
 
   // Confirmation flow: create pending match, send yes/no emails to each person
