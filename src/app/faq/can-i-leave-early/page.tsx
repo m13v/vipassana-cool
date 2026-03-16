@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Can I Leave a Vipassana Course Early? What Happens If You Quit",
   description:
     "What happens if you want to leave a Vipassana course early, why it's discouraged, and how to push through the hardest days. Honest advice from experience.",
+  alternates: { canonical: "https://vipassana.cool/faq/can-i-leave-early" },
 };
 
 export default function CanILeaveEarlyPage() {
