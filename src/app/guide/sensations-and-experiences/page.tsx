@@ -46,7 +46,7 @@ export default function SensationsExplainedPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Landscape of Sensations</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What sensations do you experience during Vipassana meditation?</h2>
           <p>
             When you practice Vipassana body scanning, you encounter an enormous range of sensations. Some are familiar — pain in your knee, an itch on your nose. Others are surprising — vibrations you&apos;ve never noticed, waves of heat or cold, tingling that seems to have no physical cause.
           </p>
@@ -56,7 +56,7 @@ export default function SensationsExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Gross Sensations</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are gross sensations in Vipassana?</h2>
           <p>
             Gross sensations are the obvious ones: pain, pressure, heaviness, intense heat, sharp stinging, throbbing, cramping. They&apos;re called &quot;gross&quot; not because they&apos;re disgusting but because they&apos;re coarse and easy to detect.
           </p>
@@ -72,7 +72,7 @@ export default function SensationsExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Subtle Sensations</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are subtle sensations in Vipassana?</h2>
           <p>
             As concentration deepens — sometimes within a single sitting, sometimes over days or weeks — you begin to notice subtler sensations: gentle tingling, fine vibrations, warmth flowing through an area, a sense of &quot;aliveness&quot; in parts of the body that previously felt numb.
           </p>
@@ -88,7 +88,7 @@ export default function SensationsExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Bhanga: Free Flow</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is bhanga or free flow in Vipassana?</h2>
           <p>
             Bhanga (also called &quot;dissolution&quot; or &quot;free flow&quot;) is a specific experience where the solid sense of the body seems to dissolve into a field of vibrations. During a body scan, instead of encountering distinct areas of sensation, your awareness moves through the body as a continuous flow. The boundary between &quot;body&quot; and &quot;not body&quot; becomes unclear.
           </p>
@@ -104,7 +104,7 @@ export default function SensationsExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Why Sensations Change Daily</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why do Vipassana sensations change from day to day?</h2>
           <p>
             One of the most confusing aspects of Vipassana practice is the inconsistency. Yesterday you had a deep, free-flowing session. Today your body feels like concrete. Yesterday there were subtle vibrations everywhere. Today there&apos;s nothing but dull aching.
           </p>
@@ -123,7 +123,7 @@ export default function SensationsExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When Sensations Scare You</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What should you do when Vipassana sensations scare you?</h2>
           <p>
             Sometimes during practice, sensations arise that feel frightening: sudden intense heat, involuntary twitching, a feeling of falling, electric-like jolts, pressure in the head, or waves of emotion that seem to come from nowhere.
           </p>
@@ -145,7 +145,7 @@ export default function SensationsExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Point Is Not the Sensations</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Are sensations the goal of Vipassana meditation?</h2>
           <p>
             This is the most important thing to understand, and the thing most meditators lose sight of at some point: <strong>the sensations are not the goal. Equanimity is the goal.</strong>
           </p>
