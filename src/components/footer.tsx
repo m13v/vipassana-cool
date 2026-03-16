@@ -83,6 +83,9 @@ export function Footer() {
               <TrackedLink href="/disclaimer" event="footer_link_click" properties={{ label: "Disclaimer", href: "/disclaimer" }} className="text-sm text-muted hover:text-foreground">
                 Disclaimer
               </TrackedLink>
+              <TrackedLink href="/terms" event="footer_link_click" properties={{ label: "Terms of Service", href: "/terms" }} className="text-sm text-muted hover:text-foreground">
+                Terms of Service
+              </TrackedLink>
             </div>
           </div>
         </div>
