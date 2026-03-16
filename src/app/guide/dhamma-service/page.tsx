@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Vipassana Dhamma Service (Seva) — What It's Like to Volunteer",
@@ -27,23 +28,17 @@ export default function DhammaServicePage() {
         url="https://vipassana.cool/guide/dhamma-service"
         datePublished="2025-06-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Guide
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Dhamma Service (Seva)
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        Serving at a Vipassana course is one of the most underrated ways to deepen your
-        practice. Here&apos;s what it actually involves, what to expect, and why so many
-        experienced meditators say serving changed their practice more than sitting did.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Dhamma Service" },
+        ]}
+        category="Guide"
+        title="Dhamma Service (Seva)"
+        description="Serving at a Vipassana course is one of the most underrated ways to deepen your practice. Here's what it actually involves, what to expect, and why so many experienced meditators say serving changed their practice more than sitting did."
+        datePublished="2025-06-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
