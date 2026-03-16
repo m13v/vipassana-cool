@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Vipassana for Addiction Recovery — Meditation and Substance Abuse",
@@ -27,23 +28,17 @@ export default function VipassanaForAddictionPage() {
         url="https://vipassana.cool/guide/vipassana-for-addiction"
         datePublished="2025-06-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Guide
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Vipassana and Addiction Recovery
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        How body-sensation awareness breaks the craving-reaction cycle at its
-        root. What the research shows, who it helps, and what to know before
-        attending a course.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Addiction Recovery" },
+        ]}
+        category="Guide"
+        title="Vipassana and Addiction Recovery"
+        description="How body-sensation awareness breaks the craving-reaction cycle at its root. What the research shows, who it helps, and what to know before attending a course."
+        datePublished="2025-06-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
