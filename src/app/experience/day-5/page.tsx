@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 5 — Settling Into the Practice",
   description:
     "Day 5 of Vipassana: the body scanning deepens, pain becomes workable, and you find your rhythm. What the middle of the course feels like.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-5" },
 };
 
 export default function Day5Page() {
