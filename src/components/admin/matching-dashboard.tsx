@@ -439,7 +439,7 @@ export function MatchingDashboard() {
           </h2>
           <div className="space-y-3">
             {[...matches].sort((a, b) => {
-              const order: Record<string, number> = { pending: 0, confirming: 0, active: 1, ended: 2 };
+              const order: Record<string, number> = { confirming: 0, pending: 1, replied: 2, scheduling: 3, active: 4, ended: 5 };
               return (order[a.status] ?? 9) - (order[b.status] ?? 9);
             }).map((m) => (
               <div
@@ -457,15 +457,21 @@ export function MatchingDashboard() {
                     <span className="text-muted"> ({m.personB.city || "?"})</span>
                   </div>
                   <span className={`ml-2 rounded-full px-2 py-0.5 text-xs font-medium ${
-                    m.status === "active" ? "bg-green-100 text-green-700" :
-                    m.status === "ended" ? "bg-red-100 text-red-700" :
+                    m.status === "active"      ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" :
+                    m.status === "scheduling"  ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400" :
+                    m.status === "replied"     ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" :
+                    m.status === "ended"       ? "bg-red-100 text-red-700" :
                     "bg-yellow-100 text-yellow-700"
                   }`}>
-                    {m.status === "confirming" ? "pending" : m.status}
+                    {m.status === "confirming" ? "awaiting confirm" :
+                     m.status === "pending"    ? "intro sent" :
+                     m.status === "replied"    ? "1 replied" :
+                     m.status === "scheduling" ? "scheduling" :
+                     m.status}
                   </span>
                 </div>
                 <div className="flex gap-2">
-                  {m.status === "pending" && (
+                  {(m.status === "pending" || m.status === "replied" || m.status === "scheduling") && (
                     <button
                       onClick={() => handleMatchStatus(m.id, "active")}
                       className="rounded border border-border px-3 py-1 text-xs hover:bg-card"
