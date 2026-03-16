@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana Dhamma Service (Seva) — What It's Like to Volunteer",
   description:
     "Everything you need to know about Vipassana Dhamma service: what seva involves, server roles, daily schedule, how to apply, and why serving deepens your meditation practice.",
+  alternates: { canonical: "https://vipassana.cool/guide/dhamma-service" },
 };
 
 export default function DhammaServicePage() {
