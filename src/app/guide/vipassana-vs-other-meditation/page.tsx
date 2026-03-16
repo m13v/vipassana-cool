@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana vs Other Meditation — Mindfulness, TM, Zen & More Compared",
   description:
     "An honest comparison of Vipassana vs mindfulness (MBSR), Transcendental Meditation (TM), Zen, and loving-kindness meditation. Cost, technique, time commitment, and which is right for you.",
+  alternates: { canonical: "https://vipassana.cool/guide/vipassana-vs-other-meditation" },
 };
 
 export default function VipassanaVsOtherMeditationPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Vipassana vs Other Meditation", url: "https://vipassana.cool/guide/vipassana-vs-other-meditation" },
+        ]}
+      />
+      <ArticleSchema
+        title="Vipassana vs Other Meditation Techniques"
+        description="An honest comparison of Vipassana vs mindfulness (MBSR), Transcendental Meditation (TM), Zen, and loving-kindness meditation. Cost, technique, time commitment, and which is right for you."
+        url="https://vipassana.cool/guide/vipassana-vs-other-meditation"
+        datePublished="2025-03-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"
