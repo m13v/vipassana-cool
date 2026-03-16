@@ -42,7 +42,7 @@ export default function VipassanaVsOtherMeditationPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Why This Comparison Matters</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why does comparing meditation techniques matter?</h2>
           <p>
             Most people don&apos;t stumble into meditation randomly. They hear about it from a friend,
             read an article, or hit a point in life where something needs to change. Then they Google
@@ -169,7 +169,7 @@ export default function VipassanaVsOtherMeditationPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Side-by-Side Comparison</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do Vipassana, MBSR, TM, Zen, and Metta compare side by side?</h2>
           <div className="mt-4 overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -245,7 +245,7 @@ export default function VipassanaVsOtherMeditationPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Key Differences That Actually Matter</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are the key differences between meditation techniques?</h2>
           <p>
             Reading descriptions of meditation techniques can make them all sound similar &mdash;
             &quot;sit quietly and pay attention.&quot; In practice, the differences are significant.
@@ -333,7 +333,7 @@ export default function VipassanaVsOtherMeditationPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How to Choose: A Decision Framework</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you choose the right meditation technique for you?</h2>
           <p>
             Rather than asking &quot;which meditation is best?&quot; ask yourself these questions:
           </p>
