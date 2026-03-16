@@ -47,7 +47,7 @@ export default function RecognizingProgressPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Why Progress Is Hard to See</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why is progress hard to see in Vipassana?</h2>
           <p>
             You are the worst judge of your own progress. This isn&apos;t false modesty — it&apos;s a structural problem. Change happens so gradually that you can&apos;t perceive it from the inside, the same way you don&apos;t notice your hair growing.
           </p>
@@ -60,7 +60,7 @@ export default function RecognizingProgressPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Progress Is NOT</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is NOT a sign of progress in Vipassana?</h2>
           <p>
             Before looking at what progress is, it helps to clear away common misconceptions:
           </p>
@@ -76,7 +76,7 @@ export default function RecognizingProgressPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Subtle Signs: Months 1&ndash;6</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are the subtle signs of progress in months 1&ndash;6?</h2>
           <p>
             In the first months of consistent daily practice after a course, you may notice:
           </p>
@@ -113,7 +113,7 @@ export default function RecognizingProgressPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Signs of Deepening: Months 6&ndash;24</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are signs of deepening practice in months 6&ndash;24?</h2>
           <p>
             With continued practice, subtler shifts emerge:
           </p>
@@ -150,7 +150,7 @@ export default function RecognizingProgressPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Signs of Deepening: Years 2+</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What changes after 2+ years of Vipassana practice?</h2>
           <p>
             Long-term practitioners often describe changes that are harder to articulate:
           </p>
@@ -180,7 +180,7 @@ export default function RecognizingProgressPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Plateaus and What They Mean</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What do plateaus mean in Vipassana meditation?</h2>
           <p>
             Every meditator hits plateaus. They feel like stagnation, but they&apos;re usually consolidation — the mind integrating at a deeper level before the next shift. Common plateaus:
           </p>
@@ -214,7 +214,7 @@ export default function RecognizingProgressPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When to Increase Duration or Take the Next Step</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">When should you increase meditation duration or take a longer course?</h2>
           <p>
             Practical readiness signals that you might be ready for more:
           </p>
@@ -230,7 +230,7 @@ export default function RecognizingProgressPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Trap of Measuring</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Is measuring meditation progress counterproductive?</h2>
           <p>
             Here&apos;s the deepest irony of this entire page: the practice is about letting go, and measuring progress is a form of clinging. Tracking how far you&apos;ve come, comparing yourself to where you &quot;should&quot; be, evaluating each sit as &quot;good&quot; or &quot;bad&quot; — all of this is the mind doing exactly what the practice is training it not to do.
           </p>
