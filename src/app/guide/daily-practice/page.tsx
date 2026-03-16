@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Vipassana Daily Practice at Home — How to Maintain After Your Course",
@@ -27,22 +28,17 @@ export default function DailyPracticePage() {
         url="https://vipassana.cool/guide/daily-practice"
         datePublished="2025-01-15"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        After Your Course
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Daily Vipassana Practice at Home
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        The course plants the seed. Daily practice is what makes it grow. Practical
-        guidance on maintaining Vipassana after you leave the center.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Daily Practice" },
+        ]}
+        category="After Your Course"
+        title="Daily Vipassana Practice at Home"
+        description="The course plants the seed. Daily practice is what makes it grow. Practical guidance on maintaining Vipassana after you leave the center."
+        datePublished="2025-01-15"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
@@ -278,6 +274,25 @@ export default function DailyPracticePage() {
         >
           Find a Course
         </a>
+      </div>
+
+      {/* Related Articles */}
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related Articles</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/group-sittings" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Group Sittings
+          </Link>
+          <Link href="/guide/restarting-your-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Restarting Your Practice
+          </Link>
+          <Link href="/guide/recognizing-progress" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Recognizing Progress
+          </Link>
+          <Link href="/guide/after-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            After the Retreat
+          </Link>
+        </div>
       </div>
 
       <PageComments pageId="guide-daily-practice" />
