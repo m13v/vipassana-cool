@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Vipassana Risks & Safety — Adverse Effects, Dark Night, Crisis Resources",
@@ -308,6 +309,22 @@ export default function RisksAndSafetyPage() {
           >
             Find a Course
           </a>
+        </div>
+      </div>
+
+      {/* Related Articles */}
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related Articles</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/scientific-evidence" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Scientific Evidence
+          </Link>
+          <Link href="/faq/vipassana-and-depression" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana &amp; Depression
+          </Link>
+          <Link href="/guide/first-course-tips" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            First Course Tips
+          </Link>
         </div>
       </div>
 
