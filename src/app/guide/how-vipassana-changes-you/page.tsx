@@ -57,7 +57,7 @@ export default function HowVipassanaChangesYouPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Reduced Reactivity</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How does Vipassana reduce emotional reactivity?</h2>
           <p>
             This is the most concrete, observable change. Before Vipassana, the chain is: stimulus → reaction → consequences. Someone cuts you off in traffic, you feel anger, you honk and curse. Someone criticizes your work, you feel hurt, you get defensive.
           </p>
@@ -73,7 +73,7 @@ export default function HowVipassanaChangesYouPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The &quot;Nothing Is Happening&quot; Plateau</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why does it feel like nothing is happening in Vipassana practice?</h2>
           <p>
             Almost every serious practitioner goes through this. You&apos;ve been sitting daily for months. The initial post-course high has faded. Your sessions feel routine — sometimes even boring. You start to wonder: &quot;Is this even doing anything?&quot;
           </p>
@@ -96,7 +96,7 @@ export default function HowVipassanaChangesYouPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Changes Over Months</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What changes after months of Vipassana practice?</h2>
           <p>
             In the first 3-6 months of consistent daily practice, most people notice:
           </p>
@@ -109,7 +109,7 @@ export default function HowVipassanaChangesYouPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Changes Over Years</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What changes after years of Vipassana practice?</h2>
           <p>
             Long-term practitioners — people with years of daily practice and multiple courses — often describe changes that are harder to articulate:
           </p>
@@ -122,7 +122,7 @@ export default function HowVipassanaChangesYouPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Vipassana Doesn&apos;t Change</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What doesn&apos;t Vipassana change?</h2>
           <p>
             Honest accounting matters. Vipassana doesn&apos;t:
           </p>
@@ -135,7 +135,7 @@ export default function HowVipassanaChangesYouPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How Change Actually Happens</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How does personal change actually happen through Vipassana?</h2>
           <p>
             The mechanism is simple, even if the execution is difficult: every time you sit and observe a sensation without reacting — a pain in your knee, an itch, a wave of boredom — you weaken the automatic pattern of craving and aversion by a tiny increment.
           </p>
@@ -174,6 +174,25 @@ export default function HowVipassanaChangesYouPage() {
         >
           Find a Course
         </a>
+      </div>
+
+      {/* Related Articles */}
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related Articles</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/daily-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Daily Practice at Home
+          </Link>
+          <Link href="/guide/recognizing-progress" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Recognizing Progress
+          </Link>
+          <Link href="/guide/after-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            After the Retreat
+          </Link>
+          <Link href="/guide/restarting-your-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Restarting Your Practice
+          </Link>
+        </div>
       </div>
 
       <PageComments pageId="guide-how-vipassana-changes-you" />
