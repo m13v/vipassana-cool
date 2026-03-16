@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Recognizing Progress in Vipassana — What Deepening Actually Looks Like",
@@ -27,23 +28,17 @@ export default function RecognizingProgressPage() {
         url="https://vipassana.cool/guide/recognizing-progress"
         datePublished="2025-09-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Deepening Practice
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Recognizing Progress: What Deepening Actually Looks Like
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        Progress in Vipassana is real but rarely dramatic. It&apos;s gradual, often
-        invisible to you, and almost always noticed by others before you see it
-        yourself. Here&apos;s what to actually look for.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Recognizing Progress" },
+        ]}
+        category="Deepening Practice"
+        title="Recognizing Progress: What Deepening Actually Looks Like"
+        description="Progress in Vipassana is real but rarely dramatic. It's gradual, often invisible to you, and almost always noticed by others before you see it yourself. Here's what to actually look for."
+        datePublished="2025-09-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
