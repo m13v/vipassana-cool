@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Vipassana Course Progression — From First 10-Day to 60-Day Courses",
   description:
     "Complete guide to Vipassana course types and progression path: old student courses, Satipatthana Sutta, 20-day, 30-day, 45-day, and 60-day courses. Requirements, eligibility, and what to expect at each level.",
+  alternates: { canonical: "https://vipassana.cool/guide/course-progression" },
 };
 
 export default function CourseProgressionPage() {
