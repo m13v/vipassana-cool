@@ -47,7 +47,7 @@ export default function RestartingPracticePage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">First: Drop the Guilt</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Should you feel guilty about stopping Vipassana practice?</h2>
           <p>
             Guilt about not practicing is itself a form of aversion — exactly what the practice teaches you to observe and release. The irony is not lost on anyone.
           </p>
@@ -60,7 +60,7 @@ export default function RestartingPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Start Smaller Than You Think</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How long should you meditate when restarting Vipassana?</h2>
           <p>
             The biggest mistake people make when restarting is trying to jump back to their old routine. If you were doing an hour a day before you stopped, don&apos;t sit down tomorrow for an hour. You&apos;ll have a difficult, frustrating session and be less likely to sit the next day.
           </p>
@@ -73,7 +73,7 @@ export default function RestartingPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What to Expect When Restarting</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What should you expect when restarting Vipassana practice?</h2>
           <p>
             Your mind will be noisier than you remember. Concentration that took 5 minutes to achieve might now take 20. Sensations that were subtle may be undetectable. The body scan may feel like trying to see in the dark.
           </p>
@@ -95,7 +95,7 @@ export default function RestartingPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Spend More Time on Anapana</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Should you focus on Anapana when restarting practice?</h2>
           <p>
             When restarting, lean heavily on <Link href="/guide/anapana-and-vipassana-explained" className="text-accent underline hover:text-foreground">Anapana</Link> (breath observation). Your concentration needs to rebuild before body scanning becomes productive.
           </p>
@@ -108,7 +108,7 @@ export default function RestartingPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When to Take Another Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">When should you take another course to restart your practice?</h2>
           <p>
             If you&apos;ve been away from practice for months or longer, taking a 10-day course is the most powerful way to restart. It&apos;s like pressing a reset button: 10 days of intensive practice rebuilds concentration, re-establishes the technique, and reignites motivation in a way that home practice alone can&apos;t match.
           </p>
@@ -128,7 +128,7 @@ export default function RestartingPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Group Sittings</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Can group sittings help you restart your practice?</h2>
           <p>
             Many Vipassana centers host weekly group sittings for old students. These are one of the best-kept secrets for maintaining and restarting practice.
           </p>
@@ -144,7 +144,7 @@ export default function RestartingPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Refresh Your Environment</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you set up your space when restarting meditation?</h2>
           <p>
             Your physical space shapes your practice more than you think. If you haven&apos;t sat in months, reclaiming the space is a concrete, immediate action that signals your intention to restart.
           </p>
@@ -156,7 +156,7 @@ export default function RestartingPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Navigating Family When Restarting</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you restart meditation when you live with family?</h2>
           <p>
             If you live with others, restarting your practice means reintroducing a routine they may have gotten used to not having. A few approaches that work:
           </p>
@@ -168,7 +168,7 @@ export default function RestartingPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">A Simple Restart Plan</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is a simple plan to restart Vipassana practice?</h2>
           <p>
             Here&apos;s a concrete plan for the first four weeks:
           </p>
@@ -209,7 +209,7 @@ export default function RestartingPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Bigger Picture</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Is falling off and restarting normal in Vipassana practice?</h2>
           <p>
             Falling off and restarting is not a bug in the practice — it&apos;s a feature. Each time you come back, you learn something new: about your resistance, about what pulls you away, about what brings you back.
           </p>
