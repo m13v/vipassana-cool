@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Vipassana Application Tips — How to Get Accepted & Beat the Waitlist",
@@ -27,22 +28,17 @@ export default function CourseApplicationTipsPage() {
         url="https://vipassana.cool/guide/course-application-tips"
         datePublished="2025-03-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Guide
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Vipassana Application Tips: How to Get Accepted
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        Courses fill up fast. Here&apos;s everything I&apos;ve learned from 6
-        applications about how to maximize your chances of getting a spot.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Application Tips" },
+        ]}
+        category="Guide"
+        title="Vipassana Application Tips: How to Get Accepted"
+        description="Courses fill up fast. Here's everything I've learned from 6 applications about how to maximize your chances of getting a spot."
+        datePublished="2025-03-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
