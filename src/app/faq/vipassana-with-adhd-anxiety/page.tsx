@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Vipassana with ADHD, Anxiety & Medication — What You Need to Know",
   description:
     "Can you do Vipassana with ADHD, anxiety, or depression? What about antidepressants? An honest guide to attending a 10-day course with mental health conditions.",
+  alternates: { canonical: "https://vipassana.cool/faq/vipassana-with-adhd-anxiety" },
 };
 
 export default function VipassanaWithAdhdAnxietyPage() {

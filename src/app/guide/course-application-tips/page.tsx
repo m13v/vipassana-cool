@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana Application Tips — How to Get Accepted & Beat the Waitlist",
@@ -12,6 +14,19 @@ export const metadata: Metadata = {
 export default function CourseApplicationTipsPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Application Tips", url: "https://vipassana.cool/guide/course-application-tips" },
+        ]}
+      />
+      <ArticleSchema
+        title="Vipassana Application Tips: How to Get Accepted"
+        description="Practical tips for applying to a Vipassana meditation course on dhamma.org. How registration works, when courses open, what to write on the application, waitlist strategies, and lessons from 6 applications."
+        url="https://vipassana.cool/guide/course-application-tips"
+        datePublished="2025-03-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

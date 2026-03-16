@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Why Is Vipassana Free? The Donation Model Explained",
   description:
     "How Vipassana courses are completely free — the dana (donation) model, why there are no fees, and how the chain of generosity works.",
+  alternates: { canonical: "https://vipassana.cool/faq/why-is-vipassana-free" },
 };
 
 export default function WhyIsVipassanaFreePage() {

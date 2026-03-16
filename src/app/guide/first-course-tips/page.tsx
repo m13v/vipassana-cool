@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "First Vipassana Course: 15 Things I Wish I Knew — Practical Tips",
   description:
     "15 practical tips for your first 10-day Vipassana course: handling Days 2-4, pain management, mental strategies, what to bring, and what nobody tells you.",
+  alternates: { canonical: "https://vipassana.cool/guide/first-course-tips" },
 };
 
 export default function FirstCourseTipsPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "First Course Tips", url: "https://vipassana.cool/guide/first-course-tips" },
+        ]}
+      />
+      <ArticleSchema
+        title="First Course: 15 Things I Wish I Knew"
+        description="15 practical tips for your first 10-day Vipassana course: handling Days 2-4, pain management, mental strategies, what to bring, and what nobody tells you."
+        url="https://vipassana.cool/guide/first-course-tips"
+        datePublished="2025-09-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

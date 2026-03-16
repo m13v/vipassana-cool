@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 7 — Finding Flow & the Quiet Mind",
   description:
     "Day 7 of Vipassana: extended periods of concentration, mental quiet, and the body scan becoming second nature.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-7" },
 };
 
 export default function Day7Page() {

@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana and Sleep — How Meditation Improves Sleep Quality",
   description:
     "Research on how Vipassana meditation improves sleep quality, increases slow-wave sleep, and helps with insomnia. What to expect during and after a course.",
+  alternates: { canonical: "https://vipassana.cool/guide/vipassana-and-sleep" },
 };
 
 export default function VipassanaAndSleepPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Sleep", url: "https://vipassana.cool/guide/vipassana-and-sleep" },
+        ]}
+      />
+      <ArticleSchema
+        title="Vipassana and Sleep"
+        description="Research on how Vipassana meditation improves sleep quality, increases slow-wave sleep, and helps with insomnia. What to expect during and after a course."
+        url="https://vipassana.cool/guide/vipassana-and-sleep"
+        datePublished="2025-06-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

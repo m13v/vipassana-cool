@@ -15,6 +15,19 @@ export const metadata: Metadata = {
 export default function ScientificEvidencePage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Scientific Evidence", url: "https://vipassana.cool/guide/scientific-evidence" },
+        ]}
+      />
+      <ArticleSchema
+        title="Scientific Evidence for Vipassana Meditation"
+        description="What does science say about Vipassana meditation? A balanced review of research on brain changes, anxiety reduction, pain management, addiction recovery, and adverse effects."
+        url="https://vipassana.cool/guide/scientific-evidence"
+        datePublished="2025-03-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

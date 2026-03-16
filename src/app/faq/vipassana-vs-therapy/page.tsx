@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Vipassana vs Therapy — How They Compare and When to Choose Which",
   description:
     "Comparing Vipassana meditation and psychotherapy: different approaches, overlapping benefits, when each is appropriate, and how they can complement each other.",
+  alternates: { canonical: "https://vipassana.cool/faq/vipassana-vs-therapy" },
 };
 
 export default function VipassanaVsTherapyPage() {

@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana Sensations Explained — Gross, Subtle, Bhanga & Free Flow",
   description:
     "What the different sensations in Vipassana mean: gross vs subtle, what bhanga (free flow) is, why sensations change daily, and when experiences scare you.",
+  alternates: { canonical: "https://vipassana.cool/guide/sensations-and-experiences" },
 };
 
 export default function SensationsExplainedPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Sensations", url: "https://vipassana.cool/guide/sensations-and-experiences" },
+        ]}
+      />
+      <ArticleSchema
+        title="Vipassana Sensations Explained"
+        description="What the different sensations in Vipassana mean: gross vs subtle, what bhanga (free flow) is, why sensations change daily, and when experiences scare you."
+        url="https://vipassana.cool/guide/sensations-and-experiences"
+        datePublished="2025-09-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

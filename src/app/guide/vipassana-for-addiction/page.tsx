@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana for Addiction Recovery — Meditation and Substance Abuse",
   description:
     "How Vipassana meditation helps with addiction recovery. Research from prison programs, substance abuse studies, and practical guidance for people in recovery.",
+  alternates: { canonical: "https://vipassana.cool/guide/vipassana-for-addiction" },
 };
 
 export default function VipassanaForAddictionPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Addiction Recovery", url: "https://vipassana.cool/guide/vipassana-for-addiction" },
+        ]}
+      />
+      <ArticleSchema
+        title="Vipassana and Addiction Recovery"
+        description="How Vipassana meditation helps with addiction recovery. Research from prison programs, substance abuse studies, and practical guidance for people in recovery."
+        url="https://vipassana.cool/guide/vipassana-for-addiction"
+        datePublished="2025-06-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

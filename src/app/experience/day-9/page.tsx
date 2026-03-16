@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 9 — The Final Full Day of Silence",
   description:
     "Day 9 of Vipassana: the last full day of Noble Silence, deepening practice, and preparing to re-enter the world. What the final day of silence feels like.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-9" },
 };
 
 export default function Day9Page() {

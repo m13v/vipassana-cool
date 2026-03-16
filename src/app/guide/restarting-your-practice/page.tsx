@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "How to Restart Your Vipassana Practice — Getting Back on the Cushion",
   description:
     "Fell off your Vipassana practice? How to restart without guilt: shorter sessions, rebuilding momentum, when to take another course, and group sittings.",
+  alternates: { canonical: "https://vipassana.cool/guide/restarting-your-practice" },
 };
 
 export default function RestartingPracticePage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Restarting Practice", url: "https://vipassana.cool/guide/restarting-your-practice" },
+        ]}
+      />
+      <ArticleSchema
+        title="How to Restart Your Practice"
+        description="Fell off your Vipassana practice? How to restart without guilt: shorter sessions, rebuilding momentum, when to take another course, and group sittings."
+        url="https://vipassana.cool/guide/restarting-your-practice"
+        datePublished="2025-09-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

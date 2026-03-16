@@ -14,6 +14,19 @@ export const metadata: Metadata = {
 export default function DhammaServicePage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Dhamma Service", url: "https://vipassana.cool/guide/dhamma-service" },
+        ]}
+      />
+      <ArticleSchema
+        title="Dhamma Service (Seva)"
+        description="Everything you need to know about Vipassana Dhamma service: what seva involves, server roles, daily schedule, how to apply, and why serving deepens your meditation practice."
+        url="https://vipassana.cool/guide/dhamma-service"
+        datePublished="2025-06-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

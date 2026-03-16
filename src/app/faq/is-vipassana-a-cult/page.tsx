@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Is Vipassana a Cult? An Honest Look at Goenka's Organization",
   description:
     "Is Vipassana meditation a cult? Examining the characteristics of cults vs. the Vipassana organization: structure, finances, control, and an honest personal assessment.",
+  alternates: { canonical: "https://vipassana.cool/faq/is-vipassana-a-cult" },
 };
 
 export default function IsVipassanaACultPage() {

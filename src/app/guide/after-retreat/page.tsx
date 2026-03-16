@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "After Vipassana — How to Integrate Back Into Normal Life",
@@ -12,6 +14,19 @@ export const metadata: Metadata = {
 export default function AfterRetreatPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "After the Retreat", url: "https://vipassana.cool/guide/after-retreat" },
+        ]}
+      />
+      <ArticleSchema
+        title="After the Retreat: Integration & Re-Entry"
+        description="What happens after a Vipassana retreat: re-entry shock, post-retreat depression, emotional patterns, and practical integration strategies from someone who has done 6 courses."
+        url="https://vipassana.cool/guide/after-retreat"
+        datePublished="2025-03-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

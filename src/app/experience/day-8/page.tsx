@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 8 — Deepening Equanimity & Subtle Sensations",
   description:
     "Day 8 of Vipassana: the practice deepens, subtle sensations become accessible, and equanimity is tested at new levels.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-8" },
 };
 
 export default function Day8Page() {

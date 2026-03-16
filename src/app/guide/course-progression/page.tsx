@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana Course Progression — From First 10-Day to 60-Day Courses",
@@ -12,6 +14,19 @@ export const metadata: Metadata = {
 export default function CourseProgressionPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Course Progression", url: "https://vipassana.cool/guide/course-progression" },
+        ]}
+      />
+      <ArticleSchema
+        title="Vipassana Course Progression"
+        description="Complete guide to Vipassana course types and progression path: old student courses, Satipatthana Sutta, 20-day, 30-day, 45-day, and 60-day courses. Requirements, eligibility, and what to expect at each level."
+        url="https://vipassana.cool/guide/course-progression"
+        datePublished="2025-06-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

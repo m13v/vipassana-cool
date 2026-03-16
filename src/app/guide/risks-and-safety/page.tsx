@@ -14,6 +14,19 @@ export const metadata: Metadata = {
 export default function RisksAndSafetyPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Risks & Safety", url: "https://vipassana.cool/guide/risks-and-safety" },
+        ]}
+      />
+      <ArticleSchema
+        title="Risks, Adverse Effects & Safety"
+        description="What the research says about Vipassana meditation risks: adverse effects data, the dukkha nanas explained, who is most at risk, warning signs, and crisis resources including Cheetah House and 988 Lifeline."
+        url="https://vipassana.cool/guide/risks-and-safety"
+        datePublished="2025-03-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

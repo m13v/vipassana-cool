@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Recognizing Progress in Vipassana — What Deepening Actually Looks Like",
   description:
     "How to recognize progress in Vipassana meditation: subtle signs over months, signs of deepening over years, plateaus, and the trap of measuring progress in a letting-go practice.",
+  alternates: { canonical: "https://vipassana.cool/guide/recognizing-progress" },
 };
 
 export default function RecognizingProgressPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Recognizing Progress", url: "https://vipassana.cool/guide/recognizing-progress" },
+        ]}
+      />
+      <ArticleSchema
+        title="Recognizing Progress: What Deepening Actually Looks Like"
+        description="How to recognize progress in Vipassana meditation: subtle signs over months, signs of deepening over years, plateaus, and the trap of measuring progress in a letting-go practice."
+        url="https://vipassana.cool/guide/recognizing-progress"
+        datePublished="2025-09-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

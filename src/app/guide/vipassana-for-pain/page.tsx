@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana for Chronic Pain — Meditation and Pain Management",
   description:
     "How Vipassana meditation helps with chronic pain management. Research showing 40% pain reduction, brain mechanisms, and practical tips for attending a course with pain.",
+  alternates: { canonical: "https://vipassana.cool/guide/vipassana-for-pain" },
 };
 
 export default function VipassanaForPainPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Chronic Pain", url: "https://vipassana.cool/guide/vipassana-for-pain" },
+        ]}
+      />
+      <ArticleSchema
+        title="Vipassana and Chronic Pain"
+        description="How Vipassana meditation helps with chronic pain management. Research showing 40% pain reduction, brain mechanisms, and practical tips for attending a course with pain."
+        url="https://vipassana.cool/guide/vipassana-for-pain"
+        datePublished="2025-06-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

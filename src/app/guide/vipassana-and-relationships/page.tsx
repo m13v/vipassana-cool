@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana & Relationships — How Meditation Changes Your Connections",
   description:
     "How Vipassana meditation affects your relationships: coming home different, when your partner doesn't get it, equanimity in conflicts, and attending together.",
+  alternates: { canonical: "https://vipassana.cool/guide/vipassana-and-relationships" },
 };
 
 export default function VipassanaRelationshipsPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Relationships", url: "https://vipassana.cool/guide/vipassana-and-relationships" },
+        ]}
+      />
+      <ArticleSchema
+        title="Vipassana & Relationships"
+        description="How Vipassana meditation affects your relationships: coming home different, when your partner doesn't get it, equanimity in conflicts, and attending together."
+        url="https://vipassana.cool/guide/vipassana-and-relationships"
+        datePublished="2025-09-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

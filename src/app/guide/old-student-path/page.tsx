@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "The Old Student Path: Life After Your First Vipassana Course",
   description:
     "What it means to be a Vipassana old student: expectations, what unlocks, building community, resources on dhamma.org, common challenges, and the long game.",
+  alternates: { canonical: "https://vipassana.cool/guide/old-student-path" },
 };
 
 export default function OldStudentPathPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Old Student Path", url: "https://vipassana.cool/guide/old-student-path" },
+        ]}
+      />
+      <ArticleSchema
+        title="The Old Student Path: Life After Your First Course"
+        description="What it means to be a Vipassana old student: expectations, what unlocks, building community, resources on dhamma.org, common challenges, and the long game."
+        url="https://vipassana.cool/guide/old-student-path"
+        datePublished="2025-09-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

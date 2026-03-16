@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana Daily Practice at Home — How to Maintain After Your Course",
@@ -12,6 +14,19 @@ export const metadata: Metadata = {
 export default function DailyPracticePage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "Daily Practice", url: "https://vipassana.cool/guide/daily-practice" },
+        ]}
+      />
+      <ArticleSchema
+        title="Daily Vipassana Practice at Home"
+        description="How to maintain a daily Vipassana meditation practice at home after completing a course. Practical tips on scheduling, obstacles, and building consistency."
+        url="https://vipassana.cool/guide/daily-practice"
+        datePublished="2025-01-15"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "What to Expect at a 10-Day Vipassana Course — Complete Overview",
   description:
     "A high-level overview of what actually happens at a 10-day Vipassana course: the daily schedule, technique progression, emotional arc, and what nobody tells you.",
+  alternates: { canonical: "https://vipassana.cool/faq/what-to-expect" },
 };
 
 export default function WhatToExpectPage() {

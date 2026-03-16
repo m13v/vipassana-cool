@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Vipassana & Depression — What You Need to Know Before Attending",
   description:
     "Can you do Vipassana with depression? When it helps, when to wait, what happens during the course, and why it's not a replacement for professional treatment.",
+  alternates: { canonical: "https://vipassana.cool/faq/vipassana-and-depression" },
 };
 
 export default function VipassanaAndDepressionPage() {

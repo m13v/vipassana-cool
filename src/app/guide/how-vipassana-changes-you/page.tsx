@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "How Vipassana Actually Changes You — Long-Term Effects of Practice",
   description:
     "How Vipassana meditation creates real change: reduced reactivity, the gradual shift, the 'nothing is happening' plateau, and what long-term practitioners notice.",
+  alternates: { canonical: "https://vipassana.cool/guide/how-vipassana-changes-you" },
 };
 
 export default function HowVipassanaChangesYouPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Guide", url: "https://vipassana.cool/guide" },
+          { name: "How It Changes You", url: "https://vipassana.cool/guide/how-vipassana-changes-you" },
+        ]}
+      />
+      <ArticleSchema
+        title="How Vipassana Actually Changes You"
+        description="How Vipassana meditation creates real change: reduced reactivity, the gradual shift, the 'nothing is happening' plateau, and what long-term practitioners notice."
+        url="https://vipassana.cool/guide/how-vipassana-changes-you"
+        datePublished="2025-09-01"
+      />
       <Link
         href="/guide"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"

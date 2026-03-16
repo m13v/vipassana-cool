@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Is Vipassana Safe? Risks, Side Effects & Mental Health",
   description:
     "An honest look at Vipassana safety: psychological risks, who should avoid it, how to handle difficult experiences, and what the research says about meditation side effects.",
+  alternates: { canonical: "https://vipassana.cool/faq/is-vipassana-safe" },
 };
 
 export default function IsVipassanaSafePage() {

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Is Vipassana Right for Me? — Self-Assessment Guide",
   description:
     "Not sure if you should attend a Vipassana course? A practical self-assessment covering fitness, beliefs, time commitment, mental health, and common hesitations.",
+  alternates: { canonical: "https://vipassana.cool/faq/is-vipassana-right-for-me" },
 };
 
 export default function IsVipassanaRightForMePage() {
