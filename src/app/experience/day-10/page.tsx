@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 10 — Noble Silence Breaks & Metta Bhavana",
   description:
     "Day 10 of Vipassana: Noble Silence breaks, metta (loving-kindness) meditation is introduced, and you reconnect with the people you've been meditating alongside.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-10" },
 };
 
 export default function Day10Page() {
