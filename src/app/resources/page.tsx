@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Useful Resources",
   description:
     "200+ curated resources for Vipassana meditation as taught by S.N. Goenka — books, documentaries, podcasts, research, apps, blogs, and official dhamma.org links.",
+  alternates: { canonical: "https://vipassana.cool/resources" },
 };
 
 export default function Resources() {
