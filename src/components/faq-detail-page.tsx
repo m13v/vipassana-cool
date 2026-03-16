@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { FaqSchema } from "@/components/faq-schema";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { TrackedLink } from "@/components/tracked-events";
+import { BreadcrumbNav } from "./breadcrumb-nav";
 
 export function FaqDetailPage({
   pageId,
@@ -29,12 +29,13 @@ export function FaqDetailPage({
         ]}
       />
       <FaqSchema faqs={schemaFaqs} />
-      <Link
-        href="/faq"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to FAQ
-      </Link>
+      <BreadcrumbNav
+        items={[
+          { label: "Home", href: "/" },
+          { label: "FAQ", href: "/faq" },
+          { label: title },
+        ]}
+      />
       <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
         FAQ
       </p>
