@@ -186,6 +186,40 @@ export async function createMatchWithTokens(personAId: string, personBId: string
   return { id, person_a_id: personAId, person_b_id: personBId, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
 }
 
+// Auto-advance match status when an inbound email is received from a matched person:
+// pending → replied (one person replied)
+// replied → scheduling (both people have replied)
+// Does not downgrade statuses that are already more advanced (active, ended, etc.)
+export async function advanceMatchOnReply(fromEmail: string): Promise<void> {
+  const sql = getSql();
+
+  const matches = await sql`
+    SELECT m.id, m.status,
+           a.email AS email_a, b.email AS email_b
+    FROM matches m
+    JOIN waitlist_entries a ON a.id = m.person_a_id
+    JOIN waitlist_entries b ON b.id = m.person_b_id
+    WHERE (a.email = ${fromEmail} OR b.email = ${fromEmail})
+      AND m.status IN ('pending', 'replied')
+  ` as { id: string; status: string; email_a: string; email_b: string }[];
+
+  for (const match of matches) {
+    const otherEmail = match.email_a === fromEmail ? match.email_b : match.email_a;
+
+    const otherReplied = await sql`
+      SELECT 1 FROM vipassana_emails
+      WHERE direction = 'inbound' AND from_email = ${otherEmail}
+      LIMIT 1
+    `;
+
+    if (otherReplied.length > 0) {
+      await updateMatchStatus(match.id, "scheduling", "system");
+    } else if (match.status === "pending") {
+      await updateMatchStatus(match.id, "replied", "system");
+    }
+  }
+}
+
 // Returns all person IDs that have ever been matched with this person (any status)
 export async function getPriorMatchedIds(personId: string): Promise<string[]> {
   const sql = getSql();
