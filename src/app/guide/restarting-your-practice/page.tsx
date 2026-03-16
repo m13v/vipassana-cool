@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "How to Restart Your Vipassana Practice — Getting Back on the Cushion",
@@ -27,23 +28,17 @@ export default function RestartingPracticePage() {
         url="https://vipassana.cool/guide/restarting-your-practice"
         datePublished="2025-09-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Getting Back on Track
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        How to Restart Your Practice
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        You stopped sitting. It&apos;s been weeks, months, maybe years. Here&apos;s how
-        to come back — without guilt, without drama, and without trying to pick up
-        where you left off.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Restarting Practice" },
+        ]}
+        category="Getting Back on Track"
+        title="How to Restart Your Practice"
+        description="You stopped sitting. It's been weeks, months, maybe years. Here's how to come back — without guilt, without drama, and without trying to pick up where you left off."
+        datePublished="2025-09-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
