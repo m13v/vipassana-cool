@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { FaqSchema } from "@/components/faq-schema";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { TrackedLink } from "@/components/tracked-events";
 
 export function FaqDetailPage({
@@ -20,6 +21,13 @@ export function FaqDetailPage({
 }) {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "FAQ", url: "https://vipassana.cool/faq" },
+          { name: title, url: `https://vipassana.cool/faq/${pageId}` },
+        ]}
+      />
       <FaqSchema faqs={schemaFaqs} />
       <Link
         href="/faq"
