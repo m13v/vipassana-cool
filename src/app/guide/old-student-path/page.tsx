@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "The Old Student Path: Life After Your First Vipassana Course",
@@ -27,23 +28,17 @@ export default function OldStudentPathPage() {
         url="https://vipassana.cool/guide/old-student-path"
         datePublished="2025-09-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        After Your Course
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        The Old Student Path: Life After Your First Course
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        You&apos;ve completed a 10-day course. You&apos;re now an &quot;old student.&quot;
-        Here&apos;s what that actually means, what it unlocks, and what the path
-        looks like from here.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Old Student Path" },
+        ]}
+        category="After Your Course"
+        title="The Old Student Path: Life After Your First Course"
+        description={`You've completed a 10-day course. You're now an "old student." Here's what that actually means, what it unlocks, and what the path looks like from here.`}
+        datePublished="2025-09-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
