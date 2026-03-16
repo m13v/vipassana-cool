@@ -46,7 +46,7 @@ export default function AfterRetreatPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Re-Entry Shock</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is re-entry shock after a Vipassana retreat?</h2>
           <p>
             You&apos;ve spent 10 days in complete silence. No phone, no eye contact, no conversation. Your mind has been operating at a fundamentally different speed. Then, on Day 10, Noble Silence lifts and suddenly everyone is talking at once. By the time you leave the center, you&apos;re being launched back into a world of notifications, traffic, small talk, and screens.
           </p>
@@ -59,7 +59,7 @@ export default function AfterRetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Emotional Patterns in the First Days and Weeks</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What emotional patterns happen after a Vipassana retreat?</h2>
           <p>
             Almost everyone goes through a predictable emotional arc after leaving. Knowing the pattern helps you ride it out instead of being blindsided.
           </p>
@@ -105,7 +105,7 @@ export default function AfterRetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Post-Retreat Depression</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Is post-retreat depression normal after Vipassana?</h2>
           <p>
             This is real and more common than people admit. After the intensity and clarity of a course, returning to ordinary life can feel flat, meaningless, or overwhelming. Some people experience genuine low mood for days or weeks.
           </p>
@@ -129,7 +129,7 @@ export default function AfterRetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Practical Integration Strategies</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you integrate back into normal life after Vipassana?</h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Build in a buffer day</strong> &mdash; Don&apos;t go back to work the day after leaving the center. Give yourself at least one full day of low-key activity. Ideally two. Let the transition happen gradually instead of slamming from retreat mode to work mode.</li>
             <li><strong>Delay screen re-exposure</strong> &mdash; Resist the urge to check social media, news, or email the moment you leave. Your mind is still tuned to a slower frequency. High-intensity digital content will feel overwhelming and can undo much of the mental calm you built. Give yourself at least 24 hours.</li>
@@ -152,7 +152,7 @@ export default function AfterRetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Maintaining the Practice at Home</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you maintain Vipassana practice at home after a retreat?</h2>
           <p>
             This is where most people lose the thread. The retreat gave you technique and momentum, but both fade without daily reinforcement. The official recommendation is two hours a day &mdash; one hour in the morning, one in the evening. If that&apos;s not realistic yet, start with whatever you can sustain and build from there.
           </p>
@@ -173,7 +173,7 @@ export default function AfterRetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Relationships After Vipassana</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How does Vipassana affect your relationships?</h2>
           <p>
             People will ask about the course. Some will be genuinely curious. Others will think you joined a cult. How you navigate this matters more than you might think.
           </p>
@@ -219,7 +219,7 @@ export default function AfterRetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When to Be Concerned</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">When should you be concerned after a Vipassana retreat?</h2>
           <p>
             Normal post-retreat adjustment includes mood swings, heightened sensitivity, some sadness, and temporary difficulty concentrating. These should gradually improve over days to weeks, especially with consistent practice.
           </p>
@@ -243,7 +243,7 @@ export default function AfterRetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When to Take Your Next Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">When should you take your next Vipassana course?</h2>
           <p>
             Goenka recommends sitting at least one 10-day course per year. This is good advice. Your daily practice is the maintenance; the course is the deep service. Even experienced meditators find that a yearly course recharges their practice in ways that home sitting alone can&apos;t.
           </p>
@@ -261,7 +261,7 @@ export default function AfterRetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">My Experience (Six Courses In)</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does integration feel like after six courses?</h2>
           <p>
             After six courses and roughly 60 days of total sitting time, here&apos;s what I&apos;ve observed about the integration process:
           </p>
