@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title:
     "Scientific Evidence for Vipassana Meditation — Research, Brain Changes & Studies",
   description:
     "What does science say about Vipassana meditation? A balanced review of research on brain changes, anxiety reduction, pain management, addiction recovery, and adverse effects.",
+  alternates: { canonical: "https://vipassana.cool/guide/scientific-evidence" },
 };
 
 export default function ScientificEvidencePage() {
