@@ -43,6 +43,7 @@ export async function GET(request: NextRequest) {
     researchNotes: e.research_notes,
     status: e.status,
     passCount: e.pass_count ?? 0,
+    contactCount: e.contact_count ?? 0,
     createdAt: e.created_at,
     priorMatchedIds: priorMatchMap[e.id] ?? [],
   }));

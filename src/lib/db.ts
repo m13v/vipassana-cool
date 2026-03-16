@@ -23,6 +23,7 @@ export type WaitlistEntry = {
   research_notes: string | null;
   status: string;
   pass_count: number;
+  contact_count: number;
   created_at: string | null;
   updated_at: string | null;
 };
@@ -65,7 +66,7 @@ export async function getEntryByEmail(email: string): Promise<WaitlistEntry | un
   return rows[0] as WaitlistEntry | undefined;
 }
 
-export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated_at" | "pass_count">): Promise<void> {
+export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated_at" | "pass_count" | "contact_count">): Promise<void> {
   const sql = getSql();
   const now = new Date().toISOString();
   await sql`
@@ -96,6 +97,8 @@ export async function updateEntryStatus(id: string, status: string, triggeredBy 
   const oldStatus = current[0]?.status ?? null;
   if (status === "passed") {
     await sql`UPDATE waitlist_entries SET status = ${status}, pass_count = pass_count + 1, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
+  } else if (status === "contacted") {
+    await sql`UPDATE waitlist_entries SET status = ${status}, contact_count = contact_count + 1, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
   } else {
     await sql`UPDATE waitlist_entries SET status = ${status}, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
   }

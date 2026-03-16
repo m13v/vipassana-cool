@@ -32,6 +32,7 @@ type WaitlistPerson = {
   researchNotes: string | null;
   status: string;
   passCount: number;
+  contactCount: number;
   createdAt: string | null;
   priorMatchedIds: string[];
 };
@@ -330,7 +331,9 @@ export function MatchingDashboard() {
                         e.status === "passed"    ? "bg-gray-100 text-gray-500" :
                         "bg-red-100 text-red-700"
                       }`}>
-                        {e.status === "passed" && e.passCount > 1 ? `passed (${e.passCount})` : e.status}
+                        {e.status === "passed" && e.passCount > 1 ? `passed (${e.passCount})` :
+                         e.status === "contacted" && e.contactCount > 1 ? `contacted (${e.contactCount})` :
+                         e.status}
                       </span>
                     </td>
                     <td className="px-3 py-2 max-w-[100px] truncate text-xs" title={e.city || ""}>{e.city || "—"}</td>
