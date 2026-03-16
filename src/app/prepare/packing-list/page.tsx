@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Vipassana Packing List — What to Bring to a 10-Day Course",
   description:
     "The complete packing list for a Vipassana retreat: what to bring, what not to bring, and practical tips from someone who has done six courses.",
+  alternates: { canonical: "https://vipassana.cool/prepare/packing-list" },
 };
 
 export default function PackingListPage() {
