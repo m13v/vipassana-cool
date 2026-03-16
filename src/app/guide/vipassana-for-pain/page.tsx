@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Vipassana for Chronic Pain — Meditation and Pain Management",
@@ -27,23 +28,17 @@ export default function VipassanaForPainPage() {
         url="https://vipassana.cool/guide/vipassana-for-pain"
         datePublished="2025-06-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Guide
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Vipassana and Chronic Pain
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        How observing pain with equanimity changes the experience of it. What
-        the brain research shows, how the technique works with pain, and
-        practical guidance for attending a course with a chronic pain condition.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Chronic Pain" },
+        ]}
+        category="Guide"
+        title="Vipassana and Chronic Pain"
+        description="How observing pain with equanimity changes the experience of it. What the brain research shows, how the technique works with pain, and practical guidance for attending a course with a chronic pain condition."
+        datePublished="2025-06-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
