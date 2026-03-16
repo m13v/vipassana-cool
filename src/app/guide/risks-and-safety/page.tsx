@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
   title: "Vipassana Risks & Safety — Adverse Effects, Dark Night, Crisis Resources",
   description:
     "What the research says about Vipassana meditation risks: adverse effects data, the dukkha nanas explained, who is most at risk, warning signs, and crisis resources including Cheetah House and 988 Lifeline.",
+  alternates: { canonical: "https://vipassana.cool/guide/risks-and-safety" },
 };
 
 export default function RisksAndSafetyPage() {
