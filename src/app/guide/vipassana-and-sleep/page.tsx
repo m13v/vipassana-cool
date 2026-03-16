@@ -48,7 +48,7 @@ export default function VipassanaAndSleepPage() {
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            The Sleep-Meditation Connection
+            How does Vipassana meditation affect sleep?
           </h2>
           <p>
             Most people who maintain a regular Vipassana practice report that
@@ -70,7 +70,7 @@ export default function VipassanaAndSleepPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            What the Research Shows
+            What does the research say about Vipassana and sleep?
           </h2>
 
           <h3 className="mb-2 mt-6 font-semibold text-foreground">
@@ -138,7 +138,7 @@ export default function VipassanaAndSleepPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Why Vipassana Specifically Helps
+            Why does Vipassana specifically help with sleep?
           </h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
@@ -177,7 +177,7 @@ export default function VipassanaAndSleepPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Sleep During a 10-Day Course
+            What is sleep like during a 10-day Vipassana course?
           </h2>
           <p>
             Here&apos;s the honest truth: sleep during your first course will
@@ -236,7 +236,7 @@ export default function VipassanaAndSleepPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Sleep Improvements After the Course
+            How does sleep improve after a Vipassana course?
           </h2>
           <p>
             This is where the lasting benefits appear. Common reports from
@@ -272,7 +272,7 @@ export default function VipassanaAndSleepPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Practical Tips for Better Sleep Through Practice
+            How can Vipassana practice improve your sleep?
           </h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
@@ -309,7 +309,7 @@ export default function VipassanaAndSleepPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Should You Meditate Right Before Bed?
+            Should you meditate right before bed?
           </h2>
           <p>
             This is a common question with a nuanced answer. Some people find
@@ -334,7 +334,7 @@ export default function VipassanaAndSleepPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            The Bigger Picture
+            How significant are Vipassana&apos;s sleep benefits?
           </h2>
           <p>
             Sleep is one of those areas where the benefits of Vipassana show up
