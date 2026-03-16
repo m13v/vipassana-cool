@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "What to Expect at a Vipassana Retreat — 60 Days of Courses, 881+ Days of Practice",
   description:
     "A day-by-day personal account of what actually happens during a 10-day Vipassana course. What to expect, what was hard, and honest insights from six retreats.",
+  alternates: { canonical: "https://vipassana.cool/experience" },
 };
 
 export default function ExperiencePage() {
