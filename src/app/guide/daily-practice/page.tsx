@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Vipassana Daily Practice at Home — How to Maintain After Your Course",
   description:
     "How to maintain a daily Vipassana meditation practice at home after completing a course. Practical tips on scheduling, obstacles, and building consistency.",
+  alternates: { canonical: "https://vipassana.cool/guide/daily-practice" },
 };
 
 export default function DailyPracticePage() {
