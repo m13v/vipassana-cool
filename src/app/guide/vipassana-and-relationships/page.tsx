@@ -46,7 +46,7 @@ export default function VipassanaRelationshipsPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Coming Home Different</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is it like coming home after a Vipassana retreat?</h2>
           <p>
             After 10 days of silence and deep introspection, you return to a world that hasn&apos;t changed. But you have. This gap — between your transformed inner state and the unchanged outer world — creates friction, especially in your closest relationships.
           </p>
@@ -59,7 +59,7 @@ export default function VipassanaRelationshipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When Your Partner Doesn&apos;t Get It</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What do you do when your partner doesn&apos;t understand Vipassana?</h2>
           <p>
             This is the most common relationship challenge meditators face. You&apos;ve had a profound experience. You want to share it. But your partner hasn&apos;t been through it, and words fall short.
           </p>
@@ -78,7 +78,7 @@ export default function VipassanaRelationshipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Equanimity in Conflict</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How does Vipassana help with conflict in relationships?</h2>
           <p>
             One of the most tangible relationship benefits of Vipassana is a changed relationship with anger and conflict. Before the practice, an argument triggers an automatic chain: your partner says something, you feel a flash of anger, you react. The reaction escalates.
           </p>
@@ -94,7 +94,7 @@ export default function VipassanaRelationshipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The &quot;I&apos;m Too Calm&quot; Problem</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Can Vipassana make you too emotionally detached?</h2>
           <p>
             Sometimes partners complain that the meditator has become &quot;too calm,&quot; &quot;emotionally unavailable,&quot; or &quot;detached.&quot; This is worth taking seriously rather than dismissing as their failure to understand.
           </p>
@@ -110,7 +110,7 @@ export default function VipassanaRelationshipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When Vipassana Reveals Relationship Problems</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Does Vipassana reveal problems in your relationships?</h2>
           <p>
             Deep introspection sometimes clarifies what you&apos;ve been avoiding. People return from courses knowing they need to end a relationship, set boundaries they&apos;ve been neglecting, or have conversations they&apos;ve been postponing.
           </p>
@@ -123,7 +123,7 @@ export default function VipassanaRelationshipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Attending a Course Together</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Can couples attend a Vipassana course together?</h2>
           <p>
             Couples sometimes want to attend together. This is possible — many courses accept couples — but understand: you will be completely separated for 10 days. Men and women are in different areas, with no contact whatsoever. You won&apos;t see each other, communicate, or share the experience until Day 10.
           </p>
@@ -139,7 +139,7 @@ export default function VipassanaRelationshipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Family Dynamics</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How does Vipassana affect family dynamics?</h2>
           <p>
             Vipassana affects family relationships too. Parents may find themselves more patient with their children. Adult children may develop new compassion for their parents. Old family patterns — the things that &quot;always&quot; trigger you at family gatherings — become visible as patterns rather than inevitable reactions.
           </p>
@@ -152,7 +152,7 @@ export default function VipassanaRelationshipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Long View</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How does Vipassana change relationships over time?</h2>
           <p>
             The relationship benefits of Vipassana unfold over years, not weeks. In the short term, you might create friction by changing the dynamics. In the medium term, the people around you adapt to (and often appreciate) the calmer, more present version of you. In the long term, the quality of your relationships changes fundamentally.
           </p>
