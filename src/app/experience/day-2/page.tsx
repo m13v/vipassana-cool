@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 2 — Knee Pain, Restlessness & the Monkey Mind",
   description:
     "Day 2 of Vipassana is often the hardest. Knee pain, back pain, mental restlessness, and the overwhelming urge to reach for your phone. Here's what to expect.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-2" },
 };
 
 export default function Day2Page() {
