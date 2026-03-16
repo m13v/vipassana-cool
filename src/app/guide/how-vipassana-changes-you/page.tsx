@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "How Vipassana Actually Changes You — Long-Term Effects of Practice",
@@ -27,23 +28,17 @@ export default function HowVipassanaChangesYouPage() {
         url="https://vipassana.cool/guide/how-vipassana-changes-you"
         datePublished="2025-09-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Long-Term Practice
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        How Vipassana Actually Changes You
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        Not instant transformation. Not dramatic enlightenment. The real, gradual
-        shift that consistent practice creates — and why most people don&apos;t notice
-        it happening.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "How It Changes You" },
+        ]}
+        category="Long-Term Practice"
+        title="How Vipassana Actually Changes You"
+        description="Not instant transformation. Not dramatic enlightenment. The real, gradual shift that consistent practice creates — and why most people don't notice it happening."
+        datePublished="2025-09-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
