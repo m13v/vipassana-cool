@@ -47,7 +47,7 @@ export default function OldStudentPathPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What &quot;Old Student&quot; Means</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does &quot;old student&quot; mean in Vipassana?</h2>
           <p>
             In the Goenka Vipassana tradition, &quot;old student&quot; simply means you&apos;ve completed at least one 10-day course. It&apos;s not about seniority, skill, or years of practice. Someone who finished their first course last week is as much an old student as someone who has been sitting for twenty years.
           </p>
@@ -57,7 +57,7 @@ export default function OldStudentPathPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Expectations</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is expected of a Vipassana old student?</h2>
           <p>
             Becoming an old student comes with expectations — not rules enforced by anyone, but commitments you make to yourself and the practice:
           </p>
@@ -72,7 +72,7 @@ export default function OldStudentPathPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Unlocks</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does completing your first Vipassana course unlock?</h2>
           <p>
             Completing your first course opens doors that weren&apos;t available before:
           </p>
@@ -130,7 +130,7 @@ export default function OldStudentPathPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Building Community</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you build community as a Vipassana practitioner?</h2>
           <p>
             The Vipassana community isn&apos;t organized like a church or a club. There are no social events, no leadership hierarchy, and no recruitment. Community happens organically:
           </p>
@@ -145,7 +145,7 @@ export default function OldStudentPathPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Old Student Resources on dhamma.org</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What resources are available for old students on dhamma.org?</h2>
           <p>
             The dhamma.org website has a section specifically for old students, though it&apos;s not prominently linked. What you&apos;ll find there:
           </p>
@@ -158,7 +158,7 @@ export default function OldStudentPathPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Common Challenges</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are the common challenges on the old student path?</h2>
 
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
@@ -199,7 +199,7 @@ export default function OldStudentPathPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Long Game</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does long-term Vipassana practice look like?</h2>
           <p>
             The old student path is not a linear ascent. It&apos;s more like a spiral — you revisit the same themes (restlessness, aversion, craving, doubt) at deeper and deeper levels. The first time you encounter strong aversion in your practice, it feels overwhelming. The tenth time, you recognize it. The hundredth time, you observe it arise and pass without identifying with it.
           </p>
