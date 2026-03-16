@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "After Vipassana — How to Integrate Back Into Normal Life",
   description:
     "What happens after a Vipassana retreat: re-entry shock, post-retreat depression, emotional patterns, and practical integration strategies from someone who has done 6 courses.",
+  alternates: { canonical: "https://vipassana.cool/guide/after-retreat" },
 };
 
 export default function AfterRetreatPage() {
