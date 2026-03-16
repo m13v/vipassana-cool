@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Vipassana Application Tips — How to Get Accepted & Beat the Waitlist",
   description:
     "Practical tips for applying to a Vipassana meditation course on dhamma.org. How registration works, when courses open, what to write on the application, waitlist strategies, and lessons from 6 applications.",
+  alternates: { canonical: "https://vipassana.cool/guide/course-application-tips" },
 };
 
 export default function CourseApplicationTipsPage() {
