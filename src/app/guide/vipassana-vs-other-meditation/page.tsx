@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Vipassana vs Other Meditation — Mindfulness, TM, Zen & More Compared",
@@ -27,23 +28,17 @@ export default function VipassanaVsOtherMeditationPage() {
         url="https://vipassana.cool/guide/vipassana-vs-other-meditation"
         datePublished="2025-03-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Guide
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Vipassana vs Other Meditation Techniques
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        If you&apos;re trying to figure out which meditation practice is right for you,
-        here&apos;s an honest comparison from someone who chose Vipassana after
-        exploring the alternatives.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Vipassana vs Other Meditation" },
+        ]}
+        category="Guide"
+        title="Vipassana vs Other Meditation Techniques"
+        description="If you're trying to figure out which meditation practice is right for you, here's an honest comparison from someone who chose Vipassana after exploring the alternatives."
+        datePublished="2025-03-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
