@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 1 — Arrival, Anapana & the First Sit",
   description:
     "What happens on day 1 of a Vipassana course: arrival, orientation, your first Anapana meditation session, and how to survive the initial hours of silence.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-1" },
 };
 
 export default function Day1Page() {
