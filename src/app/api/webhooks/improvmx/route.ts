@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
+import { advanceMatchOnReply } from "@/lib/db";
 
 interface ImprovMXWebhookPayload {
   event_type?: string;
@@ -41,6 +42,10 @@ export async function POST(request: Request) {
       INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_text, body_html, status, raw_payload)
       VALUES (${messageId}, 'inbound', ${fromEmail}, ${toEmail}, ${subject}, ${bodyText}, ${bodyHtml}, 'received', ${raw})
     `;
+
+    if (fromEmail) {
+      await advanceMatchOnReply(fromEmail);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
