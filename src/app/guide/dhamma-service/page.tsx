@@ -47,7 +47,7 @@ export default function DhammaServicePage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Is Dhamma Service?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is Vipassana Dhamma service?</h2>
           <p>
             Dhamma service &mdash; also called <em>seva</em> &mdash; is the tradition of
             volunteering at a Vipassana course. Servers handle everything that makes a course
@@ -70,7 +70,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Who Can Serve?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Who can serve at a Vipassana course?</h2>
           <p>
             The basic requirement is simple: you must have completed at least one 10-day Vipassana
             course with S.N. Goenka or one of his Assistant Teachers. You should also:
@@ -88,7 +88,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Types of Service Roles</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are the different Dhamma service roles?</h2>
           <p>
             A typical 10-day course needs around 8 full-time servers, though larger centers may
             have more. Here are the main roles:
@@ -146,7 +146,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">A Server&apos;s Daily Schedule</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does a Vipassana server&apos;s daily schedule look like?</h2>
           <p>
             The server schedule runs parallel to the student schedule but with work periods
             replacing some meditation hours. A typical day looks something like this:
@@ -188,7 +188,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How Serving Deepens Your Practice</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How does serving deepen your Vipassana practice?</h2>
           <p>
             This is the part that surprised me most. I expected serving to be a nice break from
             the intensity of sitting. Instead, it was a different kind of intensity entirely.
@@ -227,7 +227,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Practical Details</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are the practical details of Dhamma service?</h2>
 
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
@@ -281,7 +281,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How to Apply for Service</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you apply for Vipassana Dhamma service?</h2>
           <p>
             The process is similar to applying for a course:
           </p>
@@ -310,7 +310,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Short-Term vs. Long-Term Service</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the difference between short-term and long-term Dhamma service?</h2>
 
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
@@ -348,7 +348,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Service as a Prerequisite for Longer Courses</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why is Dhamma service required for longer Vipassana courses?</h2>
           <p>
             If you&apos;re interested in the{" "}
             <Link href="/guide/course-progression" className="text-accent underline hover:text-foreground">
@@ -380,7 +380,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Common Questions</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are common questions about Dhamma service?</h2>
 
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
@@ -427,7 +427,7 @@ export default function DhammaServicePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">My Experience Serving</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the experience of serving at a Vipassana course like?</h2>
           <p>
             I served my first course in the kitchen, and it humbled me completely. I thought I
             was a decent meditator after a few courses. Then I burned the oatmeal on day 2 and
