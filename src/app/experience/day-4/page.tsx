@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 4 — The Technique Changes Everything",
   description:
     "Day 4 is when Vipassana begins. The technique shifts from Anapana to body scanning, and something genuinely shifts. What the transition feels like and why it matters.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-4" },
 };
 
 export default function Day4Page() {
