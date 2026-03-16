@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Group Sittings: How to Find, Attend, and Start One — Vipassana Guide",
@@ -27,23 +28,17 @@ export default function GroupSittingsPage() {
         url="https://vipassana.cool/guide/group-sittings"
         datePublished="2025-09-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Community Practice
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Group Sittings: How to Find, Attend, and Start One
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        Group sittings are the backbone of Vipassana practice outside the course
-        environment. They provide structure, accountability, and the collective
-        energy that home practice alone can&apos;t replicate.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Group Sittings" },
+        ]}
+        category="Community Practice"
+        title="Group Sittings: How to Find, Attend, and Start One"
+        description="Group sittings are the backbone of Vipassana practice outside the course environment. They provide structure, accountability, and the collective energy that home practice alone can't replicate."
+        datePublished="2025-09-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
