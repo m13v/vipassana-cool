@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 3 — The Urge to Leave & Breaking Through",
   description:
     "Day 3 is when most people want to quit. The existential crisis, intense emotions, and how to push through the hardest part of a Vipassana course.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-3" },
 };
 
 export default function Day3Page() {
