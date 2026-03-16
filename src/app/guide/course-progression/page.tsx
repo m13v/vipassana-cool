@@ -28,22 +28,17 @@ export default function CourseProgressionPage() {
         url="https://vipassana.cool/guide/course-progression"
         datePublished="2025-06-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Guide
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Vipassana Course Progression
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        There&apos;s a whole path beyond the first 10-day course. Here&apos;s what
-        opens up as you deepen your practice, and what it takes to get there.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Course Progression" },
+        ]}
+        category="Guide"
+        title="Vipassana Course Progression"
+        description="There's a whole path beyond the first 10-day course. Here's what opens up as you deepen your practice, and what it takes to get there."
+        datePublished="2025-06-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
