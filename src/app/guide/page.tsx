@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "How to Use dhamma.org — Step-by-Step Guide",
   description:
     "A complete walkthrough of dhamma.org: how to find a center, choose a course, fill out the application, and what to expect during the registration process.",
+  alternates: { canonical: "https://vipassana.cool/guide" },
 };
 
 export default function GuidePage() {
