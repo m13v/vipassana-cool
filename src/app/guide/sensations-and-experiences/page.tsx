@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Vipassana Sensations Explained — Gross, Subtle, Bhanga & Free Flow",
@@ -27,22 +28,17 @@ export default function SensationsExplainedPage() {
         url="https://vipassana.cool/guide/sensations-and-experiences"
         datePublished="2025-09-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Understanding the Practice
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Vipassana Sensations Explained
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        Gross sensations, subtle sensations, free flow, and everything in between.
-        What they mean, why they change, and why chasing them misses the point.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Sensations" },
+        ]}
+        category="Understanding the Practice"
+        title="Vipassana Sensations Explained"
+        description="Gross sensations, subtle sensations, free flow, and everything in between. What they mean, why they change, and why chasing them misses the point."
+        datePublished="2025-09-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
