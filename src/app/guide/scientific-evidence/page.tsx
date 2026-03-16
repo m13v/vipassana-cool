@@ -49,7 +49,7 @@ export default function ScientificEvidencePage() {
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            The Important Distinction
+            What is the difference between Vipassana research and general meditation research?
           </h2>
           <p>
             Most &quot;meditation research&quot; studies mindfulness-based
@@ -71,7 +71,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Psychological Benefits
+            What are the psychological benefits of Vipassana meditation?
           </h2>
           <p>
             The most robust evidence for Vipassana is in the psychological
@@ -118,7 +118,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Neurobiological Changes
+            Does Vipassana change the brain?
           </h2>
           <p>
             This is where the research gets genuinely interesting. Brain
@@ -173,7 +173,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Pain Management
+            Can Vipassana help with chronic pain?
           </h2>
           <p>
             Vipassana&apos;s approach to pain — observing it with
@@ -212,7 +212,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Sleep Improvements
+            Does Vipassana improve sleep?
           </h2>
           <p>
             Sleep research on Vipassana meditators has produced some of the
@@ -258,7 +258,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Addiction and Prison Studies
+            Does Vipassana help with addiction and recidivism?
           </h2>
           <p>
             Some of the most distinctive Vipassana research has taken place
@@ -311,7 +311,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Cortisol and Stress Response
+            Does Vipassana reduce cortisol and stress?
           </h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
@@ -339,7 +339,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Adverse Effects: The Honest Picture
+            What are the adverse effects of Vipassana meditation?
           </h2>
           <p>
             Any balanced review of Vipassana evidence must include the
@@ -400,7 +400,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Limitations of the Research
+            What are the limitations of Vipassana research?
           </h2>
           <p>
             Before drawing strong conclusions, it&apos;s important to
@@ -455,7 +455,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Key Studies at a Glance
+            What are the key Vipassana studies?
           </h2>
           <div className="mt-4 overflow-x-auto">
             <table className="w-full text-sm">
@@ -568,7 +568,7 @@ export default function ScientificEvidencePage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            My Take
+            What should you take away from the science?
           </h2>
           <p>
             The science is encouraging but not definitive. If you&apos;re
@@ -623,6 +623,25 @@ export default function ScientificEvidencePage() {
         >
           Find a Course
         </a>
+      </div>
+
+      {/* Related Articles */}
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related Articles</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/risks-and-safety" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Risks &amp; Safety
+          </Link>
+          <Link href="/guide/vipassana-for-addiction" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana for Addiction
+          </Link>
+          <Link href="/guide/vipassana-for-pain" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana for Pain
+          </Link>
+          <Link href="/guide/vipassana-and-sleep" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana &amp; Sleep
+          </Link>
+        </div>
       </div>
 
       <PageComments pageId="guide-scientific-evidence" />
