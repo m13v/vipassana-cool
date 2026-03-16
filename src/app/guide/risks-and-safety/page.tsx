@@ -51,7 +51,7 @@ export default function RisksAndSafetyPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What the Research Actually Shows</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does the research say about Vipassana meditation risks?</h2>
           <p>
             Let&apos;s start with numbers, not anecdotes. Multiple peer-reviewed studies have examined the prevalence of adverse effects from meditation, and the findings are more nuanced than either &quot;meditation is always safe&quot; or &quot;meditation is dangerous.&quot;
           </p>
@@ -67,7 +67,7 @@ export default function RisksAndSafetyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Types of Adverse Effects</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What types of adverse effects can Vipassana cause?</h2>
           <p>
             The Varieties of Contemplative Experience study categorized meditation-related challenges into seven domains. Understanding these can help you recognize what you or someone you know might be experiencing.
           </p>
@@ -122,7 +122,7 @@ export default function RisksAndSafetyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Dukkha Nanas: The &quot;Dark Night&quot; Explained</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the &quot;Dark Night&quot; in Vipassana meditation?</h2>
           <p>
             In Theravada Buddhist meditation theory, there is a well-documented set of stages that practitioners pass through as insight deepens. Among these are the <em>dukkha nanas</em> (literally &quot;knowledges of suffering&quot;), sometimes called the &quot;Dark Night of the Soul&quot; in Western contexts.
           </p>
@@ -145,7 +145,7 @@ export default function RisksAndSafetyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Who Is Most at Risk</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Who is most at risk during Vipassana meditation?</h2>
           <p>
             Not everyone faces the same level of risk. Research and clinical experience have identified several factors that increase vulnerability:
           </p>
@@ -160,7 +160,7 @@ export default function RisksAndSafetyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">&quot;Difficult but Productive&quot; vs. &quot;Genuinely Harmful&quot;</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you tell if a difficult meditation experience is harmful?</h2>
           <p>
             This is the most important distinction in this entire page. Not all suffering during meditation is pathological. In fact, some degree of discomfort is inherent to the process &mdash; you are deliberately confronting your deepest mental patterns. The question is: where&apos;s the line?
           </p>
@@ -187,7 +187,7 @@ export default function RisksAndSafetyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Warning Signs That Something Has Gone Wrong</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are the warning signs after a Vipassana retreat?</h2>
           <p>
             If you or someone you know has attended a course and is experiencing any of the following after returning home, take it seriously:
           </p>
@@ -208,7 +208,7 @@ export default function RisksAndSafetyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What to Do If You&apos;re Struggling</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What should you do if you&apos;re struggling after Vipassana?</h2>
           <p>
             If you or someone you know is experiencing meditation-related distress, here are concrete steps and resources:
           </p>
@@ -238,7 +238,7 @@ export default function RisksAndSafetyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How the Goenka Tradition Handles Safety</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How does the Goenka tradition handle safety?</h2>
           <p>
             The Goenka Vipassana organization has several structural safeguards, though like any system, they have limitations:
           </p>
@@ -256,7 +256,7 @@ export default function RisksAndSafetyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The NPR Investigation: Context</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What did the NPR investigation find about meditation risks?</h2>
           <p>
             In 2024, NPR and the Financial Times published &quot;Untold: The Retreat,&quot; a podcast investigation into cases of people who experienced serious harm during meditation retreats. The reporting documented people who experienced hallucinations, paralyzing fear, psychosis, and other severe effects. It was a significant piece of journalism that brought mainstream attention to meditation-related adverse effects.
           </p>
@@ -269,7 +269,7 @@ export default function RisksAndSafetyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">My Honest Take</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How risky is Vipassana meditation, honestly?</h2>
           <p>
             After six courses, here is what I believe: Vipassana meditation is one of the most beneficial practices available to human beings. It is also genuinely powerful, and powerful things carry risk. Both of these can be true simultaneously.
           </p>
