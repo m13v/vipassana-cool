@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Vipassana Course Progression — From First 10-Day to 60-Day Courses",
@@ -46,7 +47,7 @@ export default function CourseProgressionPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Progression Map</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the Vipassana course progression path?</h2>
           <p>
             Vipassana isn&apos;t a one-and-done experience. S.N. Goenka designed a structured
             progression that gradually deepens your practice over years. Each level has specific
@@ -138,7 +139,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Becoming an &quot;Old Student&quot;</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does it mean to become a Vipassana &quot;old student&quot;?</h2>
           <p>
             The moment you complete your first 10-day course, you become an &quot;old student.&quot;
             This isn&apos;t just a label &mdash; it unlocks access to a different tier of the
@@ -156,7 +157,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">10-Day Courses for Old Students</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are 10-day courses like for old students?</h2>
           <p>
             Your second, third, and tenth 10-day courses are not the same as your first. As an old
             student, you already know the technique, so the experience shifts. You&apos;re not
@@ -177,7 +178,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Satipatthana Sutta Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the Satipatthana Sutta course?</h2>
           <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4 text-sm">
             <p className="font-semibold text-accent">Requirements</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -208,7 +209,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Special 10-Day Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is a special 10-day Vipassana course?</h2>
           <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4 text-sm">
             <p className="font-semibold text-accent">Requirements</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -233,7 +234,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">14-Day Gratitude Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the 14-day gratitude course?</h2>
           <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4 text-sm">
             <p className="font-semibold text-accent">Requirements</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -255,7 +256,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">20-Day Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the 20-day Vipassana course?</h2>
           <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4 text-sm">
             <p className="font-semibold text-accent">Requirements</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -286,7 +287,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">30-Day Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the 30-day Vipassana course?</h2>
           <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4 text-sm">
             <p className="font-semibold text-accent">Requirements</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -313,7 +314,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">45-Day Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the 45-day Vipassana course?</h2>
           <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4 text-sm">
             <p className="font-semibold text-accent">Requirements</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -341,7 +342,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">60-Day Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the 60-day Vipassana course?</h2>
           <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4 text-sm">
             <p className="font-semibold text-accent">Requirements</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -367,7 +368,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Dhamma Service as Part of the Path</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why is Dhamma service part of the Vipassana path?</h2>
           <p>
             You&apos;ll notice that service (Dhamma seva) appears as a requirement at multiple
             levels. This isn&apos;t bureaucratic box-checking &mdash; serving is genuinely part
@@ -390,7 +391,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Self-Courses</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are Vipassana self-courses?</h2>
           <p>
             Self-courses are a lesser-known option for serious old students. Rather than following
             the standard course structure with group discourses and teacher-led instructions, you
@@ -414,7 +415,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When to Take the Next Step</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you know when to take the next Vipassana course?</h2>
           <p>
             There&apos;s no rush. The progression exists as a path, not a race. Here are some
             honest markers of readiness:
@@ -453,7 +454,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Important Logistics</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are the logistics for longer Vipassana courses?</h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
               <strong>Long courses require teacher recommendations</strong> &mdash; for 20-day
@@ -479,7 +480,7 @@ export default function CourseProgressionPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">My Experience</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does the progression feel like after six courses?</h2>
           <p>
             After six courses, I&apos;ve come to appreciate the progression for what it is: a
             thoughtful structure that protects you from going too deep too fast. Each course built
