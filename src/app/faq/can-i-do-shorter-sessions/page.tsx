@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Do Shorter Vipassana Sessions Still Work? — 20, 30, 60 Minutes Compared",
   description:
     "Do you need to meditate for a full hour? Comparing 20, 30, and 60-minute Vipassana sessions, what Goenka recommends vs. reality, and minimum effective dose.",
+  alternates: { canonical: "https://vipassana.cool/faq/can-i-do-shorter-sessions" },
 };
 
 export default function ShorterSessionsPage() {
