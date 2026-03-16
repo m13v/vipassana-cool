@@ -46,7 +46,7 @@ export default function DailyPracticePage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Recommendation</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the recommended daily Vipassana practice?</h2>
           <p>
             The official guidance is clear: sit for one hour in the morning and one hour in the evening. This is what Goenka recommends, what the assistant teachers reinforce, and what &quot;old students&quot; are expected to maintain.
           </p>
@@ -56,7 +56,7 @@ export default function DailyPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Getting Started at Home</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you start a Vipassana practice at home?</h2>
 
           <h3 className="mb-2 mt-6 font-semibold text-foreground">Set Up Your Space</h3>
           <p>
@@ -90,7 +90,7 @@ export default function DailyPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Practice Itself</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does daily Vipassana practice look like?</h2>
           <p>
             Sit, close your eyes, and begin with a few minutes of Anapana (observing the breath at the nose). Once your mind has settled, transition to the body scan — moving attention systematically from head to feet and back. Maintain equanimity throughout: observe whatever arises without craving or aversion.
           </p>
@@ -103,7 +103,7 @@ export default function DailyPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Common Obstacles</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are common obstacles to daily practice?</h2>
 
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
@@ -144,7 +144,7 @@ export default function DailyPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Realistic Schedules</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is a realistic meditation schedule?</h2>
           <p>
             The &quot;ideal&quot; Vipassana schedule is two hours daily — one hour morning, one hour evening. That&apos;s what Goenka recommends, and it&apos;s a worthy goal. But for most people, especially those new to daily practice, jumping straight to two hours is a recipe for burnout and abandonment.
           </p>
@@ -188,7 +188,7 @@ export default function DailyPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When You Fall Off</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What happens when you stop practicing?</h2>
           <p>
             It happens to everyone. Including me. You miss a day, then two, then a week, and suddenly it&apos;s been a month since you last sat. The cushion gathers dust. The habit feels like a distant memory.
           </p>
@@ -213,7 +213,7 @@ export default function DailyPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Building Consistency</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you build a consistent meditation habit?</h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Same time, same place, every day.</strong> Remove decisions from the equation. It&apos;s not &quot;should I meditate today?&quot; — it&apos;s &quot;it&apos;s 6 AM, so I sit.&quot;</li>
             <li><strong>Start small if you need to.</strong> Twenty minutes is better than zero. You can always extend later.</li>
@@ -225,7 +225,7 @@ export default function DailyPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Practice and Family Life</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you fit Vipassana practice into family life?</h2>
           <p>
             One of the most common practical challenges isn&apos;t the technique itself — it&apos;s fitting meditation into a household with other people.
           </p>
@@ -255,7 +255,7 @@ export default function DailyPracticePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">My Practice</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does a long-term daily practice look like?</h2>
           <p>
             I sit every morning, usually for 45-60 minutes. Evening sittings happen maybe four days a week. Some days the practice is deep and focused. Many days my mind wanders and I spend the session gently bringing it back. Both kinds of sitting count.
           </p>
