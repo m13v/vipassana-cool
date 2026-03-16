@@ -28,22 +28,19 @@ export default function RisksAndSafetyPage() {
         url="https://vipassana.cool/guide/risks-and-safety"
         datePublished="2025-03-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Guide
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Risks, Adverse Effects &amp; Safety
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        A deep dive into what the research actually says about meditation-related harm,
-        who is most at risk, and what to do if something goes wrong. This goes beyond
-        our{" "}
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Risks & Safety" },
+        ]}
+        category="Guide"
+        title="Risks, Adverse Effects & Safety"
+        description="A deep dive into what the research actually says about meditation-related harm, who is most at risk, and what to do if something goes wrong."
+        datePublished="2025-03-01"
+      />
+      <p className="-mt-8 mb-12 text-lg text-muted">
+        This goes beyond our{" "}
         <Link href="/faq/is-vipassana-safe" className="text-accent underline hover:text-foreground">
           FAQ on Vipassana safety
         </Link>{" "}
