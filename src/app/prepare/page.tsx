@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "How to Prepare for a Vipassana Course",
   description:
     "Practical preparation guide for your first Vipassana retreat: what to pack, physical preparation, mental readiness, and tips from an experienced practitioner.",
+  alternates: { canonical: "https://vipassana.cool/prepare" },
 };
 
 export default function PreparePage() {
