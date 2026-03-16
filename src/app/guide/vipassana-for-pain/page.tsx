@@ -48,7 +48,7 @@ export default function VipassanaForPainPage() {
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            How Vipassana Works With Pain
+            How does Vipassana work with pain?
           </h2>
           <p>
             Vipassana does not try to eliminate pain. This is the first and most
@@ -75,7 +75,7 @@ export default function VipassanaForPainPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Pain vs. Suffering
+            What is the difference between pain and suffering in Vipassana?
           </h2>
           <p>
             This distinction is central to the Vipassana framework. Pain is a
@@ -99,7 +99,7 @@ export default function VipassanaForPainPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            What the Research Shows
+            What does the research say about Vipassana and pain?
           </h2>
 
           <h3 className="mb-2 mt-6 font-semibold text-foreground">
@@ -174,7 +174,7 @@ export default function VipassanaForPainPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Physical Pain During a 10-Day Course
+            What physical pain should you expect during a 10-day course?
           </h2>
           <p>
             Even without a pre-existing pain condition, you will experience
@@ -200,7 +200,7 @@ export default function VipassanaForPainPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            How Sitting With Pain Teaches Pain Management
+            How does sitting with pain teach pain management?
           </h2>
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
@@ -259,7 +259,7 @@ export default function VipassanaForPainPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Important Caveats
+            What are the limitations of Vipassana for pain management?
           </h2>
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
@@ -317,7 +317,7 @@ export default function VipassanaForPainPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Practical Tips for Attending a Course With Chronic Pain
+            How do you attend a Vipassana course with chronic pain?
           </h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
@@ -368,7 +368,7 @@ export default function VipassanaForPainPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Pain as Teacher
+            Can pain become a tool for deeper meditation?
           </h2>
           <p>
             There is a perspective in Vipassana that reframes pain entirely.
