@@ -46,14 +46,14 @@ export default function AnapanaVipassanaExplainedPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Two-Part System</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are the two parts of Vipassana meditation?</h2>
           <p>
             During a 10-day course, you learn two distinct meditation techniques. They&apos;re taught in sequence and are designed to work together, but they feel very different in practice. Understanding what each one does — and why the sequence matters — clears up a lot of confusion.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Anapana: Sharpening the Tool</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is Anapana meditation and how does it work?</h2>
           <p>
             Anapana is breath observation. You sit with your eyes closed and observe the natural breath as it passes through the area below the nostrils and above the upper lip. You don&apos;t control the breath. You don&apos;t count it. You just observe whatever is there: the sensation of air moving, the temperature, the subtle touch on the skin.
           </p>
@@ -72,7 +72,7 @@ export default function AnapanaVipassanaExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Vipassana: The Actual Work</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the Vipassana body scan technique?</h2>
           <p>
             Vipassana is a systematic scan of the entire body. Starting from the top of the head, you move your attention slowly downward, observing whatever sensations you find: heat, cold, tingling, pressure, pain, vibration, itching, numbness — anything. You scan from head to feet, then from feet to head, continuously.
           </p>
@@ -91,7 +91,7 @@ export default function AnapanaVipassanaExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Why Some People Prefer Anapana</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why do some people prefer Anapana over Vipassana?</h2>
           <p>
             This is one of the most common things people post about online: &quot;I enjoy Anapana but Vipassana stresses me out. Can I just do Anapana?&quot;
           </p>
@@ -107,7 +107,7 @@ export default function AnapanaVipassanaExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How They Complement Each Other</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do Anapana and Vipassana complement each other?</h2>
           <p>
             In daily practice, the sequence matters:
           </p>
@@ -122,7 +122,7 @@ export default function AnapanaVipassanaExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Common Confusion</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are common confusions about Anapana and Vipassana?</h2>
 
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
@@ -156,7 +156,7 @@ export default function AnapanaVipassanaExplainedPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">In Summary</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do Anapana and Vipassana work together?</h2>
           <p>
             Anapana is the foundation. It creates the concentration you need. Vipassana is the practice. It uses that concentration to observe sensations with equanimity, gradually rewiring your reactive patterns. You need both: concentration without wisdom is pleasant but shallow; wisdom without concentration is unfocused and ineffective.
           </p>
