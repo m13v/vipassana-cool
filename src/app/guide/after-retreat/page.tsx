@@ -292,6 +292,22 @@ export default function AfterRetreatPage() {
         </a>
       </div>
 
+      {/* Related Articles */}
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related Articles</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/daily-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Daily Practice at Home
+          </Link>
+          <Link href="/guide/how-vipassana-changes-you" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            How Vipassana Changes You
+          </Link>
+          <Link href="/guide/group-sittings" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Group Sittings
+          </Link>
+        </div>
+      </div>
+
       <PageComments pageId="guide-after-retreat" />
     </article>
   );
