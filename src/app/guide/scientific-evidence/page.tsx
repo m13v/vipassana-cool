@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title:
@@ -28,23 +28,17 @@ export default function ScientificEvidencePage() {
         url="https://vipassana.cool/guide/scientific-evidence"
         datePublished="2025-03-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Guide
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Scientific Evidence for Vipassana Meditation
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        What does the research actually say about Vipassana — not meditation
-        in general, but this specific technique? A balanced look at the
-        evidence, its limitations, and what it means for practitioners.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Scientific Evidence" },
+        ]}
+        category="Guide"
+        title="Scientific Evidence for Vipassana Meditation"
+        description="What does the research actually say about Vipassana — not meditation in general, but this specific technique? A balanced look at the evidence, its limitations, and what it means for practitioners."
+        datePublished="2025-03-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
