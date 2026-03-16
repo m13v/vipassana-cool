@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border">
       <div className="mx-auto max-w-4xl px-6 py-12">
-        <div className="grid gap-8 sm:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-4">
           <div>
             <h3 className="mb-3 text-sm font-semibold">vipassana.cool</h3>
             <p className="text-sm text-muted">
@@ -69,6 +69,20 @@ export function Footer() {
               >
                 r/vipassana
               </TrackedCTA>
+            </div>
+          </div>
+          <div>
+            <h3 className="mb-3 text-sm font-semibold">Site</h3>
+            <div className="flex flex-col gap-2">
+              <TrackedLink href="/about" event="footer_link_click" properties={{ label: "About", href: "/about" }} className="text-sm text-muted hover:text-foreground">
+                About
+              </TrackedLink>
+              <TrackedLink href="/privacy" event="footer_link_click" properties={{ label: "Privacy Policy", href: "/privacy" }} className="text-sm text-muted hover:text-foreground">
+                Privacy Policy
+              </TrackedLink>
+              <TrackedLink href="/disclaimer" event="footer_link_click" properties={{ label: "Disclaimer", href: "/disclaimer" }} className="text-sm text-muted hover:text-foreground">
+                Disclaimer
+              </TrackedLink>
             </div>
           </div>
         </div>
