@@ -47,7 +47,7 @@ export default function GroupSittingsPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Group Sittings Are</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What are Vipassana group sittings?</h2>
           <p>
             A group sitting is a weekly or biweekly gathering of old students who sit together in Vipassana meditation. The typical format is about one hour: a Goenka-guided sitting using official audio recordings, followed by a few minutes of metta (loving-kindness meditation).
           </p>
@@ -60,7 +60,7 @@ export default function GroupSittingsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Why They Matter</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why do group sittings matter for your practice?</h2>
           <p>
             Daily home practice is essential, but it&apos;s also isolating. You&apos;re sitting alone in your room, day after day, with no external feedback and no one to share the experience with. Group sittings address this in several ways:
           </p>
@@ -73,7 +73,7 @@ export default function GroupSittingsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How to Find One</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you find a Vipassana group sitting near you?</h2>
           <p>
             Group sittings are organized through Vipassana centers, not advertised on social media or meditation apps. Here&apos;s how to find one:
           </p>
@@ -103,7 +103,7 @@ export default function GroupSittingsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What to Expect at Your First One</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What should you expect at your first group sitting?</h2>
           <p>
             If you&apos;ve never attended a group sitting, the format is straightforward but worth knowing in advance:
           </p>
@@ -120,7 +120,7 @@ export default function GroupSittingsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Etiquette</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What is the etiquette for Vipassana group sittings?</h2>
           <p>
             Group sittings are informal but respectful. A few things to keep in mind:
           </p>
@@ -135,7 +135,7 @@ export default function GroupSittingsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Online and Virtual Options</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Are there online or virtual Vipassana group sittings?</h2>
           <p>
             Since 2020, virtual group sittings have become widely available. They&apos;re not a perfect replacement for in-person sittings, but they&apos;re a solid alternative when geography or schedule makes physical attendance impossible.
           </p>
@@ -149,7 +149,7 @@ export default function GroupSittingsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Starting Your Own Group Sitting</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you start your own Vipassana group sitting?</h2>
           <p>
             If there&apos;s no group sitting near you, you can start one. But there&apos;s a process — group sittings in the Goenka tradition aren&apos;t casual meetups. They&apos;re organized in coordination with the nearest Vipassana center.
           </p>
@@ -186,7 +186,7 @@ export default function GroupSittingsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Group Sittings as a Restart Anchor</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Can group sittings help you restart your meditation practice?</h2>
           <p>
             If you&apos;ve fallen off your daily practice and are struggling to get back on the cushion, committing to a single weekly group sitting can be the catalyst that restarts everything.
           </p>
