@@ -48,7 +48,44 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: "https://vipassana.cool",
+  },
 };
+
+const schemaData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Vipassana.cool",
+    url: "https://vipassana.cool",
+    description:
+      "An unofficial guide to Vipassana meditation and dhamma.org. FAQ, preparation tips, personal experiences, and everything you need to know before your first 10-day course.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://vipassana.cool/?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Vipassana.cool",
+    url: "https://vipassana.cool",
+    logo: "https://vipassana.cool/favicon.ico",
+    founder: {
+      "@type": "Person",
+      name: "Matthew Diakonov",
+      url: "https://m13v.com",
+    },
+    sameAs: [
+      "https://twitter.com/MatthewHeartful",
+      "https://www.linkedin.com/in/matthew-diakonov-a84a1911/",
+      "https://github.com/matthew-heartful",
+      "https://t.me/matthew_ddi",
+    ],
+  },
+];
 
 export default function RootLayout({
   children,
@@ -58,6 +95,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
         <PostHogProvider>
           <Navigation />
           <main className="min-h-screen">{children}</main>
