@@ -42,7 +42,7 @@ export default function CourseApplicationTipsPage() {
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How the Application Process Works</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How does the Vipassana course application process work?</h2>
           <p>
             Every Vipassana course in the Goenka tradition uses the same basic process,
             administered through dhamma.org and individual center websites. Here&apos;s the
@@ -59,7 +59,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When Courses Open for Registration</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">When do Vipassana courses open for registration?</h2>
           <p>
             Most centers open registration approximately 2&ndash;3 months before the course start
             date. Some centers have a fixed opening schedule (e.g., all courses for the quarter
@@ -86,7 +86,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Why Courses Fill Up Fast</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why do Vipassana courses fill up so fast?</h2>
           <p>
             It&apos;s worth understanding why there&apos;s so much demand relative to supply:
           </p>
@@ -99,7 +99,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Application Form Walkthrough</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What does the Vipassana application form ask?</h2>
           <p>
             The application form is the same across all centers, with minor variations. Here&apos;s
             what they ask and how to approach each section:
@@ -177,7 +177,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">The Mental Health Section: Be Honest</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Should you be honest about mental health on the Vipassana application?</h2>
           <p>
             I want to address this directly because I see people online asking whether they should
             lie on this section to avoid being rejected. Please don&apos;t.
@@ -213,7 +213,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Tips for Increasing Your Chances</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How can you increase your chances of getting accepted?</h2>
           <p>
             These are practical strategies I&apos;ve learned from 6 applications. None of them
             are hacks or tricks &mdash; they&apos;re just about being strategic with timing and
@@ -233,7 +233,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Happens After You Apply</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What happens after you submit a Vipassana application?</h2>
           <p>
             After submitting your application, you enter a waiting period. Here&apos;s what to expect:
           </p>
@@ -285,7 +285,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What If You&apos;re Waitlisted?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What should you do if you&apos;re waitlisted for a Vipassana course?</h2>
           <p>
             Being waitlisted is common and not a dead end. Cancellations happen regularly &mdash;
             life events, schedule changes, cold feet. Here&apos;s how to maximize your chances
@@ -301,7 +301,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What If You&apos;re Rejected?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What should you do if you&apos;re rejected from a Vipassana course?</h2>
           <p>
             Outright rejection is relatively rare, but it does happen. The most common reasons:
           </p>
@@ -320,7 +320,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Finding Centers with Shorter Waitlists</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you find Vipassana centers with shorter waitlists?</h2>
           <p>
             Not all centers are created equal when it comes to availability. Here are some
             strategies for finding spots when the big centers are booked:
@@ -335,7 +335,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">If You Need to Cancel</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What should you do if you need to cancel a Vipassana course?</h2>
           <p>
             Life happens. If you&apos;ve been accepted but can no longer attend, cancel as early
             as possible. This is genuinely important:
@@ -354,7 +354,7 @@ export default function CourseApplicationTipsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Lessons from 6 Applications</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What did I learn from 6 Vipassana course applications?</h2>
           <p>
             Here&apos;s what I&apos;ve learned from applying six times across multiple centers
             and years:
