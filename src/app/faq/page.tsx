@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Vipassana FAQ — Honest Answers to Common Questions",
   description:
     "Frequently asked questions about Vipassana meditation: noble silence, daily schedule, physical challenges, food, and what really happens during 10 days.",
+  alternates: { canonical: "https://vipassana.cool/faq" },
 };
 
 const faqs: { q: string; a: string[] }[] = [
