@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "Anapana & Vipassana Explained — Two Techniques, One Practice",
@@ -27,22 +27,17 @@ export default function AnapanaVipassanaExplainedPage() {
         url="https://vipassana.cool/guide/anapana-and-vipassana-explained"
         datePublished="2025-09-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        Understanding the Technique
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        Anapana & Vipassana Explained
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        Two techniques that work together. Why Anapana feels calming while Vipassana
-        feels intense — and why you need both.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "Anapana & Vipassana" },
+        ]}
+        category="Understanding the Technique"
+        title="Anapana & Vipassana Explained"
+        description="Two techniques that work together. Why Anapana feels calming while Vipassana feels intense — and why you need both."
+        datePublished="2025-09-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
