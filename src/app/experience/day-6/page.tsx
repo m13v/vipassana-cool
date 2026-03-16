@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Vipassana Day 6 — Deep Sensations & Emotional Waves",
   description:
     "Day 6 of Vipassana: deeper body awareness, emotional releases, and the practice of equanimity through intense sensations.",
+  alternates: { canonical: "https://vipassana.cool/experience/day-6" },
 };
 
 export default function Day6Page() {
