@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
   title: "First Vipassana Course: 15 Things I Wish I Knew — Practical Tips",
@@ -27,22 +28,17 @@ export default function FirstCourseTipsPage() {
         url="https://vipassana.cool/guide/first-course-tips"
         datePublished="2025-09-01"
       />
-      <Link
-        href="/guide"
-        className="mb-4 inline-block text-sm text-muted hover:text-accent"
-      >
-        &larr; Back to Guide
-      </Link>
-      <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-        First-Timer&apos;s Guide
-      </p>
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
-        First Course: 15 Things I Wish I Knew
-      </h1>
-      <p className="mb-12 text-lg text-muted">
-        Practical tips from six courses and counting. The things I wish someone had
-        told me before my first 10-day retreat — no spoilers, just useful knowledge.
-      </p>
+      <ArticleHeader
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Guide", href: "/guide" },
+          { label: "First Course Tips" },
+        ]}
+        category="First-Timer's Guide"
+        title="First Course: 15 Things I Wish I Knew"
+        description="Practical tips from six courses and counting. The things I wish someone had told me before my first 10-day retreat — no spoilers, just useful knowledge."
+        datePublished="2025-09-01"
+      />
 
       <div className="space-y-8 text-muted">
         <section>
