@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
+import { advanceMatchOnReply } from "@/lib/db";
 
 interface ResendWebhookPayload {
   type: string;
@@ -88,6 +89,10 @@ export async function POST(request: Request) {
       INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_text, body_html, status)
       VALUES (${data.email_id}, 'inbound', ${data.from}, ${data.to[0] || ""}, ${data.subject || ""}, ${content?.text || data.text || null}, ${content?.html || data.html || null}, 'received')
     `;
+
+    if (data.from) {
+      await advanceMatchOnReply(data.from);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
