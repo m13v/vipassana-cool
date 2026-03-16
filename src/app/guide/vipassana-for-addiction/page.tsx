@@ -48,7 +48,7 @@ export default function VipassanaForAddictionPage() {
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Why Vipassana Is Relevant to Addiction
+            Why is Vipassana relevant to addiction recovery?
           </h2>
           <p>
             Addiction, at its core, is a pattern of craving and aversion.
@@ -72,7 +72,7 @@ export default function VipassanaForAddictionPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            The Theoretical Framework
+            How does Vipassana break the craving-reaction cycle?
           </h2>
           <p>
             In Vipassana, you learn that every mental event — every thought,
@@ -101,7 +101,7 @@ export default function VipassanaForAddictionPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            What the Research Shows
+            What does the research say about Vipassana and addiction?
           </h2>
 
           <h3 className="mb-2 mt-6 font-semibold text-foreground">
@@ -163,7 +163,7 @@ export default function VipassanaForAddictionPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Vipassana and 12-Step Programs
+            How does Vipassana compare to 12-step programs?
           </h2>
           <p>
             Vipassana is not a replacement for 12-step programs, and 12-step
@@ -190,7 +190,7 @@ export default function VipassanaForAddictionPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            The 10-Day Format and Recovery
+            Why is the 10-day format suited for addiction recovery?
           </h2>
           <p>
             The structure of a Vipassana course is, in some ways, ideally suited
@@ -231,7 +231,7 @@ export default function VipassanaForAddictionPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Important Caveats
+            What are the important caveats for people in recovery?
           </h2>
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
@@ -298,7 +298,7 @@ export default function VipassanaForAddictionPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            Practical Considerations for People in Recovery
+            What should people in recovery know before attending?
           </h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
@@ -340,7 +340,7 @@ export default function VipassanaForAddictionPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            When to Seek Professional Treatment First
+            When should you seek professional treatment before Vipassana?
           </h2>
           <p>
             Vipassana is a powerful tool, but it&apos;s not the right first step
@@ -363,7 +363,7 @@ export default function VipassanaForAddictionPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
-            The Bigger Picture
+            How does Vipassana fit into the bigger picture of addiction recovery?
           </h2>
           <p>
             Addiction is ultimately about the relationship between craving and
