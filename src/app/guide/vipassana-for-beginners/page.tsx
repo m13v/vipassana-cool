@@ -66,7 +66,7 @@ export default function VipassanaForBeginnersPage() {
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What actually happens during the 10 days</h2>
           <p>
-            The course is intense by design. Here&apos;s the high-level structure:
+            The course is intense by design. Here&apos;s what you&apos;re signing up for:
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Noble Silence.</strong> No talking, no eye contact, no gestures, no phones, no reading, no writing. For 10 full days, you communicate only with the teacher during designated question times.</li>
@@ -94,23 +94,17 @@ export default function VipassanaForBeginnersPage() {
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">Is Vipassana Really Free?</h2>
           <p>
-            Yes. Completely. There are no charges for teaching, food, or accommodation — anywhere in the world, at any Vipassana center in the Goenka tradition. No hidden fees, no suggested donation amount during the course, no pressure.
-          </p>
-          <p>
-            The courses are funded entirely by donations from past students — people who completed a course, benefited from it, and chose to give so that others could have the same opportunity. You can only donate after completing your first course, never before.
-          </p>
-          <p>
-            This model has sustained the organization for over 50 years across 200+ centers. It works because the technique actually helps people, and those people want others to have access to it. Read more about <Link href="/faq/why-is-vipassana-free" className="text-accent underline hover:text-foreground">why Vipassana is free</Link>.
+            Yes, completely. No charges for teaching, food, or accommodation — anywhere in the world. Courses are funded entirely by donations from past students, and you can only donate after completing your first course. I go deeper into how this model works and why it matters on the <Link href="/guide/free-meditation-retreats" className="text-accent underline hover:text-foreground">free meditation retreats</Link> page.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Do I Need Prior Meditation Experience?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Do I need experience to start?</h2>
           <p>
-            No. The 10-day course is designed specifically for complete beginners. You&apos;ll be taught everything step by step, from the most basic breath observation to the full Vipassana body-scanning technique. No prior experience required — and honestly, no prior experience needed.
+            No. The 10-day course is designed for complete beginners. You&apos;ll be taught everything step by step, from basic breath observation to the full body-scanning technique.
           </p>
           <p>
-            In fact, prior experience with other meditation techniques can sometimes be a hindrance. If you&apos;ve practiced mantras, visualization, or guided meditation, you&apos;ll be asked to set those methods aside for the duration of the course. This isn&apos;t because those techniques are bad — it&apos;s because mixing methods during the course prevents you from giving Vipassana a fair trial. You can always return to your other practices afterward.
+            Honestly, prior experience with other meditation can sometimes get in the way. If you&apos;ve practiced mantras, visualization, or guided meditation, you&apos;ll be asked to set those aside for the duration. Not because they&apos;re bad — just because mixing methods prevents you from giving Vipassana a fair shot. You can always go back to your other practices afterward.
           </p>
           <p>
             The only &quot;prerequisites&quot; are a willingness to follow the instructions, observe the <a href="https://www.dhamma.org/en-US/about/code" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">Code of Discipline</a>, and commit to staying for the full 10 days.
@@ -118,9 +112,9 @@ export default function VipassanaForBeginnersPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Can I Really Handle 10 Days of Silent Meditation?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Can you actually handle it?</h2>
           <p>
-            This is the question everyone asks. Ten days sounds extreme. No phone, no talking, no entertainment, just sitting with your own mind for hours on end. Before my first course, I had the same concern.
+            This is the question everyone asks. Ten days sounds extreme. No phone, no talking, no entertainment, just sitting with your own mind for hours on end. I had the same concern before my first course.
           </p>
           <p>
             Here&apos;s what I can tell you: if you are thinking, &quot;I can&apos;t afford ten days away from my daily work or life,&quot; after the course I said to myself, &quot;I cannot go back and live a normal life.&quot; That&apos;s how much perspective shifts. The things that seemed urgent and indispensable before the course look different after 10 days of observing how your mind actually works.
@@ -134,30 +128,22 @@ export default function VipassanaForBeginnersPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Makes Vipassana Different from Other Meditation?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How is it different from other meditation?</h2>
           <p>
-            Vipassana is not guided visualization. It&apos;s not repeating mantras. It&apos;s not a relaxation technique. You&apos;re not trying to empty your mind or reach a particular state. You&apos;re training your mind to observe reality directly — specifically, the physical sensations in your body — without reacting.
+            Vipassana is not guided visualization, mantras, or a relaxation technique. You&apos;re not trying to empty your mind or reach a particular state. You&apos;re training your mind to observe physical sensations in your body — systematically, without reacting. It&apos;s closer to a workout than a spa day.
           </p>
           <p>
-            How it differs from common alternatives:
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Mindfulness apps (Headspace, Calm, etc.):</strong> These are useful entry points, but they&apos;re typically guided, short, and focused on relaxation. Vipassana is self-guided after the initial instruction, unguided during sittings, and focused on deep observation — not relaxation.</li>
-            <li><strong>Transcendental Meditation (TM):</strong> TM uses a personal mantra as the object of focus. Vipassana uses bodily sensations. TM is a paid teaching, while Vipassana operates entirely on a <Link href="/faq/why-is-vipassana-free" className="text-accent underline hover:text-foreground">donation model</Link>.</li>
-            <li><strong>Zen meditation:</strong> Zen and Vipassana share roots in Buddhism but differ in method. Zen often emphasizes koans, sitting with uncertainty, and sudden insight. Vipassana is systematic and progressive — you scan the body in a specific, structured way.</li>
-          </ul>
-          <p>
-            For a deeper comparison, read our full <Link href="/guide/vipassana-vs-other-meditation" className="text-accent underline hover:text-foreground">Vipassana vs other meditation</Link> guide.
+            The short version: mindfulness apps are guided and relaxation-focused, TM uses mantras and costs money, and Zen emphasizes koans and sudden insight. Vipassana is structured body scanning, self-guided, and free. I wrote a much more detailed breakdown on the <Link href="/guide/vipassana-vs-other-meditation" className="text-accent underline hover:text-foreground">Vipassana vs other meditation</Link> page if you want the full picture.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Who Shouldn&apos;t Attend a Vipassana Course?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Who shouldn&apos;t go</h2>
           <p>
-            Vipassana is powerful, and that power cuts both ways. The technique brings buried material to the surface — old emotions, suppressed memories, physical sensations. For most people, this is therapeutic. For some, it can be destabilizing.
+            I want to be honest about this. Vipassana brings buried stuff to the surface — old emotions, suppressed memories, intense physical sensations. For most people, that&apos;s the whole point and it&apos;s deeply therapeutic. But for some, it can be destabilizing.
           </p>
           <p>
-            The following people should exercise caution or avoid attending:
+            People who should think carefully before attending:
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Those with severe psychiatric conditions</strong> — active psychosis, schizophrenia, bipolar disorder with recent episodes.</li>
@@ -166,14 +152,14 @@ export default function VipassanaForBeginnersPage() {
             <li><strong>Anyone unable to commit to the full 10 days</strong> — leaving mid-course can leave you in a destabilized state without the tools to restabilize.</li>
           </ul>
           <p>
-            The application form asks about mental health history. Be honest. This isn&apos;t about gatekeeping — it&apos;s about keeping you safe. The teachers review applications specifically to identify people who might be at risk. Read our full guide on <Link href="/guide/risks-and-safety" className="text-accent underline hover:text-foreground">Vipassana risks and safety</Link>.
+            The application form asks about mental health history. Be honest. It&apos;s not gatekeeping — it&apos;s about your safety. The teachers review every application to make sure people aren&apos;t putting themselves at risk. I wrote more about this on the <Link href="/guide/risks-and-safety" className="text-accent underline hover:text-foreground">risks and safety</Link> page.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How Do I Get Started with Vipassana?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How to get started</h2>
           <p>
-            The process is straightforward:
+            The process is pretty simple:
           </p>
           <ol className="mt-3 list-decimal space-y-3 pl-6">
             <li>
