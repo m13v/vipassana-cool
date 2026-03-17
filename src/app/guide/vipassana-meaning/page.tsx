@@ -121,9 +121,9 @@ export default function VipassanaMeaningPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Why the Language Feels Outdated</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why the Language Can Feel Intimidating</h2>
           <p>
-            This is a big problem with this school: the language is a little bit outdated. It&apos;s much more simple than it sounds. When you hear words like <em>anicca</em>, <em>dukkha</em>, <em>anatta</em>, <em>sankhara</em>, <em>sampajanna</em> — it can feel like you&apos;re entering an academic discipline, not learning a practical technique.
+            The Pali terminology is preserved intentionally — it connects the practice to its original source. But for newcomers, the language can feel like a barrier. When you hear words like <em>anicca</em>, <em>dukkha</em>, <em>anatta</em>, <em>sankhara</em>, <em>sampajanna</em> — it can feel like you&apos;re entering an academic discipline, not learning a practical technique. In reality, it&apos;s much more simple than it sounds.
           </p>
           <p>
             But the actual practice is straightforward: sit down, close your eyes, observe your breath, then scan your body, and don&apos;t react. That&apos;s it. The Pali terminology describes what&apos;s happening at a deeper level, but you don&apos;t need to master the vocabulary to do the work. The experience comes first. The words just give you a framework to understand what you&apos;re already experiencing.
