@@ -43,8 +43,9 @@ export default function AboutPage() {
             </h2>
             <p>
               I&apos;m a Vipassana practitioner with 60 days of courses
-              completed in the tradition of S.N. Goenka. I created
-              vipassana.cool as an unofficial companion guide to{" "}
+              completed in the tradition of S.N. Goenka — six 10-day courses
+              across three centers in California over the past three years. I
+              created vipassana.cool as an unofficial companion guide to{" "}
               <a
                 href="https://www.dhamma.org"
                 target="_blank"
@@ -61,14 +62,79 @@ export default function AboutPage() {
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
+            How Vipassana Changed My Life
+          </h2>
+          <p>
+            Before Vipassana, I hadn&apos;t taken a single vacation in eight
+            years. Not a single day off. I worked seven days a week, including
+            weekends, building products and running startups. I was extremely
+            agitated, ego-centered, and stuck in bad habits.
+          </p>
+          <p className="mt-3">
+            After my first course, I said to myself:{" "}
+            <em>&ldquo;I cannot go back and live a normal life.&rdquo;</em> It
+            was that clear. I started planning my year around how many courses I
+            could attend. In my first twelve months, I went to four courses —
+            despite having an intense full-time schedule. It was so mind-blowing
+            how much time I could save and how efficient I could become after
+            learning meditation that I solely dedicated 40 days plus two hours
+            of daily practice to ramp up my skills and get established.
+          </p>
+          <p className="mt-3">
+            Vipassana is the single most important event in my life. It
+            completely changed everything — before and after — making me from
+            an extremely agitated, badly mannered, ego-centered person into
+            someone much better and much more happy.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">
+            Centers I&apos;ve Sat At
+          </h2>
+          <p>
+            I&apos;ve sat at three centers, each with a very different character:
+          </p>
+          <ul className="mt-3 space-y-3">
+            <li>
+              <strong>Dhammamanda (Northern California)</strong> — The best
+              conditions I&apos;ve experienced. Private rooms with private
+              showers, a compact layout close to the Dhamma hall, and beautiful
+              nature with tall trees. It almost felt too luxurious.
+            </li>
+            <li>
+              <strong>CYO / Bay Area Vipassana Center</strong> — A rented
+              Christian youth camp facility that hosts a course only during
+              Christmas, once a year, for the last 20 years. Extremely difficult
+              conditions: bunk beds in rooms with 12 other people, an uphill
+              walk to the Dhamma hall in winter rain and snow. A pretty nasty
+              experience — but it&apos;s the biggest meditation course in the
+              Western hemisphere, with nearly 300 people including servers. And
+              Day 10, when silence breaks and you meet everyone, is
+              unforgettable.
+            </li>
+            <li>
+              <strong>North Fork / Dhamma Mahavana (Central California)</strong>{" "}
+              — One of the oldest centers in North America. It has a
+              pagoda-style meditation hall with private meditation cells for
+              every student, which is a great perk for old students. It attracts
+              very experienced teachers and is well-run, well-organized, and
+              well-maintained.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">
             Why I Built This
           </h2>
           <p>
             The official dhamma.org website is comprehensive but can feel
-            overwhelming for newcomers. I wanted to create a clear,
-            experience-based guide that answers the practical questions people
-            actually have — what to expect, how to prepare, and what the
-            experience is really like.
+            overwhelming for newcomers. The language of the tradition is also a
+            little outdated — things are much more simple than they sound. I
+            wanted to create a clear, experience-based guide that answers the
+            practical questions people actually have — what to expect, how to
+            prepare, and what the experience is really like.
           </p>
           <p className="mt-3">
             Outside of Vipassana, I work in tech. You can learn more about my
