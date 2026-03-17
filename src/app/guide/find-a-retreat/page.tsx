@@ -106,7 +106,7 @@ export default function FindARetreatPage() {
                 This is a rented Christian youth camp that hosts a Vipassana course every Christmas. It&apos;s been running for 20+ years. The conditions are rough: bunk beds with about 12 people per room, communal bathrooms, and an uphill walk to the Dhamma hall that turns into a slog through winter rain and sometimes snow.
               </p>
               <p>
-                Pretty nasty experience in terms of physical comfort. But it&apos;s the biggest course in the Western hemisphere &mdash; around 300 people including servers. There&apos;s something extraordinary about sitting in a hall with that many people in perfect silence. And Day 10, when Noble Silence lifts and you meet everyone? Unforgettable. Three hundred people who just went through the same intense experience, all suddenly talking at once. Friendships form in minutes that feel years deep.
+                Challenging conditions, no doubt about it. But it&apos;s the biggest course in the Western hemisphere &mdash; around 300 people including servers. There&apos;s something extraordinary about sitting in a hall with that many people in perfect silence. And Day 10, when Noble Silence lifts and you meet everyone? Unforgettable. Three hundred people who just went through the same intense experience, all suddenly talking at once. Friendships form in minutes that feel years deep.
               </p>
               <p>
                 I wouldn&apos;t recommend CYO for a first course unless you&apos;re genuinely tough about physical discomfort. But for an experienced student looking for a unique experience, it&apos;s worth doing at least once.
