@@ -89,48 +89,24 @@ export default function FreeMeditationRetreatsPage() {
             <li><strong>No commercial operation.</strong> There are no gift shops, no book sales at the center, no upsells. The centers exist solely to offer the courses.</li>
           </ul>
           <p>
-            This model has sustained the global Vipassana organization for over 50 years. It works because the technique genuinely helps people, and those people want to pay it forward. The entire structure is designed so that your meditation retreat experience is never influenced by money. Learn more about <Link href="/faq/why-is-vipassana-free" className="text-accent underline hover:text-foreground">why Vipassana is free</Link>.
+            This model has kept the whole thing running for over 50 years across 200+ centers worldwide. It works because people genuinely benefit and want to pay it forward. The entire structure is designed so that money never influences your experience. Learn more about <Link href="/faq/why-is-vipassana-free" className="text-accent underline hover:text-foreground">why Vipassana is free</Link>.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What&apos;s Included in a Free Vipassana Retreat</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What You Actually Get for Free</h2>
           <p>
-            When people hear &ldquo;free meditation retreat,&rdquo; they assume the conditions must be rough. In my experience across three California centers, the conditions range from modest to surprisingly comfortable:
+            People assume &ldquo;free&rdquo; means bare-bones. Not necessarily. You get a bed, two vegetarian meals a day (breakfast and lunch, plus a light snack for new students), the complete meditation teaching through recorded discourses and live guidance from assistant teachers, and a dedicated meditation hall. No watered-down version — every student gets the full technique.
           </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Accommodation.</strong> You get a bed in a room — sometimes shared, sometimes private depending on the center. At Dhammamanda in Northern California, I had a private room with excellent conditions. At the CYO center in the Bay Area (used for a special Christmas course), it was 300 people in more difficult, shared conditions.</li>
-            <li><strong>Food.</strong> Vegetarian meals — breakfast and lunch — are provided daily. The food is simple, wholesome, and filling. New students also receive a light snack (fruit and tea) at 5 PM. No dinner is served.</li>
-            <li><strong>Instruction.</strong> You receive the full meditation teaching through recorded discourses by S.N. Goenka and live guidance from assistant teachers. There is no watered-down version — every student gets the complete technique.</li>
-            <li><strong>Meditation facilities.</strong> Each center has a dedicated meditation hall. Some centers have individual meditation cells. At Dhamma Mahavana in North Fork, California — the oldest Vipassana center in North America — there is a pagoda with private meditation cells where you can sit in complete isolation.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Three California Centers I&apos;ve Sat At</h2>
           <p>
-            To give you a concrete sense of what free meditation retreats look like in practice, here are the three centers where I&apos;ve completed courses:
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li>
-              <strong>Dhammamanda (Northern California).</strong> The best conditions I&apos;ve experienced. Private rooms, well-maintained grounds, peaceful environment. If you want a comfortable first course experience, this is the one.
-            </li>
-            <li>
-              <strong>CYO / Bay Area center (Christmas courses only).</strong> This is a rented facility used for special holiday courses — around 300 people, more crowded and more difficult conditions. Not a permanent Vipassana center, but the teaching is identical. The larger group creates a powerful energy, though the logistics are tougher.
-            </li>
-            <li>
-              <strong>Dhamma Mahavana (North Fork, Central California).</strong> The oldest Vipassana center in North America. It has a pagoda building with individual meditation cells — small, private rooms where you can practice in complete silence and isolation. A unique experience you won&apos;t find at newer centers.
-            </li>
-          </ul>
-          <p>
-            All three were completely free. Same teaching, same technique, same zero-cost model — just different physical environments.
+            I&apos;ve sat at 3 centers in California with very different conditions — from a private room at a dedicated center to bunk beds with 12 people at a rented camp hosting 300 students. Same teaching, same zero cost, wildly different vibes. Check out the <Link href="/guide/find-a-retreat" className="text-accent underline hover:text-foreground">find a retreat guide</Link> for details on specific centers and how to pick the right one.
           </p>
         </section>
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">How to Find and Apply for a Free Vipassana Retreat</h2>
           <p>
-            Applying for a free meditation retreat through the Vipassana network is straightforward:
+            The application process is simple, but plan ahead — these courses fill up fast:
           </p>
           <ol className="mt-3 list-decimal space-y-3 pl-6">
             <li>
@@ -149,21 +125,12 @@ export default function FreeMeditationRetreatsPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What to Expect at a Free 10-Day Retreat</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What the 10 Days Are Actually Like</h2>
           <p>
-            A Vipassana course is not a vacation or a spa retreat. It&apos;s intensive inner work. Here&apos;s what the 10 days look like:
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Noble Silence.</strong> No talking, no eye contact, no phones, no reading, no writing for 10 full days. You communicate only with the teacher during designated question times.</li>
-            <li><strong>4:00 AM wake-up.</strong> Every morning. The schedule runs from 4:00 AM to 9:00 PM with structured meditation sessions, meal breaks, and short rest periods.</li>
-            <li><strong>10+ hours of meditation daily.</strong> You&apos;ll learn Anapana (breath observation) for the first three days, then the full Vipassana body-scanning technique from Day 4 onward.</li>
-            <li><strong>Evening discourses.</strong> Each night, S.N. Goenka explains the theory behind the practice in recorded talks — often with humor and practical wisdom.</li>
-          </ul>
-          <p>
-            After my first course, I said to myself: &ldquo;I cannot go back and live a normal life.&rdquo; Not because the experience was traumatic — because it fundamentally shifted how I see the world. The things that seemed urgent before the course looked completely different after 10 days of observing how my mind actually works.
+            Quick version: you wake up at 4 AM, meditate 10+ hours a day, don&apos;t talk to anyone, and do this for 10 days straight. It&apos;s not a spa retreat — it&apos;s genuinely intense inner work. After my first course I told myself &ldquo;I cannot go back and live a normal life,&rdquo; not because it was traumatic, but because it completely shifted how I see things.
           </p>
           <p>
-            For a full day-by-day account, read my <Link href="/experience" className="text-accent underline hover:text-foreground">10-day experience report</Link>. For first-timer advice, see our <Link href="/guide/first-course-tips" className="text-accent underline hover:text-foreground">first course tips</Link>.
+            I go into much more detail about the daily schedule, Noble Silence, and the meditation technique in the <Link href="/guide/vipassana-for-beginners" className="text-accent underline hover:text-foreground">beginner&apos;s guide</Link>. For a full day-by-day account, read my <Link href="/experience" className="text-accent underline hover:text-foreground">10-day experience report</Link>. For first-timer advice, see the <Link href="/guide/first-course-tips" className="text-accent underline hover:text-foreground">first course tips</Link>.
           </p>
         </section>
 
@@ -178,7 +145,7 @@ export default function FreeMeditationRetreatsPage() {
             <li><strong>Work-exchange retreats.</strong> Some centers offer free attendance in exchange for work (cooking, cleaning, maintenance). These are technically free but require labor, and meditation time may be limited.</li>
           </ul>
           <p>
-            That said, if you&apos;re looking for a truly free, well-organized, and time-tested meditation retreat, Vipassana through <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a> is the gold standard. The infrastructure, the consistency of teaching across 200+ centers, and the 50+ year track record are unmatched. For a broader look at finding the right retreat, read our <Link href="/guide/find-a-retreat" className="text-accent underline hover:text-foreground">guide to finding a retreat</Link>.
+            That said, if you want something truly free, well-organized, and battle-tested over 50+ years, Vipassana through <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a> is hard to beat. 200+ centers, consistent teaching everywhere, and a model that just works. For more on choosing the right retreat, check the <Link href="/guide/find-a-retreat" className="text-accent underline hover:text-foreground">find a retreat guide</Link>.
           </p>
         </section>
 
@@ -204,7 +171,7 @@ export default function FreeMeditationRetreatsPage() {
       <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Ready to Sit a Free Retreat?</h2>
         <p className="mb-6 text-muted">
-          Find a Vipassana center near you and apply for a completely free 10-day course.
+          Find a center near you and apply — it&apos;s genuinely free, no strings attached.
         </p>
         <a
           href="https://www.dhamma.org/en-US/courses/search"
