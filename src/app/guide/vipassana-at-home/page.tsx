@@ -144,7 +144,7 @@ export default function VipassanaAtHomePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Maintaining Consistency: The Hard Part</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">The hard part: actually sitting every day</h2>
           <p>
             Learning the technique is not the hard part. Sitting every day is. Here&apos;s what helps:
           </p>
@@ -158,7 +158,7 @@ export default function VipassanaAtHomePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Group Sittings and Online Vipassana Communities</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Group sittings and community</h2>
           <p>
             Practicing alone at home is essential, but sitting with others keeps you connected to the community and the technique. Options for old students:
           </p>
@@ -174,7 +174,7 @@ export default function VipassanaAtHomePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Mini-Retreats and Self-Courses at Home</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Can you do a retreat at home?</h2>
           <p>
             Some old students attempt &ldquo;self-courses&rdquo; — following the full 10-day course timetable at home, in isolation. In theory, this is possible after your first course.
           </p>
@@ -196,7 +196,7 @@ export default function VipassanaAtHomePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Common Challenges When Practicing Vipassana at Home</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Common challenges (and what to do about them)</h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Losing the technique.</strong> Without regular courses and group sittings, the subtlety of the technique can drift. You might start doing something that feels like Vipassana but isn&apos;t quite right. Attending a course every year or two is the best way to recalibrate.</li>
             <li><strong>Sleepiness.</strong> Especially in morning sittings. If you&apos;re falling asleep consistently, check your sleep schedule first. If the problem persists, sit with your eyes open for a few minutes at the start, then close them once you&apos;re alert.</li>
@@ -208,7 +208,7 @@ export default function VipassanaAtHomePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When to Go Back to a Center</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">When to go back to a center</h2>
           <p>
             Home practice is essential, but it&apos;s not a replacement for courses. Go back to a center when:
           </p>
