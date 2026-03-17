@@ -27,7 +27,7 @@ const faqs = [
   {
     question: "Can Vipassana help with anxiety and depression?",
     answer:
-      "Many practitioners report significant improvements in anxiety and depression symptoms. Research from institutions like Harvard and the University of Massachusetts has shown that intensive meditation practices can reduce cortisol levels, decrease activity in the amygdala (the brain's fear center), and increase gray matter in areas associated with emotional regulation. However, Vipassana is not a substitute for professional mental health treatment. Those with severe psychiatric conditions should consult their healthcare provider before attending a course.",
+      "Many practitioners report significant improvements in anxiety and depression symptoms. There's a growing body of research suggesting that intensive meditation practices can lower cortisol levels, quiet the amygdala (the brain's fear center), and increase gray matter in areas tied to emotional regulation. However, Vipassana is not a substitute for professional mental health treatment. Those with severe psychiatric conditions should consult their healthcare provider before attending a course.",
   },
   {
     question: "What are the physical benefits of Vipassana meditation?",
@@ -96,7 +96,7 @@ export default function VipassanaBenefitsPage() {
             Vipassana is the single most important event in my life that completely changed everything &mdash; before and after &mdash; making me from an extremely agitated, badly mannered, ego-centered person into someone much better and much more happy.
           </p>
           <p className="mt-3">
-            Since that first course, I&apos;ve sat five more &mdash; six courses total, 60 days of noble silence, across three centers. What follows is an honest accounting of the vipassana meditation benefits I&apos;ve experienced personally, cross-referenced with what the research says. Not everything was sunshine. But the net result is unambiguous.
+            Since that first course, I&apos;ve sat five more &mdash; six courses total, 60 days of noble silence, across three centers. If you&apos;re curious about what the 10 days actually look like, check out the <Link href="/guide/vipassana-for-beginners" className="text-accent underline hover:text-foreground">beginner&apos;s guide</Link> or read about <Link href="/guide/my-vipassana-experience" className="text-accent underline hover:text-foreground">my experience</Link>. What follows here is an honest accounting of what changed &mdash; cross-referenced with what the research says. Not everything was sunshine. But the net result is unambiguous.
           </p>
         </section>
 
@@ -153,7 +153,7 @@ export default function VipassanaBenefitsPage() {
 
         {/* Productivity and Focus */}
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Productivity and Focus: Doing More by Trying Less</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">I Got Way More Productive (Didn&apos;t Expect This One)</h2>
           <p>
             This benefit surprised me the most. It was so mind-blowing how much time I could save and how efficient I could become after learning meditation. I expected spiritual benefits, emotional benefits maybe. I did not expect to become measurably more productive.
           </p>
@@ -164,13 +164,13 @@ export default function VipassanaBenefitsPage() {
             After training that focus muscle for 100+ hours over 10 days, the carry-over into daily work is substantial. I found I could sit down to code or write and maintain deep focus for 2-3 hours straight &mdash; something that was nearly impossible before, when I&apos;d check my phone every 15 minutes. The quality of my work improved because I wasn&apos;t constantly context-switching between the task and my anxious thoughts.
           </p>
           <p className="mt-3">
-            Research from the University of California, Santa Barbara found that just two weeks of mindfulness training improved GRE reading comprehension scores by 16% and reduced mind-wandering. Imagine what 10 days of intensive practice &mdash; 10+ hours daily &mdash; can do.
+            Research on mindfulness training has found that even a couple weeks of practice can noticeably improve reading comprehension and reduce mind-wandering. Now imagine what 10 days of intensive practice &mdash; 10+ hours daily &mdash; can do.
           </p>
         </section>
 
         {/* Relationships */}
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Relationships: Being Less Reactive Changes Everything Around You</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Relationships Got Better Without Me Trying</h2>
           <p>
             Before Vipassana, I was, by my own honest admission, an extremely agitated, badly mannered, ego-centered person. I wasn&apos;t cruel or malicious &mdash; I just had no awareness of how my reactivity impacted the people around me. I&apos;d snap at people, get impatient in conversations, make everything about my perspective.
           </p>
@@ -181,7 +181,7 @@ export default function VipassanaBenefitsPage() {
             The practical result: I became a better listener. I stopped interrupting. I stopped needing to be right in every conversation. When someone said something that triggered annoyance, I could feel the sensation in my body, observe it, and let it pass before responding &mdash; instead of reacting first and regretting later. This alone improved every relationship in my life &mdash; professional, personal, and romantic.
           </p>
           <p className="mt-3">
-            The Metta (loving-kindness) meditation taught on Day 10 of each course also plays a role. It&apos;s a deliberate practice of generating goodwill toward all beings. Skeptical as I was initially, I found it genuinely shifted my default orientation toward others from competitive or suspicious to generous and warm.
+            The Metta (loving-kindness) meditation taught on Day 10 of each course also plays a role. It&apos;s a practice where you share the merits of your meditation with others &mdash; extending the peace you&apos;ve cultivated outward. Skeptical as I was initially, I found it genuinely shifted my default orientation toward others from competitive or suspicious to generous and warm.
           </p>
         </section>
 
@@ -197,7 +197,7 @@ export default function VipassanaBenefitsPage() {
             This sounds like masochism, but it&apos;s actually the opposite. You discover through direct experience that pain is a sensation like any other &mdash; it arises, it changes, it passes. The suffering comes not from the pain itself but from your reaction to it &mdash; the mental resistance, the &ldquo;I can&apos;t take this,&rdquo; the anticipatory dread. When you remove the reaction, what remains is manageable.
           </p>
           <p className="mt-3">
-            Research from Wake Forest University found that meditation reduced pain intensity ratings by 40% and pain unpleasantness by 57% &mdash; outperforming even morphine, which typically reduces pain ratings by about 25%. The study showed that meditation achieves this through different neural mechanisms than placebo, involving increased activity in areas associated with cognitive control and reappraisal.
+            Research on meditation and pain shows that the practice can meaningfully reduce how intensely people experience pain &mdash; not by numbing it, but by changing the brain&apos;s relationship to it. Studies suggest this works through different neural mechanisms than placebo, involving increased activity in areas associated with cognitive control and reappraisal.
           </p>
 
           <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">Sleep Quality</h3>
@@ -205,7 +205,7 @@ export default function VipassanaBenefitsPage() {
             One of the most immediate and noticeable benefits. Before Vipassana, I&apos;d lie in bed with my mind racing &mdash; replaying the day, planning tomorrow, worrying about problems. After learning the technique, I could apply Anapana (breath observation) or body scanning as I lay down, and my mind would settle within minutes.
           </p>
           <p className="mt-3">
-            A randomized clinical trial published in <em>JAMA Internal Medicine</em> found that mindfulness meditation significantly improved sleep quality in older adults with moderate sleep disturbances, outperforming sleep hygiene education. The improvement was comparable to what&apos;s achieved with cognitive behavioral therapy for insomnia (CBT-I) &mdash; the gold standard treatment.
+            Clinical research on meditation and sleep has found that mindfulness practices significantly improve sleep quality &mdash; in some studies performing comparably to cognitive behavioral therapy for insomnia, which is considered the gold standard treatment.
           </p>
 
           <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">Body Awareness</h3>
@@ -222,19 +222,19 @@ export default function VipassanaBenefitsPage() {
           </p>
           <ul className="mt-3 list-disc space-y-3 pl-6">
             <li>
-              <strong>Brain structure changes:</strong> An eight-week meditation program at Massachusetts General Hospital produced measurable increases in gray matter density in the hippocampus (learning and memory), the temporo-parietal junction (empathy and compassion), and the cerebellum (emotional regulation). The amygdala showed decreased gray matter density &mdash; corresponding to reduced stress.
+              <strong>Brain structure changes:</strong> Studies on meditators have found measurable increases in gray matter density in regions associated with learning, memory, empathy, and emotional regulation. The amygdala tends to show decreased density &mdash; corresponding to reduced stress reactivity.
             </li>
             <li>
-              <strong>Reduced inflammation:</strong> A study from the University of Wisconsin-Madison found that experienced meditators showed reduced levels of pro-inflammatory gene expression after an intensive meditation practice, suggesting that meditation may influence the immune system at a genetic level.
+              <strong>Reduced inflammation:</strong> Research on experienced meditators has found reduced levels of pro-inflammatory gene expression after intensive practice, suggesting that meditation may influence the immune system at a genetic level.
             </li>
             <li>
-              <strong>Improved attention:</strong> Research published in <em>Psychological Science</em> showed that intensive meditation training (similar in duration to a Vipassana course) improved sustained attention and reduced attentional blink &mdash; the phenomenon where the brain &ldquo;misses&rdquo; a second stimulus presented shortly after the first.
+              <strong>Improved attention:</strong> Studies on intensive meditation training (similar in duration to a Vipassana course) have found improvements in sustained attention and reduced attentional blink &mdash; the phenomenon where the brain &ldquo;misses&rdquo; a second stimulus presented shortly after the first.
             </li>
             <li>
-              <strong>Telomere length:</strong> A study from the University of California, Davis found that meditation retreat participants showed significantly higher telomerase activity than a control group. Telomerase maintains telomere length, which is associated with cellular aging &mdash; suggesting meditation may slow biological aging.
+              <strong>Cellular aging:</strong> Some research on meditation retreat participants has found higher telomerase activity compared to control groups. Telomerase maintains telomere length, which is associated with cellular aging &mdash; suggesting meditation may slow biological aging.
             </li>
             <li>
-              <strong>Vipassana-specific research:</strong> A 2019 study published in <em>Mindfulness</em> found that Vipassana meditators showed greater emotional regulation abilities and lower psychological distress compared to matched controls. The benefits were dose-dependent &mdash; more courses and more daily practice correlated with better outcomes.
+              <strong>Vipassana-specific research:</strong> Studies on Vipassana meditators specifically have found greater emotional regulation abilities and lower psychological distress compared to matched controls. The benefits appear to be dose-dependent &mdash; more courses and more daily practice correlate with better outcomes.
             </li>
           </ul>
           <p className="mt-3">
