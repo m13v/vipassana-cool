@@ -137,7 +137,7 @@ export default function VipassanaForBeginnersPage() {
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Mindfulness apps (Headspace, Calm, etc.):</strong> These are useful entry points, but they&apos;re typically guided, short, and focused on relaxation. Vipassana is self-guided after the initial instruction, unguided during sittings, and focused on deep observation — not relaxation.</li>
-            <li><strong>Transcendental Meditation (TM):</strong> TM uses a personal mantra as the object of focus. Vipassana uses bodily sensations. TM is also a paid teaching — courses can cost thousands of dollars. Vipassana is always free.</li>
+            <li><strong>Transcendental Meditation (TM):</strong> TM uses a personal mantra as the object of focus. Vipassana uses bodily sensations. TM is a paid teaching, while Vipassana operates entirely on a <Link href="/faq/why-is-vipassana-free" className="text-accent underline hover:text-foreground">donation model</Link>.</li>
             <li><strong>Zen meditation:</strong> Zen and Vipassana share roots in Buddhism but differ in method. Zen often emphasizes koans, sitting with uncertainty, and sudden insight. Vipassana is systematic and progressive — you scan the body in a specific, structured way.</li>
           </ul>
           <p>
