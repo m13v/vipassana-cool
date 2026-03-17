@@ -32,7 +32,7 @@ const faqs = [
   {
     question: "What are the physical benefits of Vipassana meditation?",
     answer:
-      "Physical benefits include improved sleep quality, reduced chronic pain perception, lower blood pressure, decreased muscle tension, and improved immune function. The technique teaches you to observe physical sensations — including pain — without reacting, which fundamentally changes your relationship with physical discomfort. Many practitioners also report fewer headaches, improved digestion, and better body awareness.",
+      "Physical benefits include improved sleep quality, reduced chronic pain perception, lower blood pressure, decreased muscle tension, and improved immune function. The technique teaches you to observe physical sensations — including pain — without reacting, which genuinely changes your relationship with physical discomfort. Many practitioners also report fewer headaches, improved digestion, and better body awareness.",
   },
   {
     question: "Do the benefits of Vipassana last after the course ends?",
@@ -191,7 +191,7 @@ export default function VipassanaBenefitsPage() {
 
           <h3 className="mb-2 mt-4 text-lg font-semibold text-foreground">Pain Management</h3>
           <p>
-            Vipassana fundamentally changes your relationship with physical pain. During the course, you sit for hours in meditation. Your knees hurt. Your back screams. Your ankles go numb. And the instruction is: observe the sensation. Don&apos;t react. Don&apos;t shift. Don&apos;t label it as &ldquo;bad.&rdquo; Just observe.
+            Vipassana changes your relationship with physical pain in a deep way. During the course, you sit for hours in meditation. Your knees hurt. Your back screams. Your ankles go numb. And the instruction is: observe the sensation. Don&apos;t react. Don&apos;t shift. Don&apos;t label it as &ldquo;bad.&rdquo; Just observe.
           </p>
           <p className="mt-3">
             This sounds like masochism, but it&apos;s actually the opposite. You discover through direct experience that pain is a sensation like any other &mdash; it arises, it changes, it passes. The suffering comes not from the pain itself but from your reaction to it &mdash; the mental resistance, the &ldquo;I can&apos;t take this,&rdquo; the anticipatory dread. When you remove the reaction, what remains is manageable.
@@ -216,9 +216,9 @@ export default function VipassanaBenefitsPage() {
 
         {/* Scientific Backing */}
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Does the Science Say About Vipassana Meditation Benefits?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What Does the Science Actually Say?</h2>
           <p>
-            The scientific evidence for meditation benefits has grown substantially over the past two decades. While much of the research focuses on &ldquo;mindfulness meditation&rdquo; broadly, Vipassana-specific studies are increasing. Here&apos;s a summary of the key findings:
+            The research on meditation has grown a lot over the past two decades. Most of it looks at &ldquo;mindfulness meditation&rdquo; broadly, but Vipassana-specific studies are showing up more and more. Here&apos;s what the research points to:
           </p>
           <ul className="mt-3 list-disc space-y-3 pl-6">
             <li>
