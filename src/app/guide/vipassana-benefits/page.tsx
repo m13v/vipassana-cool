@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "How long before you see benefits from Vipassana meditation?",
     answer:
-      "Most people notice meaningful changes after their very first 10-day course. Improved emotional regulation, better sleep, and reduced reactivity are common within the first few weeks after a course. However, the deeper benefits — like fundamentally changed relationships with stress, pain, and difficult emotions — develop over months and years of consistent daily practice. The technique is cumulative: each course and each daily sitting builds on the last.",
+      "Most people notice meaningful changes after their very first 10-day course. Improved emotional regulation, better sleep, and reduced reactivity are common within the first few weeks after a course. However, the deeper benefits — like a genuinely different relationship with stress, pain, and difficult emotions — develop over months and years of consistent daily practice. The technique is cumulative: each course and each daily sitting builds on the last.",
   },
   {
     question: "Is Vipassana better than mindfulness meditation?",
@@ -102,7 +102,7 @@ export default function VipassanaBenefitsPage() {
 
         {/* Mental Health Benefits */}
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Mental Health Benefits: Rewiring How You React</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">You Stop Reacting on Autopilot</h2>
           <p>
             The single biggest mental health benefit of Vipassana is this: you stop reacting blindly. Before my first course, I was controlled by my reactions. Someone cut me off in traffic &mdash; rage. A client email with bad news &mdash; anxiety spiral. A compliment &mdash; inflated ego. Every stimulus triggered an automatic response, and I had zero gap between the trigger and the reaction.
           </p>
@@ -110,7 +110,7 @@ export default function VipassanaBenefitsPage() {
             Here&apos;s my neural network analogy &mdash; and again, I&apos;m not a teacher, this is just how I think about it. Our brain functions as a neural network, and everyone knows that whatever you practice, you get established with. If you spend years practicing reactivity &mdash; reacting to every irritation, every craving, every fear &mdash; that pattern gets deeply wired. In Vipassana, you practice being non-reactive. For 10 hours a day, you observe sensations &mdash; pain, pleasure, heat, cold, tingling, pressure &mdash; and you simply don&apos;t react. Over time, non-reactivity becomes your default mode.
           </p>
           <p className="mt-3">
-            The research supports this. Studies from Harvard Medical School have shown that eight weeks of meditation practice can measurably reduce the size and reactivity of the amygdala &mdash; the brain&apos;s alarm system. A 2012 study published in <em>Frontiers in Human Neuroscience</em> found that experienced Vipassana meditators showed significantly less emotional reactivity than non-meditators when exposed to unpleasant stimuli. The changes aren&apos;t just subjective &mdash; they show up on brain scans.
+            There&apos;s a growing body of research backing this up. Studies on long-term meditators have found measurable reductions in the size and reactivity of the amygdala &mdash; the brain&apos;s alarm system. And research on Vipassana practitioners specifically suggests they show less emotional reactivity than non-meditators when exposed to unpleasant stimuli. The changes aren&apos;t just subjective &mdash; they show up on brain scans.
           </p>
           <p className="mt-3">
             For me, the practical result was dramatic. After three courses, situations that would have previously sent me into a tailspin &mdash; a failed deployment at 2 AM, a difficult conversation with a co-founder, unexpected financial setbacks &mdash; became workable. The problems didn&apos;t disappear. My reaction to them transformed.
@@ -119,7 +119,7 @@ export default function VipassanaBenefitsPage() {
 
         {/* Emotional Regulation */}
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Emotional Regulation: Feeling Everything Without Drowning</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">You Feel Everything &mdash; Without Drowning in It</h2>
           <p>
             A common misconception about meditation is that it makes you numb &mdash; some kind of emotional flatline where you float through life detached from everything. That&apos;s the opposite of what happens with Vipassana.
           </p>
@@ -136,12 +136,12 @@ export default function VipassanaBenefitsPage() {
 
         {/* Stress Reduction */}
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Stress Reduction: From Chronic Tension to Sustainable Calm</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Stress Stops Running the Show</h2>
           <p>
             For eight years of non-stop work without a single day off, I thought stress was just the cost of ambition. I wore it as a badge. What I didn&apos;t realize was that chronic stress was degrading everything &mdash; my decision-making, my relationships, my health, my actual productivity.
           </p>
           <p className="mt-3">
-            Vipassana didn&apos;t eliminate stress from my life. What it did was fundamentally change my body&apos;s response to stressors. Research published in <em>Psychoneuroendocrinology</em> has shown that regular meditation practice reduces cortisol levels &mdash; the primary stress hormone &mdash; by 12-23%. A study from Johns Hopkins reviewed 47 clinical trials and found that meditation programs showed moderate evidence for reducing anxiety, depression, and pain.
+            Vipassana didn&apos;t eliminate stress from my life. What it did was change how my body responds to stressors. There&apos;s research showing that regular meditation practice lowers cortisol &mdash; the primary stress hormone &mdash; and large reviews of clinical trials have found moderate evidence that meditation reduces anxiety, depression, and pain.
           </p>
           <p className="mt-3">
             The mechanism, as I understand it from the teaching and my own experience, works like this: stress isn&apos;t caused by external events. It&apos;s caused by your reaction to those events. When you train yourself to observe sensations without reacting &mdash; which is literally what you do for 100+ hours during a course &mdash; you weaken the automatic stress response. The stressor still happens, but the cascade of cortisol, muscle tension, racing thoughts, and sleep disruption doesn&apos;t follow automatically.
