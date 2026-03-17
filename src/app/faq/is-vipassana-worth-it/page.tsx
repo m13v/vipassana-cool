@@ -89,7 +89,7 @@ export default function IsVipassanaWorthItPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">Even the Worst Conditions Are Worth It</h2>
         <p>
-          My CYO (Choose Your Own) course experience: bunk beds with 12 people in the room, snow and rain outside, an uphill walk to the meditation hall. A pretty nasty experience by any comfort standard.
+          My course at CYO — a rented Christian youth camp that hosts one Vipassana course a year during Christmas: bunk beds with 12 people in the room, snow and rain outside, an uphill walk to the meditation hall. Rough conditions by any standard.
         </p>
         <p>
           Still worth it.
