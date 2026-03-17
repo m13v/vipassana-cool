@@ -41,6 +41,12 @@ export default function VipassanaMeaningPage() {
       />
 
       <div className="space-y-8 text-muted">
+        <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
+          <p>
+            <strong>Note:</strong> I&apos;m not a teacher and don&apos;t represent the tradition. This is how I understand the meaning after 6 courses. For official info, visit <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>.
+          </p>
+        </section>
+
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">The Pali Etymology</h2>
           <p>
