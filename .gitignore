@@ -57,3 +57,8 @@ next-env.d.ts
 # Claude Code temp files
 tmpclaude-*
 .claude/
+
+# Automation-generated dumps (not version controlled)
+reddit-current.yml
+reddit-*.yml
+linkedin-*.yml
