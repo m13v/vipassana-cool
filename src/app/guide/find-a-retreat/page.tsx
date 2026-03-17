@@ -132,7 +132,7 @@ export default function FindARetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How do you choose a Vipassana center?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How to pick a center</h2>
           <p>
             Here&apos;s what actually matters when picking a location:
           </p>
@@ -144,37 +144,28 @@ export default function FindARetreatPage() {
               <strong>Stay on waitlists</strong> &mdash; If your preferred course is full, get on the waitlist. Cancellations happen regularly, especially 1&ndash;2 weeks before the course starts. I&apos;ve gotten into &quot;full&quot; courses multiple times this way.
             </li>
             <li>
-              <strong>Check accommodation type</strong> &mdash; This is a bigger factor than most people realize. The difference between a private room and a 12-person dormitory is enormous when you&apos;re trying to sleep at 9:30 PM and someone three feet away is snoring. Check the center&apos;s website for accommodation details, or email them directly.
+              <strong>Accommodation type</strong> &mdash; Private room, shared room, or dormitory? The difference between a private room and a 12-person dorm is enormous when you&apos;re trying to sleep at 9:30 PM and someone three feet away is snoring. Check the center&apos;s website or email them.
             </li>
             <li>
-              <strong>Consider the climate</strong> &mdash; Avoid extreme heat months at centers without air conditioning. Sitting still for 10+ hours a day in 100&deg;F heat is a level of suffering that goes beyond productive. Similarly, winter courses at mountain centers can be very cold, especially during early morning walks to the hall.
+              <strong>Climate and season</strong> &mdash; Sitting still 10+ hours a day in 100&deg;F heat goes beyond productive suffering. Winter courses at mountain centers can be very cold during 4 AM walks. Check if there&apos;s heating or AC.
             </li>
             <li>
-              <strong>Close to home vs. far away</strong> &mdash; For your first course, there&apos;s a tradeoff. A center close to home means easier logistics &mdash; shorter travel, familiar climate, someone can pick you up. A center far from home can feel more immersive, like a real departure from your daily life. Both are valid. Don&apos;t overthink it.
+              <strong>Travel logistics</strong> &mdash; How far from an airport or major city? Do you need a car? A center close to home means easier logistics; one far away can feel more immersive. Both are fine.
             </li>
             <li>
-              <strong>Don&apos;t overthink the choice</strong> &mdash; All centers teach the same technique. The quality of instruction doesn&apos;t vary between locations. For your first course, the most important thing is that you actually <em>go</em>. Pick the one with the best availability and reasonable logistics, and apply. You can try different centers for future courses.
+              <strong>Dedicated center vs. rented facility</strong> &mdash; If comfort matters, check whether it&apos;s a permanent center or a temporary venue.
+            </li>
+            <li>
+              <strong>Course type</strong> &mdash; Some centers offer Satipatthana Sutta courses, 20-day courses, or courses for young adults. Check the schedule if you want something beyond the standard 10-day.
+            </li>
+            <li>
+              <strong>Don&apos;t overthink it</strong> &mdash; Every center teaches the same technique with the same quality of instruction. For your first course, the most important thing is that you actually <em>go</em>. Pick whatever has good availability and reasonable logistics. You can try different centers later.
             </li>
           </ul>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What should you look for in a Vipassana center?</h2>
-          <p>
-            Quick checklist when evaluating options:
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Accommodation type</strong> &mdash; Private room, shared room, or dormitory?</li>
-            <li><strong>Climate</strong> &mdash; What&apos;s the weather during the course dates? Is there heating/AC?</li>
-            <li><strong>Travel logistics</strong> &mdash; How far from an airport or major city? Can you get there by public transit, or do you need a car?</li>
-            <li><strong>Course availability</strong> &mdash; How often do they run 10-day courses? Are there spots available for your preferred dates?</li>
-            <li><strong>Dedicated center vs. rented facility</strong> &mdash; If comfort matters to you, check whether it&apos;s a permanent center or a temporary venue.</li>
-            <li><strong>Special courses</strong> &mdash; Some centers offer Satipatthana Sutta courses, 20-day courses, or courses specifically for young adults. Check the schedule if you&apos;re looking for something beyond the standard 10-day.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How do you apply for a Vipassana course?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How to apply</h2>
           <p>
             The application process is straightforward. Go to{" "}
             <a
