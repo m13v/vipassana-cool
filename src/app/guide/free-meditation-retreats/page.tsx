@@ -9,7 +9,7 @@ import { FaqSchema } from "@/components/faq-schema";
 export const metadata: Metadata = {
   title: "Free Meditation Retreats: How to Attend a 10-Day Vipassana Course for Free",
   description:
-    "Discover how to attend a completely free meditation retreat. Learn how Vipassana courses offer free food, accommodation, and instruction through the donation (dana) model — and how to apply.",
+    "Yes, you can sit a 10-day meditation retreat for free — food, room, and teaching included. Here's how the Vipassana donation model actually works, from someone who's done it 6 times.",
   alternates: { canonical: "https://vipassana.cool/guide/free-meditation-retreats" },
 };
 
@@ -43,7 +43,7 @@ export default function FreeMeditationRetreatsPage() {
       />
       <ArticleSchema
         title="Free Meditation Retreats: How to Attend a 10-Day Vipassana Course for Free"
-        description="Discover how to attend a completely free meditation retreat. Learn how Vipassana courses offer free food, accommodation, and instruction through the donation (dana) model — and how to apply."
+        description="Yes, you can sit a 10-day meditation retreat for free — food, room, and teaching included. Here's how the Vipassana donation model actually works, from someone who's done it 6 times."
         url="https://vipassana.cool/guide/free-meditation-retreats"
         datePublished="2026-03-16"
       />
@@ -56,18 +56,24 @@ export default function FreeMeditationRetreatsPage() {
         ]}
         category="Guide"
         title="Free Meditation Retreats: How to Sit a 10-Day Course Without Paying a Cent"
-        description="A completely free meditation retreat sounds too good to be true. It&apos;s not. Here&apos;s how the Vipassana donation model works, what&apos;s included, and how to apply."
+        description="A free 10-day silent retreat with meals and a room — sounds like a scam, right? It&apos;s not. I&apos;ve done it 6 times. Here&apos;s how it actually works."
         datePublished="2026-03-16"
       />
 
       <div className="space-y-8 text-muted">
+        <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
+          <p>
+            <strong>Note:</strong> I&apos;m not a teacher and this site is not affiliated with dhamma.org. This is based on my personal experience attending 6 free courses. For official info, visit <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>.
+          </p>
+        </section>
+
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">Yes, Completely Free Meditation Retreats Exist</h2>
           <p>
-            If you&apos;re searching for a free meditation retreat, the most established option in the world is a 10-day Vipassana course in the tradition of <a href="https://www.dhamma.org/en-US/about/goenka" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">S.N. Goenka</a>. These courses are offered at over 200 centers across every continent, and they are genuinely, entirely free. No tuition, no hidden fees, no &ldquo;suggested donation&rdquo; during the course. Food, accommodation, and instruction are all provided at zero cost.
+            When I tell people I&apos;ve sat six 10-day silent meditation retreats and never paid a cent, they look at me like I&apos;m in a cult. Fair enough — it does sound sketchy. But <a href="https://www.dhamma.org/en-US/about/goenka" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">Vipassana courses in the S.N. Goenka tradition</a> are genuinely free. Over 200 centers worldwide, no tuition, no hidden fees, no &ldquo;suggested donation&rdquo; slipped under your door. Food, a bed, and the full teaching — all at zero cost.
           </p>
           <p>
-            I&apos;ve sat six courses totaling 60 days across three centers in California. When I first told my parents I was going to a free 10-day silent meditation retreat, they were skeptical. &ldquo;My parents got very suspicious. They still are suspicious. They kind of don&apos;t believe that it&apos;s really working that well.&rdquo; I get it — a free 10-day retreat with meals and a room sounds like there has to be a catch. There isn&apos;t.
+            My parents still don&apos;t fully believe it. &ldquo;They got very suspicious. They still are suspicious.&rdquo; I get it. But after 60 days of sitting across three centers in California, I can tell you: there&apos;s no catch. The model just works differently than anything else out there.
           </p>
         </section>
 
