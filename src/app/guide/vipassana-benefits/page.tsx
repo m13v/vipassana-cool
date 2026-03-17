@@ -71,7 +71,7 @@ export default function VipassanaBenefitsPage() {
         ]}
         category="Benefits &amp; Results"
         title="Vipassana Meditation Benefits: What Actually Changes After Silent Retreats"
-        description="After 6 courses, 60 days of silence, and 3 centers across the world &mdash; here&apos;s what vipassana meditation actually does to your mind, body, and life. No hype, just honest experience."
+        description="After 6 courses, 60 days of silence, and 3 centers in California &mdash; here&apos;s what vipassana meditation actually does to your mind, body, and life. No hype, just honest experience."
         datePublished="2026-03-16"
       />
 
