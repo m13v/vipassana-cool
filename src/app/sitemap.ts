@@ -64,6 +64,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/guide/vipassana-meaning`, lastModified: new Date("2026-03-16"), changeFrequency: "monthly", priority: 0.7 },
     // Vipassana for beginners
     { url: `${baseUrl}/guide/vipassana-for-beginners`, lastModified: new Date("2026-03-16"), changeFrequency: "monthly", priority: 0.9 },
+    // New content gap pages
+    { url: `${baseUrl}/guide/vipassana-benefits`, lastModified: new Date("2026-03-16"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/guide/vipassana-at-home`, lastModified: new Date("2026-03-16"), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/guide/free-meditation-retreats`, lastModified: new Date("2026-03-16"), changeFrequency: "monthly", priority: 0.8 },
     // Practice Buddy
     { url: `${baseUrl}/practice-buddy`, lastModified: new Date("2026-03-01"), changeFrequency: "weekly", priority: 0.9 },
     // Legal / info pages
