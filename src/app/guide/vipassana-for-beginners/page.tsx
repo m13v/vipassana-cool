@@ -40,6 +40,12 @@ export default function VipassanaForBeginnersPage() {
         datePublished="2026-03-16"
       />
 
+      <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
+        <p>
+          <strong>Note:</strong> I&apos;m not a teacher and don&apos;t represent the tradition. This is my personal experience after 6 courses. For official info, visit <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>.
+        </p>
+      </section>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What Is Vipassana Meditation?</h2>
@@ -47,10 +53,10 @@ export default function VipassanaForBeginnersPage() {
             &quot;Vipassana&quot; means &quot;seeing things as they really are&quot; in Pali, the ancient language of the Buddhist texts. It&apos;s a 2,500-year-old meditation technique that was rediscovered by Gotama the Buddha and has been passed down through an unbroken chain of teachers ever since.
           </p>
           <p>
-            Here&apos;s how I think about it — and I&apos;m not a teacher, this is just my personal analogy. Our brain functions as a neural network. Whatever you practice, you get established with. If you practice reacting to every sensation with craving or aversion, that pattern gets stronger. In Vipassana, you practice being non-reactive. You observe sensations in your body — pain, pleasure, itching, warmth — without reacting to them. Over time, non-reactivity becomes your default.
+            Here&apos;s how I think about it. Our brain functions as a neural network. Whatever you practice, you get established with. If you practice reacting to every sensation with craving or aversion, that pattern gets stronger. In Vipassana, you practice being non-reactive. You observe sensations in your body — pain, pleasure, itching, warmth — without reacting to them. Over time, non-reactivity becomes your default.
           </p>
           <p>
-            Another way I describe it: it&apos;s like watching a horror movie. You get emotions — fear, tension, surprise — but somewhere you know it&apos;s a movie. You experience the emotions fully, but you don&apos;t get lost in them. Vipassana does that for your entire life. You experience full emotions in daily life, but you don&apos;t get attached to anything. Again — my analogy, not official teaching.
+            I have another analogy involving horror movies that I think captures what daily life feels like after Vipassana — I wrote about it more on the <Link href="/guide/vipassana-meaning" className="text-accent underline hover:text-foreground">Vipassana meaning</Link> page.
           </p>
           <p>
             The technique is taught through 10-day residential courses at centers around the world, in the tradition of <a href="https://www.dhamma.org/en-US/about/goenka" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">S.N. Goenka</a>. There are over 200 centers globally, and the teaching is completely standardized — you&apos;ll get the same course whether you sit in India, the US, or New Zealand.
@@ -58,7 +64,7 @@ export default function VipassanaForBeginnersPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What Happens During a 10-Day Vipassana Course?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What actually happens during the 10 days</h2>
           <p>
             The course is intense by design. Here&apos;s the high-level structure:
           </p>
