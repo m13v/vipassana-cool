@@ -66,9 +66,10 @@ export default function ExperiencePage() {
           <p>
             I&apos;m a tech person through and through — 20+ products built, 3 hackathons
             won, a startup exit. My life was fast-paced, constantly optimizing, always
-            building the next thing. Vipassana found me at a point where I realized
-            I was good at building things outside of myself, but had no tools for
-            understanding what was happening inside.
+            building the next thing. I hadn&apos;t taken a single vacation in eight years.
+            Not a single day. I worked seven days a week, including weekends. Vipassana
+            found me at a point where I realized I was good at building things outside
+            of myself, but had no tools for understanding what was happening inside.
           </p>
           <p className="mt-4">
             Someone recommended a 10-day course. I was skeptical — 10 days of silence
@@ -122,15 +123,28 @@ export default function ExperiencePage() {
             Why I Kept Going Back
           </h2>
           <p>
-            After my first course, I felt different — calmer, more aware of my
-            reactions, less caught up in the constant mental chatter. But like any
-            skill, it fades without practice.
+            After my first course, I said to myself: <em>&ldquo;I cannot go
+            back and live a normal life.&rdquo;</em> It was that clear. I started
+            planning my year around how many courses I could attend. In my first
+            twelve months, I went to four courses — despite having an intense
+            full-time schedule. It was so mind-blowing how much time I could save
+            and how efficient I could become after learning meditation that I
+            solely dedicated 40 days plus two hours of daily practice to ramp up
+            my skills and get established.
           </p>
           <p className="mt-4">
-            I went back. Six times now, for a total of 60 days of courses. Each
-            time is different. Some courses are peaceful. Some are deeply
-            uncomfortable. Every one has taught me something I couldn&apos;t have
-            learned any other way.
+            Six courses now, across three centers in California, for a total of
+            60 days. Each time is different. Some courses are peaceful. Some are
+            deeply uncomfortable. Every one has taught me something I couldn&apos;t
+            have learned any other way.
+          </p>
+          <p className="mt-4">
+            I&apos;ve sat at Dhammamanda in Northern California (private rooms,
+            tall trees — almost too luxurious), the CYO Bay Area Christmas
+            course (bunk beds with 12 people, rain and snow, nearly 300 meditators —
+            the biggest course in the Western hemisphere), and North Fork in Central
+            California (one of the oldest centers in North America, with a pagoda
+            and private meditation cells).
           </p>
           <p className="mt-4">
             Now I go to a centre twice a year, and every time it&apos;s a massive
@@ -220,6 +234,15 @@ export default function ExperiencePage() {
             What I&apos;d Tell Someone Considering It
           </h2>
           <p>
+            If you&apos;re thinking <em>&ldquo;I can&apos;t afford to take 10 days
+            away from work,&rdquo;</em> I understand — I literally didn&apos;t
+            take a single vacation in eight years. But after the course, I
+            couldn&apos;t imagine going back to living without this practice.
+            Vipassana is the single most important event in my life. It completely
+            changed everything — making me from an extremely agitated,
+            ego-centered person into someone much better and much more happy.
+          </p>
+          <p className="mt-4">
             Just go. Stop reading about it (after this page, obviously), stop
             analyzing whether it&apos;s right for you, and just sign up. The
             intellectual understanding of Vipassana is worth nothing compared to the
@@ -234,6 +257,11 @@ export default function ExperiencePage() {
           <p className="mt-4">
             That&apos;s the whole philosophy of Vipassana: don&apos;t take anyone&apos;s
             word for it. Practice and see for yourself.
+          </p>
+          <p className="mt-4 text-sm italic">
+            Disclaimer: I&apos;m not a teacher. I&apos;m not here to give advice.
+            This is just my personal story and analogy to help you find the
+            practice. You need to come to the course.
           </p>
         </section>
       </div>
