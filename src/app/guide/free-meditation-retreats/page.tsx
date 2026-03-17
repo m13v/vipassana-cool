@@ -79,7 +79,7 @@ export default function FreeMeditationRetreatsPage() {
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>New students pay nothing.</strong> You attend your first course completely free. No one asks you for money before, during, or at the end of the course.</li>
             <li><strong>Past students fund future courses.</strong> After completing a course, students who benefited from the experience can choose to donate so that others can have the same opportunity. This is voluntary — there is no minimum, no pressure, no follow-up solicitation.</li>
-            <li><strong>Teachers serve for free.</strong> Assistant teachers and course managers are all volunteers. No one in the organization is paid for teaching Dhamma.</li>
+            <li><strong>Teachers serve for free.</strong> Assistant teachers and course managers are all volunteers. They receive no compensation for teaching Dhamma.</li>
             <li><strong>No commercial operation.</strong> There are no gift shops, no book sales at the center, no upsells. The centers exist solely to offer the courses.</li>
           </ul>
           <p>
