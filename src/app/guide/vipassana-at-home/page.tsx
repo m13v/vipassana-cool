@@ -71,15 +71,15 @@ export default function VipassanaAtHomePage() {
       />
 
       <div className="space-y-8 text-muted">
-        <section>
-          <p className="italic text-sm text-muted/80">
-            Disclaimer: I&apos;m not a teacher. This is my personal experience and understanding after 6 courses (60 days of sitting), 881+ days of daily practice, and countless group sittings. For official guidance, visit{" "}
+        <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
+          <p>
+            <strong>Note:</strong> I&apos;m not a teacher. This is my personal experience after 6 courses, 881+ days of daily practice, and countless group sittings. For official guidance, visit{" "}
             <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">First Things First: You Cannot Learn Vipassana at Home</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">You can&apos;t learn Vipassana at home (seriously)</h2>
           <p>
             Let me be absolutely clear about this. You cannot learn Vipassana meditation from a YouTube video, a book, an app, or a blog post — including this one. The technique must be learned at an official{" "}
             <a href="https://www.dhamma.org/en-US/courses/search" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">10-day residential course</a>{" "}
@@ -100,12 +100,12 @@ export default function VipassanaAtHomePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Why Home Practice Matters More Than the Course</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Home practice matters more than the course itself</h2>
           <p>
             The 10-day course teaches you the technique. But the real transformation happens in daily practice. A course is 10 days. Your life is the other 355 days of the year. If you only meditate during courses, you&apos;re missing the point entirely.
           </p>
           <p>
-            The official recommendation is two hours per day — one hour in the morning, one in the evening. That sounds like a lot, and it is. But here&apos;s what I found: &ldquo;It was so mind-blowing how much time I could save and how efficient I could become after learning meditation.&rdquo; The time you invest in sitting comes back multiplied in clarity, focus, and better decision-making throughout the day.
+            The official recommendation is two hours per day — one hour in the morning, one in the evening. That sounds like a lot, and it is. But here&apos;s what surprised me: the time I invest in sitting comes back multiplied. My focus got sharper, my decision-making improved, and I stopped wasting hours on anxious loops. It was mind-blowing how much more efficient I became after making meditation a daily habit.
           </p>
           <p>
             I&apos;ve maintained daily practice for 881+ days now. It&apos;s the single most important habit I&apos;ve built.
@@ -113,7 +113,7 @@ export default function VipassanaAtHomePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">My Daily Vipassana at Home Routine</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What my daily practice actually looks like</h2>
           <p>
             Here&apos;s what my actual practice looks like — not the idealized version, but what I actually do:
           </p>
@@ -130,7 +130,7 @@ export default function VipassanaAtHomePage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Setting Up Your Meditation Space at Home</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Setting up your space</h2>
           <p>
             You don&apos;t need a dedicated meditation room. You need a corner. Here&apos;s what works:
           </p>
