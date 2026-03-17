@@ -49,6 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/faq/vipassana-and-depression`, lastModified: new Date("2025-06-01"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/faq/what-to-expect`, lastModified: new Date("2025-06-01"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/faq/can-i-do-shorter-sessions`, lastModified: new Date("2025-06-01"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/faq/is-vipassana-worth-it`, lastModified: new Date("2026-03-16"), changeFrequency: "monthly", priority: 0.8 },
     // New guide pages — Batch 2
     { url: `${baseUrl}/guide/anapana-and-vipassana-explained`, lastModified: new Date("2025-06-01"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/guide/sensations-and-experiences`, lastModified: new Date("2025-06-01"), changeFrequency: "monthly", priority: 0.8 },
