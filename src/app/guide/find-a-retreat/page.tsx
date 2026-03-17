@@ -41,6 +41,12 @@ export default function FindARetreatPage() {
       />
 
       <div className="space-y-8 text-muted">
+        <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
+          <p>
+            <strong>Note:</strong> I&apos;m not a teacher and don&apos;t represent the tradition. These are my personal observations from sitting at 3 centers. For official center info, visit <a href="https://www.dhamma.org/en-US/locations/directory" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>.
+          </p>
+        </section>
+
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">How does dhamma.org work?</h2>
           <p>
@@ -68,9 +74,9 @@ export default function FindARetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What&apos;s the difference between dedicated centers and rented facilities?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Dedicated centers vs. rented facilities</h2>
           <p>
-            This is a distinction most first-timers don&apos;t know about, but it meaningfully affects your experience.
+            This distinction meaningfully affects your experience.
           </p>
           <p>
             <strong>Dedicated centers</strong> are purpose-built or permanently converted properties used exclusively for Vipassana courses. They have meditation halls designed for the practice, permanent accommodation, maintained grounds, and a full schedule of courses throughout the year. The infrastructure is optimized for retreat life &mdash; separate walking areas for men and women, purpose-built dining halls, meditation cells for old students.
@@ -84,9 +90,9 @@ export default function FindARetreatPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What are the different Vipassana centers like? Three places I&apos;ve sat.</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Three centers I&apos;ve sat at</h2>
           <p>
-            I&apos;ve done courses at three locations in California. Each one was a completely different physical experience, even though the teaching was identical.
+            I&apos;ve done courses at three locations in California. Each one felt completely different physically, even though the teaching was identical.
           </p>
 
           <div className="mt-4 space-y-6">
