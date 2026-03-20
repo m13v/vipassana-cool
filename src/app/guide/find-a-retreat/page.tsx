@@ -40,6 +40,13 @@ export default function FindARetreatPage() {
         datePublished="2026-03-16"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          There are 200+ Vipassana centers worldwide, all teaching the identical technique. Search for courses at dhamma.org by region and date. Centers come in two types: dedicated facilities (purpose-built, permanent) and rented venues (temporary, often in retreat centers). Both offer the same course and teaching quality. For your first course, choose the closest center to minimize travel stress. Apply 2-3 months ahead — popular centers fill fast. Off-peak months (January, February, October) and smaller or newer centers tend to have more availability. The teaching is standardized globally — you will get the same course in India, the US, or New Zealand.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
           <p>
