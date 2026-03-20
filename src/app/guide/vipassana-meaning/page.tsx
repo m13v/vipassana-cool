@@ -40,6 +40,13 @@ export default function VipassanaMeaningPage() {
         datePublished="2026-03-16"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana means "to see clearly" in Pali — from vi (clearly, specially) and passana (seeing, observing). Commonly translated as "insight meditation," it refers to seeing reality as it actually is, not as you want it to be. In practice, this means observing physical sensations throughout your body — pain, heat, tingling, pressure — without reacting with craving or aversion. The technique was rediscovered by Gotama the Buddha 2,500 years ago and passed down through an unbroken chain of teachers. It is non-sectarian and compatible with any religious or philosophical background.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
           <p>

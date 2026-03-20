@@ -40,6 +40,13 @@ export default function VipassanaAndSleepPage() {
         datePublished="2025-06-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Research shows Vipassana meditators have significantly enhanced slow-wave sleep — meditators aged 50-60 showed 10.63% SWS compared to just 3.94% in non-meditators. Long-term practitioners maintain higher REM sleep percentages and more complete sleep cycles across all age groups. The practice also increases melatonin production. During a 10-day course, expect disrupted sleep for the first 2-3 nights due to the 4 AM wake-up and new environment. After the course, most practitioners report noticeably improved sleep quality through applying Anapana or body scanning at bedtime.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">

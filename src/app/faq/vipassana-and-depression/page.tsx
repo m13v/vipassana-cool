@@ -40,6 +40,13 @@ export default function VipassanaAndDepressionPage() {
         { href: "/guide/how-vipassana-changes-you", label: "How Vipassana Changes You" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          People with mild-to-moderate, managed depression can benefit from Vipassana. The technique teaches equanimity toward difficult mind states, which helps practitioners relate to depressive episodes differently over time. However, Vipassana is not a treatment for depression and should not replace professional care. If you are in an acute depressive episode, wait until you are more stable — the intense introspection and isolation of a 10-day course can temporarily amplify symptoms. Be honest on the application, continue prescribed medications, and consult your therapist or psychiatrist before attending.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Important Caveat</h2>
         <p>

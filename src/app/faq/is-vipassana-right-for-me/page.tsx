@@ -40,6 +40,13 @@ export default function IsVipassanaRightForMePage() {
         { href: "/guide/first-course-tips", label: "First Course Tips" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          If you can commit 10 full days, follow basic instructions, and sit for extended periods, Vipassana is likely right for you. No prior meditation experience, specific beliefs, or exceptional fitness required. Centers provide chairs and back supports. People of all ages, religions, and physical conditions attend. Wait if you have severe untreated psychiatric conditions, are in active suicidal crisis, have recent unprocessed trauma, or cannot commit to the full 10 days. The course is designed for complete beginners — most hesitations come from overthinking, not genuine unsuitability.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Short Answer</h2>
         <p>

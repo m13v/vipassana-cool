@@ -39,6 +39,13 @@ export default function IsVipassanaSafePage() {
         { href: "/experience/day-6", label: "Day 6: Emotional Waves" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana is safe for most mentally healthy adults, but it is a genuinely powerful technique. Research shows 53% of meditators report at least one adverse effect, though most are temporary. People with active psychosis, severe untreated depression, or recent unprocessed trauma should consult a mental health professional before attending. The application screens for risk factors. If you struggle after a course, resources include Cheetah House (cheetahhouse.org), the 988 Lifeline, and your course teacher. Hard is not the same as harmful — discomfort during deep meditation is expected, not pathological.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Short Answer</h2>
         <p>

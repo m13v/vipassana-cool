@@ -39,6 +39,13 @@ export default function IsVipassanaWorthItPage() {
         { href: "/faq/can-i-leave-early", label: "Can I Leave Early?" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          After 6 courses and years of daily practice: yes, for most people who complete the full 10 days and follow the instructions. You gain a lifetime meditation technique, direct insight into how your mind works, reduced emotional reactivity, and measurably better stress management. The only cost is 10 days (courses are free). The technique is cumulative — benefits deepen with daily practice and additional courses. It is not worth it if you leave before Day 10, do not follow instructions, or never practice afterward. The course plants the seed; daily practice grows it.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Short Answer</h2>
         <p>

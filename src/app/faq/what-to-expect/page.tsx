@@ -40,6 +40,13 @@ export default function WhatToExpectPage() {
         { href: "/guide/first-course-tips", label: "First Course Tips" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          You arrive the evening before (Day 0), hand over your phone, and begin Noble Silence. Wake up at 4:00 AM daily, meditate approximately 10 hours in sessions of 1-2 hours, with breaks for meals. Days 1-3: learn Anapana (breath observation) — the hardest period. Day 4: learn Vipassana body scanning — everything shifts. Days 5-9: deepen practice with "strong determination" sittings (one hour without moving). Day 10: silence lifts, learn metta (loving-kindness). Vegetarian food only, no dinner (fruit and tea at 5 PM for new students). Evening discourses by S.N. Goenka address exactly what you are experiencing each day.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">Before You Arrive</h2>
         <p>

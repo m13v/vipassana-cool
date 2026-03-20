@@ -51,6 +51,13 @@ export default function VipassanaWithAdhdAnxietyPage() {
         { href: "/experience/day-3", label: "Day 3: The Hardest Day" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Many people with ADHD, anxiety, or depression have completed Vipassana courses successfully. ADHD can make long sittings harder, but the structured schedule and removal of distractions can help. Prescribed medications (including antidepressants and ADHD medication) are allowed — do not change dosages before or during the course. Be honest on the application about mental health history; it rarely disqualifies you. If you are in acute crisis or experiencing daily panic attacks, stabilize with professional help first. Research shows anxiety scores dropping significantly after a 10-day course for those with managed conditions.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">
           The Short Answer

@@ -40,6 +40,13 @@ export default function VipassanaForAddictionPage() {
         datePublished="2025-06-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana addresses addiction at its root by training you to observe cravings as physical sensations without reacting to them. Prison studies show promising results: recidivism dropped from 75% to 56%, and participants showed significant reductions in alcohol, marijuana, and crack cocaine use compared to standard treatment. The technique breaks the craving-reaction cycle by building equanimity toward uncomfortable sensations. Vipassana is not a replacement for professional addiction treatment but can be a powerful complement to recovery programs.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">

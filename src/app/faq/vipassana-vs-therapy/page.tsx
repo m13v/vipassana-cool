@@ -38,6 +38,13 @@ export default function VipassanaVsTherapyPage() {
         { href: "/guide/daily-practice", label: "Daily Practice at Home" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana and therapy are not alternatives — they work through different mechanisms and complement each other well. Therapy provides professional guidance for processing specific psychological issues through dialogue. Vipassana develops equanimity and self-awareness through direct observation of bodily sensations in silence. For diagnosed mental health conditions, therapy should be the primary approach. For deeper self-understanding and reduced reactivity, Vipassana goes where talk therapy often cannot. If you have active mental health concerns, start with therapy first and consider Vipassana once you are stable.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">They&apos;re Not the Same Thing</h2>
         <p>

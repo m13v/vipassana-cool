@@ -37,6 +37,13 @@ export default function WhyIsVipassanaFreePage() {
         { href: "/faq/can-i-leave-early", label: "Can I Leave Early?" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana courses are completely free — no fees for teaching, food, or accommodation at any of the 200+ centers worldwide. The model runs on dana (donations) from past students only. You cannot donate until after completing your first course. There is no catch, no upselling, no mandatory contribution. The estimated cost per student is $250-375, but donation amounts are entirely voluntary. This model has sustained the tradition for over 50 years, ensuring the teaching stays accessible to everyone regardless of financial means.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">Genuinely, Completely Free</h2>
         <p>

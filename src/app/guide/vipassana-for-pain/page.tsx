@@ -40,6 +40,13 @@ export default function VipassanaForPainPage() {
         datePublished="2025-06-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana does not eliminate pain — it changes your relationship with it. By observing pain sensations with equanimity instead of reacting with aversion, you reduce the secondary suffering (mental resistance) that amplifies the experience. Research shows mindfulness-based techniques can reduce pain intensity by up to 40% through different neural mechanisms than placebo. Centers accommodate chronic pain conditions with chairs, back supports, and modified schedules. The technique is particularly relevant for chronic pain because it works with pain directly rather than trying to distract from it.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
