@@ -40,6 +40,13 @@ export default function DhammaServicePage() {
         datePublished="2025-06-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Dhamma service (seva) means volunteering at a Vipassana course — cooking, cleaning, and managing logistics while maintaining your own practice. Available to any old student who has completed at least one 10-day course. Servers typically meditate 3-4 hours daily alongside their duties. Many experienced meditators say serving deepened their practice more than sitting did, because it tests equanimity in real-world conditions. Apply through dhamma.org the same way you apply for a course.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What is Vipassana Dhamma service?</h2>
