@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "About — vipassana.cool",
@@ -11,8 +12,47 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const profileSchema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      mainEntity: {
+        "@type": "Person",
+        name: "Matthew Diakonov",
+        url: "https://m13v.com",
+        image: "https://vipassana.cool/matthew.jpg",
+        description:
+          "Vipassana practitioner with 60 days of courses completed in the tradition of S.N. Goenka. Creator of vipassana.cool.",
+        sameAs: [
+          "https://m13v.com",
+          "https://twitter.com/MatthewHeartful",
+          "https://www.linkedin.com/in/matthew-diakonov-a84a1911/",
+          "https://github.com/matthew-heartful",
+          "https://t.me/matthew_ddi",
+        ],
+        knowsAbout: [
+          "Vipassana meditation",
+          "S.N. Goenka tradition",
+          "meditation retreats",
+          "daily meditation practice",
+        ],
+      },
+      url: "https://vipassana.cool/about",
+    },
+  ];
+
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "About", url: "https://vipassana.cool/about" },
+        ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
+      />
       <Link
         href="/"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"
