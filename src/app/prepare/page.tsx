@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
 import { EmailCapture } from "@/components/email-capture";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "How to Prepare for a Vipassana Course",
@@ -14,6 +15,12 @@ export const metadata: Metadata = {
 export default function PreparePage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Prepare", url: "https://vipassana.cool/prepare" },
+        ]}
+      />
       <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
         Preparation
       </p>
