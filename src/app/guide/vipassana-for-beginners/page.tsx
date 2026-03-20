@@ -40,6 +40,13 @@ export default function VipassanaForBeginnersPage() {
         datePublished="2026-03-16"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana is a 2,500-year-old meditation technique taught through free 10-day silent retreats at 200+ centers worldwide. You meditate 10+ hours daily, learn systematic body scanning with equanimity, and follow Noble Silence — no talking, phones, or eye contact. No prior experience needed. Days 1-3 focus on breath observation (Anapana), Day 4 introduces the full Vipassana technique, and Day 10 breaks the silence. Courses are funded entirely by donations from past students.
+        </p>
+      </div>
+
       <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
         <p>
           <strong>Note:</strong> I&apos;m not a teacher and don&apos;t represent the tradition. This is my personal experience after 6 courses. For official info, visit <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>.
