@@ -4,9 +4,11 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { DayCounter } from "@/components/day-counter";
 import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
-  title: "What to Expect at a Vipassana Retreat — 60 Days of Courses, 881+ Days of Practice",
+  title: "My Vipassana Journey — 6 Courses, 60 Days, Daily Practice",
   description:
     "A day-by-day personal account of what actually happens during a 10-day Vipassana course. What to expect, what was hard, and honest insights from six retreats.",
   alternates: { canonical: "https://vipassana.cool/experience" },
@@ -15,6 +17,19 @@ export const metadata: Metadata = {
 export default function ExperiencePage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Experience", url: "https://vipassana.cool/experience" },
+        ]}
+      />
+      <ArticleSchema
+        title="My Vipassana Journey — 6 Courses, 60 Days, Daily Practice"
+        description="A day-by-day personal account of what actually happens during a 10-day Vipassana course. What to expect, what was hard, and honest insights from six retreats."
+        url="https://vipassana.cool/experience"
+        datePublished="2025-01-15"
+        dateModified="2026-03-19"
+      />
       <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
         Personal Experience
       </p>
