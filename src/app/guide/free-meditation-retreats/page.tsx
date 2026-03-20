@@ -60,6 +60,13 @@ export default function FreeMeditationRetreatsPage() {
         datePublished="2026-03-16"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana 10-day courses are completely free — no charges for teaching, food, or accommodation at any of the 200+ centers worldwide. The model runs on dana (donations) from past students who have completed at least one course. You cannot donate before or during your first course. The estimated cost per student is roughly $250-375, but there is no expected donation amount. This donation-based model has sustained the tradition for over 50 years. The free model ensures students come motivated by genuine interest, not financial obligation, and keeps the teaching accessible regardless of economic background.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
           <p>
