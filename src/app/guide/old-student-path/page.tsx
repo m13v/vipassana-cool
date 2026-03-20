@@ -40,6 +40,13 @@ export default function OldStudentPathPage() {
         datePublished="2025-09-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          "Old student" simply means you have completed at least one 10-day Vipassana course — it is not about seniority or skill. This status unlocks: group sittings, Dhamma service (volunteering at courses), one-day and three-day sittings, Satipatthana Sutta courses, longer courses (20-60 days), and old student resources on dhamma.org. The core expectations are daily practice (2 hours recommended), observing the five precepts, and attending at least one course per year. The old student path is a lifelong practice, not a checklist of achievements.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What does &quot;old student&quot; mean in Vipassana?</h2>
