@@ -40,6 +40,13 @@ export default function CourseApplicationTipsPage() {
         datePublished="2025-03-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Apply on dhamma.org 2-3 months before your target course date — popular centers fill within days of opening. Apply the day registration opens, be flexible on dates, and consider off-peak months (January, February, October) for easier acceptance. The application takes 15 minutes and asks about health, mental health, and meditation experience. Be honest about mental health history — it rarely disqualifies you. If waitlisted, stay flexible: cancellations happen regularly, sometimes just days before the course starts.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">How does the Vipassana course application process work?</h2>
@@ -438,6 +445,24 @@ export default function CourseApplicationTipsPage() {
         >
           Find a Course
         </a>
+      </div>
+
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/first-course-tips" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            First Course Tips
+          </Link>
+          <Link href="/guide/vipassana-for-beginners" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana for Beginners
+          </Link>
+          <Link href="/guide/find-a-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Find a Retreat
+          </Link>
+          <Link href="/faq/what-to-bring" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            What to Bring
+          </Link>
+        </div>
       </div>
 
       <PageComments pageId="guide-course-application-tips" />
