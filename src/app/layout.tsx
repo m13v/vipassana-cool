@@ -61,11 +61,6 @@ const schemaData = [
     url: "https://vipassana.cool",
     description:
       "An unofficial guide to Vipassana meditation and dhamma.org. FAQ, preparation tips, personal experiences, and everything you need to know before your first 10-day course.",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://vipassana.cool/?q={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
   },
   {
     "@context": "https://schema.org",
@@ -77,6 +72,13 @@ const schemaData = [
       "@type": "Person",
       name: "Matthew Diakonov",
       url: "https://m13v.com",
+      sameAs: [
+        "https://m13v.com",
+        "https://twitter.com/MatthewHeartful",
+        "https://www.linkedin.com/in/matthew-diakonov-a84a1911/",
+        "https://github.com/matthew-heartful",
+        "https://t.me/matthew_ddi",
+      ],
     },
     sameAs: [
       "https://twitter.com/MatthewHeartful",
