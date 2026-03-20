@@ -257,11 +257,22 @@ export async function expireStaleMatches(days: number = 7): Promise<{ expiredCou
     const match = await sql`SELECT person_a_confirmed, person_b_confirmed FROM matches WHERE id = ${row.id as string}`;
     const m = match[0] as { person_a_confirmed: boolean; person_b_confirmed: boolean } | undefined;
     await updateMatchStatus(row.id as string, "expired", "cron");
-    // People who confirmed (engaged) go to "ready" — they're warm leads
-    const statusA = m?.person_a_confirmed ? "ready" : "pending";
-    const statusB = m?.person_b_confirmed ? "ready" : "pending";
-    await updateEntryStatus(row.person_a_id as string, statusA, "cron", row.id as string, "match expired after " + days + " days" + (statusA === "ready" ? " (had confirmed)" : ""));
-    await updateEntryStatus(row.person_b_id as string, statusB, "cron", row.id as string, "match expired after " + days + " days" + (statusB === "ready" ? " (had confirmed)" : ""));
+    // Only reset person status if they don't have another active match
+    for (const [personId, confirmed] of [
+      [row.person_a_id as string, m?.person_a_confirmed],
+      [row.person_b_id as string, m?.person_b_confirmed],
+    ] as const) {
+      const otherActive = await sql`
+        SELECT 1 FROM matches
+        WHERE (person_a_id = ${personId} OR person_b_id = ${personId})
+          AND status IN ('confirming', 'pending', 'replied', 'scheduling', 'active')
+        LIMIT 1
+      `;
+      if (otherActive.length === 0) {
+        const newStatus = confirmed ? "ready" : "pending";
+        await updateEntryStatus(personId, newStatus, "cron", row.id as string, "match expired after " + days + " days" + (confirmed ? " (had confirmed)" : ""));
+      }
+    }
     expiredMatches.push({ id: row.id as string, person_a_name: row.person_a_name as string | null, person_b_name: row.person_b_name as string | null });
   }
   return { expiredCount: expiredMatches.length, expiredMatches };
