@@ -2,7 +2,7 @@ import { Resend } from "resend";
 import { PostHog } from "posthog-node";
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
-import { upsertEntry, getEntryByEmail, updateEntryStatus } from "@/lib/db";
+import { upsertEntry, getEntryByEmail, updateEntryStatus, endActiveMatches } from "@/lib/db";
 
 type WaitlistData = {
   name: string;
@@ -131,7 +131,9 @@ export async function POST(request: NextRequest) {
     });
 
     // If matched user changed matching-relevant fields, re-queue them for matching
+    // and end their active matches so their partner isn't left stranded
     if (!isNew && existing?.status === "matched" && matchingFieldsChanged) {
+      await endActiveMatches(entryId, "user re-submitted with changed preferences");
       await updateEntryStatus(entryId, "pending");
     }
 
