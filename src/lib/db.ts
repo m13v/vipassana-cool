@@ -248,12 +248,16 @@ export async function expireStaleMatches(days: number = 7): Promise<{ expiredCou
   return { expiredCount: expiredMatches.length, expiredMatches };
 }
 
-// Returns all person IDs that have ever been matched with this person (any status)
+// Returns person IDs that have had a meaningful prior match with this person.
+// Only blocks re-matching if at least one person confirmed (clicked Yes).
+// If neither confirmed (both ghosted), the pair can be re-matched.
 export async function getPriorMatchedIds(personId: string): Promise<string[]> {
   const sql = getSql();
   const rows = await sql`
     SELECT person_a_id, person_b_id FROM matches
-    WHERE person_a_id = ${personId} OR person_b_id = ${personId}
+    WHERE (person_a_id = ${personId} OR person_b_id = ${personId})
+      AND (person_a_confirmed = true OR person_b_confirmed = true
+           OR status NOT IN ('expired', 'declined'))
   `;
   return rows.map((r) =>
     r.person_a_id === personId ? r.person_b_id : r.person_a_id
