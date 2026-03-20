@@ -70,6 +70,13 @@ export default function VipassanaAtHomePage() {
         datePublished="2026-03-16"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          You cannot learn Vipassana at home — it must be learned at an official 10-day course. But once you complete a course, daily home practice is where the real transformation happens. Sit 45-60 minutes every morning before anything else, in the same quiet spot, with no phone. Join Zoom or local group sittings for accountability. After 881+ days of daily practice, consistency beats duration — a daily 30-minute sit outperforms an inconsistent hour. Attend one course per year to recalibrate.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
           <p>
