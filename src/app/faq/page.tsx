@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { FaqSchema } from "@/components/faq-schema";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
 
 export const metadata: Metadata = {
@@ -116,6 +117,12 @@ const faqs: { q: string; a: string[] }[] = [
 export default function FAQPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "FAQ", url: "https://vipassana.cool/faq" },
+        ]}
+      />
       <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
         FAQ
       </p>
