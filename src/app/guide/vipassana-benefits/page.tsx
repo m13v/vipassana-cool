@@ -75,6 +75,13 @@ export default function VipassanaBenefitsPage() {
         datePublished="2026-03-16"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          After 6 courses and 60 days of silent meditation, the key benefits are: reduced emotional reactivity (the gap between stimulus and response widens), better stress regulation (lower cortisol, calmer baseline), dramatically improved focus and productivity, deeper relationships through genuine empathy, better sleep quality, and changed relationship with physical pain. Benefits are cumulative and dose-dependent — they persist with daily practice (recommended 2 hours/day) and fade without it. Brain imaging shows measurable changes in cortical thickness, amygdala reactivity, and gray matter density.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         {/* Disclaimer */}
         <section className="rounded-lg border border-border bg-card p-4 text-sm italic">
