@@ -39,6 +39,13 @@ export default function ShorterSessionsPage() {
         { href: "/faq/what-to-expect", label: "What to Expect" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          The official recommendation is one hour morning and one hour evening (2 hours daily). In practice, a consistent 20-30 minute daily sit is more valuable than an inconsistent hour. Twenty minutes is the minimum threshold for a meaningful body scan — below that, you are mostly doing concentration practice. Start with whatever duration you can sustain every day and build up gradually. An hour gives you time to settle (5-10 min Anapana), do a thorough body scan (40-45 min), and close with metta. Consistency matters far more than duration.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">What Goenka Recommends</h2>
         <p>
