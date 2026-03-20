@@ -21,6 +21,8 @@ export type WaitlistEntry = {
   practice_length: string | null;
   requested_match_id: string | null;
   research_notes: string | null;
+  morning_utc: string | null;
+  evening_utc: string | null;
   status: string;
   pass_count: number;
   contact_count: number;
@@ -41,6 +43,35 @@ export type Match = {
   person_b_confirmed: boolean;
   declined_by_id: string | null;
 };
+
+function tzOffsetMinutes(tz: string): number {
+  if (!tz) return 0;
+  const aliases: Record<string, string> = { "eastern time": "America/New_York", "est": "America/New_York", "pst": "America/Los_Angeles", "cst": "America/Chicago", "mst": "America/Denver" };
+  const alias = aliases[tz.toLowerCase().trim()];
+  if (alias) tz = alias;
+  if (tz.startsWith("GMT") || tz.startsWith("UTC")) {
+    const match = tz.match(/([+-])(\d{1,2})(?::(\d{2}))?/);
+    if (!match) return 0;
+    return (match[1] === "+" ? 1 : -1) * (parseInt(match[2]) * 60 + parseInt(match[3] || "0"));
+  }
+  const gmtMatch = tz.match(/GMT\s*([+-])\s*(\d{1,2})(?::(\d{2}))?/i);
+  if (gmtMatch) {
+    return (gmtMatch[1] === "+" ? 1 : -1) * (parseInt(gmtMatch[2]) * 60 + parseInt(gmtMatch[3] || "0"));
+  }
+  try {
+    const now = new Date();
+    const local = new Date(now.toLocaleString("en-US", { timeZone: tz })).getTime();
+    return Math.round((local - now.getTime()) / 60000);
+  } catch { return 0; }
+}
+
+export function toUtcTime(localTime: string | null, timezone: string | null): string | null {
+  if (!localTime || !timezone) return null;
+  const [h, m] = localTime.split(":").map(Number);
+  if (isNaN(h)) return null;
+  const utcMins = (((h * 60 + (m || 0)) - tzOffsetMinutes(timezone)) % 1440 + 1440) % 1440;
+  return `${String(Math.floor(utcMins / 60)).padStart(2, "0")}:${String(utcMins % 60).padStart(2, "0")}`;
+}
 
 export async function getAllEntries(): Promise<WaitlistEntry[]> {
   const sql = getSql();
@@ -66,12 +97,14 @@ export async function getEntryByEmail(email: string): Promise<WaitlistEntry | un
   return rows[0] as WaitlistEntry | undefined;
 }
 
-export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated_at" | "pass_count" | "contact_count">): Promise<void> {
+export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated_at" | "pass_count" | "contact_count" | "morning_utc" | "evening_utc">): Promise<void> {
   const sql = getSql();
   const now = new Date().toISOString();
+  const morningUtc = toUtcTime(entry.morning_time, entry.timezone);
+  const eveningUtc = toUtcTime(entry.evening_time, entry.timezone);
   await sql`
-    INSERT INTO waitlist_entries (id, email, name, is_old_student, is_goenka_tradition, timezone, city, frequency, morning_time, evening_time, days, session_duration, has_maintained_practice, practice_length, requested_match_id, research_notes, status, created_at, updated_at)
-    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${entry.morning_time}, ${entry.evening_time}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, ${entry.requested_match_id}, ${entry.research_notes}, 'pending', ${entry.created_at}, ${now})
+    INSERT INTO waitlist_entries (id, email, name, is_old_student, is_goenka_tradition, timezone, city, frequency, morning_time, evening_time, days, session_duration, has_maintained_practice, practice_length, requested_match_id, research_notes, morning_utc, evening_utc, status, created_at, updated_at)
+    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${entry.morning_time}, ${entry.evening_time}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, ${entry.requested_match_id}, ${entry.research_notes}, ${morningUtc}, ${eveningUtc}, 'pending', ${entry.created_at}, ${now})
     ON CONFLICT(email) DO UPDATE SET
       name = COALESCE(EXCLUDED.name, waitlist_entries.name),
       is_old_student = COALESCE(EXCLUDED.is_old_student, waitlist_entries.is_old_student),
@@ -87,6 +120,8 @@ export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated
       practice_length = COALESCE(EXCLUDED.practice_length, waitlist_entries.practice_length),
       requested_match_id = COALESCE(EXCLUDED.requested_match_id, waitlist_entries.requested_match_id),
       research_notes = COALESCE(waitlist_entries.research_notes, EXCLUDED.research_notes),
+      morning_utc = COALESCE(EXCLUDED.morning_utc, waitlist_entries.morning_utc),
+      evening_utc = COALESCE(EXCLUDED.evening_utc, waitlist_entries.evening_utc),
       updated_at = ${now}
   `;
 }
