@@ -233,6 +233,24 @@ export default function RestartingPracticePage() {
         </a>
       </div>
 
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/daily-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Daily Practice at Home
+          </Link>
+          <Link href="/guide/recognizing-progress" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Recognizing Progress
+          </Link>
+          <Link href="/guide/group-sittings" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Group Sittings
+          </Link>
+          <Link href="/guide/after-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            After the Retreat
+          </Link>
+        </div>
+      </div>
+
       <PageComments pageId="guide-restarting-practice" />
     </article>
   );
