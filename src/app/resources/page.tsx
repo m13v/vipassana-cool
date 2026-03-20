@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageComments } from "@/components/comments";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "Useful Resources",
@@ -11,6 +12,35 @@ export const metadata: Metadata = {
 export default function Resources() {
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Resources", url: "https://vipassana.cool/resources" },
+        ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Vipassana Meditation Resources",
+            description:
+              "200+ curated resources for Vipassana meditation as taught by S.N. Goenka.",
+            url: "https://vipassana.cool/resources",
+            numberOfItems: 200,
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Official Goenka / dhamma.org Network" },
+              { "@type": "ListItem", position: 2, name: "Books & Publications" },
+              { "@type": "ListItem", position: 3, name: "Documentaries & Films" },
+              { "@type": "ListItem", position: 4, name: "Podcasts" },
+              { "@type": "ListItem", position: 5, name: "Research Papers" },
+              { "@type": "ListItem", position: 6, name: "Apps & Tools" },
+              { "@type": "ListItem", position: 7, name: "Blogs & Personal Accounts" },
+            ],
+          }),
+        }}
+      />
       {/* Header */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
