@@ -147,28 +147,31 @@ export async function updateMatchStatus(id: string, status: string, triggeredBy 
     const rows = await sql`SELECT * FROM matches WHERE id = ${id}`;
     const match = rows[0] as Match | undefined;
     if (match) {
-      await updateEntryStatus(match.person_a_id, "pending", triggeredBy, id);
-      await updateEntryStatus(match.person_b_id, "pending", triggeredBy, id);
+      await updateEntryStatus(match.person_a_id, "ready", triggeredBy, id, "match ended");
+      await updateEntryStatus(match.person_b_id, "ready", triggeredBy, id, "match ended");
     }
   }
 }
 
-// Decline a match: record who said no, set decliner → passed, partner → contacted
+// Decline a match: record who said no.
+// Decliner → ready (they engaged by responding — "passed" is about the pair, not the person).
+// Partner → ready if they had confirmed, pending if they hadn't.
 export async function declineMatch(matchId: string, declinerId: string): Promise<void> {
   const sql = getSql();
-  const current = await sql`SELECT status FROM matches WHERE id = ${matchId}`;
+  const current = await sql`SELECT status, person_a_id, person_b_id, person_a_confirmed, person_b_confirmed FROM matches WHERE id = ${matchId}`;
   const oldStatus = current[0]?.status ?? null;
   await sql`UPDATE matches SET status = 'declined', declined_by_id = ${declinerId} WHERE id = ${matchId}`;
   await sql`
     INSERT INTO vipassana_activity_log (match_id, event_type, old_value, new_value, triggered_by)
     VALUES (${matchId}, 'match_status_change', ${oldStatus}, 'declined', 'user_click')
   `;
-  const rows = await sql`SELECT * FROM matches WHERE id = ${matchId}`;
-  const match = rows[0] as Match | undefined;
+  const match = current[0] as { person_a_id: string; person_b_id: string; person_a_confirmed: boolean; person_b_confirmed: boolean } | undefined;
   if (!match) return;
-  const partnerId = match.person_a_id === declinerId ? match.person_b_id : match.person_a_id;
-  await updateEntryStatus(declinerId, "passed", "user_click", matchId, "clicked no on confirmation");
-  await updateEntryStatus(partnerId, "contacted", "user_click", matchId, "partner declined");
+  const isA = match.person_a_id === declinerId;
+  const partnerId = isA ? match.person_b_id : match.person_a_id;
+  const partnerConfirmed = isA ? match.person_b_confirmed : match.person_a_confirmed;
+  await updateEntryStatus(declinerId, "ready", "user_click", matchId, "clicked no on confirmation");
+  await updateEntryStatus(partnerId, partnerConfirmed ? "ready" : "pending", "user_click", matchId, "partner declined");
 }
 
 export async function createMatchWithTokens(personAId: string, personBId: string): Promise<Match> {
