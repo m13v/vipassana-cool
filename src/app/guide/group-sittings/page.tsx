@@ -40,6 +40,13 @@ export default function GroupSittingsPage() {
         datePublished="2025-09-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Group sittings are weekly or biweekly gatherings where old students meditate together for about one hour using official Goenka audio recordings, followed by metta. Available in-person at centers and homes, and increasingly on Zoom. They provide accountability, collective energy, and community that solo home practice cannot replicate. To find one, check your local center's website or ask during your next course. To start your own, you need approval from your regional center, a quiet space, and at least 3-4 committed old students. Group sittings are the backbone of sustained Vipassana practice outside of courses.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What are Vipassana group sittings?</h2>
