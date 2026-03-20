@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { TrackedLink } from "@/components/tracked-events";
+import { ArticleSchema } from "@/components/article-schema";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 const days = [
   { num: 1, slug: "day-1", label: "Day 1" },
@@ -29,6 +31,20 @@ export function DayPage({
 
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://vipassana.cool" },
+          { name: "Experience", url: "https://vipassana.cool/experience" },
+          { name: `Day ${day}: ${title}`, url: `https://vipassana.cool/experience/day-${day}` },
+        ]}
+      />
+      <ArticleSchema
+        title={`Vipassana Day ${day} — ${title}`}
+        description={`Day ${day} of a 10-day Vipassana meditation course: ${title}. A personal account of what actually happens.`}
+        url={`https://vipassana.cool/experience/day-${day}`}
+        datePublished="2025-01-15"
+        dateModified="2026-03-19"
+      />
       <Link
         href="/experience"
         className="mb-4 inline-block text-sm text-muted hover:text-accent"
