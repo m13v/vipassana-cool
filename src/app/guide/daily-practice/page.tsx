@@ -40,6 +40,13 @@ export default function DailyPracticePage() {
         datePublished="2025-01-15"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          The recommended daily Vipassana practice is two hours — one hour morning, one hour evening — but consistency matters more than duration. Start with 20 minutes every morning and build up. Sit in the same spot at the same time, use a timer, and begin with Anapana before transitioning to body scanning. A 20-minute daily sit beats an inconsistent hour. Take one course per year and attend weekly group sittings to sustain your practice long-term.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What is the recommended daily Vipassana practice?</h2>
