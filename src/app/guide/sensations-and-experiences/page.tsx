@@ -40,6 +40,13 @@ export default function SensationsExplainedPage() {
         datePublished="2025-09-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          During Vipassana body scanning, you encounter gross sensations (pain, pressure, heat) and subtle sensations (tingling, vibrations, wavelike flow). Bhanga (free flow) is when sensations dissolve rapidly across the body — it feels blissful but is not the goal. Sensations change daily and between courses. The key instruction is the same regardless of sensation type: observe with equanimity, without craving pleasant sensations or resisting unpleasant ones. Chasing subtle sensations or feeling discouraged by gross ones both miss the point. Equanimity toward whatever arises is the entire practice.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What sensations do you experience during Vipassana meditation?</h2>
