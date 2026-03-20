@@ -47,6 +47,13 @@ export default function RisksAndSafetyPage() {
         with specific studies, frameworks, and crisis resources.
       </p>
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Research shows 53% of meditators report at least one adverse effect, but only 6-14% experience enduring issues — comparable to psychotherapy adverse effect rates. Risk factors include pre-existing psychiatric conditions, trauma history, and retreat intensity. Most difficult experiences during Vipassana are temporary and productive. Warning signs of genuine harm include persistent hallucinations, depersonalization, or suicidal ideation lasting weeks post-retreat. Crisis resources: 988 Lifeline, Cheetah House (cheetahhouse.org), and your course teacher.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What does the research say about Vipassana meditation risks?</h2>
