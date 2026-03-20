@@ -216,6 +216,24 @@ export default function GroupSittingsPage() {
         </a>
       </div>
 
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/daily-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Daily Practice at Home
+          </Link>
+          <Link href="/guide/restarting-your-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Restarting Your Practice
+          </Link>
+          <Link href="/guide/old-student-path" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            The Old Student Path
+          </Link>
+          <Link href="/guide/recognizing-progress" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Recognizing Progress
+          </Link>
+        </div>
+      </div>
+
       <PageComments pageId="guide-group-sittings" />
     </article>
   );
