@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { neon } from "@neondatabase/serverless";
-import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, updateEntryStatus } from "@/lib/db";
+import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, updateEntryStatus, confirmMatchPerson } from "@/lib/db";
+import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml } from "@/lib/emails";
 
 function checkAuth(request: NextRequest): boolean {
@@ -72,16 +73,60 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Confirmation flow: create pending match, send yes/no emails to each person
+  // Smart confirmation flow based on user status:
+  // - Both ready: skip confirmation, send intro immediately
+  // - One ready + one pending: only send confirmation to the pending person
+  // - Both pending: send confirmation to both
   if (sendConfirmation) {
+    const aReady = personA.status === "ready" || personA.status === "engaged";
+    const bReady = personB.status === "ready" || personB.status === "engaged";
+
+    // Both ready → direct intro, no confirmation needed
+    if (aReady && bReady) {
+      const match = await createMatch(personAId, personBId);
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const html = buildIntroEmailHtml(personA, personB);
+      const emailResult = await resend.emails.send({
+        from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+        to: [personA.email, personB.email],
+        replyTo: [personA.email, personB.email],
+        subject: "Your Practice Buddy match is here",
+        html,
+        headers: { "X-Entity-Ref-ID": match.id },
+      });
+      try {
+        const sql = neon(process.env.DATABASE_URL!);
+        await sql`
+          INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+        `;
+      } catch (dbErr) {
+        console.error("Failed to log intro email:", dbErr);
+      }
+      return NextResponse.json({ success: true, matchId: match.id, status: "matched", flow: "both-ready" });
+    }
+
+    // One or both pending → confirmation flow
     const match = await createMatchWithTokens(personAId, personBId);
     const resend = new Resend(process.env.RESEND_API_KEY);
     const sql = neon(process.env.DATABASE_URL!);
 
-    for (const [recipient, matchedWith, token] of [
-      [personA, personB, match.person_a_token!],
-      [personB, personA, match.person_b_token!],
-    ] as const) {
+    // Pre-confirm the ready person (they already said yes before)
+    if (aReady) {
+      await confirmMatchPerson(match.id, "a");
+      await updateEntryStatus(personAId, "engaged", "admin", match.id, "auto-confirmed (ready status)");
+    }
+    if (bReady) {
+      await confirmMatchPerson(match.id, "b");
+      await updateEntryStatus(personBId, "engaged", "admin", match.id, "auto-confirmed (ready status)");
+    }
+
+    // Only send confirmation email to pending person(s)
+    const toConfirm: [WaitlistEntry, WaitlistEntry, string, "a" | "b"][] = [];
+    if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, "a"]);
+    if (!bReady) toConfirm.push([personB, personA, match.person_b_token!, "b"]);
+
+    for (const [recipient, matchedWith, token] of toConfirm) {
       const html = buildConfirmationEmailHtml(recipient, matchedWith, token);
       const emailResult = await resend.emails.send({
         from: "Matt from Vipassana.cool <matt@vipassana.cool>",
@@ -101,7 +146,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true, matchId: match.id, status: "confirming" });
+    const flow = aReady || bReady ? "one-ready" : "both-pending";
+    return NextResponse.json({ success: true, matchId: match.id, status: "confirming", flow });
   }
 
   // Direct intro flow (existing behavior)
