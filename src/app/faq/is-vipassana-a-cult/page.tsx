@@ -32,6 +32,13 @@ export default function IsVipassanaACultPage() {
         { href: "/guide", label: "Guide to dhamma.org" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          No. Vipassana lacks every defining characteristic of a cult: it is completely free (no financial exploitation), you can leave at any time (no coercion), there is no leader worship (Goenka is respected but not deified), no isolation from family or friends after the course, no requirement to recruit others, and teachings are transparent and openly available. The strict 10-day structure serves the technique, not control. After the course, you are free to practice or not, attend more courses or not, with zero follow-up pressure.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">Why People Ask This</h2>
         <p>
