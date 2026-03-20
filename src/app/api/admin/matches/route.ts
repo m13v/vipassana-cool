@@ -64,7 +64,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "One or both entries not found" }, { status: 404 });
   }
 
-  // Block re-matching people who have been paired before
+  // Block matching anyone already in an active match
+  const activeStatuses = ["contacted", "engaged", "matched"];
+  if (activeStatuses.includes(personA.status)) {
+    return NextResponse.json(
+      { error: `${personA.name} is already in an active match (status: ${personA.status}).` },
+      { status: 409 }
+    );
+  }
+  if (activeStatuses.includes(personB.status)) {
+    return NextResponse.json(
+      { error: `${personB.name} is already in an active match (status: ${personB.status}).` },
+      { status: 409 }
+    );
+  }
+
+  // Block re-matching people who have been paired before (unless neither confirmed)
   const priorIds = await getPriorMatchedIds(personAId);
   if (priorIds.includes(personBId)) {
     return NextResponse.json(
