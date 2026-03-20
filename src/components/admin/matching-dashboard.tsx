@@ -329,11 +329,10 @@ export function MatchingDashboard() {
                         e.status === "contacted" ? "bg-blue-100 text-blue-700" :
                         e.status === "engaged"   ? "bg-orange-100 text-orange-700" :
                         e.status === "matched"   ? "bg-green-100 text-green-700" :
-                        e.status === "passed"    ? "bg-gray-100 text-gray-500" :
-                        "bg-red-100 text-red-700"
+                        "bg-gray-100 text-gray-500"
                       }`}>
-                        {e.status === "passed" && e.passCount > 1 ? `passed (${e.passCount})` :
-                         e.status === "contacted" && e.contactCount > 1 ? `contacted (${e.contactCount})` :
+                        {e.status === "contacted" && e.contactCount > 1 ? `contacted (${e.contactCount})` :
+                         e.passCount > 0 ? `${e.status} (${e.passCount} declined)` :
                          e.status}
                       </span>
                     </td>
