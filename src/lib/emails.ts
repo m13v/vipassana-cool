@@ -81,6 +81,7 @@ export function buildConfirmationEmailHtml(
       <p style="font-size:15px;line-height:1.7;margin:0 0 8px;">Your potential match is <strong>${matchFirstName}</strong> from ${matchedWith.city || "somewhere nice"}. They sit ${matchedWith.frequency?.toLowerCase() || "regularly"}, ${matchedWith.session_duration || ""} per session${matchedWith.has_maintained_practice ? `, ${matchedWith.has_maintained_practice.toLowerCase()} maintained practice` : ""}.</p>
       ${traitsHtml}
       <p style="font-size:15px;line-height:1.7;margin:16px 0 0;">Would you like to be introduced?</p>
+      <p style="font-size:13px;line-height:1.6;margin:12px 0 0;color:#8b7355;"><em>This match expires in 3 days. If neither of you responds, you'll both be placed back on the waitlist for a new match.</em></p>
     </div>
     <div style="text-align:center;margin-bottom:32px;">
       <a href="${yesUrl}" style="display:inline-block;background:#8b7355;color:#ffffff;padding:16px 32px;border-radius:8px;text-decoration:none;font-size:16px;font-weight:600;margin:8px 6px;">
