@@ -25,7 +25,7 @@ export function FaqDetailPage({
         items={[
           { name: "Home", url: "https://vipassana.cool" },
           { name: "FAQ", url: "https://vipassana.cool/faq" },
-          { name: title, url: `https://vipassana.cool/faq/${pageId}` },
+          { name: title, url: `https://vipassana.cool/faq/${pageId.replace(/^faq-/, "")}` },
         ]}
       />
       <FaqSchema faqs={schemaFaqs} />
