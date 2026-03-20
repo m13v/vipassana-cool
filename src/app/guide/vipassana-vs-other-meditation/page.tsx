@@ -40,6 +40,13 @@ export default function VipassanaVsOtherMeditationPage() {
         datePublished="2025-03-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana uses systematic body scanning, is taught through free 10-day silent retreats, and requires 1-2 hours of daily practice. MBSR ($400-$800) is an 8-week secular adaptation with 30-45 min/day. TM ($380-$980) uses mantra repetition, 20 min twice daily. Zen emphasizes &quot;just sitting&quot; with a long-term teacher relationship. Vipassana is the most intensive option — best for deep transformation and self-discipline. TM and MBSR deliver faster stress relief. The best meditation is the one you actually do consistently.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">Why does comparing meditation techniques matter?</h2>
@@ -400,6 +407,24 @@ export default function VipassanaVsOtherMeditationPage() {
         >
           Find a Course
         </a>
+      </div>
+
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/vipassana-meaning" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana Meaning
+          </Link>
+          <Link href="/guide/anapana-and-vipassana-explained" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Anapana &amp; Vipassana Explained
+          </Link>
+          <Link href="/guide/vipassana-for-beginners" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana for Beginners
+          </Link>
+          <Link href="/guide/scientific-evidence" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Scientific Evidence
+          </Link>
+        </div>
       </div>
 
       <PageComments pageId="guide-vipassana-vs-other-meditation" />

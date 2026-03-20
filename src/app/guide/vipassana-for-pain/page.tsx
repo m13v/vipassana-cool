@@ -416,6 +416,24 @@ export default function VipassanaForPainPage() {
         </a>
       </div>
 
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/sensations-and-experiences" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Sensations &amp; Experiences
+          </Link>
+          <Link href="/guide/scientific-evidence" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Scientific Evidence
+          </Link>
+          <Link href="/guide/first-course-tips" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            First Course Tips
+          </Link>
+          <Link href="/guide/vipassana-benefits" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana Benefits
+          </Link>
+        </div>
+      </div>
+
       <PageComments pageId="guide-vipassana-for-pain" />
     </article>
   );

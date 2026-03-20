@@ -392,6 +392,24 @@ export default function VipassanaForAddictionPage() {
         </a>
       </div>
 
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/scientific-evidence" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Scientific Evidence
+          </Link>
+          <Link href="/guide/risks-and-safety" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Risks &amp; Safety
+          </Link>
+          <Link href="/guide/vipassana-benefits" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana Benefits
+          </Link>
+          <Link href="/guide/how-vipassana-changes-you" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            How Vipassana Changes You
+          </Link>
+        </div>
+      </div>
+
       <PageComments pageId="guide-vipassana-for-addiction" />
     </article>
   );

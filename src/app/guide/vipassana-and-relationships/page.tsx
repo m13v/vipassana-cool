@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
@@ -173,6 +174,24 @@ export default function VipassanaRelationshipsPage() {
         >
           Find a Course
         </a>
+      </div>
+
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/after-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            After the Retreat
+          </Link>
+          <Link href="/guide/how-vipassana-changes-you" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            How Vipassana Changes You
+          </Link>
+          <Link href="/guide/vipassana-benefits" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana Benefits
+          </Link>
+          <Link href="/guide/daily-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Daily Practice at Home
+          </Link>
+        </div>
       </div>
 
       <PageComments pageId="guide-vipassana-relationships" />
