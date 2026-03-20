@@ -41,6 +41,13 @@ export default function ScientificEvidencePage() {
         datePublished="2025-03-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Vipassana-specific research shows anxiety scores dropping from 10 to 3.29 after a 10-day course, increased cortical thickness in brain regions tied to body awareness, enhanced slow-wave sleep (10.63% vs 3.94% in non-meditators aged 50-60), and reduced recidivism in prison programs (56% vs 75%). A meta-analysis identified 8 brain regions consistently altered by meditation. Limitations include small sample sizes, self-selection bias, and moderate risk of bias across studies. The evidence is encouraging but not yet definitive.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">
