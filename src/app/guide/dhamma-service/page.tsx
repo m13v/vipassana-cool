@@ -464,6 +464,24 @@ export default function DhammaServicePage() {
         </a>
       </div>
 
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/old-student-path" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            The Old Student Path
+          </Link>
+          <Link href="/guide/course-progression" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Course Progression
+          </Link>
+          <Link href="/guide/group-sittings" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Group Sittings
+          </Link>
+          <Link href="/guide/free-meditation-retreats" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Free Meditation Retreats
+          </Link>
+        </div>
+      </div>
+
       <PageComments pageId="guide-dhamma-service" />
     </article>
   );
