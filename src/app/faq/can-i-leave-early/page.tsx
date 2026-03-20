@@ -39,6 +39,13 @@ export default function CanILeaveEarlyPage() {
         { href: "/prepare", label: "How to Prepare" },
       ]}
     >
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Yes, you can leave — you are not physically detained. But it is strongly discouraged because the technique unfolds in stages: leaving mid-course means you have done the difficult preparatory work without receiving the full benefits. The urge to leave peaks on Days 2-4, when physical discomfort and mental restlessness are highest but before the practice clicks. Most people who make it past Day 4 complete the course. If you decide to leave, you speak with the course manager and teacher, collect your belongings, and depart. You can always apply for a future course.
+        </p>
+      </div>
+
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Quick Answer</h2>
         <p>
