@@ -40,6 +40,13 @@ export default function RestartingPracticePage() {
         datePublished="2025-09-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Every long-term meditator stops practicing at some point — it is essentially universal. Guilt about not sitting is itself aversion, exactly what the practice teaches you to observe. To restart: sit tomorrow morning for just 10-15 minutes, in your old spot, with no pressure to match your previous duration. Build back gradually — 15 minutes for a week, then 20, then 30. Join a group sitting for accountability. If you have been away for months, consider signing up for another 10-day course to reset. The practice is always there, exactly where you left it.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">Should you feel guilty about stopping Vipassana practice?</h2>
