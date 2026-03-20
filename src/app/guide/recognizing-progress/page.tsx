@@ -40,6 +40,13 @@ export default function RecognizingProgressPage() {
         datePublished="2025-09-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Progress in Vipassana is real but rarely dramatic. You are the worst judge of your own progress — others notice first. Signs of deepening over months: you catch reactions earlier, recover from emotional disturbances faster, sleep better, and feel less controlled by cravings and aversions. Signs over years: equanimity becomes more natural, the gap between stimulus and response widens permanently, and the practice feels less like effort. Plateaus where "nothing is happening" are common and often where the deepest work occurs. Measuring progress in a letting-go practice is inherently paradoxical — the desire for progress is itself an obstacle.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">Why is progress hard to see in Vipassana?</h2>
