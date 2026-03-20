@@ -40,6 +40,13 @@ export default function VipassanaRelationshipsPage() {
         datePublished="2025-09-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          After a Vipassana course, you return to a world that has not changed — but you have. This gap creates friction in relationships. Expect heightened sensitivity, difficulty with superficial conversations, and a period of recalibration. Keep explanations simple: "I did a 10-day silent meditation retreat. It was hard and valuable." Resist evangelizing. The daily practice conversation with partners works best framed practically: "I sit for 30 minutes before anyone wakes up." Let the results — more patience, better listening, calmer presence — speak for themselves. Give relationships time to adjust before making big decisions.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What is it like coming home after a Vipassana retreat?</h2>
