@@ -88,6 +88,51 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Why Trust This Guide */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-4xl px-6 py-16">
+          <h2 className="mb-6 text-2xl font-bold">Why Trust This Guide?</h2>
+          <div className="space-y-4 text-muted">
+            <p>
+              This guide is written by a practitioner with 60 days of courses completed —
+              six 10-day courses sat at three different centers across California, plus over
+              900 consecutive days of daily two-hour practice. The advice here comes from
+              direct, sustained experience with the technique as taught by S.N. Goenka.
+            </p>
+            <p>
+              The goal is simple: give you the practical, honest information that the
+              official site doesn&apos;t cover. What to actually expect during your first
+              course. How to navigate the application process. What to pack. What the hard
+              parts feel like and how to work through them. Think of it as an unofficial
+              companion to{" "}
+              <a
+                href="https://www.dhamma.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent underline decoration-accent-light hover:text-foreground"
+              >
+                dhamma.org
+              </a>
+              , built from personal experience.
+            </p>
+            <p className="text-sm">
+              This site is not affiliated with, endorsed by, or connected to the Vipassana
+              Research Institute (VRI) or dhamma.org. For official course information and
+              registration, always refer to{" "}
+              <a
+                href="https://www.dhamma.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent underline decoration-accent-light hover:text-foreground"
+              >
+                dhamma.org
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Quick cards */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-4xl px-6 py-16">
