@@ -23,6 +23,12 @@ export function ArticleSchema({
       "@type": "Person",
       name: "Matthew Diakonov",
       url: "https://m13v.com",
+      sameAs: [
+        "https://m13v.com",
+        "https://twitter.com/MatthewHeartful",
+        "https://www.linkedin.com/in/matthew-diakonov-a84a1911/",
+        "https://github.com/matthew-heartful",
+      ],
     },
     publisher: {
       "@type": "Organization",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
@@ -72,9 +73,11 @@ export default function AboutPage() {
 
       <div className="space-y-8 text-muted">
         <section className="flex flex-col items-start gap-6 sm:flex-row">
-          <img
+          <Image
             src="/matthew.jpg"
             alt="Matthew Diakonov"
+            width={128}
+            height={128}
             className="h-32 w-32 rounded-full object-cover"
           />
           <div>
