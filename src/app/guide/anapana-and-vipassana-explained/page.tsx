@@ -40,6 +40,13 @@ export default function AnapanaVipassanaExplainedPage() {
         datePublished="2025-09-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          A 10-day course teaches two complementary techniques: Anapana (Days 1-3) and Vipassana (Days 4-10). Anapana is breath observation at the nostrils — it sharpens concentration and calms the mind. Vipassana is systematic body scanning — moving attention from head to feet and back, observing all sensations with equanimity. Anapana feels calming; Vipassana feels intense because it surfaces deeper material. Both are essential: Anapana builds the concentration needed for effective Vipassana. In daily practice, start each session with 5-10 minutes of Anapana before transitioning to body scanning.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What are the two parts of Vipassana meditation?</h2>
