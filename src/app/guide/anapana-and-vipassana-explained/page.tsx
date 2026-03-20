@@ -177,6 +177,24 @@ export default function AnapanaVipassanaExplainedPage() {
         </a>
       </div>
 
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/vipassana-meaning" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana Meaning
+          </Link>
+          <Link href="/guide/sensations-and-experiences" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Sensations &amp; Experiences
+          </Link>
+          <Link href="/guide/vipassana-for-beginners" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana for Beginners
+          </Link>
+          <Link href="/guide/vipassana-vs-other-meditation" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana vs Other Meditation
+          </Link>
+        </div>
+      </div>
+
       <PageComments pageId="guide-anapana-vipassana-explained" />
     </article>
   );
