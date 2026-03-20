@@ -459,8 +459,8 @@ export default function CourseApplicationTipsPage() {
           <Link href="/guide/find-a-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Find a Retreat
           </Link>
-          <Link href="/faq/what-to-bring" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            What to Bring
+          <Link href="/faq/what-to-expect" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            What to Expect
           </Link>
         </div>
       </div>
