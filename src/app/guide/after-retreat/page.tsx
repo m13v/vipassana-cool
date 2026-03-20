@@ -40,6 +40,13 @@ export default function AfterRetreatPage() {
         datePublished="2025-03-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          After a Vipassana retreat, expect a predictable arc: Days 1-3 euphoria (heightened senses, deep presence), Days 3-10 crash (old habits resurface), Weeks 2-4 irritability, then gradual integration. Post-retreat depression is common and normal — it passes. Build in 1-2 buffer days before returning to work, delay screen re-exposure 24 hours, protect your morning sit, and find a weekly group sitting. The real work starts on Day 11. Aim for one course per year to sustain progress.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What is re-entry shock after a Vipassana retreat?</h2>
