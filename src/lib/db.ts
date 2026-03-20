@@ -242,7 +242,7 @@ export async function createMatchWithTokens(personAId: string, personBId: string
 
 // Auto-advance match status when an inbound email is received from a matched person:
 // pending → replied (one person replied)
-// replied → scheduling (both people have replied)
+// replied → active (both people have replied)
 // Does not downgrade statuses that are already more advanced (active, ended, etc.)
 export async function advanceMatchOnReply(fromEmail: string): Promise<void> {
   const sql = getSql();
@@ -267,7 +267,7 @@ export async function advanceMatchOnReply(fromEmail: string): Promise<void> {
     `;
 
     if (otherReplied.length > 0) {
-      await updateMatchStatus(match.id, "scheduling", "system");
+      await updateMatchStatus(match.id, "active", "system");
     } else if (match.status === "pending") {
       await updateMatchStatus(match.id, "replied", "system");
     }
