@@ -2,9 +2,15 @@
 
 > An unofficial guide to Vipassana meditation and dhamma.org, written by a practitioner with 60 days of courses completed.
 
+Last updated: 2026-03-19
+
 ## What is Vipassana.cool?
 
 Vipassana.cool is a companion guide to dhamma.org covering everything a person needs to know before, during, and after a 10-day silent Vipassana meditation retreat in the tradition of S.N. Goenka. The site provides honest FAQ answers, preparation tips, curated resources, day-by-day personal experience accounts, and practical guidance for navigating the dhamma.org application process. It is not affiliated with the Vipassana Research Institute.
+
+## About the Author
+
+Matthew Diakonov is a Vipassana practitioner with 60 days of courses completed — six 10-day courses across three centers in California over the past three years, with 900+ days of continuous daily practice. He works in tech and created vipassana.cool as the resource he wished existed when preparing for his first course.
 
 ## Content
 
@@ -21,42 +27,54 @@ The site offers in-depth guides on using dhamma.org, preparing for a course, and
 - [Personal Experience](https://vipassana.cool/experience): An honest account of doing Vipassana as a tech professional
 - [Day-by-Day Experience](https://vipassana.cool/experience/day-1): Individual pages for each of the 10 days (day-1 through day-10)
 - [Practice Buddy](https://vipassana.cool/practice-buddy): Get matched with a fellow meditator for daily practice accountability
+- [About](https://vipassana.cool/about): About the author and his Vipassana journey
 
 ### FAQ Detail Pages
 
-- [Is Vipassana Safe?](https://vipassana.cool/faq/is-vipassana-safe)
-- [Why Is Vipassana Free?](https://vipassana.cool/faq/why-is-vipassana-free)
-- [Can I Leave Early?](https://vipassana.cool/faq/can-i-leave-early)
-- [Is Vipassana a Cult?](https://vipassana.cool/faq/is-vipassana-a-cult)
-- [Vipassana vs Therapy](https://vipassana.cool/faq/vipassana-vs-therapy)
-- [Vipassana with ADHD/Anxiety](https://vipassana.cool/faq/vipassana-with-adhd-anxiety)
-- [Is Vipassana Right for Me?](https://vipassana.cool/faq/is-vipassana-right-for-me)
-- [Vipassana and Depression](https://vipassana.cool/faq/vipassana-and-depression)
-- [What to Expect](https://vipassana.cool/faq/what-to-expect)
-- [Can I Do Shorter Sessions?](https://vipassana.cool/faq/can-i-do-shorter-sessions)
+- [Is Vipassana Safe?](https://vipassana.cool/faq/is-vipassana-safe): Honest look at risks, side effects, and who should avoid it
+- [Why Is Vipassana Free?](https://vipassana.cool/faq/why-is-vipassana-free): The donation-only model explained
+- [Can I Leave Early?](https://vipassana.cool/faq/can-i-leave-early): What happens if you need to leave a course
+- [Is Vipassana a Cult?](https://vipassana.cool/faq/is-vipassana-a-cult): Addressing common concerns about the organization
+- [Vipassana vs Therapy](https://vipassana.cool/faq/vipassana-vs-therapy): How meditation and therapy compare and complement each other
+- [Vipassana with ADHD/Anxiety](https://vipassana.cool/faq/vipassana-with-adhd-anxiety): Specific guidance for neurodivergent practitioners
+- [Is Vipassana Right for Me?](https://vipassana.cool/faq/is-vipassana-right-for-me): Decision framework for prospective students
+- [Vipassana and Depression](https://vipassana.cool/faq/vipassana-and-depression): Research and practical guidance on meditation and depression
+- [What to Expect](https://vipassana.cool/faq/what-to-expect): Detailed breakdown of the 10-day schedule
+- [Can I Do Shorter Sessions?](https://vipassana.cool/faq/can-i-do-shorter-sessions): Understanding the time commitment
+- [Is Vipassana Worth It?](https://vipassana.cool/faq/is-vipassana-worth-it): An honest assessment of the value of a 10-day course
 
 ### Guide Detail Pages
 
+- [Vipassana for Beginners](https://vipassana.cool/guide/vipassana-for-beginners): Complete beginner's guide to Vipassana
+- [Vipassana Meaning](https://vipassana.cool/guide/vipassana-meaning): What the word Vipassana means and its origins
+- [Vipassana Benefits](https://vipassana.cool/guide/vipassana-benefits): Evidence-based benefits of Vipassana meditation
+- [Vipassana at Home](https://vipassana.cool/guide/vipassana-at-home): How to practice Vipassana outside a retreat
+- [Find a Retreat](https://vipassana.cool/guide/find-a-retreat): How to find and choose a Vipassana center
+- [Free Meditation Retreats](https://vipassana.cool/guide/free-meditation-retreats): Guide to donation-based retreat options
 - [Daily Practice](https://vipassana.cool/guide/daily-practice): Maintaining practice at home
 - [After the Retreat](https://vipassana.cool/guide/after-retreat): Reintegrating into daily life
 - [Risks and Safety](https://vipassana.cool/guide/risks-and-safety): Honest assessment of risks
 - [Vipassana vs Other Meditation](https://vipassana.cool/guide/vipassana-vs-other-meditation): Comparing traditions
 - [Course Application Tips](https://vipassana.cool/guide/course-application-tips): Getting accepted
-- [Scientific Evidence](https://vipassana.cool/guide/scientific-evidence): Research on Vipassana
+- [Scientific Evidence](https://vipassana.cool/guide/scientific-evidence): Research on Vipassana — brain changes, anxiety reduction, sleep, addiction
 - [Anapana and Vipassana Explained](https://vipassana.cool/guide/anapana-and-vipassana-explained): The two core techniques
 - [Sensations and Experiences](https://vipassana.cool/guide/sensations-and-experiences): What you feel during practice
 - [First Course Tips](https://vipassana.cool/guide/first-course-tips): Practical advice for beginners
 - [Course Progression](https://vipassana.cool/guide/course-progression): Beyond the first 10-day course
 - [Dhamma Service](https://vipassana.cool/guide/dhamma-service): Volunteering at centers
-- [Vipassana for Addiction](https://vipassana.cool/guide/vipassana-for-addiction)
-- [Vipassana and Sleep](https://vipassana.cool/guide/vipassana-and-sleep)
-- [Vipassana for Pain](https://vipassana.cool/guide/vipassana-for-pain)
-- [Vipassana and Relationships](https://vipassana.cool/guide/vipassana-and-relationships)
-- [How Vipassana Changes You](https://vipassana.cool/guide/how-vipassana-changes-you)
-- [Restarting Your Practice](https://vipassana.cool/guide/restarting-your-practice)
-- [Group Sittings](https://vipassana.cool/guide/group-sittings)
-- [Old Student Path](https://vipassana.cool/guide/old-student-path)
-- [Recognizing Progress](https://vipassana.cool/guide/recognizing-progress)
+- [Vipassana for Addiction](https://vipassana.cool/guide/vipassana-for-addiction): Research and guidance on meditation for recovery
+- [Vipassana and Sleep](https://vipassana.cool/guide/vipassana-and-sleep): How Vipassana affects sleep quality
+- [Vipassana for Pain](https://vipassana.cool/guide/vipassana-for-pain): Using Vipassana for chronic pain management
+- [Vipassana and Relationships](https://vipassana.cool/guide/vipassana-and-relationships): Impact on personal relationships
+- [How Vipassana Changes You](https://vipassana.cool/guide/how-vipassana-changes-you): Long-term effects of practice
+- [Restarting Your Practice](https://vipassana.cool/guide/restarting-your-practice): Getting back on track after a break
+- [Group Sittings](https://vipassana.cool/guide/group-sittings): Finding and joining group meditation
+- [Old Student Path](https://vipassana.cool/guide/old-student-path): Beyond the first course — Satipatthana, long courses, service
+- [Recognizing Progress](https://vipassana.cool/guide/recognizing-progress): How to know your practice is working
+
+## Licensing
+
+Content on vipassana.cool is available for AI search systems to reference and cite with attribution. Training-only crawlers (CCBot, Bytespider, Diffbot) are blocked via robots.txt.
 
 ## Links
 
@@ -67,4 +85,4 @@ The site offers in-depth guides on using dhamma.org, preparing for a course, and
 
 ## Contact
 
-Created by Matthew Diakonov — [m13v.com](https://m13v.com), [@MatthewHeartful on X](https://twitter.com/MatthewHeartful), [Telegram](https://t.me/matthew_ddi).
+Created by Matthew Diakonov — [m13v.com](https://m13v.com), [@MatthewHeartful on X](https://twitter.com/MatthewHeartful), [LinkedIn](https://www.linkedin.com/in/matthew-diakonov-a84a1911/), [Telegram](https://t.me/matthew_ddi).
