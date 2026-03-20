@@ -40,6 +40,13 @@ export default function HowVipassanaChangesYouPage() {
         datePublished="2025-09-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Real change from Vipassana is gradual, not dramatic — more like erosion than a lightning bolt. After 6 courses, the most significant shift is a widened gap between stimulus and response. You catch reactive patterns earlier, anger dissolves in minutes instead of days, and equanimity becomes more natural. Others notice the changes before you do. The "nothing is happening" plateau is common and often where the deepest work occurs. Change is cumulative: each course and each daily sitting builds on the last. The people who transform most are not those with the most dramatic experiences, but those who practice most consistently.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">The Myth of the Lightning Bolt</h2>
