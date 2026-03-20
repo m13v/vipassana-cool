@@ -215,7 +215,7 @@ export function MatchingDashboard() {
   }
 
   const sortedEntries = [...entries].sort((a, b) => {
-    const order: Record<string, number> = { pending: 0, engaged: 1, matched: 2, ended: 3 };
+    const order: Record<string, number> = { ready: 0, pending: 1, engaged: 2, contacted: 3, matched: 4, ended: 5 };
     return (order[a.status] ?? 9) - (order[b.status] ?? 9);
   });
 
@@ -324,6 +324,7 @@ export function MatchingDashboard() {
                     </td>
                     <td className="px-3 py-2">
                       <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                        e.status === "ready"     ? "bg-emerald-100 text-emerald-700" :
                         e.status === "pending"   ? "bg-yellow-100 text-yellow-700" :
                         e.status === "contacted" ? "bg-blue-100 text-blue-700" :
                         e.status === "engaged"   ? "bg-orange-100 text-orange-700" :
