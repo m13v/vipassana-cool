@@ -220,6 +220,29 @@ export async function advanceMatchOnReply(fromEmail: string): Promise<void> {
   }
 }
 
+// Expire confirming matches older than the given number of days.
+// Sets match → expired, moves both people back to pending.
+// If one person had confirmed (engaged), they go back to pending too.
+export async function expireStaleMatches(days: number = 7): Promise<{ expiredCount: number; expiredMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] }> {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT m.id, m.person_a_id, m.person_b_id, a.name as person_a_name, b.name as person_b_name
+    FROM matches m
+    JOIN waitlist_entries a ON a.id = m.person_a_id
+    JOIN waitlist_entries b ON b.id = m.person_b_id
+    WHERE m.status = 'confirming'
+      AND m.created_at < NOW() - make_interval(days => ${days})
+  `;
+  const expiredMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] = [];
+  for (const row of rows) {
+    await updateMatchStatus(row.id as string, "expired", "cron");
+    await updateEntryStatus(row.person_a_id as string, "pending", "cron", row.id as string, "match expired after " + days + " days");
+    await updateEntryStatus(row.person_b_id as string, "pending", "cron", row.id as string, "match expired after " + days + " days");
+    expiredMatches.push({ id: row.id as string, person_a_name: row.person_a_name as string | null, person_b_name: row.person_b_name as string | null });
+  }
+  return { expiredCount: expiredMatches.length, expiredMatches };
+}
+
 // Returns all person IDs that have ever been matched with this person (any status)
 export async function getPriorMatchedIds(personId: string): Promise<string[]> {
   const sql = getSql();
