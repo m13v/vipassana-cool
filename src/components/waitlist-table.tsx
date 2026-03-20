@@ -86,6 +86,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
   const [filter, setFilter] = useState<Filter>("all");
   const [setup, setSetup] = useState<QuickSetup>({ timezone: "", morningHour: "" });
   const [setupActive, setSetupActive] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(15);
 
   useEffect(() => {
     fetch("/api/waitlist/entries")
@@ -124,6 +125,14 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
       return true;
     });
   }, [entries, filter, setup, setupActive]);
+
+  const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
+  const hasMore = filtered.length > visibleCount;
+
+  // Reset visible count when filter changes
+  useEffect(() => {
+    setVisibleCount(15);
+  }, [filter, setupActive]);
 
   function statusLabel(e: WaitlistPerson): string {
     if (e.status === "passed") return e.passCount > 1 ? `Passed (${e.passCount})` : "Passed";
@@ -261,7 +270,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
             </tr>
           </thead>
           <tbody>
-            {filtered.map((e) => {
+            {visible.map((e) => {
               const st = STATUS_CONFIG[e.status] ?? STATUS_CONFIG.pending;
               return (
                 <tr key={e.id} className="border-b border-border last:border-0 transition-colors hover:bg-card-hover">
@@ -323,7 +332,7 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
 
       {/* Cards - Mobile */}
       <div className="sm:hidden space-y-3">
-        {filtered.map((e) => {
+        {visible.map((e) => {
           const st = STATUS_CONFIG[e.status] ?? STATUS_CONFIG.pending;
           return (
             <div key={e.id} className="rounded-xl border border-border bg-card p-4">
@@ -357,6 +366,18 @@ export function WaitlistTable({ onRequestMatch, onSetup }: { onRequestMatch?: (p
           );
         })}
       </div>
+
+      {/* Show More */}
+      {hasMore && (
+        <div className="text-center">
+          <button
+            onClick={() => setVisibleCount((c) => c + 15)}
+            className="rounded-lg border border-border bg-card px-5 py-2 text-sm font-medium text-muted transition-colors hover:border-accent/30 hover:text-foreground"
+          >
+            Show more ({filtered.length - visibleCount} remaining)
+          </button>
+        </div>
+      )}
 
       {counts.pending > 0 && (
         <p className="text-center text-xs text-muted">
