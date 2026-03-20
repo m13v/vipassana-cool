@@ -134,6 +134,22 @@ export async function createMatch(personAId: string, personBId: string): Promise
   return { id, person_a_id: personAId, person_b_id: personBId, status: "pending", created_at: now, notes: null, person_a_token: null, person_b_token: null, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
 }
 
+// End all active matches for a person. Sets matches to "ended" and partners back to "ready".
+export async function endActiveMatches(personId: string, note?: string): Promise<void> {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT id, person_a_id, person_b_id FROM matches
+    WHERE (person_a_id = ${personId} OR person_b_id = ${personId})
+      AND status IN ('confirming', 'pending', 'replied', 'scheduling', 'active')
+  `;
+  for (const row of rows) {
+    const partnerId = (row.person_a_id as string) === personId ? row.person_b_id as string : row.person_a_id as string;
+    await updateMatchStatus(row.id as string, "ended", "system");
+    // updateMatchStatus("ended") already sets both people to "ready",
+    // but the caller will override the re-submitter's status to "pending" after this
+  }
+}
+
 export async function updateMatchStatus(id: string, status: string, triggeredBy = "system"): Promise<void> {
   const sql = getSql();
   const current = await sql`SELECT status FROM matches WHERE id = ${id}`;
