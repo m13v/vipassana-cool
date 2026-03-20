@@ -40,6 +40,13 @@ export default function FirstCourseTipsPage() {
         datePublished="2025-09-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Days 2-4 are the hardest — nearly everyone wants to leave, but the technique changes on Day 4 and everything shifts. Physical pain is normal and subsides by Day 3-4. Use cushions or chairs freely, eat well at lunch (no dinner), bring warm layers, and ask the teacher questions without hesitation. The silence is easier than expected; the real challenge is your own mind. Start daily practice the day you get home.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <div className="space-y-8">
@@ -188,6 +195,24 @@ export default function FirstCourseTipsPage() {
         >
           Find a Course
         </a>
+      </div>
+
+      <div className="mt-12 rounded-xl border border-border bg-card p-6">
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/guide/vipassana-for-beginners" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana for Beginners
+          </Link>
+          <Link href="/guide/course-application-tips" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Course Application Tips
+          </Link>
+          <Link href="/guide/sensations-and-experiences" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Sensations &amp; Experiences
+          </Link>
+          <Link href="/guide/after-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            After the Retreat
+          </Link>
+        </div>
       </div>
 
       <PageComments pageId="guide-first-course-tips" />
