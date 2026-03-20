@@ -40,6 +40,13 @@ export default function CourseProgressionPage() {
         datePublished="2025-06-01"
       />
 
+      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
+        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
+        <p className="text-sm text-muted">
+          Beyond the initial 10-day course, Vipassana offers a structured progression: Satipatthana Sutta courses (after 3+ ten-day courses and 1 year of daily practice), 20-day courses (after 5+ ten-day courses), 30-day, 45-day, and 60-day long courses with increasingly strict prerequisites. Each level requires consistent daily practice of 2 hours and Dhamma service experience. The progression is designed to deepen practice gradually over years, not to rush through milestones.
+        </p>
+      </div>
+
       <div className="space-y-8 text-muted">
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What is the Vipassana course progression path?</h2>
