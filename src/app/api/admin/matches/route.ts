@@ -4,6 +4,7 @@ import { neon } from "@neondatabase/serverless";
 import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, updateEntryStatus, confirmMatchPerson } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml } from "@/lib/emails";
+import type { MeetLinkInfo } from "@/lib/emails";
 
 function checkAuth(request: NextRequest): boolean {
   const secret = request.headers.get("authorization")?.replace("Bearer ", "")
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { personAId, personBId, sendEmail = true, sendConfirmation = false } = await request.json();
+  const { personAId, personBId, sendEmail = true, sendConfirmation = false, meetLinkA, meetLinkB } = await request.json();
 
   if (!personAId || !personBId) {
     return NextResponse.json({ error: "personAId and personBId required" }, { status: 400 });
