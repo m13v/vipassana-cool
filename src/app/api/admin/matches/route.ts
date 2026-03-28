@@ -101,23 +101,51 @@ export async function POST(request: NextRequest) {
     if (aReady && bReady) {
       const match = await createMatch(personAId, personBId);
       const resend = new Resend(process.env.RESEND_API_KEY);
-      const html = buildIntroEmailHtml(personA, personB);
-      const emailResult = await resend.emails.send({
-        from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-        to: [personA.email, personB.email],
-        replyTo: [personA.email, personB.email],
-        subject: "Your Practice Buddy match is here",
-        html,
-        headers: { "X-Entity-Ref-ID": match.id },
-      });
-      try {
-        const sql = neon(process.env.DATABASE_URL!);
-        await sql`
-          INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
-        `;
-      } catch (dbErr) {
-        console.error("Failed to log intro email:", dbErr);
+      const sql = neon(process.env.DATABASE_URL!);
+
+      // If meet tracking links provided, send per-person emails so each gets their unique tracking URL
+      if (meetLinkA && meetLinkB) {
+        for (const [person, otherPerson, trackingUrl] of [
+          [personA, personB, meetLinkA],
+          [personB, personA, meetLinkB],
+        ] as [WaitlistEntry, WaitlistEntry, string][]) {
+          const meetInfo: MeetLinkInfo = { trackingUrl };
+          const html = buildIntroEmailHtml(person === personA ? personA : personB, person === personA ? personB : personA, meetInfo);
+          const emailResult = await resend.emails.send({
+            from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+            to: [personA.email, personB.email],
+            replyTo: [personA.email, personB.email],
+            subject: "Your Practice Buddy match is here",
+            html,
+            headers: { "X-Entity-Ref-ID": match.id },
+          });
+          try {
+            await sql`
+              INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+              VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+            `;
+          } catch (dbErr) {
+            console.error("Failed to log intro email:", dbErr);
+          }
+        }
+      } else {
+        const html = buildIntroEmailHtml(personA, personB);
+        const emailResult = await resend.emails.send({
+          from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+          to: [personA.email, personB.email],
+          replyTo: [personA.email, personB.email],
+          subject: "Your Practice Buddy match is here",
+          html,
+          headers: { "X-Entity-Ref-ID": match.id },
+        });
+        try {
+          await sql`
+            INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+          `;
+        } catch (dbErr) {
+          console.error("Failed to log intro email:", dbErr);
+        }
       }
       return NextResponse.json({ success: true, matchId: match.id, status: "matched", flow: "both-ready" });
     }
