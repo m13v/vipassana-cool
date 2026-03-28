@@ -59,9 +59,14 @@ function tzOffsetMinutes(tz: string): number {
     return (gmtMatch[1] === "+" ? 1 : -1) * (parseInt(gmtMatch[2]) * 60 + parseInt(gmtMatch[3] || "0"));
   }
   try {
-    const now = new Date();
-    const local = new Date(now.toLocaleString("en-US", { timeZone: tz })).getTime();
-    return Math.round((local - now.getTime()) / 60000);
+    // Use Intl.DateTimeFormat to reliably extract the UTC offset for an IANA timezone
+    const fmt = new Intl.DateTimeFormat("en-US", { timeZone: tz, timeZoneName: "shortOffset" });
+    const parts = fmt.formatToParts(new Date());
+    const tzPart = parts.find(p => p.type === "timeZoneName")?.value || "";
+    // tzPart looks like "GMT+1", "GMT-5", "GMT+5:30", "GMT"
+    const offsetMatch = tzPart.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);
+    if (!offsetMatch) return 0; // "GMT" with no offset = UTC
+    return (offsetMatch[1] === "+" ? 1 : -1) * (parseInt(offsetMatch[2]) * 60 + parseInt(offsetMatch[3] || "0"));
   } catch { return 0; }
 }
 
