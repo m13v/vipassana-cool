@@ -93,7 +93,10 @@ export function PracticeBuddyClient() {
             />
           </div>
           <p className="mt-6 text-center text-sm text-muted">
-            You get a permanent Google Meet link. Join at your sit time, play a Goenka recording, meditate together. No scheduling, no app &mdash; just show up.
+            You get a permanent Google Meet link. Join at your sit time, play a Goenka recording, meditate together. No scheduling, no app &mdash; just show up.{" "}
+            <a href="/practice-buddy/how-it-works" className="text-accent hover:underline">
+              Learn how it works in detail →
+            </a>
           </p>
         </div>
       </section>
