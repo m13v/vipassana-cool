@@ -108,6 +108,38 @@ export type MeetLinkInfo = {
   trackingUrl: string; // per-person tracking URL
 };
 
+export type SessionContext = {
+  session: "morning" | "evening";
+  utcTime: string; // "06:00"
+};
+
+/** Format UTC time as "06:00 (6:00am)" — both 24h and 12h formats */
+function formatDualTime(utcTime: string | null): string {
+  if (!utcTime) return "";
+  const [h, m] = utcTime.split(":").map(Number);
+  if (isNaN(h)) return utcTime;
+  const time24 = `${String(h).padStart(2, "0")}:${String(m || 0).padStart(2, "0")}`;
+  const suffix = h >= 12 ? "pm" : "am";
+  const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  const time12 = `${h12}:${String(m || 0).padStart(2, "0")}${suffix}`;
+  return `${time24} (${time12})`;
+}
+
+/** Get the UTC time for a person's session slot */
+export function getSessionUtcTime(person: WaitlistEntry, session: "morning" | "evening"): string {
+  return (session === "evening" ? person.evening_utc : person.morning_utc) || "06:00";
+}
+
+/** Build subject line for confirmation email */
+export function buildConfirmationSubject(sessionCtx: SessionContext): string {
+  return `I found a practice buddy for your ${sessionCtx.session} session at ${formatDualTime(sessionCtx.utcTime)} UTC`;
+}
+
+/** Build subject line for intro email */
+export function buildIntroSubject(sessionCtx: SessionContext): string {
+  return `Your Practice Buddy match – ${sessionCtx.session} session at ${formatDualTime(sessionCtx.utcTime)} UTC`;
+}
+
 export function buildIntroEmailHtml(
   personA: WaitlistEntry,
   personB: WaitlistEntry,
