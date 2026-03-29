@@ -11,7 +11,7 @@ import {
   confirmMatchPerson,
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
-import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionUtcTime } from "@/lib/emails";
+import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionUtcTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
@@ -317,7 +317,7 @@ export async function GET(request: NextRequest) {
           [personB, personA, trackTokenB, sessCtxB],
         ] as [typeof personA, typeof personB, string, SessionContext][]) {
           const meetInfo: MeetLinkInfo = { trackingUrl: `${baseUrl}/meet/${trackToken}` };
-          const html = buildIntroEmailHtml(person, other, meetInfo, introSessionCtx);
+          const html = buildIntroEmailHtml(person, other, meetInfo, introSessionCtx, buildUnsubscribeUrl(person.unsubscribe_token));
           const subject = buildIntroSubject(sessCtx);
           const emailResult = await resend!.emails.send({
             from: "Matt from Vipassana.cool <matt@vipassana.cool>",
@@ -362,7 +362,7 @@ export async function GET(request: NextRequest) {
         if (!bReady) toConfirm.push([personB, personA, match.person_b_token!, sessCtxB, sessCtxA]);
 
         for (const [recipient, matchedWith, token, recipientSessCtx, matchSessCtx] of toConfirm) {
-          const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx });
+          const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx }, buildUnsubscribeUrl(recipient.unsubscribe_token));
           const subject = buildConfirmationSubject(recipientSessCtx);
           const emailResult = await resend!.emails.send({
             from: "Matt from Vipassana.cool <matt@vipassana.cool>",
