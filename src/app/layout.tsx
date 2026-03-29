@@ -13,26 +13,27 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL("https://vipassana.cool"),
   title: {
-    default: "Vipassana.cool — Your Guide to Vipassana Meditation & dhamma.org",
+    default: "Vipassana.cool — Find a Daily Meditation Practice Buddy",
     template: "%s | Vipassana.cool",
   },
   description:
-    "An unofficial guide to Vipassana meditation and dhamma.org. FAQ, preparation tips, personal experiences, and everything you need to know before your first 10-day course.",
+    "Get matched with a fellow Vipassana meditator for daily practice over Google Meet. Plus guides, FAQ, preparation tips, and personal experiences for your 10-day course.",
   keywords: [
     "vipassana",
     "vipassana meditation",
+    "practice buddy",
+    "meditation accountability",
     "dhamma.org",
     "10-day course",
     "S.N. Goenka",
     "meditation retreat",
-    "silent meditation",
-    "mindfulness",
-    "meditation guide",
+    "meditation partner",
+    "daily meditation",
   ],
   openGraph: {
-    title: "Vipassana.cool — Your Guide to Vipassana Meditation",
+    title: "Vipassana.cool — Find a Daily Meditation Practice Buddy",
     description:
-      "An unofficial guide to Vipassana meditation and dhamma.org. Everything you need to know before your first 10-day course.",
+      "Get matched with a fellow Vipassana meditator for daily practice over Google Meet. Free, tradition-respectful accountability.",
     url: "https://vipassana.cool",
     siteName: "Vipassana.cool",
     locale: "en_US",
@@ -40,9 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vipassana.cool — Your Guide to Vipassana Meditation",
+    title: "Vipassana.cool — Find a Daily Meditation Practice Buddy",
     description:
-      "An unofficial guide to Vipassana meditation and dhamma.org. Everything you need to know before your first 10-day course.",
+      "Get matched with a fellow Vipassana meditator for daily practice over Google Meet. Free, tradition-respectful accountability.",
   },
   robots: {
     index: true,
