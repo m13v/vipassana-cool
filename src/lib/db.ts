@@ -34,6 +34,8 @@ export type Match = {
   id: string;
   person_a_id: string;
   person_b_id: string;
+  person_a_session: string | null; // 'morning' or 'evening'
+  person_b_session: string | null; // 'morning' or 'evening'
   status: string;
   created_at: string | null;
   notes: string | null;
@@ -162,16 +164,16 @@ export async function getAllMatches(): Promise<(Match & { person_a: WaitlistEntr
   return result;
 }
 
-export async function createMatch(personAId: string, personBId: string): Promise<Match> {
+export async function createMatch(personAId: string, personBId: string, sessionA = "morning", sessionB = "morning"): Promise<Match> {
   const sql = getSql();
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
-  await sql`INSERT INTO matches (id, person_a_id, person_b_id, status, created_at) VALUES (${id}, ${personAId}, ${personBId}, 'pending', ${now})`;
+  await sql`INSERT INTO matches (id, person_a_id, person_b_id, person_a_session, person_b_session, status, created_at) VALUES (${id}, ${personAId}, ${personBId}, ${sessionA}, ${sessionB}, 'pending', ${now})`;
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personAId}, ${id}, 'match_created', 'pending', 'admin')`;
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personBId}, ${id}, 'match_created', 'pending', 'admin')`;
   await updateEntryStatus(personAId, "matched", "admin", id);
   await updateEntryStatus(personBId, "matched", "admin", id);
-  return { id, person_a_id: personAId, person_b_id: personBId, status: "pending", created_at: now, notes: null, person_a_token: null, person_b_token: null, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
+  return { id, person_a_id: personAId, person_b_id: personBId, person_a_session: sessionA, person_b_session: sessionB, status: "pending", created_at: now, notes: null, person_a_token: null, person_b_token: null, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
 }
 
 // End all active matches for a person. Sets matches to "ended" and partners back to "ready".
@@ -230,19 +232,19 @@ export async function declineMatch(matchId: string, declinerId: string): Promise
   await updateEntryStatus(partnerId, partnerConfirmed ? "ready" : "pending", "user_click", matchId, "partner declined");
 }
 
-export async function createMatchWithTokens(personAId: string, personBId: string): Promise<Match> {
+export async function createMatchWithTokens(personAId: string, personBId: string, sessionA = "morning", sessionB = "morning"): Promise<Match> {
   const sql = getSql();
   const id = crypto.randomUUID();
   const tokenA = crypto.randomUUID();
   const tokenB = crypto.randomUUID();
   const now = new Date().toISOString();
   await sql`
-    INSERT INTO matches (id, person_a_id, person_b_id, status, created_at, person_a_token, person_b_token, person_a_confirmed, person_b_confirmed)
-    VALUES (${id}, ${personAId}, ${personBId}, 'confirming', ${now}, ${tokenA}, ${tokenB}, false, false)
+    INSERT INTO matches (id, person_a_id, person_b_id, person_a_session, person_b_session, status, created_at, person_a_token, person_b_token, person_a_confirmed, person_b_confirmed)
+    VALUES (${id}, ${personAId}, ${personBId}, ${sessionA}, ${sessionB}, 'confirming', ${now}, ${tokenA}, ${tokenB}, false, false)
   `;
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personAId}, ${id}, 'match_created', 'confirming', 'admin')`;
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personBId}, ${id}, 'match_created', 'confirming', 'admin')`;
-  return { id, person_a_id: personAId, person_b_id: personBId, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
+  return { id, person_a_id: personAId, person_b_id: personBId, person_a_session: sessionA, person_b_session: sessionB, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
 }
 
 // Auto-advance match status when an inbound email is received from a matched person:
@@ -316,6 +318,22 @@ export async function expireStaleMatches(days: number = 7): Promise<{ expiredCou
     expiredMatches.push({ id: row.id as string, person_a_name: row.person_a_name as string | null, person_b_name: row.person_b_name as string | null });
   }
   return { expiredCount: expiredMatches.length, expiredMatches };
+}
+
+// Check if a specific session slot (person + morning/evening) is already in an active match.
+// Returns the match ID if blocked, null if available.
+export async function getActiveMatchForSession(personId: string, session: string): Promise<string | null> {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT id FROM matches
+    WHERE status IN ('confirming', 'pending', 'replied', 'scheduling', 'active')
+      AND (
+        (person_a_id = ${personId} AND person_a_session = ${session})
+        OR (person_b_id = ${personId} AND person_b_session = ${session})
+      )
+    LIMIT 1
+  `;
+  return rows.length > 0 ? (rows[0].id as string) : null;
 }
 
 // Returns person IDs that have had a meaningful prior match with this person.
