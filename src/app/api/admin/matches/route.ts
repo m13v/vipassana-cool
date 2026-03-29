@@ -3,7 +3,7 @@ import { Resend } from "resend";
 import { neon } from "@neondatabase/serverless";
 import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, getActiveMatchForSession, updateEntryStatus, confirmMatchPerson } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
-import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionUtcTime } from "@/lib/emails";
+import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionUtcTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 
 function checkAuth(request: NextRequest): boolean {
@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
           [personB, personA, meetLinkB, sessCtxB],
         ] as [WaitlistEntry, WaitlistEntry, string, SessionContext][]) {
           const meetInfo: MeetLinkInfo = { trackingUrl };
-          const html = buildIntroEmailHtml(person === personA ? personA : personB, person === personA ? personB : personA, meetInfo, introSessionCtx);
+          const html = buildIntroEmailHtml(person === personA ? personA : personB, person === personA ? personB : personA, meetInfo, introSessionCtx, buildUnsubscribeUrl(person.unsubscribe_token));
           const subject = buildIntroSubject(sessCtx);
           const emailResult = await resend.emails.send({
             from: "Matt from Vipassana.cool <matt@vipassana.cool>",
@@ -181,7 +181,7 @@ export async function POST(request: NextRequest) {
     if (!bReady) toConfirm.push([personB, personA, match.person_b_token!, "b", sessCtxB, sessCtxA]);
 
     for (const [recipient, matchedWith, token, , recipientSessCtx, matchSessCtx] of toConfirm) {
-      const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx });
+      const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx }, buildUnsubscribeUrl(recipient.unsubscribe_token));
       const subject = buildConfirmationSubject(recipientSessCtx);
       const emailResult = await resend.emails.send({
         from: "Matt from Vipassana.cool <matt@vipassana.cool>",
