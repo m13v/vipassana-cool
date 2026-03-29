@@ -296,10 +296,10 @@ export async function expireStaleMatches(days: number = 7): Promise<{ expiredCou
   `;
   const expiredMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] = [];
   for (const row of rows) {
-    const match = await sql`SELECT person_a_confirmed, person_b_confirmed FROM matches WHERE id = ${row.id as string}`;
-    const m = match[0] as { person_a_confirmed: boolean; person_b_confirmed: boolean } | undefined;
+    const match = await sql`SELECT person_a_confirmed, person_b_confirmed, person_a_session, person_b_session FROM matches WHERE id = ${row.id as string}`;
+    const m = match[0] as { person_a_confirmed: boolean; person_b_confirmed: boolean; person_a_session: string | null; person_b_session: string | null } | undefined;
     await updateMatchStatus(row.id as string, "expired", "cron");
-    // Only reset person status if they don't have another active match
+    // Only reset person status if they don't have another active match for ANY session
     for (const [personId, confirmed] of [
       [row.person_a_id as string, m?.person_a_confirmed],
       [row.person_b_id as string, m?.person_b_confirmed],
