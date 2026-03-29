@@ -284,6 +284,7 @@ export async function GET(request: NextRequest) {
           meetResult = await createMeetEvent(
             `Vipassana Practice Buddy – ${nameA} & ${nameB}`,
             bestUtcTime, duration, slug,
+            [personA.email, personB.email],
           );
         } catch (err) {
           errors.push({
