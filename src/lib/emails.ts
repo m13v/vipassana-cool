@@ -43,15 +43,65 @@ function formatTimezone(tz: string | null): string {
   return friendly[tz] || tz;
 }
 
+function utcToMinutes(utc: string | null): number | null {
+  if (!utc) return null;
+  const [h, m] = utc.split(":").map(Number);
+  return h * 60 + m;
+}
+
 function utcDiffMinutes(utcA: string | null, utcB: string | null): number | null {
-  if (!utcA || !utcB) return null;
-  const [hA, mA] = utcA.split(":").map(Number);
-  const [hB, mB] = utcB.split(":").map(Number);
-  const minsA = hA * 60 + mA;
-  const minsB = hB * 60 + mB;
+  const minsA = utcToMinutes(utcA);
+  const minsB = utcToMinutes(utcB);
+  if (minsA === null || minsB === null) return null;
   let diff = Math.abs(minsA - minsB);
-  if (diff > 720) diff = 1440 - diff; // wrap around midnight
+  if (diff > 720) diff = 1440 - diff;
   return diff;
+}
+
+function tzOffsetMinutes(tz: string | null): number {
+  if (!tz) return 0;
+  const aliases: Record<string, string> = { "eastern time": "America/New_York", "est": "America/New_York", "pst": "America/Los_Angeles" };
+  const alias = aliases[tz.toLowerCase().trim()];
+  if (alias) tz = alias;
+  if (tz.startsWith("GMT") || tz.startsWith("UTC")) {
+    const match = tz.match(/([+-])(\d{1,2})(?::(\d{2}))?/);
+    if (!match) return 0;
+    return (match[1] === "+" ? 1 : -1) * (parseInt(match[2]) * 60 + parseInt(match[3] || "0"));
+  }
+  try {
+    const fmt = new Intl.DateTimeFormat("en-US", { timeZone: tz, timeZoneName: "shortOffset" });
+    const parts = fmt.formatToParts(new Date());
+    const tzPart = parts.find(p => p.type === "timeZoneName")?.value || "";
+    const offsetMatch = tzPart.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);
+    if (!offsetMatch) return 0;
+    return (offsetMatch[1] === "+" ? 1 : -1) * (parseInt(offsetMatch[2]) * 60 + parseInt(offsetMatch[3] || "0"));
+  } catch { return 0; }
+}
+
+function utcMinutesToLocalTime(utcMins: number, offset: number): string {
+  const local = (utcMins + offset + 1440) % 1440;
+  const h = Math.floor(local / 60);
+  const m = local % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+}
+
+function findBestOverlap(a: WaitlistEntry, b: WaitlistEntry): { aUtc: number; bUtc: number; diff: number } | null {
+  const slots = [
+    { aUtc: utcToMinutes(a.morning_utc), bUtc: utcToMinutes(b.morning_utc) },
+    { aUtc: utcToMinutes(a.evening_utc), bUtc: utcToMinutes(b.evening_utc) },
+    { aUtc: utcToMinutes(a.morning_utc), bUtc: utcToMinutes(b.evening_utc) },
+    { aUtc: utcToMinutes(a.evening_utc), bUtc: utcToMinutes(b.morning_utc) },
+  ].filter((s): s is { aUtc: number; bUtc: number } => s.aUtc !== null && s.bUtc !== null);
+
+  let best: { aUtc: number; bUtc: number; diff: number } | null = null;
+  for (const s of slots) {
+    let diff = Math.abs(s.aUtc - s.bUtc);
+    if (diff > 720) diff = 1440 - diff;
+    if (best === null || diff < best.diff) {
+      best = { ...s, diff };
+    }
+  }
+  return best;
 }
 
 export type MeetLinkInfo = {
@@ -70,27 +120,59 @@ export function buildIntroEmailHtml(
     ? `<ul style="font-size:15px;line-height:1.8;margin:0 0 16px;padding-left:20px;">${traits.map((t) => `<li>${t}</li>`).join("")}</ul>`
     : "";
 
-  // Build time overlap section
+  // Build time overlap section with suggested meeting time
   let timeHtml = "";
-  const timeA = formatLocalTime(personA.morning_time);
-  const timeB = formatLocalTime(personB.morning_time);
   const tzA = formatTimezone(personA.timezone);
   const tzB = formatTimezone(personB.timezone);
-  const diff = utcDiffMinutes(personA.morning_utc, personB.morning_utc);
+  const best = findBestOverlap(personA, personB);
 
-  if (timeA && timeB && tzA && tzB) {
-    const diffText = diff === 0
-      ? "at the exact same time"
-      : diff !== null && diff <= 60
-        ? `just ${diff} minutes apart`
-        : "around the same time";
-
+  if (best && tzA && tzB) {
+    const offsetA = tzOffsetMinutes(personA.timezone);
+    const offsetB = tzOffsetMinutes(personB.timezone);
     const sameZone = personA.timezone === personB.timezone;
-    const timeLine = sameZone
-      ? `You both sit at ${timeA} (${tzA}) &mdash; ${diffText}.`
-      : `${nameA} sits at ${timeA} (${tzA}) and ${nameB} at ${timeB} (${tzB}) &mdash; ${diffText}.`;
 
-    timeHtml = `<p style="font-size:15px;line-height:1.7;margin:0 0 16px;">&#128336; <strong>${timeLine}</strong></p>`;
+    if (best.diff === 0) {
+      const localA = formatLocalTime(utcMinutesToLocalTime(best.aUtc, offsetA));
+      const localB = formatLocalTime(utcMinutesToLocalTime(best.bUtc, offsetB));
+      const timeLine = sameZone
+        ? `You both sit at ${localA} (${tzA}) &mdash; at the exact same time.`
+        : `${nameA} sits at ${localA} (${tzA}) and ${nameB} at ${localB} (${tzB}) &mdash; at the exact same time.`;
+      timeHtml = `<p style="font-size:15px;line-height:1.7;margin:0 0 16px;">&#128336; <strong>${timeLine}</strong></p>`;
+    } else {
+      // Calculate midpoint, round to nearest 30 min
+      let midUtc: number;
+      if (Math.abs(best.aUtc - best.bUtc) > 720) {
+        midUtc = Math.round(((best.aUtc + best.bUtc + 1440) / 2)) % 1440;
+      } else {
+        midUtc = Math.round((best.aUtc + best.bUtc) / 2);
+      }
+      midUtc = Math.round(midUtc / 30) * 30;
+      midUtc = midUtc % 1440;
+
+      const meetLocalA = formatLocalTime(utcMinutesToLocalTime(midUtc, offsetA));
+      const meetLocalB = formatLocalTime(utcMinutesToLocalTime(midUtc, offsetB));
+
+      let shiftA = midUtc - best.aUtc;
+      if (shiftA > 720) shiftA -= 1440;
+      if (shiftA < -720) shiftA += 1440;
+      let shiftB = midUtc - best.bUtc;
+      if (shiftB > 720) shiftB -= 1440;
+      if (shiftB < -720) shiftB += 1440;
+
+      const notes: string[] = [];
+      if (shiftA !== 0) notes.push(`${Math.abs(shiftA)} min ${shiftA > 0 ? "later" : "earlier"} for ${nameA}`);
+      if (shiftB !== 0) notes.push(`${Math.abs(shiftB)} min ${shiftB > 0 ? "later" : "earlier"} for ${nameB}`);
+
+      let timeLine: string;
+      if (sameZone) {
+        timeLine = `I suggest meeting at <strong>${meetLocalA} (${tzA})</strong>`;
+      } else {
+        timeLine = `I suggest meeting at <strong>${meetLocalA} (${tzA})</strong> / <strong>${meetLocalB} (${tzB})</strong>`;
+      }
+      if (notes.length > 0) timeLine += ` &mdash; that's ${notes.join(", ")}.`;
+
+      timeHtml = `<p style="font-size:15px;line-height:1.7;margin:0 0 16px;">&#128336; ${timeLine}</p>`;
+    }
   }
 
   // Build Google Meet section
