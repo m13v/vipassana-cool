@@ -106,14 +106,15 @@ export async function getEntryByEmail(email: string): Promise<WaitlistEntry | un
   return rows[0] as WaitlistEntry | undefined;
 }
 
-export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated_at" | "pass_count" | "contact_count" | "morning_utc" | "evening_utc">): Promise<void> {
+export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated_at" | "pass_count" | "contact_count" | "morning_utc" | "evening_utc" | "unsubscribed" | "unsubscribe_token">): Promise<void> {
   const sql = getSql();
   const now = new Date().toISOString();
   const morningUtc = toUtcTime(entry.morning_time, entry.timezone);
   const eveningUtc = toUtcTime(entry.evening_time, entry.timezone);
+  const unsubToken = crypto.randomUUID();
   await sql`
-    INSERT INTO waitlist_entries (id, email, name, is_old_student, is_goenka_tradition, timezone, city, frequency, morning_time, evening_time, days, session_duration, has_maintained_practice, practice_length, requested_match_id, research_notes, morning_utc, evening_utc, status, created_at, updated_at)
-    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${entry.morning_time}, ${entry.evening_time}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, ${entry.requested_match_id}, ${entry.research_notes}, ${morningUtc}, ${eveningUtc}, 'pending', ${entry.created_at}, ${now})
+    INSERT INTO waitlist_entries (id, email, name, is_old_student, is_goenka_tradition, timezone, city, frequency, morning_time, evening_time, days, session_duration, has_maintained_practice, practice_length, requested_match_id, research_notes, morning_utc, evening_utc, status, unsubscribe_token, created_at, updated_at)
+    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${entry.morning_time}, ${entry.evening_time}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, ${entry.requested_match_id}, ${entry.research_notes}, ${morningUtc}, ${eveningUtc}, 'pending', ${unsubToken}, ${entry.created_at}, ${now})
     ON CONFLICT(email) DO UPDATE SET
       name = COALESCE(EXCLUDED.name, waitlist_entries.name),
       is_old_student = COALESCE(EXCLUDED.is_old_student, waitlist_entries.is_old_student),
