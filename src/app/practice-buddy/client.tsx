@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { WaitlistTable } from "@/components/waitlist-table";
 import { WaitlistSignup } from "@/components/waitlist-signup";
 
@@ -10,7 +10,18 @@ type SignupPrefill = { timezone?: string; morningTime?: string; frequency?: stri
 export function PracticeBuddyClient() {
   const [matchRequest, setMatchRequest] = useState<{ id: string; name: string } | null>(null);
   const [prefill, setPrefill] = useState<SignupPrefill | null>(null);
+  const [matchedCount, setMatchedCount] = useState<number | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/waitlist?stats=true")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.matchedCount != null) setMatchedCount(data.matchedCount);
+        else if (data.entries) setMatchedCount(data.entries.filter((e: { status: string }) => e.status === "matched").length);
+      })
+      .catch(() => {});
+  }, []);
 
   function handleRequestMatch(personId: string, personName: string) {
     setMatchRequest({ id: personId, name: personName });
@@ -21,10 +32,8 @@ export function PracticeBuddyClient() {
   }
 
   function handleSetup(setup: QuickSetup) {
-    // Convert hour number to HH:00 for the signup form's time input
     const morningTime = setup.morningHour !== "" ? `${setup.morningHour.padStart(2, "0")}:00` : "";
     setPrefill({ timezone: setup.timezone, morningTime, frequency: "" });
-    // Scroll to form
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -32,25 +41,65 @@ export function PracticeBuddyClient() {
     <>
       {/* Hero */}
       <section className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <p className="mb-4 text-sm font-medium tracking-widest uppercase text-accent">
-          Coming Soon
-        </p>
         <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
           Practice Buddy
         </h1>
-        <p className="mx-auto mb-10 max-w-2xl text-lg text-muted">
+        <p className="mx-auto mb-6 max-w-2xl text-lg text-muted">
           Get matched with a fellow Vipassana meditator who shares your commitment,
-          time zone, and practice goals. Check in with each other. Stay on the path.
+          time zone, and practice goals. Meditate together over Google Meet every day.
         </p>
+        {matchedCount !== null && matchedCount > 0 && (
+          <p className="mb-8 text-2xl font-bold text-accent">
+            {matchedCount} meditators matched so far
+          </p>
+        )}
         <a
           href="#waitlist-form"
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
-          Apply to Be Matched
+          Get Matched
         </a>
       </section>
 
-      {/* Who's Waiting — right after hero */}
+      {/* How It Works — animated flow */}
+      <section className="border-t border-border bg-card/50">
+        <div className="mx-auto max-w-3xl px-6 py-12">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-2 text-center">
+            <FlowStep
+              icon={<svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>}
+              title="Sign up"
+              subtitle="2 min form"
+              delay={0}
+            />
+            <FlowArrow />
+            <FlowStep
+              icon={<svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>}
+              title="Get matched"
+              subtitle="By time & style"
+              delay={1}
+            />
+            <FlowArrow />
+            <FlowStep
+              icon={<svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>}
+              title="Meet daily"
+              subtitle="Google Meet link"
+              delay={2}
+            />
+            <FlowArrow />
+            <FlowStep
+              icon={<svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>}
+              title="Stay consistent"
+              subtitle="Same time, every day"
+              delay={3}
+            />
+          </div>
+          <p className="mt-6 text-center text-sm text-muted">
+            You get a permanent Google Meet link. Join at your sit time, play a Goenka recording, meditate together. No scheduling, no app &mdash; just show up.
+          </p>
+        </div>
+      </section>
+
+      {/* Who's Waiting — right after flow */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-16">
           <h2 className="mb-8 text-2xl font-bold">Who&apos;s Waiting</h2>
@@ -102,7 +151,7 @@ export function PracticeBuddyClient() {
       {/* Social proof one-liner */}
       <section className="border-t border-border bg-accent/5">
         <div className="mx-auto max-w-3xl px-6 py-5 text-center text-sm text-muted">
-          12 meditators matched so far — from Paris to Delhi to Berlin.{" "}
+          {matchedCount !== null && matchedCount > 0 ? `${matchedCount} meditators matched` : "Meditators matched"} so far — from Paris to Delhi to San Diego.{" "}
           <a
             href="https://old.reddit.com/r/vipassana/comments/1roib8y/the_real_reason_most_of_us_lose_our_practice/"
             target="_blank"
@@ -144,27 +193,27 @@ export function PracticeBuddyClient() {
       {/* How It Works */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-16">
-          <h2 className="mb-8 text-2xl font-bold">How It Will Work</h2>
+          <h2 className="mb-8 text-2xl font-bold">How It Works</h2>
           <div className="space-y-8">
             <Step
               number="1"
               title="Tell us about your practice"
-              description="How many courses you've completed, your time zone, your current practice goals, what you struggle with, and how you prefer to communicate."
+              description="Fill out a short form — your time zone, when you sit, session duration, and experience level. Takes about 2 minutes."
             />
             <Step
               number="2"
               title="Get matched"
-              description="We pair you with another old student who shares your commitment level and schedule. Not randomly — based on compatibility."
+              description="We manually review every signup and pair you with someone who sits at a compatible time. You'll get an email with your match and a shared Google Meet link."
             />
             <Step
               number="3"
-              title="Check in regularly"
-              description="A simple daily or weekly check-in with your buddy. Did you sit today? How was it? What's hard right now? No tracking app — just honest conversation."
+              title="Meditate together daily"
+              description="Open the same Meet link at your sit time every day. When your buddy joins, one of you plays a Goenka recording and shares their screen. Meditate together, chat after, and go about your day."
             />
             <Step
               number="4"
-              title="Rotate or stay"
-              description="After a month, you can keep your buddy or get a new match. Some pairs last months. Some become lifelong Dhamma friends."
+              title="Keep going"
+              description="The link never changes — same time, same link, every day. If life changes, we'll find you a new buddy. Some pairs last months. Some become lifelong Dhamma friends."
             />
           </div>
         </div>
@@ -352,6 +401,41 @@ function MatchCriteria({
     <div className="rounded-lg border border-border p-4">
       <h3 className="mb-1 text-sm font-semibold">{title}</h3>
       <p className="text-xs text-muted">{description}</p>
+    </div>
+  );
+}
+
+function FlowStep({
+  icon,
+  title,
+  subtitle,
+  delay,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+  delay: number;
+}) {
+  return (
+    <div
+      className="flex flex-col items-center gap-2 opacity-0 animate-[fadeSlideUp_0.5s_ease-out_forwards]"
+      style={{ animationDelay: `${delay * 200}ms` }}
+    >
+      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10">
+        {icon}
+      </div>
+      <p className="text-sm font-semibold">{title}</p>
+      <p className="text-xs text-muted">{subtitle}</p>
+    </div>
+  );
+}
+
+function FlowArrow() {
+  return (
+    <div className="hidden sm:flex items-center justify-center text-accent/40">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
     </div>
   );
 }
