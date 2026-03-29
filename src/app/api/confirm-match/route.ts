@@ -9,7 +9,7 @@ import {
   updateEntryStatus,
   declineMatch,
 } from "@/lib/db";
-import { buildIntroEmailHtml, buildIntroSubject, getSessionUtcTime } from "@/lib/emails";
+import { buildIntroEmailHtml, buildIntroSubject, getSessionUtcTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
@@ -123,7 +123,7 @@ export async function GET(request: NextRequest) {
         [personA, personB, meetInfoA, sessCtxA],
         [personB, personA, meetInfoB, sessCtxB],
       ] as [typeof personA, typeof personB, MeetLinkInfo, SessionContext][]) {
-        const html = buildIntroEmailHtml(person, other, meetInfo, introSessionCtx);
+        const html = buildIntroEmailHtml(person, other, meetInfo, introSessionCtx, buildUnsubscribeUrl(person.unsubscribe_token));
         const subject = buildIntroSubject(sessCtx);
         const emailResult = await resend.emails.send({
           from: "Matt from Vipassana.cool <matt@vipassana.cool>",
