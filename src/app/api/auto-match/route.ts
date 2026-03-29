@@ -11,8 +11,8 @@ import {
   confirmMatchPerson,
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
-import { buildIntroEmailHtml, buildConfirmationEmailHtml } from "@/lib/emails";
-import type { MeetLinkInfo } from "@/lib/emails";
+import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionUtcTime } from "@/lib/emails";
+import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
 /**
@@ -245,12 +245,14 @@ export async function GET(request: NextRequest) {
         const flow = aReady && bReady
           ? "both-ready (instant intro)"
           : aReady || bReady ? "one-ready" : "both-pending";
+        const dryCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session) };
+        const dryCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session) };
         let htmlOk = false;
         try {
           if (aReady && bReady) {
-            buildIntroEmailHtml(personA, personB);
+            buildIntroEmailHtml(personA, personB, undefined, { sessionA: dryCtxA, sessionB: dryCtxB });
           } else {
-            buildConfirmationEmailHtml(personA, personB, "dry-run-token");
+            buildConfirmationEmailHtml(personA, personB, "dry-run-token", { recipientSession: dryCtxA, matchSession: dryCtxB });
           }
           htmlOk = true;
         } catch {
@@ -305,24 +307,29 @@ export async function GET(request: NextRequest) {
         `;
 
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://vipassana.cool";
-        for (const [person, other, trackToken] of [
-          [personA, personB, trackTokenA],
-          [personB, personA, trackTokenB],
-        ] as [typeof personA, typeof personB, string][]) {
+        const sessCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session) };
+        const sessCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session) };
+        const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
+
+        for (const [person, other, trackToken, sessCtx] of [
+          [personA, personB, trackTokenA, sessCtxA],
+          [personB, personA, trackTokenB, sessCtxB],
+        ] as [typeof personA, typeof personB, string, SessionContext][]) {
           const meetInfo: MeetLinkInfo = { trackingUrl: `${baseUrl}/meet/${trackToken}` };
-          const html = buildIntroEmailHtml(person, other, meetInfo);
+          const html = buildIntroEmailHtml(person, other, meetInfo, introSessionCtx);
+          const subject = buildIntroSubject(sessCtx);
           const emailResult = await resend!.emails.send({
             from: "Matt from Vipassana.cool <matt@vipassana.cool>",
             to: [personA.email, personB.email],
             replyTo: [personA.email, personB.email],
-            subject: "Your Practice Buddy match is here",
+            subject,
             html,
             headers: { "X-Entity-Ref-ID": match.id },
           });
           await sql`
             INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
             VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
-                    ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+                    ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
           `;
         }
 
@@ -346,16 +353,20 @@ export async function GET(request: NextRequest) {
           await updateEntryStatus(personB.id, "engaged", "auto-match", match.id, "auto-confirmed (ready status)");
         }
 
-        const toConfirm: [WaitlistEntry, WaitlistEntry, string][] = [];
-        if (!aReady) toConfirm.push([personA, personB, match.person_a_token!]);
-        if (!bReady) toConfirm.push([personB, personA, match.person_b_token!]);
+        const sessCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session) };
+        const sessCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session) };
 
-        for (const [recipient, matchedWith, token] of toConfirm) {
-          const html = buildConfirmationEmailHtml(recipient, matchedWith, token);
+        const toConfirm: [WaitlistEntry, WaitlistEntry, string, SessionContext, SessionContext][] = [];
+        if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, sessCtxA, sessCtxB]);
+        if (!bReady) toConfirm.push([personB, personA, match.person_b_token!, sessCtxB, sessCtxA]);
+
+        for (const [recipient, matchedWith, token, recipientSessCtx, matchSessCtx] of toConfirm) {
+          const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx });
+          const subject = buildConfirmationSubject(recipientSessCtx);
           const emailResult = await resend!.emails.send({
             from: "Matt from Vipassana.cool <matt@vipassana.cool>",
             to: [recipient.email],
-            subject: "I found a practice buddy match for you",
+            subject,
             html,
             headers: { "X-Entity-Ref-ID": match.id },
           });
@@ -363,7 +374,7 @@ export async function GET(request: NextRequest) {
           await sql`
             INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
             VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
-                    ${recipient.email}, 'I found a practice buddy match for you', ${html}, 'sent')
+                    ${recipient.email}, ${subject}, ${html}, 'sent')
           `;
         }
 
