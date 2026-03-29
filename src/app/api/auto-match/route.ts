@@ -54,7 +54,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const dryRun = request.nextUrl.searchParams.get("dryRun") === "true";
+  // Default to dry run (report-only). Pass ?live=true to actually send.
+  const dryRun = request.nextUrl.searchParams.get("live") !== "true";
+  const maxPairs = parseInt(request.nextUrl.searchParams.get("limit") || "0") || Infinity;
   const sql = neon(process.env.DATABASE_URL!);
   const now = Date.now();
   const DAY_MS = 24 * 60 * 60 * 1000;
@@ -184,6 +186,7 @@ export async function GET(request: NextRequest) {
   const pairs: { slotA: SessionSlot; slotB: SessionSlot; diff: number }[] = [];
 
   for (const p of allViable) {
+    if (pairs.length >= maxPairs) break;
     const keyA = `${p.slotA.personId}:${p.slotA.session}`;
     const keyB = `${p.slotB.personId}:${p.slotB.session}`;
     if (usedSlots.has(keyA) || usedSlots.has(keyB)) continue;
@@ -387,8 +390,11 @@ export async function GET(request: NextRequest) {
   }
 
   // Send admin summary (skip in dry run)
-  if (!dryRun && (results.length > 0 || errors.length > 0)) {
+  // Always send admin summary (including dry runs so you see what it would do)
+  if (results.length > 0 || errors.length > 0) {
     try {
+      const reportResend = new Resend(process.env.RESEND_API_KEY);
+      const prefix = dryRun ? "[DRY RUN] " : "";
       const matchList = results
         .map(
           (r) =>
@@ -401,15 +407,16 @@ export async function GET(request: NextRequest) {
             `<li style="color:red">${e.personA} + ${e.personB}: ${e.error}</li>`
         )
         .join("");
-      await resend!.emails.send({
+      await reportResend.emails.send({
         from: "Vipassana.cool <hello@vipassana.cool>",
         to: "i@m13v.com",
-        subject: `Auto-match: ${results.length} pair${results.length !== 1 ? "s" : ""} matched${errors.length > 0 ? `, ${errors.length} error${errors.length !== 1 ? "s" : ""}` : ""}`,
+        subject: `${prefix}Auto-match: ${results.length} pair${results.length !== 1 ? "s" : ""} ${dryRun ? "identified" : "matched"}${errors.length > 0 ? `, ${errors.length} error${errors.length !== 1 ? "s" : ""}` : ""}`,
         html: `
-          <p>Auto-matching cron completed.</p>
+          <p>${dryRun ? "Auto-matching dry run — no emails sent, no matches created." : "Auto-matching cron completed."}</p>
           <p><strong>Pool:</strong> ${candidates.length} people, ${slots.length} sessions, ${eligible.length} eligible people</p>
-          ${results.length > 0 ? `<p><strong>Matched (${results.length}):</strong></p><ul>${matchList}</ul>` : ""}
+          ${results.length > 0 ? `<p><strong>${dryRun ? "Would match" : "Matched"} (${results.length}):</strong></p><ul>${matchList}</ul>` : ""}
           ${errors.length > 0 ? `<p><strong>Errors (${errors.length}):</strong></p><ul>${errorList}</ul>` : ""}
+          ${dryRun ? `<p>To send these matches live, trigger: <code>/api/auto-match?live=true&limit=N</code></p>` : ""}
           <p><a href="https://vipassana.cool/admin/matching">View dashboard</a></p>
         `,
       });
