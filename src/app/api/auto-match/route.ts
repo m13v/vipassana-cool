@@ -61,13 +61,14 @@ export async function GET(request: NextRequest) {
   const now = Date.now();
   const DAY_MS = 24 * 60 * 60 * 1000;
 
-  // Get all pending/ready people
+  // Get all pending/ready people (exclude unsubscribed)
   const candidates = (await sql`
     SELECT id, name, email, timezone, city, frequency, session_duration,
            morning_time, morning_utc, evening_time, evening_utc,
-           is_old_student, status, contact_count, pass_count, created_at
+           is_old_student, status, contact_count, pass_count, created_at,
+           unsubscribed, unsubscribe_token
     FROM waitlist_entries
-    WHERE status IN ('pending', 'ready')
+    WHERE status IN ('pending', 'ready') AND unsubscribed = false
     ORDER BY CASE status WHEN 'ready' THEN 0 ELSE 1 END, created_at ASC
   `) as WaitlistEntry[];
 
