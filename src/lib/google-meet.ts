@@ -40,6 +40,7 @@ export async function createMeetEvent(
   startUtcTime: string,
   durationMinutes: number,
   slug: string,
+  attendeeEmails: string[] = [],
 ): Promise<MeetEventResult> {
   const accessToken = await getAccessToken();
 
@@ -61,6 +62,8 @@ export async function createMeetEvent(
         conferenceSolutionKey: { type: "hangoutsMeet" },
       },
     },
+    guestsCanInviteOthers: true,
+    attendees: attendeeEmails.map((email) => ({ email })),
   };
 
   const res = await fetch(
