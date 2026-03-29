@@ -7,6 +7,10 @@
     {
       "path": "/api/expire-matches",
       "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/auto-match",
+      "schedule": "0 */2 * * *"
     }
   ]
 }
