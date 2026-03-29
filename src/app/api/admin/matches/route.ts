@@ -3,8 +3,8 @@ import { Resend } from "resend";
 import { neon } from "@neondatabase/serverless";
 import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, getActiveMatchForSession, updateEntryStatus, confirmMatchPerson } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
-import { buildIntroEmailHtml, buildConfirmationEmailHtml } from "@/lib/emails";
-import type { MeetLinkInfo } from "@/lib/emails";
+import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionUtcTime } from "@/lib/emails";
+import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 
 function checkAuth(request: NextRequest): boolean {
   const secret = request.headers.get("authorization")?.replace("Bearer ", "")
@@ -104,45 +104,51 @@ export async function POST(request: NextRequest) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       const sql = neon(process.env.DATABASE_URL!);
 
+      const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", utcTime: getSessionUtcTime(personA, sessionA as "morning" | "evening") };
+      const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", utcTime: getSessionUtcTime(personB, sessionB as "morning" | "evening") };
+      const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
+
       // If meet tracking links provided, send per-person emails so each gets their unique tracking URL
       if (meetLinkA && meetLinkB) {
-        for (const [person, otherPerson, trackingUrl] of [
-          [personA, personB, meetLinkA],
-          [personB, personA, meetLinkB],
-        ] as [WaitlistEntry, WaitlistEntry, string][]) {
+        for (const [person, otherPerson, trackingUrl, sessCtx] of [
+          [personA, personB, meetLinkA, sessCtxA],
+          [personB, personA, meetLinkB, sessCtxB],
+        ] as [WaitlistEntry, WaitlistEntry, string, SessionContext][]) {
           const meetInfo: MeetLinkInfo = { trackingUrl };
-          const html = buildIntroEmailHtml(person === personA ? personA : personB, person === personA ? personB : personA, meetInfo);
+          const html = buildIntroEmailHtml(person === personA ? personA : personB, person === personA ? personB : personA, meetInfo, introSessionCtx);
+          const subject = buildIntroSubject(sessCtx);
           const emailResult = await resend.emails.send({
             from: "Matt from Vipassana.cool <matt@vipassana.cool>",
             to: [personA.email, personB.email],
             replyTo: [personA.email, personB.email],
-            subject: "Your Practice Buddy match is here",
+            subject,
             html,
             headers: { "X-Entity-Ref-ID": match.id },
           });
           try {
             await sql`
               INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-              VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+              VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
             `;
           } catch (dbErr) {
             console.error("Failed to log intro email:", dbErr);
           }
         }
       } else {
-        const html = buildIntroEmailHtml(personA, personB);
+        const html = buildIntroEmailHtml(personA, personB, undefined, introSessionCtx);
+        const subject = buildIntroSubject(sessCtxA);
         const emailResult = await resend.emails.send({
           from: "Matt from Vipassana.cool <matt@vipassana.cool>",
           to: [personA.email, personB.email],
           replyTo: [personA.email, personB.email],
-          subject: "Your Practice Buddy match is here",
+          subject,
           html,
           headers: { "X-Entity-Ref-ID": match.id },
         });
         try {
           await sql`
             INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
           `;
         } catch (dbErr) {
           console.error("Failed to log intro email:", dbErr);
@@ -167,16 +173,20 @@ export async function POST(request: NextRequest) {
     }
 
     // Only send confirmation email to pending person(s)
-    const toConfirm: [WaitlistEntry, WaitlistEntry, string, "a" | "b"][] = [];
-    if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, "a"]);
-    if (!bReady) toConfirm.push([personB, personA, match.person_b_token!, "b"]);
+    const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", utcTime: getSessionUtcTime(personA, sessionA as "morning" | "evening") };
+    const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", utcTime: getSessionUtcTime(personB, sessionB as "morning" | "evening") };
 
-    for (const [recipient, matchedWith, token] of toConfirm) {
-      const html = buildConfirmationEmailHtml(recipient, matchedWith, token);
+    const toConfirm: [WaitlistEntry, WaitlistEntry, string, "a" | "b", SessionContext, SessionContext][] = [];
+    if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, "a", sessCtxA, sessCtxB]);
+    if (!bReady) toConfirm.push([personB, personA, match.person_b_token!, "b", sessCtxB, sessCtxA]);
+
+    for (const [recipient, matchedWith, token, , recipientSessCtx, matchSessCtx] of toConfirm) {
+      const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx });
+      const subject = buildConfirmationSubject(recipientSessCtx);
       const emailResult = await resend.emails.send({
         from: "Matt from Vipassana.cool <matt@vipassana.cool>",
         to: [recipient.email],
-        subject: "I found a practice buddy match for you",
+        subject,
         html,
         headers: { "X-Entity-Ref-ID": match.id },
       });
@@ -184,7 +194,7 @@ export async function POST(request: NextRequest) {
       try {
         await sql`
           INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${recipient.email}, 'I found a practice buddy match for you', ${html}, 'sent')
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${recipient.email}, ${subject}, ${html}, 'sent')
         `;
       } catch (dbErr) {
         console.error("Failed to log confirmation email:", dbErr);
