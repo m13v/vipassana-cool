@@ -67,9 +67,9 @@ export async function GET(request: NextRequest) {
       const bestUtcTime = findBestMeetTime(personA, personB);
       const duration = parseDurationMinutes(personA.session_duration, personB.session_duration);
 
-      // Create Google Meet link
-      let meetUrl: string | undefined;
-      let eventId: string | undefined;
+      // Create Google Meet link — required before sending intro email
+      let meetUrl: string;
+      let eventId: string;
       try {
         const slug = `${nameA}-${nameB}`.toLowerCase().replace(/[^a-z0-9-]/g, "");
         const result = await createMeetEvent(
@@ -81,54 +81,41 @@ export async function GET(request: NextRequest) {
         meetUrl = result.meetUrl;
         eventId = result.eventId;
       } catch (err) {
+        // Meet creation failed — don't send intro, keep match in confirming state,
+        // notify admin to handle manually
         console.error("Failed to create Meet event:", err);
-        // Continue without Meet link — still send intro email
-      }
-
-      // Create per-person tracking links if we have a Meet URL
-      let meetInfoA: MeetLinkInfo | undefined;
-      let meetInfoB: MeetLinkInfo | undefined;
-      if (meetUrl) {
-        const tokenA = crypto.randomUUID();
-        const tokenB = crypto.randomUUID();
-        await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${tokenA}, ${match.id}, ${personA.id}, ${meetUrl})`;
-        await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${tokenB}, ${match.id}, ${personB.id}, ${meetUrl})`;
-        meetInfoA = { trackingUrl: `${BASE_URL}/meet/${tokenA}` };
-        meetInfoB = { trackingUrl: `${BASE_URL}/meet/${tokenB}` };
-
-        // Log event ID for cleanup
-        await sql`
-          INSERT INTO vipassana_activity_log (match_id, event_type, new_value, triggered_by, note)
-          VALUES (${match.id}, 'meet_created', ${meetUrl}, 'system', ${`eventId=${eventId}`})
-        `;
-      }
-
-      // Send intro emails — per-person if we have tracking URLs, shared otherwise
-      if (meetInfoA && meetInfoB) {
-        // Send separate emails so each person gets their own tracking URL
-        for (const [person, other, meetInfo] of [
-          [personA, personB, meetInfoA],
-          [personB, personA, meetInfoB],
-        ] as [typeof personA, typeof personB, MeetLinkInfo][]) {
-          const html = buildIntroEmailHtml(person, other, meetInfo);
-          const emailResult = await resend.emails.send({
-            from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-            to: [personA.email, personB.email],
-            replyTo: [personA.email, personB.email],
-            subject: "Your Practice Buddy match is here",
-            html,
-            headers: { "X-Entity-Ref-ID": match.id },
+        try {
+          await resend.emails.send({
+            from: "Vipassana.cool <hello@vipassana.cool>",
+            to: ["i@m13v.com"],
+            subject: `ALERT: Meet creation failed for ${nameA} & ${nameB}`,
+            html: `<p>Both confirmed but Google Meet creation failed. The match is still in <code>confirming</code> state — intro email was NOT sent.</p><p><strong>Error:</strong> ${String(err)}</p><p><strong>Action needed:</strong> Create a Meet link manually and send the intro email.</p><p><a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
           });
-          try {
-            await sql`
-              INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-              VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
-                      ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
-            `;
-          } catch { /* non-critical */ }
-        }
-      } else {
-        const html = buildIntroEmailHtml(personA, personB);
+        } catch { /* non-critical */ }
+        // Redirect user to success page — from their perspective they confirmed OK
+        return NextResponse.redirect(new URL("/match-confirmed?response=yes", BASE_URL));
+      }
+
+      // Create per-person tracking links
+      const tokenA = crypto.randomUUID();
+      const tokenB = crypto.randomUUID();
+      await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${tokenA}, ${match.id}, ${personA.id}, ${meetUrl})`;
+      await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${tokenB}, ${match.id}, ${personB.id}, ${meetUrl})`;
+      const meetInfoA: MeetLinkInfo = { trackingUrl: `${BASE_URL}/meet/${tokenA}` };
+      const meetInfoB: MeetLinkInfo = { trackingUrl: `${BASE_URL}/meet/${tokenB}` };
+
+      // Log event ID for cleanup
+      await sql`
+        INSERT INTO vipassana_activity_log (match_id, event_type, new_value, triggered_by, note)
+        VALUES (${match.id}, 'meet_created', ${meetUrl}, 'system', ${`eventId=${eventId}`})
+      `;
+
+      // Send intro emails — one per person so each gets their unique tracking URL
+      for (const [person, other, meetInfo] of [
+        [personA, personB, meetInfoA],
+        [personB, personA, meetInfoB],
+      ] as [typeof personA, typeof personB, MeetLinkInfo][]) {
+        const html = buildIntroEmailHtml(person, other, meetInfo);
         const emailResult = await resend.emails.send({
           from: "Matt from Vipassana.cool <matt@vipassana.cool>",
           to: [personA.email, personB.email],
@@ -156,7 +143,7 @@ export async function GET(request: NextRequest) {
           from: "Vipassana.cool <hello@vipassana.cool>",
           to: ["i@m13v.com"],
           subject: `Both confirmed: ${nameA} & ${nameB} matched!`,
-          html: `<p><strong>${nameA} & ${nameB}</strong> both confirmed. Intro email sent${meetUrl ? ` with Meet link: ${meetUrl}` : " (no Meet link)"}.</p><p><a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
+          html: `<p><strong>${nameA} & ${nameB}</strong> both confirmed. Intro email sent with Meet link: ${meetUrl}</p><p><a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
         });
       } catch { /* non-critical */ }
     }
