@@ -9,8 +9,8 @@ import {
   updateEntryStatus,
   declineMatch,
 } from "@/lib/db";
-import { buildIntroEmailHtml } from "@/lib/emails";
-import type { MeetLinkInfo } from "@/lib/emails";
+import { buildIntroEmailHtml, buildIntroSubject, getSessionUtcTime } from "@/lib/emails";
+import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://vipassana.cool";
@@ -110,17 +110,25 @@ export async function GET(request: NextRequest) {
         VALUES (${match.id}, 'meet_created', ${meetUrl}, 'system', ${`eventId=${eventId}`})
       `;
 
+      // Build session context from match record
+      const sessA = (match.person_a_session || "morning") as "morning" | "evening";
+      const sessB = (match.person_b_session || "morning") as "morning" | "evening";
+      const sessCtxA: SessionContext = { session: sessA, utcTime: getSessionUtcTime(personA, sessA) };
+      const sessCtxB: SessionContext = { session: sessB, utcTime: getSessionUtcTime(personB, sessB) };
+      const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
+
       // Send intro emails — one per person so each gets their unique tracking URL
-      for (const [person, other, meetInfo] of [
-        [personA, personB, meetInfoA],
-        [personB, personA, meetInfoB],
-      ] as [typeof personA, typeof personB, MeetLinkInfo][]) {
-        const html = buildIntroEmailHtml(person, other, meetInfo);
+      for (const [person, other, meetInfo, sessCtx] of [
+        [personA, personB, meetInfoA, sessCtxA],
+        [personB, personA, meetInfoB, sessCtxB],
+      ] as [typeof personA, typeof personB, MeetLinkInfo, SessionContext][]) {
+        const html = buildIntroEmailHtml(person, other, meetInfo, introSessionCtx);
+        const subject = buildIntroSubject(sessCtx);
         const emailResult = await resend.emails.send({
           from: "Matt from Vipassana.cool <matt@vipassana.cool>",
           to: [personA.email, personB.email],
           replyTo: [personA.email, personB.email],
-          subject: "Your Practice Buddy match is here",
+          subject,
           html,
           headers: { "X-Entity-Ref-ID": match.id },
         });
@@ -128,7 +136,7 @@ export async function GET(request: NextRequest) {
           await sql`
             INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
             VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
-                    ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+                    ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
           `;
         } catch { /* non-critical */ }
       }
