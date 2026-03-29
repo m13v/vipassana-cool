@@ -26,6 +26,8 @@ export type WaitlistEntry = {
   status: string;
   pass_count: number;
   contact_count: number;
+  unsubscribed: boolean;
+  unsubscribe_token: string | null;
   created_at: string | null;
   updated_at: string | null;
 };
