@@ -144,6 +144,7 @@ export function buildIntroEmailHtml(
   personA: WaitlistEntry,
   personB: WaitlistEntry,
   meetLink?: MeetLinkInfo,
+  sessionCtx?: { sessionA: SessionContext; sessionB: SessionContext },
 ): string {
   const nameA = personA.name?.split(/\s+/)[0] || "fellow meditator";
   const nameB = personB.name?.split(/\s+/)[0] || "fellow meditator";
@@ -256,7 +257,8 @@ export function buildIntroEmailHtml(
 export function buildConfirmationEmailHtml(
   recipient: WaitlistEntry,
   matchedWith: WaitlistEntry,
-  token: string
+  token: string,
+  sessionCtx?: { recipientSession: SessionContext; matchSession: SessionContext },
 ): string {
   const firstName = recipient.name?.split(/\s+/)[0] || "there";
   const matchFirstName = matchedWith.name?.split(/\s+/)[0] || "someone";
@@ -269,16 +271,31 @@ export function buildConfirmationEmailHtml(
   const yesUrl = `${baseUrl}/api/confirm-match?token=${token}&response=yes`;
   const noUrl = `${baseUrl}/api/confirm-match?token=${token}&response=no`;
 
+  // Session context section
+  let sessionHtml = "";
+  if (sessionCtx) {
+    const yourTime = formatDualTime(sessionCtx.recipientSession.utcTime);
+    const theirTime = formatDualTime(sessionCtx.matchSession.utcTime);
+    const yourLabel = sessionCtx.recipientSession.session;
+    const theirLabel = sessionCtx.matchSession.session;
+    sessionHtml = `
+      <div style="background:#f0ebe3;border:1px solid #e8e4de;border-radius:8px;padding:16px;margin:16px 0;">
+        <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>Session:</strong> Your <strong>${yourLabel}</strong> session at <strong>${yourTime} UTC</strong></p>
+        <p style="font-size:15px;line-height:1.7;margin:0;">${matchFirstName}'s <strong>${theirLabel}</strong> session is at <strong>${theirTime} UTC</strong></p>
+      </div>`;
+  }
+
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="margin:0;padding:0;background-color:#faf9f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#2c2c2c;">
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
     <div style="text-align:center;margin-bottom:32px;">
       <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#8b7355;margin:0 0 8px;">Vipassana.cool</p>
-      <h1 style="font-size:28px;font-weight:700;margin:0;line-height:1.3;">I found a match for you</h1>
+      <h1 style="font-size:28px;font-weight:700;margin:0;line-height:1.3;">I found a match for your ${sessionCtx ? sessionCtx.recipientSession.session : "daily"} session</h1>
     </div>
     <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
       <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Hi ${firstName},</p>
-      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">I'm Matt from Vipassana.cool. I've been reviewing the Practice Buddy waitlist and I think I've found a great match for you.</p>
+      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">I'm Matt from Vipassana.cool. I've been reviewing the Practice Buddy waitlist and I think I've found a great match for your <strong>${sessionCtx ? sessionCtx.recipientSession.session + " session" : "daily practice"}</strong>.</p>
+      ${sessionHtml}
       <p style="font-size:15px;line-height:1.7;margin:0 0 8px;">Your potential match is <strong>${matchFirstName}</strong> from ${matchedWith.city || "somewhere nice"}. They sit ${matchedWith.frequency?.toLowerCase() || "regularly"}, ${matchedWith.session_duration || ""} per session${matchedWith.has_maintained_practice ? `, ${matchedWith.has_maintained_practice.toLowerCase()} maintained practice` : ""}.</p>
       ${traitsHtml}
       <p style="font-size:15px;line-height:1.7;margin:16px 0 0;">Would you like to be introduced?</p>
