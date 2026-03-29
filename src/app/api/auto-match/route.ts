@@ -4,6 +4,7 @@ import { neon } from "@neondatabase/serverless";
 import {
   getEntry,
   getPriorMatchedIds,
+  getActiveMatchForSession,
   createMatchWithTokens,
   createMatch,
   updateEntryStatus,
@@ -13,15 +14,38 @@ import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml } from "@/lib/emails";
 
 /**
- * Auto-matching cron — runs every 2 hours.
+ * Session-based auto-matching cron — runs every 2 hours.
  *
- * Rules:
- * - contact_count = 0, signed up >24h ago → find best match, send confirmation
- * - contact_count = 1, last match expired >7 days ago → re-try once
- * - contact_count >= 2 → skip (serial ghosters)
+ * Matching is per-session, not per-user:
+ * - Once-a-day people have 1 session (morning_utc)
+ * - Twice-a-day people have 2 sessions (morning_utc + evening_utc)
+ * - Any session can match any other session within ±60 min UTC
+ * - A person sitting twice can have 2 different buddies
  *
- * Uses same guards as manual matching: active-match guard, re-match guard, ±60 min UTC.
+ * Eligibility rules:
+ * - contact_count = 0, signed up >24h ago → auto-match
+ * - contact_count = 1, last match expired >7 days ago → retry
+ * - contact_count >= 2 → skip (serial ghoster)
  */
+
+type SessionSlot = {
+  personId: string;
+  person: WaitlistEntry;
+  session: "morning" | "evening";
+  utcMinutes: number;
+};
+
+function utcToMinutes(utc: string | null): number | null {
+  if (!utc) return null;
+  const [h, m] = utc.split(":").map(Number);
+  return isNaN(h) ? null : h * 60 + (m || 0);
+}
+
+function timeDiff(a: number, b: number): number {
+  const d = Math.abs(a - b);
+  return Math.min(d, 1440 - d);
+}
+
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -29,8 +53,10 @@ export async function GET(request: NextRequest) {
   }
 
   const sql = neon(process.env.DATABASE_URL!);
+  const now = Date.now();
+  const DAY_MS = 24 * 60 * 60 * 1000;
 
-  // Get all pending/ready people eligible for auto-matching
+  // Get all pending/ready people
   const candidates = (await sql`
     SELECT id, name, email, timezone, city, frequency, session_duration,
            morning_time, morning_utc, evening_time, evening_utc,
@@ -40,29 +66,20 @@ export async function GET(request: NextRequest) {
     ORDER BY CASE status WHEN 'ready' THEN 0 ELSE 1 END, created_at ASC
   `) as WaitlistEntry[];
 
-  // Filter to eligible candidates based on contact_count rules
-  const now = Date.now();
-  const DAY_MS = 24 * 60 * 60 * 1000;
-
+  // Filter eligible based on contact_count rules
   const eligible: WaitlistEntry[] = [];
   for (const c of candidates) {
-    if (c.contact_count >= 2) continue; // serial ghoster — skip
+    if (c.contact_count >= 2) continue;
 
     if (c.status === "ready") {
-      // ready people are always eligible (they already confirmed before)
       eligible.push(c);
       continue;
     }
 
-    // pending people
     if (c.contact_count === 0) {
-      // Never contacted — must be >24h old
       const createdAt = c.created_at ? new Date(c.created_at).getTime() : 0;
-      if (now - createdAt > DAY_MS) {
-        eligible.push(c);
-      }
+      if (now - createdAt > DAY_MS) eligible.push(c);
     } else if (c.contact_count === 1) {
-      // Contacted once, ghosted — only retry if last match expired >7 days ago
       const lastExpiry = await sql`
         SELECT m.created_at FROM matches m
         WHERE (m.person_a_id = ${c.id} OR m.person_b_id = ${c.id})
@@ -71,14 +88,28 @@ export async function GET(request: NextRequest) {
       `;
       if (lastExpiry.length > 0) {
         const expiredAt = new Date(lastExpiry[0].created_at as string).getTime();
-        if (now - expiredAt > 7 * DAY_MS) {
-          eligible.push(c);
-        }
+        if (now - expiredAt > 7 * DAY_MS) eligible.push(c);
       }
     }
   }
 
-  // Build blocked pairs set (same logic as find-matches)
+  // Build session slots from eligible people
+  const slots: SessionSlot[] = [];
+  for (const p of eligible) {
+    const mornMin = utcToMinutes(p.morning_utc);
+    if (mornMin !== null) {
+      slots.push({ personId: p.id, person: p, session: "morning", utcMinutes: mornMin });
+    }
+    // Only add evening slot if they sit twice and have an evening time
+    if (p.frequency === "Twice a day") {
+      const eveMin = utcToMinutes(p.evening_utc);
+      if (eveMin !== null) {
+        slots.push({ personId: p.id, person: p, session: "evening", utcMinutes: eveMin });
+      }
+    }
+  }
+
+  // Build blocked pairs set (prior matches where at least one confirmed or still active)
   const allPairs = await sql`
     SELECT person_a_id, person_b_id, person_a_confirmed, person_b_confirmed, status
     FROM matches
@@ -94,28 +125,10 @@ export async function GET(request: NextRequest) {
       .map((r) => [r.person_a_id, r.person_b_id].sort().join("|"))
   );
 
-  // Active people who can't be matched right now
-  const activeStatuses = new Set(["contacted", "engaged", "matched"]);
-
-  function utcToMinutes(utc: string | null): number | null {
-    if (!utc) return null;
-    const [h, m] = utc.split(":").map(Number);
-    return isNaN(h) ? null : h * 60 + (m || 0);
-  }
-
-  function timeDiff(a: number, b: number): number {
-    const d = Math.abs(a - b);
-    return Math.min(d, 1440 - d);
-  }
-
-  // Find best non-overlapping pairs from eligible pool
-  const matched = new Set<string>();
-  const pairs: { a: WaitlistEntry; b: WaitlistEntry; diff: number }[] = [];
-
-  // Generate all viable pairs scored by priority
+  // Generate all viable session pairs
   type ScoredPair = {
-    a: WaitlistEntry;
-    b: WaitlistEntry;
+    slotA: SessionSlot;
+    slotB: SessionSlot;
     diff: number;
     readyScore: number;
     bothOld: boolean;
@@ -123,38 +136,38 @@ export async function GET(request: NextRequest) {
   };
   const allViable: ScoredPair[] = [];
 
-  for (let i = 0; i < eligible.length; i++) {
-    for (let j = i + 1; j < eligible.length; j++) {
-      const a = eligible[i];
-      const b = eligible[j];
+  for (let i = 0; i < slots.length; i++) {
+    for (let j = i + 1; j < slots.length; j++) {
+      const sa = slots[i];
+      const sb = slots[j];
 
-      // Skip if either is in an active match state
-      if (activeStatuses.has(a.status) || activeStatuses.has(b.status)) continue;
+      // Can't match a person with themselves
+      if (sa.personId === sb.personId) continue;
 
-      // Skip blocked pairs
-      if (blockedPairs.has([a.id, b.id].sort().join("|"))) continue;
+      // Check blocked pairs (person-level, not session-level)
+      if (blockedPairs.has([sa.personId, sb.personId].sort().join("|"))) continue;
 
-      // UTC time comparison — ±60 min hard filter
-      const utcA = utcToMinutes(a.morning_utc);
-      const utcB = utcToMinutes(b.morning_utc);
-      if (utcA == null || utcB == null) continue;
-      const diff = timeDiff(utcA, utcB);
+      // ±60 min UTC hard filter
+      const diff = timeDiff(sa.utcMinutes, sb.utcMinutes);
       if (diff > 60) continue;
 
       allViable.push({
-        a,
-        b,
+        slotA: sa,
+        slotB: sb,
         diff,
         readyScore:
-          (a.status === "ready" ? 1 : 0) + (b.status === "ready" ? 1 : 0),
+          (sa.person.status === "ready" ? 1 : 0) +
+          (sb.person.status === "ready" ? 1 : 0),
         bothOld:
-          a.is_old_student === "Yes" && b.is_old_student === "Yes",
-        sessionMatch: a.session_duration === b.session_duration,
+          sa.person.is_old_student === "Yes" &&
+          sb.person.is_old_student === "Yes",
+        sessionMatch:
+          sa.person.session_duration === sb.person.session_duration,
       });
     }
   }
 
-  // Sort: ready first → both old → same session → smallest time diff
+  // Sort: ready first → both old → same session duration → smallest time diff
   allViable.sort(
     (x, y) =>
       (y.readyScore - x.readyScore) ||
@@ -163,50 +176,57 @@ export async function GET(request: NextRequest) {
       (x.diff - y.diff)
   );
 
-  // Greedily pick non-overlapping pairs
+  // Greedily pick non-overlapping pairs (a session slot can only be used once)
+  const usedSlots = new Set<string>(); // "personId:session"
+  const pairs: { slotA: SessionSlot; slotB: SessionSlot; diff: number }[] = [];
+
   for (const p of allViable) {
-    if (matched.has(p.a.id) || matched.has(p.b.id)) continue;
-    pairs.push({ a: p.a, b: p.b, diff: p.diff });
-    matched.add(p.a.id);
-    matched.add(p.b.id);
+    const keyA = `${p.slotA.personId}:${p.slotA.session}`;
+    const keyB = `${p.slotB.personId}:${p.slotB.session}`;
+    if (usedSlots.has(keyA) || usedSlots.has(keyB)) continue;
+    pairs.push({ slotA: p.slotA, slotB: p.slotB, diff: p.diff });
+    usedSlots.add(keyA);
+    usedSlots.add(keyB);
   }
 
-  // Execute matches using the same flow as the admin API
+  // Execute matches
   const results: {
     personA: string;
+    sessionA: string;
     personB: string;
+    sessionB: string;
     matchId: string;
     flow: string;
   }[] = [];
   const errors: { personA: string; personB: string; error: string }[] = [];
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  for (const { a, b } of pairs) {
+  for (const { slotA, slotB } of pairs) {
     try {
-      // Re-fetch to get fresh status (might have changed during this run)
-      const personA = await getEntry(a.id);
-      const personB = await getEntry(b.id);
+      // Re-fetch fresh status
+      const personA = await getEntry(slotA.personId);
+      const personB = await getEntry(slotB.personId);
       if (!personA || !personB) {
-        errors.push({ personA: a.name || a.email, personB: b.name || b.email, error: "Entry not found" });
-        continue;
-      }
-      if (activeStatuses.has(personA.status) || activeStatuses.has(personB.status)) {
-        errors.push({
-          personA: personA.name || personA.email,
-          personB: personB.name || personB.email,
-          error: `Status conflict: ${personA.status}/${personB.status}`,
-        });
+        errors.push({ personA: slotA.person.name || slotA.person.email, personB: slotB.person.name || slotB.person.email, error: "Entry not found" });
         continue;
       }
 
-      // Re-check re-match guard
+      // Session-level active match guard
+      const activeA = await getActiveMatchForSession(personA.id, slotA.session);
+      if (activeA) {
+        errors.push({ personA: `${personA.name} (${slotA.session})`, personB: `${personB.name} (${slotB.session})`, error: "Session already matched" });
+        continue;
+      }
+      const activeB = await getActiveMatchForSession(personB.id, slotB.session);
+      if (activeB) {
+        errors.push({ personA: `${personA.name} (${slotA.session})`, personB: `${personB.name} (${slotB.session})`, error: "Session already matched" });
+        continue;
+      }
+
+      // Re-match guard
       const priorIds = await getPriorMatchedIds(personA.id);
       if (priorIds.includes(personB.id)) {
-        errors.push({
-          personA: personA.name || personA.email,
-          personB: personB.name || personB.email,
-          error: "Prior match exists",
-        });
+        errors.push({ personA: personA.name || personA.email, personB: personB.name || personB.email, error: "Prior match exists" });
         continue;
       }
 
@@ -215,7 +235,7 @@ export async function GET(request: NextRequest) {
 
       if (aReady && bReady) {
         // Both ready → instant intro
-        const match = await createMatch(personA.id, personB.id);
+        const match = await createMatch(personA.id, personB.id, slotA.session, slotB.session);
         const html = buildIntroEmailHtml(personA, personB);
         const emailResult = await resend.emails.send({
           from: "Matt from Vipassana.cool <matt@vipassana.cool>",
@@ -232,13 +252,15 @@ export async function GET(request: NextRequest) {
         `;
         results.push({
           personA: personA.name || personA.email,
+          sessionA: slotA.session,
           personB: personB.name || personB.email,
+          sessionB: slotB.session,
           matchId: match.id,
           flow: "both-ready (instant intro)",
         });
       } else {
         // Confirmation flow
-        const match = await createMatchWithTokens(personA.id, personB.id);
+        const match = await createMatchWithTokens(personA.id, personB.id, slotA.session, slotB.session);
 
         if (aReady) {
           await confirmMatchPerson(match.id, "a");
@@ -249,9 +271,9 @@ export async function GET(request: NextRequest) {
           await updateEntryStatus(personB.id, "engaged", "auto-match", match.id, "auto-confirmed (ready status)");
         }
 
-        const toConfirm: [WaitlistEntry, WaitlistEntry, string, "a" | "b"][] = [];
-        if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, "a"]);
-        if (!bReady) toConfirm.push([personB, personA, match.person_b_token!, "b"]);
+        const toConfirm: [WaitlistEntry, WaitlistEntry, string][] = [];
+        if (!aReady) toConfirm.push([personA, personB, match.person_a_token!]);
+        if (!bReady) toConfirm.push([personB, personA, match.person_b_token!]);
 
         for (const [recipient, matchedWith, token] of toConfirm) {
           const html = buildConfirmationEmailHtml(recipient, matchedWith, token);
@@ -273,20 +295,20 @@ export async function GET(request: NextRequest) {
         const flow = aReady || bReady ? "one-ready" : "both-pending";
         results.push({
           personA: personA.name || personA.email,
+          sessionA: slotA.session,
           personB: personB.name || personB.email,
+          sessionB: slotB.session,
           matchId: match.id,
           flow,
         });
       }
 
-      // Rate limit: 2s between sends
-      if (pairs.indexOf({ a, b, diff: 0 }) < pairs.length - 1) {
-        await new Promise((r) => setTimeout(r, 2000));
-      }
+      // Rate limit between sends
+      await new Promise((r) => setTimeout(r, 2000));
     } catch (err) {
       errors.push({
-        personA: a.name || a.email,
-        personB: b.name || b.email,
+        personA: slotA.person.name || slotA.person.email,
+        personB: slotB.person.name || slotB.person.email,
         error: String(err),
       });
     }
@@ -298,7 +320,7 @@ export async function GET(request: NextRequest) {
       const matchList = results
         .map(
           (r) =>
-            `<li><strong>${r.personA} + ${r.personB}</strong> — ${r.flow}</li>`
+            `<li><strong>${r.personA} (${r.sessionA}) + ${r.personB} (${r.sessionB})</strong> — ${r.flow}</li>`
         )
         .join("");
       const errorList = errors
@@ -313,7 +335,7 @@ export async function GET(request: NextRequest) {
         subject: `Auto-match: ${results.length} pair${results.length !== 1 ? "s" : ""} matched${errors.length > 0 ? `, ${errors.length} error${errors.length !== 1 ? "s" : ""}` : ""}`,
         html: `
           <p>Auto-matching cron completed.</p>
-          <p><strong>Pool:</strong> ${candidates.length} total, ${eligible.length} eligible</p>
+          <p><strong>Pool:</strong> ${candidates.length} people, ${slots.length} sessions, ${eligible.length} eligible people</p>
           ${results.length > 0 ? `<p><strong>Matched (${results.length}):</strong></p><ul>${matchList}</ul>` : ""}
           ${errors.length > 0 ? `<p><strong>Errors (${errors.length}):</strong></p><ul>${errorList}</ul>` : ""}
           <p><a href="https://vipassana.cool/admin/matching">View dashboard</a></p>
@@ -327,6 +349,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     success: true,
     pool: candidates.length,
+    sessions: slots.length,
     eligible: eligible.length,
     viablePairs: allViable.length,
     matched: results.length,
