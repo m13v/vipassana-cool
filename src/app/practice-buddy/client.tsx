@@ -14,11 +14,10 @@ export function PracticeBuddyClient() {
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("/api/admin/waitlist?stats=true")
+    fetch("/api/waitlist/entries")
       .then((r) => r.json())
       .then((data) => {
-        if (data.matchedCount != null) setMatchedCount(data.matchedCount);
-        else if (data.entries) setMatchedCount(data.entries.filter((e: { status: string }) => e.status === "matched").length);
+        if (data.entries) setMatchedCount(data.entries.filter((e: { status: string }) => e.status === "matched").length);
       })
       .catch(() => {});
   }, []);
@@ -64,7 +63,7 @@ export function PracticeBuddyClient() {
       {/* How It Works — animated flow */}
       <section className="border-t border-border bg-card/50">
         <div className="mx-auto max-w-3xl px-6 py-12">
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-2 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] gap-4 sm:gap-3 text-center items-center">
             <FlowStep
               icon={<svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>}
               title="Sign up"
