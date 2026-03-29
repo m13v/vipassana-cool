@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
 
   // Log the unsubscribe
   await sql`
-    INSERT INTO vipassana_activity_log (entry_id, event_type, old_value, new_value, triggered_by, note)
+    INSERT INTO vipassana_activity_log (person_id, event_type, old_value, new_value, triggered_by, note)
     VALUES (${rows[0].id}, 'unsubscribed', 'false', 'true', 'user_click', ${`${rows[0].name || rows[0].email} unsubscribed via email link`})
   `;
 
