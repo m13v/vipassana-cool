@@ -84,7 +84,7 @@ export function toUtcTime(localTime: string | null, timezone: string | null): st
 
 export async function getAllEntries(): Promise<WaitlistEntry[]> {
   const sql = getSql();
-  const rows = await sql`SELECT * FROM waitlist_entries ORDER BY created_at DESC`;
+  const rows = await sql`SELECT * FROM waitlist_entries WHERE unsubscribed = false ORDER BY created_at DESC`;
   return rows as WaitlistEntry[];
 }
 
