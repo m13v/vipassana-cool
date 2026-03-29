@@ -104,8 +104,8 @@ export async function POST(request: NextRequest) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       const sql = neon(process.env.DATABASE_URL!);
 
-      const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", utcTime: getSessionUtcTime(personA, sessionA as "morning" | "evening") };
-      const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", utcTime: getSessionUtcTime(personB, sessionB as "morning" | "evening") };
+      const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", utcTime: getSessionUtcTime(personA, sessionA as "morning" | "evening"), timezone: personA.timezone };
+      const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", utcTime: getSessionUtcTime(personB, sessionB as "morning" | "evening"), timezone: personB.timezone };
       const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
       // If meet tracking links provided, send per-person emails so each gets their unique tracking URL
@@ -173,8 +173,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Only send confirmation email to pending person(s)
-    const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", utcTime: getSessionUtcTime(personA, sessionA as "morning" | "evening") };
-    const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", utcTime: getSessionUtcTime(personB, sessionB as "morning" | "evening") };
+    const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", utcTime: getSessionUtcTime(personA, sessionA as "morning" | "evening"), timezone: personA.timezone };
+    const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", utcTime: getSessionUtcTime(personB, sessionB as "morning" | "evening"), timezone: personB.timezone };
 
     const toConfirm: [WaitlistEntry, WaitlistEntry, string, "a" | "b", SessionContext, SessionContext][] = [];
     if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, "a", sessCtxA, sessCtxB]);
@@ -210,8 +210,8 @@ export async function POST(request: NextRequest) {
 
   if (sendEmail) {
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", utcTime: getSessionUtcTime(personA, sessionA as "morning" | "evening") };
-    const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", utcTime: getSessionUtcTime(personB, sessionB as "morning" | "evening") };
+    const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", utcTime: getSessionUtcTime(personA, sessionA as "morning" | "evening"), timezone: personA.timezone };
+    const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", utcTime: getSessionUtcTime(personB, sessionB as "morning" | "evening"), timezone: personB.timezone };
     const html = buildIntroEmailHtml(personA, personB, undefined, { sessionA: sessCtxA, sessionB: sessCtxB });
     const subject = buildIntroSubject(sessCtxA);
 

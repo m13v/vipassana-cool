@@ -113,8 +113,8 @@ export async function GET(request: NextRequest) {
       // Build session context from match record
       const sessA = (match.person_a_session || "morning") as "morning" | "evening";
       const sessB = (match.person_b_session || "morning") as "morning" | "evening";
-      const sessCtxA: SessionContext = { session: sessA, utcTime: getSessionUtcTime(personA, sessA) };
-      const sessCtxB: SessionContext = { session: sessB, utcTime: getSessionUtcTime(personB, sessB) };
+      const sessCtxA: SessionContext = { session: sessA, utcTime: getSessionUtcTime(personA, sessA), timezone: personA.timezone };
+      const sessCtxB: SessionContext = { session: sessB, utcTime: getSessionUtcTime(personB, sessB), timezone: personB.timezone };
       const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
       // Send intro emails — one per person so each gets their unique tracking URL

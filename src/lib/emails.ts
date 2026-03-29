@@ -111,18 +111,29 @@ export type MeetLinkInfo = {
 export type SessionContext = {
   session: "morning" | "evening";
   utcTime: string; // "06:00"
+  timezone: string | null; // IANA timezone or GMT offset
 };
 
-/** Format UTC time as "06:00 (6:00am)" — both 24h and 12h formats */
-function formatDualTime(utcTime: string | null): string {
-  if (!utcTime) return "";
-  const [h, m] = utcTime.split(":").map(Number);
-  if (isNaN(h)) return utcTime;
+/** Format a time string as "06:00 (6:00am)" — both 24h and 12h formats */
+function formatDualTime(time: string | null): string {
+  if (!time) return "";
+  const [h, m] = time.split(":").map(Number);
+  if (isNaN(h)) return time;
   const time24 = `${String(h).padStart(2, "0")}:${String(m || 0).padStart(2, "0")}`;
   const suffix = h >= 12 ? "pm" : "am";
   const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
   const time12 = `${h12}:${String(m || 0).padStart(2, "0")}${suffix}`;
   return `${time24} (${time12})`;
+}
+
+/** Convert UTC time to local using timezone, return dual-format string with tz label */
+function formatSessionLocalTime(ctx: SessionContext): string {
+  const utcMins = utcToMinutes(ctx.utcTime);
+  if (utcMins === null) return ctx.utcTime || "";
+  const offset = tzOffsetMinutes(ctx.timezone);
+  const localTime = utcMinutesToLocalTime(utcMins, offset);
+  const tzLabel = formatTimezone(ctx.timezone);
+  return `${formatDualTime(localTime)}${tzLabel ? ` ${tzLabel}` : ""}`;
 }
 
 /** Get the UTC time for a person's session slot */
@@ -132,12 +143,12 @@ export function getSessionUtcTime(person: WaitlistEntry, session: "morning" | "e
 
 /** Build subject line for confirmation email */
 export function buildConfirmationSubject(sessionCtx: SessionContext): string {
-  return `I found a practice buddy for your ${sessionCtx.session} session at ${formatDualTime(sessionCtx.utcTime)} UTC`;
+  return `I found a practice buddy for your ${sessionCtx.session} session at ${formatSessionLocalTime(sessionCtx)}`;
 }
 
 /** Build subject line for intro email */
 export function buildIntroSubject(sessionCtx: SessionContext): string {
-  return `Your Practice Buddy match – ${sessionCtx.session} session at ${formatDualTime(sessionCtx.utcTime)} UTC`;
+  return `Your Practice Buddy match – ${sessionCtx.session} session at ${formatSessionLocalTime(sessionCtx)}`;
 }
 
 export function buildIntroEmailHtml(
@@ -156,12 +167,12 @@ export function buildIntroEmailHtml(
   // Build session context section (shows which sessions are matched)
   let sessionInfoHtml = "";
   if (sessionCtx) {
-    const timeA = formatDualTime(sessionCtx.sessionA.utcTime);
-    const timeB = formatDualTime(sessionCtx.sessionB.utcTime);
+    const timeA = formatSessionLocalTime(sessionCtx.sessionA);
+    const timeB = formatSessionLocalTime(sessionCtx.sessionB);
     sessionInfoHtml = `
       <div style="background:#f0ebe3;border:1px solid #e8e4de;border-radius:8px;padding:16px;margin:0 0 16px;">
-        <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>${nameA}'s ${sessionCtx.sessionA.session} session:</strong> ${timeA} UTC</p>
-        <p style="font-size:15px;line-height:1.7;margin:0;"><strong>${nameB}'s ${sessionCtx.sessionB.session} session:</strong> ${timeB} UTC</p>
+        <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>${nameA}'s ${sessionCtx.sessionA.session} session:</strong> ${timeA}</p>
+        <p style="font-size:15px;line-height:1.7;margin:0;"><strong>${nameB}'s ${sessionCtx.sessionB.session} session:</strong> ${timeB}</p>
       </div>`;
   }
 
@@ -287,14 +298,14 @@ export function buildConfirmationEmailHtml(
   // Session context section
   let sessionHtml = "";
   if (sessionCtx) {
-    const yourTime = formatDualTime(sessionCtx.recipientSession.utcTime);
-    const theirTime = formatDualTime(sessionCtx.matchSession.utcTime);
+    const yourTime = formatSessionLocalTime(sessionCtx.recipientSession);
+    const theirTime = formatSessionLocalTime(sessionCtx.matchSession);
     const yourLabel = sessionCtx.recipientSession.session;
     const theirLabel = sessionCtx.matchSession.session;
     sessionHtml = `
       <div style="background:#f0ebe3;border:1px solid #e8e4de;border-radius:8px;padding:16px;margin:16px 0;">
-        <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>Session:</strong> Your <strong>${yourLabel}</strong> session at <strong>${yourTime} UTC</strong></p>
-        <p style="font-size:15px;line-height:1.7;margin:0;">${matchFirstName}'s <strong>${theirLabel}</strong> session is at <strong>${theirTime} UTC</strong></p>
+        <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>Session:</strong> Your <strong>${yourLabel}</strong> session at <strong>${yourTime}</strong></p>
+        <p style="font-size:15px;line-height:1.7;margin:0;">${matchFirstName}'s <strong>${theirLabel}</strong> session is at <strong>${theirTime}</strong></p>
       </div>`;
   }
 

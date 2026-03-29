@@ -245,8 +245,8 @@ export async function GET(request: NextRequest) {
         const flow = aReady && bReady
           ? "both-ready (instant intro)"
           : aReady || bReady ? "one-ready" : "both-pending";
-        const dryCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session) };
-        const dryCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session) };
+        const dryCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session), timezone: personA.timezone };
+        const dryCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session), timezone: personB.timezone };
         let htmlOk = false;
         try {
           if (aReady && bReady) {
@@ -307,8 +307,8 @@ export async function GET(request: NextRequest) {
         `;
 
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://vipassana.cool";
-        const sessCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session) };
-        const sessCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session) };
+        const sessCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session), timezone: personA.timezone };
+        const sessCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session), timezone: personB.timezone };
         const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
         for (const [person, other, trackToken, sessCtx] of [
@@ -353,8 +353,8 @@ export async function GET(request: NextRequest) {
           await updateEntryStatus(personB.id, "engaged", "auto-match", match.id, "auto-confirmed (ready status)");
         }
 
-        const sessCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session) };
-        const sessCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session) };
+        const sessCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session), timezone: personA.timezone };
+        const sessCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session), timezone: personB.timezone };
 
         const toConfirm: [WaitlistEntry, WaitlistEntry, string, SessionContext, SessionContext][] = [];
         if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, sessCtxA, sessCtxB]);
