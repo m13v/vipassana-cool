@@ -52,6 +52,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const dryRun = request.nextUrl.searchParams.get("dryRun") === "true";
   const sql = neon(process.env.DATABASE_URL!);
   const now = Date.now();
   const DAY_MS = 24 * 60 * 60 * 1000;
@@ -189,7 +190,7 @@ export async function GET(request: NextRequest) {
     usedSlots.add(keyB);
   }
 
-  // Execute matches
+  // Execute matches (or simulate in dry run mode)
   const results: {
     personA: string;
     sessionA: string;
@@ -197,13 +198,14 @@ export async function GET(request: NextRequest) {
     sessionB: string;
     matchId: string;
     flow: string;
+    emailHtmlGenerated?: boolean;
   }[] = [];
   const errors: { personA: string; personB: string; error: string }[] = [];
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = dryRun ? null : new Resend(process.env.RESEND_API_KEY);
 
   for (const { slotA, slotB } of pairs) {
     try {
-      // Re-fetch fresh status
+      // Re-fetch fresh status (real DB read even in dry run)
       const personA = await getEntry(slotA.personId);
       const personB = await getEntry(slotB.personId);
       if (!personA || !personB) {
@@ -211,7 +213,7 @@ export async function GET(request: NextRequest) {
         continue;
       }
 
-      // Session-level active match guard
+      // Session-level active match guard (real DB check even in dry run)
       const activeA = await getActiveMatchForSession(personA.id, slotA.session);
       if (activeA) {
         errors.push({ personA: `${personA.name} (${slotA.session})`, personB: `${personB.name} (${slotB.session})`, error: "Session already matched" });
@@ -223,7 +225,7 @@ export async function GET(request: NextRequest) {
         continue;
       }
 
-      // Re-match guard
+      // Re-match guard (real DB check even in dry run)
       const priorIds = await getPriorMatchedIds(personA.id);
       if (priorIds.includes(personB.id)) {
         errors.push({ personA: personA.name || personA.email, personB: personB.name || personB.email, error: "Prior match exists" });
@@ -233,11 +235,39 @@ export async function GET(request: NextRequest) {
       const aReady = personA.status === "ready";
       const bReady = personB.status === "ready";
 
+      if (dryRun) {
+        // Dry run: generate email HTML to verify templates work, but don't send or write DB
+        const flow = aReady && bReady
+          ? "both-ready (instant intro)"
+          : aReady || bReady ? "one-ready" : "both-pending";
+        let htmlOk = false;
+        try {
+          if (aReady && bReady) {
+            buildIntroEmailHtml(personA, personB);
+          } else {
+            buildConfirmationEmailHtml(personA, personB, "dry-run-token");
+          }
+          htmlOk = true;
+        } catch {
+          htmlOk = false;
+        }
+        results.push({
+          personA: personA.name || personA.email,
+          sessionA: slotA.session,
+          personB: personB.name || personB.email,
+          sessionB: slotB.session,
+          matchId: "dry-run",
+          flow,
+          emailHtmlGenerated: htmlOk,
+        });
+        continue;
+      }
+
+      // --- LIVE MODE: create matches, send emails ---
       if (aReady && bReady) {
-        // Both ready → instant intro
         const match = await createMatch(personA.id, personB.id, slotA.session, slotB.session);
         const html = buildIntroEmailHtml(personA, personB);
-        const emailResult = await resend.emails.send({
+        const emailResult = await resend!.emails.send({
           from: "Matt from Vipassana.cool <matt@vipassana.cool>",
           to: [personA.email, personB.email],
           replyTo: [personA.email, personB.email],
@@ -259,7 +289,6 @@ export async function GET(request: NextRequest) {
           flow: "both-ready (instant intro)",
         });
       } else {
-        // Confirmation flow
         const match = await createMatchWithTokens(personA.id, personB.id, slotA.session, slotB.session);
 
         if (aReady) {
@@ -277,7 +306,7 @@ export async function GET(request: NextRequest) {
 
         for (const [recipient, matchedWith, token] of toConfirm) {
           const html = buildConfirmationEmailHtml(recipient, matchedWith, token);
-          const emailResult = await resend.emails.send({
+          const emailResult = await resend!.emails.send({
             from: "Matt from Vipassana.cool <matt@vipassana.cool>",
             to: [recipient.email],
             subject: "I found a practice buddy match for you",
@@ -314,8 +343,8 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // Send admin summary
-  if (results.length > 0 || errors.length > 0) {
+  // Send admin summary (skip in dry run)
+  if (!dryRun && (results.length > 0 || errors.length > 0)) {
     try {
       const matchList = results
         .map(
@@ -329,7 +358,7 @@ export async function GET(request: NextRequest) {
             `<li style="color:red">${e.personA} + ${e.personB}: ${e.error}</li>`
         )
         .join("");
-      await resend.emails.send({
+      await resend!.emails.send({
         from: "Vipassana.cool <hello@vipassana.cool>",
         to: "i@m13v.com",
         subject: `Auto-match: ${results.length} pair${results.length !== 1 ? "s" : ""} matched${errors.length > 0 ? `, ${errors.length} error${errors.length !== 1 ? "s" : ""}` : ""}`,
@@ -348,6 +377,7 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({
     success: true,
+    dryRun,
     pool: candidates.length,
     sessions: slots.length,
     eligible: eligible.length,
