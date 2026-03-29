@@ -210,13 +210,16 @@ export async function POST(request: NextRequest) {
 
   if (sendEmail) {
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const html = buildIntroEmailHtml(personA, personB);
+    const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", utcTime: getSessionUtcTime(personA, sessionA as "morning" | "evening") };
+    const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", utcTime: getSessionUtcTime(personB, sessionB as "morning" | "evening") };
+    const html = buildIntroEmailHtml(personA, personB, undefined, { sessionA: sessCtxA, sessionB: sessCtxB });
+    const subject = buildIntroSubject(sessCtxA);
 
     const emailResult = await resend.emails.send({
       from: "Matt from Vipassana.cool <matt@vipassana.cool>",
       to: [personA.email, personB.email],
       replyTo: [personA.email, personB.email],
-      subject: "Your Practice Buddy match is here",
+      subject,
       html,
       headers: { "X-Entity-Ref-ID": match.id },
     });
@@ -225,7 +228,7 @@ export async function POST(request: NextRequest) {
       const sql = neon(process.env.DATABASE_URL!);
       await sql`
         INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-        VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+        VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
       `;
     } catch (dbErr) {
       console.error("Failed to log outbound email:", dbErr);
