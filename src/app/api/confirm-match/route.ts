@@ -77,6 +77,7 @@ export async function GET(request: NextRequest) {
           bestUtcTime,
           duration,
           slug,
+          [personA.email, personB.email],
         );
         meetUrl = result.meetUrl;
         eventId = result.eventId;
