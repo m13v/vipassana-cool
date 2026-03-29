@@ -153,6 +153,18 @@ export function buildIntroEmailHtml(
     ? `<ul style="font-size:15px;line-height:1.8;margin:0 0 16px;padding-left:20px;">${traits.map((t) => `<li>${t}</li>`).join("")}</ul>`
     : "";
 
+  // Build session context section (shows which sessions are matched)
+  let sessionInfoHtml = "";
+  if (sessionCtx) {
+    const timeA = formatDualTime(sessionCtx.sessionA.utcTime);
+    const timeB = formatDualTime(sessionCtx.sessionB.utcTime);
+    sessionInfoHtml = `
+      <div style="background:#f0ebe3;border:1px solid #e8e4de;border-radius:8px;padding:16px;margin:0 0 16px;">
+        <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>${nameA}'s ${sessionCtx.sessionA.session} session:</strong> ${timeA} UTC</p>
+        <p style="font-size:15px;line-height:1.7;margin:0;"><strong>${nameB}'s ${sessionCtx.sessionB.session} session:</strong> ${timeB} UTC</p>
+      </div>`;
+  }
+
   // Build time overlap section with suggested meeting time
   let timeHtml = "";
   const tzA = formatTimezone(personA.timezone);
@@ -230,12 +242,13 @@ export function buildIntroEmailHtml(
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
     <div style="text-align:center;margin-bottom:32px;">
       <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#8b7355;margin:0 0 8px;">Vipassana.cool</p>
-      <h1 style="font-size:28px;font-weight:700;margin:0;line-height:1.3;">Your Practice Buddy match is here</h1>
+      <h1 style="font-size:28px;font-weight:700;margin:0;line-height:1.3;">Your Practice Buddy match is here${sessionCtx ? ` – ${sessionCtx.sessionA.session} session` : ""}</h1>
     </div>
     <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
       <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Hi both,</p>
-      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">I'm Matt from Vipassana.cool. You both signed up for Practice Buddy, and I think you're a great match.</p>
+      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">I'm Matt from Vipassana.cool. You both signed up for Practice Buddy, and I think you're a great match${sessionCtx ? ` for your <strong>${sessionCtx.sessionA.session}</strong> session` : ""}.</p>
       ${traitsHtml}
+      ${sessionInfoHtml}
       ${timeHtml}
       <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>${nameA}</strong> &mdash; ${personA.city || "location unknown"}${personA.has_maintained_practice ? `, ${personA.has_maintained_practice.toLowerCase()} maintained practice` : ""}${personA.practice_length ? ` for ${personA.practice_length}` : ""}.</p>
       <p style="font-size:15px;line-height:1.7;margin:0 0 16px;"><strong>${nameB}</strong> &mdash; ${personB.city || "location unknown"}${personB.has_maintained_practice ? `, ${personB.has_maintained_practice.toLowerCase()} maintained practice` : ""}${personB.practice_length ? ` for ${personB.practice_length}` : ""}.</p>
