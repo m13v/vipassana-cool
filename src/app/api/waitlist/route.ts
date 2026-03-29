@@ -2,7 +2,8 @@ import { Resend } from "resend";
 import { PostHog } from "posthog-node";
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
-import { upsertEntry, getEntryByEmail, updateEntryStatus, endActiveMatches } from "@/lib/db";
+import { upsertEntry, getEntryByEmail, updateEntryStatus, endActiveMatches, getEntry } from "@/lib/db";
+import { buildUnsubscribeUrl } from "@/lib/emails";
 
 type WaitlistData = {
   name: string;
@@ -139,7 +140,10 @@ export async function POST(request: NextRequest) {
 
     // Only send confirmation email for new signups
     if (isNew) {
-      const emailHtml = getWaitlistEmail(data);
+      // Fetch the saved entry to get the unsubscribe token
+      const savedEntry = await getEntry(entryId);
+      const unsubUrl = buildUnsubscribeUrl(savedEntry?.unsubscribe_token ?? null);
+      const emailHtml = getWaitlistEmail(data, unsubUrl);
       const emailResult = await resend.emails.send({
         from: "Vipassana.cool <hello@vipassana.cool>",
         to: data.email,
@@ -165,7 +169,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function getWaitlistEmail(data: WaitlistData): string {
+function getWaitlistEmail(data: WaitlistData, unsubscribeUrl?: string): string {
   const firstName = (data.name || "").trim().split(/\s+/)[0] || "friend";
   return `<!DOCTYPE html>
 <html>
@@ -219,6 +223,7 @@ function getWaitlistEmail(data: WaitlistData): string {
       <p style="font-size:12px;color:#999;margin:0;">
         You received this because you joined the Practice Buddy waitlist.
       </p>
+      ${unsubscribeUrl ? `<p style="font-size:11px;color:#999;margin:8px 0 0;"><a href="${unsubscribeUrl}" style="color:#999;text-decoration:underline;">Unsubscribe</a> from Practice Buddy emails</p>` : ""}
     </div>
 
   </div>
