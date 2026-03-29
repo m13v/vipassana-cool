@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { neon } from "@neondatabase/serverless";
-import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, updateEntryStatus, confirmMatchPerson } from "@/lib/db";
+import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, getActiveMatchForSession, updateEntryStatus, confirmMatchPerson } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml } from "@/lib/emails";
 import type { MeetLinkInfo } from "@/lib/emails";
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { personAId, personBId, sendEmail = true, sendConfirmation = false, meetLinkA, meetLinkB } = await request.json();
+  const { personAId, personBId, sessionA = "morning", sessionB = "morning", sendEmail = true, sendConfirmation = false, meetLinkA, meetLinkB } = await request.json();
 
   if (!personAId || !personBId) {
     return NextResponse.json({ error: "personAId and personBId required" }, { status: 400 });
@@ -65,17 +65,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "One or both entries not found" }, { status: 404 });
   }
 
-  // Block matching anyone already in an active match
-  const activeStatuses = ["contacted", "engaged", "matched"];
-  if (activeStatuses.includes(personA.status)) {
+  // Block matching a session slot that's already in an active match
+  const activeMatchA = await getActiveMatchForSession(personAId, sessionA);
+  if (activeMatchA) {
     return NextResponse.json(
-      { error: `${personA.name} is already in an active match (status: ${personA.status}).` },
+      { error: `${personA.name}'s ${sessionA} session is already in an active match.` },
       { status: 409 }
     );
   }
-  if (activeStatuses.includes(personB.status)) {
+  const activeMatchB = await getActiveMatchForSession(personBId, sessionB);
+  if (activeMatchB) {
     return NextResponse.json(
-      { error: `${personB.name} is already in an active match (status: ${personB.status}).` },
+      { error: `${personB.name}'s ${sessionB} session is already in an active match.` },
       { status: 409 }
     );
   }
@@ -99,7 +100,7 @@ export async function POST(request: NextRequest) {
 
     // Both ready → direct intro, no confirmation needed
     if (aReady && bReady) {
-      const match = await createMatch(personAId, personBId);
+      const match = await createMatch(personAId, personBId, sessionA, sessionB);
       const resend = new Resend(process.env.RESEND_API_KEY);
       const sql = neon(process.env.DATABASE_URL!);
 
@@ -151,7 +152,7 @@ export async function POST(request: NextRequest) {
     }
 
     // One or both pending → confirmation flow
-    const match = await createMatchWithTokens(personAId, personBId);
+    const match = await createMatchWithTokens(personAId, personBId, sessionA, sessionB);
     const resend = new Resend(process.env.RESEND_API_KEY);
     const sql = neon(process.env.DATABASE_URL!);
 
@@ -195,7 +196,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Direct intro flow (existing behavior)
-  const match = await createMatch(personAId, personBId);
+  const match = await createMatch(personAId, personBId, sessionA, sessionB);
 
   if (sendEmail) {
     const resend = new Resend(process.env.RESEND_API_KEY);
