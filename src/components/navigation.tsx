@@ -52,7 +52,14 @@ const links: NavLink[] = [
   },
   { href: "/prepare", label: "Preparation" },
   { href: "/resources", label: "Resources" },
-  { href: "/practice-buddy", label: "Practice Buddy", bold: true },
+  {
+    href: "/",
+    label: "Practice Buddy",
+    bold: true,
+    children: [
+      { href: "/practice-buddy/how-it-works", label: "How It Works" },
+    ],
+  },
   {
     href: "/experience",
     label: "Personal Experience",
