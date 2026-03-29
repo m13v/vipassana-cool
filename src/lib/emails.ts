@@ -151,11 +151,23 @@ export function buildIntroSubject(sessionCtx: SessionContext): string {
   return `Your Practice Buddy match – ${sessionCtx.session} session at ${formatSessionLocalTime(sessionCtx)}`;
 }
 
+export function buildUnsubscribeUrl(token: string | null): string {
+  if (!token) return "";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://vipassana.cool";
+  return `${baseUrl}/api/unsubscribe?token=${token}`;
+}
+
+function unsubscribeFooterHtml(unsubscribeUrl: string): string {
+  if (!unsubscribeUrl) return "";
+  return `<p style="font-size:11px;color:#999;margin:8px 0 0;"><a href="${unsubscribeUrl}" style="color:#999;text-decoration:underline;">Unsubscribe</a> from Practice Buddy emails</p>`;
+}
+
 export function buildIntroEmailHtml(
   personA: WaitlistEntry,
   personB: WaitlistEntry,
   meetLink?: MeetLinkInfo,
   sessionCtx?: { sessionA: SessionContext; sessionB: SessionContext },
+  unsubscribeUrl?: string,
 ): string {
   const nameA = personA.name?.split(/\s+/)[0] || "fellow meditator";
   const nameB = personB.name?.split(/\s+/)[0] || "fellow meditator";
@@ -273,6 +285,7 @@ export function buildIntroEmailHtml(
     <div style="text-align:center;padding:24px 0;border-top:1px solid #e8e4de;">
       <p style="font-size:15px;margin:0 0 8px;">Be happy,<br>Matt</p>
       <p style="font-size:13px;color:#6b6b6b;margin:0;"><a href="https://vipassana.cool" style="color:#8b7355;">vipassana.cool</a></p>
+      ${unsubscribeUrl ? unsubscribeFooterHtml(unsubscribeUrl) : ""}
     </div>
   </div>
 </body></html>`;
@@ -283,6 +296,7 @@ export function buildConfirmationEmailHtml(
   matchedWith: WaitlistEntry,
   token: string,
   sessionCtx?: { recipientSession: SessionContext; matchSession: SessionContext },
+  unsubscribeUrl?: string,
 ): string {
   const firstName = recipient.name?.split(/\s+/)[0] || "there";
   const matchFirstName = matchedWith.name?.split(/\s+/)[0] || "someone";
@@ -337,6 +351,7 @@ export function buildConfirmationEmailHtml(
       <p style="font-size:15px;margin:0 0 8px;">Be happy,<br>Matt</p>
       <p style="font-size:13px;color:#6b6b6b;margin:0;"><a href="https://vipassana.cool" style="color:#8b7355;">vipassana.cool</a></p>
       <p style="font-size:11px;color:#999;margin:8px 0 0;">P.S. I do a brief web search on name and email to write a more personal intro. Hope that's okay.</p>
+      ${unsubscribeUrl ? unsubscribeFooterHtml(unsubscribeUrl) : ""}
     </div>
   </div>
 </body></html>`;
