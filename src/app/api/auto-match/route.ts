@@ -12,6 +12,8 @@ import {
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml } from "@/lib/emails";
+import type { MeetLinkInfo } from "@/lib/emails";
+import { createMeetEvent } from "@/lib/google-meet";
 
 /**
  * Session-based auto-matching cron — runs every 2 hours.
@@ -265,28 +267,69 @@ export async function GET(request: NextRequest) {
 
       // --- LIVE MODE: create matches, send emails ---
       if (aReady && bReady) {
+        // Both ready → instant intro. Must create Meet link first.
+        const nameA = personA.name?.split(/\s+/)[0] || "A";
+        const nameB = personB.name?.split(/\s+/)[0] || "B";
+        const slug = `${nameA}-${nameB}`.toLowerCase().replace(/[^a-z0-9-]/g, "");
+        const bestUtcTime = findBestMeetTime(personA, personB);
+        const duration = parseDurationMinutes(personA.session_duration, personB.session_duration);
+
+        let meetResult: { meetUrl: string; eventId: string };
+        try {
+          meetResult = await createMeetEvent(
+            `Vipassana Practice Buddy – ${nameA} & ${nameB}`,
+            bestUtcTime, duration, slug,
+          );
+        } catch (err) {
+          errors.push({
+            personA: personA.name || personA.email,
+            personB: personB.name || personB.email,
+            error: `Meet creation failed: ${String(err)}`,
+          });
+          continue; // Skip this pair — don't create match or send email
+        }
+
         const match = await createMatch(personA.id, personB.id, slotA.session, slotB.session);
-        const html = buildIntroEmailHtml(personA, personB);
-        const emailResult = await resend!.emails.send({
-          from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-          to: [personA.email, personB.email],
-          replyTo: [personA.email, personB.email],
-          subject: "Your Practice Buddy match is here",
-          html,
-          headers: { "X-Entity-Ref-ID": match.id },
-        });
+
+        // Create per-person tracking links
+        const trackTokenA = crypto.randomUUID();
+        const trackTokenB = crypto.randomUUID();
+        await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${trackTokenA}, ${match.id}, ${personA.id}, ${meetResult.meetUrl})`;
+        await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${trackTokenB}, ${match.id}, ${personB.id}, ${meetResult.meetUrl})`;
         await sql`
-          INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
-                  ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+          INSERT INTO vipassana_activity_log (match_id, event_type, new_value, triggered_by, note)
+          VALUES (${match.id}, 'meet_created', ${meetResult.meetUrl}, 'auto-match', ${`eventId=${meetResult.eventId}`})
         `;
+
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://vipassana.cool";
+        for (const [person, other, trackToken] of [
+          [personA, personB, trackTokenA],
+          [personB, personA, trackTokenB],
+        ] as [typeof personA, typeof personB, string][]) {
+          const meetInfo: MeetLinkInfo = { trackingUrl: `${baseUrl}/meet/${trackToken}` };
+          const html = buildIntroEmailHtml(person, other, meetInfo);
+          const emailResult = await resend!.emails.send({
+            from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+            to: [personA.email, personB.email],
+            replyTo: [personA.email, personB.email],
+            subject: "Your Practice Buddy match is here",
+            html,
+            headers: { "X-Entity-Ref-ID": match.id },
+          });
+          await sql`
+            INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
+                    ${[personA.email, personB.email].join(", ")}, 'Your Practice Buddy match is here', ${html}, 'sent')
+          `;
+        }
+
         results.push({
           personA: personA.name || personA.email,
           sessionA: slotA.session,
           personB: personB.name || personB.email,
           sessionB: slotB.session,
           matchId: match.id,
-          flow: "both-ready (instant intro)",
+          flow: "both-ready (instant intro + Meet)",
         });
       } else {
         const match = await createMatchWithTokens(personA.id, personB.id, slotA.session, slotB.session);
@@ -386,4 +429,57 @@ export async function GET(request: NextRequest) {
     results,
     errors,
   });
+}
+
+/** Find the best overlapping UTC time between two people's sessions, rounded to 30 min. */
+function findBestMeetTime(a: { morning_utc: string | null; evening_utc: string | null }, b: { morning_utc: string | null; evening_utc: string | null }): string {
+  function toMin(t: string | null): number | null {
+    if (!t) return null;
+    const [h, m] = t.split(":").map(Number);
+    return isNaN(h) ? null : h * 60 + (m || 0);
+  }
+  function diff(a: number, b: number): number {
+    const d = Math.abs(a - b);
+    return Math.min(d, 1440 - d);
+  }
+  const slots = [
+    { a: toMin(a.morning_utc), b: toMin(b.morning_utc) },
+    { a: toMin(a.evening_utc), b: toMin(b.evening_utc) },
+    { a: toMin(a.morning_utc), b: toMin(b.evening_utc) },
+    { a: toMin(a.evening_utc), b: toMin(b.morning_utc) },
+  ].filter((s): s is { a: number; b: number } => s.a !== null && s.b !== null);
+
+  let best = slots[0];
+  let bestDiff = best ? diff(best.a, best.b) : Infinity;
+  for (const s of slots) {
+    const d = diff(s.a, s.b);
+    if (d < bestDiff) { best = s; bestDiff = d; }
+  }
+  if (!best) return "06:00";
+  let mid: number;
+  if (Math.abs(best.a - best.b) > 720) {
+    mid = Math.round(((best.a + best.b + 1440) / 2)) % 1440;
+  } else {
+    mid = Math.round((best.a + best.b) / 2);
+  }
+  mid = Math.round(mid / 30) * 30;
+  mid = mid % 1440;
+  const h = Math.floor(mid / 60);
+  const m = mid % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+}
+
+/** Parse session duration strings to minutes, take the longer of two. */
+function parseDurationMinutes(a: string | null, b: string | null): number {
+  function parse(s: string | null): number {
+    if (!s) return 60;
+    const lower = s.toLowerCase();
+    if (lower.includes("30")) return 30;
+    if (lower.includes("20")) return 20;
+    if (lower.includes("15")) return 15;
+    if (lower.includes("45")) return 45;
+    if (lower.includes("2")) return 120;
+    return 60;
+  }
+  return Math.max(parse(a), parse(b));
 }
