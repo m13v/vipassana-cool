@@ -8,6 +8,7 @@ import {
   updateMatchStatus,
   updateEntryStatus,
   declineMatch,
+  updateMatchCalendarEvent,
 } from "@/lib/db";
 import { buildIntroEmailHtml, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
@@ -104,6 +105,9 @@ export async function GET(request: NextRequest) {
       await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${tokenB}, ${match.id}, ${personB.id}, ${meetUrl})`;
       const meetInfoA: MeetLinkInfo = { trackingUrl: `${BASE_URL}/meet/${tokenA}` };
       const meetInfoB: MeetLinkInfo = { trackingUrl: `${BASE_URL}/meet/${tokenB}` };
+
+      // Store calendar event ID on match for RSVP tracking
+      await updateMatchCalendarEvent(match.id, eventId);
 
       // Log event ID for cleanup
       await sql`
