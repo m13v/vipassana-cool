@@ -89,7 +89,7 @@ export async function GET(request: NextRequest) {
       const lastExpiry = await sql`
         SELECT m.created_at FROM matches m
         WHERE (m.person_a_id = ${c.id} OR m.person_b_id = ${c.id})
-          AND m.status = 'expired'
+          AND m.status IN ('expired', 'declined')
         ORDER BY m.created_at DESC LIMIT 1
       `;
       if (lastExpiry.length > 0) {
