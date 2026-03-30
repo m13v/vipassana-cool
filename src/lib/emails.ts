@@ -1,3 +1,4 @@
+import { toUtcTime } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 
 export function buildCommonTraits(personA: WaitlistEntry, personB: WaitlistEntry): string[] {
@@ -86,11 +87,16 @@ function utcMinutesToLocalTime(utcMins: number, offset: number): string {
 }
 
 function findBestOverlap(a: WaitlistEntry, b: WaitlistEntry): { aUtc: number; bUtc: number; diff: number } | null {
+  // Compute fresh UTC from local time + timezone (DST-aware)
+  const aMornUtc = toUtcTime(a.morning_time, a.timezone);
+  const aEveUtc = toUtcTime(a.evening_time, a.timezone);
+  const bMornUtc = toUtcTime(b.morning_time, b.timezone);
+  const bEveUtc = toUtcTime(b.evening_time, b.timezone);
   const slots = [
-    { aUtc: utcToMinutes(a.morning_utc), bUtc: utcToMinutes(b.morning_utc) },
-    { aUtc: utcToMinutes(a.evening_utc), bUtc: utcToMinutes(b.evening_utc) },
-    { aUtc: utcToMinutes(a.morning_utc), bUtc: utcToMinutes(b.evening_utc) },
-    { aUtc: utcToMinutes(a.evening_utc), bUtc: utcToMinutes(b.morning_utc) },
+    { aUtc: utcToMinutes(aMornUtc), bUtc: utcToMinutes(bMornUtc) },
+    { aUtc: utcToMinutes(aEveUtc), bUtc: utcToMinutes(bEveUtc) },
+    { aUtc: utcToMinutes(aMornUtc), bUtc: utcToMinutes(bEveUtc) },
+    { aUtc: utcToMinutes(aEveUtc), bUtc: utcToMinutes(bMornUtc) },
   ].filter((s): s is { aUtc: number; bUtc: number } => s.aUtc !== null && s.bUtc !== null);
 
   let best: { aUtc: number; bUtc: number; diff: number } | null = null;
@@ -110,7 +116,7 @@ export type MeetLinkInfo = {
 
 export type SessionContext = {
   session: "morning" | "evening";
-  utcTime: string; // "06:00"
+  localTime: string; // user's intended local time, e.g. "06:00"
   timezone: string | null; // IANA timezone or GMT offset
 };
 
@@ -126,19 +132,15 @@ function formatDualTime(time: string | null): string {
   return `${time24} (${time12})`;
 }
 
-/** Convert UTC time to local using timezone, return dual-format string with tz label */
+/** Format session local time with timezone label — uses the user's original local time directly */
 function formatSessionLocalTime(ctx: SessionContext): string {
-  const utcMins = utcToMinutes(ctx.utcTime);
-  if (utcMins === null) return ctx.utcTime || "";
-  const offset = tzOffsetMinutes(ctx.timezone);
-  const localTime = utcMinutesToLocalTime(utcMins, offset);
   const tzLabel = formatTimezone(ctx.timezone);
-  return `${formatDualTime(localTime)}${tzLabel ? ` ${tzLabel}` : ""}`;
+  return `${formatDualTime(ctx.localTime)}${tzLabel ? ` ${tzLabel}` : ""}`;
 }
 
-/** Get the UTC time for a person's session slot */
-export function getSessionUtcTime(person: WaitlistEntry, session: "morning" | "evening"): string {
-  return (session === "evening" ? person.evening_utc : person.morning_utc) || "06:00";
+/** Get the local time for a person's session slot (their original intended time) */
+export function getSessionLocalTime(person: WaitlistEntry, session: "morning" | "evening"): string {
+  return (session === "evening" ? person.evening_time : person.morning_time) || "06:00";
 }
 
 /** Build subject line for confirmation email */
