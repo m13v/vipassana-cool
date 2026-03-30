@@ -9,7 +9,7 @@ import {
   updateEntryStatus,
   declineMatch,
 } from "@/lib/db";
-import { buildIntroEmailHtml, buildIntroSubject, getSessionUtcTime, buildUnsubscribeUrl } from "@/lib/emails";
+import { buildIntroEmailHtml, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
@@ -114,8 +114,8 @@ export async function GET(request: NextRequest) {
       // Build session context from match record
       const sessA = (match.person_a_session || "morning") as "morning" | "evening";
       const sessB = (match.person_b_session || "morning") as "morning" | "evening";
-      const sessCtxA: SessionContext = { session: sessA, utcTime: getSessionUtcTime(personA, sessA), timezone: personA.timezone };
-      const sessCtxB: SessionContext = { session: sessB, utcTime: getSessionUtcTime(personB, sessB), timezone: personB.timezone };
+      const sessCtxA: SessionContext = { session: sessA, localTime: getSessionLocalTime(personA, sessA), timezone: personA.timezone };
+      const sessCtxB: SessionContext = { session: sessB, localTime: getSessionLocalTime(personB, sessB), timezone: personB.timezone };
       const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
       // Send intro emails — one per person so each gets their unique tracking URL
