@@ -9,7 +9,7 @@
       "schedule": "0 12 * * *"
     },
     {
-      "path": "/api/auto-match",
+      "path": "/api/auto-match?live=true",
       "schedule": "*/30 * * * *"
     }
   ]
