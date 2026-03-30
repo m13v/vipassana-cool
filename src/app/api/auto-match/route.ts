@@ -12,7 +12,7 @@ import {
   toUtcTime,
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
-import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionUtcTime, buildUnsubscribeUrl } from "@/lib/emails";
+import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
@@ -250,8 +250,8 @@ export async function GET(request: NextRequest) {
         const flow = aReady && bReady
           ? "both-ready (instant intro)"
           : aReady || bReady ? "one-ready" : "both-pending";
-        const dryCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session), timezone: personA.timezone };
-        const dryCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session), timezone: personB.timezone };
+        const dryCtxA: SessionContext = { session: slotA.session, localTime: getSessionLocalTime(personA, slotA.session), timezone: personA.timezone };
+        const dryCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone };
         let htmlOk = false;
         try {
           if (aReady && bReady) {
@@ -313,8 +313,8 @@ export async function GET(request: NextRequest) {
         `;
 
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://vipassana.cool";
-        const sessCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session), timezone: personA.timezone };
-        const sessCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session), timezone: personB.timezone };
+        const sessCtxA: SessionContext = { session: slotA.session, localTime: getSessionLocalTime(personA, slotA.session), timezone: personA.timezone };
+        const sessCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone };
         const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
         for (const [person, other, trackToken, sessCtx] of [
@@ -359,8 +359,8 @@ export async function GET(request: NextRequest) {
           await updateEntryStatus(personB.id, "engaged", "auto-match", match.id, "auto-confirmed (ready status)");
         }
 
-        const sessCtxA: SessionContext = { session: slotA.session, utcTime: getSessionUtcTime(personA, slotA.session), timezone: personA.timezone };
-        const sessCtxB: SessionContext = { session: slotB.session, utcTime: getSessionUtcTime(personB, slotB.session), timezone: personB.timezone };
+        const sessCtxA: SessionContext = { session: slotA.session, localTime: getSessionLocalTime(personA, slotA.session), timezone: personA.timezone };
+        const sessCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone };
 
         const toConfirm: [WaitlistEntry, WaitlistEntry, string, SessionContext, SessionContext][] = [];
         if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, sessCtxA, sessCtxB]);
