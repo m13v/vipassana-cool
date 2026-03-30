@@ -9,6 +9,7 @@ import {
   createMatch,
   updateEntryStatus,
   confirmMatchPerson,
+  toUtcTime,
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionUtcTime, buildUnsubscribeUrl } from "@/lib/emails";
@@ -100,15 +101,18 @@ export async function GET(request: NextRequest) {
   }
 
   // Build session slots from eligible people
+  // Compute UTC from local time + timezone on the fly (DST-aware)
   const slots: SessionSlot[] = [];
   for (const p of eligible) {
-    const mornMin = utcToMinutes(p.morning_utc);
+    const freshMorningUtc = toUtcTime(p.morning_time, p.timezone);
+    const mornMin = utcToMinutes(freshMorningUtc);
     if (mornMin !== null) {
       slots.push({ personId: p.id, person: p, session: "morning", utcMinutes: mornMin });
     }
     // Only add evening slot if they sit twice and have an evening time
     if (p.frequency === "Twice a day") {
-      const eveMin = utcToMinutes(p.evening_utc);
+      const freshEveningUtc = toUtcTime(p.evening_time, p.timezone);
+      const eveMin = utcToMinutes(freshEveningUtc);
       if (eveMin !== null) {
         slots.push({ personId: p.id, person: p, session: "evening", utcMinutes: eveMin });
       }
@@ -452,7 +456,7 @@ export async function GET(request: NextRequest) {
 }
 
 /** Find the best overlapping UTC time between two people's sessions, rounded to 30 min. */
-function findBestMeetTime(a: { morning_utc: string | null; evening_utc: string | null }, b: { morning_utc: string | null; evening_utc: string | null }): string {
+function findBestMeetTime(a: WaitlistEntry, b: WaitlistEntry): string {
   function toMin(t: string | null): number | null {
     if (!t) return null;
     const [h, m] = t.split(":").map(Number);
@@ -462,11 +466,16 @@ function findBestMeetTime(a: { morning_utc: string | null; evening_utc: string |
     const d = Math.abs(a - b);
     return Math.min(d, 1440 - d);
   }
+  // Compute fresh UTC from local time + timezone (DST-aware)
+  const aMornUtc = toUtcTime(a.morning_time, a.timezone);
+  const aEveUtc = toUtcTime(a.evening_time, a.timezone);
+  const bMornUtc = toUtcTime(b.morning_time, b.timezone);
+  const bEveUtc = toUtcTime(b.evening_time, b.timezone);
   const slots = [
-    { a: toMin(a.morning_utc), b: toMin(b.morning_utc) },
-    { a: toMin(a.evening_utc), b: toMin(b.evening_utc) },
-    { a: toMin(a.morning_utc), b: toMin(b.evening_utc) },
-    { a: toMin(a.evening_utc), b: toMin(b.morning_utc) },
+    { a: toMin(aMornUtc), b: toMin(bMornUtc) },
+    { a: toMin(aEveUtc), b: toMin(bEveUtc) },
+    { a: toMin(aMornUtc), b: toMin(bEveUtc) },
+    { a: toMin(aEveUtc), b: toMin(bMornUtc) },
   ].filter((s): s is { a: number; b: number } => s.a !== null && s.b !== null);
 
   let best = slots[0];
