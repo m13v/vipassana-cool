@@ -10,6 +10,7 @@ import {
   updateEntryStatus,
   confirmMatchPerson,
   toUtcTime,
+  updateMatchCalendarEvent,
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
@@ -307,6 +308,7 @@ export async function GET(request: NextRequest) {
         const trackTokenB = crypto.randomUUID();
         await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${trackTokenA}, ${match.id}, ${personA.id}, ${meetResult.meetUrl})`;
         await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${trackTokenB}, ${match.id}, ${personB.id}, ${meetResult.meetUrl})`;
+        await updateMatchCalendarEvent(match.id, meetResult.eventId);
         await sql`
           INSERT INTO vipassana_activity_log (match_id, event_type, new_value, triggered_by, note)
           VALUES (${match.id}, 'meet_created', ${meetResult.meetUrl}, 'auto-match', ${`eventId=${meetResult.eventId}`})
