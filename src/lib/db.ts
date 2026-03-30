@@ -46,6 +46,9 @@ export type Match = {
   person_a_confirmed: boolean;
   person_b_confirmed: boolean;
   declined_by_id: string | null;
+  calendar_event_id: string | null;
+  calendar_rsvp_a: string | null;
+  calendar_rsvp_b: string | null;
 };
 
 function tzOffsetMinutes(tz: string): number {
@@ -176,7 +179,7 @@ export async function createMatch(personAId: string, personBId: string, sessionA
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personBId}, ${id}, 'match_created', 'pending', 'admin')`;
   await updateEntryStatus(personAId, "matched", "admin", id);
   await updateEntryStatus(personBId, "matched", "admin", id);
-  return { id, person_a_id: personAId, person_b_id: personBId, person_a_session: sessionA, person_b_session: sessionB, status: "pending", created_at: now, notes: null, person_a_token: null, person_b_token: null, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
+  return { id, person_a_id: personAId, person_b_id: personBId, person_a_session: sessionA, person_b_session: sessionB, status: "pending", created_at: now, notes: null, person_a_token: null, person_b_token: null, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null, calendar_event_id: null, calendar_rsvp_a: null, calendar_rsvp_b: null };
 }
 
 // End all active matches for a person. Sets matches to "ended" and partners back to "ready".
@@ -247,7 +250,7 @@ export async function createMatchWithTokens(personAId: string, personBId: string
   `;
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personAId}, ${id}, 'match_created', 'confirming', 'admin')`;
   await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by) VALUES (${personBId}, ${id}, 'match_created', 'confirming', 'admin')`;
-  return { id, person_a_id: personAId, person_b_id: personBId, person_a_session: sessionA, person_b_session: sessionB, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null };
+  return { id, person_a_id: personAId, person_b_id: personBId, person_a_session: sessionA, person_b_session: sessionB, status: "confirming", created_at: now, notes: null, person_a_token: tokenA, person_b_token: tokenB, person_a_confirmed: false, person_b_confirmed: false, declined_by_id: null, calendar_event_id: null, calendar_rsvp_a: null, calendar_rsvp_b: null };
 }
 
 // Auto-advance match status when an inbound email is received from a matched person:
@@ -353,6 +356,29 @@ export async function getPriorMatchedIds(personId: string): Promise<string[]> {
   return rows.map((r) =>
     r.person_a_id === personId ? r.person_b_id : r.person_a_id
   ) as string[];
+}
+
+export async function updateMatchCalendarEvent(matchId: string, calendarEventId: string): Promise<void> {
+  const sql = getSql();
+  await sql`UPDATE matches SET calendar_event_id = ${calendarEventId} WHERE id = ${matchId}`;
+}
+
+export async function updateMatchRsvp(matchId: string, rsvpA: string, rsvpB: string): Promise<void> {
+  const sql = getSql();
+  await sql`UPDATE matches SET calendar_rsvp_a = ${rsvpA}, calendar_rsvp_b = ${rsvpB} WHERE id = ${matchId}`;
+}
+
+export async function getActiveMatchesWithCalendar(): Promise<(Match & { person_a_email: string; person_b_email: string })[]> {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT m.*, a.email as person_a_email, b.email as person_b_email
+    FROM matches m
+    JOIN waitlist_entries a ON a.id = m.person_a_id
+    JOIN waitlist_entries b ON b.id = m.person_b_id
+    WHERE m.calendar_event_id IS NOT NULL
+      AND m.status IN ('pending', 'replied', 'active')
+  `;
+  return rows as (Match & { person_a_email: string; person_b_email: string })[];
 }
 
 export async function getMatchByToken(token: string): Promise<Match | undefined> {
