@@ -11,6 +11,10 @@
     {
       "path": "/api/auto-match?live=true",
       "schedule": "*/30 * * * *"
+    },
+    {
+      "path": "/api/check-rsvp",
+      "schedule": "0 */6 * * *"
     }
   ]
 }
