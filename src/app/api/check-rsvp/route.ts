@@ -80,9 +80,9 @@ export async function GET(request: NextRequest) {
         updated++;
       }
 
-      // If both declined the calendar invite, auto-end the match
+      // If either person declined the calendar invite, auto-end the match
       let autoEnded = false;
-      if (rsvpA === "declined" && rsvpB === "declined") {
+      if (rsvpA === "declined" || rsvpB === "declined") {
         await updateMatchStatus(match.id, "ended", "cron");
         ended++;
         autoEnded = true;
