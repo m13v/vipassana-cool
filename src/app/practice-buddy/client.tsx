@@ -17,7 +17,7 @@ export function PracticeBuddyClient() {
     fetch("/api/waitlist/entries")
       .then((r) => r.json())
       .then((data) => {
-        if (data.entries) setMatchedCount(data.entries.filter((e: { status: string }) => e.status === "matched" || e.status === "engaged").length);
+        if (data.entries) setMatchedCount(data.entries.filter((e: { status: string }) => e.status === "matched").length);
       })
       .catch(() => {});
   }, []);
