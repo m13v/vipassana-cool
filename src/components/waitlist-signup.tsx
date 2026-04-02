@@ -222,6 +222,7 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
               id="wb-name"
               type="text"
               required
+              minLength={2}
               placeholder="Your name"
               value={form.name}
               onChange={(e) => update("name", e.target.value)}
