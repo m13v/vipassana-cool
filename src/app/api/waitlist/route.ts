@@ -39,6 +39,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
+    const trimmedName = (data.name || "").trim();
+    const INVALID_NAMES = ["empty", "test", "n/a", "na", "none", "null", "undefined", "anonymous", "name", "your name", "first name", "asdf", "aaa"];
+    if (!trimmedName || trimmedName.length < 2 || INVALID_NAMES.includes(trimmedName.toLowerCase())) {
+      return NextResponse.json({ error: "Please enter your real name" }, { status: 400 });
+    }
+    data.name = trimmedName;
+
     // Split name into first/last for Resend contact
     const nameParts = (data.name || "").trim().split(/\s+/);
     const firstName = nameParts[0] || "";
