@@ -39,7 +39,7 @@ export function PracticeBuddyClient() {
   return (
     <>
       {/* Hero */}
-      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
+      <section id="practice-buddy" className="mx-auto max-w-4xl px-6 py-20 text-center">
         <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
           Practice Buddy
         </h1>
