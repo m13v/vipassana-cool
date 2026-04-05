@@ -4,6 +4,7 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 export const metadata: Metadata = {
   title: "Vipassana Daily Practice at Home — How to Maintain After Your Course",
@@ -268,7 +269,12 @@ export default function DailyPracticePage() {
         </section>
       </div>
 
-      <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
+      <PracticeBuddyCta
+        heading="Need Accountability for Your Daily Practice?"
+        description="The hardest part of daily practice is doing it alone. Get matched with a fellow Vipassana meditator for daily sits over Google Meet. Free, and tradition-respectful."
+      />
+
+      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Ready to Begin?</h2>
         <p className="mb-6 text-muted">
           Find a center near you and sign up for your first (or next) 10-day course.
