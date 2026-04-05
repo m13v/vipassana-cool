@@ -4,6 +4,7 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 export const metadata: Metadata = {
   title:
@@ -611,7 +612,12 @@ export default function ScientificEvidencePage() {
         </section>
       </div>
 
-      <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
+      <PracticeBuddyCta
+        heading="Already Practicing? Stay Consistent."
+        description="Research shows benefits are dose-dependent. Get matched with a fellow Vipassana meditator for daily accountability over Google Meet. Free and tradition-respectful."
+      />
+
+      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Ready to Experience It Yourself?</h2>
         <p className="mb-6 text-muted">
           The best evidence is direct experience. Find a center near you and
