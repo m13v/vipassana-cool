@@ -5,6 +5,7 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
 import { FaqSchema } from "@/components/faq-schema";
+import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 export const metadata: Metadata = {
   title: "Vipassana at Home: How to Maintain a Daily Practice After Your First Course",
@@ -246,7 +247,12 @@ export default function VipassanaAtHomePage() {
         </section>
       </div>
 
-      <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
+      <PracticeBuddyCta
+        heading="Practicing at Home Doesn't Mean Practicing Alone"
+        description="Get matched with a fellow Vipassana meditator for daily accountability over Google Meet. Free, tradition-respectful, and based on real commitment."
+      />
+
+      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Haven&apos;t Done Your First Course Yet?</h2>
         <p className="mb-6 text-muted">
           You must complete a 10-day course before practicing Vipassana at home. Find a center and apply.
