@@ -2,7 +2,7 @@
 
 > An unofficial guide to Vipassana meditation and dhamma.org, written by a practitioner with 60 days of courses completed.
 
-Last updated: 2026-03-19
+Last updated: 2026-04-06
 
 ## What is Vipassana.cool?
 
@@ -15,6 +15,10 @@ Matthew Diakonov is a Vipassana practitioner with 60 days of courses completed â
 ## Content
 
 The site offers in-depth guides on using dhamma.org, preparing for a course, and maintaining a daily practice afterward. It includes a detailed FAQ addressing common concerns (safety, cost, leaving early, mental health considerations), a 200+ link resource library (books, documentaries, podcasts, research papers), and a full day-by-day account of what a 10-day course is actually like. Topical guides cover subjects like Vipassana vs. other meditation styles, scientific evidence, addiction recovery, pain management, sleep, relationships, and the old student path.
+
+## Practice Buddy
+
+Vipassana.cool offers a free Practice Buddy matching service for old students of Vipassana meditation. Meditators sign up with their timezone, preferred practice time, and session duration, and the system matches them with a compatible partner for daily meditation over Google Meet. The service is designed to solve the most common problem old students face: maintaining consistent daily practice after returning home from a course. There are currently 94 meditators on the waitlist from cities worldwide. The service is free, has no app to download, and respects the Goenka tradition.
 
 ## Key Pages
 
