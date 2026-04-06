@@ -4,6 +4,7 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 export const metadata: Metadata = {
   title: "Group Sittings: How to Find, Attend, and Start One — Vipassana Guide",
@@ -208,7 +209,12 @@ export default function GroupSittingsPage() {
         </section>
       </div>
 
-      <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
+      <PracticeBuddyCta
+        heading="Can't Find a Local Group?"
+        description="Practice with a partner online instead. Get matched with a fellow Vipassana meditator for daily sits over Google Meet. Free and tradition-respectful."
+      />
+
+      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Find a Group Sitting</h2>
         <p className="mb-6 text-muted">
           Check your nearest Vipassana center for group sitting schedules.
