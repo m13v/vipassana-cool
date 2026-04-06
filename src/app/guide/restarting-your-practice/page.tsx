@@ -4,6 +4,7 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 export const metadata: Metadata = {
   title: "How to Restart Your Vipassana Practice — Getting Back on the Cushion",
@@ -224,7 +225,12 @@ export default function RestartingPracticePage() {
         </section>
       </div>
 
-      <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
+      <PracticeBuddyCta
+        heading="Ready to Restart With Support?"
+        description="Restarting is easier with a partner. Get matched with a fellow Vipassana meditator for daily practice over Google Meet. Free and tradition-respectful."
+      />
+
+      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Recharge with a Course</h2>
         <p className="mb-6 text-muted">
           A 10-day course is the best way to reset your practice.
