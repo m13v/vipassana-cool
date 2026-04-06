@@ -4,6 +4,7 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 export const metadata: Metadata = {
   title: "After Vipassana — How to Integrate Back Into Normal Life",
@@ -280,7 +281,12 @@ export default function AfterRetreatPage() {
         </section>
       </div>
 
-      <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
+      <PracticeBuddyCta
+        heading="Keep the Momentum Going"
+        description="The transition home is the hardest part. Get matched with a fellow Vipassana meditator for daily accountability over Google Meet. Free and tradition-respectful."
+      />
+
+      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Ready for Your Next Course?</h2>
         <p className="mb-6 text-muted">
           Find a center near you and sign up for your next 10-day course or Dhamma service period.
