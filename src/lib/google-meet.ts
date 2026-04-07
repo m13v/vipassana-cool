@@ -94,5 +94,34 @@ export async function createMeetEvent(
     throw new Error(`Calendar event created (${eventId}) but no Meet URL returned`);
   }
 
+  // Extract meeting code from URL (e.g. "abc-defg-hij" from "https://meet.google.com/abc-defg-hij")
+  const meetingCode = meetUrl.replace("https://meet.google.com/", "").split("?")[0];
+
+  // Use Google Meet REST API v2 to set access type to OPEN so anyone with the link can join
+  // without needing the host to admit them
+  try {
+    const spaceRes = await fetch(
+      `https://meet.googleapis.com/v2/spaces/${meetingCode}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          config: {
+            accessType: "OPEN",
+          },
+        }),
+      },
+    );
+    if (!spaceRes.ok) {
+      const text = await spaceRes.text();
+      console.warn(`Failed to set Meet space to OPEN access: ${spaceRes.status} ${text}`);
+    }
+  } catch (err) {
+    console.warn("Failed to update Meet space access type:", err);
+  }
+
   return { eventId, meetUrl };
 }
