@@ -101,7 +101,7 @@ export async function createMeetEvent(
   // without needing the host to admit them
   try {
     const spaceRes = await fetch(
-      `https://meet.googleapis.com/v2/spaces/${meetingCode}`,
+      `https://meet.googleapis.com/v2/spaces/${meetingCode}?updateMask=config.accessType`,
       {
         method: "PATCH",
         headers: {
