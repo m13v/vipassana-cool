@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
           const subject = buildIntroSubject(sessCtx);
           const emailResult = await resend.emails.send({
             from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-            to: [personA.email, personB.email],
+            to: [person.email],
             replyTo: [personA.email, personB.email],
             subject,
             html,
