@@ -132,7 +132,6 @@ export async function GET(request: NextRequest) {
         const emailResult = await resend.emails.send({
           from: "Matt from Vipassana.cool <matt@vipassana.cool>",
           to: [person.email],
-          cc: [other.email],
           replyTo: [personA.email, personB.email],
           subject,
           html,
