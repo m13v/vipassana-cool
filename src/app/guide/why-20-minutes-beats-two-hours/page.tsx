@@ -259,7 +259,7 @@ export default function WhyTwentyMinutesPage() {
         </ul>
       </section>
 
-      <PageComments slug="why-20-minutes-beats-two-hours" />
+      <PageComments pageId="why-20-minutes-beats-two-hours" />
     </article>
   );
 }
