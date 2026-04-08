@@ -44,6 +44,34 @@ export async function createMeetEvent(
 ): Promise<MeetEventResult> {
   const accessToken = await getAccessToken();
 
+  // Step 1: Create a Meet space via the Meet API with OPEN access
+  // so anyone with the link can join without needing the host to admit them
+  const spaceRes = await fetch("https://meet.googleapis.com/v2/spaces", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      config: {
+        accessType: "OPEN",
+      },
+    }),
+  });
+
+  if (!spaceRes.ok) {
+    const text = await spaceRes.text();
+    throw new Error(`Failed to create Meet space: ${spaceRes.status} ${text}`);
+  }
+
+  const space = await spaceRes.json();
+  const meetUrl = space.meetingUri;
+
+  if (!meetUrl) {
+    throw new Error("Meet space created but no meeting URI returned");
+  }
+
+  // Step 2: Create a recurring calendar event with the Meet link attached
   const [h, m] = startUtcTime.split(":").map(Number);
   const now = new Date();
   // Start tomorrow at the given UTC time
@@ -57,10 +85,18 @@ export async function createMeetEvent(
     end: { dateTime: end.toISOString(), timeZone: "UTC" },
     recurrence: ["RRULE:FREQ=DAILY"],
     conferenceData: {
-      createRequest: {
-        requestId: `buddy-${slug}-${Date.now()}`,
-        conferenceSolutionKey: { type: "hangoutsMeet" },
+      conferenceSolution: {
+        key: { type: "hangoutsMeet" },
+        name: "Google Meet",
       },
+      entryPoints: [
+        {
+          entryPointType: "video",
+          uri: meetUrl,
+          label: meetUrl.replace("https://", ""),
+        },
+      ],
+      conferenceId: space.meetingCode,
     },
     guestsCanInviteOthers: true,
     attendees: attendeeEmails.map((email) => ({ email })),
@@ -84,44 +120,7 @@ export async function createMeetEvent(
   }
 
   const result = await res.json();
-  const meetUrl =
-    result.conferenceData?.entryPoints?.find(
-      (ep: { entryPointType: string; uri: string }) => ep.entryPointType === "video",
-    )?.uri || "";
   const eventId = result.id || "";
-
-  if (!meetUrl) {
-    throw new Error(`Calendar event created (${eventId}) but no Meet URL returned`);
-  }
-
-  // Extract meeting code from URL (e.g. "abc-defg-hij" from "https://meet.google.com/abc-defg-hij")
-  const meetingCode = meetUrl.replace("https://meet.google.com/", "").split("?")[0];
-
-  // Use Google Meet REST API v2 to set access type to OPEN so anyone with the link can join
-  // without needing the host to admit them
-  try {
-    const spaceRes = await fetch(
-      `https://meet.googleapis.com/v2/spaces/${meetingCode}?updateMask=config.accessType`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          config: {
-            accessType: "OPEN",
-          },
-        }),
-      },
-    );
-    if (!spaceRes.ok) {
-      const text = await spaceRes.text();
-      console.warn(`Failed to set Meet space to OPEN access: ${spaceRes.status} ${text}`);
-    }
-  } catch (err) {
-    console.warn("Failed to update Meet space access type:", err);
-  }
 
   return { eventId, meetUrl };
 }
