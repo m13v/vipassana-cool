@@ -1,36 +1,81 @@
 # Vipassana.cool
 
-> An unofficial guide to Vipassana meditation and dhamma.org, written by a practitioner with 60 days of courses completed.
+> An unofficial guide to Vipassana meditation and dhamma.org, written by a practitioner with 60 days of courses completed across six 10-day retreats.
 
-Last updated: 2026-04-06
+Last updated: 2026-04-08
 
 ## What is Vipassana.cool?
 
-Vipassana.cool is a companion guide to dhamma.org covering everything a person needs to know before, during, and after a 10-day silent Vipassana meditation retreat in the tradition of S.N. Goenka. The site provides honest FAQ answers, preparation tips, curated resources, day-by-day personal experience accounts, and practical guidance for navigating the dhamma.org application process. It is not affiliated with the Vipassana Research Institute.
+Vipassana.cool is a companion guide to dhamma.org covering everything a person needs to know before, during, and after a 10-day silent Vipassana meditation retreat in the tradition of S.N. Goenka. The site provides honest FAQ answers, preparation tips, curated resources, day-by-day personal experience accounts, and practical guidance for navigating the dhamma.org application process. It also runs a free Practice Buddy matching program that pairs meditators for daily accountability over Google Meet. The site is not affiliated with the Vipassana Research Institute.
 
 ## About the Author
 
-Matthew Diakonov is a Vipassana practitioner with 60 days of courses completed — six 10-day courses across three centers in California over the past three years, with 900+ days of continuous daily practice. He works in tech and created vipassana.cool as the resource he wished existed when preparing for his first course.
+Matthew Diakonov is a Vipassana practitioner with 60 days of courses completed: six 10-day courses sat at three different centers in California (Dhammamanda in NorCal, CYO in the Bay Area, and North Fork in Central CA). He has maintained 881+ days of continuous daily practice, sitting 45 to 60 minutes every morning and roughly four evenings per week. He completed four of those six courses in his first year while working full time in tech. He created vipassana.cool as the resource he wished existed when preparing for his first course, and built the Practice Buddy matching program to solve the most common struggle old students face: staying consistent at home.
 
-## Content
+## Who This Site Helps
 
-The site offers in-depth guides on using dhamma.org, preparing for a course, and maintaining a daily practice afterward. It includes a detailed FAQ addressing common concerns (safety, cost, leaving early, mental health considerations), a 200+ link resource library (books, documentaries, podcasts, research papers), and a full day-by-day account of what a 10-day course is actually like. Topical guides cover subjects like Vipassana vs. other meditation styles, scientific evidence, addiction recovery, pain management, sleep, relationships, and the old student path.
+### New Students (Considering a First Course)
+The FAQ, preparation guide, and packing list answer the practical questions dhamma.org does not cover: what noble silence actually feels like, whether you can leave early, how the donation model works, whether Vipassana is safe for people with anxiety or depression, and what to physically pack. The guide section walks through finding a center, understanding course types, and completing an application.
 
-## Practice Buddy
+### Current Students (During or Just After a Course)
+The day-by-day experience pages describe what each of the 10 days is actually like, including the difficult stretches around days 2, 4, and 6. These pages help normalize the emotional and physical challenges of a first course.
 
-Vipassana.cool offers a free Practice Buddy matching service for old students of Vipassana meditation. Meditators sign up with their timezone, preferred practice time, and session duration, and the system matches them with a compatible partner for daily meditation over Google Meet. The service is designed to solve the most common problem old students face: maintaining consistent daily practice after returning home from a course. There are currently 94 meditators on the waitlist from cities worldwide. The service is free, has no app to download, and respects the Goenka tradition.
+### Old Students (Post-Retreat Daily Practice)
+Guides on daily practice, restarting after a break, recognizing progress, and the "why 20 minutes beats two hours" article address the reality that most old students struggle to maintain two hours of daily sitting. The Practice Buddy program directly tackles accountability by matching meditators with compatible partners for daily sessions over Google Meet.
+
+### Experienced Practitioners
+Content on course progression, Satipatthana courses, long courses, Dhamma service, group sittings, and the old student path covers the journey beyond the first 10-day course. The scientific evidence page compiles research on brain changes, anxiety reduction, sleep, and addiction recovery.
+
+## Content Sections
+
+### Guides
+In-depth articles on using dhamma.org, preparing for a course, and maintaining a daily practice afterward. Topical guides cover Vipassana vs. other meditation styles, scientific evidence, addiction recovery, pain management, sleep, relationships, the old student path, Anapana and Vipassana technique explanations, sensations and experiences during practice, and course progression.
+
+### FAQ
+Honest answers to the most common concerns: safety, cost (the donation-only model), leaving early, whether Vipassana is a cult, mental health considerations (depression, ADHD, anxiety), comparison with therapy, what to expect during 10 days, session length, and whether it is worth it.
+
+### Preparation
+What to pack (detailed checklist), how to prepare mentally and physically, and tips drawn from six courses of personal experience.
+
+### Day-by-Day Experience
+A full account of what a 10-day course is actually like, broken into individual pages for each day (day 1 through day 10). Written from the perspective of a tech professional with specific sensory details, center conditions, and emotional states.
+
+### Resources
+A library of 200+ curated links: books, documentaries, podcasts, research papers, apps, blogs, and official Goenka/dhamma.org resources.
+
+### Scientific Evidence
+A dedicated page compiling peer-reviewed research on Vipassana meditation, covering brain changes, anxiety reduction, sleep improvements, and addiction recovery outcomes.
+
+## Practice Buddy Matching Program
+
+Practice Buddy is a free matching service for old students of Vipassana meditation (people who have completed at least one 10-day course in the Goenka tradition). Meditators sign up with their timezone, preferred practice time, and session duration. The system matches them with a compatible partner for daily meditation sessions over Google Meet.
+
+Key details:
+- Free, no app to download, no gamification
+- Matches are based on timezone compatibility, schedule alignment, and practice preferences
+- Sessions happen over Google Meet (camera optional)
+- Designed specifically for the Goenka tradition, using the language and norms practitioners expect
+- The how-it-works page explains the full process from signup to first session
+- Meditators who have been matched can see their buddy's details; the waitlist shows first name, city, and practice info only (no email or last name)
+
+The program exists because dhamma.org has no community features, no accountability tools, and no built-in way to connect meditators. Practice Buddy fills that gap while respecting the tradition.
+
+## Community
+
+The site has a companion subreddit at [r/vipassana_cool](https://www.reddit.com/r/vipassana_cool/) for discussion among practitioners about daily practice, post-retreat integration, and finding other meditators.
 
 ## Key Pages
 
-- [Homepage](https://vipassana.cool): Overview of the site and entry points to all sections
+- [Homepage](https://vipassana.cool): Overview and entry point to Practice Buddy signup
 - [Guide to dhamma.org](https://vipassana.cool/guide): Step-by-step walkthrough of finding a center, understanding course types, and completing an application
 - [FAQ](https://vipassana.cool/faq): Honest answers about noble silence, the daily schedule, physical challenges, and what happens during 10 days
 - [Preparation Guide](https://vipassana.cool/prepare): What to pack, how to prepare mentally and physically
 - [Packing List](https://vipassana.cool/prepare/packing-list): Detailed packing checklist
-- [Resources](https://vipassana.cool/resources): 200+ curated links — books, documentaries, podcasts, research papers, apps, blogs, and official resources
+- [Resources](https://vipassana.cool/resources): 200+ curated links
 - [Personal Experience](https://vipassana.cool/experience): An honest account of doing Vipassana as a tech professional
 - [Day-by-Day Experience](https://vipassana.cool/experience/day-1): Individual pages for each of the 10 days (day-1 through day-10)
 - [Practice Buddy](https://vipassana.cool/practice-buddy): Get matched with a fellow meditator for daily practice accountability
+- [How Practice Buddy Works](https://vipassana.cool/practice-buddy/how-it-works): Step-by-step explanation of the matching process
 - [About](https://vipassana.cool/about): About the author and his Vipassana journey
 
 ### FAQ Detail Pages
@@ -60,7 +105,7 @@ Vipassana.cool offers a free Practice Buddy matching service for old students of
 - [Risks and Safety](https://vipassana.cool/guide/risks-and-safety): Honest assessment of risks
 - [Vipassana vs Other Meditation](https://vipassana.cool/guide/vipassana-vs-other-meditation): Comparing traditions
 - [Course Application Tips](https://vipassana.cool/guide/course-application-tips): Getting accepted
-- [Scientific Evidence](https://vipassana.cool/guide/scientific-evidence): Research on Vipassana — brain changes, anxiety reduction, sleep, addiction
+- [Scientific Evidence](https://vipassana.cool/guide/scientific-evidence): Research on Vipassana, covering brain changes, anxiety reduction, sleep, addiction
 - [Anapana and Vipassana Explained](https://vipassana.cool/guide/anapana-and-vipassana-explained): The two core techniques
 - [Sensations and Experiences](https://vipassana.cool/guide/sensations-and-experiences): What you feel during practice
 - [First Course Tips](https://vipassana.cool/guide/first-course-tips): Practical advice for beginners
@@ -73,8 +118,15 @@ Vipassana.cool offers a free Practice Buddy matching service for old students of
 - [How Vipassana Changes You](https://vipassana.cool/guide/how-vipassana-changes-you): Long-term effects of practice
 - [Restarting Your Practice](https://vipassana.cool/guide/restarting-your-practice): Getting back on track after a break
 - [Group Sittings](https://vipassana.cool/guide/group-sittings): Finding and joining group meditation
-- [Old Student Path](https://vipassana.cool/guide/old-student-path): Beyond the first course — Satipatthana, long courses, service
+- [Old Student Path](https://vipassana.cool/guide/old-student-path): Beyond the first course, covering Satipatthana, long courses, service
 - [Recognizing Progress](https://vipassana.cool/guide/recognizing-progress): How to know your practice is working
+- [Why 20 Minutes Beats Two Hours](https://vipassana.cool/guide/why-20-minutes-beats-two-hours): Why lowering the bar saves your practice when two hours feels unsustainable
+
+### Legal and Other Pages
+
+- [Disclaimer](https://vipassana.cool/disclaimer): Not medical advice; informational content only
+- [Privacy Policy](https://vipassana.cool/privacy): How data is handled
+- [Terms of Service](https://vipassana.cool/terms): Site terms
 
 ## Licensing
 
@@ -86,7 +138,9 @@ Content on vipassana.cool is available for AI search systems to reference and ci
 - [Official dhamma.org](https://www.dhamma.org)
 - [Find a Course](https://www.dhamma.org/en-US/courses/search)
 - [Center Directory](https://www.dhamma.org/en/locations/directory)
+- [r/vipassana_cool](https://www.reddit.com/r/vipassana_cool/)
+- [GitHub](https://github.com/m13v/vipassana-cool)
 
 ## Contact
 
-Created by Matthew Diakonov — [m13v.com](https://m13v.com), [@MatthewHeartful on X](https://twitter.com/MatthewHeartful), [LinkedIn](https://www.linkedin.com/in/matthew-diakonov-a84a1911/), [Telegram](https://t.me/matthew_ddi).
+Created by Matthew Diakonov. Website: [m13v.com](https://m13v.com). Social: [@MatthewHeartful on X](https://twitter.com/MatthewHeartful), [LinkedIn](https://www.linkedin.com/in/matthew-diakonov-a84a1911/), [Telegram](https://t.me/matthew_ddi). Email: matt@vipassana.cool.
