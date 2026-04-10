@@ -44,40 +44,14 @@ export async function createMeetEvent(
 ): Promise<MeetEventResult> {
   const accessToken = await getAccessToken();
 
-  // Step 1: Create a Meet space via the Meet API with OPEN access
-  // so anyone with the link can join without needing the host to admit them
-  const spaceRes = await fetch("https://meet.googleapis.com/v2/spaces", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      config: {
-        accessType: "OPEN",
-      },
-    }),
-  });
-
-  if (!spaceRes.ok) {
-    const text = await spaceRes.text();
-    throw new Error(`Failed to create Meet space: ${spaceRes.status} ${text}`);
-  }
-
-  const space = await spaceRes.json();
-  const meetUrl = space.meetingUri;
-
-  if (!meetUrl) {
-    throw new Error("Meet space created but no meeting URI returned");
-  }
-
-  // Step 2: Create a recurring calendar event with the Meet link attached
   const [h, m] = startUtcTime.split(":").map(Number);
   const now = new Date();
   // Start tomorrow at the given UTC time
   const start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, h, m, 0));
   const end = new Date(start.getTime() + durationMinutes * 60 * 1000);
 
+  // Let the Calendar API auto-generate a Meet link via createRequest.
+  // This only requires the calendar scope (no separate Meet API scope needed).
   const event = {
     summary,
     description: "Your daily meditation practice buddy session via vipassana.cool",
@@ -85,18 +59,10 @@ export async function createMeetEvent(
     end: { dateTime: end.toISOString(), timeZone: "UTC" },
     recurrence: ["RRULE:FREQ=DAILY"],
     conferenceData: {
-      conferenceSolution: {
-        key: { type: "hangoutsMeet" },
-        name: "Google Meet",
+      createRequest: {
+        requestId: slug,
+        conferenceSolutionKey: { type: "hangoutsMeet" },
       },
-      entryPoints: [
-        {
-          entryPointType: "video",
-          uri: meetUrl,
-          label: meetUrl.replace("https://", ""),
-        },
-      ],
-      conferenceId: space.meetingCode,
     },
     guestsCanInviteOthers: true,
     attendees: attendeeEmails.map((email) => ({ email })),
@@ -121,6 +87,13 @@ export async function createMeetEvent(
 
   const result = await res.json();
   const eventId = result.id || "";
+  const meetUrl = result.conferenceData?.entryPoints?.find(
+    (ep: { entryPointType: string }) => ep.entryPointType === "video",
+  )?.uri || result.hangoutLink || "";
+
+  if (!meetUrl) {
+    throw new Error("Calendar event created but no Meet link was generated");
+  }
 
   return { eventId, meetUrl };
 }
