@@ -9,8 +9,9 @@ import {
   updateEntryStatus,
   declineMatch,
   updateMatchCalendarEvent,
+  updateMatchSuggestedUtc,
 } from "@/lib/db";
-import { buildIntroEmailHtml, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
+import { buildIntroEmailHtml, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl, computeSuggestedMeetUtcMinutes, utcMinutesToHHMM } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
@@ -65,7 +66,8 @@ export async function GET(request: NextRequest) {
       const nameB = personB.name?.split(/\s+/)[0] || "B";
 
       // Determine the best overlapping UTC time for the Meet event
-      const bestUtcTime = findBestMeetTime(personA, personB);
+      const suggestedMins = computeSuggestedMeetUtcMinutes(personA, personB);
+      const bestUtcTime = suggestedMins != null ? utcMinutesToHHMM(suggestedMins) : "06:00";
       const duration = parseDurationMinutes(personA.session_duration, personB.session_duration);
 
       // Create Google Meet link — required before sending intro email
@@ -106,8 +108,9 @@ export async function GET(request: NextRequest) {
       const meetInfoA: MeetLinkInfo = { trackingUrl: `${BASE_URL}/meet/${tokenA}` };
       const meetInfoB: MeetLinkInfo = { trackingUrl: `${BASE_URL}/meet/${tokenB}` };
 
-      // Store calendar event ID on match for RSVP tracking
+      // Store calendar event ID + suggested meeting time on match
       await updateMatchCalendarEvent(match.id, eventId);
+      await updateMatchSuggestedUtc(match.id, bestUtcTime);
 
       // Log event ID for cleanup
       await sql`
@@ -118,8 +121,8 @@ export async function GET(request: NextRequest) {
       // Build session context from match record
       const sessA = (match.person_a_session || "morning") as "morning" | "evening";
       const sessB = (match.person_b_session || "morning") as "morning" | "evening";
-      const sessCtxA: SessionContext = { session: sessA, localTime: getSessionLocalTime(personA, sessA), timezone: personA.timezone };
-      const sessCtxB: SessionContext = { session: sessB, localTime: getSessionLocalTime(personB, sessB), timezone: personB.timezone };
+      const sessCtxA: SessionContext = { session: sessA, localTime: getSessionLocalTime(personA, sessA), timezone: personA.timezone, suggestedUtcMinutes: suggestedMins };
+      const sessCtxB: SessionContext = { session: sessB, localTime: getSessionLocalTime(personB, sessB), timezone: personB.timezone, suggestedUtcMinutes: suggestedMins };
       const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
       // Send intro emails — one per person so each gets their unique tracking URL
@@ -163,49 +166,6 @@ export async function GET(request: NextRequest) {
   }
 
   return NextResponse.redirect(new URL("/match-confirmed?response=yes", BASE_URL));
-}
-
-/** Find the best overlapping UTC time between two people's sessions, rounded to 30 min. */
-function findBestMeetTime(a: { morning_utc: string | null; evening_utc: string | null }, b: { morning_utc: string | null; evening_utc: string | null }): string {
-  function toMin(t: string | null): number | null {
-    if (!t) return null;
-    const [h, m] = t.split(":").map(Number);
-    return isNaN(h) ? null : h * 60 + (m || 0);
-  }
-  function diff(a: number, b: number): number {
-    const d = Math.abs(a - b);
-    return Math.min(d, 1440 - d);
-  }
-
-  const slots = [
-    { a: toMin(a.morning_utc), b: toMin(b.morning_utc) },
-    { a: toMin(a.evening_utc), b: toMin(b.evening_utc) },
-    { a: toMin(a.morning_utc), b: toMin(b.evening_utc) },
-    { a: toMin(a.evening_utc), b: toMin(b.morning_utc) },
-  ].filter((s): s is { a: number; b: number } => s.a !== null && s.b !== null);
-
-  let best = slots[0];
-  let bestDiff = best ? diff(best.a, best.b) : Infinity;
-  for (const s of slots) {
-    const d = diff(s.a, s.b);
-    if (d < bestDiff) { best = s; bestDiff = d; }
-  }
-
-  if (!best) return "06:00"; // fallback
-
-  // Calculate midpoint, round to 30 min
-  let mid: number;
-  if (Math.abs(best.a - best.b) > 720) {
-    mid = Math.round(((best.a + best.b + 1440) / 2)) % 1440;
-  } else {
-    mid = Math.round((best.a + best.b) / 2);
-  }
-  mid = Math.round(mid / 30) * 30;
-  mid = mid % 1440;
-
-  const h = Math.floor(mid / 60);
-  const m = mid % 60;
-  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }
 
 /** Parse session duration strings to minutes, take the longer of two. */
