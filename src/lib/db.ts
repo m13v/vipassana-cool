@@ -170,6 +170,116 @@ export async function getAllMatches(): Promise<(Match & { person_a: WaitlistEntr
   return result;
 }
 
+export type MatchEngagement = {
+  matchId: string;
+  replyA: boolean;
+  replyB: boolean;
+  meetClicksA: number;
+  meetClicksB: number;
+  attendanceA: string | null;
+  attendanceB: string | null;
+};
+
+// Batch-fetch engagement signals (intro replies, meet clicks, meet attendance) for a list of matches.
+// Uses aggregate queries grouped by match_id and person_id (one query per signal type), not N per match.
+// Gracefully handles a missing `meet_attendance` table by returning null attendance for all matches.
+export async function getMatchEngagement(
+  matches: { id: string; person_a_id: string; person_b_id: string }[]
+): Promise<Map<string, MatchEngagement>> {
+  const sql = getSql();
+  const byMatch = new Map<string, MatchEngagement>();
+  for (const m of matches) {
+    byMatch.set(m.id, {
+      matchId: m.id,
+      replyA: false,
+      replyB: false,
+      meetClicksA: 0,
+      meetClicksB: 0,
+      attendanceA: null,
+      attendanceB: null,
+    });
+  }
+  if (matches.length === 0) return byMatch;
+
+  const matchIds = matches.map((m) => m.id);
+  const sides = new Map<string, { a: string; b: string }>();
+  for (const m of matches) sides.set(m.id, { a: m.person_a_id, b: m.person_b_id });
+
+  // 1. Intro replies from vipassana_activity_log (event_type='email_reply' with match_id set).
+  try {
+    const replyRows = await sql`
+      SELECT match_id, person_id
+      FROM vipassana_activity_log
+      WHERE event_type = 'email_reply'
+        AND match_id = ANY(${matchIds})
+    ` as { match_id: string; person_id: string }[];
+    for (const r of replyRows) {
+      const eng = byMatch.get(r.match_id);
+      const side = sides.get(r.match_id);
+      if (!eng || !side) continue;
+      if (r.person_id === side.a) eng.replyA = true;
+      else if (r.person_id === side.b) eng.replyB = true;
+    }
+  } catch (err) {
+    console.warn("getMatchEngagement: failed to query activity log for replies:", err);
+  }
+
+  // 2. Meet click counts grouped by (match_id, person_id).
+  try {
+    const clickRows = await sql`
+      SELECT match_id, person_id, COUNT(*)::int AS click_count
+      FROM meet_clicks
+      WHERE match_id = ANY(${matchIds})
+      GROUP BY match_id, person_id
+    ` as { match_id: string; person_id: string; click_count: number }[];
+    for (const r of clickRows) {
+      const eng = byMatch.get(r.match_id);
+      const side = sides.get(r.match_id);
+      if (!eng || !side) continue;
+      if (r.person_id === side.a) eng.meetClicksA = r.click_count;
+      else if (r.person_id === side.b) eng.meetClicksB = r.click_count;
+    }
+  } catch (err) {
+    console.warn("getMatchEngagement: failed to query meet_clicks:", err);
+  }
+
+  // 3. Meet attendance (latest join per person per match). Table may not exist yet.
+  try {
+    const tableCheck = await sql`
+      SELECT 1 FROM information_schema.tables
+      WHERE table_name = 'meet_attendance'
+      LIMIT 1
+    ` as unknown[];
+    if (tableCheck.length > 0) {
+      const attendanceRows = await sql`
+        SELECT match_id, person_id, MAX(joined_at) AS last_joined
+        FROM meet_attendance
+        WHERE match_id = ANY(${matchIds})
+        GROUP BY match_id, person_id
+      ` as { match_id: string; person_id: string; last_joined: string | null }[];
+      for (const r of attendanceRows) {
+        const eng = byMatch.get(r.match_id);
+        const side = sides.get(r.match_id);
+        if (!eng || !side) continue;
+        const iso = r.last_joined ? new Date(r.last_joined).toISOString() : null;
+        if (r.person_id === side.a) eng.attendanceA = iso;
+        else if (r.person_id === side.b) eng.attendanceB = iso;
+      }
+    } else {
+      console.warn("getMatchEngagement: meet_attendance table not found, skipping attendance signal");
+    }
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    if (msg.includes("does not exist") || msg.includes("undefined_table")) {
+      console.warn("getMatchEngagement: meet_attendance table missing, attendance unavailable");
+    } else {
+      console.warn("getMatchEngagement: failed to query meet_attendance:", err);
+    }
+  }
+
+  return byMatch;
+}
+
 export async function createMatch(personAId: string, personBId: string, sessionA = "morning", sessionB = "morning"): Promise<Match> {
   const sql = getSql();
   const id = crypto.randomUUID();
