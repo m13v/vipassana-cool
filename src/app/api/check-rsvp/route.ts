@@ -30,11 +30,26 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ success: true, checked: 0, updated: 0 });
   }
 
-  let accessToken: string;
+  let primaryAccessToken: string;
   try {
-    accessToken = await getAccessToken();
+    primaryAccessToken = await getAccessToken("primary");
   } catch (err) {
     return NextResponse.json({ error: `Token refresh failed: ${String(err)}` }, { status: 500 });
+  }
+
+  // mediar token is lazy: only fetched if we need a fallback
+  let mediarAccessToken: string | null = null;
+  let mediarTokenError: string | null = null;
+  async function getMediarToken(): Promise<string | null> {
+    if (mediarAccessToken) return mediarAccessToken;
+    if (mediarTokenError) return null;
+    try {
+      mediarAccessToken = await getAccessToken("mediar");
+      return mediarAccessToken;
+    } catch (err) {
+      mediarTokenError = String(err);
+      return null;
+    }
   }
 
   let updated = 0;
@@ -42,15 +57,45 @@ export async function GET(request: NextRequest) {
   const errors: { matchId: string; error: string }[] = [];
   const rsvpChanges: RsvpChange[] = [];
 
+  async function fetchEvent(eventId: string, token: string) {
+    return fetch(
+      `https://www.googleapis.com/calendar/v3/calendars/primary/events/${eventId}`,
+      { headers: { Authorization: `Bearer ${token}` } },
+    );
+  }
+
   for (const match of matches) {
     try {
-      const res = await fetch(
-        `https://www.googleapis.com/calendar/v3/calendars/primary/events/${match.calendar_event_id}`,
-        { headers: { Authorization: `Bearer ${accessToken}` } },
-      );
+      let res = await fetchEvent(match.calendar_event_id!, primaryAccessToken);
+      let usedToken: "primary" | "mediar" = "primary";
 
-      if (!res.ok) {
-        if (res.status === 404) {
+      if (res.status === 404) {
+        // Try mediar fallback before concluding the event is deleted
+        const mediar = await getMediarToken();
+        if (mediar) {
+          const retry = await fetchEvent(match.calendar_event_id!, mediar);
+          if (retry.ok) {
+            res = retry;
+            usedToken = "mediar";
+          } else if (retry.status !== 404) {
+            errors.push({ matchId: match.id, error: `mediar API ${retry.status}` });
+            continue;
+          } else {
+            // both returned 404: genuinely deleted (or invisible to both)
+            if (match.calendar_rsvp_a !== "eventDeleted") {
+              await updateMatchRsvp(match.id, "eventDeleted", "eventDeleted");
+              rsvpChanges.push({
+                nameA: match.person_a_email, nameB: match.person_b_email,
+                oldA: match.calendar_rsvp_a || "needsAction", newA: "eventDeleted",
+                oldB: match.calendar_rsvp_b || "needsAction", newB: "eventDeleted",
+                autoEnded: false,
+              });
+              updated++;
+            }
+            continue;
+          }
+        } else {
+          // no mediar token available: preserve legacy behavior
           if (match.calendar_rsvp_a !== "eventDeleted") {
             await updateMatchRsvp(match.id, "eventDeleted", "eventDeleted");
             rsvpChanges.push({
@@ -63,7 +108,10 @@ export async function GET(request: NextRequest) {
           }
           continue;
         }
-        errors.push({ matchId: match.id, error: `API ${res.status}` });
+      }
+
+      if (!res.ok) {
+        errors.push({ matchId: match.id, error: `API ${res.status} (${usedToken})` });
         continue;
       }
 
