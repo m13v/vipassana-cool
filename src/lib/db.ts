@@ -257,8 +257,20 @@ export async function createMatchWithTokens(personAId: string, personBId: string
 // pending → replied (one person replied)
 // replied → active (both people have replied)
 // Does not downgrade statuses that are already more advanced (active, ended, etc.)
-export async function advanceMatchOnReply(fromEmail: string): Promise<void> {
+// Also logs an `email_reply` activity row (linked to match_id when possible) so
+// the activity log stays consistent with historical behavior.
+export async function advanceMatchOnReply(fromEmail: string, subject?: string): Promise<void> {
   const sql = getSql();
+
+  // Resolve sender's person_id via waitlist_entries (needed for activity log).
+  const senderRows = await sql`
+    SELECT id FROM waitlist_entries WHERE email = ${fromEmail} LIMIT 1
+  ` as { id: string }[];
+  if (senderRows.length === 0) {
+    console.warn("[advanceMatchOnReply] no waitlist_entry for", fromEmail, "; skipping activity log");
+    return;
+  }
+  const senderId = senderRows[0].id;
 
   const matches = await sql`
     SELECT m.id, m.status,
@@ -269,6 +281,13 @@ export async function advanceMatchOnReply(fromEmail: string): Promise<void> {
     WHERE (a.email = ${fromEmail} OR b.email = ${fromEmail})
       AND m.status IN ('pending', 'replied')
   ` as { id: string; status: string; email_a: string; email_b: string }[];
+
+  if (matches.length === 0) {
+    // No pending/replied match for sender (e.g., reply to closed match, or no match).
+    // Still insert an email_reply row with match_id=null for log consistency.
+    await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, triggered_by, note) VALUES (${senderId}, ${null}, 'email_reply', 'user', ${subject ?? null})`;
+    return;
+  }
 
   for (const match of matches) {
     const otherEmail = match.email_a === fromEmail ? match.email_b : match.email_a;
@@ -284,6 +303,8 @@ export async function advanceMatchOnReply(fromEmail: string): Promise<void> {
     } else if (match.status === "pending") {
       await updateMatchStatus(match.id, "replied", "system");
     }
+
+    await sql`INSERT INTO vipassana_activity_log (person_id, match_id, event_type, triggered_by, note) VALUES (${senderId}, ${match.id}, 'email_reply', 'user', ${subject ?? null})`;
   }
 }
 
