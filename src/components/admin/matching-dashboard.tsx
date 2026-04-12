@@ -51,7 +51,6 @@ type MatchEngagement = {
   replies: { a: boolean; b: boolean };
   meetClicks: { a: number; b: number };
   rsvp: { a: string | null; b: string | null };
-  attendance: { a: string | null; b: string | null };
 };
 
 type MatchRecord = {
@@ -636,13 +635,13 @@ function StatusBadge({ value }: { value: string | null }) {
 }
 
 // Renders a compact engagement summary for a match: confirmation clicks, intro replies,
-// meet link clicks, calendar RSVP, and meet attendance. Green = positive, red = negative,
+// meet link clicks, and calendar RSVP. Green = positive, red = negative,
 // grey = neutral/missing. Fits on one wide row alongside match status.
 function EngagementCell({ engagement }: { engagement?: MatchEngagement }) {
   if (!engagement) {
     return <span className="text-xs text-muted">(no engagement data)</span>;
   }
-  const { confirmation, replies, meetClicks, rsvp, attendance } = engagement;
+  const { confirmation, replies, meetClicks, rsvp } = engagement;
 
   const pill = (active: boolean, labelOn: string, labelOff: string, title: string) => (
     <span
@@ -686,29 +685,6 @@ function EngagementCell({ engagement }: { engagement?: MatchEngagement }) {
     </span>
   );
 
-  const attendancePill = (who: "A" | "B", iso: string | null) => {
-    if (!iso) {
-      return (
-        <span
-          title={`Meet attendance (${who}): never`}
-          className="rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-400"
-        >
-          {who}: never
-        </span>
-      );
-    }
-    const d = new Date(iso);
-    const label = `${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
-    return (
-      <span
-        title={`Meet attendance (${who}): ${label}`}
-        className="rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-medium text-green-700"
-      >
-        {who}: {label}
-      </span>
-    );
-  };
-
   return (
     <div className="flex flex-wrap items-center gap-1" title="Engagement signals">
       <div className="flex items-center gap-0.5">
@@ -730,11 +706,6 @@ function EngagementCell({ engagement }: { engagement?: MatchEngagement }) {
         <span className="text-[10px] uppercase tracking-wide text-muted">rsvp</span>
         {rsvpPill("A", rsvp.a)}
         {rsvpPill("B", rsvp.b)}
-      </div>
-      <div className="flex items-center gap-0.5">
-        <span className="text-[10px] uppercase tracking-wide text-muted">joined</span>
-        {attendancePill("A", attendance.a)}
-        {attendancePill("B", attendance.b)}
       </div>
     </div>
   );
