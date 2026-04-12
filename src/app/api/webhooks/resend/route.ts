@@ -91,7 +91,7 @@ export async function POST(request: Request) {
     `;
 
     if (data.from) {
-      await advanceMatchOnReply(data.from);
+      await advanceMatchOnReply(data.from, data.subject);
     }
 
     return NextResponse.json({ success: true });
