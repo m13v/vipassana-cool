@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     `;
 
     if (fromEmail) {
-      await advanceMatchOnReply(fromEmail);
+      await advanceMatchOnReply(fromEmail, subject);
     }
 
     return NextResponse.json({ success: true });
