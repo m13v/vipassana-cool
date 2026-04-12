@@ -460,49 +460,6 @@ export async function GET(request: NextRequest) {
   });
 }
 
-/** Find the best overlapping UTC time between two people's sessions, rounded to 30 min. */
-function findBestMeetTime(a: WaitlistEntry, b: WaitlistEntry): string {
-  function toMin(t: string | null): number | null {
-    if (!t) return null;
-    const [h, m] = t.split(":").map(Number);
-    return isNaN(h) ? null : h * 60 + (m || 0);
-  }
-  function diff(a: number, b: number): number {
-    const d = Math.abs(a - b);
-    return Math.min(d, 1440 - d);
-  }
-  // Compute fresh UTC from local time + timezone (DST-aware)
-  const aMornUtc = toUtcTime(a.morning_time, a.timezone);
-  const aEveUtc = toUtcTime(a.evening_time, a.timezone);
-  const bMornUtc = toUtcTime(b.morning_time, b.timezone);
-  const bEveUtc = toUtcTime(b.evening_time, b.timezone);
-  const slots = [
-    { a: toMin(aMornUtc), b: toMin(bMornUtc) },
-    { a: toMin(aEveUtc), b: toMin(bEveUtc) },
-    { a: toMin(aMornUtc), b: toMin(bEveUtc) },
-    { a: toMin(aEveUtc), b: toMin(bMornUtc) },
-  ].filter((s): s is { a: number; b: number } => s.a !== null && s.b !== null);
-
-  let best = slots[0];
-  let bestDiff = best ? diff(best.a, best.b) : Infinity;
-  for (const s of slots) {
-    const d = diff(s.a, s.b);
-    if (d < bestDiff) { best = s; bestDiff = d; }
-  }
-  if (!best) return "06:00";
-  let mid: number;
-  if (Math.abs(best.a - best.b) > 720) {
-    mid = Math.round(((best.a + best.b + 1440) / 2)) % 1440;
-  } else {
-    mid = Math.round((best.a + best.b) / 2);
-  }
-  mid = Math.round(mid / 30) * 30;
-  mid = mid % 1440;
-  const h = Math.floor(mid / 60);
-  const m = mid % 60;
-  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
-}
-
 /** Parse session duration strings to minutes, take the longer of two. */
 function parseDurationMinutes(a: string | null, b: string | null): number {
   function parse(s: string | null): number {
