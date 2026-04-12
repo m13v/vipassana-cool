@@ -46,6 +46,14 @@ type MatchPerson = {
   sessionDuration: string | null;
 };
 
+type MatchEngagement = {
+  confirmation: { a: boolean; b: boolean };
+  replies: { a: boolean; b: boolean };
+  meetClicks: { a: number; b: number };
+  rsvp: { a: string | null; b: string | null };
+  attendance: { a: string | null; b: string | null };
+};
+
 type MatchRecord = {
   id: string;
   status: string;
@@ -55,6 +63,7 @@ type MatchRecord = {
   personBConfirmed: boolean;
   personA: MatchPerson;
   personB: MatchPerson;
+  engagement?: MatchEngagement;
 };
 
 export function MatchingDashboard() {
@@ -444,9 +453,9 @@ export function MatchingDashboard() {
             }).map((m) => (
               <div
                 key={m.id}
-                className="flex items-center justify-between rounded-xl border border-border p-4"
+                className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border p-4"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <div className="text-sm">
                     <strong>{m.personA.firstName || "?"}</strong>
                     <span className="text-muted"> ({m.personA.city || "?"})</span>
@@ -469,6 +478,7 @@ export function MatchingDashboard() {
                      m.status === "scheduling" ? "scheduling" :
                      m.status}
                   </span>
+                  <EngagementCell engagement={m.engagement} />
                 </div>
                 <div className="flex gap-2">
                   {(m.status === "pending" || m.status === "replied" || m.status === "scheduling") && (
@@ -623,4 +633,109 @@ function StatusBadge({ value }: { value: string | null }) {
   if (!value) return <span className="text-muted">—</span>;
   const color = value === "Yes" ? "text-green-600" : value === "No" ? "text-red-500" : "text-muted";
   return <span className={`text-xs font-medium ${color}`}>{value}</span>;
+}
+
+// Renders a compact engagement summary for a match: confirmation clicks, intro replies,
+// meet link clicks, calendar RSVP, and meet attendance. Green = positive, red = negative,
+// grey = neutral/missing. Fits on one wide row alongside match status.
+function EngagementCell({ engagement }: { engagement?: MatchEngagement }) {
+  if (!engagement) {
+    return <span className="text-xs text-muted">(no engagement data)</span>;
+  }
+  const { confirmation, replies, meetClicks, rsvp, attendance } = engagement;
+
+  const pill = (active: boolean, labelOn: string, labelOff: string, title: string) => (
+    <span
+      title={title}
+      className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
+        active ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-400"
+      }`}
+    >
+      {active ? labelOn : labelOff}
+    </span>
+  );
+
+  const rsvpPill = (who: "A" | "B", value: string | null) => {
+    const cfg: Record<string, { label: string; cls: string }> = {
+      accepted:     { label: "accepted",     cls: "bg-emerald-100 text-emerald-700" },
+      declined:     { label: "declined",     cls: "bg-red-100 text-red-700" },
+      tentative:    { label: "tentative",    cls: "bg-yellow-100 text-yellow-700" },
+      needsAction:  { label: "no action",    cls: "bg-gray-100 text-gray-500" },
+      deleted:      { label: "deleted",      cls: "bg-red-100 text-red-700" },
+    };
+    const key = (value ?? "").toLowerCase();
+    const c = cfg[key] ?? { label: value ?? "no cal", cls: "bg-gray-100 text-gray-400" };
+    return (
+      <span
+        title={`Calendar RSVP (${who}): ${value ?? "none"}`}
+        className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${c.cls}`}
+      >
+        {who}: {c.label}
+      </span>
+    );
+  };
+
+  const clickPill = (who: "A" | "B", count: number) => (
+    <span
+      title={`Meet link clicks (${who}): ${count}`}
+      className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
+        count > 0 ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-400"
+      }`}
+    >
+      {who}: {count} click{count === 1 ? "" : "s"}
+    </span>
+  );
+
+  const attendancePill = (who: "A" | "B", iso: string | null) => {
+    if (!iso) {
+      return (
+        <span
+          title={`Meet attendance (${who}): never`}
+          className="rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-400"
+        >
+          {who}: never
+        </span>
+      );
+    }
+    const d = new Date(iso);
+    const label = `${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+    return (
+      <span
+        title={`Meet attendance (${who}): ${label}`}
+        className="rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-medium text-green-700"
+      >
+        {who}: {label}
+      </span>
+    );
+  };
+
+  return (
+    <div className="flex flex-wrap items-center gap-1" title="Engagement signals">
+      <div className="flex items-center gap-0.5">
+        <span className="text-[10px] uppercase tracking-wide text-muted">confirm</span>
+        {pill(confirmation.a, "A yes", "A ?", "Person A clicked yes on confirmation email")}
+        {pill(confirmation.b, "B yes", "B ?", "Person B clicked yes on confirmation email")}
+      </div>
+      <div className="flex items-center gap-0.5">
+        <span className="text-[10px] uppercase tracking-wide text-muted">reply</span>
+        {pill(replies.a, "A replied", "A quiet", "Person A replied to intro email")}
+        {pill(replies.b, "B replied", "B quiet", "Person B replied to intro email")}
+      </div>
+      <div className="flex items-center gap-0.5">
+        <span className="text-[10px] uppercase tracking-wide text-muted">meet</span>
+        {clickPill("A", meetClicks.a)}
+        {clickPill("B", meetClicks.b)}
+      </div>
+      <div className="flex items-center gap-0.5">
+        <span className="text-[10px] uppercase tracking-wide text-muted">rsvp</span>
+        {rsvpPill("A", rsvp.a)}
+        {rsvpPill("B", rsvp.b)}
+      </div>
+      <div className="flex items-center gap-0.5">
+        <span className="text-[10px] uppercase tracking-wide text-muted">joined</span>
+        {attendancePill("A", attendance.a)}
+        {attendancePill("B", attendance.b)}
+      </div>
+    </div>
+  );
 }
