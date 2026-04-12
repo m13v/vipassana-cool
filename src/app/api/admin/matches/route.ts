@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { neon } from "@neondatabase/serverless";
-import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, getActiveMatchForSession, updateEntryStatus, confirmMatchPerson } from "@/lib/db";
+import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, getActiveMatchForSession, updateEntryStatus, confirmMatchPerson, getMatchEngagement } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
@@ -19,30 +19,60 @@ export async function GET(request: NextRequest) {
 
   const matches = await getAllMatches();
 
-  const safe = matches.map((m) => ({
-    id: m.id,
-    status: m.status,
-    createdAt: m.created_at,
-    notes: m.notes,
-    personAConfirmed: m.person_a_confirmed ?? false,
-    personBConfirmed: m.person_b_confirmed ?? false,
-    personA: {
-      id: m.person_a.id,
-      firstName: m.person_a.name?.split(/\s+/)[0] || null,
-      city: m.person_a.city,
-      timezone: m.person_a.timezone,
-      frequency: m.person_a.frequency,
-      sessionDuration: m.person_a.session_duration,
-    },
-    personB: {
-      id: m.person_b.id,
-      firstName: m.person_b.name?.split(/\s+/)[0] || null,
-      city: m.person_b.city,
-      timezone: m.person_b.timezone,
-      frequency: m.person_b.frequency,
-      sessionDuration: m.person_b.session_duration,
-    },
-  }));
+  // Batch-load engagement signals for all matches in a few aggregate queries.
+  const engagement = await getMatchEngagement(
+    matches.map((m) => ({ id: m.id, person_a_id: m.person_a_id, person_b_id: m.person_b_id }))
+  );
+
+  const safe = matches.map((m) => {
+    const eng = engagement.get(m.id);
+    return {
+      id: m.id,
+      status: m.status,
+      createdAt: m.created_at,
+      notes: m.notes,
+      personAConfirmed: m.person_a_confirmed ?? false,
+      personBConfirmed: m.person_b_confirmed ?? false,
+      personA: {
+        id: m.person_a.id,
+        firstName: m.person_a.name?.split(/\s+/)[0] || null,
+        city: m.person_a.city,
+        timezone: m.person_a.timezone,
+        frequency: m.person_a.frequency,
+        sessionDuration: m.person_a.session_duration,
+      },
+      personB: {
+        id: m.person_b.id,
+        firstName: m.person_b.name?.split(/\s+/)[0] || null,
+        city: m.person_b.city,
+        timezone: m.person_b.timezone,
+        frequency: m.person_b.frequency,
+        sessionDuration: m.person_b.session_duration,
+      },
+      engagement: {
+        confirmation: {
+          a: m.person_a_confirmed ?? false,
+          b: m.person_b_confirmed ?? false,
+        },
+        replies: {
+          a: eng?.replyA ?? false,
+          b: eng?.replyB ?? false,
+        },
+        meetClicks: {
+          a: eng?.meetClicksA ?? 0,
+          b: eng?.meetClicksB ?? 0,
+        },
+        rsvp: {
+          a: m.calendar_rsvp_a ?? null,
+          b: m.calendar_rsvp_b ?? null,
+        },
+        attendance: {
+          a: eng?.attendanceA ?? null,
+          b: eng?.attendanceB ?? null,
+        },
+      },
+    };
+  });
 
   return NextResponse.json({ matches: safe });
 }
