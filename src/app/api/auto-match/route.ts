@@ -311,14 +311,15 @@ export async function GET(request: NextRequest) {
         await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${trackTokenA}, ${match.id}, ${personA.id}, ${meetResult.meetUrl})`;
         await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${trackTokenB}, ${match.id}, ${personB.id}, ${meetResult.meetUrl})`;
         await updateMatchCalendarEvent(match.id, meetResult.eventId);
+        await updateMatchSuggestedUtc(match.id, bestUtcTime);
         await sql`
           INSERT INTO vipassana_activity_log (match_id, event_type, new_value, triggered_by, note)
           VALUES (${match.id}, 'meet_created', ${meetResult.meetUrl}, 'auto-match', ${`eventId=${meetResult.eventId}`})
         `;
 
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://vipassana.cool";
-        const sessCtxA: SessionContext = { session: slotA.session, localTime: getSessionLocalTime(personA, slotA.session), timezone: personA.timezone };
-        const sessCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone };
+        const sessCtxA: SessionContext = { session: slotA.session, localTime: getSessionLocalTime(personA, slotA.session), timezone: personA.timezone, suggestedUtcMinutes: suggestedMins };
+        const sessCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone, suggestedUtcMinutes: suggestedMins };
         const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
         for (const [person, other, trackToken, sessCtx] of [
