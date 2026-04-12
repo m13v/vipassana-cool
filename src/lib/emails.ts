@@ -110,6 +110,30 @@ function findBestOverlap(a: WaitlistEntry, b: WaitlistEntry): { aUtc: number; bU
   return best;
 }
 
+/**
+ * Compute the suggested meeting time (midpoint of the best overlapping slot,
+ * rounded to 30 min) as UTC minutes since midnight. Returns null if no overlap.
+ */
+export function computeSuggestedMeetUtcMinutes(a: WaitlistEntry, b: WaitlistEntry): number | null {
+  const best = findBestOverlap(a, b);
+  if (!best) return null;
+  let mid: number;
+  if (Math.abs(best.aUtc - best.bUtc) > 720) {
+    mid = Math.round(((best.aUtc + best.bUtc + 1440) / 2)) % 1440;
+  } else {
+    mid = Math.round((best.aUtc + best.bUtc) / 2);
+  }
+  mid = Math.round(mid / 30) * 30;
+  return mid % 1440;
+}
+
+/** Format UTC minutes as "HH:MM" for storage and API calls. */
+export function utcMinutesToHHMM(mins: number): string {
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+}
+
 export type MeetLinkInfo = {
   trackingUrl: string; // per-person tracking URL
 };
@@ -118,6 +142,7 @@ export type SessionContext = {
   session: "morning" | "evening";
   localTime: string; // user's intended local time, e.g. "06:00"
   timezone: string | null; // IANA timezone or GMT offset
+  suggestedUtcMinutes?: number | null; // when both confirmed, the computed meeting UTC minutes
 };
 
 /** Format a time string as "06:00 (6:00am)" — both 24h and 12h formats */
@@ -148,9 +173,18 @@ export function buildConfirmationSubject(sessionCtx: SessionContext): string {
   return `I found a practice buddy for your ${sessionCtx.session} session at ${formatSessionLocalTime(sessionCtx)}`;
 }
 
-/** Build subject line for intro email */
+/** Build subject line for intro email. Uses suggested UTC time when available, localized to recipient. */
 export function buildIntroSubject(sessionCtx: SessionContext): string {
-  return `Your Practice Buddy match – ${sessionCtx.session} session at ${formatSessionLocalTime(sessionCtx)}`;
+  let timeStr: string;
+  if (sessionCtx.suggestedUtcMinutes != null) {
+    const offset = tzOffsetMinutes(sessionCtx.timezone);
+    const localHHMM = utcMinutesToLocalTime(sessionCtx.suggestedUtcMinutes, offset);
+    const tzLabel = formatTimezone(sessionCtx.timezone);
+    timeStr = `${formatDualTime(localHHMM)}${tzLabel ? ` ${tzLabel}` : ""}`;
+  } else {
+    timeStr = formatSessionLocalTime(sessionCtx);
+  }
+  return `Your Practice Buddy match, ${sessionCtx.session} session at ${timeStr}`;
 }
 
 export function buildUnsubscribeUrl(token: string | null): string {
