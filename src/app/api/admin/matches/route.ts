@@ -66,10 +66,6 @@ export async function GET(request: NextRequest) {
           a: m.calendar_rsvp_a ?? null,
           b: m.calendar_rsvp_b ?? null,
         },
-        attendance: {
-          a: eng?.attendanceA ?? null,
-          b: eng?.attendanceB ?? null,
-        },
       },
     };
   });
