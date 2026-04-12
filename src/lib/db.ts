@@ -363,6 +363,11 @@ export async function updateMatchCalendarEvent(matchId: string, calendarEventId:
   await sql`UPDATE matches SET calendar_event_id = ${calendarEventId} WHERE id = ${matchId}`;
 }
 
+export async function updateMatchSuggestedUtc(matchId: string, suggestedUtcTime: string): Promise<void> {
+  const sql = getSql();
+  await sql`UPDATE matches SET suggested_utc_time = ${suggestedUtcTime} WHERE id = ${matchId}`;
+}
+
 export async function updateMatchRsvp(matchId: string, rsvpA: string, rsvpB: string): Promise<void> {
   const sql = getSql();
   await sql`UPDATE matches SET calendar_rsvp_a = ${rsvpA}, calendar_rsvp_b = ${rsvpB} WHERE id = ${matchId}`;
