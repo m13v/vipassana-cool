@@ -11,9 +11,10 @@ import {
   confirmMatchPerson,
   toUtcTime,
   updateMatchCalendarEvent,
+  updateMatchSuggestedUtc,
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
-import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
+import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl, computeSuggestedMeetUtcMinutes, utcMinutesToHHMM } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
@@ -282,7 +283,8 @@ export async function GET(request: NextRequest) {
         const nameA = personA.name?.split(/\s+/)[0] || "A";
         const nameB = personB.name?.split(/\s+/)[0] || "B";
         const slug = `${nameA}-${nameB}`.toLowerCase().replace(/[^a-z0-9-]/g, "");
-        const bestUtcTime = findBestMeetTime(personA, personB);
+        const suggestedMins = computeSuggestedMeetUtcMinutes(personA, personB);
+        const bestUtcTime = suggestedMins != null ? utcMinutesToHHMM(suggestedMins) : "06:00";
         const duration = parseDurationMinutes(personA.session_duration, personB.session_duration);
 
         let meetResult: { meetUrl: string; eventId: string };
