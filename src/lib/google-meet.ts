@@ -8,20 +8,44 @@ type MeetEventResult = {
   meetUrl: string;
 };
 
-export async function getAccessToken(): Promise<string> {
+export type TokenKind = "primary" | "mediar";
+
+export type MeetJoinEvent = {
+  meetingCode: string;
+  participantEmail: string | null;
+  startTime: string; // ISO
+  durationSec: number | null;
+  eventName: string; // e.g. call_ended, attendance_report_user_type
+  raw: unknown;
+};
+
+export async function getAccessToken(tokenKind: TokenKind = "primary"): Promise<string> {
+  let refreshToken: string | undefined;
+  if (tokenKind === "mediar") {
+    refreshToken = process.env.GOOGLE_REFRESH_TOKEN_MEDIAR;
+    if (!refreshToken) {
+      throw new Error("GOOGLE_REFRESH_TOKEN_MEDIAR is not set in the environment");
+    }
+  } else {
+    refreshToken = process.env.GOOGLE_REFRESH_TOKEN;
+    if (!refreshToken) {
+      throw new Error("GOOGLE_REFRESH_TOKEN is not set in the environment");
+    }
+  }
+
   const res = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
       client_id: process.env.GOOGLE_CLIENT_ID!,
       client_secret: process.env.GOOGLE_CLIENT_SECRET!,
-      refresh_token: process.env.GOOGLE_REFRESH_TOKEN!,
+      refresh_token: refreshToken,
       grant_type: "refresh_token",
     }),
   });
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Failed to refresh Google token: ${res.status} ${text}`);
+    throw new Error(`Failed to refresh Google token (${tokenKind}): ${res.status} ${text}`);
   }
   const data = await res.json();
   return data.access_token;
@@ -96,4 +120,92 @@ export async function createMeetEvent(
   }
 
   return { eventId, meetUrl };
+}
+
+/**
+ * Fetch Google Meet join/attendance events from the Admin SDK Reports API.
+ * Requires the mediar refresh token (scope: admin.reports.audit.readonly).
+ *
+ * Queries the `meet` application activity log and extracts relevant
+ * per-participant and per-call events. We currently surface:
+ *   call_ended (one record per call: meeting_code, duration_seconds, ...)
+ *   attendance_report_user_type (per-participant attendance rows)
+ *   call_considered_ended / participant_joined (fallback)
+ *
+ * Docs:
+ *  https://developers.google.com/admin-sdk/reports/v1/reference/activities/list
+ *  https://developers.google.com/admin-sdk/reports/v1/appendix/activity/meet
+ */
+export async function fetchMeetAttendanceEvents(opts: {
+  startTime?: string;
+  endTime?: string;
+  meetingCode?: string;
+}): Promise<MeetJoinEvent[]> {
+  const accessToken = await getAccessToken("mediar");
+  const results: MeetJoinEvent[] = [];
+
+  const params = new URLSearchParams();
+  if (opts.startTime) params.set("startTime", opts.startTime);
+  if (opts.endTime) params.set("endTime", opts.endTime);
+  params.set("maxResults", "1000");
+  if (opts.meetingCode) {
+    // filter by meeting_code for efficiency
+    params.set("filters", `meeting_code==${opts.meetingCode}`);
+  }
+
+  let pageToken: string | undefined;
+  do {
+    const qp = new URLSearchParams(params);
+    if (pageToken) qp.set("pageToken", pageToken);
+
+    const url =
+      "https://admin.googleapis.com/admin/reports/v1/activity/users/all/applications/meet?" +
+      qp.toString();
+
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Meet reports fetch failed: ${res.status} ${text}`);
+    }
+    const json = await res.json();
+    const items: unknown[] = json.items || [];
+    for (const item of items) {
+      const it = item as {
+        id?: { time?: string };
+        actor?: { email?: string };
+        events?: { name?: string; parameters?: { name?: string; value?: string; intValue?: string; boolValue?: boolean }[] }[];
+      };
+      const eventTime = it.id?.time || "";
+      const actorEmail = it.actor?.email || null;
+      for (const ev of it.events || []) {
+        const params2 = ev.parameters || [];
+        const getStr = (n: string) => params2.find((p) => p.name === n)?.value;
+        const getInt = (n: string) => {
+          const p = params2.find((pp) => pp.name === n);
+          if (!p) return null;
+          if (p.intValue != null) return parseInt(p.intValue, 10);
+          if (p.value != null) return parseInt(p.value, 10);
+          return null;
+        };
+        const meetingCode = getStr("meeting_code") || getStr("conference_id") || "";
+        if (!meetingCode) continue;
+        const duration = getInt("duration_seconds");
+        const identifier = getStr("identifier") || getStr("endpoint_id") || null;
+        const participantEmail = identifier && identifier.includes("@") ? identifier : actorEmail;
+        results.push({
+          meetingCode,
+          participantEmail,
+          startTime: eventTime,
+          durationSec: duration,
+          eventName: ev.name || "",
+          raw: item,
+        });
+      }
+    }
+    pageToken = json.nextPageToken;
+  } while (pageToken);
+
+  return results;
 }
