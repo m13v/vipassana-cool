@@ -1,0 +1,280 @@
+- generic:
+  - generic:
+    - navigation:
+      - complementary:
+        - generic:
+          - button [expanded]:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                    - text: p
+                - generic:
+                  - generic: piastech
+            - generic:
+              - img
+        - navigation:
+          - list:
+            - listitem:
+              - link:
+                - /url: /emails
+                - generic:
+                  - img
+                - text: Emails
+            - listitem:
+              - link:
+                - /url: /broadcasts
+                - generic:
+                  - img
+                - text: Broadcasts
+            - listitem:
+              - link:
+                - /url: /automations
+                - generic:
+                  - img
+                - text: Automations
+            - listitem:
+              - link:
+                - /url: /templates
+                - generic:
+                  - img
+                - text: Templates
+            - listitem:
+              - link:
+                - /url: /audience
+                - generic:
+                  - img
+                - text: Audience
+            - listitem:
+              - link:
+                - /url: /metrics
+                - generic:
+                  - img
+                - text: Metrics
+            - listitem:
+              - link:
+                - /url: /domains
+                - generic:
+                  - img
+                - text: Domains
+            - listitem:
+              - link:
+                - /url: /logs
+                - generic:
+                  - img
+                - text: Logs
+            - listitem:
+              - link:
+                - /url: /api-keys
+                - generic:
+                  - img
+                - text: API Keys
+            - listitem:
+              - link:
+                - /url: /webhooks
+                - generic:
+                  - img
+                - text: Webhooks
+            - listitem:
+              - link:
+                - /url: /settings
+                - generic:
+                  - img
+                - text: Settings
+        - button:
+          - generic:
+            - generic:
+              - generic:
+                - generic: i
+              - generic: i@m13v.com
+          - generic:
+            - img
+    - generic:
+      - generic:
+        - generic:
+          - button:
+            - generic: Feedback
+            - generic:
+              - generic: F
+          - link:
+            - /url: /help
+            - text: Help
+          - link:
+            - /url: https://resend.com/docs
+            - text: Docs
+      - generic:
+        - generic:
+          - heading [level=1]: Settings
+        - generic:
+          - generic:
+            - link:
+              - /url: /settings/usage
+              - text: Usage
+            - link:
+              - /url: /settings/billing
+              - text: Billing
+            - link:
+              - /url: /settings/team
+              - text: Team
+            - link:
+              - /url: /settings/smtp
+              - text: SMTP
+            - link:
+              - /url: /settings/integrations
+              - text: Integrations
+            - link:
+              - /url: /settings/unsubscribe-page
+              - text: Unsubscribe page
+            - link:
+              - /url: /settings/documents
+              - text: Documents
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=2]: Transactional
+                - generic: Integrate email into your app using the Resend API or SMTP interface.
+                - button [disabled]:
+                  - generic: Upgrade
+              - generic:
+                - generic:
+                  - heading [level=3]: Free
+                - generic:
+                  - generic:
+                    - table:
+                      - rowgroup:
+                        - row:
+                          - cell:
+                            - img
+                          - cell: Monthly limit
+                          - cell:
+                            - generic:
+                              - generic: 179 / 3,000
+                              - img
+                        - row:
+                          - cell:
+                            - img
+                          - cell: Daily limit
+                          - cell:
+                            - generic:
+                              - generic: 0 / 100
+                              - img
+            - generic:
+              - generic:
+                - heading [level=2]: Marketing
+                - generic: Design and send marketing emails using Broadcasts and Audiences.
+                - button [disabled]:
+                  - generic: Upgrade
+              - generic:
+                - generic:
+                  - heading [level=3]: Free
+                - generic:
+                  - generic:
+                    - table:
+                      - rowgroup:
+                        - row:
+                          - cell:
+                            - img
+                          - cell: Contacts limit
+                          - cell:
+                            - generic:
+                              - generic: 0 / 1,000
+                        - row:
+                          - cell:
+                            - img
+                          - cell: Segments limit
+                          - cell:
+                            - generic:
+                              - generic: 1 / 3
+                        - row:
+                          - cell:
+                            - img
+                          - cell: Broadcasts limit
+                          - cell:
+                            - generic:
+                              - generic: Unlimited
+            - generic:
+              - generic:
+                - heading [level=2]: Team
+                - generic: Understand the quotas and limits for your team.
+              - generic:
+                - generic:
+                  - heading [level=3]: Free
+                - generic:
+                  - generic:
+                    - table:
+                      - rowgroup:
+                        - row:
+                          - cell:
+                            - img
+                          - cell: AI credits
+                          - cell:
+                            - generic:
+                              - generic: 0 / 5
+                        - row:
+                          - cell:
+                            - img
+                          - cell: Automations
+                          - cell:
+                            - generic:
+                              - generic: 0 / 1,000
+                        - row:
+                          - cell:
+                            - img
+                          - cell: Domains
+                          - cell:
+                            - generic:
+                              - generic: 1 / 1
+                        - row:
+                          - cell:
+                            - img
+                          - cell: Rate limit
+                          - cell: 5 req/s
+            - heading [level=1]: Extras
+            - generic:
+              - generic:
+                - heading [level=2]: Pay-as-you-go
+                - generic: Continue using Resend beyond your quota.
+              - generic:
+                - generic:
+                  - generic:
+                    - heading [level=3]: Transactional · $0.90 / per 1,000 emails
+                  - paragraph: When enabled, you will continue sending and receiving transactional emails beyond your quota. Resend will automatically charge $0.90 for each additional bucket of 1,000 emails.
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Automations · $0.0015 / per run
+                    - paragraph: Start with 10,000 Automation Runs for free, and scale as you need. Resend automatically charges for each run beyond the free limit.
+                  - switch [disabled]
+            - generic:
+              - generic:
+                - heading [level=2]: Add-ons
+                - generic: Get even more of Resend with special add-ons.
+              - generic:
+                - generic:
+                  - generic:
+                    - heading [level=3]: Dedicated IPs - $30 / mo
+                  - paragraph: Resend will provision, warm up, monitor and auto-scale the dedicated IP to ensure consistent deliverability and performance.
+                  - paragraph:
+                    - link:
+                      - /url: /blog/do-you-need-a-dedicated-ip
+                      - text: Check if a dedicated IP would be right for you
+                  - generic:
+                    - paragraph: You'll need to be on a Scale plan or higher to request a dedicated IP.
+                    - link:
+                      - /url: /pricing
+                      - text: View pricing
+  - region "Notifications alt+T"
+  - alert
+  - menu "p piastech" [active] [ref=e347]:
+    - paragraph [ref=e348]: Teams
+    - menuitem "p piastech" [ref=e349] [cursor=pointer]:
+      - generic [ref=e350]:
+        - generic [ref=e352]:
+          - img [ref=e353]
+          - text: p
+        - generic [ref=e367]: piastech
+      - img [ref=e368]
+    - separator [ref=e370]
+    - menuitem "Create Team" [ref=e371] [cursor=pointer]:
+      - img [ref=e373]
+      - generic [ref=e375]: Create Team
