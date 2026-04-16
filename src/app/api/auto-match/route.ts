@@ -132,7 +132,7 @@ export async function GET(request: NextRequest) {
         (r) =>
           r.person_a_confirmed ||
           r.person_b_confirmed ||
-          ["confirming", "active", "pending", "replied"].includes(r.status as string)
+          !["expired", "declined", "ended"].includes(r.status as string)
       )
       .map((r) => [r.person_a_id, r.person_b_id].sort().join("|"))
   );
