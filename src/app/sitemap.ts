@@ -67,6 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/guide/free-meditation-retreats`, lastModified: d("2026-03-19"), changeFrequency: "monthly", priority: 0.8 },
     // Topic guides (t/)
     { url: `${baseUrl}/t/is-vipassana-a-cult`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/t/anapana-and-vipassana`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/after-vipassana-daily-practice-rewire-habits`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/matthew-diakonov`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.7 },
     // Practice Buddy
