@@ -66,6 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/guide/vipassana-at-home`, lastModified: d("2026-03-19"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/guide/free-meditation-retreats`, lastModified: d("2026-03-19"), changeFrequency: "monthly", priority: 0.8 },
     // Topic guides (t/)
+    { url: `${baseUrl}/t/vipassana-psychosis`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/is-vipassana-a-cult`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/goenka-cult`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/anapana-and-vipassana`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.8 },
