@@ -72,6 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/t/anapana-and-vipassana`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/after-vipassana-daily-practice-rewire-habits`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/matthew-diakonov`, lastModified: d("2026-04-17"), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/t/gross-sensation`, lastModified: d("2026-04-18"), changeFrequency: "monthly", priority: 0.8 },
     // Practice Buddy
     { url: `${baseUrl}/practice-buddy/how-it-works`, lastModified: d("2026-03-28"), changeFrequency: "monthly", priority: 0.8 },
     // Legal / info pages
