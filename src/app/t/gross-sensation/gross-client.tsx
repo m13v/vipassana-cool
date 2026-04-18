@@ -495,7 +495,7 @@ const misreads = [
 ];
 
 export function MisreadList() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLUListElement>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -594,7 +594,7 @@ const instructions = [
 ];
 
 export function SitInstructions() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLOListElement>(null);
   const [shown, setShown] = useState(-1);
   useEffect(() => {
     const el = ref.current;
