@@ -126,10 +126,10 @@ export default function VipassanaAndDepressionPage() {
           People who develop a consistent Vipassana practice often report these changes in how they relate to depression:
         </p>
         <ul className="mt-3 list-disc space-y-2 pl-6">
-          <li><strong>Earlier awareness.</strong> You notice the onset of a depressive episode sooner because you&apos;re more attuned to your mental and physical states.</li>
-          <li><strong>Less identification.</strong> Instead of &quot;I am depressed,&quot; the experience becomes &quot;depression is present.&quot; This subtle shift creates space between you and the experience.</li>
-          <li><strong>Reduced rumination.</strong> The body-scanning technique gives you something to do besides think in circles. When you notice rumination, you have a concrete alternative: observe sensations.</li>
-          <li><strong>Greater tolerance for discomfort.</strong> Equanimity doesn&apos;t mean you enjoy depression. It means you can sit with it without adding layers of anxiety, guilt, and resistance on top of it.</li>
+          <li><strong>Earlier awareness.</strong> Practitioners tend to notice the onset of a depressive episode sooner.</li>
+          <li><strong>Less identification.</strong> Instead of &quot;I am depressed,&quot; the experience becomes &quot;depression is present.&quot; This subtle shift creates some space around the experience.</li>
+          <li><strong>Reduced rumination.</strong> The training received at the course gives practitioners an alternative to running in circles mentally.</li>
+          <li><strong>Greater tolerance for discomfort.</strong> Equanimity doesn&apos;t mean enjoying depression. It means being able to sit with it without adding layers of anxiety, guilt, and resistance on top of it.</li>
         </ul>
         <p>
           These benefits develop gradually through consistent practice. They&apos;re not dramatic or sudden. But over months and years, they can meaningfully change your relationship with depression.
@@ -144,10 +144,10 @@ export default function VipassanaAndDepressionPage() {
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li><strong>Therapy</strong> helps you understand your patterns, process trauma, and develop coping strategies at a cognitive level.</li>
           <li><strong>Medication</strong> addresses neurochemical imbalances that create the biological substrate of depression.</li>
-          <li><strong>Vipassana</strong> trains your capacity to observe mental states without reactivity, building equanimity at the experiential level.</li>
+          <li><strong>Vipassana</strong> is a long-term training received at the 10-day course and maintained through daily practice afterward.</li>
         </ul>
         <p>
-          These are complementary, not competing approaches. A meditator on antidepressants who sees a therapist is not &quot;doing it wrong.&quot; They&apos;re addressing the problem from multiple angles — which is often the most effective strategy.
+          These are complementary, not competing approaches. A meditator on antidepressants who sees a therapist is not &quot;doing it wrong.&quot; They are addressing the problem from multiple angles, which is often the most effective strategy.
         </p>
         <p>
           Read more in our <Link href="/faq/vipassana-vs-therapy" className="text-accent underline hover:text-foreground">Vipassana vs Therapy</Link> page.
