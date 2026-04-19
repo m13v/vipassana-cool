@@ -43,7 +43,7 @@ export default function VipassanaForBeginnersPage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          Vipassana is a 2,500-year-old meditation technique taught through free 10-day silent retreats at 200+ centers worldwide. You meditate 10+ hours daily, learn systematic body scanning with equanimity, and follow Noble Silence — no talking, phones, or eye contact. No prior experience needed. Days 1-3 focus on breath observation (Anapana), Day 4 introduces the full Vipassana technique, and Day 10 breaks the silence. Courses are funded entirely by donations from past students.
+          Vipassana is a 2,500-year-old meditation technique taught through free 10-day silent retreats at 200+ centers worldwide. You meditate 10+ hours daily, follow Noble Silence (no talking, phones, or eye contact), and learn the technique in full from the teacher. No prior experience needed. The early days build concentration, the main Vipassana technique is introduced mid-course, and the later days deepen that practice. Day 10 breaks the silence. Courses are funded entirely by donations from past students.
         </p>
       </div>
 
@@ -60,7 +60,7 @@ export default function VipassanaForBeginnersPage() {
             &quot;Vipassana&quot; means &quot;seeing things as they really are&quot; in Pali, the ancient language of the Buddhist texts. It&apos;s a 2,500-year-old meditation technique that was rediscovered by Gotama the Buddha and has been passed down through an unbroken chain of teachers ever since.
           </p>
           <p>
-            Here&apos;s how I think about it. Our brain functions as a neural network. Whatever you practice, you get established with. If you practice reacting to every sensation with craving or aversion, that pattern gets stronger. In Vipassana, you practice being non-reactive. You observe sensations in your body — pain, pleasure, itching, warmth — without reacting to them. Over time, non-reactivity becomes your default.
+            Here&apos;s how I think about it. Our brain functions as a neural network. Whatever you practice, you get established with. If you practice reacting with craving or aversion, that pattern gets stronger. Vipassana trains the opposite pattern, non-reactivity. Over time, non-reactivity becomes your default. The specifics of how that is cultivated are taught on the 10-day course.
           </p>
           <p>
             I have another analogy involving horror movies that I think captures what daily life feels like after Vipassana — I wrote about it more on the <Link href="/guide/vipassana-meaning" className="text-accent underline hover:text-foreground">Vipassana meaning</Link> page.
