@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DayPage } from "@/components/day-page";
 
 export const metadata: Metadata = {
-  title: "Vipassana Day 10 — Noble Silence Breaks & the Transition Home",
+  title: "Vipassana Day 10: Noble Silence Breaks and the Transition Home",
   description:
     "Day 10 of a 10-day Vipassana course: Noble Silence ends, metta bhavana is introduced in the course sittings, and students prepare to re-enter ordinary life.",
   alternates: { canonical: "https://vipassana.cool/experience/day-10" },
