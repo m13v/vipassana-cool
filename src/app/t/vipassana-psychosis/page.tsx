@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   title:
     "Vipassana Psychosis: Why Cases Cluster on Day 4, and What to Watch For",
   description:
-    "Vipassana-induced psychosis is real but it is not random on the retreat schedule. Day 4 of the 10-day stacks three specific loads on the same morning: body scan replaces Anapana, Adhitthana immobility begins, and sleep debt peaks. A day-by-day guide to the risk curve, the prodromal signs, and exactly what to do if you notice them.",
+    "Vipassana-induced psychosis is real but it is not random on the retreat schedule. Day 4 of the 10-day stacks three specific loads on the same morning: the technique intensifies, Adhitthana immobility begins, and sleep debt peaks. A day-by-day guide to the risk curve, the prodromal signs, and exactly what to do if you notice them.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title:
@@ -54,7 +54,7 @@ const faqs = [
   {
     question: "When during a Vipassana retreat is psychosis most likely to appear?",
     answer:
-      "Day 4 through Day 6. Days 1, 2 and 3 are Anapana only, which is breath observation and structurally stabilizing. Day 4 is the pivot: the technique changes to full body scan, the first Adhitthana (Strong Determination) hour is introduced where you cannot open your eyes, move your hands, or uncross your legs, three of those are scheduled every day from then on, and cumulative sleep debt at 5 to 6 hours a night has reached roughly 8 to 16 hours. These three loads stack on the same morning. The evening discourse introduces anicca, impermanence, which can intensify depersonalization in someone already prone to it. In the longer 20-day and 30-day courses, onset also tends to be on the back half of the retreat rather than the opening days.",
+      "Day 4 through Day 6. The opening days of the course are a preparatory, concentration-building phase, which is structurally stabilizing. Day 4 is the pivot: the technique intensifies, the first Adhitthana (Strong Determination) hour is introduced where you cannot open your eyes, move your hands, or uncross your legs (three of those are scheduled every day from then on), and cumulative sleep debt at 5 to 6 hours a night has reached roughly 8 to 16 hours. These three loads stack on the same morning. The evening discourse introduces anicca, impermanence, which can intensify depersonalization in someone already prone to it. In the longer 20-day and 30-day courses, onset also tends to be on the back half of the retreat rather than the opening days.",
   },
   {
     question: "Who is actually at risk for Vipassana psychosis?",
@@ -69,7 +69,7 @@ const faqs = [
   {
     question: "What should I do if I notice psychosis symptoms during a Vipassana retreat?",
     answer:
-      "Tell the course manager first, not the assistant teacher between scheduled interview times. The course manager is the operational person and handles exactly this. Ask to switch to Anapana only for the next sitting, breath observation is stabilizing and body scan plus Adhitthana is the activating piece. Use the evening teacher interview to describe the symptom literally, not in Dhamma metaphors. If symptoms escalate, leaving the course is not failure. Courses run continuously, you can sit another. Call 988 (US) or local crisis line from the center phone. After the course, contact Cheetah House (cheetahhouse.org), which was founded by Dr. Willoughby Britton at Brown University specifically to support meditators with adverse effects.",
+      "Tell the course manager first, not the assistant teacher between scheduled interview times. The course manager is the operational person and handles exactly this. Ask them and the assistant teacher what to adjust for the next sitting, the center has a protocol for scaling back and they use it. Use the evening teacher interview to describe the symptom literally, not in Dhamma metaphors. If symptoms escalate, leaving the course is not failure. Courses run continuously, you can sit another. Call 988 (US) or local crisis line from the center phone. After the course, contact Cheetah House (cheetahhouse.org), which was founded by Dr. Willoughby Britton at Brown University specifically to support meditators with adverse effects.",
   },
   {
     question: "Does the Vipassana application form actually screen for psychosis risk?",
@@ -165,24 +165,24 @@ export default function Page() {
         <p className="text-sm text-muted">
           Vipassana-induced psychosis is rare but real, and it is not random on the 10-day
           schedule. It clusters on Day 4 through Day 6 because Day 4 stacks three specific loads
-          on the same morning: the technique changes from Anapana (breath observation,
-          stabilizing) to the full body scan (activating), the first Adhitthana sittings begin
-          where you cannot move your eyes, hands, or legs for an hour, three times a day, and
-          cumulative sleep debt at 5 to 6 hours per night has reached 8 to 16 hours. Almost every
-          published case also has a pre-existing risk factor, a prior psychotic episode, a close
-          family history, or recent heavy cannabis or psychedelic use. The prodromal window is
-          usually 24 to 48 hours before full symptoms and has specific warning signs. If you
-          notice them, tell the course manager the same day.
+          on the same morning: the technique intensifies (from a stabilizing preparatory phase to
+          a more activating one), the first Adhitthana sittings begin where you cannot move your
+          eyes, hands, or legs for an hour, three times a day, and cumulative sleep debt at 5 to
+          6 hours per night has reached 8 to 16 hours. Almost every published case also has a
+          pre-existing risk factor, a prior psychotic episode, a close family history, or recent
+          heavy cannabis or psychedelic use. The prodromal window is usually 24 to 48 hours before
+          full symptoms and has specific warning signs. If you notice them, tell the course
+          manager the same day.
         </p>
       </div>
 
       <div className="mb-12">
         <ConceptReveal
           title="The day the course changes shape"
-          subtitle="Three and a half days of breath observation end. Three new loads begin at once. For most students this is when the real work starts. For a small number, this is when the trouble starts."
+          subtitle="The preparatory phase ends. Three new loads begin at once. For most students this is when the real work starts. For a small number, this is when the trouble starts."
           captions={[
-            "Days 1 to 3, Anapana only. Breath at the nostrils. Structurally stabilizing.",
-            "Day 4 morning, body scan begins. Fine sensation, whole body, new object of attention.",
+            "The opening days are a preparatory phase. Structurally stabilizing.",
+            "Day 4 morning, the main technique is introduced. New instruction, new register.",
             "Day 4 morning, first Adhitthana hour. No eyes, no hands, no legs. Three a day from now on.",
             "Day 4 evening discourse, anicca. Impermanence as direct experience, not concept.",
             "By Day 4 night, ~8 to 16 hours of sleep debt have accumulated at 5h a night.",
@@ -278,9 +278,9 @@ export default function Page() {
         <p className="mb-6 text-muted">
           This is the thing no other page on this keyword surfaces. Reported adverse events are
           not flat across the 10 days. They concentrate in a window, and the window is right
-          after the Day 4 pivot. Days 1 to 3 are Anapana-only and structurally calm. Day 4 to Day
-          6 is the peak. Day 7 onward the schedule does not change but accommodation has usually
-          begun.
+          after the Day 4 pivot. The opening days are a preparatory phase and structurally calm.
+          Day 4 to Day 6 is the peak. Day 7 onward the schedule does not change but accommodation
+          has usually begun.
         </p>
         <DayRiskCurve />
       </section>
@@ -427,8 +427,8 @@ export default function Page() {
           trained volunteers, not mental health professionals. They have a few hundred retreats of
           pattern recognition but they do not diagnose, they do not prescribe, and they do not run
           a psychiatric unit. What they can do is often the right thing: scale back the technique,
-          move you to Anapana only, extend sleep, adjust the schedule, and call outside help if
-          needed.
+          move you to the preparatory phase, extend sleep, adjust the schedule, and call outside
+          help if needed.
         </p>
         <p className="mb-4 text-muted">
           What they cannot do is manage an acute psychotic episode on the premises. If you are in
