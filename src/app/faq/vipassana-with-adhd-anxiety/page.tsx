@@ -233,8 +233,9 @@ export default function VipassanaWithAdhdAnxietyPage() {
           </Link>{" "}
           found that mindfulness meditation training shows promise for
           improving attention regulation and emotional control in adults with
-          ADHD. The technique isn&apos;t a cure, but it builds exactly the
-          mental muscles that ADHD weakens.
+          ADHD. Mindfulness training is not the same as Vipassana as taught in
+          the Goenka tradition, but the research is suggestive of the
+          direction.
         </p>
       </section>
 
@@ -243,13 +244,13 @@ export default function VipassanaWithAdhdAnxietyPage() {
           Anxiety During the Course: Normal vs. Concerning
         </h2>
         <p>
-          Some anxiety during a Vipassana course is completely normal —
-          even for people without anxiety disorders. You&apos;re in an
-          unfamiliar environment, cut off from your usual coping mechanisms,
-          doing intense inner work. Research from a naturalistic observation
-          study found that participants&apos; anxiety scores dropped
-          significantly from an average of 10 to 3.29 after the course. But
-          getting there can be rocky.
+          Some anxiety during a Vipassana course is completely normal, even
+          for people without anxiety disorders. You&apos;re in an unfamiliar
+          environment, cut off from your usual coping mechanisms, doing
+          intense inner work. Research from a naturalistic observation study
+          found that participants&apos; anxiety scores dropped significantly
+          from an average of 10 to 3.29 after the course. But getting there
+          can be rocky.
         </p>
 
         <h3 className="mb-2 mt-6 font-semibold text-foreground">
@@ -257,16 +258,16 @@ export default function VipassanaWithAdhdAnxietyPage() {
         </h3>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>
-            Heightened anxiety in the first 2-3 days as you adjust to
-            silence and the schedule
+            Heightened anxiety in the first 2 to 3 days as you adjust to
+            silence and the schedule.
           </li>
           <li>
             Waves of anxiety that arise during meditation and pass within
-            minutes
+            minutes.
           </li>
           <li>
             Physical anxiety symptoms (chest tightness, racing heart) that
-            you observe and allow to dissolve
+            come and go during a sitting.
           </li>
           <li>
             Brief urges to leave, especially around{" "}
@@ -274,11 +275,12 @@ export default function VipassanaWithAdhdAnxietyPage() {
               href="/experience/day-3"
               className="text-accent underline hover:text-foreground"
             >
-              Day 2-3
+              Day 2 to 3
             </Link>
+            .
           </li>
           <li>
-            Difficulty sleeping the first few nights
+            Difficulty sleeping the first few nights.
           </li>
         </ul>
 
@@ -288,21 +290,21 @@ export default function VipassanaWithAdhdAnxietyPage() {
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>
             Persistent panic attacks that don&apos;t resolve between
-            sittings
+            sittings.
           </li>
           <li>
-            Dissociation — feeling detached from reality, like
-            nothing is real
+            Dissociation: feeling detached from reality, like nothing is
+            real.
           </li>
           <li>
             Intrusive thoughts that are significantly worse than your
-            baseline
+            baseline.
           </li>
           <li>
-            Inability to eat or sleep for multiple consecutive days
+            Inability to eat or sleep for multiple consecutive days.
           </li>
           <li>
-            Feeling genuinely unsafe rather than just uncomfortable
+            Feeling genuinely unsafe rather than just uncomfortable.
           </li>
         </ul>
         <p className="mt-4">
@@ -340,19 +342,19 @@ export default function VipassanaWithAdhdAnxietyPage() {
         </h3>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>
-            Your depression is mild to moderate and currently managed
+            Your depression is mild to moderate and currently managed.
           </li>
           <li>
             You have professional support (therapist, psychiatrist) who
-            knows you&apos;re attending
+            knows you&apos;re attending.
           </li>
           <li>
             You&apos;re stable on medication and not in the middle of a
-            dosage change
+            dosage change.
           </li>
           <li>
             You understand that difficult emotions will arise and
-            you&apos;re prepared for that
+            you&apos;re prepared for that.
           </li>
         </ul>
 
@@ -361,17 +363,17 @@ export default function VipassanaWithAdhdAnxietyPage() {
         </h3>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>
-            You&apos;re experiencing suicidal ideation — the isolation
-            can amplify this dangerously
+            You&apos;re experiencing suicidal ideation; the isolation can
+            amplify this dangerously.
           </li>
           <li>
-            You&apos;re in a major depressive episode right now
+            You&apos;re in a major depressive episode right now.
           </li>
           <li>
-            You recently changed medications and aren&apos;t yet stable
+            You recently changed medications and aren&apos;t yet stable.
           </li>
           <li>
-            Your mental health professional advises against it
+            Your mental health professional advises against it.
           </li>
         </ul>
       </section>
@@ -388,27 +390,27 @@ export default function VipassanaWithAdhdAnxietyPage() {
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>
             You&apos;re in active crisis (suicidal thoughts, severe panic,
-            psychotic symptoms)
+            psychotic symptoms).
           </li>
           <li>
             You recently started or changed psychiatric medication (wait at
-            least 3-6 months to stabilize)
+            least 3 to 6 months to stabilize).
           </li>
           <li>
             You&apos;re using substances to cope and haven&apos;t
-            addressed the underlying dependency
+            addressed the underlying dependency.
           </li>
           <li>
             You&apos;ve been advised against intensive meditation by a
-            mental health professional
+            mental health professional.
           </li>
           <li>
             You&apos;re going through acute trauma (recent bereavement,
-            divorce, job loss) and haven&apos;t had time to process
+            divorce, job loss) and haven&apos;t had time to process.
           </li>
         </ul>
         <p className="mt-4">
-          Getting professional help isn&apos;t a detour — it&apos;s
+          Getting professional help isn&apos;t a detour; it is
           preparation.{" "}
           <Link
             href="/faq/vipassana-vs-therapy"
@@ -431,41 +433,41 @@ export default function VipassanaWithAdhdAnxietyPage() {
         </p>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>
-            <strong>Walk during breaks</strong> — use every break for
-            physical movement. Walking meditation is explicitly allowed and
-            helps burn off restless energy.
+            <strong>Walk during breaks.</strong> Many neurodivergent students
+            use every break for physical movement, which helps burn off
+            restless energy. Gentle walking in the designated areas is part
+            of the course structure.
           </li>
           <li>
-            <strong>Don&apos;t compare yourself</strong> — the person
-            sitting perfectly still next to you is also suffering. Everyone
+            <strong>Don&apos;t compare yourself.</strong> The person sitting
+            perfectly still next to you is also suffering. Everyone
             struggles differently. Focus on your own experience.
           </li>
           <li>
-            <strong>Use the cushion setup time</strong> — spend time
-            arranging your cushions and supports before each sitting. Physical
-            comfort reduces one variable your brain has to manage.
+            <strong>Set up carefully before each sit.</strong> Spend time
+            arranging your cushions and supports before each sitting.
+            Physical comfort reduces one variable your brain has to manage.
           </li>
           <li>
-            <strong>Reframe &quot;failure&quot;</strong> — noticing that
-            your mind has wandered IS the practice. Every time you catch
-            yourself and return to the breath or body scan, you&apos;ve
-            done a mental pushup. People with ADHD may do more of these
-            per session, which arguably means more reps.
+            <strong>Lower the idea of &quot;failure.&quot;</strong> What
+            counts as progress during a sit is part of the instruction
+            transmitted by the assistant teacher. Many ADHD students
+            describe surprising progress precisely because they were willing
+            to keep sitting.
           </li>
           <li>
-            <strong>Talk to the teacher early</strong> — don&apos;t wait
+            <strong>Talk to the teacher early.</strong> Don&apos;t wait
             until you&apos;re in crisis. On Day 1 or 2, mention your
             condition during the teacher interview. They can offer specific
             guidance and check in on you throughout the course.
           </li>
           <li>
-            <strong>Lower your expectations</strong> — you&apos;re not
-            trying to achieve a perfect meditation. You&apos;re learning to
-            observe your mind as it is, including the ADHD, the anxiety, the
-            depression. That observation itself is the work.
+            <strong>Lower your expectations.</strong> You are not trying to
+            achieve a perfect meditation. You are a beginner student in a
+            training that is taught over 10 days.
           </li>
           <li>
-            <strong>Use the structure</strong> — the rigid schedule is your
+            <strong>Use the structure.</strong> The rigid schedule is your
             friend. It eliminates decision fatigue and provides the external
             scaffolding that neurodivergent brains often need.
           </li>
@@ -479,17 +481,16 @@ export default function VipassanaWithAdhdAnxietyPage() {
         <p>
           I&apos;ve sat with anxiety. I&apos;ve sat with depression. I&apos;ve
           sat with a mind that wouldn&apos;t stop racing. The hardest part
-          isn&apos;t the meditation — it&apos;s the self-judgment that comes
-          with feeling like your brain is &quot;broken&quot; while everyone
-          else seems serene.
+          isn&apos;t the meditation itself; it is the self-judgment that
+          comes with feeling like your brain is &quot;broken&quot; while
+          everyone else seems serene.
         </p>
         <p>
           Here&apos;s what I&apos;ve learned: the practice doesn&apos;t
           require a calm mind. It requires a willing one. You don&apos;t need
           to be neurotypical to benefit from Vipassana. You need to be honest
-          with yourself, honest on the application, and willing to observe
-          whatever arises — including the restlessness, the anxiety, and the
-          difficult thoughts — with equanimity.
+          with yourself and honest on the application, and to show up at the
+          course willing to do the training as it is given.
         </p>
         <p>
           That said, I also believe in the value of professional support.
