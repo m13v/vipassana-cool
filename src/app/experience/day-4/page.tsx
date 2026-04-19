@@ -2,67 +2,68 @@ import type { Metadata } from "next";
 import { DayPage } from "@/components/day-page";
 
 export const metadata: Metadata = {
-  title: "Vipassana Day 4 — The Technique Changes Everything",
+  title: "Vipassana Day 4 — The Pivot Point of the Course",
   description:
-    "Day 4 is when Vipassana begins. The technique shifts from Anapana to body scanning, and something genuinely shifts. What the transition feels like and why it matters.",
+    "Day 4 is the pivot of a 10-day Vipassana course. A descriptive account of what commonly happens on day 4 and why many students remember it as a turning point.",
   alternates: { canonical: "https://vipassana.cool/experience/day-4" },
 };
 
 export default function Day4Page() {
   return (
-    <DayPage day={4} title="The Technique Changes Everything">
+    <DayPage day={4} title="The Pivot Point of the Course">
       <p>
-        Day 4 is the pivot point of the entire course. After three and a half days of Anapana — sharpening your attention by observing the breath — you finally learn the actual Vipassana technique. And it changes everything.
+        Day 4 is the day the course changes shape. For three and a half days, students have been working with a narrower attention practice as preparation. On day 4, the main technique (Vipassana body awareness) is formally introduced during one of the longer group sittings. The course pivots here, and most people remember day 4 as the moment the whole thing started to make sense.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">From Breath to Body</h2>
+      <h2 className="text-xl font-bold text-foreground">What Day 4 Looks Like on the Schedule</h2>
       <p>
-        The instruction shifts: instead of observing the small area below your nostrils, you begin scanning your entire body, part by part, from head to feet and back again. Start at the top of the head. Move to the forehead. Eyes. Cheeks. Lips. Chin. Neck. Shoulders. Each arm. The torso, front and back. Abdomen. Hips. Each leg, down to the toes. Then back up.
+        The day starts at 4:00 AM like the others. Wake-up gong, meditation hall, breakfast, back to the hall. By mid-morning, the schedule builds toward a long group sitting in which the teacher introduces the Vipassana technique itself. The formal transmission happens in that course sitting, guided by the recorded audio and the assistant teacher. This page does not reproduce the instruction; it exists at the course for a reason.
       </p>
       <p>
-        The task is to observe sensations — any sensations — in each area as you move through it. Heat, cold, tingling, pressure, pain, itching, pulsing, heaviness, lightness. And to observe them with equanimity: without craving pleasant sensations or developing aversion to unpleasant ones.
-      </p>
-
-      <h2 className="text-xl font-bold text-foreground">Adhitthana: Strong Determination</h2>
-      <p>
-        Day 4 also introduces &quot;adhitthana&quot; — sittings of strong determination. Three times a day (morning, afternoon, and evening), you commit to sitting for the full hour without opening your eyes, moving your hands, or uncrossing your legs. No adjustment, no shifting, no stretching.
-      </p>
-      <p>
-        This sounds masochistic. It isn&apos;t — or at least, that&apos;s not the point. The purpose is to give you a laboratory for equanimity. When your knee is screaming and you choose to observe the sensation instead of reacting, you&apos;re training a fundamental skill: the ability to experience discomfort without automatically reacting.
-      </p>
-      <p>
-        This is the skill that transfers to daily life. Not sitting still for an hour — but the capacity to meet difficulty without immediately reacting.
+        After the transmission, the rest of day 4 is given over to integrating the new practice. Sittings feel longer because the task has changed. Most people describe a kind of quiet amazement: something that had only been described is now being done.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">The First Body Scan</h2>
+      <h2 className="text-xl font-bold text-foreground">Adhitthana Begins</h2>
       <p>
-        I remember my first real body scan clearly. Moving attention from head to feet, I was amazed at what I could feel. The top of my head was tingling. My left shoulder had a deep, heavy ache. My stomach was warm. My right shin had a strange buzzing sensation I&apos;d never noticed in my entire life.
-      </p>
-      <p>
-        For the first time, I understood what Goenka meant by &quot;the reality of the present moment as it manifests in the body.&quot; We live our entire lives in our heads — in thoughts, plans, memories, fantasies. The body is just a vehicle we ignore. Vipassana turns the lights on.
+        Day 4 also introduces adhitthana, sittings of strong determination, as a feature of the schedule. Three of the daily group sittings are designated as adhitthana. What that means in practice, and how to work with it, is explained by the assistant teacher and the recordings, not here. As a scheduling fact: from day 4 onward, three hours a day are marked on the timetable with this word.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">Blind Spots</h2>
+      <h2 className="text-xl font-bold text-foreground">What I Remember About Day 4</h2>
       <p>
-        Some areas of the body will be &quot;blank&quot; — you move your attention there and feel nothing. This is normal. These are areas where your awareness hasn&apos;t yet developed. The instruction is to stay in that area for a minute, observe whatever is there (even if it feels like nothing), and move on. With practice, these blind spots fill in.
+        Day 4 is the day I stopped wanting to leave. The first three days had been the steepest part of the learning curve, physically and mentally. On day 4 something clicked. I remember walking back to my room after the afternoon sitting and thinking, for the first time, that I understood why people came back to these courses year after year.
       </p>
       <p>
-        Don&apos;t get frustrated by blank areas and don&apos;t get excited by areas with strong sensations. Both reactions are traps. Equanimity means treating every part of the body, every sensation (or lack of sensation), with the same balanced attention.
-      </p>
-
-      <h2 className="text-xl font-bold text-foreground">Evening Discourse</h2>
-      <p>
-        Day 4&apos;s discourse is one of the most important. Goenka explains the theoretical framework behind the technique: how sensations arise and pass away, how our reactions to sensations create mental patterns (sankhara), and how observing without reacting begins to break these patterns. He introduces the concept of anicca — impermanence — which becomes the central theme of the remaining days.
+        I have heard many other students describe day 4 in similar terms: not dramatic, not ecstatic, just a quiet recognition that the work was starting to do something. The body felt more present. The mind felt less frantic. The schedule that had seemed absurd on day 2 suddenly seemed appropriate.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">Tips for Day 4</h2>
+      <h2 className="text-xl font-bold text-foreground">The Evening Discourse</h2>
+      <p>
+        Day 4&apos;s recorded discourse by S.N. Goenka is one of the longer and more foundational ones. It lays out the framework the course has been pointing at since day 1: how sensations arise and pass, how mental patterns (sankhara) form, and what anicca (impermanence) means at an experiential level. The discourse is where the theoretical shape of the tradition comes into view.
+      </p>
+
+      <h2 className="text-xl font-bold text-foreground">Common Experiences on Day 4</h2>
+      <p>
+        From talking to other students and reading course write-ups, a few experiences come up often:
+      </p>
       <ul className="list-disc space-y-2 pl-6">
-        <li>The technique change brings new energy. Lean into it.</li>
-        <li>During strong determination sittings, focus on observing the pain rather than enduring it. There&apos;s a subtle but important difference.</li>
-        <li>Don&apos;t try to create sensations. Observe what&apos;s already there.</li>
-        <li>Move through the body systematically — don&apos;t skip areas even if they feel blank.</li>
-        <li>This is the day many people go from &quot;this is terrible&quot; to &quot;something is actually happening here.&quot;</li>
+        <li>A sense of renewed energy after three days of difficulty.</li>
+        <li>Surprise at how much the body actually contains, once attention is pointed at it carefully.</li>
+        <li>A shift from &quot;this is terrible and pointless&quot; to &quot;something is happening here.&quot;</li>
+        <li>Longer sittings that feel shorter than the early-week ones.</li>
+        <li>More respect for the schedule, including the adhitthana sittings.</li>
       </ul>
+      <p>
+        None of this is guaranteed. Some students find day 4 quiet, some find it frustrating, some find it the first day they genuinely enjoy. The arc of the course is not the same for everyone, and the teachers are clear that comparisons between students are not useful.
+      </p>
+
+      <h2 className="text-xl font-bold text-foreground">Where to Go Next</h2>
+      <p>
+        If you have not yet done a 10-day course, day 4 is not something to prepare for in advance. It is something that unfolds inside the structure of the retreat, with the guidance of the assistant teacher and the recorded audio. Our{" "}
+        <a href="/guide/find-a-retreat" className="text-accent hover:text-foreground">guide to finding a retreat</a>
+        {" "}and our{" "}
+        <a href="/prepare" className="text-accent hover:text-foreground">preparation page</a>
+        {" "}cover the practical side: how to apply, what to bring, what the first day looks like when you arrive.
+      </p>
     </DayPage>
   );
 }
