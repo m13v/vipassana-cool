@@ -19,7 +19,7 @@ export default function WhatToExpectPage() {
         {
           question: "What happens at a 10-day Vipassana course?",
           answer:
-            "You arrive the evening before (Day 0), learn two meditation techniques over 10 days (Anapana for concentration, then Vipassana body scanning), meditate approximately 10 hours per day in noble silence, attend evening discourses by S.N. Goenka, and leave the morning of Day 11. The course progresses from breath observation to full-body scanning to equanimity practice.",
+            "You arrive the evening before (Day 0), learn the technique in stages from an authorized assistant teacher over 10 days, meditate approximately 10 hours per day in noble silence, attend evening discourses by S.N. Goenka, and leave the morning of Day 11. The first three days are Anapana (a preparatory practice), Vipassana proper is introduced on Day 4, and Day 10 introduces metta (loving-kindness).",
         },
         {
           question: "What is the daily schedule at a Vipassana course?",
@@ -29,7 +29,7 @@ export default function WhatToExpectPage() {
         {
           question: "What does the emotional arc of a Vipassana course feel like?",
           answer:
-            "Days 1-3 are typically the hardest — physical pain, mental restlessness, and strong urges to leave. Day 4 introduces the full Vipassana technique and often brings renewed energy. Days 5-7 involve deepening practice with ups and downs. Days 8-9 can bring profound stillness or intense purification. Day 10 breaks the silence and introduces metta (loving-kindness).",
+            "Days 1 to 3 are typically the hardest: physical pain, mental restlessness, and strong urges to leave. Day 4 introduces Vipassana proper and often brings renewed energy. Days 5 to 7 involve deepening with ups and downs. Days 8 and 9 can bring profound stillness or intense purification. Day 10 breaks the silence and introduces metta (loving-kindness).",
         },
       ]}
       relatedLinks={[
@@ -43,7 +43,7 @@ export default function WhatToExpectPage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          You arrive the evening before (Day 0), hand over your phone, and begin Noble Silence. Wake up at 4:00 AM daily, meditate approximately 10 hours in sessions of 1-2 hours, with breaks for meals. Days 1-3: learn Anapana (breath observation) — the hardest period. Day 4: learn Vipassana body scanning — everything shifts. Days 5-9: deepen practice with "strong determination" sittings (one hour without moving). Day 10: silence lifts, learn metta (loving-kindness). Vegetarian food only, no dinner (fruit and tea at 5 PM for new students). Evening discourses by S.N. Goenka address exactly what you are experiencing each day.
+          You arrive the evening before (Day 0), hand over your phone, and begin Noble Silence. Wake up at 4:00 AM daily, meditate approximately 10 hours in sessions of 1-2 hours, with breaks for meals. Days 1 to 3 introduce Anapana (the preparatory practice). Day 4 introduces Vipassana proper. Days 5 to 9 deepen the work with "strong determination" sittings (one hour without moving). Day 10 lifts silence and introduces metta (loving-kindness). Vegetarian food only, no dinner (fruit and tea at 5 PM for new students). Evening discourses by S.N. Goenka address exactly what students commonly experience on that day.
         </p>
       </div>
 
