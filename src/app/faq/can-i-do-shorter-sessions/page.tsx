@@ -3,9 +3,9 @@ import { FaqDetailPage } from "@/components/faq-detail-page";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Do Shorter Vipassana Sessions Still Work? — 20, 30, 60 Minutes Compared",
+  title: "Do Shorter Vipassana Sessions Still Work? 20, 30, 60 Minutes Compared",
   description:
-    "Do you need to meditate for a full hour? Comparing 20, 30, and 60-minute Vipassana sessions, what Goenka recommends vs. reality, and minimum effective dose.",
+    "Do you need to meditate for a full hour? A look at common session lengths, what Goenka recommends, and the reality of daily practice around work and life.",
   alternates: { canonical: "https://vipassana.cool/faq/can-i-do-shorter-sessions" },
 };
 
@@ -19,17 +19,17 @@ export default function ShorterSessionsPage() {
         {
           question: "Do I need to meditate for a full hour with Vipassana?",
           answer:
-            "The official recommendation is one hour morning and one hour evening. In practice, many meditators sit for shorter durations — especially when starting or restarting. A consistent 20-30 minute daily practice is more valuable than an inconsistent hour. The key is sitting every day.",
+            "The official recommendation is one hour in the morning and one hour in the evening. In practice, many meditators sit for shorter durations, especially when restarting after a break. A consistent shorter daily sit is often more sustainable than an inconsistent full hour. The internal instructions come from the assistant teacher at the course.",
         },
         {
           question: "Is 20 minutes of Vipassana meditation enough?",
           answer:
-            "Twenty minutes is enough to do a basic body scan and maintain the habit. It won't produce the same depth as a full hour, but it's far better than skipping entirely. Many experienced meditators use 20-minute sessions when time is tight.",
+            "Twenty minutes keeps the daily habit alive. It will not replicate the depth of a full hour, but it is far better than skipping. Many practitioners use shorter sessions when time is tight and reserve longer sits for mornings, weekends, or retreats.",
         },
         {
-          question: "What is the minimum effective dose for Vipassana meditation?",
+          question: "What is a realistic daily practice duration?",
           answer:
-            "There's no official minimum, but most practitioners find that 20 minutes is the threshold where a meaningful body scan becomes possible. Below that, you're mostly doing concentration practice (Anapana) rather than a full Vipassana scan.",
+            "There is no official minimum. What counts as a complete sit, and how it is structured, is part of the instruction given by the assistant teacher at the 10-day course. On this site the duration question is discussed only at the level of logistics and consistency.",
         },
       ]}
       relatedLinks={[
@@ -42,7 +42,7 @@ export default function ShorterSessionsPage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          The official recommendation is one hour morning and one hour evening (2 hours daily). In practice, a consistent 20-30 minute daily sit is more valuable than an inconsistent hour. Twenty minutes is the minimum threshold for a meaningful body scan — below that, you are mostly doing concentration practice. Start with whatever duration you can sustain every day and build up gradually. An hour gives you time to settle (5-10 min Anapana), do a thorough body scan (40-45 min), and close with metta. Consistency matters far more than duration.
+          The official recommendation is one hour in the morning and one hour in the evening (two hours daily). In practice, a consistent shorter daily sit is often more sustainable than an inconsistent full hour. Start with whatever duration you can sustain every day and build up gradually. What happens inside the sit, and how a sit is structured, is transmitted in person at the 10-day course by the assistant teacher; this page only addresses the logistics of duration and frequency. Consistency matters far more than duration.
         </p>
       </div>
 
