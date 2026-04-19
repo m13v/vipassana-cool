@@ -3,7 +3,7 @@ import { FaqDetailPage } from "@/components/faq-detail-page";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Is Vipassana Right for Me? — Self-Assessment Guide",
+  title: "Is Vipassana Right for Me? A Self-Assessment Guide",
   description:
     "Not sure if you should attend a Vipassana course? A practical self-assessment covering fitness, beliefs, time commitment, mental health, and common hesitations.",
   alternates: { canonical: "https://vipassana.cool/faq/is-vipassana-right-for-me" },
@@ -24,7 +24,7 @@ export default function IsVipassanaRightForMePage() {
         {
           question: "Do I need to be Buddhist to do Vipassana?",
           answer:
-            "No. Vipassana is a technique, not a religion. People of all faiths and no faith attend courses. You'll hear Pali terms and references to the Buddha's teachings, but the practice is purely experiential — observing sensations in your body.",
+            "No. Vipassana is a technique, not a religion. People of all faiths and no faith attend courses. You'll hear Pali terms and references to the Buddha's teachings, but the technique itself is taught as a practical training; the course is the place where it is transmitted by an authorized assistant teacher.",
         },
         {
           question: "Am I too old or unfit for Vipassana?",
@@ -43,7 +43,7 @@ export default function IsVipassanaRightForMePage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          If you can commit 10 full days, follow basic instructions, and sit for extended periods, Vipassana is likely right for you. No prior meditation experience, specific beliefs, or exceptional fitness required. Centers provide chairs and back supports. People of all ages, religions, and physical conditions attend. Wait if you have severe untreated psychiatric conditions, are in active suicidal crisis, have recent unprocessed trauma, or cannot commit to the full 10 days. The course is designed for complete beginners — most hesitations come from overthinking, not genuine unsuitability.
+          If you can commit 10 full days, follow basic instructions, and sit for extended periods, Vipassana is likely right for you. No prior meditation experience, specific beliefs, or exceptional fitness required. Centers provide chairs and back supports. People of all ages, religions, and physical conditions attend. Wait if you have severe untreated psychiatric conditions, are in active suicidal crisis, have recent unprocessed trauma, or cannot commit to the full 10 days. The course is designed for complete beginners; most hesitations come from overthinking, not genuine unsuitability.
         </p>
       </div>
 
@@ -60,11 +60,11 @@ export default function IsVipassanaRightForMePage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">You&apos;re Probably Ready If...</h2>
         <ul className="mt-3 list-disc space-y-2 pl-6">
-          <li><strong>You can commit 10 full days.</strong> Not 8, not &quot;most of it.&quot; The technique unfolds in stages — leaving early means you&apos;ve done the hard part without getting the benefit.</li>
-          <li><strong>You can follow instructions.</strong> The course asks you to practice one specific technique. If you can set aside your own preferences for 10 days and do what&apos;s asked, you&apos;ll do fine.</li>
+          <li><strong>You can commit 10 full days.</strong> Not 8, not &quot;most of it.&quot; The course is structured in stages; leaving early means you have done the hard part without receiving the rest.</li>
+          <li><strong>You can follow instructions.</strong> The course asks you to practice one specific technique, which is transmitted by the assistant teacher. If you can set aside your own preferences for 10 days and do what&apos;s asked, you&apos;ll do fine.</li>
           <li><strong>You&apos;re genuinely curious.</strong> Not pressured by a partner, not going to prove something, not looking for a quick fix. Genuine curiosity about your own mind is the best motivation.</li>
-          <li><strong>You can handle discomfort.</strong> Not extreme discomfort — just the ordinary kind. Sitting still, waking early, eating simple food, being alone with your thoughts. If you can tolerate boredom and mild physical pain, you have what it takes.</li>
-          <li><strong>You have no active psychiatric crisis.</strong> If you&apos;re currently stable — even if you have a history of anxiety, depression, or other conditions — you&apos;re likely fine. More on this below.</li>
+          <li><strong>You can handle discomfort.</strong> Not extreme discomfort, just the ordinary kind. Sitting still, waking early, eating simple food, being alone with your thoughts. If you can tolerate boredom and mild physical pain, you have what it takes.</li>
+          <li><strong>You have no active psychiatric crisis.</strong> If you&apos;re currently stable, even with a history of anxiety, depression, or other conditions, you&apos;re likely fine. More on this below.</li>
         </ul>
       </section>
 
