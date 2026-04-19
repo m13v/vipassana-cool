@@ -461,8 +461,8 @@ export default function Page() {
         <p className="mb-4 text-muted">
           I have sat six 10-day courses at three different centers. I have watched three students
           across those courses leave early under circumstances that looked like the prodromal
-          window above. In two of those three, the course manager caught it, they were moved to
-          Anapana, and they finished. In one, they left on Day 5 and the center called a taxi. I
+          window above. In two of those three, the course manager caught it, their practice was
+          scaled back, and they finished. In one, they left on Day 5 and the center called a taxi. I
           do not know what happened after. The structure handled the cases it could handle and
           handed off the one it could not.
         </p>
