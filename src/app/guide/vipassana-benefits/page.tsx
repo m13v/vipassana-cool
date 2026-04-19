@@ -22,7 +22,7 @@ const faqs = [
   {
     question: "Is Vipassana better than mindfulness meditation?",
     answer:
-      "Vipassana and modern mindfulness share roots, but they differ significantly in depth and approach. Mindfulness apps typically offer guided, short sessions focused on relaxation. Vipassana is a systematic, self-guided technique involving full-body sensation scanning, taught through intensive 10-day silent retreats. Vipassana goes deeper into the root causes of suffering by training equanimity toward all sensations. Many mindfulness practitioners find that Vipassana provides the rigorous foundation that casual mindfulness practice lacks.",
+      "Vipassana and modern mindfulness share roots, but they differ significantly in depth and approach. Mindfulness apps typically offer guided, short sessions focused on relaxation. Vipassana is a systematic, self-guided technique taught through intensive 10-day silent retreats. It goes deeper into the root causes of suffering by training equanimity at a fundamental level. Many mindfulness practitioners find that Vipassana provides the rigorous foundation that casual mindfulness practice lacks.",
   },
   {
     question: "Can Vipassana help with anxiety and depression?",
@@ -165,7 +165,7 @@ export default function VipassanaBenefitsPage() {
             This benefit surprised me the most. It was so mind-blowing how much time I could save and how efficient I could become after learning meditation. I expected spiritual benefits, emotional benefits maybe. I did not expect to become measurably more productive.
           </p>
           <p className="mt-3">
-            The mechanism is straightforward once you understand it. Most &ldquo;productivity loss&rdquo; isn&apos;t about lacking time &mdash; it&apos;s about lacking focus. Your mind wanders to worries, social media, random thoughts, emotional loops. Studies suggest the average person&apos;s mind wanders 47% of waking hours. Vipassana trains sustained, single-pointed attention. During the course, you spend three full days just watching your breath at the tip of your nostrils &mdash; and even that simple exercise reveals how little control you have over your own attention.
+            The mechanism is straightforward once you understand it. Most &ldquo;productivity loss&rdquo; isn&apos;t about lacking time, it&apos;s about lacking focus. Your mind wanders to worries, social media, random thoughts, emotional loops. Studies suggest the average person&apos;s mind wanders 47% of waking hours. Vipassana trains sustained, single-pointed attention. The early days of the course are an extended exercise in exactly this, and they reveal how little control most of us have over our own attention.
           </p>
           <p className="mt-3">
             After training that focus muscle for 100+ hours over 10 days, the carry-over into daily work is substantial. I found I could sit down to code or write and maintain deep focus for 2-3 hours straight &mdash; something that was nearly impossible before, when I&apos;d check my phone every 15 minutes. The quality of my work improved because I wasn&apos;t constantly context-switching between the task and my anxious thoughts.
@@ -209,7 +209,7 @@ export default function VipassanaBenefitsPage() {
 
           <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">Sleep Quality</h3>
           <p>
-            One of the most immediate and noticeable benefits. Before Vipassana, I&apos;d lie in bed with my mind racing &mdash; replaying the day, planning tomorrow, worrying about problems. After learning the technique, I could apply Anapana (breath observation) or body scanning as I lay down, and my mind would settle within minutes.
+            One of the most immediate and noticeable benefits. Before Vipassana, I&apos;d lie in bed with my mind racing, replaying the day, planning tomorrow, worrying about problems. After learning the technique, I could apply what I&apos;d learned as I lay down, and my mind would settle within minutes.
           </p>
           <p className="mt-3">
             Clinical research on meditation and sleep has found that mindfulness practices significantly improve sleep quality &mdash; in some studies performing comparably to cognitive behavioral therapy for insomnia, which is considered the gold standard treatment.
