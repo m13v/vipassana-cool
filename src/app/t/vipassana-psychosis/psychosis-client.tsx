@@ -166,7 +166,7 @@ export function LoadStack() {
       label: "Load 1",
       title: "Technique change",
       detail:
-        "Three and a half days of breath observation (Anapana) end. The full body scan begins. Attention moves part by part across the whole body, tracking fine sensation. New instruction, new object, new cognitive register, all on the same morning.",
+        "The preparatory, concentration-building phase ends. The main Vipassana technique is introduced. New instruction, new object of attention, new cognitive register, all on the same morning.",
     },
     {
       label: "Load 2",
@@ -480,7 +480,7 @@ export function ActionFlow() {
     },
     {
       t: "Before the next sitting",
-      b: "Ask to switch to Anapana only for the next session. Breath observation is stabilizing. The full body scan, especially with Adhitthana immobility, is the activating piece.",
+      b: "Ask the course manager or assistant teacher what to adjust before the next session. They have a protocol for this, and the scaled-back version is stabilizing rather than activating.",
     },
     {
       t: "Same day, evening interview",
@@ -591,7 +591,7 @@ export function CaseReportCard() {
       </div>
       <p className="mt-5 text-xs text-muted">
         PMC8380174. The structural takeaway for this page: the onset window was not the beginning
-        of the retreat. It was after the body scan phase had been running for days. That matches
+        of the retreat. It was after the intensive phase had been running for days. That matches
         the Day 4 through Day 6 cluster in the 10-day format.
       </p>
     </div>
