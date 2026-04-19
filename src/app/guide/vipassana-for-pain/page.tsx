@@ -184,18 +184,17 @@ export default function VipassanaForPainPage() {
           </p>
           <p className="mt-3">
             You sit for 10+ hours a day. Your knees, back, hips, and neck will
-            protest. During Adhitthana (strong determination) sittings — three
-            one-hour sessions per day where you commit to not moving — the
+            protest. During Adhitthana (strong determination) sittings (three
+            one-hour sessions per day where you commit to not moving), the
             discomfort can become intense.
           </p>
           <p className="mt-3">
-            This is not punishment. It&apos;s the training ground. The pain you
-            experience during sitting becomes your teacher. Every time you
-            observe knee pain with equanimity instead of shifting your position,
-            you&apos;re building the exact skill that helps with chronic pain
-            management. You&apos;re learning, at the deepest experiential level,
-            that pain is impermanent and that you can be present with it without
-            being destroyed by it.
+            This is not punishment. It is the training ground. The pain
+            encountered during sitting, and the relationship students develop
+            with it inside the course format, is where the capacity that helps
+            with chronic pain gets built. Many students describe learning, at a
+            deep experiential level, that pain is impermanent and that one can
+            be present with it without being destroyed by it.
           </p>
         </section>
 
@@ -206,53 +205,52 @@ export default function VipassanaForPainPage() {
           <div className="mt-4 space-y-6">
             <div className="border-l-2 border-accent/30 pl-4">
               <h3 className="mb-1 font-semibold text-foreground">
-                You learn that pain changes
+                Pain is not a solid block
               </h3>
               <p>
-                When you stay with the pain and observe it carefully, you notice
-                it&apos;s not a solid block. It moves, shifts, pulsates,
-                changes in intensity. Sometimes it dissolves entirely for a
-                moment before returning. This direct experience of
-                impermanence changes your relationship with chronic pain — you
-                know, from experience, that the intensity fluctuates.
+                Practitioners commonly report that pain moves, shifts,
+                pulsates, and changes in intensity; sometimes it dissolves
+                entirely for a moment before returning. This direct experience
+                of impermanence reshapes the relationship with chronic pain:
+                one knows, from experience, that the intensity fluctuates.
               </p>
             </div>
 
             <div className="border-l-2 border-accent/30 pl-4">
               <h3 className="mb-1 font-semibold text-foreground">
-                You separate pain from panic
+                Pain and panic become separable
               </h3>
               <p>
-                Much of chronic pain suffering comes from the fear response: the
-                pain signals danger, which triggers anxiety, which creates
-                tension, which increases pain. By observing pain calmly, you
-                break this amplification cycle. The pain remains, but the panic
-                subsides.
+                Much of chronic pain suffering comes from the fear response:
+                the pain signals danger, which triggers anxiety, which creates
+                tension, which increases pain. A steadier nervous system tends
+                to break this amplification cycle. The pain remains, but the
+                panic subsides.
               </p>
             </div>
 
             <div className="border-l-2 border-accent/30 pl-4">
               <h3 className="mb-1 font-semibold text-foreground">
-                You build tolerance
+                Tolerance grows
               </h3>
               <p>
                 Not tolerance in the sense of gritting your teeth, but genuine
-                equanimity — the ability to be present with discomfort without
-                it dominating your experience. This tolerance transfers directly
-                to daily life with chronic pain.
+                equanimity: the capacity to be present with discomfort without
+                it dominating experience. Many practitioners find this
+                capacity transfers into daily life with chronic pain.
               </p>
             </div>
 
             <div className="border-l-2 border-accent/30 pl-4">
               <h3 className="mb-1 font-semibold text-foreground">
-                You discover agency
+                A sense of agency
               </h3>
               <p>
-                Chronic pain often creates a sense of helplessness. The
-                experience of sitting with intense sitting pain and choosing
-                your response to it — observing rather than reacting — restores
-                a sense of agency. You may not be able to control the pain, but
-                you can control your relationship to it.
+                Chronic pain often creates a sense of helplessness. The lived
+                experience of being present with intense sitting pain, inside
+                the course format, tends to restore a sense of agency. One may
+                not be able to control the pain, but one can shape the
+                relationship to it.
               </p>
             </div>
           </div>
@@ -297,7 +295,7 @@ export default function VipassanaForPainPage() {
                 meditation persist after a program ends, pain measures
                 themselves can return toward pre-treatment levels during
                 follow-up. This underscores the importance of ongoing daily
-                practice — the benefits require maintenance.
+                practice; the benefits require maintenance.
               </p>
             </div>
 
