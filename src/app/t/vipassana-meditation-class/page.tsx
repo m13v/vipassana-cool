@@ -61,7 +61,7 @@ const faqs = [
   {
     question: "Why is the first-time experience gated on a 10-day course?",
     answer:
-      "The stated reason, which is repeated on dhamma.org and in Goenka's own discourses, is that the technique cannot be learned correctly in fragments. Anapana (breath awareness) is taught on the first three days; Vipassana proper (body scanning with equanimity toward sensations) is taught from day four. Without the scaffolding of silence, the fixed schedule, and an on-site assistant teacher who answers questions privately, the tradition holds that partial instruction does more harm than good. Practically speaking: the technique ships as one 10-day block because the tradition does not believe the subset has been observed to work on its own.",
+      "The stated reason, which is repeated on dhamma.org and in Goenka's own discourses, is that the technique cannot be learned correctly in fragments. The course is structured as one integrated arc, with an early phase building concentration before the main practice is introduced. Without the scaffolding of silence, the fixed schedule, and an on-site assistant teacher who answers questions privately, the tradition holds that partial instruction does more harm than good. Practically speaking: the technique ships as one 10-day block because the tradition does not believe the subset has been observed to work on its own.",
   },
   {
     question: "What about 'online Vipassana courses' that advertise themselves as classes?",
