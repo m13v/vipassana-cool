@@ -148,9 +148,9 @@ export default function VipassanaAndSleepPage() {
               bedtime.
             </li>
             <li>
-              <strong>Body relaxation.</strong> Many practitioners notice
-              their jaw unclenching, shoulders dropping, and muscles softening
-              during practice.
+              <strong>Body relaxation.</strong> Many practitioners notice their
+              jaw unclenching, shoulders dropping, and muscles softening over
+              the course of a daily practice.
             </li>
             <li>
               <strong>Equanimity toward sleep anxiety.</strong> If you&apos;ve
@@ -273,62 +273,25 @@ export default function VipassanaAndSleepPage() {
           <h2 className="mb-3 text-xl font-bold text-foreground">
             How can Vipassana practice improve your sleep?
           </h2>
+          <p>
+            The specifics of how the practice is carried out are taught at the
+            10-day course by the assistant teacher, and any questions about
+            how to apply it in particular situations are best directed there.
+            At the level of outcomes, practitioners who maintain a consistent
+            daily sit generally report two compounding effects on sleep.
+          </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
-              <strong>Evening practice</strong> — An evening meditation session,
-              even 20-30 minutes, helps the mind transition from the activity of
-              the day to rest. Finish at least 30 minutes before bed to allow
-              the alertness that meditation can produce to settle.
+              <strong>Less accumulated reactivity.</strong> A steadier nervous
+              system during the day tends to mean less mental chatter at
+              bedtime.
             </li>
             <li>
-              <strong>Body scan in bed</strong> — If you&apos;re having trouble
-              falling asleep, do a gentle body scan while lying down. This
-              isn&apos;t a formal Vipassana sit — it&apos;s using the skill of
-              systematic body awareness to relax. Move attention slowly from
-              head to feet.
-            </li>
-            <li>
-              <strong>Don&apos;t force it</strong> — Vipassana teaches equanimity.
-              Apply this to sleep itself. If sleep isn&apos;t coming, observe
-              the sensations of being awake without frustration. Resisting
-              wakefulness creates more tension, which keeps you awake longer.
-            </li>
-            <li>
-              <strong>Morning practice helps evening sleep</strong> — A strong
-              morning sit sets the tone for the day. Less accumulated stress and
-              reactivity during the day means less mental chatter at bedtime.
-            </li>
-            <li>
-              <strong>Be patient</strong> — Sleep improvements from meditation
-              are cumulative. They build over weeks and months of consistent
-              practice, not overnight (no pun intended).
+              <strong>Patience with the process.</strong> Sleep improvements
+              from meditation are cumulative. They build over weeks and months
+              of consistent practice.
             </li>
           </ul>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">
-            Should you meditate right before bed?
-          </h2>
-          <p>
-            This is a common question with a nuanced answer. Some people find
-            that meditating immediately before bed helps them sleep. Others find
-            it makes them more alert. The practice can have an energizing effect,
-            especially if concentration deepens during the sit.
-          </p>
-          <p className="mt-3">
-            The general recommendation is to finish your evening meditation
-            30-60 minutes before you intend to sleep. This gives your mind time
-            to transition. But experiment — if bedtime meditation works for you,
-            there&apos;s nothing wrong with it. The goal is restful sleep, not
-            adherence to a rule.
-          </p>
-          <p className="mt-3">
-            One approach that works well: do your formal evening sit earlier in
-            the evening, then use a brief, gentle body scan (5-10 minutes) as
-            part of your bedtime routine. The formal sit maintains the practice;
-            the bedtime scan aids sleep.
-          </p>
         </section>
 
         <section>
@@ -338,14 +301,14 @@ export default function VipassanaAndSleepPage() {
           <p>
             Sleep is one of those areas where the benefits of Vipassana show up
             tangibly and relatively quickly. You don&apos;t need to take anyone&apos;s
-            word for it — within a few weeks of consistent daily practice, most
+            word for it; within a few weeks of consistent daily practice, most
             people notice a difference in how they sleep.
           </p>
           <p className="mt-3">
             This isn&apos;t the primary purpose of the practice, of course.
             Vipassana is about developing wisdom and equanimity, not about
             optimizing your sleep score. But better sleep is a welcome
-            side effect — and for people who have struggled with insomnia or
+            side effect, and for people who have struggled with insomnia or
             poor sleep quality, it can be life-changing.
           </p>
           <p className="mt-3">
