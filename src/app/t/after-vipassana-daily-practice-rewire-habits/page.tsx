@@ -117,16 +117,16 @@ export default function Page() {
         <section id="repetition">
           <h2 className="mb-3 text-2xl font-bold text-foreground">3. Why daily repetition is the real tool</h2>
           <p className="mb-4">
-            The technique itself is simple. You observe sensations in the body with equanimity. You do not push, you do not cling. You keep coming back when the mind wanders. That is it.
+            The technique was transmitted at the course. This page is about what happens to daily life around it, not about the technique itself.
           </p>
           <p className="mb-4">
-            What makes it work is not the depth of any single sit. It is the repetition. Every morning that you sit through a wave of restlessness without acting on it, you are teaching the nervous system a specific thing: the wave can be observed and it will pass. The more times you repeat that, the more the nervous system starts to treat urges in daily life the same way.
+            What makes daily practice work is not the depth of any single sit. It is the repetition. Every morning the practitioner shows up, the nervous system is getting another installation of whatever habit the training is shaping. The more times that is repeated, the more the shift carries into daily life.
           </p>
           <p className="mb-4">
-            This is why a 20 minute sit you actually do every day is worth more than a 90 minute sit you do twice a week. The lesson the brain is learning is not "how to meditate deeply." It is "the default response to an unpleasant sensation is to watch it, not to act." That lesson only installs through reps.
+            This is why a 20 minute sit done every day is worth more than a 90 minute sit done twice a week. The underlying lesson installs through frequency of reps, not through any single deep session.
           </p>
           <p className="mb-4">
-            It helps to think of the daily sit as weight training, not as a spiritual experience. You do not need every sit to be profound. Most will be boring. Some will feel pointless. A few will feel restless or even uncomfortable. All of them count. If you watch the breath, scan the body, and stay equanimous for 30 minutes, you have done the rep, regardless of how it felt.
+            It helps to think of the daily sit as weight training, not as a spiritual experience. You do not need every sit to be profound. Most will be boring. Some will feel pointless. A few will feel restless or even uncomfortable. All of them count. If you completed a 30-minute daily sit, you did the rep, regardless of how it felt.
           </p>
           <p>
             Goenka puts it bluntly in the discourses: the work is done when you come out of the meditation. The sit is the training ground. The rest of the day is the test.
