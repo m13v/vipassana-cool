@@ -6,7 +6,7 @@ import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
 
 export const metadata: Metadata = {
-  title: "Vipassana for Chronic Pain — Meditation and Pain Management",
+  title: "Vipassana for Chronic Pain: Meditation and Pain Management",
   description:
     "How Vipassana meditation helps with chronic pain management. Research showing 40% pain reduction, brain mechanisms, and practical tips for attending a course with pain.",
   alternates: { canonical: "https://vipassana.cool/guide/vipassana-for-pain" },
@@ -36,14 +36,14 @@ export default function VipassanaForPainPage() {
         ]}
         category="Guide"
         title="Vipassana and Chronic Pain"
-        description="How observing pain with equanimity changes the experience of it. What the brain research shows, how the technique works with pain, and practical guidance for attending a course with a chronic pain condition."
+        description="How meeting pain with equanimity changes the experience of it. What the brain research shows, and practical guidance for attending a course with a chronic pain condition."
         datePublished="2025-06-01"
       />
 
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          Vipassana does not eliminate pain — it changes your relationship with it. By observing pain sensations with equanimity instead of reacting with aversion, you reduce the secondary suffering (mental resistance) that amplifies the experience. Research shows mindfulness-based techniques can reduce pain intensity by up to 40% through different neural mechanisms than placebo. Centers accommodate chronic pain conditions with chairs, back supports, and modified schedules. The technique is particularly relevant for chronic pain because it works with pain directly rather than trying to distract from it.
+          Vipassana does not eliminate pain; it changes the relationship practitioners have with it. By meeting pain with equanimity instead of aversion, the secondary suffering (mental resistance) that amplifies the experience tends to lessen. Research shows mindfulness-based techniques can reduce pain intensity by up to 40% through different neural mechanisms than placebo. Centers accommodate chronic pain conditions with chairs, back supports, and modified schedules. The technique is taught at the 10-day course by an authorized assistant teacher; this page covers outcomes, research, and logistics, not the technique itself.
         </p>
       </div>
 
@@ -54,24 +54,24 @@ export default function VipassanaForPainPage() {
           </h2>
           <p>
             Vipassana does not try to eliminate pain. This is the first and most
-            important thing to understand. The technique works by changing your
-            relationship to pain — how you perceive it, react to it, and suffer
-            because of it.
+            important thing to understand. The technique works by changing the
+            practitioner&apos;s relationship to pain: how it is perceived,
+            reacted to, and suffered from.
           </p>
           <p className="mt-3">
-            In Vipassana, you systematically scan the body, observing whatever
-            sensations are present — pleasant, unpleasant, or neutral — with
-            equanimity. When you encounter pain, the instruction is the same as
-            for any other sensation: observe it. Don&apos;t react. Don&apos;t
-            try to make it go away. Don&apos;t tense against it. Just watch.
+            The course teaches a particular relationship with sensation, which
+            the assistant teacher transmits during the 10-day course. The
+            specific mechanics of how pain is worked with inside the practice
+            are not taught on a website; they are taught in person in the
+            course format, with guidance available throughout the ten days.
           </p>
           <p className="mt-3">
-            What happens next is counterintuitive. When you stop fighting pain
-            and simply observe it with equanimity, the experience of suffering
+            What long-term practitioners commonly report is counterintuitive.
+            When the fight with pain eases, the experience of suffering
             changes. The pain signal may remain, but the layer of mental
-            anguish — the resistance, the fear, the frustration — begins to
-            dissolve. You discover, through direct experience, that pain and
-            suffering are not the same thing.
+            anguish (the resistance, the fear, the frustration) begins to
+            dissolve. Many describe discovering, through direct experience,
+            that pain and suffering are not the same thing.
           </p>
         </section>
 
@@ -81,18 +81,17 @@ export default function VipassanaForPainPage() {
           </h2>
           <p>
             This distinction is central to the Vipassana framework. Pain is a
-            physical signal — nerve fibers firing, information traveling to the
+            physical signal: nerve fibers firing, information traveling to the
             brain. Suffering is the mental reaction to that signal: the
             resistance, the story (&quot;this will never end&quot;), the fear
             (&quot;something is wrong with me&quot;), the anger (&quot;this
             isn&apos;t fair&quot;).
           </p>
           <p className="mt-3">
-            Vipassana works primarily on the suffering layer. By observing
-            sensations with equanimity, you gradually separate the raw signal
-            from the reactive overlay. The signal may remain. But the
-            amplification — the mental multiplication of pain — decreases
-            significantly.
+            Long-term practitioners report that the practice works primarily on
+            the suffering layer. As the reactive overlay gradually separates
+            from the raw signal, the amplification (the mental multiplication
+            of pain) tends to decrease significantly.
           </p>
           <p className="mt-3">
             This is not just philosophy. Brain imaging studies confirm it.
@@ -112,7 +111,7 @@ export default function VipassanaForPainPage() {
             <em>Journal of Neuroscience</em> found that mindfulness meditation
             reduced pain intensity by 40% and pain unpleasantness by 57%
             compared to rest. To put this in context, morphine typically reduces
-            pain by about 25%. The meditation effect was substantially larger —
+            pain by about 25%. The meditation effect was substantially larger,
             and without side effects.
           </p>
           <p className="mt-3">
@@ -126,14 +125,14 @@ export default function VipassanaForPainPage() {
           </h3>
           <p>
             Brain imaging reveals <em>how</em> this works. During meditation,
-            pain-related activation of the primary somatosensory cortex — the
-            area that processes the raw pain signal — was reduced. Meanwhile,
+            pain-related activation of the primary somatosensory cortex (the
+            area that processes the raw pain signal) was reduced. Meanwhile,
             activity increased in the anterior cingulate cortex and anterior
             insula, regions involved in cognitive regulation of pain processing.
           </p>
           <p className="mt-3">
             Reductions in pain unpleasantness were specifically associated with
-            increased orbitofrontal cortex activation — an area that reframes
+            increased orbitofrontal cortex activation, an area that reframes
             the contextual evaluation of sensory events. In other words, the
             brain learns to evaluate pain differently, reducing its emotional
             impact.
@@ -165,12 +164,12 @@ export default function VipassanaForPainPage() {
             shown improvements across a wide spectrum of pain conditions:
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Chronic low back pain</strong> — The most extensively studied condition</li>
-            <li><strong>Fibromyalgia</strong> — Improvements in pain, mood, and functional capacity</li>
-            <li><strong>Migraine</strong> — Reduced frequency and severity</li>
-            <li><strong>Chronic pelvic pain</strong> — Improved pain and quality of life</li>
-            <li><strong>Irritable bowel syndrome</strong> — Reduced abdominal pain and symptoms</li>
-            <li><strong>Arthritis</strong> — Improvements in pain coping and daily function</li>
+            <li><strong>Chronic low back pain.</strong> The most extensively studied condition.</li>
+            <li><strong>Fibromyalgia.</strong> Improvements in pain, mood, and functional capacity.</li>
+            <li><strong>Migraine.</strong> Reduced frequency and severity.</li>
+            <li><strong>Chronic pelvic pain.</strong> Improved pain and quality of life.</li>
+            <li><strong>Irritable bowel syndrome.</strong> Reduced abdominal pain and symptoms.</li>
+            <li><strong>Arthritis.</strong> Improvements in pain coping and daily function.</li>
           </ul>
         </section>
 
