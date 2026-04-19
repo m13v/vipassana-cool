@@ -43,7 +43,7 @@ export default function VipassanaVsOtherMeditationPage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          Vipassana uses systematic body scanning, is taught through free 10-day silent retreats, and requires 1-2 hours of daily practice. MBSR ($400-$800) is an 8-week secular adaptation with 30-45 min/day. TM ($380-$980) uses mantra repetition, 20 min twice daily. Zen emphasizes &quot;just sitting&quot; with a long-term teacher relationship. Vipassana is the most intensive option — best for deep transformation and self-discipline. TM and MBSR deliver faster stress relief. The best meditation is the one you actually do consistently.
+          Vipassana is a sensation-awareness practice taught on free 10-day silent retreats, with a recommended 1-2 hours of daily practice afterward. MBSR ($400-$800) is an 8-week secular adaptation with 30-45 min/day. TM ($380-$980) uses mantra repetition, 20 min twice daily. Zen emphasizes &quot;just sitting&quot; with a long-term teacher relationship. Vipassana is the most intensive option, best for deep transformation and self-discipline. TM and MBSR deliver faster stress relief. The best meditation is the one you actually do consistently.
         </p>
       </div>
 
@@ -73,12 +73,12 @@ export default function VipassanaVsOtherMeditationPage() {
           <p>
             Vipassana means &quot;insight&quot; or &quot;clear seeing&quot; in Pali. In the Goenka
             tradition, it&apos;s taught through 10-day residential retreats where you meditate
-            roughly 10 hours a day in complete silence. The technique involves systematic observation
-            of bodily sensations &mdash; scanning from head to feet and back &mdash; while
-            maintaining equanimity (not reacting with craving or aversion to whatever you feel).
+            roughly 10 hours a day in complete silence. The practice trains a direct, non-reactive
+            relationship with present experience (equanimity, rather than craving or aversion). The
+            specifics of the technique are transmitted at the course itself.
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Technique</strong> &mdash; Body scanning with equanimity. You observe sensations without reacting. The first three days use Anapana (breath observation at the nostrils) to sharpen concentration before learning the full Vipassana technique on Day 4.</li>
+            <li><strong>Technique</strong>, a sensation-awareness practice grounded in equanimity, taught in full at the 10-day course. The early days build concentration; the main Vipassana technique is introduced mid-course.</li>
             <li><strong>Format</strong> &mdash; 10-day residential retreat. 4 AM wake-up, 9:30 PM lights out. Noble Silence (no talking, no eye contact, no phones). Men and women separated.</li>
             <li><strong>Cost</strong> &mdash; Completely free, including food and accommodation. Everything is funded by donations from previous students. You can donate after completing a course, but there is zero pressure.</li>
             <li><strong>Time commitment</strong> &mdash; 10 full days for your first course (about 12 nights total). After that, daily practice of 1-2 hours recommended, plus one course per year.</li>
@@ -102,7 +102,7 @@ export default function VipassanaVsOtherMeditationPage() {
             &mdash; are nearly identical. The packaging and intensity are very different.
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Technique</strong> &mdash; Breath awareness, body scans, mindful movement, and gentle yoga. The emphasis is on paying attention to present-moment experience without judgment. Less structured than Vipassana&apos;s systematic body scanning.</li>
+            <li><strong>Technique</strong>, breath awareness, body scans, mindful movement, and gentle yoga. The emphasis is on paying attention to present-moment experience without judgment. Less structured than what is taught at a 10-day Vipassana course.</li>
             <li><strong>Format</strong> &mdash; Typically an 8-week course meeting once a week for 2-3 hours, plus one full-day retreat. Home practice of 30-45 minutes daily. Also available through apps (Headspace, Calm, Waking Up) for self-guided practice.</li>
             <li><strong>Cost</strong> &mdash; $400&ndash;$800 for a standard 8-week MBSR course. Apps run $70&ndash;$100/year. Free options exist (Palouse Mindfulness offers a complete MBSR course online for free).</li>
             <li><strong>Time commitment</strong> &mdash; 8 weeks, 20-30 total hours of instruction and practice. Daily home practice of 30-45 minutes. Much more accessible than Vipassana&apos;s 10-day immersion.</li>
@@ -135,11 +135,11 @@ export default function VipassanaVsOtherMeditationPage() {
           <h2 className="mb-3 text-xl font-bold text-foreground">Zen Meditation (Zazen)</h2>
           <p>
             Zen is a school of Mahayana Buddhism that developed in China (as Chan) and later
-            flourished in Japan. Zazen &mdash; &quot;seated meditation&quot; &mdash; is its core
-            practice. Unlike Vipassana&apos;s systematic body scanning, Zen meditation often
-            involves simply sitting with awareness, sometimes focused on the breath, sometimes
-            using koans (paradoxical questions like &quot;What is the sound of one hand
-            clapping?&quot;) to break through conceptual thinking.
+            flourished in Japan. Zazen (&quot;seated meditation&quot;) is its core practice.
+            Unlike the technique taught at a 10-day Vipassana course, Zen often involves simply
+            sitting with awareness, sometimes focused on the breath, sometimes using koans
+            (paradoxical questions like &quot;What is the sound of one hand clapping?&quot;) to
+            break through conceptual thinking.
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Technique</strong> &mdash; Varies by school. Soto Zen emphasizes shikantaza (&quot;just sitting&quot;) &mdash; open awareness without a specific object. Rinzai Zen uses koans. Both place strong emphasis on posture (upright, cross-legged) and physical form.</li>
@@ -192,7 +192,7 @@ export default function VipassanaVsOtherMeditationPage() {
               <tbody>
                 <tr className="border-b border-border/50">
                   <td className="py-3 pr-4 font-medium text-foreground">Core technique</td>
-                  <td className="py-3 pr-4">Body scanning with equanimity</td>
+                  <td className="py-3 pr-4">Sensation awareness with equanimity</td>
                   <td className="py-3 pr-4">Breath &amp; body awareness, gentle yoga</td>
                   <td className="py-3 pr-4">Mantra repetition</td>
                   <td className="py-3 pr-4">Just sitting or koan practice</td>
