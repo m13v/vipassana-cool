@@ -197,17 +197,17 @@ export default function ExperiencePage() {
           </p>
           <p className="mt-4">
             The biggest insight I&apos;ve had is that the real practice happens off
-            the cushion. You have to actually pay attention to how you behave in
-            normal life and actively apply your meditation skills — observing your
-            reactions, maintaining equanimity in difficult conversations, noticing
-            cravings and aversions as they arise. When you do that, you start seeing
-            so many benefits in your real life early on that it naturally motivates
-            you to keep up the two hours daily.
+            the cushion. I try to pay attention to how I behave in normal life and
+            carry what I learn from sitting into everyday moments: how I respond
+            in a difficult conversation, how I notice a spike of craving or
+            aversion before acting on it. When I do that, the benefits in daily
+            life show up early enough that they naturally motivate me to keep up
+            the two hours daily.
           </p>
           <p className="mt-4">
             The hardest part isn&apos;t the sitting. It&apos;s the consistency.
             There are mornings when the alarm goes off at 5 AM and every part of me
-            wants to skip it. But like any practice — running, coding, writing — the
+            wants to skip it. But like any practice (running, coding, writing), the
             compound effect over time is extraordinary.
           </p>
         </section>
@@ -250,24 +250,24 @@ export default function ExperiencePage() {
           </h2>
           <p>
             If you&apos;re thinking <em>&ldquo;I can&apos;t afford to take 10 days
-            away from work,&rdquo;</em> I understand — I literally didn&apos;t
+            away from work,&rdquo;</em> I understand; I literally didn&apos;t
             take a single vacation in eight years. But after the course, I
             couldn&apos;t imagine going back to living without this practice.
             Vipassana is the single most important event in my life. It completely
-            changed everything — making me from an extremely agitated,
+            changed everything, making me from an extremely agitated,
             ego-centered person into someone much better and much more happy.
           </p>
           <p className="mt-4">
-            Just go. Stop reading about it (after this page, obviously), stop
-            analyzing whether it&apos;s right for you, and just sign up. The
-            intellectual understanding of Vipassana is worth nothing compared to the
-            experiential understanding.
+            For me, the best move was to stop reading (after this page, obviously)
+            and stop analyzing whether it was right for me. I just signed up.
+            The intellectual understanding of Vipassana is worth nothing compared
+            to the experiential understanding.
           </p>
           <p className="mt-4">
-            It will be hard. You will want to quit. Days 2–4 are genuinely
-            rough. But if you commit to staying the full 10 days and following the
-            instructions, you will leave with something valuable — not because
-            anyone told you so, but because you experienced it yourself.
+            It was hard. I wanted to quit. Days 2 to 4 were genuinely rough. But
+            staying the full 10 days and following the instructions left me with
+            something valuable, not because anyone told me so, but because I
+            experienced it myself.
           </p>
           <p className="mt-4">
             That&apos;s the whole philosophy of Vipassana: don&apos;t take anyone&apos;s
