@@ -3,7 +3,7 @@ import { FaqDetailPage } from "@/components/faq-detail-page";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Vipassana with ADHD, Anxiety & Medication — What You Need to Know",
+  title: "Vipassana with ADHD, Anxiety, and Medication: What to Know",
   description:
     "Can you do Vipassana with ADHD, anxiety, or depression? What about antidepressants? An honest guide to attending a 10-day course with mental health conditions.",
   alternates: { canonical: "https://vipassana.cool/faq/vipassana-with-adhd-anxiety" },
@@ -35,7 +35,7 @@ export default function VipassanaWithAdhdAnxietyPage() {
           question:
             "Should I disclose my mental health history on the Vipassana application?",
           answer:
-            "Absolutely. The application asks about psychiatric history, medications, and mental health conditions for your safety, not to gatekeep. Being honest allows the center to provide appropriate support. Concealing conditions puts you at risk — teachers cannot help with what they do not know about. Most conditions do not disqualify you.",
+            "Absolutely. The application asks about psychiatric history, medications, and mental health conditions for your safety, not to gatekeep. Being honest allows the center to provide appropriate support. Concealing conditions puts you at risk; teachers cannot help with what they do not know about. Most conditions do not disqualify you.",
         },
       ]}
       relatedLinks={[
@@ -54,7 +54,7 @@ export default function VipassanaWithAdhdAnxietyPage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          Many people with ADHD, anxiety, or depression have completed Vipassana courses successfully. ADHD can make long sittings harder, but the structured schedule and removal of distractions can help. Prescribed medications (including antidepressants and ADHD medication) are allowed — do not change dosages before or during the course. Be honest on the application about mental health history; it rarely disqualifies you. If you are in acute crisis or experiencing daily panic attacks, stabilize with professional help first. Research shows anxiety scores dropping significantly after a 10-day course for those with managed conditions.
+          Many people with ADHD, anxiety, or depression have completed Vipassana courses successfully. ADHD can make long sittings harder, but the structured schedule and removal of distractions can help. Prescribed medications (including antidepressants and ADHD medication) are allowed; do not change dosages before or during the course. Be honest on the application about mental health history; it rarely disqualifies you. If you are in acute crisis or experiencing daily panic attacks, stabilize with professional help first. Research shows anxiety scores dropping significantly after a 10-day course for those with managed conditions.
         </p>
       </div>
 
@@ -84,7 +84,7 @@ export default function VipassanaWithAdhdAnxietyPage() {
         <p>
           The Vipassana application asks detailed questions about your mental
           health history, current medications, and psychiatric conditions.
-          This isn&apos;t a barrier — it&apos;s a safety measure. The
+          This isn&apos;t a barrier; it is a safety measure. The
           teachers and management need to know what you&apos;re working with
           so they can support you appropriately.
         </p>
@@ -93,8 +93,8 @@ export default function VipassanaWithAdhdAnxietyPage() {
           being rejected. Don&apos;t do this. Concealing a serious mental
           health condition and then struggling silently during 10 days of
           intensive meditation is far worse than being asked to wait or
-          prepare first. Most conditions — including ADHD, generalized
-          anxiety, managed depression, and PTSD — do not automatically
+          prepare first. Most conditions (including ADHD, generalized
+          anxiety, managed depression, and PTSD) do not automatically
           disqualify you.
         </p>
         <p>
@@ -117,32 +117,32 @@ export default function VipassanaWithAdhdAnxietyPage() {
         </p>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>
-            <strong>Do not change your dosage</strong> — don&apos;t reduce,
+            <strong>Do not change your dosage.</strong> Don&apos;t reduce,
             increase, or stop any medication before or during the course.
             Teachers specifically advise keeping your medication routine the
             same, so that if Vipassana has an effect on you, you&apos;ll know
             it was the practice and not a medication change.
           </li>
           <li>
-            <strong>SSRIs and SNRIs</strong> — antidepressants are fine.
+            <strong>SSRIs and SNRIs:</strong> antidepressants are fine.
             Some practitioners report that medication can slightly dampen the
             intensity of certain emotional experiences during meditation, but
             this is not a reason to stop taking them.
           </li>
           <li>
-            <strong>ADHD medications</strong> — stimulants like
+            <strong>ADHD medications:</strong> stimulants like
             methylphenidate or amphetamine salts are allowed. Some people
             find their focus medication helpful for the long sitting hours;
             others find the practice works differently without it. Either
             way, maintain your normal routine.
           </li>
           <li>
-            <strong>Anti-anxiety medications</strong> — benzodiazepines and
+            <strong>Anti-anxiety medications:</strong> benzodiazepines and
             other anxiolytics are permitted if prescribed. If you take them
             as-needed, bring them and use them as your doctor has instructed.
           </li>
           <li>
-            <strong>Sleeping aids</strong> — the 4 AM wake-up is difficult
+            <strong>Sleeping aids:</strong> the 4 AM wake-up is difficult
             for everyone. If you have a prescribed sleep aid, you can use it.
           </li>
         </ul>
@@ -168,26 +168,25 @@ export default function VipassanaWithAdhdAnxietyPage() {
         </h3>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>
-            <strong>Sitting still</strong> — the hour-long
-            &quot;Adhitthana&quot; (strong determination) sittings where
-            you&apos;re asked not to move are particularly difficult. Your
-            body wants to fidget, shift, scratch. This is true for everyone
-            but amplified with ADHD.
+            <strong>Sitting still.</strong> The hour-long &quot;sittings of
+            strong determination&quot; later in the course, where students are
+            asked not to move, are particularly difficult. The body wants to
+            fidget, shift, scratch. This is true for everyone but amplified
+            with ADHD.
           </li>
           <li>
-            <strong>Mind-wandering</strong> — ADHD brains wander. During
-            meditation, you&apos;ll notice your attention drifting
-            constantly. The first few days can feel like you&apos;re
-            &quot;failing&quot; at meditation because you can&apos;t stay
-            focused for more than a few seconds.
+            <strong>Mind-wandering.</strong> ADHD brains wander. During
+            meditation, attention drifts constantly. The first few days can
+            feel like &quot;failing&quot; at meditation because focus is
+            hard to hold for more than a few seconds.
           </li>
           <li>
-            <strong>Restlessness</strong> — the schedule is structured, but
-            the break periods (where everyone else seems peaceful) can feel
-            agonizing when your brain is screaming for stimulation.
+            <strong>Restlessness.</strong> The schedule is structured, but the
+            break periods (where everyone else seems peaceful) can feel
+            agonizing when the brain is screaming for stimulation.
           </li>
           <li>
-            <strong>Time perception</strong> — without clocks, phones, or
+            <strong>Time perception.</strong> Without clocks, phones, or
             external markers, time can feel distorted. Some sittings feel
             like they last forever.
           </li>
@@ -198,29 +197,28 @@ export default function VipassanaWithAdhdAnxietyPage() {
         </h3>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>
-            <strong>Hyperfocus</strong> — many ADHD practitioners report
-            that once they break through the initial resistance, their
-            ability to hyperfocus kicks in. When meditation becomes the
+            <strong>Hyperfocus.</strong> Many ADHD practitioners report that
+            once they break through the initial resistance, their ability to
+            hyperfocus kicks in. When meditation becomes the
             &quot;interesting thing,&quot; ADHD brains can go remarkably
             deep.
           </li>
           <li>
-            <strong>No distractions to manage</strong> — paradoxically, the
+            <strong>No distractions to manage.</strong> Paradoxically, the
             retreat environment removes the biggest ADHD challenge: managing
-            competing stimuli. There&apos;s nothing to check, no
-            notifications, no decisions to make. The structure does the
-            executive-function work for you.
+            competing stimuli. There is nothing to check, no notifications,
+            no decisions to make. The structure does the executive-function
+            work for you.
           </li>
           <li>
-            <strong>Novelty</strong> — ADHD brains crave novelty, and the
-            sensations you discover during body scanning are endlessly novel.
-            Each sit is genuinely different.
+            <strong>Novelty.</strong> ADHD brains crave novelty, and each
+            day of the course tends to feel different in its own way.
           </li>
           <li>
-            <strong>Self-understanding</strong> — observing your own
-            restless mind without judgment can be profoundly illuminating.
-            You start to see the pattern of restlessness as just another
-            sensation, not something &quot;wrong&quot; with you.
+            <strong>Self-understanding.</strong> Observing a restless mind
+            without judgment can be illuminating. Many ADHD practitioners
+            describe starting to see restlessness as a pattern rather than a
+            personal defect.
           </li>
         </ul>
         <p className="mt-4">
