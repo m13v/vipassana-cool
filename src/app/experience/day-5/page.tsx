@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DayPage } from "@/components/day-page";
 
 export const metadata: Metadata = {
-  title: "Vipassana Day 5 — Settling Into the Middle of the Course",
+  title: "Vipassana Day 5: Settling Into the Middle of the Course",
   description:
     "A descriptive account of day 5 of a 10-day Vipassana course: the practice begins to feel familiar, the schedule clicks into place, and the middle of the course takes shape.",
   alternates: { canonical: "https://vipassana.cool/experience/day-5" },
