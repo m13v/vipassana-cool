@@ -208,26 +208,25 @@ export default function Page() {
           </p>
           <p className="mb-4">
             Vipassana as Goenka teaches it is not trying to quiet the mind or
-            produce any particular state. It is training one very specific
-            habit: when an unpleasant sensation arises in the body, observe it
-            without reacting to it. Sit. Watch. Do not move the hand toward the
-            itch. Do not tense the shoulders against the ache. Do not narrate.
-            Just observe the raw physical signal until it passes on its own.
+            produce any particular state. The technique itself is transmitted
+            by the assistant teacher at the 10-day course, not described on a
+            website. What can be said at a general level is that the training
+            is aimed at shifting the default response to experience, and the
+            shift happens through repetition.
           </p>
           <p className="mb-4">
-            Repeat this thousands of times and something happens at the level
-            of default response. Not because the meditator is enlightened, and
-            not because their brain has been replaced. Because the nervous
-            system, which learns the response it repeats, has been handed a new
-            repeated response: observe, do not react.
+            Repeat the training thousands of times and something changes at
+            the level of default response. Not because the meditator is
+            enlightened, and not because the brain has been replaced. Because
+            the nervous system, which learns the response it repeats, has
+            been handed a new repeated response.
           </p>
           <p>
-            That is the entire mechanism. Everything else that is claimed for
-            Vipassana (reduced anxiety, less rumination, equanimity around
-            pain, loss, and craving) is a downstream effect of that one
-            rewiring: the default relationship with an unpleasant sensation has
-            shifted from react to observe. If there is a useful word for this
-            it is conditioning, not awakening. Reps install the new default.
+            That is the mechanism at a high level. Everything else that is
+            claimed for Vipassana (reduced anxiety, less rumination, equanimity
+            around pain, loss, and craving) is a downstream effect of that
+            shift. If there is a useful word for it, it is conditioning, not
+            awakening. Reps install the new default.
           </p>
         </section>
 
@@ -256,11 +255,11 @@ export default function Page() {
             of daily life. The depth is lower by design.
           </p>
           <p>
-            The depth was never the point. The point is the rep. If you sat
-            upright, ran the body scan, and held equanimity as the aim for
-            thirty minutes, you did the rep, regardless of whether the session
-            felt deep or shallow, focused or scattered. Most of your reps will
-            be mediocre. All of them count.
+            The depth was never the point. The point is the rep. A rep is a
+            completed daily sit of at least 20 minutes, upright, self-directed,
+            no media running. What happens inside the sit is between the
+            meditator and the training they received at the course. Most of
+            your reps will feel mediocre. All of them count.
           </p>
         </section>
 
@@ -332,9 +331,8 @@ export default function Page() {
           <p className="mb-6">
             Rewiring is a count-of-repetitions problem, not a total-minutes
             problem. Every morning that the nervous system encodes the same
-            lesson (unpleasant sensation observed without acting) is a
-            deposit. A longer sit is a longer deposit on that morning, but the
-            frequency of mornings is doing the arithmetic.
+            habit is a deposit. A longer sit is a longer deposit on that
+            morning, but the frequency of mornings is doing the arithmetic.
           </p>
           <RepEconomics />
           <p className="mt-6">
@@ -363,10 +361,10 @@ export default function Page() {
             6. Four sessions that do not count as a rep
           </h2>
           <p className="mb-6">
-            Not every time you put yourself on a cushion is a rep. A rep is
-            upright, self-directed, attention on sensation, at a dose above
-            roughly twenty minutes. Four common sessions fail one or more of
-            those conditions and do not install anything useful.
+            Not every time you put yourself on a cushion is a rep. A rep is a
+            completed daily sit of at least 20 minutes, upright, self-directed,
+            no media running. Four common sessions fail one or more of those
+            conditions and do not install anything useful.
           </p>
           <InvalidReps />
           <p className="mt-6">
@@ -484,10 +482,11 @@ export default function Page() {
           <ul className="mb-6 list-disc space-y-2 pl-6">
             <li>
               <strong className="text-foreground">
-                A rep is upright, self-directed, 20+ minutes, on sensation.
+                A rep is upright, self-directed, at least 20 minutes, no media
+                running.
               </strong>{" "}
-              Four conditions. All four, or it is a different session category,
-              not a Vipassana rep.
+              All four conditions, or it is a different session category, not
+              a Vipassana rep.
             </li>
             <li>
               <strong className="text-foreground">
@@ -544,7 +543,7 @@ export default function Page() {
             drifted, the honest answer is that the rep count, not the
             motivation, is the thing to rebuild.{" "}
             <NumberTicker value={20} /> minutes tomorrow morning, upright,
-            self-directed, on sensation, counts as one.
+            self-directed, counts as one.
           </p>
         </section>
       </div>
