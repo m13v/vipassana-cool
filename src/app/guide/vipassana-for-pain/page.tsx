@@ -320,47 +320,46 @@ export default function VipassanaForPainPage() {
           </h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
-              <strong>Chairs are available</strong> — You do not have to sit on
+              <strong>Chairs are available.</strong> You do not have to sit on
               the floor. Every center provides chairs for students who need
               them. There is no judgment about using one. Ask at registration
               or on Day 0.
             </li>
             <li>
-              <strong>Talk to the teacher</strong> — During the course, you can
-              request brief interviews with the assistant teacher. If your pain
-              is severe or you need guidance on how to work with it, ask.
-              They&apos;ve worked with many students with chronic pain
-              conditions.
+              <strong>Talk to the teacher.</strong> During the course, you can
+              request brief interviews with the assistant teacher. If your
+              pain is severe or you need guidance on how to work with it, ask.
+              They have worked with many students with chronic pain conditions.
             </li>
             <li>
-              <strong>Bring your supports</strong> — Cushions, back supports,
+              <strong>Bring your supports.</strong> Cushions, back supports,
               and blankets are usually provided, but bring anything specific
               that helps you sit comfortably. A meditation bench, a special
-              cushion, a lumbar support — whatever you use at home.
+              cushion, a lumbar support: whatever you use at home.
             </li>
             <li>
-              <strong>Stretch between sessions</strong> — The schedule includes
+              <strong>Stretch between sessions.</strong> The schedule includes
               breaks between sittings. Use these to stretch, walk gently, and
-              move your body. Don&apos;t just lie down — gentle movement helps
+              move your body. Don&apos;t just lie down; gentle movement helps
               more than complete rest for most pain conditions.
             </li>
             <li>
-              <strong>Bring necessary medication</strong> — Centers accommodate
-              required medications. List them on your application and bring them
-              clearly labeled. Don&apos;t stop prescribed pain medication for
-              the course without consulting your doctor.
+              <strong>Bring necessary medication.</strong> Centers accommodate
+              required medications. List them on your application and bring
+              them clearly labeled. Don&apos;t stop prescribed pain medication
+              for the course without consulting your doctor.
             </li>
             <li>
-              <strong>Adjust your expectations</strong> — You may not be able
-              to sit as still as other students. That&apos;s fine. Work within
-              your body&apos;s limits. Equanimity applies here too — don&apos;t
+              <strong>Adjust your expectations.</strong> You may not be able
+              to sit as still as other students. That is fine. Work within
+              your body&apos;s limits. Equanimity applies here too; don&apos;t
               compare your practice to anyone else&apos;s.
             </li>
             <li>
-              <strong>Communicate on arrival</strong> — When you arrive, let
-              the course manager know about your condition. They can assign you
-              a seat near the door for easy exit, near a wall for back support,
-              or in a spot where shifting position is less disruptive.
+              <strong>Communicate on arrival.</strong> When you arrive, let
+              the course manager know about your condition. They can assign
+              you a seat near the door for easy exit, near a wall for back
+              support, or in a spot where shifting position is less disruptive.
             </li>
           </ul>
         </section>
@@ -370,19 +369,17 @@ export default function VipassanaForPainPage() {
             Can pain become a tool for deeper meditation?
           </h2>
           <p>
-            There is a perspective in Vipassana that reframes pain entirely.
-            Pain is one of the strongest sensations you can observe. Because it
-            commands attention so forcefully, it&apos;s actually excellent
-            material for developing equanimity. If you can learn to observe
-            intense knee pain without reacting, you can observe anything
-            without reacting.
+            There is a perspective in the tradition that reframes pain
+            entirely. Pain is one of the strongest sensations a practitioner
+            encounters. Because it commands attention so forcefully, it is
+            often described as excellent material for developing equanimity.
           </p>
           <p className="mt-3">
-            This doesn&apos;t mean you should seek out pain or glorify
-            suffering. It means that if pain is already part of your life —
-            as it is for millions of people with chronic conditions — Vipassana
-            offers a way to transform it from an obstacle into a training
-            ground.
+            This doesn&apos;t mean anyone should seek out pain or glorify
+            suffering. It means that if pain is already part of your life (as
+            it is for millions of people with chronic conditions), the
+            tradition offers a way to approach it as a training ground rather
+            than only an obstacle.
           </p>
           <p className="mt-3">
             For more on the science behind these findings, see our{" "}
