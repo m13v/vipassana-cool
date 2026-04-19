@@ -3,7 +3,7 @@ import { FaqDetailPage } from "@/components/faq-detail-page";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Vipassana vs Therapy — How They Compare and When to Choose Which",
+  title: "Vipassana vs Therapy: How They Compare and When to Choose Which",
   description:
     "Comparing Vipassana meditation and psychotherapy: different approaches, overlapping benefits, when each is appropriate, and how they can complement each other.",
   alternates: { canonical: "https://vipassana.cool/faq/vipassana-vs-therapy" },
@@ -14,12 +14,12 @@ export default function VipassanaVsTherapyPage() {
     <FaqDetailPage
       pageId="faq-vipassana-vs-therapy"
       title="Vipassana vs Therapy"
-      description="How Vipassana meditation and psychotherapy compare — different mechanisms, overlapping benefits, and when each is the right choice."
+      description="How Vipassana meditation and psychotherapy compare: different mechanisms, overlapping benefits, and when each is the right choice."
       schemaFaqs={[
         {
           question: "Is Vipassana a replacement for therapy?",
           answer:
-            "No. Vipassana and therapy work through different mechanisms and serve different purposes. Vipassana develops equanimity and awareness through direct observation of sensations. Therapy provides professional guidance for processing specific psychological issues. They complement each other well, but neither replaces the other.",
+            "No. Vipassana and therapy work through different mechanisms and serve different purposes. Vipassana is a long-term training transmitted at a 10-day residential course and maintained through daily practice afterward. Therapy provides professional guidance for processing specific psychological issues. They complement each other well, but neither replaces the other.",
         },
         {
           question: "Can Vipassana help with mental health?",
@@ -41,14 +41,14 @@ export default function VipassanaVsTherapyPage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          Vipassana and therapy are not alternatives — they work through different mechanisms and complement each other well. Therapy provides professional guidance for processing specific psychological issues through dialogue. Vipassana develops equanimity and self-awareness through direct observation of bodily sensations in silence. For diagnosed mental health conditions, therapy should be the primary approach. For deeper self-understanding and reduced reactivity, Vipassana goes where talk therapy often cannot. If you have active mental health concerns, start with therapy first and consider Vipassana once you are stable.
+          Vipassana and therapy are not alternatives; they work through different mechanisms and complement each other well. Therapy provides professional guidance for processing specific psychological issues through dialogue. Vipassana is a long-term training received at a 10-day residential course and carried forward through daily practice. For diagnosed mental health conditions, therapy should be the primary approach. For deeper self-understanding and reduced reactivity, Vipassana operates at a different layer than talk therapy. If you have active mental health concerns, start with therapy first and consider Vipassana once you are stable.
         </p>
       </div>
 
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">They&apos;re Not the Same Thing</h2>
         <p>
-          People sometimes frame Vipassana and therapy as alternatives — should I meditate or see a therapist? This is like asking whether you should exercise or eat well. They&apos;re different practices that address overlapping but distinct aspects of wellbeing. Understanding how they differ helps you know when to use which.
+          People sometimes frame Vipassana and therapy as alternatives: should I meditate or see a therapist? This is like asking whether you should exercise or eat well. They are different practices that address overlapping but distinct aspects of wellbeing. Understanding how they differ helps you know when to use which.
         </p>
       </section>
 
@@ -63,12 +63,12 @@ export default function VipassanaVsTherapyPage() {
           Different therapeutic modalities work differently (CBT targets thought patterns, EMDR processes trauma, psychodynamic therapy explores unconscious dynamics), but they share a common thread: using conscious, guided exploration to address specific psychological issues.
         </p>
 
-        <h3 className="mb-2 mt-6 font-semibold text-foreground">Vipassana: Bottom-Up Observation</h3>
+        <h3 className="mb-2 mt-6 font-semibold text-foreground">Vipassana: A Different Layer</h3>
         <p>
-          Vipassana works from the bottom up: instead of analyzing thoughts and narratives, you observe raw sensations in the body. The theory is that every mental pattern has a physical manifestation — anxiety feels like tightness in the chest, anger feels like heat in the face, grief feels like heaviness in the throat. By observing these sensations with equanimity (not reacting), the underlying patterns gradually weaken.
+          Vipassana operates at a different layer than narrative-based therapy. The specifics of the technique are transmitted at the 10-day course by an authorized assistant teacher and are not described on this site. What can be said from outside the technique is that practitioners often describe it as less about narrative analysis and more about a direct relationship with experience.
         </p>
         <p>
-          Vipassana doesn&apos;t require you to understand <em>why</em> you feel a certain way. You don&apos;t need to identify the source, construct a narrative, or develop a cognitive framework. You simply observe what&apos;s happening in your body, moment to moment, without reacting.
+          The training is maintained through daily practice after the course. Its style and rhythm are distinct from weekly therapy sessions.
         </p>
       </section>
 
@@ -78,11 +78,11 @@ export default function VipassanaVsTherapyPage() {
           Despite different mechanisms, the outcomes often overlap:
         </p>
         <ul className="mt-3 list-disc space-y-2 pl-6">
-          <li><strong>Reduced reactivity</strong> — both help you respond to situations rather than react impulsively.</li>
-          <li><strong>Better emotional regulation</strong> — therapy through understanding, Vipassana through equanimity.</li>
-          <li><strong>Increased self-awareness</strong> — therapy illuminates patterns through narrative, Vipassana through direct observation.</li>
-          <li><strong>Processing of difficult experiences</strong> — therapy through guided exploration, Vipassana through allowing buried material to surface and pass.</li>
-          <li><strong>Improved relationships</strong> — both reduce the unconscious patterns that create interpersonal difficulty.</li>
+          <li><strong>Reduced reactivity:</strong> both tend to help people respond to situations rather than react impulsively.</li>
+          <li><strong>Better emotional regulation:</strong> therapy through understanding, Vipassana through a different set of mechanisms transmitted at the course.</li>
+          <li><strong>Increased self-awareness:</strong> therapy illuminates patterns through narrative; Vipassana practitioners describe a different mode of awareness.</li>
+          <li><strong>Processing of difficult experiences:</strong> therapy through guided exploration; old students often describe material surfacing and passing during sustained practice.</li>
+          <li><strong>Improved relationships:</strong> both tend to reduce the unconscious patterns that create interpersonal difficulty.</li>
         </ul>
       </section>
 
@@ -90,10 +90,10 @@ export default function VipassanaVsTherapyPage() {
         <h2 className="mb-3 text-xl font-bold text-foreground">When Therapy Is the Right Choice</h2>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>You have a <strong>diagnosed mental health condition</strong> that needs professional management.</li>
-          <li>You&apos;re in <strong>acute crisis</strong> — suicidal thoughts, severe anxiety, active trauma responses.</li>
-          <li>You need help with a <strong>specific issue</strong> — a relationship problem, grief, career decision — that benefits from guided conversation.</li>
-          <li>You want <strong>professional accountability</strong> — a trained person monitoring your progress and adjusting the approach.</li>
-          <li>You need <strong>immediate tools</strong> — therapy can provide coping strategies in the first session. Vipassana requires 10 days of intensive practice.</li>
+          <li>You&apos;re in <strong>acute crisis:</strong> suicidal thoughts, severe anxiety, active trauma responses.</li>
+          <li>You need help with a <strong>specific issue</strong> (a relationship problem, grief, career decision) that benefits from guided conversation.</li>
+          <li>You want <strong>professional accountability:</strong> a trained person monitoring your progress and adjusting the approach.</li>
+          <li>You need <strong>immediate tools.</strong> Therapy can provide coping strategies in the first session. Vipassana requires a 10-day residential commitment before daily practice can begin.</li>
         </ul>
       </section>
 
@@ -101,9 +101,9 @@ export default function VipassanaVsTherapyPage() {
         <h2 className="mb-3 text-xl font-bold text-foreground">When Vipassana Shines</h2>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li>You&apos;re <strong>generally stable</strong> but want deeper self-understanding and equanimity.</li>
-          <li>You&apos;ve done therapy and <strong>understand your patterns intellectually</strong> but find they still control your behavior. Vipassana can reach layers that cognitive understanding doesn&apos;t.</li>
-          <li>You want a <strong>daily practice</strong> — something you can do independently, every day, for the rest of your life.</li>
-          <li>You want to address the <strong>general tendency to react</strong> rather than specific issues. Vipassana trains equanimity broadly.</li>
+          <li>You&apos;ve done therapy and <strong>understand your patterns intellectually</strong> but find they still control your behavior. Vipassana tends to operate at a different layer than cognitive understanding.</li>
+          <li>You want a <strong>daily practice:</strong> something you can do independently, every day, for the rest of your life.</li>
+          <li>You want to address the <strong>general tendency to react</strong> rather than specific issues.</li>
           <li>You&apos;re interested in <strong>direct experience</strong> rather than conceptual understanding. Vipassana is experiential by nature.</li>
         </ul>
       </section>
@@ -111,17 +111,17 @@ export default function VipassanaVsTherapyPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">Using Both Together</h2>
         <p>
-          In my experience, Vipassana and therapy complement each other beautifully. Therapy helps me understand my patterns. Vipassana helps me sit with them without reacting. Therapy gives me frameworks. Vipassana gives me equanimity. They address different layers of the same underlying project: becoming a more conscious, less reactive human being.
+          In my experience, Vipassana and therapy complement each other well. Therapy has helped me understand my patterns. Vipassana has given me a different kind of capacity, transmitted at the course. They address different layers of the same underlying project: becoming a more conscious, less reactive human being.
         </p>
         <p>
-          If you&apos;re in therapy and considering Vipassana, discuss it with your therapist. Most therapists are supportive of meditation practice. If you&apos;re a Vipassana practitioner considering therapy, there&apos;s no contradiction — Goenka himself said the technique isn&apos;t meant to replace professional help for those who need it.
+          If you&apos;re in therapy and considering Vipassana, discuss it with your therapist. Most therapists are supportive of meditation practice. If you&apos;re a Vipassana practitioner considering therapy, there is no contradiction; Goenka himself said the technique is not meant to replace professional help for those who need it.
         </p>
       </section>
 
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Bottom Line</h2>
         <p>
-          Don&apos;t choose between them — understand what each offers and use whichever (or both) serves your current needs. If you&apos;re struggling with specific psychological issues, start with therapy. If you&apos;re stable and seeking deeper awareness, try Vipassana. If you want the best of both worlds, do both. They&apos;re different tools for the same workshop.
+          It is rarely a choice between them. If you&apos;re struggling with specific psychological issues, start with therapy. If you&apos;re stable and seeking deeper awareness, consider attending a Vipassana course. If you want the benefit of both, do both. They are different tools for the same workshop.
         </p>
         <p>
           One thing I&apos;ll add from personal experience: <Link href="/faq/is-vipassana-safe" className="text-accent underline hover:text-foreground">Vipassana can surface intense emotional material</Link>. Having a therapist you trust can be invaluable for processing what comes up, especially after your first course.
