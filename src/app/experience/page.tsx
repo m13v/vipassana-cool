@@ -8,7 +8,7 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 
 export const metadata: Metadata = {
-  title: "My Vipassana Journey — 6 Courses, 60 Days, Daily Practice",
+  title: "My Vipassana Journey: 6 Courses, 60 Days, Daily Practice",
   description:
     "A day-by-day personal account of what actually happens during a 10-day Vipassana course. What to expect, what was hard, and honest insights from six retreats.",
   alternates: { canonical: "https://vipassana.cool/experience" },
@@ -24,7 +24,7 @@ export default function ExperiencePage() {
         ]}
       />
       <ArticleSchema
-        title="My Vipassana Journey — 6 Courses, 60 Days, Daily Practice"
+        title="My Vipassana Journey: 6 Courses, 60 Days, Daily Practice"
         description="A day-by-day personal account of what actually happens during a 10-day Vipassana course. What to expect, what was hard, and honest insights from six retreats."
         url="https://vipassana.cool/experience"
         datePublished="2025-01-15"
@@ -79,7 +79,7 @@ export default function ExperiencePage() {
             How I Found Vipassana
           </h2>
           <p>
-            I&apos;m a tech person through and through — 20+ products built, 3 hackathons
+            I&apos;m a tech person through and through: 20+ products built, 3 hackathons
             won, a startup exit. My life was fast-paced, constantly optimizing, always
             building the next thing. I hadn&apos;t taken a single vacation in eight years.
             Not a single day. I worked seven days a week, including weekends. Vipassana
@@ -87,7 +87,7 @@ export default function ExperiencePage() {
             of myself, but had no tools for understanding what was happening inside.
           </p>
           <p className="mt-4">
-            Someone recommended a 10-day course. I was skeptical — 10 days of silence
+            Someone recommended a 10-day course. I was skeptical; 10 days of silence
             sounded like either a cult or a waste of time. But I&apos;d tried apps, books,
             and weekend workshops, and nothing had stuck. So I signed up.
           </p>
@@ -103,16 +103,16 @@ export default function ExperiencePage() {
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {[
-              { day: 1, title: "Arrival & Anapana", desc: "Sit, breathe, observe. Simple — until it isn't." },
-              { day: 2, title: "Knee Pain & Monkey Mind", desc: "Knees screaming. Mind replaying every conversation from the last 5 years." },
+              { day: 1, title: "Arrival and Settling In", desc: "Arrival and the first practice session. Simple on paper; less simple in the body." },
+              { day: 2, title: "Knee Pain and Monkey Mind", desc: "Knees screaming. Mind replaying every conversation from the last 5 years." },
               { day: 3, title: "The Urge to Leave", desc: "Existential crisis. Why am I here? I seriously considered leaving." },
-              { day: 4, title: "The Technique Changes", desc: "Something shifted. Sensations I'd never noticed. Like discovering a new sense." },
-              { day: 5, title: "Settling In", desc: "Finding rhythm. Pain becomes workable. The practice deepens." },
-              { day: 6, title: "Deep Sensations", desc: "Emotional waves. Deeper layers surface. Equanimity tested." },
-              { day: 7, title: "Finding Flow", desc: "Mental quiet. Extended concentration. Peace that surprises you." },
-              { day: 8, title: "Deepening Equanimity", desc: "Subtle sensations, subtle cravings. The refinement continues." },
+              { day: 4, title: "Something Shifts", desc: "A different quality of attention. Things I had never noticed before." },
+              { day: 5, title: "Settling In", desc: "Finding rhythm. Pain becomes workable. The days settle." },
+              { day: 6, title: "Deeper Layers", desc: "Emotional waves. Deeper layers surface. Equanimity tested." },
+              { day: 7, title: "Finding Flow", desc: "Mental quiet. Extended concentration. A kind of peace that surprises you." },
+              { day: 8, title: "Quieter Still", desc: "A subtler experience. The days keep refining." },
               { day: 9, title: "Last Day of Silence", desc: "Bittersweet. Best sittings. Not ready to leave this space." },
-              { day: 10, title: "Silence Breaks", desc: "Talking felt alien. Gratitude for the experience. Metta bhavana." },
+              { day: 10, title: "Silence Breaks", desc: "Talking felt alien. Gratitude for the experience." },
             ].map((d) => (
               <TrackedLink
                 key={d.day}
@@ -141,7 +141,7 @@ export default function ExperiencePage() {
             After my first course, I said to myself: <em>&ldquo;I cannot go
             back and live a normal life.&rdquo;</em> It was that clear. I started
             planning my year around how many courses I could attend. In my first
-            twelve months, I went to four courses — despite having an intense
+            twelve months, I went to four courses, despite having an intense
             full-time schedule. It was so mind-blowing how much time I could save
             and how efficient I could become after learning meditation that I
             solely dedicated 40 days plus two hours of daily practice to ramp up
@@ -155,8 +155,8 @@ export default function ExperiencePage() {
           </p>
           <p className="mt-4">
             I&apos;ve sat at Dhammamanda in Northern California (private rooms,
-            tall trees — almost too luxurious), the CYO Bay Area Christmas
-            course (bunk beds with 12 people, rain and snow, nearly 300 meditators —
+            tall trees, almost too luxurious), the CYO Bay Area Christmas
+            course (bunk beds with 12 people, rain and snow, nearly 300 meditators,
             the biggest course in the Western hemisphere), and North Fork in Central
             California (one of the oldest centers in North America, with a pagoda
             and private meditation cells).
@@ -164,7 +164,7 @@ export default function ExperiencePage() {
           <p className="mt-4">
             Now I go to a centre twice a year, and every time it&apos;s a massive
             mind reset. The depth of meditation at a centre is night and day
-            compared to home practice — you just can&apos;t reach that same level
+            compared to home practice; you just can&apos;t reach that same level
             on your own. I come back making important decisions about my personal
             life, business, partnerships, everything. That clarity is something I
             can&apos;t get any other way.
@@ -174,7 +174,7 @@ export default function ExperiencePage() {
             In a very practical, observable way. I react less impulsively.
             I&apos;m more present in conversations. I sleep better. When something
             difficult happens, I have a brief moment of space between the event
-            and my reaction — and in that space, I can choose.
+            and my reaction, and in that space, I can choose.
           </p>
         </section>
 
@@ -184,14 +184,14 @@ export default function ExperiencePage() {
           </h2>
           <p>
             The courses are powerful, but the daily practice is where the transformation
-            actually happens. <DayCounter /> days of sitting — every day at 6 AM and
+            actually happens. <DayCounter /> days of sitting, every day at 6 AM and
             9 PM. I currently sit with one other buddy, which helps with
             accountability. Some days the full hour flies by. Some days every minute
             is a battle with distraction.
           </p>
           <p className="mt-4">
             Honestly, the meditation itself is still quite challenging. My main struggle
-            is distraction — the mind just wants to wander. But it&apos;s a very gradual
+            is distraction; the mind just wants to wander. But it&apos;s a very gradual
             path. You definitely see improvement over time if you&apos;re consistent.
             It&apos;s a very long journey to master, and I&apos;m nowhere near mastery.
           </p>
