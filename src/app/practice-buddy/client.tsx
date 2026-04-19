@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { WaitlistTable } from "@/components/waitlist-table";
 import { WaitlistSignup } from "@/components/waitlist-signup";
+import { BookCallButton } from "@/components/book-call-button";
 
 type QuickSetup = { timezone: string; morningHour: string };
 type SignupPrefill = { timezone?: string; morningTime?: string; frequency?: string };
@@ -52,12 +53,15 @@ export function PracticeBuddyClient() {
             {matchedCount} meditators matched so far
           </p>
         )}
-        <a
-          href="#waitlist-form"
-          className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
-        >
-          Get Matched
-        </a>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="#waitlist-form"
+            className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          >
+            Get Matched
+          </a>
+          <BookCallButton label="Book a call" section="hero" />
+        </div>
       </section>
 
       {/* How It Works — animated flow */}

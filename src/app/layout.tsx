@@ -4,6 +4,8 @@ import "./globals.css";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { PostHogProvider } from "@/components/posthog-provider";
+import { NewsletterSignup } from "@seo/components";
+import { SeoComponentsStyles } from "@seo/components/server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -107,6 +109,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <SeoComponentsStyles />
+      </head>
       <body className={`${geistSans.variable} antialiased`}>
         <script
           type="application/ld+json"
@@ -117,6 +122,7 @@ export default function RootLayout({
           <main className="min-h-screen">{children}</main>
           <Footer />
         </PostHogProvider>
+        <NewsletterSignup />
       </body>
     </html>
   );

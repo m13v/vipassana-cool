@@ -9,13 +9,21 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@assistant-ui/react": "^0.12.25",
+    "@google/generative-ai": "^0.24.1",
     "@hyvor/hyvor-talk-react": "^1.0.2",
+    "@m13v/seo-components": "^0.17.1",
     "@neondatabase/serverless": "^1.0.2",
+    "@remotion/player": "^4.0.448",
+    "@seo/components": "npm:@m13v/seo-components@^0.17.1",
+    "@supabase/supabase-js": "^2.103.3",
+    "lottie-react": "^2.4.1",
     "next": "16.1.6",
     "posthog-js": "^1.347.2",
     "posthog-node": "^5.21.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "remotion": "^4.0.448",
     "resend": "^6.9.3"
   },
   "devDependencies": {

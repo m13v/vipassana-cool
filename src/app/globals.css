@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@layer seo-components, theme, base, components, utilities;
+
 :root {
   --background: #faf9f6;
   --foreground: #2c2c2c;

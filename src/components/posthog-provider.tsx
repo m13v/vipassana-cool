@@ -25,6 +25,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
             capture_pageview: true,
             capture_pageleave: true,
           });
+          (window as unknown as { posthog: typeof posthogLib }).posthog = posthogLib;
           posthogInstance = posthogLib;
           setPh(posthogLib);
         });
