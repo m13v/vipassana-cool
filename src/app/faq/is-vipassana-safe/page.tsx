@@ -14,7 +14,7 @@ export default function IsVipassanaSafePage() {
     <FaqDetailPage
       pageId="faq-is-vipassana-safe"
       title="Is Vipassana Safe?"
-      description="An honest, balanced look at the risks and safety of intensive Vipassana meditation — from someone who has done six courses."
+      description="An honest, balanced look at the risks and safety of intensive Vipassana meditation, from someone who has done six courses."
       schemaFaqs={[
         {
           question: "Is Vipassana meditation dangerous?",
@@ -42,7 +42,7 @@ export default function IsVipassanaSafePage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          Vipassana is safe for most mentally healthy adults, but it is a genuinely powerful technique. Research shows 53% of meditators report at least one adverse effect, though most are temporary. People with active psychosis, severe untreated depression, or recent unprocessed trauma should consult a mental health professional before attending. The application screens for risk factors. If you struggle after a course, resources include Cheetah House (cheetahhouse.org), the 988 Lifeline, and your course teacher. Hard is not the same as harmful — discomfort during deep meditation is expected, not pathological.
+          Vipassana is safe for most mentally healthy adults, but it is a genuinely powerful technique. Research shows 53% of meditators report at least one adverse effect, though most are temporary. People with active psychosis, severe untreated depression, or recent unprocessed trauma should consult a mental health professional before attending. The application screens for risk factors. If you struggle after a course, resources include Cheetah House (cheetahhouse.org), the 988 Lifeline, and your course teacher. Hard is not the same as harmful; discomfort during deep meditation is expected, not pathological.
         </p>
       </div>
 
@@ -69,15 +69,15 @@ export default function IsVipassanaSafePage() {
           These are things almost everyone experiences and are part of the process:
         </p>
         <ul className="mt-3 list-disc space-y-2 pl-6">
-          <li><strong>Physical pain</strong> — knees, back, shoulders from prolonged sitting. Manageable with cushion adjustments and stretching.</li>
-          <li><strong>Emotional releases</strong> — crying, waves of sadness or anger that seem to come from nowhere. This is buried material surfacing. It passes.</li>
-          <li><strong>The urge to leave</strong> — especially on <Link href="/experience/day-3" className="text-accent underline hover:text-foreground">Days 2-3</Link>. Nearly universal. It passes.</li>
-          <li><strong>Sleep disruption</strong> — difficulty falling asleep or vivid dreams, especially in the first few days.</li>
-          <li><strong>Heightened sensitivity</strong> — after the course, sounds seem louder, lights brighter, food more flavorful. This normalizes within a few days.</li>
-          <li><strong>Temporary mood swings</strong> — irritability or euphoria in the days following the course. These stabilize with continued practice.</li>
+          <li><strong>Physical pain:</strong> knees, back, shoulders from prolonged sitting. Manageable with cushion adjustments and stretching.</li>
+          <li><strong>Emotional releases:</strong> crying, waves of sadness or anger that seem to come from nowhere. This is buried material surfacing. It passes.</li>
+          <li><strong>The urge to leave,</strong> especially on <Link href="/experience/day-3" className="text-accent underline hover:text-foreground">Days 2 to 3</Link>. Nearly universal. It passes.</li>
+          <li><strong>Sleep disruption:</strong> difficulty falling asleep or vivid dreams, especially in the first few days.</li>
+          <li><strong>Heightened sensitivity.</strong> After the course, sounds seem louder, lights brighter, food more flavorful. This normalizes within a few days.</li>
+          <li><strong>Temporary mood swings:</strong> irritability or euphoria in the days following the course. These stabilize with continued practice.</li>
         </ul>
         <p className="mt-4">
-          None of these are signs that something has gone wrong. They&apos;re signs that the technique is working — you&apos;re becoming more aware of what was always there.
+          None of these are signs that something has gone wrong. They tend to be signs that the practice is working: awareness is widening to include what was already there.
         </p>
       </section>
 
@@ -87,14 +87,14 @@ export default function IsVipassanaSafePage() {
           There are situations where a 10-day intensive course may not be the right choice:
         </p>
         <ul className="mt-3 list-disc space-y-2 pl-6">
-          <li><strong>Active psychosis or schizophrenia</strong> — the deep introspection can destabilize an already fragile mental state.</li>
-          <li><strong>Recent severe trauma</strong> — if you&apos;re still in acute crisis, intensive meditation can overwhelm your coping capacity.</li>
-          <li><strong>Severe untreated depression or suicidal ideation</strong> — the isolation and silence can amplify these states.</li>
-          <li><strong>Bipolar disorder during a manic phase</strong> — the intensity can exacerbate mania.</li>
-          <li><strong>Active substance addiction</strong> — withdrawal in an unsupported environment is dangerous.</li>
+          <li><strong>Active psychosis or schizophrenia:</strong> the deep introspection can destabilize an already fragile mental state.</li>
+          <li><strong>Recent severe trauma.</strong> If you&apos;re still in acute crisis, intensive meditation can overwhelm your coping capacity.</li>
+          <li><strong>Severe untreated depression or suicidal ideation:</strong> the isolation and silence can amplify these states.</li>
+          <li><strong>Bipolar disorder during a manic phase:</strong> the intensity can exacerbate mania.</li>
+          <li><strong>Active substance addiction:</strong> withdrawal in an unsupported environment is dangerous.</li>
         </ul>
         <p className="mt-4">
-          The application form asks about psychiatric history for exactly this reason. Be completely honest. The screening isn&apos;t gatekeeping — it&apos;s genuine care for your wellbeing. If you&apos;re unsure, consult both a mental health professional and the center before applying.
+          The application form asks about psychiatric history for exactly this reason. Be completely honest. The screening isn&apos;t gatekeeping; it is genuine care for your wellbeing. If you&apos;re unsure, consult both a mental health professional and the center before applying.
         </p>
       </section>
 
@@ -104,12 +104,12 @@ export default function IsVipassanaSafePage() {
           Vipassana courses aren&apos;t unstructured. Several safety mechanisms are in place:
         </p>
         <ul className="mt-3 list-disc space-y-2 pl-6">
-          <li><strong>Teacher availability</strong> — you can speak with the assistant teacher during designated times about any difficulties.</li>
-          <li><strong>Course manager</strong> — available for logistical and personal concerns throughout the course.</li>
-          <li><strong>Application screening</strong> — the form asks about physical and mental health conditions.</li>
-          <li><strong>Gradual technique introduction</strong> — three days of preparatory Anapana before the full Vipassana technique.</li>
-          <li><strong>Evening discourses</strong> — Goenka&apos;s talks address common difficulties each day, normalizing the experience.</li>
-          <li><strong>You can leave</strong> — while strongly discouraged, you are not detained. If you truly need to go, you can.</li>
+          <li><strong>Teacher availability:</strong> you can speak with the assistant teacher during designated times about any difficulties.</li>
+          <li><strong>Course manager:</strong> available for logistical and personal concerns throughout the course.</li>
+          <li><strong>Application screening:</strong> the form asks about physical and mental health conditions.</li>
+          <li><strong>A staged structure:</strong> the course unfolds in stages over 10 days, with preparatory practice before Vipassana proper is introduced.</li>
+          <li><strong>Evening discourses:</strong> Goenka&apos;s talks address common difficulties each day, normalizing the experience.</li>
+          <li><strong>You can leave.</strong> While strongly discouraged, you are not detained. If you truly need to go, you can.</li>
         </ul>
       </section>
 
@@ -119,10 +119,10 @@ export default function IsVipassanaSafePage() {
           After six courses, my honest assessment: Vipassana is one of the most beneficial things I&apos;ve ever done, and I&apos;ve recommended it to dozens of people. But I wouldn&apos;t recommend it to someone in acute psychological crisis without professional guidance.
         </p>
         <p>
-          The discomfort is real but temporary. The benefits — reduced reactivity, improved focus, better emotional regulation — are lasting. The key is going in with eyes open: it will be hard, it will surface difficult things, and that&apos;s the point.
+          The discomfort is real but temporary. The benefits (reduced reactivity, improved focus, better emotional regulation) are lasting. The key is going in with eyes open: it will be hard, it will surface difficult things, and that is the point.
         </p>
         <p>
-          If you&apos;re mentally healthy and willing to follow the instructions for 10 days, the risk-benefit ratio is overwhelmingly positive. If you have concerns about your mental health, talk to a professional first. There&apos;s no rush — courses are available year-round, and your wellbeing comes first.
+          If you&apos;re mentally healthy and willing to follow the instructions for 10 days, the risk-benefit ratio is overwhelmingly positive. If you have concerns about your mental health, talk to a professional first. There&apos;s no rush; courses are available year-round, and your wellbeing comes first.
         </p>
       </section>
     </FaqDetailPage>
