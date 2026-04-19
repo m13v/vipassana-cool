@@ -4,14 +4,51 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { FaqSchema } from "@/components/faq-schema";
 import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
+const PAGE_URL = "https://vipassana.cool/guide/daily-practice";
+const PUBLISHED = "2025-01-15";
+
 export const metadata: Metadata = {
-  title: "Vipassana Daily Practice at Home — How to Maintain After Your Course",
+  title: "Why Daily Practice Matters After a Vipassana Course",
   description:
-    "How to maintain a daily Vipassana meditation practice at home after completing a course. Practical tips on scheduling, obstacles, and building consistency.",
-  alternates: { canonical: "https://vipassana.cool/guide/daily-practice" },
+    "Why daily practice after a 10-day Goenka course is important: habit, consistency, integration, and community. A non-teaching reflection for old students. This page does not describe technique.",
+  alternates: { canonical: PAGE_URL },
 };
+
+const faqs = [
+  {
+    question: "What does the Goenka tradition recommend for daily practice?",
+    answer:
+      "After a 10-day course, old students are encouraged to continue sitting daily, traditionally two hours per day (one in the morning, one in the evening). The instructions for what that practice consists of were given during the course itself.",
+  },
+  {
+    question: "Why does daily practice matter after the course?",
+    answer:
+      "A 10-day course is the foundation. Daily practice afterward is what integrates the course into ordinary life. The tradition treats it as the means by which the work begun at the center is sustained and deepened over time.",
+  },
+  {
+    question: "What if I can't sit two hours a day?",
+    answer:
+      "Many old students do not, at least not consistently. This is normal and well known. The tradition's own guidance is that two hours is the recommendation, not a test you pass or fail. What matters most is maintaining some form of daily continuity and returning to a course periodically.",
+  },
+  {
+    question: "Where should I go with technique questions?",
+    answer:
+      "To an assistant teacher. Most centers have question time during courses and group sittings, and you can also reach out to your regional center by email or phone. Teachers are the appropriate source for technique guidance in this tradition, not websites or forums.",
+  },
+  {
+    question: "How do I keep the habit alive between courses?",
+    answer:
+      "Common supports include a consistent time and place for sitting each day, attending weekly group sittings with other old students, taking at least one course per year, and, for some people, being paired with a Practice Buddy for mutual accountability.",
+  },
+  {
+    question: "What is a Practice Buddy?",
+    answer:
+      "A Practice Buddy is a fellow old student from the same tradition who agrees to sit with you regularly over video, in silence. The practice itself is not shared or discussed during the sit: the point is showing up together, as mutual accountability. See /practice-buddy/how-it-works for details.",
+  },
+];
 
 export default function DailyPracticePage() {
   return (
@@ -20,15 +57,16 @@ export default function DailyPracticePage() {
         items={[
           { name: "Home", url: "https://vipassana.cool" },
           { name: "Guide", url: "https://vipassana.cool/guide" },
-          { name: "Daily Practice", url: "https://vipassana.cool/guide/daily-practice" },
+          { name: "Daily Practice", url: PAGE_URL },
         ]}
       />
       <ArticleSchema
-        title="Daily Vipassana Practice at Home"
-        description="How to maintain a daily Vipassana meditation practice at home after completing a course. Practical tips on scheduling, obstacles, and building consistency."
-        url="https://vipassana.cool/guide/daily-practice"
-        datePublished="2025-01-15"
+        title="Why Daily Practice Matters After a Vipassana Course"
+        description="A non-teaching reflection on habit, consistency, and community as the foundation of daily practice after a 10-day course."
+        url={PAGE_URL}
+        datePublished={PUBLISHED}
       />
+      <FaqSchema faqs={faqs} />
       <ArticleHeader
         breadcrumbs={[
           { label: "Home", href: "/" },
@@ -36,248 +74,129 @@ export default function DailyPracticePage() {
           { label: "Daily Practice" },
         ]}
         category="After Your Course"
-        title="Daily Vipassana Practice at Home"
-        description="The course plants the seed. Daily practice is what makes it grow. Practical guidance on maintaining Vipassana after you leave the center."
-        datePublished="2025-01-15"
+        title="Why Daily Practice Matters"
+        description="The course plants the seed. Daily practice is what keeps it alive. This page is about habit and continuity, not technique."
+        datePublished={PUBLISHED}
       />
 
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          The recommended daily Vipassana practice is two hours — one hour morning, one hour evening — but consistency matters more than duration. Start with 20 minutes every morning and build up. Sit in the same spot at the same time, use a timer, and begin with Anapana before transitioning to body scanning. A 20-minute daily sit beats an inconsistent hour. Take one course per year and attend weekly group sittings to sustain your practice long-term.
+          The Goenka tradition recommends that old students sit daily after the course, traditionally two hours per day. What happens inside a sitting is taught at the course itself, not here. This page is about the surrounding question: why daily continuity matters, why most practitioners struggle with it at some point, and the supports (community, group sittings, annual courses, Practice Buddies) that help the habit survive ordinary life.
         </p>
       </div>
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What is the recommended daily Vipassana practice?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">A note on what this page is and is not</h2>
           <p>
-            The official guidance is clear: sit for one hour in the morning and one hour in the evening. This is what Goenka recommends, what the assistant teachers reinforce, and what &quot;old students&quot; are expected to maintain.
+            In the Goenka tradition, the meditation technique is transmitted at a 10-day residential course by an authorized teacher. What you do during a sitting was explained there, in the context it belongs in. This page does not re-describe that, because doing so would sit outside the tradition&apos;s long-standing guidance to old students.
           </p>
           <p>
-            The reality is that many people struggle with this, especially in the beginning. Two hours of daily meditation is a significant commitment. The most important thing is to practice every day, even if the duration is shorter than the ideal.
+            What this page is about is the frame around the sitting: why daily practice is considered important, why it is hard to keep up, and what seems to help.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How do you start a Vipassana practice at home?</h2>
-
-          <h3 className="mb-2 mt-6 font-semibold text-foreground">Set Up Your Space</h3>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What the tradition recommends</h2>
           <p>
-            Designate a spot for meditation. It doesn&apos;t need to be a dedicated room — a corner of your bedroom works. The key is consistency: sitting in the same place creates a mental association that helps you settle in faster. Keep your cushion, bench, or chair there permanently so there&apos;s zero setup friction.
+            At the end of a 10-day course, old students are asked to maintain daily practice. The traditional recommendation is two hours per day, divided into a morning and an evening sitting. This is the framing Goenka himself gave, and it is repeated by assistant teachers.
           </p>
           <p>
-            <strong>Choosing your spot:</strong> If you live with others, a corner with your back to the room works well. A visual boundary — even a small rug or a folded blanket marking your space — signals to housemates that this is your practice area. Consistency matters more than aesthetics: the same spot, every day, creates a gravitational pull that makes sitting easier.
-          </p>
-          <p>
-            <strong>Cushion vs bench vs chair:</strong> Use whatever allows you to sit upright with a straight spine. If your hips are tight, a higher cushion or a bench helps. If your knees are an issue, a chair is perfectly fine — Goenka himself says the technique works regardless of posture. The worst option is your bed or a couch; too much comfort leads to drowsiness.
-          </p>
-          <p>
-            <strong>Managing noise:</strong> Early morning is naturally quieter. If noise is a persistent issue, simple earplugs or a white noise machine can help. That said, some meditators treat noise as part of the practice — observe the sound, notice your aversion to it, and return to the body scan. External silence is helpful but not required.
-          </p>
-          <p>
-            <strong>Temperature:</strong> Slightly cool is better than warm. A warm room makes you drowsy. Keep a blanket nearby for cold mornings — your body temperature drops during extended sitting. The blanket-over-legs approach from the meditation hall works well at home too.
-          </p>
-
-          <h3 className="mb-2 mt-6 font-semibold text-foreground">Choose Your Time</h3>
-          <p>
-            Morning practice before the day starts is generally most effective. Your mind hasn&apos;t yet been pulled in a hundred directions. Set your alarm earlier than you need to, sit, then start your day. The evening sit is harder to protect — social commitments, fatigue, and &quot;just one more thing&quot; constantly encroach.
-          </p>
-          <p>
-            If two hours is too much right now, start with whatever you can sustain. Thirty minutes in the morning is better than an hour that you skip three days a week. Consistency matters more than duration.
-          </p>
-
-          <h3 className="mb-2 mt-6 font-semibold text-foreground">Use a Timer</h3>
-          <p>
-            Set a timer for your desired duration so you&apos;re not checking the clock. A simple phone timer works. Some people use meditation timer apps that have a gentle bell — find what works for you. Avoid apps with guided meditations; Vipassana is a self-directed practice.
+            The recommendation is an orientation, not a test. Many old students, over a long practice life, move in and out of that two-hour mark depending on work, family, and health. The value of the recommendation is in the direction it points, not in perfect compliance.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What does daily Vipassana practice look like?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why continuity matters more than heroics</h2>
           <p>
-            Sit, close your eyes, and begin with a few minutes of Anapana (observing the breath at the nose). Once your mind has settled, transition to the body scan — moving attention systematically from head to feet and back. Maintain equanimity throughout: observe whatever arises without craving or aversion.
+            A single long sitting, once in a while, is not what the tradition asks for. It asks for a daily relationship with the practice. That daily-ness is what lets the course gradually seep into ordinary life: how you react in traffic, how you speak to family, how you sit with difficulty at work.
           </p>
           <p>
-            At the end of your sit, spend a minute or two on metta — generating feelings of goodwill and compassion for yourself and all beings. Then open your eyes gently.
-          </p>
-          <p>
-            That&apos;s it. No special rituals, no mantras, no visualization. Just observation and equanimity.
+            Showing up each day, even briefly, keeps the thread unbroken. A missed day is not the problem. A missed month, without a path back, is.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What are common obstacles to daily practice?</h2>
-
-          <div className="mt-4 space-y-6">
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">&quot;I don&apos;t have time&quot;</h3>
-              <p>
-                This is the number one obstacle, and it&apos;s usually a priority issue rather than a time issue. You have time for social media, Netflix, and scrolling your phone. You have time to sit. Start with 20 minutes and build up. The busier you are, the more you need the practice.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">&quot;My meditation isn&apos;t as deep as at the center&quot;</h3>
-              <p>
-                Of course it isn&apos;t. At the center, you meditated 10+ hours a day in a controlled environment. At home, you&apos;re doing 30-60 minutes amid the noise of life. The depth will be less intense, but the consistency is what creates lasting change. Don&apos;t compare — just practice.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">&quot;I keep missing days&quot;</h3>
-              <p>
-                Everyone misses days. The key is how you respond. Don&apos;t spiral into guilt or give up. Just sit the next day. If you miss a week, sit today. The practice is always available, and every sit is a fresh start. What you&apos;re building is a long-term habit, not a perfect streak.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">&quot;I&apos;m not feeling the sensations I felt during the course&quot;</h3>
-              <p>
-                The intensity of sensations during a course comes from the depth of concentration built over 10 days. Daily practice will have subtler sensations, and that&apos;s fine. The work is happening whether you feel dramatic sensations or not. Equanimity toward subtle sensations is just as valuable as equanimity toward intense ones.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">&quot;My family thinks it&apos;s weird&quot;</h3>
-              <p>
-                Early morning is your friend. Sit before anyone else is awake. You don&apos;t need to explain or defend your practice. Let the results speak for themselves — when the people around you notice you&apos;re calmer, more patient, and more present, the questions shift from &quot;why do you do that?&quot; to &quot;how do I start?&quot;
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What is a realistic meditation schedule?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why practice lapses are normal</h2>
           <p>
-            The &quot;ideal&quot; Vipassana schedule is two hours daily — one hour morning, one hour evening. That&apos;s what Goenka recommends, and it&apos;s a worthy goal. But for most people, especially those new to daily practice, jumping straight to two hours is a recipe for burnout and abandonment.
+            Essentially every long-term practitioner has stopped at some point, for weeks, months, sometimes longer. New babies, new jobs, grief, travel, illness, and the sheer gravity of ordinary life all pull at the morning schedule. This is so common in the old-student community that it barely needs to be said.
           </p>
           <p>
-            Here are practical schedule tiers. Start where you can be consistent, and build from there:
-          </p>
-
-          <div className="mt-6 space-y-4">
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">Starter: 20 minutes morning only</h3>
-              <p>
-                Perfect for the first weeks after your course. Just sit every morning for 20 minutes. No evening session. The goal is to establish the habit before extending the duration. Twenty minutes is enough to do a meaningful body scan and build the daily groove.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">Building: 30 minutes morning, 15 minutes evening</h3>
-              <p>
-                Once the morning habit is solid, add a short evening sit. Fifteen minutes before bed helps you process the day and creates a natural bookend. Your morning session becomes the main practice; the evening session is a lighter supplement.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">Committed: 45 minutes morning, 30 minutes evening</h3>
-              <p>
-                This is where the practice starts to deepen noticeably. Forty-five minutes gives you time to settle, do a thorough body scan, and sit with whatever arises. The 30-minute evening sit becomes a real practice session, not just a check-in.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">Full: 1 hour morning, 1 hour evening</h3>
-              <p>
-                The recommended practice. Two hours daily is what sustains deep progress over months and years. If you can reach this level consistently, you&apos;ll notice a significant difference in your equanimity, awareness, and the quality of your sittings during courses.
-              </p>
-            </div>
-          </div>
-
-          <p className="mt-6">
-            The key message: any consistent practice beats an inconsistent &quot;ideal&quot; practice. Sitting for 20 minutes every single day will take you further than sitting for an hour three times a week. Build the habit first, then extend the duration. Your practice should feel sustainable, not heroic.
+            Guilt about this tends to make things worse, not better. The tradition&apos;s framing is more practical: notice the gap, come back, sit again tomorrow. If the gap has been very long, a course is a natural way to re-anchor.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What happens when you stop practicing?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Things that help the habit survive</h2>
           <p>
-            It happens to everyone. Including me. You miss a day, then two, then a week, and suddenly it&apos;s been a month since you last sat. The cushion gathers dust. The habit feels like a distant memory.
+            Across the old-student community, a few patterns come up again and again as supports for continuity. None of them are about technique; they are about structure around the practice.
           </p>
-          <p>
-            This is normal. It&apos;s not a failure — it&apos;s part of the long arc of practice. The question isn&apos;t whether you&apos;ll fall off. The question is how you come back.
-          </p>
-          <p>
-            If you&apos;ve been away for days, just sit tomorrow morning. Start with 10 or 15 minutes if a full session feels intimidating. Don&apos;t try to &quot;make up&quot; for lost time. Just begin again.
-          </p>
-          <p>
-            If you&apos;ve been away for weeks or months, the same applies — but be gentle with yourself. Your concentration will have weakened, sensations may be less clear, and your mind will be noisier than you remember. That&apos;s okay. Every meditator who has practiced for decades has gone through stretches like this. The practice is always there, exactly where you left it.
-          </p>
-          <p>
-            There&apos;s no need for guilt. Guilt is just another form of aversion — exactly what the practice teaches you to observe and release. Instead of beating yourself up for not sitting, channel that energy into sitting right now.
-          </p>
-          <p>
-            Sometimes the best way to restart is to take another course. A 10-day course is like pressing a reset button on your practice. If you&apos;ve been struggling to maintain daily practice for months, signing up for a course can reignite the motivation and deepen the technique in ways that home practice alone cannot.
-          </p>
-          <p>
-            <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">Group sittings</Link> are another powerful accountability tool. Many Vipassana centers host weekly group sittings for old students. Having a regular appointment with other meditators creates gentle external structure. You&apos;re less likely to skip when others are expecting you. And sitting with a group, even in silence, reinforces that you&apos;re part of something larger than your individual practice.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How do you build a consistent meditation habit?</h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Same time, same place, every day.</strong> Remove decisions from the equation. It&apos;s not &quot;should I meditate today?&quot; — it&apos;s &quot;it&apos;s 6 AM, so I sit.&quot;</li>
-            <li><strong>Start small if you need to.</strong> Twenty minutes is better than zero. You can always extend later.</li>
-            <li><strong>Don&apos;t negotiate with resistance.</strong> The mind will generate excellent reasons to skip. Sit anyway. You&apos;ve never regretted a sit.</li>
-            <li><strong>Take a course annually.</strong> One course per year recharges the practice significantly. It&apos;s like a deep reset that sustains the daily work.</li>
-            <li><strong>Connect with other meditators.</strong> <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">Group sittings</Link> are offered at most Vipassana centers. Sitting with others, even once a week, reinforces the practice.</li>
-            <li><strong>Use the Goenka recordings.</strong> As an old student, you have access to guided group sittings and chanting recordings. These can add structure to home sessions.</li>
+            <li>
+              <strong>Same time, same place.</strong> Removing decisions is the first kindness you can do for your future self. Early morning, before the day starts, tends to be the most protected time for most people.
+            </li>
+            <li>
+              <strong>Annual course.</strong> Sitting a course at least once a year is strongly encouraged in the tradition and is often what resets a faltering practice.
+            </li>
+            <li>
+              <strong>Group sittings.</strong> Many centers host weekly group sittings for old students. Sitting alongside others creates gentle accountability and continuity. See <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">group sittings</Link> for more.
+            </li>
+            <li>
+              <strong>Community.</strong> Being known by other old students, even loosely, keeps the practice from becoming purely private and fragile.
+            </li>
+            <li>
+              <strong>Accountability partner.</strong> Some old students find it helpful to be paired with another old student for daily shared sittings over video, in silence. See <Link href="/practice-buddy/how-it-works" className="text-accent underline hover:text-foreground">Practice Buddy</Link>.
+            </li>
           </ul>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How do you fit Vipassana practice into family life?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Fitting practice into ordinary life</h2>
           <p>
-            One of the most common practical challenges isn&apos;t the technique itself — it&apos;s fitting meditation into a household with other people.
+            Daily sitting does not require a dedicated room, a perfect cushion, or a silent house. It requires a slot that is protected well enough that it does not collapse the first time life is busy. Old students with small children, demanding jobs, or shared living situations have all found workable arrangements, usually by sitting before anyone else is awake and treating the time as non-negotiable the way meals or sleep are non-negotiable.
           </p>
-
-          <div className="mt-4 space-y-6">
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">When you have a partner</h3>
-              <p>
-                Communicate your schedule matter-of-factly, not apologetically. &quot;I sit from 6 to 7 every morning&quot; is better than &quot;I hope you don&apos;t mind if I meditate.&quot; Use a vibrating watch or phone alarm so you don&apos;t wake them. And let the benefits speak — when your partner notices you&apos;re calmer, more patient, and more present, the meditation time becomes easier to protect.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">When you have young children</h3>
-              <p>
-                Early morning before they wake is the most reliable window. If that&apos;s not possible, negotiate with your partner: &quot;I sit for 30 minutes while you handle morning routine, then I take over.&quot; When interruptions happen — and they will — handle them gently, then return to the cushion. A closed door with a simple rule (&quot;unless someone is hurt, please wait&quot;) works for older children.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">Shared spaces</h3>
-              <p>
-                If you don&apos;t have a private room, a corner with your back to the room creates enough separation. Early morning solves most shared-space problems — you sit while the house is asleep. If morning isn&apos;t an option, a visual boundary (a specific mat, a folded blanket) and a consistent time create the same effect as a dedicated room.
-              </p>
-            </div>
-          </div>
+          <p>
+            Communicate the schedule with the people you live with plainly, not apologetically. Over months, the household usually adjusts around it.
+          </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What does a long-term daily practice look like?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Where to take technique questions</h2>
           <p>
-            I sit every morning, usually for 45-60 minutes. Evening sittings happen maybe four days a week. Some days the practice is deep and focused. Many days my mind wanders and I spend the session gently bringing it back. Both kinds of sitting count.
+            Any question about what is happening inside a sitting, what to do with a particular difficulty, or how to adjust your practice belongs with an assistant teacher, not with the internet. Centers welcome questions from old students by email, phone, and in person at group sittings and during courses. That is the line of communication the tradition provides for exactly this.
           </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">The long view</h2>
           <p>
-            The cumulative effect over hundreds of days is unmistakable. Not dramatic, single moments of transformation — but a gradual, steady shift in how I relate to difficulty, uncertainty, and my own reactive patterns. That shift is what keeps me coming back to the cushion. For more on what this looks like over time, see our guide to <Link href="/guide/recognizing-progress" className="text-accent underline hover:text-foreground">recognizing progress</Link>.
+            A practice measured in decades looks nothing like a heroic streak. It looks like many returns. Some months are steady, some are sparse, some are interrupted by a course or a retreat. The thread that makes it a practice is the returning. Everything else is incidental.
           </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Frequently asked questions</h2>
+          <div className="mt-4 space-y-6">
+            {faqs.map((faq) => (
+              <div key={faq.question} className="border-l-2 border-accent/30 pl-4">
+                <h3 className="mb-1 font-semibold text-foreground">{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
 
       <PracticeBuddyCta
-        heading="Need Accountability for Your Daily Practice?"
-        description="The hardest part of daily practice is doing it alone. Get matched with a fellow Vipassana meditator for daily sits over Google Meet. Free, and tradition-respectful."
+        heading="Need accountability for daily practice?"
+        description="The hardest part of daily practice is doing it alone. Get matched with a fellow old student for daily sits over video. Silent, free, tradition-respectful."
       />
 
       <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
-        <h2 className="mb-3 text-xl font-bold">Ready to Begin?</h2>
+        <h2 className="mb-3 text-xl font-bold">Sit another course</h2>
         <p className="mb-6 text-muted">
-          Find a center near you and sign up for your first (or next) 10-day course.
+          A 10-day course is the tradition&apos;s own way of resetting and deepening practice. Find one near you.
         </p>
         <a
           href="https://www.dhamma.org/en-US/courses/search"
@@ -285,25 +204,27 @@ export default function DailyPracticePage() {
           rel="noopener noreferrer"
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
-          Find a Course
+          Find a course
         </a>
       </div>
 
-      {/* Related Articles */}
       <div className="mt-12 rounded-xl border border-border bg-card p-6">
-        <h2 className="mb-4 font-semibold text-foreground">Related Articles</h2>
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
         <div className="flex flex-wrap gap-3">
           <Link href="/guide/group-sittings" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Group Sittings
           </Link>
-          <Link href="/guide/restarting-your-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            Restarting Your Practice
+          <Link href="/guide/find-a-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Find a Retreat
           </Link>
-          <Link href="/guide/recognizing-progress" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            Recognizing Progress
+          <Link href="/guide/course-application-tips" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Course Application Tips
           </Link>
-          <Link href="/guide/after-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            After the Retreat
+          <Link href="/practice-buddy/how-it-works" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Practice Buddy
+          </Link>
+          <Link href="/experience" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Student Experiences
           </Link>
         </div>
       </div>
