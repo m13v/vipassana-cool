@@ -2,64 +2,74 @@ import type { Metadata } from "next";
 import { DayPage } from "@/components/day-page";
 
 export const metadata: Metadata = {
-  title: "Vipassana Day 1 — Arrival, Anapana & the First Sit",
+  title: "Vipassana Day 1 — Arrival and the First Full Day",
   description:
-    "What happens on day 1 of a Vipassana course: arrival, orientation, your first Anapana meditation session, and how to survive the initial hours of silence.",
+    "A descriptive account of day 1 of a 10-day Vipassana course: arrival, orientation, the first morning in the hall, and how the first full day of Noble Silence commonly feels.",
   alternates: { canonical: "https://vipassana.cool/experience/day-1" },
 };
 
 export default function Day1Page() {
   return (
-    <DayPage day={1} title="Arrival, Anapana & the First Sit">
+    <DayPage day={1} title="Arrival and the First Full Day">
       <p>
-        Day 1 technically starts the evening before. You arrive at the center between 2 and 5 PM on &quot;Day 0,&quot; register, get assigned a room, and hand over your phone, books, and any writing materials. That evening, Noble Silence begins. The last conversation you have is probably with a stranger in the dining hall — then nothing for nine days.
+        Day 1 technically starts the evening before. Students arrive at the center between about 2 and 5 PM on &quot;day 0,&quot; register, are assigned a room, and hand in phones, books, and writing materials. That evening, Noble Silence begins. The last conversation most people have is with a stranger in the dining hall, and then: nothing for the next nine days.
       </p>
 
       <h2 className="text-xl font-bold text-foreground">The First Morning</h2>
       <p>
-        The gong sounds at 4:00 AM. It&apos;s still dark. You stumble to the meditation hall with fifty other half-awake people and sit down on a cushion. The assistant teacher presses play on a recording, and S.N. Goenka&apos;s voice fills the hall.
+        The wake-up gong sounds at 4:00 AM. It is still dark. Fifty or so half-awake people shuffle to the meditation hall and sit down on cushions. The assistant teacher starts the recording, and S.N. Goenka&apos;s voice fills the room.
       </p>
       <p>
-        The instruction is simple: observe your breath. Not control it, not breathe deeply, not visualize anything. Just observe the natural breath as it flows in and out of the nostrils. This is Anapana — the technique you&apos;ll practice for the first three and a half days.
-      </p>
-
-      <h2 className="text-xl font-bold text-foreground">What Anapana Actually Feels Like</h2>
-      <p>
-        It sounds easy. It isn&apos;t. Within two minutes, your mind has replayed a conversation from three years ago, planned your grocery list, composed an email, and started writing a novel. You notice you&apos;ve been distracted, bring your attention back to the breath, and within seconds you&apos;re gone again.
-      </p>
-      <p>
-        This is completely normal. The point isn&apos;t to have a perfectly concentrated mind on Day 1 — it&apos;s to begin the process of sharpening your attention. Every time you notice you&apos;ve wandered and bring your attention back, that&apos;s one rep. You&apos;ll do thousands of these reps over the next ten days.
+        The course introduces breath awareness as the starting practice on day 1. The formal instruction for how to do it is given inside the hall, by the recorded audio and the assistant teacher. This page does not reproduce the instruction; it belongs to the course itself. For roughly the first three and a half days, the schedule works with this starting practice as preparation.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">Physical Challenges</h2>
+      <h2 className="text-xl font-bold text-foreground">What the First Day Commonly Feels Like</h2>
       <p>
-        Your body is not used to sitting for this long. By the afternoon session, your knees ache, your back is stiff, and you&apos;re constantly shifting position. The meditation hall has cushions, benches, and back supports available — use them. There&apos;s no prize for suffering through pain you could easily address with a different cushion arrangement.
+        On paper, the first day sounds simple: sit, listen, follow the schedule. In practice, almost everyone finds it harder than expected. Within a few minutes of the first sitting, the mind has replayed a conversation from years ago, planned tomorrow&apos;s grocery list, composed an email, and started drafting an imaginary argument with someone. Attention wanders, comes back, wanders again.
       </p>
       <p>
-        One thing that helped me: during breaks, do gentle stretches. Hip openers, gentle twists, walking. Your body will adapt over the next few days, but Day 1 is the steepest learning curve physically.
+        This is completely ordinary on day 1. Students are told, in one form or another, that a quiet and focused mind is not the expectation on the first day. Every time the mind notices it has wandered and returns to the task, that is one repetition. Ten days produces a lot of repetitions.
+      </p>
+
+      <h2 className="text-xl font-bold text-foreground">Physical Adjustment</h2>
+      <p>
+        Most bodies are not used to sitting for this many hours. By the afternoon, knees ache, backs stiffen, students shift position frequently. The meditation hall has cushions, benches, and back supports; the course managers encourage people to use whatever configuration actually works for them. There is no award for enduring avoidable discomfort.
+      </p>
+      <p>
+        Gentle walking and stretching during breaks helps. The body adapts over the next few days, but day 1 is usually the steepest part of the physical learning curve.
       </p>
 
       <h2 className="text-xl font-bold text-foreground">The Silence</h2>
       <p>
-        The silence is strange at first. You eat breakfast across from someone and don&apos;t make eye contact. You walk past people on the path and don&apos;t acknowledge them. Every social instinct says this is wrong.
+        Noble Silence feels strange at first. You eat breakfast across from someone and do not make eye contact. You pass someone on a path and do not acknowledge them. Every social instinct you have says this is rude or wrong. It takes a while for the nervous system to register that the rule is the point, not an oversight.
       </p>
       <p>
-        But by the end of Day 1, you start to feel the first hints of relief. No small talk, no social performance, no need to be interesting or interested. You just exist. For many people — especially extroverts — this is the first time they&apos;ve ever experienced this.
+        By the end of day 1, many students report the first hints of relief: no small talk, no social performance, no need to be interesting or interested. For people who have never experienced silence at this scale, this recognition alone can be worth the day.
       </p>
 
       <h2 className="text-xl font-bold text-foreground">Evening Discourse</h2>
       <p>
-        At 7 PM, everyone gathers to watch a recorded video discourse by S.N. Goenka. These nightly talks become the highlight of each day. Goenka is warm, humorous, and surprisingly relatable. On Day 1, he explains the technique, the rules, and why they exist. He acknowledges that the whole thing probably seems a bit mad.
+        At 7 PM, students gather to watch a recorded video discourse by S.N. Goenka. These nightly talks become the anchor of each day. On day 1, the discourse introduces the rules of the course, the basic shape of the tradition, and why things are structured the way they are. Goenka is warm, dry, and often unexpectedly funny. He acknowledges that the whole setup probably seems a bit mad from the outside.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">Tips for Day 1</h2>
+      <h2 className="text-xl font-bold text-foreground">Logistical Notes</h2>
       <ul className="list-disc space-y-2 pl-6">
-        <li>Don&apos;t fight the mental chatter. Just keep gently returning to the breath.</li>
-        <li>Experiment with your sitting position early. Find what works before your body gets sore.</li>
-        <li>Eat a solid breakfast and lunch — there&apos;s no dinner, only fruit and tea at 5 PM.</li>
-        <li>Use the breaks to walk and stretch. Don&apos;t spend them lying in bed.</li>
-        <li>Remember: everyone around you is going through the same thing. You&apos;re not uniquely struggling.</li>
+        <li>Wake-up gong at 4:00 AM. Lights out around 9:30 PM.</li>
+        <li>Breakfast and lunch are the main meals. For new students, the evening provides tea and fruit around 5 PM; there is no dinner.</li>
+        <li>Phones and books are held at reception for the duration of the course.</li>
+        <li>Noble Silence begins after orientation on the arrival evening and lasts until the morning of day 10.</li>
       </ul>
+
+      <h2 className="text-xl font-bold text-foreground">Where to Go Next</h2>
+      <p>
+        If you are preparing for your first course, our{" "}
+        <a href="/prepare" className="text-accent hover:text-foreground">preparation page</a>
+        {" "}and{" "}
+        <a href="/prepare/packing-list" className="text-accent hover:text-foreground">packing list</a>
+        {" "}cover the practical side. The rest of this series continues with{" "}
+        <a href="/experience/day-2" className="text-accent hover:text-foreground">day 2</a>,{" "}
+        <a href="/experience/day-3" className="text-accent hover:text-foreground">day 3</a>, and onward.
+      </p>
     </DayPage>
   );
 }
