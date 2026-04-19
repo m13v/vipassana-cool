@@ -102,7 +102,7 @@ export default function RisksAndSafetyPage() {
             <div className="border-l-2 border-accent/30 pl-4">
               <h3 className="mb-1 font-semibold text-foreground">Somatic (Physical)</h3>
               <p>
-                Beyond the expected knee and back pain: involuntary movements, electrical sensations, pressure in the head, chronic pain changes, or somatic re-experiencing of trauma. The Vipassana body scan technique specifically works with physical sensation, so somatic effects are particularly common in this tradition.
+                Beyond the expected knee and back pain: involuntary movements, electrical sensations, pressure in the head, chronic pain changes, or somatic re-experiencing of trauma. The technique works with physical sensation, which is why somatic effects are common.
               </p>
             </div>
 
@@ -156,7 +156,7 @@ export default function RisksAndSafetyPage() {
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Pre-existing psychiatric conditions</strong> &mdash; People with a history of psychosis, bipolar disorder, severe depression, or PTSD are at higher risk. The application screening exists for this reason. Be honest on the form.</li>
-            <li><strong>Trauma history</strong> &mdash; Unresolved trauma can surface with force during intensive meditation. The body scan technique specifically works with physical sensation, which is where trauma is often stored. Without trauma-informed support, this can be overwhelming.</li>
+            <li><strong>Trauma history</strong>, unresolved trauma can surface with force during intensive meditation. The technique works with physical sensation, which is where trauma is often stored. Without trauma-informed support, this can be overwhelming.</li>
             <li><strong>No teacher guidance</strong> &mdash; Self-directed intensive practice without access to an experienced teacher is riskier than practice within a structured course. The teacher&apos;s role isn&apos;t just instruction &mdash; it&apos;s recognizing when a student is in trouble.</li>
             <li><strong>Retreat intensity</strong> &mdash; Longer retreats and more hours of daily practice correlate with higher rates of adverse effects. A 10-day course with 10+ hours of daily meditation is at the high end of intensity.</li>
             <li><strong>Personality factors</strong> &mdash; High levels of neuroticism or absorption (tendency toward immersive internal experiences) are associated with higher rates of challenging meditation experiences.</li>
@@ -235,7 +235,7 @@ export default function RisksAndSafetyPage() {
 
           <h3 className="mb-2 mt-6 font-semibold text-foreground">Practical Steps</h3>
           <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Reduce or stop intensive practice temporarily</strong> &mdash; If meditation is making things worse, it&apos;s okay to scale back or stop. Shorter, gentler sessions (Anapana rather than body scanning) can be less activating.</li>
+            <li><strong>Reduce or stop intensive practice temporarily</strong>, if meditation is making things worse, it&apos;s okay to scale back or stop. Talk to your assistant teacher if intensive practice is destabilizing, they can help you decide what to adjust.</li>
             <li><strong>Ground yourself</strong> &mdash; Physical activity, time in nature, social connection, and routine can help stabilize a dysregulated nervous system.</li>
             <li><strong>Don&apos;t isolate</strong> &mdash; The urge to withdraw is common but counterproductive. Stay connected to people you trust.</li>
             <li><strong>Avoid blaming yourself</strong> &mdash; Adverse meditation experiences are not a sign of personal failure or spiritual inadequacy. They are a known risk of intensive practice that requires appropriate support.</li>
@@ -249,7 +249,7 @@ export default function RisksAndSafetyPage() {
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Application screening</strong> &mdash; The registration form asks about psychiatric history, current medications, and physical health. Applicants with certain conditions may be asked to provide additional information or may not be accepted.</li>
-            <li><strong>Gradual technique introduction</strong> &mdash; The first three days focus on Anapana (breath observation) before introducing the full Vipassana body scan. This provides a stabilization period.</li>
+            <li><strong>Gradual technique introduction</strong>, the technique is introduced gradually across the course to allow a stabilization period.</li>
             <li><strong>Teacher availability</strong> &mdash; Students can speak with the assistant teacher during designated interview times about any difficulties they&apos;re experiencing.</li>
             <li><strong>Evening discourses</strong> &mdash; Goenka&apos;s nightly talks systematically address common challenges for each day of the course, normalizing difficult experiences.</li>
             <li><strong>Course managers</strong> &mdash; Non-teaching staff available for personal and logistical concerns throughout the course.</li>
