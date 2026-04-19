@@ -75,6 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/t/gross-sensation`, lastModified: d("2026-04-18"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/gross-sensation-meaning`, lastModified: d("2026-04-18"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/vipassana-cult`, lastModified: d("2026-04-18"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/t/accountability-partner-apps`, lastModified: d("2026-04-18"), changeFrequency: "monthly", priority: 0.8 },
     // Practice Buddy
     { url: `${baseUrl}/practice-buddy/how-it-works`, lastModified: d("2026-03-28"), changeFrequency: "monthly", priority: 0.8 },
     // Legal / info pages
