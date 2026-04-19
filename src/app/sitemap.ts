@@ -79,6 +79,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/t/accountability-partner-app`, lastModified: d("2026-04-18"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/vipassana-meditation-class`, lastModified: d("2026-04-19"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/t/daily-practice-limit-reached`, lastModified: d("2026-04-18"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/t/daily-handwriting-practice-pdf-free`, lastModified: d("2026-04-18"), changeFrequency: "monthly", priority: 0.7 },
+    // Printable tools
+    { url: `${baseUrl}/daily-sit-log/print`, lastModified: d("2026-04-18"), changeFrequency: "yearly", priority: 0.5 },
     // Practice Buddy
     { url: `${baseUrl}/practice-buddy/how-it-works`, lastModified: d("2026-03-28"), changeFrequency: "monthly", priority: 0.8 },
     // Legal / info pages
