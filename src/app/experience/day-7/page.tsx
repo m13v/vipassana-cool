@@ -2,59 +2,72 @@ import type { Metadata } from "next";
 import { DayPage } from "@/components/day-page";
 
 export const metadata: Metadata = {
-  title: "Vipassana Day 7 — Finding Flow & the Quiet Mind",
+  title: "Vipassana Day 7 — Quieter Mind, Longer Sittings",
   description:
-    "Day 7 of Vipassana: extended periods of concentration, mental quiet, and the body scan becoming second nature.",
+    "A descriptive account of day 7 of a 10-day Vipassana course: the mind is noticeably quieter, sittings feel longer and more settled, and the course takes on a different quality.",
   alternates: { canonical: "https://vipassana.cool/experience/day-7" },
 };
 
 export default function Day7Page() {
   return (
-    <DayPage day={7} title="Finding Flow & the Quiet Mind">
+    <DayPage day={7} title="Quieter Mind, Longer Sittings">
       <p>
-        Day 7 often brings something you couldn&apos;t have imagined on Day 2: peace. Not the dramatic, ecstatic kind — a quiet, steady peace that comes from sustained practice. Your mind has become noticeably calmer. The mental chatter hasn&apos;t stopped, but it&apos;s softer, less insistent, easier to let pass.
+        Day 7 often brings something that would have been hard to imagine from inside day 2: a kind of steadier quiet. Not dramatic, not ecstatic. Just a mind that is less insistent than it was, a body that is more settled in the schedule, and sittings that sometimes pass in a way that feels less like work and more like simply being there.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">The Scan Becomes Fluid</h2>
+      <h2 className="text-xl font-bold text-foreground">The Quality of the Mind</h2>
       <p>
-        By Day 7, the body scan is approaching fluidity. You can move through your entire body in 15-20 minutes with clear awareness of sensations everywhere. Blind spots are rare. The movement of attention becomes smooth rather than jerky — flowing from head to feet like water running downhill.
+        The most commonly mentioned change by day 7 is the quality of the mind itself. For many students, day 7 includes the first extended stretches of real mental quiet they have experienced in adult life. The constant internal narration has not disappeared entirely, but it is softer, slower, and easier to let pass without being pulled into a long mental tangent.
       </p>
       <p>
-        Some sittings will have a quality of effortlessness. The attention moves, sensations are observed, equanimity is maintained — and the hour passes in what feels like twenty minutes. These are the sittings that show you what the practice can be.
-      </p>
-
-      <h2 className="text-xl font-bold text-foreground">Mental Quiet</h2>
-      <p>
-        The most remarkable change by Day 7 is the quality of the mind. For perhaps the first time in your adult life, there are extended periods of genuine mental quiet. Not emptiness — awareness is heightened — but the constant narration, planning, and commenting has significantly diminished.
-      </p>
-      <p>
-        When thoughts do arise, you notice them more quickly. Instead of getting lost in a ten-minute mental tangent before realizing you&apos;ve been distracted, you catch thoughts within seconds. This is the sharpened awareness from seven days of practice.
-      </p>
-      <p>
-        Walking during breaks takes on a different quality. You notice the feel of the ground, the temperature of the air, the sound of birds, with a vividness that borders on surreal. The world hasn&apos;t changed — your perception has.
+        When thoughts do arise, they are noticed more quickly. What might have been a ten-minute distraction on day 2 is, on day 7, often caught within seconds. This is one of the observable fruits of a week of continuous practice.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">The Oscillation Continues</h2>
+      <h2 className="text-xl font-bold text-foreground">Walking Between Sessions</h2>
       <p>
-        Day 7 isn&apos;t uniformly peaceful. There are still difficult sittings — periods of restlessness, pain, or emotional intensity. The difference is how you meet them. What would have triggered panic or despair on Day 3 is now met with something closer to curiosity. &quot;Interesting — a wave of agitation. Let me observe what sensations accompany it.&quot;
+        Walking during breaks takes on a different quality by day 7. Many students notice the feel of the ground, the temperature of the air, the sound of birds, with a vividness that is almost surreal. The environment has not changed; the attention has. The world, for a few days, looks unusually detailed.
       </p>
+
+      <h2 className="text-xl font-bold text-foreground">Effortless Sittings, When They Happen</h2>
       <p>
-        This shift in perspective is the fruit of the practice. Not that difficulties stop arising, but that your response to them transforms.
+        Some sittings on day 7 have a quality students often describe as effortless: attention is there, the task is there, and the hour passes more quickly than the clock predicts. These are not the goal of the practice. They are a natural result of several consecutive days of careful sitting. How to work with them, and how not to, is something the course covers inside the hall.
+      </p>
+
+      <h2 className="text-xl font-bold text-foreground">Oscillation Still Happens</h2>
+      <p>
+        Day 7 is not uniformly peaceful. There are still difficult sittings: restlessness, physical discomfort, emotional waves. What most students notice, though, is that their response to those difficulties has shifted. What would have been met with panic on day 3 is often met with something closer to curiosity by day 7. That shift is one of the quietly important changes the course produces.
       </p>
 
       <h2 className="text-xl font-bold text-foreground">Evening Discourse</h2>
       <p>
-        Goenka discusses metta — loving-kindness — and how Vipassana naturally develops compassion. As you become more aware of your own suffering and the mental patterns that cause it, you develop genuine empathy for others who are caught in the same patterns. This isn&apos;t taught as a separate practice at this stage but described as a natural consequence of the work.
+        Goenka&apos;s day 7 discourse discusses metta (loving-kindness) and how compassion develops as a natural side effect of the work students have been doing all week. Students who have been aware, for seven days, of their own patterns and their own suffering often find that a quieter compassion for others arises without being deliberately cultivated. The discourse names this rather than teaching it.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">Tips for Day 7</h2>
+      <h2 className="text-xl font-bold text-foreground">What I Remember About Day 7</h2>
+      <p>
+        Day 7 is the day I usually notice, on any course, that I am not looking forward to the course ending. The first few days I am looking forward to the tenth day. By day 7 I am not counting at all. Everything has simplified. Sitting is the task. Walking is the task. Eating is the task. The texture of the days has turned into something I do not want to interrupt.
+      </p>
+
+      <h2 className="text-xl font-bold text-foreground">Common Observations on Day 7</h2>
       <ul className="list-disc space-y-2 pl-6">
-        <li>Don&apos;t get complacent. Peaceful sittings can lead to dullness if you&apos;re not vigilant.</li>
-        <li>Maintain the systematic body scan even when free flow makes it tempting to just bask in pleasant sensations.</li>
-        <li>Notice the changes in your perception during daily activities — eating, walking, resting.</li>
-        <li>Three days left. Stay committed to the practice.</li>
-        <li>If you have a difficult sitting after several peaceful ones, don&apos;t be discouraged. Oscillation is normal.</li>
+        <li>The mind is noticeably quieter than it was earlier in the week.</li>
+        <li>Walking and eating feel more vivid than usual.</li>
+        <li>Some sittings pass more quickly than the clock suggests.</li>
+        <li>Difficult sittings still happen; the relationship to them has shifted.</li>
+        <li>Students often stop counting days around here.</li>
       </ul>
+
+      <h2 className="text-xl font-bold text-foreground">Where to Go Next</h2>
+      <p>
+        The series continues with{" "}
+        <a href="/experience/day-8" className="text-accent hover:text-foreground">day 8</a>
+        {" "}and{" "}
+        <a href="/experience/day-9" className="text-accent hover:text-foreground">day 9</a>
+        , the last full day of Noble Silence. For practical preparation before a first course, see the{" "}
+        <a href="/prepare" className="text-accent hover:text-foreground">preparation page</a>
+        {" "}and the{" "}
+        <a href="/guide/find-a-retreat" className="text-accent hover:text-foreground">retreat finder</a>.
+      </p>
     </DayPage>
   );
 }
