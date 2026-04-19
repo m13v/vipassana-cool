@@ -3,7 +3,7 @@ import { FaqDetailPage } from "@/components/faq-detail-page";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "What to Expect at a 10-Day Vipassana Course — Complete Overview",
+  title: "What to Expect at a 10-Day Vipassana Course: Complete Overview",
   description:
     "A high-level overview of what actually happens at a 10-day Vipassana course: the daily schedule, technique progression, emotional arc, and what nobody tells you.",
   alternates: { canonical: "https://vipassana.cool/faq/what-to-expect" },
@@ -14,7 +14,7 @@ export default function WhatToExpectPage() {
     <FaqDetailPage
       pageId="faq-what-to-expect"
       title="What to Expect at a 10-Day Course"
-      description="A practical overview of what happens during 10 days of Vipassana — the schedule, the technique, the emotional arc, and the reality of it."
+      description="A practical overview of what happens during 10 days of Vipassana: the schedule, the stages of the course, the emotional arc, and the reality of it."
       schemaFaqs={[
         {
           question: "What happens at a 10-day Vipassana course?",
@@ -67,21 +67,21 @@ export default function WhatToExpectPage() {
         </p>
         <div className="mt-4 rounded-lg border border-border bg-card p-4 text-sm">
           <div className="space-y-1">
-            <p><strong>4:00 AM</strong> — Wake-up gong</p>
-            <p><strong>4:30–6:30</strong> — Meditation (hall or room)</p>
-            <p><strong>6:30–8:00</strong> — Breakfast and rest</p>
-            <p><strong>8:00–9:00</strong> — Group sitting in the hall (mandatory)</p>
-            <p><strong>9:00–11:00</strong> — Meditation (hall or room)</p>
-            <p><strong>11:00–1:00 PM</strong> — Lunch and rest</p>
-            <p><strong>1:00–2:30</strong> — Meditation (hall or room)</p>
-            <p><strong>2:30–3:30</strong> — Group sitting in the hall (mandatory)</p>
-            <p><strong>3:30–5:00</strong> — Meditation (hall or room)</p>
-            <p><strong>5:00–6:00</strong> — Tea break</p>
-            <p><strong>6:00–7:00</strong> — Group sitting in the hall (mandatory)</p>
-            <p><strong>7:00–8:15</strong> — Teacher&apos;s Discourse (video)</p>
-            <p><strong>8:15–9:00</strong> — Meditation</p>
-            <p><strong>9:00–9:30</strong> — Questions with teacher (optional)</p>
-            <p><strong>9:30</strong> — Lights out</p>
+            <p><strong>4:00 AM</strong>: Wake-up gong</p>
+            <p><strong>4:30 to 6:30</strong>: Meditation (hall or room)</p>
+            <p><strong>6:30 to 8:00</strong>: Breakfast and rest</p>
+            <p><strong>8:00 to 9:00</strong>: Group sitting in the hall (mandatory)</p>
+            <p><strong>9:00 to 11:00</strong>: Meditation (hall or room)</p>
+            <p><strong>11:00 to 1:00 PM</strong>: Lunch and rest</p>
+            <p><strong>1:00 to 2:30</strong>: Meditation (hall or room)</p>
+            <p><strong>2:30 to 3:30</strong>: Group sitting in the hall (mandatory)</p>
+            <p><strong>3:30 to 5:00</strong>: Meditation (hall or room)</p>
+            <p><strong>5:00 to 6:00</strong>: Tea break</p>
+            <p><strong>6:00 to 7:00</strong>: Group sitting in the hall (mandatory)</p>
+            <p><strong>7:00 to 8:15</strong>: Teacher&apos;s Discourse (video)</p>
+            <p><strong>8:15 to 9:00</strong>: Meditation</p>
+            <p><strong>9:00 to 9:30</strong>: Questions with teacher (optional)</p>
+            <p><strong>9:30</strong>: Lights out</p>
           </div>
         </div>
         <p className="mt-4">
@@ -92,34 +92,28 @@ export default function WhatToExpectPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Technique Progression</h2>
         <p>
-          The course teaches two techniques in sequence, plus a closing practice:
+          The course is structured in stages, each introduced by the assistant teacher. The specifics of what is taught, how, and in what order are transmitted in person at the course; they are not described on this site.
         </p>
 
         <div className="mt-4 space-y-6">
           <div className="border-l-2 border-accent/30 pl-4">
-            <h3 className="mb-1 font-semibold text-foreground">Days 1–3: Anapana (Breath Observation)</h3>
+            <h3 className="mb-1 font-semibold text-foreground">Days 1 to 3: Anapana (preparatory)</h3>
             <p>
-              You observe your natural breath at the area below the nostrils and above the upper lip. That&apos;s it. No counting, no controlling, no visualization. Just observing the breath as it is — its temperature, its rhythm, the sensations it creates on the skin.
-            </p>
-            <p>
-              This sounds simple. It&apos;s incredibly difficult. Your mind will wander constantly. The purpose of these three days is to sharpen your concentration enough to practice the actual Vipassana technique. Think of Anapana as calibrating the instrument.
+              The first three days introduce Anapana, the preparatory practice. Students commonly find this stage both simple on paper and difficult in experience. The purpose is to build the capacity the rest of the course will require.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
-            <h3 className="mb-1 font-semibold text-foreground">Days 4–9: Vipassana (Body Scanning)</h3>
+            <h3 className="mb-1 font-semibold text-foreground">Days 4 to 9: Vipassana proper</h3>
             <p>
-              On Day 4, you&apos;re taught to systematically scan your body from head to feet and back, observing whatever sensations arise — heat, cold, tingling, pressure, pain, vibration, numbness. The key instruction: maintain equanimity. Don&apos;t crave pleasant sensations. Don&apos;t push away unpleasant ones. Just observe.
-            </p>
-            <p>
-              Over these days, your sensitivity increases. You begin to notice subtler sensations. Some days feel like breakthroughs; others feel like regression. Both are normal and part of the process.
+              On Day 4, the Vipassana technique itself is introduced by the assistant teacher. Over the following days, sensitivity increases and the work deepens. Some days feel like breakthroughs; others feel like regression. Both are normal and part of the process.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
-            <h3 className="mb-1 font-semibold text-foreground">Day 10: Metta (Loving-Kindness)</h3>
+            <h3 className="mb-1 font-semibold text-foreground">Day 10: Metta (loving-kindness)</h3>
             <p>
-              On the final meditation day, you learn metta bhavana — a practice of generating feelings of goodwill and compassion for all beings. Noble Silence is also lifted on Day 10, and you can talk to other students for the first time in 9 days.
+              On the final meditation day, metta bhavana is introduced. Noble Silence is also lifted on Day 10, and students can talk to each other for the first time in 9 days.
             </p>
           </div>
         </div>
@@ -149,28 +143,28 @@ export default function WhatToExpectPage() {
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">Day 4: The Shift</h3>
             <p>
-              The actual Vipassana technique is introduced. This brings renewed energy and purpose. The body scan gives you something concrete to work with. Many people describe Day 4 as the turning point of the course.
+              Vipassana proper is introduced. This brings renewed energy and purpose. Many people describe Day 4 as the turning point of the course.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
-            <h3 className="mb-1 font-semibold text-foreground">Days 5–7: Deepening</h3>
+            <h3 className="mb-1 font-semibold text-foreground">Days 5 to 7: Deepening</h3>
             <p>
-              The practice deepens. You have good sittings and difficult ones. Emotions may surface — tears, anger, grief, joy, all without obvious trigger. This is normal. The technique is working with material stored deep in the body-mind.
+              The practice deepens. You have good sittings and difficult ones. Emotions may surface (tears, anger, grief, joy, all without obvious trigger). This is normal, and addressed by the assistant teacher during the course.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
-            <h3 className="mb-1 font-semibold text-foreground">Days 8–9: Intensity or Stillness</h3>
+            <h3 className="mb-1 font-semibold text-foreground">Days 8 and 9: Intensity or Stillness</h3>
             <p>
-              Some people experience profound stillness and clarity. Others face intense emotional purification. Both are valid experiences. The key is equanimity regardless of what arises.
+              Some people experience profound stillness and clarity. Others face intense emotional difficulty. Both are valid experiences and are addressed by the assistant teacher as they arise.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">Day 10: Relief and Connection</h3>
             <p>
-              Silence lifts. Talking again is overwhelming — everyone has been through an intense shared experience. There&apos;s laughter, tears, and connection. The metta practice provides a gentle ending. You leave the next morning.
+              Silence lifts. Talking again is overwhelming; everyone has been through an intense shared experience. There is laughter, tears, and connection. Metta provides a gentle ending. You leave the next morning.
             </p>
           </div>
         </div>
