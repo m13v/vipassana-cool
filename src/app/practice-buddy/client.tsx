@@ -268,8 +268,8 @@ export function PracticeBuddyClient() {
             <p>
               Meanwhile, the broader meditation app market (Insight Timer, Waking Up, Balance)
               treats community as a bolt-on feature, not the core mechanism. And none of them
-              understand the specific needs of Vipassana practitioners — the two-hour daily
-              commitment, the body scanning technique, the retreat-to-home transition.
+              understand the specific needs of Vipassana practitioners: the two-hour daily
+              commitment, the Goenka-tradition technique, the retreat-to-home transition.
             </p>
             <p>
               There&apos;s a gap between what the tradition provides and what practitioners need.
