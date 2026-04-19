@@ -190,7 +190,7 @@ export default function VipassanaAndSleepPage() {
               <p>
                 The gong sounds at 4:00 AM. Lights out is at 9:30 PM. That&apos;s
                 about 6.5 hours of sleep opportunity, which is less than most
-                people are used to. By Day 3 or 4, your body adjusts — but the
+                people are used to. By Day 3 or 4, your body adjusts, but the
                 first few mornings can be rough.
               </p>
             </div>
@@ -202,7 +202,7 @@ export default function VipassanaAndSleepPage() {
               <p>
                 At most centers, you&apos;ll share a room with one or more
                 people. Snoring, rustling, and different sleep schedules can be
-                disruptive. Earplugs are your friend — bring a good pair.
+                disruptive. Earplugs are your friend, bring a good pair.
               </p>
             </div>
 
@@ -225,7 +225,7 @@ export default function VipassanaAndSleepPage() {
               <p>
                 Most students find that by Day 5 or 6, something shifts. The
                 body adapts to the early schedule, the mind settles, and sleep
-                — though short — becomes surprisingly deep and restorative.
+                (though short) becomes surprisingly deep and restorative.
                 Many people are amazed that they can function well on less sleep
                 than they thought possible.
               </p>
@@ -243,26 +243,26 @@ export default function VipassanaAndSleepPage() {
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
-              <strong>Faster sleep onset</strong> — The mind settles more
+              <strong>Faster sleep onset.</strong> The mind settles more
               quickly at bedtime. The gap between lying down and falling asleep
               shrinks.
             </li>
             <li>
-              <strong>Fewer nighttime awakenings</strong> — Less tossing and
+              <strong>Fewer nighttime awakenings.</strong> Less tossing and
               turning. When you do wake, you fall back asleep more easily.
             </li>
             <li>
-              <strong>Feeling more rested</strong> — Even without sleeping
+              <strong>Feeling more rested.</strong> Even without sleeping
               longer, the quality of sleep improves. You wake up feeling
               genuinely refreshed rather than groggy.
             </li>
             <li>
-              <strong>Less dependence on sleep aids</strong> — Many practitioners
-              find they no longer need melatonin supplements, antihistamines, or
-              other sleep aids they previously relied on.
+              <strong>Less dependence on sleep aids.</strong> Many
+              practitioners find they no longer need melatonin supplements,
+              antihistamines, or other sleep aids they previously relied on.
             </li>
             <li>
-              <strong>More consistent sleep patterns</strong> — The discipline
+              <strong>More consistent sleep patterns.</strong> The discipline
               of sitting at the same times each day tends to regulate the
               overall daily rhythm, which naturally supports better sleep.
             </li>
