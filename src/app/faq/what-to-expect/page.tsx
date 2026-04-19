@@ -127,7 +127,7 @@ export default function WhatToExpectPage() {
 
         <div className="mt-4 space-y-4">
           <div className="border-l-2 border-accent/30 pl-4">
-            <h3 className="mb-1 font-semibold text-foreground">Days 1–2: Shock and Adjustment</h3>
+            <h3 className="mb-1 font-semibold text-foreground">Days 1 to 2: Shock and Adjustment</h3>
             <p>
               The schedule hits hard. Your body hurts, your mind is restless, and you&apos;re questioning your decision. You&apos;re also adjusting to silence, which is disorienting at first.
             </p>
@@ -187,7 +187,7 @@ export default function WhatToExpectPage() {
           <li><strong>You won&apos;t sleep 9 hours.</strong> Despite the early bedtime, many people struggle with sleep, especially in the first few days. This improves as you settle in.</li>
           <li><strong>The silence becomes liberating.</strong> What seems impossible before the course becomes the best part during it. Not having to perform social niceties is an enormous relief.</li>
           <li><strong>Physical pain is a bigger deal than you expect.</strong> Your back, knees, and hips will hurt. Bring comfortable loose clothing and be willing to use supports.</li>
-          <li><strong>Boredom is real.</strong> Without any stimulation, your mind will go to extraordinary lengths to entertain itself. This is actually productive — you&apos;re watching your mind&apos;s habits in real time.</li>
+          <li><strong>Boredom is real.</strong> Without any stimulation, your mind will go to extraordinary lengths to entertain itself. This is actually productive; you&apos;re watching your mind&apos;s habits in real time.</li>
           <li><strong>The experience is different for everyone.</strong> Don&apos;t compare your experience to others&apos; stories. Some people have dramatic experiences; others have quiet, subtle ones. Both are equally valuable.</li>
         </ul>
       </section>
@@ -195,7 +195,7 @@ export default function WhatToExpectPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">How This Differs from the Personal Account</h2>
         <p>
-          This page gives you the <em>structural</em> overview. For the <em>emotional</em> reality — what it actually feels like, day by day — read the <Link href="/experience/day-1" className="text-accent underline hover:text-foreground">personal experience account</Link> starting from Day 1. Both perspectives are useful in different ways.
+          This page gives you the <em>structural</em> overview. For the <em>emotional</em> reality (what it actually feels like, day by day), read the <Link href="/experience/day-1" className="text-accent underline hover:text-foreground">personal experience account</Link> starting from Day 1. Both perspectives are useful in different ways.
         </p>
       </section>
     </FaqDetailPage>
