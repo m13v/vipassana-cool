@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DayPage } from "@/components/day-page";
 
 export const metadata: Metadata = {
-  title: "Vipassana Day 3 — The Day People Consider Leaving",
+  title: "Vipassana Day 3: The Day People Consider Leaving",
   description:
     "A descriptive account of day 3 of a 10-day Vipassana course: the urge to quit, emotional surfacing, and what many students remember about the hardest day.",
   alternates: { canonical: "https://vipassana.cool/experience/day-3" },
