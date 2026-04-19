@@ -85,14 +85,14 @@ export default function IsVipassanaRightForMePage() {
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">&quot;I&apos;m not spiritual or religious&quot;</h3>
             <p>
-              Neither am I. Vipassana is a technique for observing your own sensations. You don&apos;t need to believe in anything. The practice is entirely experiential — you observe what&apos;s happening in your body, moment to moment. No faith required.
+              Neither am I. Vipassana is taught as a practical training, not a doctrine. You don&apos;t need to believe in anything in advance; the course is the place where the technique is transmitted. No faith required.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">&quot;I can&apos;t sit still for 10 minutes, let alone 10 hours&quot;</h3>
             <p>
-              Nobody can when they start. The course teaches you gradually. Day 1, your legs hurt after 20 minutes and your mind races. By Day 7, you can sit for an hour without moving. The transformation happens <em>during</em> the course, not before it. You don&apos;t need to arrive pre-trained.
+              Nobody can when they start. The course introduces you to longer sittings gradually. Day 1, legs hurt after 20 minutes and the mind races. By Day 7, many students can sit for an hour without moving. The adjustment happens <em>during</em> the course, not before it. You don&apos;t need to arrive pre-trained.
             </p>
           </div>
 
@@ -106,7 +106,7 @@ export default function IsVipassanaRightForMePage() {
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">&quot;I&apos;m too old / not fit enough&quot;</h3>
             <p>
-              People in their 70s and 80s attend courses. You don&apos;t need to sit cross-legged on the floor — chairs are available. If you can sit upright for an hour, you can do this. Centers accommodate physical limitations. Mention any concerns on your application and they&apos;ll work with you.
+              People in their 70s and 80s attend courses. You don&apos;t need to sit cross-legged on the floor; chairs are available. If you can sit upright for an hour, you can do this. Centers accommodate physical limitations. Mention any concerns on your application and they&apos;ll work with you.
             </p>
           </div>
 
@@ -132,7 +132,7 @@ export default function IsVipassanaRightForMePage() {
           This deserves special attention because it&apos;s the most important consideration. Vipassana involves deep introspection. You will sit with difficult emotions, memories, and patterns that you normally avoid. For most people, this is challenging but ultimately beneficial.
         </p>
         <p>
-          For people with certain conditions, it can be destabilizing. The application form asks about your mental health history for good reason — not to gatekeep, but to protect you.
+          For people with certain conditions, it can be destabilizing. The application form asks about your mental health history for good reason: not to gatekeep, but to protect you.
         </p>
         <p>
           <strong>Generally safe:</strong> Mild-to-moderate anxiety, managed depression, ADHD with or without medication, past therapy, general life stress.
@@ -161,13 +161,13 @@ export default function IsVipassanaRightForMePage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Real Question</h2>
         <p>
-          Most people asking &quot;Is Vipassana right for me?&quot; already know the answer. They&apos;re looking for permission or reassurance. Here it is: if you&apos;re drawn to it, stable enough to handle 10 days of silence and introspection, and willing to follow the instructions — go.
+          Most people asking &quot;Is Vipassana right for me?&quot; already know the answer. They&apos;re looking for permission or reassurance. Here it is: if you&apos;re drawn to it, stable enough to handle 10 days of silence and introspection, and willing to follow the instructions, go.
         </p>
         <p>
           You don&apos;t need to be perfect. You don&apos;t need to be spiritual. You don&apos;t need to be a meditator. You just need to be willing to try.
         </p>
         <p>
-          The worst that happens is you have 10 very uncomfortable days and learn something about yourself. The best that happens is it fundamentally shifts how you relate to your own mind. For most people, the reality lands somewhere in between — and that somewhere is worth the 10 days.
+          The worst that happens is you have 10 very uncomfortable days and learn something about yourself. The best that happens is it fundamentally shifts how you relate to your own mind. For most people, the reality lands somewhere in between, and that somewhere is worth the 10 days.
         </p>
       </section>
     </FaqDetailPage>
