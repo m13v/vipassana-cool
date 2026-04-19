@@ -6,96 +6,68 @@ import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
 import { FaqSchema } from "@/components/faq-schema";
 import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
-import {
-  GradientWord,
-  ConceptReel,
-  Stats,
-  FieldGuide,
-  Diagnostic,
-  Replacements,
-  Beam,
-  MidSitRule,
-} from "./meaning-client";
 
 const PAGE_URL = "https://vipassana.cool/t/gross-sensation-meaning";
 const PUBLISHED = "2026-04-18";
 
 export const metadata: Metadata = {
   title:
-    "Gross Sensation Meaning: A Working Vocabulary for Naming What You Feel",
+    "Gross Sensation Meaning: The Word, Its Origin, and Its Lineage",
   description:
-    "Gross sensation in Vipassana means a coarse-grained body sensation. A field guide of twelve specific labels, a three-question real-time diagnostic, and the rule that turns 'pain' into a precise two-word phrase you can use mid-sit.",
+    "A brief etymology of the term 'gross sensation' in the Goenka tradition. It translates the Pali oḷārika. This page does not teach how to work with sensations.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title:
-      "Gross Sensation Meaning: A Working Vocabulary for Naming What You Feel",
+    title: "Gross Sensation Meaning: The Word, Its Origin, and Its Lineage",
     description:
-      "A field guide of twelve gross sensation labels, a three-question diagnostic, and the rule that replaces 'it hurts' with a precise label you can apply during a sit.",
+      "Short etymology of oḷārika and the lineage through which the English gloss 'gross sensation' reaches modern students.",
     url: PAGE_URL,
     type: "article",
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Gross Sensation Meaning: A Working Vocabulary for Naming What You Feel",
+    title: "Gross Sensation Meaning: The Word, Its Origin, and Its Lineage",
     description:
-      "Coarse-grained, not unpleasant. Twelve labels, three diagnostic questions, one rule. Built for the cushion, not the dictionary.",
+      "The word means coarse-grained. A short note on origin and lineage.",
   },
   robots: { index: true, follow: true },
 };
 
 const faqs = [
   {
-    question: "What does gross sensation mean?",
+    question: "What is the origin of the term 'gross sensation'?",
     answer:
-      "In Goenka Vipassana, gross sensation translates the Pali term oḷārika vedanā. The literal sense is coarse-grained, blocky, low-resolution. A gross sensation is one your awareness can detect easily without sharpening. The English word gross is doing technical duty here, in the sense of a gross estimate or the gross motor system. It is not doing connotative duty. A gross sensation is not by definition unpleasant, disgusting, or bad. Pleasantness is a separate axis. A warm glow across the chest can be a gross sensation. So can knee pain. The opposite of gross is subtle, which means fine-grained and harder to detect.",
+      "It is the standard English translation of the Pali oḷārika, a technical term used across centuries of Theravada Abhidhamma commentary. Oḷārika means coarse-grained, blocky, palpable. Its pair is sukhuma, meaning fine-grained, and together the two describe a resolution, not a valence.",
   },
   {
-    question: "What are examples of gross sensations in meditation?",
+    question: "How does the term reach modern students?",
     answer:
-      "A working twelve-label vocabulary covers most cases: dense (heavy, blocky weight), sharp (a pin-thin point), throbbing (a rhythmic pulse), pressing (broad even downward weight), twisting (an internal corkscrew), grinding (two surfaces moving against each other), prickling (a field of coarse points), burning (diffuse heat), dragging (a slow downward pull), knotting (a bounded lump of tension), stinging (bright narrow surface heat), and locking (a frozen joint that refuses to release on the in-breath). Each label has a physical signature you can verify by attention. The point of the vocabulary is precision over judgment. Naming a sensation by its actual qualities short-circuits the reflex to label it as bad and start fighting it.",
+      "Through the lineage the Goenka tradition traces in modern Burma: Ledi Sayadaw (late 19th and early 20th century), Sayagyi U Ba Khin (20th century), and S. N. Goenka, who began teaching publicly in 1969. Each node in the chain worked in Pali-inflected English or vernacular, and the English gloss 'gross' was standardized along the way.",
   },
   {
-    question: "How do I know if a sensation is gross or subtle?",
+    question: "Does this page teach me what to do with sensations?",
     answer:
-      "Three questions, asked in real time. First, can you feel its outer edge? Bounded sensations tend to be the named gross sensations like knotting or sharp. Unbounded sensations split into either the broad gross category like pressing and dragging, or the subtle category like field-wide tingling. Second, does it pull harder than the area around it? Gravity is a gross sensation marker. Subtle sensations sit flat in the field. Third, can you describe it in one word, or do you need two? A two-word description (sharp inner knee, dense lower back, dragging both eyelids) is at the resolution gross sensations sit at. A one-word description means you have not specified yet and should stay with the sensation for one more breath cycle.",
+      "No. This page is etymology only. Instruction on how to work with sensations in practice is reserved for the 10-day residential course, delivered in person by an authorized assistant teacher. This site does not reproduce that instruction.",
   },
   {
-    question: "Is a gross sensation always painful?",
+    question: "How is this page different from the companion page on gross sensation?",
     answer:
-      "No. Gross is a resolution category, not a pleasantness category. A pleasant gross sensation is common: a warm glow across the chest, dense pleasant heaviness in the lower body near the end of a long sit, a sudden wash of well-being. These are coarse-grained (your awareness picks them up at a chunky scale) and pleasant at the same time. The instruction for them is the same as for unpleasant gross sensations: observe with equanimity, do not crave more of them, do not linger. Treating a pleasant gross sensation as if it were subtle is the standard mistake that leads to chasing pleasant experiences and undermining the practice.",
+      "This one is focused on origin and lineage (where the word comes from, how it reaches the modern tradition). The companion page is focused on the translation issue (that the English word 'gross' carries a connotation the Pali source does not). Both are short linguistic notes.",
   },
   {
-    question: "Why use a vocabulary of twelve labels instead of just observing?",
+    question: "What does oḷārika literally mean?",
     answer:
-      "Because un-labeled observation tends to collapse, in practice, to the two judgments your nervous system already runs: this is bad, this is good. The gap between feeling a sensation and reacting to it is short, and judgment fills it before equanimity has a chance to. Naming the sensation precisely (sharp, twisting, knotting, dragging) replaces the judgment with a description, and a description does not generate aversion the way a verdict does. The labels are not metaphysical claims. They are operational handles. After a few hundred sits the labels become automatic and the rule (replace any moral word with a physical noun and a region) does the work without the list in front of you.",
+      "Coarse, blocky, palpable, low-resolution. The sense in English is closer to 'a gross estimate' or 'the gross motor system' than to the everyday colloquial use of the word. It describes the grain of a sensation relative to the awareness observing it, not whether the sensation is welcome or unwelcome.",
   },
   {
-    question: "Where does the word gross come from in Vipassana terminology?",
+    question: "Why does the tradition reserve teaching to authorized teachers?",
     answer:
-      "It is the standard English translation of the Pali oḷārika, used by S.N. Goenka inheriting the vocabulary from his teacher Sayagyi U Ba Khin, who learned it from Ledi Sayadaw, who drew it directly from the Theravada Abhidhamma. In every link of the chain, oḷārika means coarse, blocky, palpable. The English word gross, in its older sense, captures this well. The connotation of disgusting that the word picked up over the last few centuries in spoken English is unrelated and does not appear in the Pali source. For the deeper version of this lineage breakdown and the body-map of where gross sensations cluster across a 10-day course, see the companion article on gross sensation linked at the end of this page.",
+      "The stated reason is that the technique is learned correctly inside the container it was designed for: ten days, residential, in silence, with an assistant teacher answering questions one on one. A written or video curriculum removes that context. The tradition preserves the transmission inside the course rather than publish partial versions.",
   },
   {
-    question: "How do I apply this during a real sit?",
+    question: "Where should I go to actually learn?",
     answer:
-      "Five steps, in this order. First, hear the word in your head when it arrives: pain, bad, terrible, unbearable. Catch it. Second, drop the judgment word. Replace it with a physical noun from the twelve-label set. Third, add a qualifier of one word that locates it (inner knee, lower sacrum, both eyelids). Fourth, hold the two-word label for one full breath cycle without revising it. Fifth, move to the next region of the body scan at the pace your teacher gave you, not at the pace the loudest sensation pulls. The goal is not a perfect label. The goal is the move from judgment to description. The reaction loosens as a side effect of the labeling, not as a separate piece of work.",
+      "Apply for a 10-day residential course at dhamma.org. The course is free, runs on donations from previous students, and is the only place the technique is formally taught.",
   },
-  {
-    question: "Does this work for non-Vipassana meditation styles?",
-    answer:
-      "The vocabulary transfers cleanly to any practice that asks you to attend to body sensation: Mahasi noting, Shinzen Young's noting system, somatic experiencing, basic mindfulness of body in MBSR. The terminology of gross and subtle is specifically Goenka inflected by his Burmese lineage, but the underlying split (coarse-grained sensations versus fine-grained sensations) is present across most somatic traditions. The diagnostic and the rule (drop the judgment word, replace with a physical noun, add a one-word qualifier) work in any practice. They are not specific to a 10-day Vipassana course.",
-  },
-];
-
-const toc = [
-  { id: "definition", label: "What gross sensation actually means" },
-  { id: "stats", label: "The three numbers behind this glossary" },
-  { id: "field-guide", label: "Twelve labels, with physical signatures" },
-  { id: "diagnostic", label: "The three-question diagnostic" },
-  { id: "replacements", label: "Lazy default vs. precise label" },
-  { id: "beam", label: "Why naming is the work" },
-  { id: "rule", label: "The mid-sit rule, in five steps" },
-  { id: "context", label: "Where this fits with the rest of the practice" },
 ];
 
 export default function Page() {
@@ -109,8 +81,8 @@ export default function Page() {
         ]}
       />
       <ArticleSchema
-        title="Gross Sensation Meaning: A Working Vocabulary for Naming What You Feel"
-        description="A field guide of twelve specific gross sensation labels, a three-question real-time diagnostic, and the mid-sit rule that replaces 'it hurts' with a precise two-word phrase."
+        title="Gross Sensation Meaning: The Word, Its Origin, and Its Lineage"
+        description="A short etymology of the term 'gross sensation' and a note on the lineage through which it reaches modern students. Not a practice page."
         url={PAGE_URL}
         datePublished={PUBLISHED}
       />
@@ -122,286 +94,127 @@ export default function Page() {
           { label: "Guides", href: "/t" },
           { label: "Gross Sensation Meaning" },
         ]}
-        category="Sensations & Vocabulary"
-        title="Gross Sensation Meaning: A Working Vocabulary for Naming What You Feel"
-        description="Gross sensation means a coarse-grained body sensation, full stop. The dictionary definition takes one sentence. What this page gives you instead is a working vocabulary of twelve labels you can apply during a real sit, a three-question diagnostic that picks the right one in under ten seconds, and the rule that turns 'it hurts' into a precise two-word phrase."
+        category="Linguistic Note"
+        title="Gross Sensation Meaning: The Word, Its Origin, and Its Lineage"
+        description="Where the English phrase 'gross sensation' comes from, and the lineage that carries it into the Goenka tradition. This page is an etymology note. It does not describe any practice sequence."
         datePublished={PUBLISHED}
       />
 
-      <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
-        <p className="mb-1 text-sm font-medium text-accent">TL;DR</p>
+      <div className="mb-10 rounded-lg border border-accent/20 bg-accent/5 p-5">
+        <p className="mb-1 text-sm font-medium text-accent">Note</p>
         <p className="text-sm text-muted">
-          Gross sensation translates the Pali <em>oḷārika vedanā</em> and means
-          a coarse-grained body sensation. Coarse, not unpleasant. The two get
-          conflated because the English word gross does double duty. This page
-          replaces the judgment-loaded vocabulary (pain, bad, unbearable) with a
-          twelve-label working glossary you can apply during a sit (dense,
-          sharp, throbbing, pressing, twisting, grinding, prickling, burning,
-          dragging, knotting, stinging, locking). A three-question diagnostic
-          picks the right label in seconds. The mid-sit rule is one sentence:
-          drop the judgment word, replace it with a physical noun, add a
-          one-word region. The reaction loosens as a side effect.
+          This is an etymology and lineage note. It does not teach how to work with sensations in practice. Technique transmission is reserved for the 10-day residential course, taught in person by an authorized assistant teacher. Course information is at{" "}
+          <a
+            href="https://www.dhamma.org/en-US/courses/search"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent underline hover:text-foreground"
+          >
+            dhamma.org
+          </a>
+          .
         </p>
       </div>
 
-      <div className="mb-12">
-        <ConceptReel />
-      </div>
-
-      <div id="stats" className="mb-12">
-        <Stats />
-      </div>
-
-      <div className="mb-12 rounded-lg border border-border bg-card p-6">
-        <p className="mb-3 text-sm font-semibold text-foreground">
-          What this page covers
+      <section className="mb-12">
+        <h2 className="mb-3 text-2xl font-bold text-foreground">
+          The word
+        </h2>
+        <p className="mb-4 text-muted">
+          Oḷārika (sometimes spelled olarika; Sanskrit audārika) is a Pali term meaning coarse, blocky, palpable, low-resolution. Its paired opposite is sukhuma, meaning fine-grained. These two words describe a resolution axis: how coarse or how fine the grain of an observed sensation is. They are standard vocabulary across centuries of Theravada Abhidhamma commentary.
         </p>
-        <ol className="list-decimal space-y-1.5 pl-6 text-sm text-muted">
-          {toc.map((t) => (
-            <li key={t.id}>
-              <a href={`#${t.id}`} className="hover:text-accent">
-                {t.label}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </div>
+        <p className="text-muted">
+          When the tradition&apos;s English-language teachers settled on the word &quot;gross&quot; for oḷārika, they were using the technical sense of the English word, the same sense we use when we say &quot;a gross estimate.&quot; The colloquial connotation of disgusting does not come from the Pali and was not intended by the translation.
+        </p>
+      </section>
 
-      <div className="space-y-12 text-muted leading-relaxed">
-        <section id="definition">
-          <h2 className="mb-3 text-2xl font-bold text-foreground">
-            1. What gross sensation <GradientWord>actually</GradientWord> means
-          </h2>
-          <p className="mb-4">
-            Gross sensation is the standard English translation of the Pali term{" "}
-            <em>oḷārika vedanā</em>. <em>Oḷārika</em> means coarse, blocky,
-            palpable, low-resolution. <em>Vedanā</em> is the Pali word for the
-            feeling tone that arises when a sense base meets its object, which
-            in body-scan practice means the physical sensation under the
-            attention right now. The paired term is <em>sukhuma vedanā</em>,
-            translated as subtle sensation. <em>Sukhuma</em> means fine-grained
-            and harder to detect. Both terms describe a resolution, not a
-            valence.
-          </p>
-          <p className="mb-4">
-            English is uncooperative here. The word gross has two meanings.
-            One is technical: a gross estimate, the gross motor system, gross
-            domestic product. That is the meaning Goenka&apos;s translators
-            were using. The other meaning, the spoken English one, is
-            connotative: disgusting, unpleasant, off-putting. First-course
-            students hear the second meaning and import it into the practice.
-            Gross sensations become the bad ones; subtle sensations become the
-            good ones. Two axes (resolution and pleasantness) collapse into one,
-            and the entire body of first-course confusion flows downhill from
-            there.
-          </p>
-          <p>
-            The version this page works from is the technical one. Gross means
-            coarse-grained. A gross sensation can be pleasant, unpleasant, or
-            neutral. So can a subtle sensation. The vocabulary below is built
-            on that distinction and stays out of the moral register entirely.
-          </p>
-        </section>
+      <section className="mb-12">
+        <h2 className="mb-3 text-2xl font-bold text-foreground">
+          The lineage
+        </h2>
+        <p className="mb-4 text-muted">
+          In the modern Goenka lineage, the tradition traces its chain of transmission through Ledi Sayadaw, a late 19th and early 20th century Burmese monk associated with the revival of lay practice, to Sayagyi U Ba Khin, a Burmese lay teacher, to S. N. Goenka, who began teaching publicly in India in 1969 and whose courses later spread worldwide. Each node in this chain worked in Pali-inflected English, Burmese, or Hindi, and the English gloss &quot;gross sensation&quot; was standardized along the way as the tradition moved into English-speaking settings.
+        </p>
+        <p className="text-muted">
+          The Pali words themselves, of course, long predate this specific lineage. They are canonical and commentarial vocabulary with stable meanings across centuries.
+        </p>
+      </section>
 
-        <section id="field-guide">
-          <h2 className="mb-3 text-2xl font-bold text-foreground">
-            2. Twelve labels, with physical signatures
-          </h2>
-          <p className="mb-6">
-            Most pages on this topic stop at the definition. The harder
-            problem, on the cushion, is that you sit down and a sensation
-            arrives that you cannot name in any precise way, and so you call it
-            pain, and pain is a verdict, and the verdict triggers a reaction
-            before equanimity can. The fix is a working vocabulary. The twelve
-            labels below cover most of what an experienced practitioner
-            actually reports across hundreds of sits. They are not exhaustive
-            and they are not a closed taxonomy. They are operational handles.
-          </p>
-          <FieldGuide />
-        </section>
+      <section className="mb-12">
+        <h2 className="mb-3 text-2xl font-bold text-foreground">
+          What this page is not
+        </h2>
+        <p className="text-muted">
+          It is not a field guide, not a diagnostic, and not a practice instruction. It is an etymology note. How sensations are actually worked with on the cushion is a matter for the 10-day course, where an assistant teacher can answer questions one on one. If that is what you are looking for, the only source to trust is the tradition&apos;s own, at{" "}
+          <a
+            href="https://www.dhamma.org/en-US/courses/search"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent underline hover:text-foreground"
+          >
+            dhamma.org
+          </a>
+          .
+        </p>
+      </section>
 
-        <section id="diagnostic">
-          <h2 className="mb-3 text-2xl font-bold text-foreground">
-            3. The three-question diagnostic
-          </h2>
-          <p className="mb-6">
-            Twelve labels is too many to scan through under pressure. The
-            diagnostic narrows the field in seconds. Run it on whatever
-            sensation is loudest in this moment, before you reach for a label.
-          </p>
-          <Diagnostic />
-        </section>
-
-        <section id="replacements">
-          <h2 className="mb-3 text-2xl font-bold text-foreground">
-            4. Lazy default vs. precise label
-          </h2>
-          <p className="mb-6">
-            What this looks like in practice. The left column is the sentence
-            most students hear in their own head during a hard sit. The right
-            column is the same moment, named precisely. The difference between
-            the two is most of the practice.
-          </p>
-          <Replacements />
-          <p className="mt-6">
-            The right column is not a softening or a euphemism. The sensations
-            described are real and frequently severe. The shift is that a
-            description does not invite the same reaction a verdict does. You
-            can sit with sharp, narrow, on the inner knee line for forty
-            minutes. It is much harder to sit with it hurts for two.
-          </p>
-        </section>
-
-        <section id="beam">
-          <h2 className="mb-3 text-2xl font-bold text-foreground">
-            5. Why naming <GradientWord>is</GradientWord> the work
-          </h2>
-          <p className="mb-6">
-            The standard instruction is observe with equanimity. The standard
-            failure mode is to try to manufacture equanimity directly, on top
-            of an active reaction, which does not work because equanimity is
-            not a feeling you can summon. It is the absence of the reaction.
-            Naming a sensation precisely is what removes the conditions for
-            the reaction in the first place. Once the sensation has a label
-            and the label is sufficiently specific, there is nothing for the
-            reaction to attach to. Equanimity is the residual.
-          </p>
-          <Beam />
-        </section>
-
-        <section id="rule">
-          <h2 className="mb-3 text-2xl font-bold text-foreground">
-            6. The mid-sit rule, in five steps
-          </h2>
-          <p className="mb-6">
-            All of the above compressed into one runnable rule. Five steps,
-            executed in roughly ten seconds the first few times, dropping to
-            two seconds after a few hundred sits.
-          </p>
-          <MidSitRule />
-        </section>
-
-        <section id="context">
-          <h2 className="mb-3 text-2xl font-bold text-foreground">
-            7. Where this fits with the rest of the practice
-          </h2>
-          <p className="mb-4">
-            Naming sensations is not a substitute for the technique. The
-            technique is the body scan, performed at the pace your teacher
-            gave you, with equanimity toward whatever arises. Naming is a
-            patch on the place the technique tends to break for new students,
-            which is the moment a strong gross sensation arrives and the mind
-            collapses into one of two reactions before the scan can move on.
-            Once the patch is internalized, the labels disappear. You stop
-            saying the words in your head. The vocabulary becomes the lens.
-          </p>
-          <p className="mb-4">
-            The companion piece to this article is{" "}
-            <Link
-              href="/t/gross-sensation"
-              className="text-accent underline hover:text-foreground"
-            >
-              the longer breakdown of where gross sensations live across a
-              10-day course
-            </Link>
-            , which maps the body region by region from day one through day
-            ten and goes deeper on the etymology, lineage, and the six-cell
-            sensation matrix. For the broader sensation overview (subtle
-            sensations, free flow, what to do when something scary arises),
-            see{" "}
-            <Link
-              href="/guide/sensations-and-experiences"
-              className="text-accent underline hover:text-foreground"
-            >
-              the sensations and experiences overview
-            </Link>
-            . For a deeper look at the knee, back, and shoulder mechanics that
-            generate most gross sensations during a course, see{" "}
-            <Link
-              href="/guide/vipassana-for-pain"
-              className="text-accent underline hover:text-foreground"
-            >
-              vipassana for pain
-            </Link>
-            .
-          </p>
-          <p>
-            The vocabulary on this page is built from the author&apos;s notes
-            across six 10-day courses at three centers and from a daily
-            practice that has held for{" "}
-            <Link
-              href="/t/vipassana-daily-practice"
-              className="text-accent underline hover:text-foreground"
-            >
-              well over two years
-            </Link>
-            . It is operational, not scholarly. The errors it corrects are the
-            errors the author has made on the cushion, with enough rep count
-            to notice what each one cost.
-          </p>
-        </section>
-      </div>
-
-      <div className="mt-16 rounded-lg border border-accent/20 bg-accent/5 p-6">
-        <p className="mb-3 text-sm font-semibold text-foreground">
+      <section className="mb-14">
+        <h2 className="mb-4 text-2xl font-bold text-foreground">
           Frequently asked questions
-        </p>
-        <div className="space-y-5">
-          {faqs.map((f) => (
-            <div key={f.question}>
-              <p className="mb-1.5 text-sm font-semibold text-foreground">
-                {f.question}
-              </p>
-              <p className="text-sm text-muted">{f.answer}</p>
-            </div>
+        </h2>
+        <div className="space-y-3">
+          {faqs.map((f, i) => (
+            <details
+              key={i}
+              className="group rounded-lg border border-border bg-card p-5 open:border-accent/30 open:bg-accent/5"
+            >
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-3 text-base font-semibold text-foreground">
+                <span>{f.question}</span>
+                <span className="mt-1 shrink-0 text-accent transition-transform group-open:rotate-45">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path
+                      d="M7 1v12M1 7h12"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+              </summary>
+              <p className="mt-3 text-sm text-muted">{f.answer}</p>
+            </details>
           ))}
         </div>
-      </div>
+      </section>
 
       <PracticeBuddyCta
-        heading="Vocabulary becomes lens through repetition."
-        description="The labels become automatic somewhere around sit two hundred. Sitting daily is what gets you there. A practice buddy, joining you silently on a Google Meet call each morning, is the lowest-friction way to make the rep count actually happen."
+        heading="For old students: keep the daily sit alive"
+        description="Free Practice Buddy matching pairs you with another meditator who has also completed a 10-day course. You sit together on a shared Google Meet link at the same time each morning. No app, no teaching."
       />
 
       <div className="mt-12 rounded-xl border border-border bg-card p-6">
-        <h2 className="mb-4 font-semibold text-foreground">Related guides</h2>
+        <h2 className="mb-4 font-semibold text-foreground">Related</h2>
         <div className="flex flex-wrap gap-3">
           <Link
             href="/t/gross-sensation"
             className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
           >
-            Gross Sensation: The Mistranslation
+            Gross sensation: the translation note
           </Link>
           <Link
-            href="/guide/sensations-and-experiences"
+            href="/t/anapana-and-vipassana"
             className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
           >
-            Sensations &amp; Experiences Overview
+            Anapana and Vipassana: linguistic note
           </Link>
-          <Link
-            href="/guide/vipassana-for-pain"
+          <a
+            href="https://www.dhamma.org/en-US/courses/search"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
           >
-            Vipassana for Pain
-          </Link>
-          <Link
-            href="/guide/anapana-and-vipassana-explained"
-            className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
-          >
-            Anapana &amp; Vipassana Explained
-          </Link>
-          <Link
-            href="/guide/recognizing-progress"
-            className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
-          >
-            Recognizing Progress
-          </Link>
-          <Link
-            href="/t/vipassana-daily-practice"
-            className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
-          >
-            Daily Practice Rewiring
-          </Link>
+            Find a 10-day course (dhamma.org)
+          </a>
         </div>
       </div>
 
