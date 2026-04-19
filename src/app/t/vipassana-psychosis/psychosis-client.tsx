@@ -234,14 +234,14 @@ export function DayRiskCurve() {
   }, []);
 
   const days = [
-    { d: 0, h: 6, label: "D1", sub: "Anapana" },
-    { d: 1, h: 10, label: "D2", sub: "Anapana" },
-    { d: 2, h: 16, label: "D3", sub: "Anapana" },
+    { d: 0, h: 6, label: "D1", sub: "Prep phase" },
+    { d: 1, h: 10, label: "D2", sub: "Prep phase" },
+    { d: 2, h: 16, label: "D3", sub: "Prep phase" },
     { d: 3, h: 62, label: "D4", sub: "Pivot", peak: true },
-    { d: 4, h: 74, label: "D5", sub: "Body scan" },
-    { d: 5, h: 68, label: "D6", sub: "Body scan" },
-    { d: 6, h: 46, label: "D7", sub: "Body scan" },
-    { d: 7, h: 34, label: "D8", sub: "Sweeping" },
+    { d: 4, h: 74, label: "D5", sub: "Main phase" },
+    { d: 5, h: 68, label: "D6", sub: "Main phase" },
+    { d: 6, h: 46, label: "D7", sub: "Main phase" },
+    { d: 7, h: 34, label: "D8", sub: "Main phase" },
     { d: 8, h: 28, label: "D9", sub: "Integration" },
     { d: 9, h: 22, label: "D10", sub: "Metta" },
   ];
