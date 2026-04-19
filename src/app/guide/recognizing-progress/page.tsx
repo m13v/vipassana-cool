@@ -70,7 +70,7 @@ export default function RecognizingProgressPage() {
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li><strong>Dramatic sensations</strong> — Free flow, vibrations, dissolution experiences. These are byproducts of concentration, not signs of wisdom. A meditator with subtle sensations and deep equanimity is progressing more than one with dramatic experiences and no equanimity.</li>
             <li><strong>Bliss or euphoria</strong> — Feeling wonderful during meditation is pleasant but not the goal. Craving pleasant sensations is as much an obstacle as averting unpleasant ones.</li>
-            <li><strong>Mystical visions or experiences</strong> — Lights, colors, visions, past-life memories. Goenka addresses these directly: they&apos;re distractions. Observe them, don&apos;t attach to them, and continue the body scan.</li>
+            <li><strong>Mystical visions or experiences</strong>, lights, colors, visions, past-life memories. Goenka addresses these directly: they&apos;re distractions from the work of the practice itself.</li>
             <li><strong>Long sitting times</strong> — Sitting for two hours doesn&apos;t automatically mean deeper practice than sitting for 45 minutes. Duration matters, but quality of equanimity matters more.</li>
           </ul>
           <p>
@@ -95,7 +95,7 @@ export default function RecognizingProgressPage() {
             <div className="border-l-2 border-accent/30 pl-4">
               <h3 className="mb-1 font-semibold text-foreground">Body awareness off the cushion</h3>
               <p>
-                You start noticing physical sensations during daily life — tension in your jaw during a stressful conversation, tightness in your chest before a difficult email, relaxation in your shoulders when you walk in nature. The body scan moves from a formal exercise into an ambient awareness.
+                You start noticing physical sensations during daily life, tension in your jaw during a stressful conversation, tightness in your chest before a difficult email, relaxation in your shoulders when you walk in nature. The practice moves from a formal exercise into an ambient awareness.
               </p>
             </div>
 
@@ -222,7 +222,7 @@ export default function RecognizingProgressPage() {
             Practical readiness signals that you might be ready for more:
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Your current duration feels too short</strong> — You regularly wish the timer hadn&apos;t gone off. The body scan is flowing well when you have to stop.</li>
+            <li><strong>Your current duration feels too short</strong>, you regularly wish the timer hadn&apos;t gone off. The practice is flowing well when you have to stop.</li>
             <li><strong>Daily practice is stable</strong> — You&apos;ve been sitting consistently for several months without major gaps.</li>
             <li><strong>You crave the depth of a course</strong> — Not as an escape, but as a deepening. You want the intensive environment to go further than home practice allows.</li>
             <li><strong>Equanimity is your default</strong> — Most sits, regardless of sensation quality, end with a sense of calm rather than frustration.</li>
@@ -241,7 +241,7 @@ export default function RecognizingProgressPage() {
             The signs described on this page are useful as reassurance when you doubt the practice is working. They are not a checklist to complete or a scorecard to maintain. The moment you start sitting with the goal of achieving a particular sign of progress, you&apos;ve replaced equanimity with craving.
           </p>
           <p>
-            The best relationship with progress: don&apos;t look for it. Sit every day. Do your body scans. Practice equanimity. Take courses. Serve. The changes happen on their own timeline, in their own way. Your job is just to show up.
+            The best relationship with progress: don&apos;t look for it. Sit every day. Practice equanimity. Take courses. Serve. The changes happen on their own timeline, in their own way. Your job is just to show up.
           </p>
           <p>
             For more on how Vipassana creates lasting change, read our <Link href="/guide/how-vipassana-changes-you" className="text-accent underline hover:text-foreground">guide to how Vipassana changes you</Link>.
