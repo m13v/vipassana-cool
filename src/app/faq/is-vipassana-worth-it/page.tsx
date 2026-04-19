@@ -14,12 +14,12 @@ export default function IsVipassanaWorthItPage() {
     <FaqDetailPage
       pageId="faq-is-vipassana-worth-it"
       title="Is a 10-Day Vipassana Course Worth It?"
-      description="After six courses and years of daily practice — an honest breakdown of what you get, what you don't, and who it's not for."
+      description="After six courses and years of daily practice: an honest breakdown of what you get, what you don't, and who it's not for."
       schemaFaqs={[
         {
           question: "Is a 10-day Vipassana course worth it?",
           answer:
-            "Yes, for most people who complete the full 10 days and follow the instructions. You gain a meditation technique you can use for life, direct insight into how your mind works, and reduced reactivity to stress. However, it requires genuine effort — it is not a vacation or a quick fix.",
+            "Yes, for most people who complete the full 10 days and follow the instructions. You gain a meditation technique you can use for life, direct insight into how your mind works, and reduced reactivity to stress. However, it requires genuine effort; it is not a vacation or a quick fix.",
         },
         {
           question: "Is Vipassana worth the time commitment?",
@@ -29,7 +29,7 @@ export default function IsVipassanaWorthItPage() {
         {
           question: "When is Vipassana not worth it?",
           answer:
-            "Vipassana may not be worth it if you leave before Day 10, don't follow the instructions, are in acute mental health crisis (seek professional help first), or never practice afterward. The course plants the seed — daily practice grows it.",
+            "Vipassana may not be worth it if you leave before Day 10, don't follow the instructions, are in acute mental health crisis (seek professional help first), or never practice afterward. The course plants the seed; daily practice grows it.",
         },
       ]}
       relatedLinks={[
@@ -42,27 +42,27 @@ export default function IsVipassanaWorthItPage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          After 6 courses and years of daily practice: yes, for most people who complete the full 10 days and follow the instructions. You gain a lifetime meditation technique, direct insight into how your mind works, reduced emotional reactivity, and measurably better stress management. The only cost is 10 days (courses are free). The technique is cumulative — benefits deepen with daily practice and additional courses. It is not worth it if you leave before Day 10, do not follow instructions, or never practice afterward. The course plants the seed; daily practice grows it.
+          After 6 courses and years of daily practice: yes, for most people who complete the full 10 days and follow the instructions. You gain a lifetime meditation technique, direct insight into how your mind works, reduced emotional reactivity, and measurably better stress management. The only cost is 10 days (courses are free). The practice is cumulative; benefits deepen with daily practice and additional courses. It is not worth it if you leave before Day 10, do not follow instructions, or never practice afterward. The course plants the seed; daily practice grows it.
         </p>
       </div>
 
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Short Answer</h2>
         <p>
-          Yes — but not in the way you might expect. It&apos;s not a vacation, not a spa retreat, and not a quick fix. It&apos;s the hardest thing most people voluntarily choose to do. And for most who complete it, it&apos;s also one of the most valuable.
+          Yes, but not in the way you might expect. It&apos;s not a vacation, not a spa retreat, and not a quick fix. It&apos;s the hardest thing most people voluntarily choose to do. And for most who complete it, it is also one of the most valuable.
         </p>
       </section>
 
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The &quot;I Can&apos;t Take 10 Days Off&quot; Objection</h2>
         <p>
-          I literally didn&apos;t take a single vacation in eight years. Not a single day. I worked seven days a week. I told myself I couldn&apos;t afford to step away — that things would fall apart without me.
+          I literally didn&apos;t take a single vacation in eight years. Not a single day. I worked seven days a week. I told myself I couldn&apos;t afford to step away; that things would fall apart without me.
         </p>
         <p>
           After my first course I said to myself, &quot;I cannot go back and live a normal life.&quot; In my first twelve months, I went to four courses. Four. The person who never took a day off was suddenly prioritizing 40 days of silent meditation per year.
         </p>
         <p>
-          If someone who never took a day off in eight years can prioritize this, the time objection dissolves. The question isn&apos;t whether you have 10 days — it&apos;s whether you&apos;re willing to invest them in something that might fundamentally change how you relate to your own mind.
+          If someone who never took a day off in eight years can prioritize this, the time objection dissolves. The question isn&apos;t whether you have 10 days; it is whether you&apos;re willing to invest them in something that might fundamentally change how you relate to your own mind.
         </p>
       </section>
 
