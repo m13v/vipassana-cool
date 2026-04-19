@@ -4,170 +4,188 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { FaqSchema } from "@/components/faq-schema";
+
+const PAGE_URL = "https://vipassana.cool/guide/sensations-and-experiences";
+const PUBLISHED = "2025-09-01";
 
 export const metadata: Metadata = {
-  title: "Vipassana Sensations Explained — Gross, Subtle, Bhanga & Free Flow",
+  title: "What Students Commonly Report: Sensations and Experiences in Vipassana",
   description:
-    "What the different sensations in Vipassana mean: gross vs subtle, what bhanga (free flow) is, why sensations change daily, and when experiences scare you.",
-  alternates: { canonical: "https://vipassana.cool/guide/sensations-and-experiences" },
+    "A descriptive, non-teaching overview of what students in the Goenka tradition commonly report experiencing at different points in their practice. This page reflects phenomena, it does not tell you how to work with them.",
+  alternates: { canonical: PAGE_URL },
 };
 
-export default function SensationsExplainedPage() {
+const faqs = [
+  {
+    question: "Is this page going to teach me how to respond to sensations?",
+    answer:
+      "No. How to work with anything that arises in practice is explained by the teacher at the 10-day course and, afterward, by an assistant teacher in individual interviews or at group sittings. This page only describes, in third person, what students commonly report.",
+  },
+  {
+    question: "What do students commonly talk about after a course?",
+    answer:
+      "Themes that come up constantly in old-student conversation include: how much physical discomfort is present early in a course, how variable each sitting is, the strangeness of unfamiliar bodily phenomena, emotional material surfacing unexpectedly, and how little any particular experience predicts the next one.",
+  },
+  {
+    question: "Are strong sensations a sign of progress?",
+    answer:
+      "In the tradition's own framing, no particular kind of experience is treated as a marker of progress. Students are consistently warned against evaluating sittings by how they feel. Teachers reiterate this during discourses because it is such a common thing to forget.",
+  },
+  {
+    question: "What should I do if something alarming happens during a sitting?",
+    answer:
+      "Talk to an assistant teacher. During a course there is dedicated question time. Outside a course, you can reach your nearest center by email or phone. This is the channel the tradition provides for exactly this kind of question, and it is the appropriate one to use.",
+  },
+  {
+    question: "When should I seek professional (non-meditation) help?",
+    answer:
+      "If you are experiencing dissociation, panic attacks, flashbacks, intrusive trauma material, or psychological distress beyond ordinary discomfort, please also seek help from a qualified mental-health professional. See /faq/is-vipassana-safe for more on this.",
+  },
+  {
+    question: "Why do experiences vary so much day to day?",
+    answer:
+      "Students universally report that sittings differ widely, even between consecutive days. The tradition frames this variability as itself part of what the practice is pointing at (the universally changing nature of experience), and as a reason not to attach special significance to any single sitting.",
+  },
+];
+
+export default function SensationsExperiencesPage() {
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
       <BreadcrumbSchema
         items={[
           { name: "Home", url: "https://vipassana.cool" },
           { name: "Guide", url: "https://vipassana.cool/guide" },
-          { name: "Sensations", url: "https://vipassana.cool/guide/sensations-and-experiences" },
+          { name: "Sensations and Experiences", url: PAGE_URL },
         ]}
       />
       <ArticleSchema
-        title="Vipassana Sensations Explained"
-        description="What the different sensations in Vipassana mean: gross vs subtle, what bhanga (free flow) is, why sensations change daily, and when experiences scare you."
-        url="https://vipassana.cool/guide/sensations-and-experiences"
-        datePublished="2025-09-01"
+        title="What Students Commonly Report: Sensations and Experiences"
+        description="A descriptive, non-teaching reflection on what students in the Goenka tradition commonly report during and after courses."
+        url={PAGE_URL}
+        datePublished={PUBLISHED}
       />
+      <FaqSchema faqs={faqs} />
       <ArticleHeader
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Guide", href: "/guide" },
-          { label: "Sensations" },
+          { label: "Sensations and Experiences" },
         ]}
-        category="Understanding the Practice"
-        title="Vipassana Sensations Explained"
-        description="Gross sensations, subtle sensations, free flow, and everything in between. What they mean, why they change, and why chasing them misses the point."
-        datePublished="2025-09-01"
+        category="Reflections"
+        title="What Students Commonly Report"
+        description="A descriptive look at the range of experiences students in the Goenka tradition talk about. What arises, not what to do about it."
+        datePublished={PUBLISHED}
       />
 
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          During Vipassana body scanning, you encounter gross sensations (pain, pressure, heat) and subtle sensations (tingling, vibrations, wavelike flow). Bhanga (free flow) is when sensations dissolve rapidly across the body — it feels blissful but is not the goal. Sensations change daily and between courses. The key instruction is the same regardless of sensation type: observe with equanimity, without craving pleasant sensations or resisting unpleasant ones. Chasing subtle sensations or feeling discouraged by gross ones both miss the point. Equanimity toward whatever arises is the entire practice.
+          This page describes what students in the Goenka tradition commonly report experiencing, in plainly descriptive terms. It does not explain how to work with any of it. Working with experience in practice is what the 10-day course and the assistant teacher are for. If something unusual or difficult is coming up for you, talk to an assistant teacher.
         </p>
       </div>
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What sensations do you experience during Vipassana meditation?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">A note about this page</h2>
           <p>
-            When you practice Vipassana body scanning, you encounter an enormous range of sensations. Some are familiar — pain in your knee, an itch on your nose. Others are surprising — vibrations you&apos;ve never noticed, waves of heat or cold, tingling that seems to have no physical cause.
+            In the Goenka tradition, how to relate to anything that arises during practice is explained by the teacher during a 10-day course, and reinforced afterward by assistant teachers. That is the appropriate source. This page stays on the descriptive side of the line: it reflects what students commonly share about their experience, without telling you how to respond.
           </p>
           <p>
-            This is normal. You&apos;re not imagining things, and you&apos;re not &quot;making sensations up.&quot; As concentration deepens, your awareness becomes sensitive enough to detect what was always there but below your usual threshold of perception.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What are gross sensations in Vipassana?</h2>
-          <p>
-            Gross sensations are the obvious ones: pain, pressure, heaviness, intense heat, sharp stinging, throbbing, cramping. They&apos;re called &quot;gross&quot; not because they&apos;re disgusting but because they&apos;re coarse and easy to detect.
-          </p>
-          <p>
-            Early in practice, gross sensations dominate. Your knees hurt from sitting. Your back aches. You feel a dull heaviness in your chest. An area of your body feels &quot;blocked&quot; — like your awareness can&apos;t penetrate it.
-          </p>
-          <p>
-            <strong>The right response:</strong> Observe with equanimity. Don&apos;t push the pain away. Don&apos;t tense against it. Just observe: &quot;There is pain here. It has these qualities. It changes moment to moment.&quot; The pain won&apos;t necessarily disappear, but your reaction to it can change fundamentally.
-          </p>
-          <p>
-            Gross sensations are not &quot;bad&quot; meditation. They&apos;re where some of the most important work happens. Developing equanimity toward pain is far more transformative than enjoying pleasant vibrations.
+            If you are here with a live question about your own practice, the right place to take it is to an assistant teacher at your nearest Vipassana center.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What are subtle sensations in Vipassana?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">The range is wide</h2>
           <p>
-            As concentration deepens — sometimes within a single sitting, sometimes over days or weeks — you begin to notice subtler sensations: gentle tingling, fine vibrations, warmth flowing through an area, a sense of &quot;aliveness&quot; in parts of the body that previously felt numb.
+            Students who sit 10-day courses report an enormous range of experiences, and that range is part of what makes the practice hard to describe from the outside. Some sittings feel blank. Some feel turbulent. Some feel almost boringly ordinary. Some are colored by a specific physical sensation for hours; others are dominated by thoughts.
           </p>
           <p>
-            Subtle sensations are often pleasant. Your entire body might feel like it&apos;s vibrating gently. Areas that were blocked begin to open. The scan flows more smoothly.
-          </p>
-          <p>
-            <strong>The trap:</strong> It&apos;s very easy to start craving subtle sensations. They feel good. They feel like &quot;progress.&quot; You start trying to recreate them, seeking out the pleasant vibrations, getting frustrated when they don&apos;t appear.
-          </p>
-          <p>
-            This is exactly what Goenka warns about. Craving pleasant sensations is just as much a hindrance as aversion to pain. The practice is equanimity toward <em>all</em> sensations — pleasant, unpleasant, and neutral.
+            Across that range, one consistent note is that students almost never find their experience matches what they expected before the course.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What is bhanga or free flow in Vipassana?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Physical phenomena that come up</h2>
           <p>
-            Bhanga (also called &quot;dissolution&quot; or &quot;free flow&quot;) is a specific experience where the solid sense of the body seems to dissolve into a field of vibrations. During a body scan, instead of encountering distinct areas of sensation, your awareness moves through the body as a continuous flow. The boundary between &quot;body&quot; and &quot;not body&quot; becomes unclear.
+            Students commonly describe a wide vocabulary of bodily experience during sittings: aches and stiffness (especially early in a course, when the body is not yet used to long periods of sitting), heat, cold, tingling, pressure, heaviness, lightness, pulsing, trembling, and many others that do not map neatly to ordinary language.
           </p>
           <p>
-            This is one of the most discussed (and misunderstood) experiences in Vipassana. People describe it in various ways: &quot;my body dissolved into light,&quot; &quot;everything was vibrating,&quot; &quot;I couldn&apos;t feel the boundary of my skin.&quot;
-          </p>
-          <p>
-            <strong>What it actually is:</strong> Your concentration has reached a level where you&apos;re perceiving sensations at a very fine resolution. What normally feels like a solid arm now feels like a field of rapidly changing particles. This is direct experiential insight into <em>anicca</em> (impermanence) — everything is in constant flux.
-          </p>
-          <p>
-            <strong>What it is not:</strong> Enlightenment, a spiritual achievement, or the goal of practice. It&apos;s an experience, and like all experiences, it arises and passes away.
+            Some of these are intense. Others are so faint that students are unsure whether they are noticing anything at all. Both extremes are common. Neither is, in itself, a mark of success or failure.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Why do Vipassana sensations change from day to day?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Phenomena the tradition names</h2>
           <p>
-            One of the most confusing aspects of Vipassana practice is the inconsistency. Yesterday you had a deep, free-flowing session. Today your body feels like concrete. Yesterday there were subtle vibrations everywhere. Today there&apos;s nothing but dull aching.
+            Students often hear specific Pali-rooted words during a course to describe different qualities of experience, for example references to gross (<em>olarika</em>) and subtle (<em>sukhuma</em>) sensations, and to experiences like <em>bhanga</em>, sometimes translated as &quot;dissolution&quot; or &quot;free flow.&quot; These terms come up in Goenka&apos;s evening discourses.
           </p>
           <p>
-            This is completely normal and is itself part of the teaching. Sensations change because:
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Concentration varies.</strong> Some days your mind is sharper than others. Subtle sensations require concentration to detect.</li>
-            <li><strong>The body processes different layers.</strong> The technique works with stored patterns (sankharas) at different depths. Some days the surface is clear; other days deeper material comes up as gross sensations.</li>
-            <li><strong>Sleep, food, and stress affect everything.</strong> A poorly-slept night or a stressful day changes the landscape of your practice.</li>
-            <li><strong>This is literally the point.</strong> Impermanence (<em>anicca</em>) is the core teaching. Everything changes — including your meditation experience. Observing this change with equanimity <em>is</em> the practice.</li>
-          </ul>
-          <p>
-            Stop evaluating your sittings as &quot;good&quot; or &quot;bad.&quot; A sitting where you observe gross sensations with equanimity is just as valuable as one with free flow. Maybe more so.
+            The terms themselves are not the technique. They are a shared vocabulary for discussing what arises. The instructions for how any of these experiences are to be related to in practice are given inside the course, not here.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What should you do when Vipassana sensations scare you?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Emotional material surfacing</h2>
           <p>
-            Sometimes during practice, sensations arise that feel frightening: sudden intense heat, involuntary twitching, a feeling of falling, electric-like jolts, pressure in the head, or waves of emotion that seem to come from nowhere.
+            Many students report that emotional material shows up during courses and sometimes during ongoing home practice: grief, anger, old memories, waves of love, inexplicable tears, a sense of old things loosening. This is very commonly shared in group conversations among old students.
           </p>
           <p>
-            In most cases, these are normal aspects of deep meditation. The body stores tension and trauma as physical patterns, and when these patterns release, the sensations can be surprising and unfamiliar.
-          </p>
-          <p>
-            <strong>What to do:</strong>
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Maintain equanimity.</strong> This is easier said than done when something scary is happening, but it&apos;s the core instruction. Observe without reacting.</li>
-            <li><strong>Return to Anapana.</strong> If the sensations are too intense, narrow your focus back to the breath. This is always available as a safe harbor.</li>
-            <li><strong>Talk to the teacher.</strong> During a course, use the question time to describe what you&apos;re experiencing. At home, contact your local center.</li>
-            <li><strong>Distinguish intensity from danger.</strong> Intense is not the same as harmful. An unfamiliar sensation is not a medical emergency. That said, if something genuinely concerns you about your physical health, seek medical attention.</li>
-          </ul>
-          <p>
-            If you&apos;re experiencing dissociation, panic attacks, flashbacks, or psychological distress that goes beyond manageable discomfort, stop scanning and seek professional support. Read our <Link href="/faq/is-vipassana-safe" className="text-accent underline hover:text-foreground">safety guide</Link> for more on when to be cautious.
+            What to make of it, and how to hold it, is something teachers address in course discourses and individual interviews. Outside that context, students are generally cautious about amateur interpretation of each other&apos;s experience, for good reasons.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Are sensations the goal of Vipassana meditation?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Day-to-day variability</h2>
           <p>
-            This is the most important thing to understand, and the thing most meditators lose sight of at some point: <strong>the sensations are not the goal. Equanimity is the goal.</strong>
+            A consistent theme across long-term practitioners is how different one sitting can be from the next. Yesterday a student might describe a calm, steady hour; today the same person describes restlessness and aching. A week later, the pattern has reversed.
           </p>
           <p>
-            It doesn&apos;t matter whether you experience free flow or dull pain. What matters is how you relate to whatever arises. Can you observe pain without aversion? Can you observe pleasure without craving? Can you sit with ambiguity and uncertainty without needing to label and control the experience?
+            In the tradition&apos;s framing, this variability is not a bug. It is part of what the practice is pointing at. It is also part of why teachers steadily discourage students from grading their sittings.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">When experiences feel alarming</h2>
+          <p>
+            Sometimes students describe experiences that are frightening: sudden heat, unusual movements, sensations that feel electrical, surges of emotion with no clear cause, or a sense of unfamiliar depth that is disorienting. In the great majority of cases these are described by teachers as ordinary parts of the process, not medical emergencies.
           </p>
           <p>
-            The meditator who sits with knee pain for an hour, maintaining steady equanimity, is doing deeper work than the meditator who chases free-flow experiences. The practice is in the equanimity, not in the experience.
+            That said, this is exactly the kind of question that an assistant teacher is there for. They are experienced with the range of what students report, and they can respond in a way generic writing cannot. If something is troubling you, bring it to them.
           </p>
           <p>
-            Goenka repeats this endlessly during the course for a reason: we all forget it. We all start chasing good experiences and avoiding bad ones. Noticing that tendency <em>and returning to equanimity</em> is itself the practice.
+            If you are experiencing clinical-level distress (dissociation, panic attacks, flashbacks, intrusive trauma responses, or anything that is interfering with your daily functioning), please also consult a qualified mental-health professional. See our <Link href="/faq/is-vipassana-safe" className="text-accent underline hover:text-foreground">safety guide</Link> for more on this.
           </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What long-term practitioners tend to report</h2>
+          <p>
+            Old students with years of practice rarely describe dramatic breakthroughs when asked about their practice. They more often describe small, gradual shifts in how they relate to difficulty: fewer automatic reactions in ordinary situations, a slightly longer pause before speaking in anger, a little more room around discomfort. None of this is loud. Most of it is only visible over long stretches of time.
+          </p>
+          <p>
+            This is one of the quieter kinds of evidence that something is working. It is also why the tradition emphasizes consistency over any particular experience.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Frequently asked questions</h2>
+          <div className="mt-4 space-y-6">
+            {faqs.map((faq) => (
+              <div key={faq.question} className="border-l-2 border-accent/30 pl-4">
+                <h3 className="mb-1 font-semibold text-foreground">{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
 
       <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
-        <h2 className="mb-3 text-xl font-bold">Experience It Yourself</h2>
+        <h2 className="mb-3 text-xl font-bold">Experience comes from practice, not reading</h2>
         <p className="mb-6 text-muted">
-          Sensations are understood through practice, not reading. Find a course near you.
+          None of this can be understood by reading about it. It is understood by sitting a course.
         </p>
         <a
           href="https://www.dhamma.org/en-US/courses/search"
@@ -175,29 +193,32 @@ export default function SensationsExplainedPage() {
           rel="noopener noreferrer"
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
-          Find a Course
+          Find a course
         </a>
       </div>
 
       <div className="mt-12 rounded-xl border border-border bg-card p-6">
         <h2 className="mb-4 font-semibold text-foreground">Related</h2>
         <div className="flex flex-wrap gap-3">
-          <Link href="/guide/anapana-and-vipassana-explained" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            Anapana &amp; Vipassana Explained
+          <Link href="/experience" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Student Experiences
           </Link>
-          <Link href="/guide/recognizing-progress" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            Recognizing Progress
+          <Link href="/guide/scientific-evidence" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Scientific Evidence
           </Link>
-          <Link href="/guide/first-course-tips" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            First Course Tips
+          <Link href="/guide/find-a-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Find a Retreat
           </Link>
-          <Link href="/guide/vipassana-for-pain" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            Vipassana for Pain
+          <Link href="/guide/group-sittings" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Group Sittings
+          </Link>
+          <Link href="/guide/vipassana-for-beginners" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Vipassana for Beginners
           </Link>
         </div>
       </div>
 
-      <PageComments pageId="guide-sensations-explained" />
+      <PageComments pageId="guide-sensations-experiences" />
     </article>
   );
 }
