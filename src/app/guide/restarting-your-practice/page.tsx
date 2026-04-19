@@ -4,14 +4,51 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { FaqSchema } from "@/components/faq-schema";
 import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
+const PAGE_URL = "https://vipassana.cool/guide/restarting-your-practice";
+const PUBLISHED = "2025-09-01";
+
 export const metadata: Metadata = {
-  title: "How to Restart Your Vipassana Practice — Getting Back on the Cushion",
+  title: "Restarting Your Vipassana Practice After a Long Gap",
   description:
-    "Fell off your Vipassana practice? How to restart without guilt: shorter sessions, rebuilding momentum, when to take another course, and group sittings.",
-  alternates: { canonical: "https://vipassana.cool/guide/restarting-your-practice" },
+    "Most old students stop sitting at some point. This page is about motivation, community, and the traditional paths for re-engaging: group sittings, short courses, and the 10-day course. Non-teaching.",
+  alternates: { canonical: PAGE_URL },
 };
+
+const faqs = [
+  {
+    question: "Is it normal to stop practicing for a long time?",
+    answer:
+      "Yes. Most long-term practitioners in the Goenka tradition have had stretches, sometimes years, without daily practice. Lapses are essentially universal and not something to feel unusually guilty about.",
+  },
+  {
+    question: "What is the traditional way to re-engage after a long gap?",
+    answer:
+      "The paths the tradition itself recommends are: attending a group sitting for old students at a local center, sitting a short course (typically three days) if one is available, or sitting another 10-day course. These are the structures the tradition has built for exactly this situation.",
+  },
+  {
+    question: "Should I sit another 10-day course to restart?",
+    answer:
+      "If it has been a long time, or if you have tried to restart at home multiple times without it sticking, a 10-day course is often the most effective re-entry. The tradition recommends at least one course per year for old students for this kind of reason.",
+  },
+  {
+    question: "Can I ask an assistant teacher for help?",
+    answer:
+      "Yes. Centers welcome questions from old students by email, phone, and in person at group sittings. Teachers are the appropriate place for any questions about how to resume practice.",
+  },
+  {
+    question: "What is a Practice Buddy?",
+    answer:
+      "A Practice Buddy is a fellow old student who agrees to sit with you over video, in silence, on a regular schedule. It provides accountability without discussion of technique. See /practice-buddy/how-it-works.",
+  },
+  {
+    question: "How do I handle guilt about having stopped?",
+    answer:
+      "Gently. Guilt is itself a form of aversion, and attachments to a perfect streak are not what the practice is about. The tradition's framing is much more practical: notice, come back, continue.",
+  },
+];
 
 export default function RestartingPracticePage() {
   return (
@@ -20,221 +57,140 @@ export default function RestartingPracticePage() {
         items={[
           { name: "Home", url: "https://vipassana.cool" },
           { name: "Guide", url: "https://vipassana.cool/guide" },
-          { name: "Restarting Practice", url: "https://vipassana.cool/guide/restarting-your-practice" },
+          { name: "Restarting Your Practice", url: PAGE_URL },
         ]}
       />
       <ArticleSchema
-        title="How to Restart Your Practice"
-        description="Fell off your Vipassana practice? How to restart without guilt: shorter sessions, rebuilding momentum, when to take another course, and group sittings."
-        url="https://vipassana.cool/guide/restarting-your-practice"
-        datePublished="2025-09-01"
+        title="Restarting Your Vipassana Practice"
+        description="Non-teaching reflections on motivation, community, and the traditional paths for re-engaging after a long gap in daily sitting."
+        url={PAGE_URL}
+        datePublished={PUBLISHED}
       />
+      <FaqSchema faqs={faqs} />
       <ArticleHeader
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Guide", href: "/guide" },
-          { label: "Restarting Practice" },
+          { label: "Restarting Your Practice" },
         ]}
         category="Getting Back on Track"
-        title="How to Restart Your Practice"
-        description="You stopped sitting. It's been weeks, months, maybe years. Here's how to come back — without guilt, without drama, and without trying to pick up where you left off."
-        datePublished="2025-09-01"
+        title="Restarting Your Practice"
+        description="You stopped sitting. Weeks, months, maybe years. Here is the short version: you are in extremely good company, and the tradition has well-worn paths back."
+        datePublished={PUBLISHED}
       />
 
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          Every long-term meditator stops practicing at some point — it is essentially universal. Guilt about not sitting is itself aversion, exactly what the practice teaches you to observe. To restart: sit tomorrow morning for just 10-15 minutes, in your old spot, with no pressure to match your previous duration. Build back gradually — 15 minutes for a week, then 20, then 30. Join a group sitting for accountability. If you have been away for months, consider signing up for another 10-day course to reset. The practice is always there, exactly where you left it.
+          Long gaps in daily practice are extremely common, and the Goenka tradition has clear paths for re-engaging: local group sittings for old students, short courses, and the 10-day course. This page is about motivation and those structures. It does not contain any sitting-length ramp or technique prescription: how you practice was taught at your course, and is the province of an assistant teacher from there on.
         </p>
       </div>
 
       <div className="space-y-8 text-muted">
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Should you feel guilty about stopping Vipassana practice?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">You are not alone, and you have not ruined anything</h2>
           <p>
-            Guilt about not practicing is itself a form of aversion — exactly what the practice teaches you to observe and release. The irony is not lost on anyone.
+            Essentially every long-term meditator in this tradition has stopped sitting at some point. For some it is weeks, for others years. Life happens: new babies, demanding jobs, grief, moves, illness, burnout, complicated stretches of the heart and mind. The practice does not disappear during those times. You also do not fall out of the old-student community by being absent from the cushion.
           </p>
           <p>
-            Every long-term meditator has periods where they stop. Weeks, months, sometimes years. This is so common that it&apos;s essentially universal. You haven&apos;t failed. You haven&apos;t lost everything you built. You&apos;ve just been away for a while, and now you&apos;re coming back.
-          </p>
-          <p>
-            The practice is always there, exactly where you left it. It doesn&apos;t judge you for your absence. Neither should you.
+            Guilt about having stopped is, in the tradition&apos;s own framing, another form of the reactivity the practice is pointing at. Noticing it, and not making a project out of it, is a much kinder place to start than self-recrimination.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How long should you meditate when restarting Vipassana?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why lapses happen</h2>
           <p>
-            The biggest mistake people make when restarting is trying to jump back to their old routine. If you were doing an hour a day before you stopped, don&apos;t sit down tomorrow for an hour. You&apos;ll have a difficult, frustrating session and be less likely to sit the next day.
+            A daily sitting depends on a very particular alignment: time, energy, privacy, and the willingness to sit with discomfort. Any of those can give way, and in ordinary life they often do. Solo practice in a busy household is a fragile structure. It does not take a dramatic reason to lose it.
           </p>
           <p>
-            Start with 10 or 15 minutes. That&apos;s it. Set a timer, sit, observe your breath, and if concentration allows, do a brief body scan. When the timer goes off, stop. Even if you feel like you could do more. The goal in the first week isn&apos;t depth — it&apos;s rebuilding the habit.
-          </p>
-          <p>
-            After a week of daily 15-minute sits, extend to 20. Then 25. Add 5 minutes per week until you reach your target duration. This gradual ramp-up prevents burnout and creates positive momentum. Each day feels achievable, which makes the next day easier.
+            Understanding this as structural, rather than as a personal failure, is useful. It directs your attention to what would help next time, rather than to more guilt.
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What should you expect when restarting Vipassana practice?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">The tradition&apos;s own paths for re-engaging</h2>
           <p>
-            Your mind will be noisier than you remember. Concentration that took 5 minutes to achieve might now take 20. Sensations that were subtle may be undetectable. The body scan may feel like trying to see in the dark.
-          </p>
-          <p>
-            This is normal and temporary. It&apos;s not that you&apos;ve &quot;lost&quot; your practice — the underlying capacity is still there, just dormant. Think of it like returning to exercise after a break. The first few runs are painful, but fitness returns faster than it was initially built.
-          </p>
-          <p>
-            <strong>What you might experience in the first week:</strong>
+            The Goenka tradition has built three main structures for old students who want to re-engage. None of them require you to figure out how to restart alone.
           </p>
           <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li>Restless mind — constant thoughts, difficulty staying with the breath</li>
-            <li>Physical discomfort — your body has forgotten how to sit still</li>
-            <li>Frustration — &quot;I used to be so much better at this&quot;</li>
-            <li>Emotional release — stored tension from the time you weren&apos;t practicing</li>
-          </ul>
-          <p>
-            Observe all of it with equanimity. That&apos;s the practice, whether your mind is calm or chaotic.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Should you focus on Anapana when restarting practice?</h2>
-          <p>
-            When restarting, lean heavily on <Link href="/guide/anapana-and-vipassana-explained" className="text-accent underline hover:text-foreground">Anapana</Link> (breath observation). Your concentration needs to rebuild before body scanning becomes productive.
-          </p>
-          <p>
-            For the first few days, you might spend your entire session on Anapana. That&apos;s fine. When your mind can stay with the breath for several minutes without wandering, transition to the body scan for the remaining time.
-          </p>
-          <p>
-            Don&apos;t force the transition. Scanning with a scattered mind produces frustration, not insight. Build the foundation first.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">When should you take another course to restart your practice?</h2>
-          <p>
-            If you&apos;ve been away from practice for months or longer, taking a 10-day course is the most powerful way to restart. It&apos;s like pressing a reset button: 10 days of intensive practice rebuilds concentration, re-establishes the technique, and reignites motivation in a way that home practice alone can&apos;t match.
-          </p>
-          <p>
-            <strong>Signs a course would help:</strong>
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li>You&apos;ve tried to restart at home multiple times and keep falling off</li>
-            <li>It&apos;s been over a year since your last course</li>
-            <li>You can&apos;t remember the instructions clearly</li>
-            <li>Your practice at home feels shallow or mechanical</li>
-            <li>You want the external structure and accountability that a course provides</li>
-          </ul>
-          <p>
-            Goenka recommends taking at least one course per year. If you&apos;ve been away, this is a perfect time to sign up. Courses are available year-round at centers worldwide.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Can group sittings help you restart your practice?</h2>
-          <p>
-            Many Vipassana centers host weekly group sittings for old students. These are one of the best-kept secrets for maintaining and restarting practice.
-          </p>
-          <p>
-            A group sitting creates gentle accountability: you&apos;re less likely to skip when others expect you. Sitting with a group, even in silence, reinforces that you&apos;re part of a community of practitioners. And the concentrated energy of a group sitting often produces a deeper session than sitting alone at home.
-          </p>
-          <p>
-            If you&apos;re struggling to restart, committing to one group sitting per week can be the anchor that holds your practice together while you rebuild the daily habit.
-          </p>
-          <p>
-            Check your nearest Vipassana center&apos;s website for group sitting schedules. Many are listed on <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>. For the full guide on finding, attending, or starting a group sitting, see our <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">group sittings page</Link>.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How do you set up your space when restarting meditation?</h2>
-          <p>
-            Your physical space shapes your practice more than you think. If you haven&apos;t sat in months, reclaiming the space is a concrete, immediate action that signals your intention to restart.
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Clear the spot</strong> — If your cushion has been buried under laundry, reclaim it. Dust it off. Put it back in position. Having a visible, ready meditation space removes one layer of friction.</li>
-            <li><strong>Remove obstacles</strong> — Is the alarm clock across the room? Move it closer. Do you need to find your timer app every morning? Pin it to your home screen. Every small friction point is an excuse your mind will use.</li>
-            <li><strong>Small upgrades</strong> — A dedicated timer (instead of your phone), earplugs if noise is an issue, a blanket for cold mornings. These small investments signal commitment and remove excuses. You don&apos;t need to spend much — you just need your space to be ready and waiting.</li>
+            <li>
+              <strong>Group sittings.</strong> Most centers and many cities host weekly group sittings for old students. They are a natural, low-threshold re-entry point. See <Link href="/guide/group-sittings" className="text-accent underline hover:text-foreground">group sittings</Link> for more.
+            </li>
+            <li>
+              <strong>Short courses.</strong> Three-day courses are offered at many centers for old students. They are shorter and logistically easier to fit into life than a full 10-day course, and are explicitly designed as a way to re-anchor practice.
+            </li>
+            <li>
+              <strong>Another 10-day course.</strong> If the gap has been long or you have tried to restart at home repeatedly, a full course is often the most effective step. The tradition suggests old students sit at least one course per year for exactly this kind of reason.
+            </li>
           </ul>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">How do you restart meditation when you live with family?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">The value of community and accountability</h2>
           <p>
-            If you live with others, restarting your practice means reintroducing a routine they may have gotten used to not having. A few approaches that work:
+            Solo practice is beautiful and difficult. Shared practice is also beautiful and slightly less difficult to maintain, because it is carried by more than one person&apos;s momentum at a time. Two old students who know they will be sitting together tomorrow are, together, more likely to actually sit tomorrow than either one alone.
           </p>
-          <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li><strong>Start with minimal disruption</strong> — Begin with 15 minutes before anyone else is awake. There&apos;s nothing to negotiate or explain. You&apos;re just getting up a bit earlier.</li>
-            <li><strong>Don&apos;t make a big announcement</strong> — &quot;I&apos;m restarting my meditation practice&quot; invites discussion and potential resistance. Just sit. If anyone asks, keep it simple: &quot;Yeah, I&apos;m meditating again in the mornings.&quot;</li>
-            <li><strong>Let results convince skeptics</strong> — The best argument for your meditation time is your improved patience, presence, and emotional balance. This takes a few weeks to become visible, but it&apos;s more persuasive than any explanation.</li>
-          </ul>
+          <p>
+            This is not a deep insight; it is just how humans work. Group sittings, weekly check-ins with an old-student friend, or a Practice Buddy pairing are all ways of outsourcing a small amount of the momentum your practice needs.
+          </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">What is a simple plan to restart Vipassana practice?</h2>
+          <h2 className="mb-3 text-xl font-bold text-foreground">What not to try to do from scratch, alone</h2>
           <p>
-            Here&apos;s a concrete plan for the first four weeks:
+            When people try to rebuild a practice from scratch on their own, they often try to engineer a detailed program for themselves: a schedule, a plan, a set of rules. Sometimes this works. More often it doesn&apos;t, because the problem was not a missing plan. The original instructions for the practice are fine; what tends to be missing is the surrounding structure.
           </p>
+          <p>
+            That is what group sittings, courses, and pairings are for. They are the structure, not an improved plan.
+          </p>
+        </section>
 
-          <div className="mt-4 space-y-4">
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">Week 1: 15 minutes, morning only</h3>
-              <p>
-                Mostly Anapana. Brief scan if concentration allows. The only goal is to sit every day. No exceptions, no negotiations.
-              </p>
-            </div>
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Talking to an assistant teacher</h2>
+          <p>
+            If you are uncertain about how to restart, or about what has been coming up for you since you stopped, an assistant teacher is the right person to talk to. Centers are set up to handle exactly these conversations. Emailing your regional center with a brief note about your situation is entirely normal, and you will not be the first person to do it.
+          </p>
+        </section>
 
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">Week 2: 20 minutes, morning only</h3>
-              <p>
-                5 minutes Anapana, then body scan. The scan won&apos;t be thorough yet. That&apos;s fine. You&apos;re rebuilding.
-              </p>
-            </div>
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Reclaiming a little bit of space</h2>
+          <p>
+            If a cushion that hasn&apos;t been used in a year has been buried under laundry, dusting it off and putting it back in its spot is a small, concrete signal of intention. You do not have to sit today. Just reclaim the space. Often the sitting comes later, on its own, once the space is ready for it again.
+          </p>
+        </section>
 
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">Week 3: 30 minutes morning, optional 10 minutes evening</h3>
-              <p>
-                The morning session is the priority. The evening session is a bonus, not a requirement. Don&apos;t create guilt around the evening sit.
-              </p>
-            </div>
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">A more forgiving frame</h2>
+          <p>
+            A practice measured over years or decades will include many stops and restarts. The practitioners who last are not the ones who never paused. They are the ones who kept returning. That is the whole craft: returning.
+          </p>
+          <p>
+            Returning today looks like signing up for the next short course, emailing your center, messaging an old-student friend, or simply sitting somewhere quiet again. None of it has to be dramatic. It just has to be the next thing.
+          </p>
+        </section>
 
-            <div className="border-l-2 border-accent/30 pl-4">
-              <h3 className="mb-1 font-semibold text-foreground">Week 4: 30-45 minutes morning, 15 minutes evening</h3>
-              <p>
-                By now the habit should feel more natural. Extend duration gradually based on how the practice is going. Don&apos;t rush to an hour if 30 minutes is where your practice is alive.
-              </p>
-            </div>
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Frequently asked questions</h2>
+          <div className="mt-4 space-y-6">
+            {faqs.map((faq) => (
+              <div key={faq.question} className="border-l-2 border-accent/30 pl-4">
+                <h3 className="mb-1 font-semibold text-foreground">{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </div>
+            ))}
           </div>
-
-          <p className="mt-6">
-            For the full guide on session durations and building consistency, see <Link href="/guide/daily-practice" className="text-accent underline hover:text-foreground">Daily Practice at Home</Link> and <Link href="/faq/can-i-do-shorter-sessions" className="text-accent underline hover:text-foreground">Do Shorter Sessions Work?</Link>.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="mb-3 text-xl font-bold text-foreground">Is falling off and restarting normal in Vipassana practice?</h2>
-          <p>
-            Falling off and restarting is not a bug in the practice — it&apos;s a feature. Each time you come back, you learn something new: about your resistance, about what pulls you away, about what brings you back.
-          </p>
-          <p>
-            The meditators who maintain lifelong practice are not the ones who never stopped. They&apos;re the ones who kept coming back. The cushion is always there. You can always sit down again.
-          </p>
-          <p>
-            Don&apos;t wait for the right moment. Don&apos;t wait until you feel motivated. Don&apos;t wait for a course. Just sit tomorrow morning. Fifteen minutes. That&apos;s it. Everything starts from there.
-          </p>
         </section>
       </div>
 
       <PracticeBuddyCta
-        heading="Ready to Restart With Support?"
-        description="Restarting is easier with a partner. Get matched with a fellow Vipassana meditator for daily practice over Google Meet. Free and tradition-respectful."
+        heading="Restarting is easier with a partner"
+        description="Get matched with a fellow old student for daily shared sittings over video. Silent, free, tradition-respectful."
       />
 
       <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
-        <h2 className="mb-3 text-xl font-bold">Recharge with a Course</h2>
+        <h2 className="mb-3 text-xl font-bold">Sit another course</h2>
         <p className="mb-6 text-muted">
-          A 10-day course is the best way to reset your practice.
-          Find one near you.
+          The tradition&apos;s own reset button. Short courses and 10-day courses are both available at centers worldwide.
         </p>
         <a
           href="https://www.dhamma.org/en-US/courses/search"
@@ -242,24 +198,27 @@ export default function RestartingPracticePage() {
           rel="noopener noreferrer"
           className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
-          Find a Course
+          Find a course
         </a>
       </div>
 
       <div className="mt-12 rounded-xl border border-border bg-card p-6">
         <h2 className="mb-4 font-semibold text-foreground">Related</h2>
         <div className="flex flex-wrap gap-3">
-          <Link href="/guide/daily-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            Daily Practice at Home
-          </Link>
-          <Link href="/guide/recognizing-progress" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            Recognizing Progress
-          </Link>
           <Link href="/guide/group-sittings" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Group Sittings
           </Link>
-          <Link href="/guide/after-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            After the Retreat
+          <Link href="/guide/find-a-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Find a Retreat
+          </Link>
+          <Link href="/guide/course-application-tips" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Course Application Tips
+          </Link>
+          <Link href="/practice-buddy/how-it-works" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Practice Buddy
+          </Link>
+          <Link href="/experience" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Student Experiences
           </Link>
         </div>
       </div>
