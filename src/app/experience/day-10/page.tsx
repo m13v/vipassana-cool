@@ -2,78 +2,80 @@ import type { Metadata } from "next";
 import { DayPage } from "@/components/day-page";
 
 export const metadata: Metadata = {
-  title: "Vipassana Day 10 — Noble Silence Breaks & Metta Bhavana",
+  title: "Vipassana Day 10 — Noble Silence Breaks & the Transition Home",
   description:
-    "Day 10 of Vipassana: Noble Silence breaks, metta (loving-kindness) meditation is introduced, and you reconnect with the people you've been meditating alongside.",
+    "Day 10 of a 10-day Vipassana course: Noble Silence ends, metta bhavana is introduced in the course sittings, and students prepare to re-enter ordinary life.",
   alternates: { canonical: "https://vipassana.cool/experience/day-10" },
 };
 
 export default function Day10Page() {
   return (
-    <DayPage day={10} title="Noble Silence Breaks & Metta Bhavana">
+    <DayPage day={10} title="Noble Silence Breaks & the Transition Home">
       <p>
-        Day 10 is the transition day — the bridge between the intense, inward-focused world of the course and the noisy, complex world you&apos;re about to re-enter. It starts with one of the most memorable moments of the entire experience: the silence breaks.
+        Day 10 is the transition day. The course is not quite over, but it shifts shape. Noble Silence ends in the morning, metta bhavana (loving-kindness) is brought into the schedule during the course sittings, and the long inward turn of the preceding days begins to rotate back outward. Most students remember day 10 as a mix of relief, tenderness, and mild disorientation.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">Metta Bhavana: Loving-Kindness</h2>
+      <h2 className="text-xl font-bold text-foreground">Metta Bhavana Enters the Schedule</h2>
       <p>
-        The morning begins with a new practice: Metta Bhavana, or loving-kindness meditation. After nine days of rigorous, objective body scanning, you&apos;re asked to generate feelings of goodwill and compassion — first for yourself, then for all beings.
+        The final day of the course introduces metta bhavana, loving-kindness, into the sittings. The instructions for how to practice it come from the assistant teacher and the recorded audio, in the meditation hall. This page does not reproduce them; as with the main technique on day 4, the transmission belongs to the course.
       </p>
       <p>
-        This isn&apos;t just a nice add-on. After days of deep, sometimes difficult inner work, metta serves as a balm. You&apos;ve been observing pain, discomfort, and difficult emotions with equanimity. Now you consciously radiate warmth and kindness. Many people find this surprisingly emotional.
-      </p>
-      <p>
-        The technique is simple: at the end of a body scan, when your mind is calm and concentrated, you wish well for yourself, then expand that wish outward — to the people in the room, the center, the town, the country, the world. May all beings be happy. May all beings be free from suffering.
+        As a descriptive note: many students find the metta sittings unexpectedly moving. After nine days of rigorous interior work, the quality of the practice softens. The mood in the hall is audibly different, even before anyone has said a word.
       </p>
 
       <h2 className="text-xl font-bold text-foreground">The Silence Breaks</h2>
       <p>
-        Around 10 AM, after the morning meditation session, Noble Silence is lifted. The teacher makes an announcement, and suddenly — you can talk.
+        Around mid-morning, after the sitting, Noble Silence is formally lifted. The assistant teacher makes the announcement, and suddenly the hall, the dining area, the paths outside all fill with voices.
       </p>
       <p>
-        This moment is extraordinary. You&apos;ve been sitting, eating, walking, and living alongside these people for nine days, sharing an incredibly intimate experience, without exchanging a single word. Now voices fill the hall.
+        The first thing almost everyone notices: talking feels strange. The voice sounds different coming out of a body that has been quiet for nine days. Language arrives in slow, clunky pieces. Many people describe trying to say something about what the course was like and discovering that words do not quite fit the shape of the experience.
       </p>
       <p>
-        The first thing you notice: talking feels strange. Your voice sounds different. Words come slowly. After nine days of silence, language feels clunky and inadequate. You want to describe what you&apos;ve experienced, but the words don&apos;t quite capture it.
-      </p>
-      <p>
-        The second thing you notice: every person around you has a story. The guy you&apos;d been sitting next to, who you&apos;d imagined was having a peaceful, easy time? He nearly left on Day 3 and spent Day 6 in tears. The woman who always seemed so composed? She was fighting anxiety the entire course. Everyone was going through their own private battle. This realization — that everyone is fighting a hard fight — stays with you.
+        The second thing people notice: every stranger in the room has been having their own course. The person you had imagined was floating through the week effortlessly nearly left on day 3. The person who looked miserable had the deepest sittings of their life on day 7. Almost everyone has been fighting a private battle. Hearing that, from fifty different people at once, tends to reshape how you think about strangers for a while.
       </p>
 
       <h2 className="text-xl font-bold text-foreground">The Flood of Conversation</h2>
       <p>
-        Within minutes, the dining hall transforms. People are laughing, sharing experiences, exchanging contact information. It&apos;s like the first day of school, but with fifty people who&apos;ve just been through something intense together. The energy is joyful and slightly manic.
+        Within an hour of the silence ending, the dining hall is loud. People laugh, exchange contact info, compare notes, swap experiences of day 3 and day 6 and day 9. Old students (people who have sat multiple courses) tend to be calmer; new students often ride a wave of adrenaline for several hours.
       </p>
       <p>
-        Some people talk nonstop for hours. Others find they prefer small doses of conversation with quiet breaks in between. Listen to what your body and mind need. If the noise feels overwhelming, step outside. You don&apos;t have to participate in every conversation.
+        Students who spent the week in deep interior states sometimes find the noise overwhelming and prefer short conversations with long quiet breaks. There is no single right way to do day 10. Some people talk nonstop. Some people sit alone under a tree. Both are normal.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">The Final Meditation Sessions</h2>
+      <h2 className="text-xl font-bold text-foreground">The Final Sittings</h2>
       <p>
-        There are still meditation sessions on Day 10, and they feel different. The hall has a lighter energy. People are smiling. The practice continues, but with a softer quality. These sessions often integrate metta with body scanning — a combination that will become your daily practice.
+        The course still has scheduled sittings on day 10. They feel different. The hall has a lighter quality. The silence inside the sittings is now held alongside the knowledge that words are available again. Many students describe these sittings as some of the most settled of the course.
       </p>
 
       <h2 className="text-xl font-bold text-foreground">Evening Discourse</h2>
       <p>
-        Goenka&apos;s final discourse summarizes the technique and lays out the path forward. He emphasizes the importance of daily practice — morning and evening — and of taking at least one course per year. He also introduces the concept of &quot;old student&quot; courses and service opportunities. The talk ends with his characteristic chanting, and the course is officially over.
+        Goenka&apos;s final recorded discourse sums up the technique, places it in the broader tradition, and talks about what daily practice after the course looks like. He mentions how long to sit, how often, and the role of refresher courses. The talk closes with his chanting, and the course is essentially complete.
       </p>
 
       <h2 className="text-xl font-bold text-foreground">Leaving the Center</h2>
       <p>
-        On Day 11 (the morning after), you pack your bags, eat breakfast, and leave. Getting your phone back is a shock — the flood of notifications, the brightness of the screen, the pull to check everything immediately. Take it slowly. Some people don&apos;t turn their phones on until they get home.
+        Students usually leave on the morning of day 11. Phones and belongings are returned. For most people, the first hour with a phone is jarring: the brightness, the volume, the pull to open every app at once. Many old students describe turning the phone on only once they are home, not at the center.
       </p>
       <p>
-        The drive or ride home is surreal. Traffic, billboards, radio chatter — the world feels louder and faster than you remembered. This heightened sensitivity fades over a few days, but it gives you a window into how much stimulation you normally process without noticing.
+        The ride home is often surreal. Traffic, billboards, music on the radio, casual speech in public places all feel louder and faster than they did ten days ago. This heightened sensitivity fades over a few days. While it lasts, it offers an unusually clear picture of how much stimulation normal life contains.
       </p>
 
-      <h2 className="text-xl font-bold text-foreground">Tips for Day 10</h2>
-      <ul className="list-disc space-y-2 pl-6">
-        <li>Embrace the metta practice. It&apos;s a beautiful complement to the body scanning.</li>
-        <li>When the silence breaks, ease into conversation. Don&apos;t overwhelm yourself.</li>
-        <li>Exchange contact info with people whose experiences resonated with you. Course friendships can be valuable.</li>
-        <li>Plan your first day back carefully. Give yourself a buffer day before returning to work.</li>
-        <li>Commit to daily practice before you leave. The course is just the beginning.</li>
-      </ul>
+      <h2 className="text-xl font-bold text-foreground">What I Remember About Day 10</h2>
+      <p>
+        In my own experience, day 10 always felt like waking up from a long dream. Not because the course was a dream, but because the quality of the days had been so different from ordinary life that ordinary life felt briefly unfamiliar. The first phone call home always took me by surprise: my own voice sounding like a stranger&apos;s for the first few sentences.
+      </p>
+
+      <h2 className="text-xl font-bold text-foreground">Where to Go Next</h2>
+      <p>
+        If you are reading this before your first course, day 10 is the day most former students describe when asked &quot;what was it like?&quot; It is worth reading about, but it makes very little sense without the nine days that precede it.
+      </p>
+      <p>
+        Practical next steps:{" "}
+        <a href="/guide/find-a-retreat" className="text-accent hover:text-foreground">find a retreat</a>,{" "}
+        <a href="/guide/course-application-tips" className="text-accent hover:text-foreground">course application tips</a>,{" "}
+        <a href="/prepare/packing-list" className="text-accent hover:text-foreground">packing list</a>, and the full{" "}
+        <a href="/experience" className="text-accent hover:text-foreground">day-by-day experience</a>.
+      </p>
     </DayPage>
   );
 }
