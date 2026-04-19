@@ -3,7 +3,7 @@ import { FaqDetailPage } from "@/components/faq-detail-page";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Vipassana & Depression — What You Need to Know Before Attending",
+  title: "Vipassana and Depression: What to Know Before Attending",
   description:
     "Can you do Vipassana with depression? When it helps, when to wait, what happens during the course, and why it's not a replacement for professional treatment.",
   alternates: { canonical: "https://vipassana.cool/faq/vipassana-and-depression" },
@@ -14,7 +14,7 @@ export default function VipassanaAndDepressionPage() {
     <FaqDetailPage
       pageId="faq-vipassana-and-depression"
       title="Vipassana & Depression"
-      description="Honest guidance on attending a Vipassana course when you have depression — when it helps, when to wait, and what to expect."
+      description="Honest guidance on attending a Vipassana course when you have depression: when it helps, when to wait, and what to expect."
       schemaFaqs={[
         {
           question: "Can I do Vipassana if I have depression?",
@@ -24,7 +24,7 @@ export default function VipassanaAndDepressionPage() {
         {
           question: "Does Vipassana cure depression?",
           answer:
-            "No. Vipassana is not a treatment for depression and should not be used as a replacement for professional mental health care. However, many practitioners report that the technique — particularly developing equanimity toward difficult mind states — helps them relate to depressive episodes differently over time.",
+            "No. Vipassana is not a treatment for depression and should not be used as a replacement for professional mental health care. However, many practitioners report that, over time, the training received at the course helps them relate to depressive episodes differently.",
         },
         {
           question: "Is Vipassana dangerous for people with depression?",
@@ -43,7 +43,7 @@ export default function VipassanaAndDepressionPage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          People with mild-to-moderate, managed depression can benefit from Vipassana. The technique teaches equanimity toward difficult mind states, which helps practitioners relate to depressive episodes differently over time. However, Vipassana is not a treatment for depression and should not replace professional care. If you are in an acute depressive episode, wait until you are more stable — the intense introspection and isolation of a 10-day course can temporarily amplify symptoms. Be honest on the application, continue prescribed medications, and consult your therapist or psychiatrist before attending.
+          People with mild-to-moderate, managed depression can benefit from attending a course. Many practitioners report that, over time, their relationship to depressive episodes changes. However, Vipassana is not a treatment for depression and should not replace professional care. If you are in an acute depressive episode, wait until you are more stable; the intense introspection and isolation of a 10-day course can temporarily amplify symptoms. Be honest on the application, continue prescribed medications, and consult your therapist or psychiatrist before attending.
         </p>
       </div>
 
@@ -57,10 +57,10 @@ export default function VipassanaAndDepressionPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">Vipassana Is Not a Cure</h2>
         <p>
-          Let&apos;s get this out of the way first: Vipassana does not cure depression. It is not a treatment. If you&apos;re attending a course hoping it will fix your depression, you&apos;re setting yourself up for disappointment — and potentially making things worse.
+          To say it plainly: Vipassana does not cure depression. It is not a treatment. If you&apos;re attending a course hoping it will fix your depression, you&apos;re setting yourself up for disappointment and potentially making things worse.
         </p>
         <p>
-          What Vipassana <em>can</em> do is change your relationship with depressive states. The technique teaches you to observe mental and physical phenomena with equanimity — without craving pleasant experiences or pushing away unpleasant ones. Over time, this can shift how you experience depression: from something that overwhelms and defines you to something you can observe, understand, and endure with less suffering.
+          What sustained practice <em>can</em> do over time is change the relationship you have with depressive states. Over years of practice, many people report that depression can shift from something that overwhelms and defines them to something they can observe, understand, and endure with less suffering. The training itself is transmitted at the course by an authorized assistant teacher.
         </p>
         <p>
           But this takes sustained practice. A single 10-day course won&apos;t do it. Daily practice over months and years, possibly supplemented by additional courses, is what creates lasting change.
@@ -70,7 +70,7 @@ export default function VipassanaAndDepressionPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">When Attending Is Generally Fine</h2>
         <ul className="mt-3 list-disc space-y-2 pl-6">
-          <li><strong>Mild-to-moderate depression that is currently managed</strong> — whether through medication, therapy, lifestyle, or a combination. You&apos;re functional, stable, and not in crisis.</li>
+          <li><strong>Mild-to-moderate depression that is currently managed,</strong> whether through medication, therapy, lifestyle, or a combination. You&apos;re functional, stable, and not in crisis.</li>
           <li><strong>History of depression that isn&apos;t currently active.</strong> Past episodes don&apos;t disqualify you. Many meditators have histories of depression and find Vipassana deeply valuable.</li>
           <li><strong>You&apos;re on antidepressants and stable.</strong> You can continue medication during the course. The application asks about medication, and the center will work with you. Do not stop medication to attend.</li>
           <li><strong>You have therapeutic support in place.</strong> Having a therapist or psychiatrist you can return to after the course provides a safety net.</li>
@@ -81,7 +81,7 @@ export default function VipassanaAndDepressionPage() {
         <h2 className="mb-3 text-xl font-bold text-foreground">When You Should Wait</h2>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li><strong>You&apos;re currently in a depressive episode.</strong> The 10 days of silence, isolation, and introspection can amplify what you&apos;re already feeling. This is not the time.</li>
-          <li><strong>You&apos;ve recently been hospitalized</strong> for mental health reasons. Give yourself time to stabilize — at least several months — before considering a course.</li>
+          <li><strong>You&apos;ve recently been hospitalized</strong> for mental health reasons. Give yourself time to stabilize (at least several months) before considering a course.</li>
           <li><strong>You&apos;re experiencing suicidal ideation.</strong> Full stop. Get professional help now. Vipassana will still be available when you&apos;re in a better place.</li>
           <li><strong>You&apos;re attending as a last resort.</strong> If Vipassana feels like &quot;the only thing left to try,&quot; the pressure you&apos;re placing on the experience can be harmful. It works best as one tool among many, not as a Hail Mary.</li>
           <li><strong>You recently changed or stopped medication.</strong> Wait until you&apos;ve been stable on your current regimen for several months.</li>
@@ -91,26 +91,26 @@ export default function VipassanaAndDepressionPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">What Happens During the Course</h2>
         <p>
-          If you do attend with a history of depression, here&apos;s what to expect:
+          If you attend with a history of depression, here is a rough sketch of the emotional arc (the actual technique is transmitted at the course, not described here):
         </p>
         <p>
-          <strong>Days 1-3</strong> can be emotionally intense for everyone, but especially so if you&apos;re prone to depression. The silence, the lack of distraction, and the constant focus inward can bring difficult feelings to the surface. This is partly the point — but it&apos;s not comfortable.
+          <strong>Days 1 to 3</strong> can be emotionally intense for everyone, but especially so for someone prone to depression. The silence, the lack of distraction, and the constant focus inward can bring difficult feelings to the surface. This is partly the point, but it is not comfortable.
         </p>
         <p>
-          <strong>Days 4-6</strong> introduce the body scanning technique. This shifts attention from the narrative mind (&quot;why am I sad, what&apos;s wrong with me&quot;) to direct physical observation. Many people with depression find this shift helpful — it breaks the rumination loop.
+          <strong>Days 4 to 6</strong> introduce Vipassana proper. Many people with depression describe the shift from rumination to a different mode of attention as helpful, though how that lands is very individual.
         </p>
         <p>
-          <strong>Days 7-10</strong> typically bring more stability. You&apos;ve built enough concentration to observe difficult states without being overwhelmed by them. The equanimity you&apos;ve been developing starts to feel real, not theoretical.
+          <strong>Days 7 to 10</strong> typically bring more stability. Concentration has built up enough to observe difficult states without being overwhelmed by them.
         </p>
         <p>
-          Throughout, you can speak with the assistant teacher during designated question times. They&apos;ve guided thousands of students through difficult experiences and can offer practical guidance. If things become genuinely unmanageable, the course management can help.
+          Throughout, you can speak with the assistant teacher during designated question times. They have guided thousands of students through difficult experiences and can offer guidance within the course. If things become genuinely unmanageable, the course management can help.
         </p>
       </section>
 
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Post-Course Period</h2>
         <p>
-          The weeks after a course can be a vulnerable time. You&apos;ve just spent 10 days in a controlled, supportive environment. Returning to normal life — with its noise, responsibilities, and relationships — can feel jarring.
+          The weeks after a course can be a vulnerable time. You&apos;ve just spent 10 days in a controlled, supportive environment. Returning to normal life (with its noise, responsibilities, and relationships) can feel jarring.
         </p>
         <p>
           Some people experience a &quot;post-retreat high&quot; that fades, leading to a dip. Others feel raw and emotionally exposed for a while. These are normal responses, not signs that something went wrong.
