@@ -6,7 +6,7 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { TrackedLink, TrackedCTA } from "@/components/tracked-events";
 
 export const metadata: Metadata = {
-  title: "Vipassana FAQ — Honest Answers to Common Questions",
+  title: "Vipassana FAQ: Honest Answers to Common Questions",
   description:
     "Frequently asked questions about Vipassana meditation: noble silence, daily schedule, physical challenges, food, and what really happens during 10 days.",
   alternates: { canonical: "https://vipassana.cool/faq" },
@@ -17,7 +17,7 @@ const faqs: { q: string; a: string[] }[] = [
     q: "Is Vipassana a religion?",
     a: [
       "No. Vipassana is a meditation technique, not a religion. While it was rediscovered by the Buddha, it contains no rites, rituals, or dogma. People of all faiths (and no faith) attend courses.",
-      "You will hear references to Pali terms and Buddhist concepts, but the technique itself is purely about observing sensations in your body. You don't need to believe in anything — just practice and observe.",
+      "You will hear references to Pali terms and Buddhist concepts, but the technique itself is taught as a practical training, not a doctrine. You don't need to believe in anything; the course is the place where the technique is transmitted by an authorized assistant teacher.",
     ],
   },
   {
@@ -32,7 +32,7 @@ const faqs: { q: string; a: string[] }[] = [
     a: [
       "Noble Silence means silence of body, speech, and mind. For the first 9 days, you don't talk, make gestures, write notes, or make eye contact with other students.",
       "You can speak to the teacher during designated question periods, and you can speak to the course manager for logistical needs (room issues, health concerns).",
-      "On Day 10, Noble Silence is lifted and students can talk to each other. This is actually a beautiful moment — you've been meditating alongside these people for 9 days and finally get to connect.",
+      "On Day 10, Noble Silence is lifted and students can talk to each other. This is actually a beautiful moment: you've been meditating alongside these people for 9 days and finally get to connect.",
       "Most people find silence much easier than expected. After the first day or two, it becomes natural and even liberating.",
     ],
   },
@@ -40,7 +40,7 @@ const faqs: { q: string; a: string[] }[] = [
     q: "What does a typical day look like?",
     a: [
       "The schedule is the same every day: wake-up gong at 4:00 AM, meditation from 4:30 to 6:30, breakfast at 6:30, meditation from 8:00 to 11:00, lunch at 11:00, rest until 1:00 PM, meditation from 1:00 to 5:00, tea break at 5:00, meditation from 6:00 to 7:00, teacher's discourse (video) from 7:00 to 8:15, final meditation from 8:15 to 9:00, lights out at 9:30.",
-      "It sounds brutal, and the first few days are genuinely hard. But by Day 4 or 5, most people settle into the rhythm. The discourse in the evening is a highlight — S.N. Goenka is surprisingly funny and relatable.",
+      "It sounds brutal, and the first few days are genuinely hard. But by Day 4 or 5, most people settle into the rhythm. The discourse in the evening is a highlight; S.N. Goenka is surprisingly funny and relatable.",
     ],
   },
   {
@@ -48,22 +48,22 @@ const faqs: { q: string; a: string[] }[] = [
     a: [
       "Not all meditation time is 'group sitting.' About 3 hours per day are mandatory group sittings in the meditation hall. The rest can be done in the hall or in your room.",
       "You will be sore. Your knees, back, and ankles will hurt, especially in the first few days. This is normal. You can use cushions, benches, and even chairs if needed. The center provides various sitting supports.",
-      "The physical discomfort actually becomes part of the practice — you learn to observe sensations without reacting. That's literally the technique.",
+      "The physical discomfort is handled inside the course format, with instructions from the assistant teacher. The training is specifically built for a body that has not sat ten hours a day before.",
     ],
   },
   {
     q: "What's the food like?",
     a: [
-      "Vegetarian, usually quite good. Breakfast is typically porridge, toast, and fruit. Lunch is the main meal — rice, vegetables, salad, soup. At 5 PM, new students get fruit and tea; old students get only tea with lemon.",
-      "There's no dinner. This is one of the hardest adjustments for most people. The hunger usually subsides after Day 2–3. Having a solid lunch helps.",
+      "Vegetarian, usually quite good. Breakfast is typically porridge, toast, and fruit. Lunch is the main meal (rice, vegetables, salad, soup). At 5 PM, new students get fruit and tea; old students get only tea with lemon.",
+      "There's no dinner. This is one of the hardest adjustments for most people. The hunger usually subsides after Day 2 or 3. Having a solid lunch helps.",
     ],
   },
   {
     q: "What if I want to leave early?",
     a: [
-      "You make a commitment to stay all 10 days. Leaving early is strongly discouraged because the technique unfolds in stages — leaving partway means you've done the difficult part (breaking old patterns) without the beneficial part (learning the full technique).",
+      "You make a commitment to stay all 10 days. Leaving early is strongly discouraged because the technique unfolds in stages; leaving partway means you've done the difficult part (breaking old patterns) without the beneficial part (receiving the full transmission at the course).",
       "That said, you're not physically detained. If you truly need to leave for an emergency or serious medical reason, you can. But mild discomfort or restlessness is expected and passes.",
-      "In my experience, Days 2–4 are the hardest. If you make it past Day 4, you'll make it. The urge to leave is itself something to observe.",
+      "In my experience, Days 2 to 4 are the hardest. If you make it past Day 4, you'll make it.",
     ],
   },
   {
@@ -87,14 +87,14 @@ const faqs: { q: string; a: string[] }[] = [
     a: [
       "This depends on severity. Vipassana involves deep introspection and can surface difficult emotions. For people with mild anxiety or depression, it can be very beneficial.",
       "For people with severe psychiatric conditions, active psychosis, or those who are currently in crisis, it may not be appropriate. The application form asks about this for good reason.",
-      "Be completely honest on the application. The teachers have decades of experience and will guide you if they have concerns. This isn't gatekeeping — it's genuine care for your wellbeing.",
+      "Be completely honest on the application. The teachers have decades of experience and will guide you if they have concerns. This isn't gatekeeping; it's genuine care for your wellbeing.",
     ],
   },
   {
     q: "What happens after the course?",
     a: [
       "You're recommended to meditate for one hour in the morning and one hour in the evening. This is the suggested practice to maintain what you've learned.",
-      "In reality, many people struggle with consistency. Even 20–30 minutes per day is better than nothing. The key is daily practice, however short.",
+      "In reality, many people struggle with consistency. Even 20 to 30 minutes per day is better than nothing. The key is daily practice, however short.",
       "You can (and should) take more courses. Each one goes deeper. You can also serve at courses, which is a completely different and rewarding experience.",
     ],
   },
