@@ -294,7 +294,7 @@ export function GapWidening() {
 const invalidReps = [
   {
     title: "The guilt sit",
-    body: "You skipped three days, felt bad, sat for 45 minutes with the whole session a mental courtroom. The body scan never started. That is a self-punishment session in meditation clothing. It does not deposit anything useful in the nervous system.",
+    body: "You skipped three days, felt bad, sat for 45 minutes with the whole session a mental courtroom. The actual sit never started. That is a self-punishment session in meditation clothing. It does not deposit anything useful in the nervous system.",
   },
   {
     title: "The podcast sit",
