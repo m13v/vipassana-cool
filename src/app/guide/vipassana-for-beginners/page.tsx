@@ -82,16 +82,16 @@ export default function VipassanaForBeginnersPage() {
             <li><strong>Vegetarian food.</strong> Simple, filling. Breakfast and lunch only — new students get fruit and tea at 5 PM, but no dinner.</li>
           </ul>
           <p>
-            <strong>Days 1-3:</strong> You learn Anapana — observing the natural breath as it enters and leaves the nostrils. This sounds trivial. It is incredibly difficult. Your mind will wander constantly, and your only job is to bring it back, again and again.
+            <strong>The first days</strong> build concentration. The instructions are straightforward, the work is not. Your mind will wander constantly, and your only job is to keep coming back, again and again.
           </p>
           <p>
-            <strong>Day 4:</strong> The actual Vipassana technique is introduced — systematic scanning of sensations throughout your body, from head to feet and back. This is the core practice. Day 4 is when everything shifts.
+            <strong>Mid-course</strong>, the main Vipassana technique is introduced. This is the pivot of the retreat and when, for many students, everything shifts. What it involves is transmitted in the hall, by the teacher.
           </p>
           <p>
-            <strong>Days 5-9:</strong> You deepen the body scanning practice. Three group sittings per day become &quot;sittings of strong determination&quot; — sitting without moving for the full hour. This is where the real work happens.
+            <strong>The later days</strong> deepen that practice. Three group sittings per day become &quot;sittings of strong determination,&quot; sitting without moving for the full hour. This is where the real work happens.
           </p>
           <p>
-            <strong>Day 10:</strong> Noble Silence lifts. You can talk again. It feels strange, overwhelming, and often joyful. You also learn Metta Bhavana — loving-kindness meditation — as a complement to the Vipassana practice.
+            <strong>Day 10:</strong> Noble Silence lifts. You can talk again. It feels strange, overwhelming, and often joyful. Metta Bhavana (loving-kindness) is also introduced as a complement to the main practice.
           </p>
           <p>
             For my full day-by-day account of what it&apos;s actually like, read my <Link href="/experience" className="text-accent underline hover:text-foreground">10-day experience report</Link>.
@@ -108,7 +108,7 @@ export default function VipassanaForBeginnersPage() {
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">Do I need experience to start?</h2>
           <p>
-            No. The 10-day course is designed for complete beginners. You&apos;ll be taught everything step by step, from basic breath observation to the full body-scanning technique.
+            No. The 10-day course is designed for complete beginners. You&apos;ll be taught everything step by step by the teacher, over the course of the retreat.
           </p>
           <p>
             Honestly, prior experience with other meditation can sometimes get in the way. If you&apos;ve practiced mantras, visualization, or guided meditation, you&apos;ll be asked to set those aside for the duration. Not because they&apos;re bad — just because mixing methods prevents you from giving Vipassana a fair shot. You can always go back to your other practices afterward.
@@ -137,10 +137,10 @@ export default function VipassanaForBeginnersPage() {
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">How is it different from other meditation?</h2>
           <p>
-            Vipassana is not guided visualization, mantras, or a relaxation technique. You&apos;re not trying to empty your mind or reach a particular state. You&apos;re training your mind to observe physical sensations in your body — systematically, without reacting. It&apos;s closer to a workout than a spa day.
+            Vipassana is not guided visualization, mantras, or a relaxation technique. You&apos;re not trying to empty your mind or reach a particular state. It&apos;s closer to a workout than a spa day, a structured training in non-reactivity.
           </p>
           <p>
-            The short version: mindfulness apps are guided and relaxation-focused, TM uses mantras and costs money, and Zen emphasizes koans and sudden insight. Vipassana is structured body scanning, self-guided, and free. I wrote a much more detailed breakdown on the <Link href="/guide/vipassana-vs-other-meditation" className="text-accent underline hover:text-foreground">Vipassana vs other meditation</Link> page if you want the full picture.
+            The short version: mindfulness apps are guided and relaxation-focused, TM uses mantras and costs money, and Zen emphasizes koans and sudden insight. Vipassana is the technique taught on the free 10-day course, structured and self-guided thereafter. I wrote a much more detailed breakdown on the <Link href="/guide/vipassana-vs-other-meditation" className="text-accent underline hover:text-foreground">Vipassana vs other meditation</Link> page if you want the full picture.
           </p>
         </section>
 
