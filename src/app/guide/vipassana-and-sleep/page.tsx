@@ -43,7 +43,7 @@ export default function VipassanaAndSleepPage() {
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
-          Research shows Vipassana meditators have significantly enhanced slow-wave sleep — meditators aged 50-60 showed 10.63% SWS compared to just 3.94% in non-meditators. Long-term practitioners maintain higher REM sleep percentages and more complete sleep cycles across all age groups. The practice also increases melatonin production. During a 10-day course, expect disrupted sleep for the first 2-3 nights due to the 4 AM wake-up and new environment. After the course, most practitioners report noticeably improved sleep quality through applying Anapana or body scanning at bedtime.
+          Research shows Vipassana meditators have significantly enhanced slow-wave sleep: meditators aged 50-60 showed 10.63% SWS compared to just 3.94% in non-meditators. Long-term practitioners maintain higher REM sleep percentages and more complete sleep cycles across all age groups. The practice also increases melatonin production. During a 10-day course, expect disrupted sleep for the first 2-3 nights due to the 4 AM wake-up and new environment. After the course, most practitioners report noticeably improved sleep quality.
         </p>
       </div>
 
@@ -54,7 +54,7 @@ export default function VipassanaAndSleepPage() {
           </h2>
           <p>
             Most people who maintain a regular Vipassana practice report that
-            their sleep improves. Not just subjectively — research using EEG
+            their sleep improves. Not just subjectively: research using EEG
             monitoring has documented measurable changes in sleep architecture
             among Vipassana practitioners. They spend more time in deep sleep,
             transition into it faster, and experience fewer nighttime
@@ -62,11 +62,10 @@ export default function VipassanaAndSleepPage() {
           </p>
           <p className="mt-3">
             This makes intuitive sense. Much of what keeps people awake is
-            mental agitation — rumination about the past, anxiety about the
-            future, rehearsing conversations, worrying. Vipassana trains the
-            mind to observe these patterns without getting caught up in them.
-            When that skill transfers to bedtime, the mind settles more
-            naturally.
+            mental agitation (rumination about the past, anxiety about the
+            future, rehearsing conversations, worrying). Students commonly
+            report that the training they received at the course helps the
+            mind settle more naturally at bedtime.
           </p>
         </section>
 
@@ -144,32 +143,30 @@ export default function VipassanaAndSleepPage() {
           </h2>
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
-              <strong>Reduced rumination</strong> — The body-scanning technique
-              pulls attention away from thought loops. When your attention is on
-              sensations in your left knee, it can&apos;t simultaneously be
-              replaying that awkward conversation from work.
+              <strong>Reduced rumination.</strong> Practitioners commonly
+              report less looping on past conversations and future worries at
+              bedtime.
             </li>
             <li>
-              <strong>Body relaxation</strong> — Systematically scanning the
-              body releases tension you didn&apos;t know you were holding. Many
-              practitioners notice their jaw unclenching, shoulders dropping,
-              and muscles softening during practice.
+              <strong>Body relaxation.</strong> Many practitioners notice
+              their jaw unclenching, shoulders dropping, and muscles softening
+              during practice.
             </li>
             <li>
-              <strong>Equanimity toward sleep anxiety</strong> — If you&apos;ve
+              <strong>Equanimity toward sleep anxiety.</strong> If you&apos;ve
               struggled with insomnia, you know the paradox: the more you try
-              to sleep, the harder it becomes. Vipassana teaches equanimity —
-              not caring whether sleep comes or not. Ironically, this letting go
-              is often what allows sleep to arrive.
+              to sleep, the harder it becomes. A trained capacity for
+              equanimity around whether sleep comes or not often allows sleep
+              to arrive on its own.
             </li>
             <li>
-              <strong>Reduced reactivity to nighttime waking</strong> — Everyone
-              wakes briefly during the night. Trained meditators are less likely
-              to react to these awakenings with frustration or anxiety, making
-              it easier to drift back to sleep.
+              <strong>Reduced reactivity to nighttime waking.</strong>{" "}
+              Everyone wakes briefly during the night. Trained meditators are
+              less likely to react to these awakenings with frustration or
+              anxiety, making it easier to drift back to sleep.
             </li>
             <li>
-              <strong>Neuroplastic changes</strong> — Long-term practice appears
+              <strong>Neuroplastic changes.</strong> Long-term practice appears
               to reorganize sleep microarchitecture itself, creating more
               efficient sleep patterns that consolidate memory and restore the
               body more effectively.
