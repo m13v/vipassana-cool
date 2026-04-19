@@ -49,65 +49,65 @@ export default function ShorterSessionsPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">What Goenka Recommends</h2>
         <p>
-          The official guidance is clear and specific: one hour of meditation in the morning and one hour in the evening. Two hours daily, every day, without exception. This is what assistant teachers reinforce, what old students are expected to maintain, and what&apos;s considered the &quot;correct&quot; practice.
+          The official guidance is specific: one hour of meditation in the morning and one hour in the evening. Two hours daily, every day. This is what assistant teachers reinforce and what old students are expected to maintain.
         </p>
         <p>
-          Goenka&apos;s reasoning is sound. An hour gives you enough time to settle your mind (5-10 minutes of Anapana), do a thorough body scan (40-45 minutes), and close with metta (a few minutes). Less than an hour, and you&apos;re rushing through the process.
-        </p>
-        <p>
-          Two sessions daily creates a rhythm: the morning sit sets the tone for the day, the evening sit processes what the day brought.
+          Two sessions daily creates a rhythm: the morning sit sets the tone for the day, the evening sit comes at the end of it. What happens inside each sit, and what an hour actually contains, is part of the instruction transmitted at the course by the assistant teacher.
         </p>
       </section>
 
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">What Most People Actually Do</h2>
         <p>
-          Here&apos;s the reality: a significant number of &quot;old students&quot; don&apos;t maintain two hours daily. Life intervenes — work, family, travel, fatigue. The gap between the recommendation and actual practice is something people rarely talk about openly in the Vipassana community.
+          The reality is that a significant number of old students do not maintain two hours daily. Life intervenes: work, family, travel, fatigue. The gap between the recommendation and actual practice is something people rarely talk about openly in the Vipassana community.
         </p>
         <p>
-          This silence creates unnecessary guilt. People who sit for 30 minutes feel they&apos;re &quot;not doing it right.&quot; People who miss the evening sit feel like failures. Some stop entirely because they can&apos;t maintain the &quot;proper&quot; schedule.
+          This silence creates unnecessary guilt. People who sit for 30 minutes feel they are &quot;not doing it right.&quot; People who miss the evening sit feel like failures. Some stop entirely because they cannot maintain the &quot;proper&quot; schedule.
         </p>
         <p>
-          This is a problem because <strong>imperfect daily practice beats perfect occasional practice every time.</strong>
+          This is worth naming because <strong>imperfect daily practice tends to beat perfect occasional practice over time.</strong>
         </p>
       </section>
 
       <section>
-        <h2 className="mb-3 text-xl font-bold text-foreground">Comparing Session Lengths</h2>
+        <h2 className="mb-3 text-xl font-bold text-foreground">Session Lengths in Practice</h2>
+        <p>
+          What follows is a description of how different durations tend to feel from the outside: as a scheduling question, not as technique instruction. The internal content of a sit is taught at the course.
+        </p>
 
         <div className="mt-4 space-y-6">
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">15 minutes</h3>
             <p>
-              Mostly Anapana. By the time your mind settles enough to scan, the timer goes off. Useful as a minimum-effort habit keeper — &quot;at least I sat&quot; — but you&apos;re not really practicing the full technique. Better than nothing on a chaotic day.
+              A minimum-effort habit keeper. Useful on a chaotic day where the alternative is skipping entirely. Short enough that many people describe it as &quot;barely settling in&quot; before it ends.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">20 minutes</h3>
             <p>
-              The minimum for a meaningful body scan. You get 5 minutes of Anapana, a quick scan from head to feet (or a partial scan), and a minute of metta. It&apos;s compressed but it works. The habit is maintained and you&apos;re practicing the actual technique, even if briefly.
+              A common floor for a daily sit. Long enough that the habit is maintained and the day has a clear meditation anchor.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">30 minutes</h3>
             <p>
-              A solid session. You can do a proper Anapana warmup, a full head-to-feet-to-head scan, and close with metta. The scan won&apos;t be as thorough as in a longer session, but you&apos;re working with the technique properly. Many regular practitioners find this to be the sweet spot for weekday mornings.
+              Many regular practitioners describe this as the sweet spot for weekday mornings: short enough to fit before work, long enough to feel substantial.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">45 minutes</h3>
             <p>
-              Close to the full experience. You have enough time for concentration to deepen, for the scan to become detailed, and for equanimity to settle in. The difference between 30 and 45 minutes is often larger than the numbers suggest — that extra 15 minutes is where deeper work happens.
+              Closer to the full recommendation. The difference between 30 and 45 minutes is often larger than the numbers suggest; the last 15 minutes tend to carry a different quality.
             </p>
           </div>
 
           <div className="border-l-2 border-accent/30 pl-4">
             <h3 className="mb-1 font-semibold text-foreground">60 minutes</h3>
             <p>
-              The recommended duration. An hour gives you the full progression: settling, scanning, deepening, and closing. The last 15-20 minutes of a one-hour sit are often the most productive — your mind has finally quieted enough for subtle work. This is what you lose with shorter sessions.
+              The recommended duration. An hour is what the tradition was designed around, and it is what old students are asked to maintain if they can.
             </p>
           </div>
         </div>
@@ -116,13 +116,13 @@ export default function ShorterSessionsPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">The Real Question: Consistency vs. Duration</h2>
         <p>
-          If the choice is between 30 minutes every day and 60 minutes three times a week, choose the 30 minutes. The cumulative effect of daily practice compounds in ways that sporadic longer sessions don&apos;t.
+          If the choice is between 30 minutes every day and 60 minutes three times a week, the 30 minutes is usually the better bet. Daily practice compounds in ways that sporadic longer sessions do not.
         </p>
         <p>
-          Daily practice builds neurological pathways. Each sit reinforces the previous one. Missing a day breaks the chain and requires re-settling each time you return. Even a short daily sit maintains the thread of continuity.
+          Each sit tends to reinforce the previous one. Missing a day breaks the continuity and requires re-settling each time. Even a short daily sit keeps the thread alive.
         </p>
         <p>
-          That said, if you can do 60 minutes daily, the depth of practice will be greater. It&apos;s not just &quot;more of the same&quot; — longer sessions allow concentration to reach levels that shorter sessions can&apos;t.
+          That said, if you can sit for 60 minutes daily, the experience is different. It is not simply &quot;more of the same,&quot; which is part of why the tradition recommends the full hour.
         </p>
       </section>
 
@@ -149,13 +149,13 @@ export default function ShorterSessionsPage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">A Practical Approach</h2>
         <p>
-          Here&apos;s what I&apos;d recommend to anyone struggling with the &quot;two hours or nothing&quot; standard:
+          For anyone struggling with the &quot;two hours or nothing&quot; standard, a few observations from old students tend to recur:
         </p>
         <ol className="mt-3 list-decimal space-y-2 pl-6">
-          <li><strong>Make daily practice non-negotiable.</strong> Pick a duration you can sustain — even 20 minutes — and do it every single day.</li>
-          <li><strong>Build gradually.</strong> Add 5 minutes per week until you reach a duration that challenges you but is sustainable.</li>
-          <li><strong>Use the weekends.</strong> If weekday mornings are tight, do longer sessions on Saturday and Sunday. The depth from a weekend hour compensates for shorter weekday sessions.</li>
-          <li><strong>Don&apos;t compare yourself to the &quot;ideal.&quot;</strong> Your practice is yours. Two hours daily is a worthy goal, not a minimum requirement for the practice to &quot;count.&quot;</li>
+          <li><strong>Daily practice tends to matter most.</strong> A duration that can be sustained every day is more useful than an ideal duration that is skipped.</li>
+          <li><strong>Building gradually tends to work.</strong> Adding time slowly is easier to sustain than jumping to an hour overnight.</li>
+          <li><strong>Weekends can carry longer sits.</strong> Many people do shorter sits on weekdays and longer ones on Saturday and Sunday.</li>
+          <li><strong>Comparing yourself to the &quot;ideal&quot; is rarely useful.</strong> Two hours daily is the standard the tradition holds; a shorter daily sit is not worthless.</li>
         </ol>
         <p className="mt-4">
           For more on building and maintaining daily practice, see the full <Link href="/guide/daily-practice" className="text-accent underline hover:text-foreground">daily practice guide</Link>.
