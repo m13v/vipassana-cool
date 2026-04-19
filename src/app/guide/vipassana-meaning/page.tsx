@@ -70,7 +70,7 @@ export default function VipassanaMeaningPage() {
             This is S.N. Goenka&apos;s most common translation of Vipassana, and it&apos;s the one you&apos;ll hear hundreds of times during a 10-day course. What it means in practice: you observe reality directly — not through the filter of your preferences, biases, or automatic reactions.
           </p>
           <p>
-            When you sit and observe sensations in your body without reacting, you&apos;re experiencing reality as it is, not as you wish it were. Pleasant sensation? You don&apos;t chase it. Unpleasant sensation? You don&apos;t push it away. You just observe.
+            The practice is built around a direct, non-reactive relationship with present experience. The specifics of how that relationship is cultivated are transmitted at the course.
           </p>
           <p>
             The best analogy I&apos;ve found: it&apos;s like watching a horror movie — you get the emotions, but you know it&apos;s a movie. Same thing with your entire life. The sensations are real, the situations are real, but you develop this ability to observe them without being completely consumed by your reaction to them.
@@ -126,7 +126,7 @@ export default function VipassanaMeaningPage() {
             In Buddhist meditation, vipassana (insight) is traditionally paired with samatha (calm, concentration). They&apos;re complementary skills. Samatha steadies the mind; vipassana uses that steady mind to observe reality clearly.
           </p>
           <p>
-            The Goenka course teaches both. Days 1&ndash;3 are Anapana — breath observation that develops concentration (samatha). Days 4&ndash;10 are Vipassana — body scanning that develops insight. You need the concentration to do the insight work. Without it, the mind is too scattered to observe anything clearly.
+            The Goenka course teaches both over its arc, concentration first, then insight. You need the concentration to do the insight work. Without it, the mind is too scattered to observe anything clearly.
           </p>
           <p>
             For a deeper look at how these two techniques work together, see <Link href="/guide/anapana-and-vipassana-explained" className="text-accent hover:underline">Anapana &amp; Vipassana Explained</Link>.
