@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DayPage } from "@/components/day-page";
 
 export const metadata: Metadata = {
-  title: "Vipassana Day 2 — The Body Complains and the Mind Races",
+  title: "Vipassana Day 2: The Body Complains and the Mind Races",
   description:
     "A descriptive account of day 2 of a 10-day Vipassana course: physical discomfort, restless mind, and the first real test of the schedule.",
   alternates: { canonical: "https://vipassana.cool/experience/day-2" },
