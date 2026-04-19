@@ -49,17 +49,17 @@ const faqs = [
   {
     question: "Does daily Vipassana practice actually rewire the brain?",
     answer:
-      "Yes, with two caveats. The brain changes measurably with sustained meditation practice: reduced amygdala reactivity to negative stimuli, lowered default-mode-network activity linked to self-referential thinking, and in long-term practitioners elevated occipital gamma power during sitting. All three effects correlate more strongly with hours of recent daily practice than with cumulative lifetime hours. The caveats: the effect is cumulative and gradual, not dramatic after one course, and the claims that survive peer review are modest compared to popular neuroscience framing. What rewiring looks like from the inside is a slowly widening gap between an urge and your reaction to it, reported consistently by practitioners around the 90-day mark of daily sitting.",
+      "Yes, with two caveats. The brain changes measurably with sustained meditation practice: reduced amygdala reactivity to negative stimuli, lowered default-mode-network activity linked to self-referential thinking, and in long-term practitioners elevated occipital gamma power during sitting. All three effects correlate more strongly with hours of recent daily practice than with cumulative lifetime hours. The caveats: the effect is cumulative and gradual, not dramatic after one course, and the claims that survive peer review are modest compared to popular neuroscience framing. What rewiring looks like from the inside is a slowly widening gap between an urge and the reaction that used to follow it, reported consistently by practitioners around the 90-day mark of daily sitting.",
   },
   {
     question: "How many days of daily practice before you notice the rewiring?",
     answer:
-      "Most practitioners report a small but observable change around day 90: a quarter-second pause appears between an urge and the action that usually followed it. Before day 30, almost nobody notices anything, which is normal. The nervous system is still reinforcing the habit of sitting itself. Between day 30 and day 90 the reports shift. Around day 180, the morning sit itself becomes harder to skip than to do. Around day 365, people around you notice before you do: the baseline reactivity to small frustrations has dropped. Past day 900, the question of whether the practice is working stops being asked; it is replaced by much more specific questions about what you are observing on the cushion.",
+      "Most practitioners report a small but observable change around day 90: a quarter-second pause appears between an urge and the action that usually followed it. Before day 30, almost nobody notices anything, which is normal. The nervous system is still reinforcing the habit of sitting itself. Between day 30 and day 90 the reports shift. Around day 180, the morning sit itself becomes harder to skip than to do. Around day 365, people around you notice before you do: the baseline reactivity to small frustrations has dropped. Past day 900, the question of whether the practice is working stops being asked; it is replaced by more specific questions the practitioner takes to the next course.",
   },
   {
     question: "Why is 20 minutes daily better than 90 minutes twice a week for rewiring?",
     answer:
-      "Because the nervous system learns from rep frequency, not from session length. A 20-minute daily sit gives the brain 30 installations a month of the same lesson: the default response to an unpleasant sensation is to watch it, not to act on it. A 90-minute sit twice a week gives the brain 8 installations of that lesson, even though the minute-total is higher. The daily path delivers almost four times the reps on two thirds the time. This is not a preference; it is how habit encoding works in the basal ganglia. The depth of any single sit matters much less than the count of consecutive mornings.",
+      "Because the nervous system learns from rep frequency, not from session length. Daily repetition gives the brain many more installations per month of whatever habit is being trained, compared with the same minute-total packed into fewer sessions. This is not a preference; it is how habit encoding works in the basal ganglia. The depth of any single sit matters much less than the count of consecutive mornings.",
   },
   {
     question: "What does the stimulus-response gap widening feel like in real life?",
@@ -69,7 +69,7 @@ const faqs = [
   {
     question: "What sessions do not count as a rewiring rep?",
     answer:
-      "Four common ones. The guilt sit: you skipped, sat 45 minutes berating yourself, never actually did a body scan. The podcast sit: guided meditation with an external voice directing attention, which trains a different skill than self-directed Vipassana. The bed sit: comfortable enough that most of the session is a nap you are pretending is a sit. The ten-minute apology: a tiny dose that, when it becomes the normal rather than a floor on hard days, is too short to carry into daily reactivity. Posture upright, attention self-directed, duration above roughly twenty minutes, and no media running. Those four conditions define a rep that installs something.",
+      "Four common ones. The guilt sit: you skipped, then sat 45 minutes berating yourself. The podcast sit: guided meditation with an external voice directing you, which is a different practice category than self-directed Vipassana. The bed sit: comfortable enough that most of the session is a nap you are pretending is a sit. The ten-minute apology: a tiny dose that, when it becomes the normal rather than a floor on hard days, is too short to carry into daily reactivity. A rep is a completed daily sit of at least 20 minutes, upright, self-directed, no media running. What happens inside the sit is between the meditator and the training they received at the course.",
   },
   {
     question: "How is the 881+ day counter on vipassana.cool calculated?",
@@ -132,7 +132,8 @@ export default function Page() {
           the change before you do. 900+ days is where the author is now, and
           the number he is sitting on is a live counter on this site, computed
           from twelve lines of code you can verify yourself. Frequency beats
-          duration. 20 minutes daily outperforms 90 minutes twice a week.
+          duration: a daily sit outperforms the same minute-total packed into a
+          few long sits per week.
         </p>
       </div>
 
