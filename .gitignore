@@ -62,3 +62,6 @@ tmpclaude-*
 reddit-current.yml
 reddit-*.yml
 linkedin-*.yml
+
+# SEO plugin build artifact
+seo-guides-manifest.json
