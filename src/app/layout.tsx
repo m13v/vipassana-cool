@@ -4,8 +4,10 @@ import "./globals.css";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { PostHogProvider } from "@/components/posthog-provider";
-import { NewsletterSignup } from "@seo/components";
+import { NewsletterSignup, HeadingAnchors } from "@seo/components";
 import { SeoComponentsStyles } from "@seo/components/server";
+import { SiteSidebar } from "@/components/site-sidebar";
+import { GuideChat } from "@/components/guide-chat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -119,7 +121,10 @@ export default function RootLayout({
         />
         <PostHogProvider>
           <Navigation />
+          <HeadingAnchors />
+          <SiteSidebar />
           <main className="min-h-screen">{children}</main>
+          <GuideChat />
           <Footer />
         </PostHogProvider>
         <NewsletterSignup />
