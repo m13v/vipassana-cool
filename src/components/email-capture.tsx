@@ -26,7 +26,7 @@ export function EmailCapture({ location = "prepare" }: { location?: string }) {
       }
 
       setStatus("success");
-      posthog.capture("checklist_signup", { location });
+      posthog.capture("newsletter_subscribed", { source: "checklist", location });
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
