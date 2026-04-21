@@ -58,12 +58,14 @@ export async function GET(request: NextRequest) {
           SELECT count() as signups
           FROM events
           WHERE timestamp > now() - interval 7 day
-            AND event = 'waitlist_signup'
+            AND (event = 'waitlist_signup'
+                 OR (event = 'newsletter_subscribed' AND properties.source = 'waitlist'))
         `),
         hogqlQuery(projectId, phKey, `
           SELECT count() as signups
           FROM events
           WHERE event = 'waitlist_signup'
+             OR (event = 'newsletter_subscribed' AND properties.source = 'waitlist')
         `),
       ]);
 
