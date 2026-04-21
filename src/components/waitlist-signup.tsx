@@ -148,7 +148,8 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
       const resData = await res.json();
       setRematching(resData.rematching === true);
       setStatus("success");
-      posthog.capture("waitlist_signup", {
+      posthog.capture("newsletter_subscribed", {
+        source: "waitlist",
         location,
         frequency: form.frequency,
         is_old_student: form.isOldStudent,
