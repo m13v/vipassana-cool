@@ -4,14 +4,14 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { PracticeBuddyClient } from "./practice-buddy/client";
 
 export const metadata: Metadata = {
-  title: "Vipassana.cool — Find a Daily Meditation Practice Buddy",
+  title: "Sit Every Morning With Another Vipassana Meditator | Vipassana.cool",
   description:
-    "Get matched with a fellow Vipassana meditator for daily practice over Google Meet. Free, tradition-respectful, and based on real accountability — not an app.",
+    "Get matched with a fellow old student in your time zone and sit together every day over Google Meet. Free, silent, tradition-respectful. For students of S.N. Goenka 10-day courses.",
   alternates: { canonical: "https://vipassana.cool" },
   openGraph: {
-    title: "Vipassana.cool — Find a Daily Meditation Practice Buddy",
+    title: "Sit Every Morning With Another Vipassana Meditator",
     description:
-      "Get matched with a fellow Vipassana meditator for daily practice over Google Meet. Free, tradition-respectful accountability.",
+      "Get matched with a fellow old student in your time zone and sit together every day over Google Meet. Free, silent, tradition-respectful.",
   },
 };
 

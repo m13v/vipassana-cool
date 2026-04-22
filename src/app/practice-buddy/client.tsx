@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { WaitlistTable } from "@/components/waitlist-table";
 import { WaitlistSignup } from "@/components/waitlist-signup";
 import { BookCallButton } from "@/components/book-call-button";
+import { DayCounter } from "@/components/day-counter";
 
 type QuickSetup = { timezone: string; morningHour: string };
 type SignupPrefill = { timezone?: string; morningTime?: string; frequency?: string };
@@ -12,13 +13,17 @@ export function PracticeBuddyClient() {
   const [matchRequest, setMatchRequest] = useState<{ id: string; name: string } | null>(null);
   const [prefill, setPrefill] = useState<SignupPrefill | null>(null);
   const [matchedCount, setMatchedCount] = useState<number | null>(null);
+  const [pendingCount, setPendingCount] = useState<number | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch("/api/waitlist/entries")
       .then((r) => r.json())
       .then((data) => {
-        if (data.entries) setMatchedCount(data.entries.filter((e: { status: string }) => e.status === "matched").length);
+        if (data.entries) {
+          setMatchedCount(data.entries.filter((e: { status: string }) => e.status === "matched").length);
+          setPendingCount(data.entries.filter((e: { status: string }) => e.status === "pending").length);
+        }
       })
       .catch(() => {});
   }, []);
@@ -40,28 +45,42 @@ export function PracticeBuddyClient() {
   return (
     <>
       {/* Hero */}
-      <section id="practice-buddy" className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-          Practice Buddy
-        </h1>
-        <p className="mx-auto mb-6 max-w-2xl text-lg text-muted">
-          Get matched with a fellow Vipassana meditator who shares your commitment,
-          time zone, and practice goals. Meditate together over Google Meet every day.
+      <section id="practice-buddy" className="mx-auto max-w-4xl px-6 pb-16 pt-20 text-center">
+        <p className="mb-5 inline-block rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-xs font-medium text-accent">
+          For old students of S.N. Goenka 10-day courses
         </p>
-        {matchedCount !== null && matchedCount > 0 && (
-          <p className="mb-8 text-2xl font-bold text-accent">
-            {matchedCount} meditators matched so far
+        <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+          Sit every morning with another Vipassana meditator
+        </h1>
+        <p className="mx-auto mb-5 max-w-2xl text-lg text-muted">
+          After a 10-day course, keeping daily practice alive on your own is the hardest part. Get matched with a fellow old student in your time zone, open a permanent Google Meet link, and sit together every day.
+        </p>
+        <p className="mx-auto mb-7 max-w-2xl text-sm text-muted/80">
+          Built by an old student on day <DayCounter /> of daily practice, after 6 courses at 3 centers and 40+ days of dhamma service. Free forever.
+        </p>
+        {((matchedCount !== null && matchedCount > 0) || (pendingCount !== null && pendingCount > 0)) && (
+          <p className="mb-6 text-sm text-muted">
+            {matchedCount !== null && matchedCount > 0 && (
+              <span className="font-semibold text-accent">{matchedCount} matched</span>
+            )}
+            {matchedCount !== null && matchedCount > 0 && pendingCount !== null && pendingCount > 0 && ", "}
+            {pendingCount !== null && pendingCount > 0 && (
+              <span><span className="font-semibold text-foreground">{pendingCount} waiting</span> for a buddy right now</span>
+            )}
           </p>
         )}
         <div className="flex flex-wrap items-center justify-center gap-3">
           <a
             href="#waitlist-form"
-            className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
-            Get Matched
+            Find my buddy
           </a>
-          <BookCallButton label="Book a call" section="hero" />
+          <BookCallButton label="Talk to the founder first" section="hero" />
         </div>
+        <p className="mt-4 text-xs text-muted/70">
+          Takes 2 minutes. No app to install, no streaks, no fees, ever.
+        </p>
       </section>
 
       {/* How It Works — animated flow */}
