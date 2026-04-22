@@ -89,7 +89,7 @@ export function SearchModal({ open, onClose }: { open: boolean; onClose: () => v
 
   const navigate = useCallback(
     (href: string) => {
-      posthog.capture("search_result_click", { href, query });
+      posthog.capture("cta_click", { source: "search_result", href, query });
       onClose();
       router.push(href);
     },
