@@ -5,7 +5,6 @@ import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { PostHogProvider } from "@/components/posthog-provider";
 import { NewsletterSignup, HeadingAnchors } from "@seo/components";
-import { SeoComponentsStyles } from "@seo/components/server";
 import { SiteSidebar } from "@/components/site-sidebar";
 import { GuideChat } from "@/components/guide-chat";
 
@@ -111,9 +110,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <SeoComponentsStyles />
-      </head>
       <body className={`${geistSans.variable} antialiased`}>
         <script
           type="application/ld+json"
