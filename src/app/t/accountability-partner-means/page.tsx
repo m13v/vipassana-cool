@@ -211,12 +211,14 @@ export default function Page() {
       "The literal machine-readable meaning of 'accountability partner' on vipassana.cool resolves to one JSON field (attendees[].responseStatus) on a Google Calendar event, polled once a day at 14:00 UTC by /api/check-rsvp. The string 'declined' auto-ends the partnership.",
     url: PAGE_URL,
     datePublished: PUBLISHED,
-    authorName: "Matthew Diakonov",
+    author: "Matthew Diakonov",
+    publisherName: "vipassana.cool",
+    publisherUrl: "https://vipassana.cool",
   });
   const breadcrumbJsonLd = breadcrumbListSchema([
-    { name: "Home", item: "https://vipassana.cool" },
-    { name: "Guides", item: "https://vipassana.cool/t" },
-    { name: "Accountability partner means", item: PAGE_URL },
+    { name: "Home", url: "https://vipassana.cool" },
+    { name: "Guides", url: "https://vipassana.cool/t" },
+    { name: "Accountability partner means", url: PAGE_URL },
   ]);
   const faqJsonLd = faqPageSchema(faqs);
 
@@ -239,7 +241,7 @@ export default function Page() {
         />
       </div>
 
-      <BackgroundGrid pattern="dot" glow className="mt-6 pt-10 pb-14">
+      <BackgroundGrid pattern="dots" glow className="mt-6 pt-10 pb-14">
         <header className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-mono uppercase tracking-[0.3em] text-teal-600 mb-4">
             what the word indexes in the runtime
