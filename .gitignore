@@ -65,3 +65,6 @@ linkedin-*.yml
 
 # SEO plugin build artifact
 seo-guides-manifest.json
+
+# Playwright test recordings
+video-*.webm
