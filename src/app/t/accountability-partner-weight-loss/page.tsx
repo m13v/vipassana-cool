@@ -277,6 +277,7 @@ export default function Page() {
         <BeforeAfter
           title="Accountability with and without the internal capacity"
           before={{
+            label: "Without internal preparation",
             content:
               "You set up weekly check-ins. You share a food log. You feel committed for two weeks. Then a stressful month arrives and you eat before you notice you are eating. You stop reporting because you do not want to document what happened. The accountability relationship quietly dissolves.",
             highlights: [
@@ -287,6 +288,7 @@ export default function Page() {
             ],
           }}
           after={{
+            label: "With Vipassana-trained awareness",
             content:
               "After a 10-day course and consistent daily practice, many alumni describe noticing the pull of stress or boredom before it becomes an action. The conversation with a Practice Buddy goes earlier in the sequence. There is something real to address before the food log entry exists.",
             highlights: [
@@ -305,9 +307,17 @@ export default function Page() {
           Where the internal capacity changes the accountability chain
         </h2>
         <AnimatedBeam
-          from={["Stress trigger", "Boredom", "Habitual food cue"]}
-          hub="Vipassana-trained noticing"
-          to={["Early awareness", "Pause before acting", "Accountability conversation"]}
+          from={[
+            { label: "Stress trigger" },
+            { label: "Boredom" },
+            { label: "Habitual food cue" },
+          ]}
+          hub={{ label: "Vipassana-trained noticing" }}
+          to={[
+            { label: "Early awareness" },
+            { label: "Pause before acting" },
+            { label: "Accountability conversation" },
+          ]}
           title="Craving to choice: the chain that practice extends"
         />
       </section>
@@ -490,7 +500,7 @@ export default function Page() {
 
       {/* FAQ */}
       <section className="max-w-3xl mx-auto px-6 pb-16" id="faq">
-        <FaqSection faqs={faqs} />
+        <FaqSection items={faqs} />
       </section>
 
       {/* Sticky CTA */}
