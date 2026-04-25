@@ -132,66 +132,10 @@ export function PracticeBuddyClient() {
         </div>
       </section>
 
-      {/* The Problem */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <h2 className="mb-6 text-2xl font-bold">The Problem Everyone Knows</h2>
-          <div className="space-y-4 text-muted">
-            <p>
-              You leave a 10-day course transformed. You commit to sitting two hours a day.
-              Then life happens — work, family, fatigue, doubt. Within weeks, the cushion
-              gathers dust.
-            </p>
-            <p>
-              This isn&apos;t a personal failure. It&apos;s a structural one. At the center, you had a
-              schedule, a group, a shared commitment. At home, you have none of that.
-              The technique is the same, but the support system vanishes.
-            </p>
-            <p>
-              Research backs this up: meditation apps have a <strong>4.7% retention rate</strong> after
-              30 days. Most people who start a daily practice lose it within a month.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* The Research */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <h2 className="mb-8 text-2xl font-bold">What the Research Says</h2>
-          <div className="grid gap-6 sm:grid-cols-2">
-            <StatCard number="95%" label="goal completion rate when you have a specific accountability appointment with someone" />
-            <StatCard number="10%" label="goal completion rate when you just have the goal in your head" />
-            <StatCard number="2.8x" label="more likely to maintain a new habit with structured accountability (meta-analysis of 42 studies)" />
-            <StatCard number="62%" label="of well-being app benefits come through reduced loneliness, not the content itself" />
-          </div>
-          <p className="mt-8 text-muted">
-            The evidence is clear: the single most effective thing you can do for your
-            practice is commit to another person. Not an app, not a streak counter, not a
-            notification — a real human who expects to hear from you.
-          </p>
-        </div>
-      </section>
-
-      {/* Social proof one-liner */}
-      <section className="border-t border-border bg-accent/5">
-        <div className="mx-auto max-w-3xl px-6 py-5 text-center text-sm text-muted">
-          {matchedCount !== null && matchedCount > 0 ? `${matchedCount} meditators matched` : "Meditators matched"} so far — from Paris to Delhi to San Diego.{" "}
-          <a
-            href="https://old.reddit.com/r/vipassana/comments/1roib8y/the_real_reason_most_of_us_lose_our_practice/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent hover:underline"
-          >
-            See the conversation on Reddit →
-          </a>
-        </div>
-      </section>
-
-      {/* What People Are Saying */}
+      {/* What People Are Saying — moved up, immediately before form */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-10">
-          <h2 className="mb-5 text-lg font-semibold">What People Are Saying</h2>
+          <h2 className="mb-5 text-lg font-semibold">What people are saying</h2>
           <div className="grid gap-6 sm:grid-cols-2">
             <Quote
               text="Thank you so much for the initiative, the connections and beautiful tool. It is a very helpful thing that you built here."
@@ -212,13 +156,72 @@ export function PracticeBuddyClient() {
               href="https://old.reddit.com/r/vipassana/comments/1roib8y/the_real_reason_most_of_us_lose_our_practice/o9gtvrj/"
             />
           </div>
+          <p className="mt-6 text-center text-sm text-muted">
+            {matchedCount !== null && matchedCount > 0 ? `${matchedCount} meditators matched` : "Meditators matched"} so far, from Paris to Delhi to San Diego.{" "}
+            <a
+              href="https://old.reddit.com/r/vipassana/comments/1roib8y/the_real_reason_most_of_us_lose_our_practice/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline"
+            >
+              See the conversation on Reddit →
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* Signup Form — moved up so visitors don't have to scroll past all the educational content */}
+      <section className="border-t border-border bg-accent/5">
+        <div ref={formRef} className="mx-auto max-w-3xl px-6 py-16">
+          <WaitlistSignup location="primary-cta" prefill={prefill ?? undefined} />
+        </div>
+      </section>
+
+      {/* The Problem */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-3xl px-6 py-16">
+          <h2 className="mb-6 text-2xl font-bold">The Problem Everyone Knows</h2>
+          <div className="space-y-4 text-muted">
+            <p>
+              You leave a 10-day course transformed. You commit to sitting two hours a day.
+              Then life happens: work, family, fatigue, doubt. Within weeks, the cushion
+              gathers dust.
+            </p>
+            <p>
+              This isn&apos;t a personal failure. It&apos;s a structural one. At the center, you had a
+              schedule, a group, a shared commitment. At home, you have none of that.
+              The technique is the same, but the support system vanishes.
+            </p>
+            <p>
+              Research backs this up: meditation apps have a <strong>4.7% retention rate</strong> after
+              30 days. Most people who start a daily practice lose it within a month.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* The Research */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-3xl px-6 py-16">
+          <h2 className="mb-8 text-2xl font-bold">What the research says</h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <StatCard number="95%" label="goal completion rate when you have a specific accountability appointment with someone" />
+            <StatCard number="10%" label="goal completion rate when you just have the goal in your head" />
+            <StatCard number="2.8x" label="more likely to maintain a new habit with structured accountability (meta-analysis of 42 studies)" />
+            <StatCard number="62%" label="of well-being app benefits come through reduced loneliness, not the content itself" />
+          </div>
+          <p className="mt-8 text-muted">
+            The evidence is clear: the single most effective thing you can do for your
+            practice is commit to another person. Not an app, not a streak counter, not a
+            notification, a real human who expects to hear from you.
+          </p>
         </div>
       </section>
 
       {/* How It Works */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-16">
-          <h2 className="mb-8 text-2xl font-bold">How It Works</h2>
+          <h2 className="mb-8 text-2xl font-bold">How it works</h2>
           <div className="space-y-8">
             <Step
               number="1"
@@ -322,10 +325,22 @@ export function PracticeBuddyClient() {
         </div>
       </section>
 
-      {/* Signup Form */}
-      <section className="border-t border-border">
-        <div ref={formRef} className="mx-auto max-w-3xl px-6 py-16">
-          <WaitlistSignup location="bottom-cta" prefill={prefill ?? undefined} />
+      {/* Bottom CTA — scrolls back up to the primary form */}
+      <section className="border-t border-border bg-card/50">
+        <div className="mx-auto max-w-3xl px-6 py-16 text-center">
+          <h2 className="mb-3 text-2xl font-bold">Ready to sit with someone tomorrow morning?</h2>
+          <p className="mx-auto mb-6 max-w-xl text-sm text-muted">
+            Takes 2 minutes. Free forever. No app to install, no streaks, no content. Just a matched human who expects to see you at your sit time.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="#waitlist-form"
+              className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            >
+              Find my buddy
+            </a>
+            <BookCallButton label="Talk to the founder first" section="bottom" />
+          </div>
         </div>
       </section>
 
