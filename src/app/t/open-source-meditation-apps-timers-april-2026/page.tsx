@@ -146,7 +146,7 @@ const matchingTimeline = [
   {
     title: "Every two hours, a cron fires",
     description:
-      "A Vercel cron hits /api/auto-match. The route is src/app/api/auto-match/route.ts, 476 lines. Header comment at line 22 says 'Session-based auto-matching cron, runs every 2 hours.' No ML, no ranking model, no magic, just session arithmetic in UTC minutes.",
+      "A Vercel cron hits /api/auto-match. The route is src/app/api/auto-match/route.ts, 476 lines. Header comment at line 22 says 'Session-based auto-matching cron, runs every 2 hours.' No ML, no scoring model, no magic, just session arithmetic in UTC minutes.",
   },
   {
     title: "Sessions are split and paired",
@@ -394,7 +394,7 @@ export default function Page() {
           filename="src/app/api/auto-match/route.ts"
         />
         <p className="text-zinc-600 leading-relaxed mt-6">
-          No ML, no ranking model, no clever fallback logic. Two old students
+          No ML, no scoring model, no clever fallback logic. Two old students
           say they want to sit at roughly similar times, the cron runs every
           two hours, any pair within sixty UTC minutes of each other gets a
           match and a Google Meet link. The code is skimmable top to bottom in
@@ -567,7 +567,7 @@ export default function Page() {
           heading="Two different objects, both called 'open source meditation tool'"
           productName="Matching infrastructure (vipassana.cool)"
           competitorName="Timer or guided session app (Medito and peers)"
-          intro="Not a ranking. Two different shapes that share a phrase. Each is good at its own job, and a reader who understands which one they are looking at will pick the right one."
+          intro="Not a leaderboard. Two different shapes that share a phrase. Each is good at its own job, and a reader who understands which one they are looking at will pick the right one."
           rows={categoryRows}
         />
       </section>
