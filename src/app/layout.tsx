@@ -118,10 +118,14 @@ export default function RootLayout({
         <PostHogProvider>
           <Navigation />
           <HeadingAnchors />
-          <SiteSidebar />
-          <main className="min-h-screen">{children}</main>
-          <GuideChat />
-          <Footer />
+          <div className="flex min-h-screen">
+            <SiteSidebar />
+            <div className="flex-1 min-w-0 flex flex-col">
+              <main className="min-h-screen">{children}</main>
+              <Footer />
+            </div>
+            <GuideChat />
+          </div>
         </PostHogProvider>
         <NewsletterSignup />
       </body>
