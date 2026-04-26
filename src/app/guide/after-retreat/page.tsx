@@ -7,10 +7,17 @@ import { ArticleHeader } from "@/components/article-header";
 import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 export const metadata: Metadata = {
-  title: "After Vipassana — How to Integrate Back Into Normal Life",
+  title: "After Vipassana: Day 11 Survival, Post-Retreat Depression & Integration",
   description:
-    "What happens after a Vipassana retreat: re-entry shock, post-retreat depression, emotional patterns, and practical integration strategies from someone who has done 6 courses.",
+    "The crash after a 10-day Vipassana course: re-entry shock, post-retreat depression, the predictable emotional arc, and how to keep daily practice alive. Notes from 6 courses, 945+ days of daily sitting.",
   alternates: { canonical: "https://vipassana.cool/guide/after-retreat" },
+  openGraph: {
+    title: "After Vipassana: Day 11 Is When the Real Work Starts",
+    description:
+      "The euphoria fades fast. Most people lose their practice within 4 weeks. Here is what to expect, and how to keep daily sitting alive when you get home.",
+    url: "https://vipassana.cool/guide/after-retreat",
+    type: "article",
+  },
 };
 
 export default function AfterRetreatPage() {
@@ -45,6 +52,35 @@ export default function AfterRetreatPage() {
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
           After a Vipassana retreat, expect a predictable arc: Days 1-3 euphoria (heightened senses, deep presence), Days 3-10 crash (old habits resurface), Weeks 2-4 irritability, then gradual integration. Post-retreat depression is common and normal — it passes. Build in 1-2 buffer days before returning to work, delay screen re-exposure 24 hours, protect your morning sit, and find a weekly group sitting. The real work starts on Day 11. Aim for one course per year to sustain progress.
+        </p>
+      </div>
+
+      <div className="mb-10 rounded-xl border border-accent/40 bg-accent/[0.07] p-6 sm:p-7">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-accent">
+          Reading this on the ride home? Start here.
+        </p>
+        <h2 className="mb-3 text-xl font-bold text-foreground sm:text-2xl">
+          The next 72 hours decide whether your practice survives.
+        </h2>
+        <p className="mb-5 text-sm text-muted sm:text-base">
+          Most old students lose their daily sit within 4 weeks of leaving a course. Sitting on a shared Google Meet with another old student in your time zone, every morning, is the single thing that fixes that. No app, no streaks, no fees. Free, silent, tradition-respectful.
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <Link
+            href="/#waitlist-form"
+            className="inline-block rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          >
+            Get matched with a practice buddy
+          </Link>
+          <Link
+            href="/#how-it-works"
+            className="text-sm font-medium text-accent underline-offset-4 hover:underline"
+          >
+            How matching works &rarr;
+          </Link>
+        </div>
+        <p className="mt-4 text-xs text-muted/70">
+          Built by an old student, 6 courses, 945+ days of daily practice. 2 minute signup.
         </p>
       </div>
 
@@ -168,13 +204,26 @@ export default function AfterRetreatPage() {
             <Link href="/guide/daily-practice" className="text-accent underline hover:text-foreground">
               complete guide to daily Vipassana practice at home
             </Link>{" "}
-            that covers scheduling, obstacles, and building consistency. And if you&apos;re wondering whether the practice is actually working, our guide to{" "}
+            that covers scheduling, obstacles, and building consistency. If you&apos;ve already lost the thread once, see{" "}
+            <Link href="/guide/restarting-your-practice" className="text-accent underline hover:text-foreground">
+              restarting your practice
+            </Link>
+            . If an hour a day feels impossible, see{" "}
+            <Link href="/guide/why-20-minutes-beats-two-hours" className="text-accent underline hover:text-foreground">
+              why 20 minutes beats two hours
+            </Link>
+            . And if you&apos;re wondering whether the practice is actually working, our guide to{" "}
             <Link href="/guide/recognizing-progress" className="text-accent underline hover:text-foreground">
               recognizing progress
             </Link>{" "}
             covers what deepening actually looks like over months and years.
           </p>
         </section>
+
+        <PracticeBuddyCta
+          heading="The honest fix for the &ldquo;I&rsquo;ll sit at home&rdquo; problem"
+          description="Knowing the protocol is not the same as sitting down. A scheduled meet with another old student, in your time zone, on the other side of a calendar invite, is what actually keeps the cushion warm. Free, silent, no app to install."
+        />
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">How does Vipassana affect your relationships?</h2>
@@ -282,39 +331,51 @@ export default function AfterRetreatPage() {
       </div>
 
       <PracticeBuddyCta
-        heading="Keep the Momentum Going"
-        description="The transition home is the hardest part. Get matched with a fellow Vipassana meditator for daily accountability over Google Meet. Free and tradition-respectful."
+        heading="Day 11 starts tomorrow. Don&rsquo;t sit it alone."
+        description="Get paired with a fellow old student in your time zone, on a permanent Google Meet link, for the next morning sit. Free forever. Built by an old student, 6 courses, 945+ days of daily practice."
       />
-
-      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
-        <h2 className="mb-3 text-xl font-bold">Ready for Your Next Course?</h2>
-        <p className="mb-6 text-muted">
-          Find a center near you and sign up for your next 10-day course or Dhamma service period.
-        </p>
-        <a
-          href="https://www.dhamma.org/en-US/courses/search"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
-        >
-          Find a Course
-        </a>
-      </div>
 
       {/* Related Articles */}
       <div className="mt-12 rounded-xl border border-border bg-card p-6">
-        <h2 className="mb-4 font-semibold text-foreground">Related Articles</h2>
+        <h2 className="mb-4 font-semibold text-foreground">Keep reading</h2>
         <div className="flex flex-wrap gap-3">
           <Link href="/guide/daily-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Daily Practice at Home
           </Link>
-          <Link href="/guide/how-vipassana-changes-you" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            How Vipassana Changes You
+          <Link href="/guide/restarting-your-practice" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Restarting Your Practice
+          </Link>
+          <Link href="/guide/why-20-minutes-beats-two-hours" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Why 20 Minutes Beats Two Hours
           </Link>
           <Link href="/guide/group-sittings" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Group Sittings
           </Link>
+          <Link href="/guide/recognizing-progress" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Recognizing Progress
+          </Link>
+          <Link href="/guide/how-vipassana-changes-you" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            How Vipassana Changes You
+          </Link>
+          <Link href="/guide/dhamma-service" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Dhamma Service
+          </Link>
+          <Link href="/guide/risks-and-safety" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Risks &amp; Safety
+          </Link>
         </div>
+        <p className="mt-5 text-xs text-muted/70">
+          Ready to sit your next course?{" "}
+          <a
+            href="https://www.dhamma.org/en-US/courses/search"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent underline-offset-4 hover:underline"
+          >
+            Find a 10-day course on dhamma.org
+          </a>
+          . Course logistics live there, not here.
+        </p>
       </div>
 
       <PageComments pageId="guide-after-retreat" />
