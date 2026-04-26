@@ -379,6 +379,30 @@ export async function advanceMatchOnReply(fromEmail: string, subject?: string): 
   }
 }
 
+// End stale pending matches: intro email was sent, but no email reply ever started.
+// After `days` of silence, mark the match as 'ended' and put both people back to 'ready'
+// so they can be matched again. Different from expireStaleMatches in two ways:
+// (1) targets 'pending' rather than 'confirming', (2) terminal status is 'ended' (not
+// 'expired') because the intro did go out — the relationship just didn't take off.
+export async function endStalePendingMatches(days: number = 14): Promise<{ endedCount: number; endedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] }> {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT m.id, m.person_a_id, m.person_b_id, a.name as person_a_name, b.name as person_b_name
+    FROM matches m
+    JOIN waitlist_entries a ON a.id = m.person_a_id
+    JOIN waitlist_entries b ON b.id = m.person_b_id
+    WHERE m.status = 'pending'
+      AND m.created_at < NOW() - make_interval(days => ${days})
+  `;
+  const endedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] = [];
+  for (const row of rows) {
+    // updateMatchStatus("ended") already moves both people to "ready" — no need to do it manually
+    await updateMatchStatus(row.id as string, "ended", "cron");
+    endedMatches.push({ id: row.id as string, person_a_name: row.person_a_name as string | null, person_b_name: row.person_b_name as string | null });
+  }
+  return { endedCount: endedMatches.length, endedMatches };
+}
+
 // Expire confirming matches older than the given number of days.
 // Sets match → expired, moves both people back to pending.
 // If one person had confirmed (engaged), they go back to pending too.
