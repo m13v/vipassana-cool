@@ -28,9 +28,10 @@ import { createMeetEvent } from "@/lib/google-meet";
  * - A person sitting twice can have 2 different buddies
  *
  * Eligibility rules:
+ * - status = 'ready' → always eligible (motivated user, bypass cooldown and attempt cap)
  * - contact_count = 0, signed up >24h ago → auto-match
- * - contact_count between 1 and 9, last match expired >7 days ago → retry
- * - contact_count >= 10 → skip (serial ghoster)
+ * - contact_count between 1 and 9, last match ended/expired/declined >7 days ago → retry
+ * - contact_count >= 10 → skip (serial ghoster, unless 'ready')
  */
 
 type SessionSlot = {
@@ -78,26 +79,28 @@ export async function GET(request: NextRequest) {
   // Filter eligible based on contact_count rules
   const eligible: WaitlistEntry[] = [];
   for (const c of candidates) {
-    if (c.contact_count >= 10) continue;
-
+    // 'ready' status bypasses the attempt cap and cooldown — these are motivated
+    // users who explicitly told us they want a match now.
     if (c.status === "ready") {
       eligible.push(c);
       continue;
     }
 
+    if (c.contact_count >= 10) continue;
+
     if (c.contact_count === 0) {
       const createdAt = c.created_at ? new Date(c.created_at).getTime() : 0;
       if (now - createdAt > DAY_MS) eligible.push(c);
     } else {
-      const lastExpiry = await sql`
+      const lastTerminal = await sql`
         SELECT m.created_at FROM matches m
         WHERE (m.person_a_id = ${c.id} OR m.person_b_id = ${c.id})
-          AND m.status IN ('expired', 'declined')
+          AND m.status IN ('expired', 'declined', 'ended')
         ORDER BY m.created_at DESC LIMIT 1
       `;
-      if (lastExpiry.length > 0) {
-        const expiredAt = new Date(lastExpiry[0].created_at as string).getTime();
-        if (now - expiredAt > 7 * DAY_MS) eligible.push(c);
+      if (lastTerminal.length > 0) {
+        const closedAt = new Date(lastTerminal[0].created_at as string).getTime();
+        if (now - closedAt > 7 * DAY_MS) eligible.push(c);
       }
     }
   }
