@@ -29,8 +29,8 @@ import { createMeetEvent } from "@/lib/google-meet";
  *
  * Eligibility rules:
  * - contact_count = 0, signed up >24h ago → auto-match
- * - contact_count = 1, last match expired >7 days ago → retry
- * - contact_count >= 2 → skip (serial ghoster)
+ * - contact_count between 1 and 9, last match expired >7 days ago → retry
+ * - contact_count >= 10 → skip (serial ghoster)
  */
 
 type SessionSlot = {
@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
   // Filter eligible based on contact_count rules
   const eligible: WaitlistEntry[] = [];
   for (const c of candidates) {
-    if (c.contact_count >= 2) continue;
+    if (c.contact_count >= 10) continue;
 
     if (c.status === "ready") {
       eligible.push(c);
@@ -88,7 +88,7 @@ export async function GET(request: NextRequest) {
     if (c.contact_count === 0) {
       const createdAt = c.created_at ? new Date(c.created_at).getTime() : 0;
       if (now - createdAt > DAY_MS) eligible.push(c);
-    } else if (c.contact_count === 1) {
+    } else {
       const lastExpiry = await sql`
         SELECT m.created_at FROM matches m
         WHERE (m.person_a_id = ${c.id} OR m.person_b_id = ${c.id})
