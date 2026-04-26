@@ -188,8 +188,11 @@ export async function GET(request: NextRequest) {
       (x.diff - y.diff)
   );
 
-  // Greedily pick non-overlapping pairs (a session slot can only be used once)
+  // Greedily pick non-overlapping pairs. A session slot can only be used once,
+  // and the same two people are never paired twice across different sessions
+  // (twice-a-day practitioners should get two different buddies, per design).
   const usedSlots = new Set<string>(); // "personId:session"
+  const usedPersonPairs = new Set<string>(); // "personIdA|personIdB" sorted
   const pairs: { slotA: SessionSlot; slotB: SessionSlot; diff: number }[] = [];
 
   for (const p of allViable) {
@@ -197,9 +200,12 @@ export async function GET(request: NextRequest) {
     const keyA = `${p.slotA.personId}:${p.slotA.session}`;
     const keyB = `${p.slotB.personId}:${p.slotB.session}`;
     if (usedSlots.has(keyA) || usedSlots.has(keyB)) continue;
+    const personPairKey = [p.slotA.personId, p.slotB.personId].sort().join("|");
+    if (usedPersonPairs.has(personPairKey)) continue;
     pairs.push({ slotA: p.slotA, slotB: p.slotB, diff: p.diff });
     usedSlots.add(keyA);
     usedSlots.add(keyB);
+    usedPersonPairs.add(personPairKey);
   }
 
   // Execute matches (or simulate in dry run mode)
