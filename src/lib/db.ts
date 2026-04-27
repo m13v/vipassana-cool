@@ -379,15 +379,22 @@ export async function advanceMatchOnReply(fromEmail: string, subject?: string): 
   }
 }
 
-// End stale pending matches: intro email was sent, but no email reply ever started.
-// After `days` of silence, mark the match as 'ended' and put both people back to 'ready'
-// so they can be matched again. Different from expireStaleMatches in two ways:
-// (1) targets 'pending' rather than 'confirming', (2) terminal status is 'ended' (not
-// 'expired') because the intro did go out — the relationship just didn't take off.
-export async function endStalePendingMatches(days: number = 14): Promise<{ endedCount: number; endedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] }> {
+// Sweep stale 'pending' matches that never advanced via email reply.
+// Distinguishes by whether either side ever confirmed:
+//   - Both confirmed: real bond that didn't take off → 'ended' (still blocks re-pairing).
+//   - Neither confirmed: legacy/unengaged row that should not block the pair → 'expired'
+//     (so getPriorMatchedIds and the blockedPairs guard release the two people).
+// In both cases the match closes and both participants return to 'ready'.
+export async function endStalePendingMatches(days: number = 14): Promise<{
+  endedCount: number;
+  expiredCount: number;
+  endedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[];
+  expiredMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[];
+}> {
   const sql = getSql();
   const rows = await sql`
-    SELECT m.id, m.person_a_id, m.person_b_id, a.name as person_a_name, b.name as person_b_name
+    SELECT m.id, m.person_a_id, m.person_b_id, m.person_a_confirmed, m.person_b_confirmed,
+           a.name as person_a_name, b.name as person_b_name
     FROM matches m
     JOIN waitlist_entries a ON a.id = m.person_a_id
     JOIN waitlist_entries b ON b.id = m.person_b_id
@@ -395,12 +402,22 @@ export async function endStalePendingMatches(days: number = 14): Promise<{ ended
       AND m.created_at < NOW() - make_interval(days => ${days})
   `;
   const endedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] = [];
+  const expiredMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] = [];
   for (const row of rows) {
-    // updateMatchStatus("ended") already moves both people to "ready" — no need to do it manually
-    await updateMatchStatus(row.id as string, "ended", "cron");
-    endedMatches.push({ id: row.id as string, person_a_name: row.person_a_name as string | null, person_b_name: row.person_b_name as string | null });
+    const eitherConfirmed = (row.person_a_confirmed as boolean) || (row.person_b_confirmed as boolean);
+    const newStatus = eitherConfirmed ? "ended" : "expired";
+    await updateMatchStatus(row.id as string, newStatus, "cron");
+    // 'ended' path triggers the entry → 'ready' transitions inside updateMatchStatus.
+    // 'expired' does not, so do it manually here so people re-enter the pool.
+    if (!eitherConfirmed) {
+      await updateEntryStatus(row.person_a_id as string, "ready", "cron", row.id as string, "stale pending swept (no engagement)");
+      await updateEntryStatus(row.person_b_id as string, "ready", "cron", row.id as string, "stale pending swept (no engagement)");
+    }
+    const summary = { id: row.id as string, person_a_name: row.person_a_name as string | null, person_b_name: row.person_b_name as string | null };
+    if (eitherConfirmed) endedMatches.push(summary);
+    else expiredMatches.push(summary);
   }
-  return { endedCount: endedMatches.length, endedMatches };
+  return { endedCount: endedMatches.length, expiredCount: expiredMatches.length, endedMatches, expiredMatches };
 }
 
 // Expire confirming matches older than the given number of days.
