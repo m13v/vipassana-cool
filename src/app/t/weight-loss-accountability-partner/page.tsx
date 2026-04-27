@@ -183,7 +183,7 @@ export type WaitlistEntry = {
   evening_utc: string | null;
   status: string;                          // pending | ready | matched | ...
   pass_count: number;
-  contact_count: number;                   // dropped from auto-match at 2
+  contact_count: number;                   // dropped from auto-match at 10
   unsubscribed: boolean;
   unsubscribe_token: string | null;
   created_at: string | null;
@@ -229,9 +229,9 @@ const matcherFieldsBento: BentoCard[] = [
       "'Once a day' or 'Twice a day,' nothing else. The product does not contemplate three-times-a-day, weekly-only, or weekday-only-with-weekend-rest, all of which are common in weight-loss program structures.",
   },
   {
-    title: "contact_count caps at 2 before auto-match drops you",
+    title: "contact_count caps at 10 before auto-match drops you",
     description:
-      "After two offered matches without follow-through, the cron stops sending you to new partners. This is a behavior-shaping rule that makes sense for daily silent sits with a stranger; weight-loss services usually have the inverse incentive (keep the user in the funnel) and would not implement this filter at all.",
+      "After ten offered matches without follow-through (with a 7-day cool-off between each), the cron stops sending you to new partners. This is a behavior-shaping rule that makes sense for daily silent sits with a stranger; weight-loss services usually have the inverse incentive (keep the user in the funnel) and would not implement this filter at all.",
   },
 ];
 
