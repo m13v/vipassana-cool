@@ -507,7 +507,7 @@ export function MechanicsBento() {
         </h3>
         <p className="text-sm text-muted">
           After{" "}
-          <code className="rounded bg-card-hover px-1 font-mono text-xs">contact_count &ge; 2</code>
+          <code className="rounded bg-card-hover px-1 font-mono text-xs">contact_count &ge; 10</code>
           {" "}the person is quietly dropped from the eligible pool. No email is
           sent. No waitlist lifetime. No punishment points.
         </p>
