@@ -75,7 +75,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "How does the serial-ghoster check work?",
-    a: "One line, src/app/api/auto-match/route.ts:81 — if (c.contact_count >= 2) continue. The waitlist_entries table has a contact_count column that increments every time the person is offered a match. Two offers without a confirmed follow-through and they drop out of the candidate pool for auto-matching. They can still sign up again manually or the operator can re-engage them by hand from the admin UI, but the cron will not keep sending them to new partners. This is the sort of behavior an LLM-based matcher would need a careful policy and a lot of prompt engineering to get right, and one if-statement does it deterministically.",
+    a: "One line, src/app/api/auto-match/route.ts:84 — if (c.contact_count >= 10) continue. The waitlist_entries table has a contact_count column that increments every time the person is offered a match. Ten offers without a successful match (with a 7-day cool-off between each retry) and they drop out of the candidate pool for auto-matching. Status 'ready' bypasses the cap. They can still sign up again manually or the operator can re-engage them by hand from the admin UI, but the cron will not keep sending them to new partners. This is the sort of behavior an LLM-based matcher would need a careful policy and a lot of prompt engineering to get right, and one if-statement does it deterministically.",
   },
   {
     q: "Is there any AI anywhere on this site?",
@@ -126,7 +126,7 @@ const whyNotAiBento: BentoCard[] = [
   {
     title: "Serial-ghoster filter is one line",
     description:
-      "if (c.contact_count >= 2) continue — src/app/api/auto-match/route.ts:81. Two failed engagements removes you from auto-matching. An LLM-based classifier would need training data, a prompt, a threshold, and a policy review. The if-statement has none of those.",
+      "if (c.contact_count >= 10) continue — src/app/api/auto-match/route.ts:84. Ten failed engagements (each with a 7-day cool-off in between) removes you from auto-matching. Status 'ready' bypasses. An LLM-based classifier would need training data, a prompt, a threshold, and a policy review. The if-statement has none of those.",
   },
   {
     title: "The AI there is, is a content assistant",
@@ -246,30 +246,30 @@ for (const p of allViable) {
   usedSlots.add(keyB);
 }`;
 
-const eligibilitySnippet = `// src/app/api/auto-match/route.ts lines 78 to 103
-// The candidate filter. Two failed outreach attempts and you are out.
+const eligibilitySnippet = `// src/app/api/auto-match/route.ts lines 78 to 105
+// The candidate filter. Ten failed outreach attempts and you are out.
 
 for (const c of candidates) {
-  if (c.contact_count >= 2) continue;      // serial-ghoster filter
-
   if (c.status === "ready") {
-    eligible.push(c);                       // prior match expired, bumped to front of queue
+    eligible.push(c);                       // motivated user, bypasses cap and cooldown
     continue;
   }
+
+  if (c.contact_count >= 10) continue;      // serial-ghoster filter
 
   if (c.contact_count === 0) {
     const createdAt = c.created_at ? new Date(c.created_at).getTime() : 0;
     if (now - createdAt > DAY_MS) eligible.push(c);  // 24h cooldown on fresh signups
-  } else if (c.contact_count === 1) {
-    const lastExpiry = await sql\`
+  } else {
+    const lastTerminal = await sql\`
       SELECT m.created_at FROM matches m
       WHERE (m.person_a_id = \${c.id} OR m.person_b_id = \${c.id})
-        AND m.status IN ('expired', 'declined')
+        AND m.status IN ('expired', 'declined', 'ended')
       ORDER BY m.created_at DESC LIMIT 1
     \`;
-    if (lastExpiry.length > 0) {
-      const expiredAt = new Date(lastExpiry[0].created_at as string).getTime();
-      if (now - expiredAt > 7 * DAY_MS) eligible.push(c);  // one retry, 7d after last expiry
+    if (lastTerminal.length > 0) {
+      const closedAt = new Date(lastTerminal[0].created_at as string).getTime();
+      if (now - closedAt > 7 * DAY_MS) eligible.push(c);  // retry after 7d cool-off
     }
   }
 }`;
@@ -508,7 +508,7 @@ export default function Page() {
             },
             {
               label: "contact_count per person",
-              sublabel: ">= 2 and you're skipped",
+              sublabel: ">= 10 and you're skipped",
             },
             {
               label: "±60 min UTC filter",
