@@ -178,7 +178,7 @@ export function PredicateBeam() {
 
   const gates = [
     "not unsubscribed",
-    "contact_count < 2",
+    "contact_count < 10",
     "signed up > 24h",
     "not prior match",
     "no active slot",
@@ -444,12 +444,12 @@ export function PredicateBento() {
           predicate 2
         </p>
         <h3 className="mb-2 text-base font-bold text-foreground">
-          Two-strike rule on prior intros
+          Ten-strike rule on prior intros
         </h3>
         <p className="text-sm text-muted">
-          Line 81:{" "}
+          Line 84:{" "}
           <code className="rounded bg-card-hover px-1 font-mono text-xs">
-            if (c.contact_count &gt;= 2) continue;
+            if (c.contact_count &gt;= 10) continue;
           </code>
           . Anyone who has received two intros without replying is out of the
           pool. The comment in the source calls this the{" "}
