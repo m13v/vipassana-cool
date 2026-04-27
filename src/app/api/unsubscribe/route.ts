@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   const sql = neon(process.env.DATABASE_URL!);
 
   const rows = await sql`
-    SELECT id, email, name, status FROM waitlist_entries WHERE unsubscribe_token = ${token}
+    SELECT id, email, name, status, unsubscribed FROM waitlist_entries WHERE unsubscribe_token = ${token}
   `;
 
   if (rows.length === 0) {
@@ -30,6 +30,13 @@ export async function GET(request: NextRequest) {
   }
 
   const person = rows[0];
+
+  // Idempotency guard: Hotmail/Outlook Safe Links and similar scanners pre-fetch
+  // the unsubscribe URL, which would otherwise re-fire admin emails, activity-log
+  // rows, and PostHog events on every hit.
+  if (person.unsubscribed === true || person.status === "unsubscribed") {
+    return NextResponse.redirect(new URL("/unsubscribed?status=success", BASE_URL));
+  }
 
   // 1. Get affected matches and partners BEFORE ending them
   const activeMatches = await sql`
