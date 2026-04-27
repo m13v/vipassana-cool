@@ -190,7 +190,7 @@ export default function Page() {
           <div className="mb-6">
             <ArticleMeta
               datePublished={PUBLISHED}
-              authorRole="operator, vipassana.cool"
+              authorRole="Written with AI"
               readingTime="9 min read"
             />
           </div>

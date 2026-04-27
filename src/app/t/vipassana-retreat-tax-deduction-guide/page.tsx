@@ -316,7 +316,7 @@ export default function Page() {
       <div className="mt-6">
         <ArticleMeta
           author="Matthew Diakonov"
-          authorRole="operator, vipassana.cool (6 courses sat)"
+          authorRole="Written with AI"
           datePublished={PUBLISHED}
           readingTime="10 min read"
         />

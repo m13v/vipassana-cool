@@ -374,7 +374,7 @@ export default function Page() {
       <div className="py-4">
         <ArticleMeta
           datePublished={PUBLISHED}
-          authorRole="operator, vipassana.cool"
+          authorRole="Written with AI"
           readingTime="10 min read"
         />
       </div>
