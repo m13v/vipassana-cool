@@ -69,7 +69,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "What are the eligibility rules for 'being findable' at all?",
-    a: "Three cases, all visible at src/app/api/auto-match/route.ts lines 80 to 103. First, if your contact_count is 2 or more, you are skipped. Two prior matches that did not stick is enough evidence for the system to stop trying, and at that point the operator (Matt) takes over manually or not at all. Second, if your contact_count is 0, you must have been signed up for longer than 24 hours before you enter the eligible pool. The cool-off period is there so you do not get paired during the first tick after you sign up, before any human has confirmed the signup is real. Third, if your contact_count is 1, your previous match must have expired or been declined, and at least 7 days must have passed since that row transitioned to expired or declined. A 'ready' status bypasses the cool-off entirely and makes you a top-of-sort candidate.",
+    a: "Three cases, all visible at src/app/api/auto-match/route.ts lines 78 to 105. First, if your status is 'ready' you bypass the rest of this filter — motivated users go straight into the eligible pool. Otherwise, if your contact_count is 10 or more, you are skipped. Ten prior matches that did not stick is enough evidence for the system to stop trying, and at that point the operator (Matt) takes over manually or not at all. Second, if your contact_count is 0, you must have been signed up for longer than 24 hours before you enter the eligible pool. The cool-off period is there so you do not get paired during the first tick after you sign up, before any human has confirmed the signup is real. Third, if your contact_count is between 1 and 9, your previous match must have expired, ended, or been declined, and at least 7 days must have passed since that row reached its terminal status.",
   },
   {
     q: "How are viable pairs sorted once the 60-minute filter passes?",
@@ -133,7 +133,7 @@ const serpVsCronRows: ComparisonRow[] = [
   {
     feature: "Serial no-shows",
     competitor: "No defined stop condition.",
-    ours: "contact_count >= 2 skips you; the operator takes it from there manually.",
+    ours: "contact_count >= 10 skips you; the operator takes it from there manually.",
   },
   {
     feature: "Cost to you",
@@ -177,7 +177,7 @@ const cronTickSteps = [
   {
     title: "Eligibility gates run",
     description:
-      "contact_count = 0 AND age > 24h, or contact_count = 1 AND last expired match > 7d ago, or status = 'ready' (bypasses the cool-off). contact_count >= 2 is excluded outright.",
+      "status = 'ready' (bypasses every other check), or contact_count = 0 AND age > 24h, or contact_count between 1 and 9 AND last terminal match > 7d ago. contact_count >= 10 is excluded outright.",
   },
   {
     title: "Slots are built",
