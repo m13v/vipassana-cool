@@ -4,7 +4,7 @@ import { neon } from "@neondatabase/serverless";
 import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, getActiveMatchForSession, updateEntryStatus, confirmMatchPerson, getMatchEngagement } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
-import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
+import type { SessionContext } from "@/lib/emails";
 
 function checkAuth(request: NextRequest): boolean {
   const secret = request.headers.get("authorization")?.replace("Bearer ", "")
@@ -134,51 +134,30 @@ export async function POST(request: NextRequest) {
       const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", localTime: getSessionLocalTime(personB, sessionB as "morning" | "evening"), timezone: personB.timezone };
       const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
-      // If meet tracking links provided, send per-person emails so each gets their unique tracking URL
-      if (meetLinkA && meetLinkB) {
-        for (const [person, otherPerson, trackingUrl, sessCtx] of [
-          [personA, personB, meetLinkA, sessCtxA],
-          [personB, personA, meetLinkB, sessCtxB],
-        ] as [WaitlistEntry, WaitlistEntry, string, SessionContext][]) {
-          const meetInfo: MeetLinkInfo = { trackingUrl };
-          const html = buildIntroEmailHtml(person === personA ? personA : personB, person === personA ? personB : personA, meetInfo, introSessionCtx, buildUnsubscribeUrl(person.unsubscribe_token));
-          const subject = buildIntroSubject(sessCtx);
-          const emailResult = await resend.emails.send({
-            from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-            to: [person.email],
-            replyTo: [personA.email, personB.email],
-            subject,
-            html,
-            headers: { "X-Entity-Ref-ID": match.id },
-          });
-          try {
-            await sql`
-              INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-              VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
-            `;
-          } catch (dbErr) {
-            console.error("Failed to log intro email:", dbErr);
-          }
-        }
-      } else {
-        const html = buildIntroEmailHtml(personA, personB, undefined, introSessionCtx);
-        const subject = buildIntroSubject(sessCtxA);
-        const emailResult = await resend.emails.send({
-          from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-          to: [personA.email, personB.email],
-          replyTo: [personA.email, personB.email],
-          subject,
-          html,
-          headers: { "X-Entity-Ref-ID": match.id },
-        });
-        try {
-          await sql`
-            INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
-          `;
-        } catch (dbErr) {
-          console.error("Failed to log intro email:", dbErr);
-        }
+      const meetLinks = meetLinkA && meetLinkB
+        ? { a: { trackingUrl: meetLinkA }, b: { trackingUrl: meetLinkB } }
+        : undefined;
+      const unsubscribeUrls = {
+        a: buildUnsubscribeUrl(personA.unsubscribe_token),
+        b: buildUnsubscribeUrl(personB.unsubscribe_token),
+      };
+      const html = buildIntroEmailHtml(personA, personB, meetLinks, introSessionCtx, unsubscribeUrls);
+      const subject = buildIntroSubject(sessCtxA, sessCtxB);
+      const emailResult = await resend.emails.send({
+        from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+        to: [personA.email, personB.email],
+        replyTo: [personA.email, personB.email],
+        subject,
+        html,
+        headers: { "X-Entity-Ref-ID": match.id },
+      });
+      try {
+        await sql`
+          INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
+        `;
+      } catch (dbErr) {
+        console.error("Failed to log intro email:", dbErr);
       }
       return NextResponse.json({ success: true, matchId: match.id, status: "matched", flow: "both-ready" });
     }
@@ -239,7 +218,7 @@ export async function POST(request: NextRequest) {
     const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", localTime: getSessionLocalTime(personA, sessionA as "morning" | "evening"), timezone: personA.timezone };
     const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", localTime: getSessionLocalTime(personB, sessionB as "morning" | "evening"), timezone: personB.timezone };
     const html = buildIntroEmailHtml(personA, personB, undefined, { sessionA: sessCtxA, sessionB: sessCtxB });
-    const subject = buildIntroSubject(sessCtxA);
+    const subject = buildIntroSubject(sessCtxA, sessCtxB);
 
     const emailResult = await resend.emails.send({
       from: "Matt from Vipassana.cool <matt@vipassana.cool>",
