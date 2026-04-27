@@ -125,29 +125,30 @@ export async function GET(request: NextRequest) {
       const sessCtxB: SessionContext = { session: sessB, localTime: getSessionLocalTime(personB, sessB), timezone: personB.timezone, suggestedUtcMinutes: suggestedMins };
       const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
-      // Send intro emails — one per person so each gets their unique tracking URL
-      for (const [person, other, meetInfo, sessCtx] of [
-        [personA, personB, meetInfoA, sessCtxA],
-        [personB, personA, meetInfoB, sessCtxB],
-      ] as [typeof personA, typeof personB, MeetLinkInfo, SessionContext][]) {
-        const html = buildIntroEmailHtml(person, other, meetInfo, introSessionCtx, buildUnsubscribeUrl(person.unsubscribe_token));
-        const subject = buildIntroSubject(sessCtx);
-        const emailResult = await resend.emails.send({
-          from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-          to: [person.email],
-          replyTo: [personA.email, personB.email],
-          subject,
-          html,
-          headers: { "X-Entity-Ref-ID": match.id },
-        });
-        try {
-          await sql`
-            INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
-                    ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
-          `;
-        } catch { /* non-critical */ }
-      }
+      // Single intro email to both recipients. Body shows two tracking buttons
+      // (one per person), so per-person click attribution is preserved.
+      const meetLinks = { a: meetInfoA, b: meetInfoB };
+      const unsubscribeUrls = {
+        a: buildUnsubscribeUrl(personA.unsubscribe_token),
+        b: buildUnsubscribeUrl(personB.unsubscribe_token),
+      };
+      const html = buildIntroEmailHtml(personA, personB, meetLinks, introSessionCtx, unsubscribeUrls);
+      const subject = buildIntroSubject(sessCtxA, sessCtxB);
+      const emailResult = await resend.emails.send({
+        from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+        to: [personA.email, personB.email],
+        replyTo: [personA.email, personB.email],
+        subject,
+        html,
+        headers: { "X-Entity-Ref-ID": match.id },
+      });
+      try {
+        await sql`
+          INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
+                  ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
+        `;
+      } catch { /* non-critical */ }
 
       await updateMatchStatus(match.id, "pending");
       await updateEntryStatus(match.person_a_id, "matched");
