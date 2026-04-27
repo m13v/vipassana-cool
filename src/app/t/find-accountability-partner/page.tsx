@@ -70,7 +70,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "How long does 'confirming' stay open before it gives up?",
-    a: "Three days. The expire-matches cron at vercel.json line 12 runs at 12:00 UTC daily and calls expireStaleMatches(3) at line 11 of src/app/api/expire-matches/route.ts. That function selects every match where status = 'confirming' and created_at < now - 3 days, flips its status to 'expired', and returns both participants to the 'pending' pool with contact_count incremented by one. So the window between the cron writing your match row and needing both of you to have clicked yes is strictly three calendar days, regardless of timezone. Miss that window and your partner goes back into the pool, your contact_count becomes one, and you re-enter the pool after a 7-day cool-off.",
+    a: "Three days. The expire-matches cron at vercel.json line 12 runs at 12:00 UTC daily and calls expireStaleMatches(3) at line 11 of src/app/api/expire-matches/route.ts. That function selects every match where status = 'confirming' and created_at < now - 3 days, flips its status to 'expired', and returns both participants to the 'pending' pool with contact_count incremented by one. So the window between the cron writing your match row and needing both of you to have clicked yes is strictly three calendar days, regardless of timezone. Miss that window and your partner goes back into the pool, your contact_count is one higher than it was, and you re-enter the eligible pool after a 7-day cool-off (the cap is ten attempts before you're permanently dropped from auto-matching).",
   },
   {
     q: "Why two confirmation clicks instead of one?",
