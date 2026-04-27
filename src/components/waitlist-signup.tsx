@@ -29,13 +29,74 @@ const DAYS_OF_WEEK = [
   "Sunday",
 ];
 
-const GMT_OFFSETS = [
-  "GMT-12", "GMT-11", "GMT-10", "GMT-9", "GMT-8", "GMT-7", "GMT-6", "GMT-5",
-  "GMT-4", "GMT-3", "GMT-2", "GMT-1", "GMT+0", "GMT+1", "GMT+2", "GMT+3",
-  "GMT+3:30", "GMT+4", "GMT+4:30", "GMT+5", "GMT+5:30", "GMT+5:45", "GMT+6",
-  "GMT+6:30", "GMT+7", "GMT+8", "GMT+8:30", "GMT+9", "GMT+9:30", "GMT+10",
-  "GMT+10:30", "GMT+11", "GMT+12", "GMT+13", "GMT+14",
+// IANA timezones grouped by region. Storing IANA (not GMT offsets) lets the
+// matcher handle DST correctly and the email render friendly labels
+// ("Paris time", "US Pacific") instead of stale offsets.
+const TIMEZONE_GROUPS: { label: string; zones: { value: string; label: string }[] }[] = [
+  { label: "Americas", zones: [
+    { value: "America/Los_Angeles", label: "US Pacific (Los Angeles, Seattle, Vancouver)" },
+    { value: "America/Vancouver",   label: "US Pacific - Vancouver" },
+    { value: "America/Phoenix",     label: "Arizona (no DST)" },
+    { value: "America/Denver",      label: "US Mountain (Denver, Salt Lake City)" },
+    { value: "America/Chicago",     label: "US Central (Chicago, Houston, Mexico City)" },
+    { value: "America/Mexico_City", label: "Mexico City" },
+    { value: "America/New_York",    label: "US Eastern (New York, Atlanta, Toronto)" },
+    { value: "America/Toronto",     label: "Toronto / Montréal" },
+    { value: "America/Halifax",     label: "Atlantic Canada (Halifax)" },
+    { value: "America/Sao_Paulo",   label: "São Paulo / Brazil" },
+    { value: "America/Argentina/Buenos_Aires", label: "Buenos Aires" },
+    { value: "America/Asuncion",    label: "Asunción" },
+    { value: "America/Santiago",    label: "Santiago" },
+    { value: "America/Lima",        label: "Lima" },
+  ]},
+  { label: "Europe / Africa", zones: [
+    { value: "Europe/London",     label: "London / UK" },
+    { value: "Europe/Dublin",     label: "Dublin" },
+    { value: "Europe/Lisbon",     label: "Lisbon" },
+    { value: "Atlantic/Canary",   label: "Canary Islands" },
+    { value: "Europe/Madrid",     label: "Madrid / Spain" },
+    { value: "Europe/Paris",      label: "Paris / France" },
+    { value: "Europe/Amsterdam",  label: "Amsterdam / Netherlands" },
+    { value: "Europe/Berlin",     label: "Berlin / Germany" },
+    { value: "Europe/Zurich",     label: "Zürich / Switzerland" },
+    { value: "Europe/Luxembourg", label: "Luxembourg" },
+    { value: "Europe/Rome",       label: "Rome / Italy" },
+    { value: "Europe/Vienna",     label: "Vienna / Austria" },
+    { value: "Europe/Prague",     label: "Prague" },
+    { value: "Europe/Warsaw",     label: "Warsaw" },
+    { value: "Europe/Stockholm",  label: "Stockholm" },
+    { value: "Europe/Copenhagen", label: "Copenhagen" },
+    { value: "Europe/Oslo",       label: "Oslo" },
+    { value: "Europe/Helsinki",   label: "Helsinki" },
+    { value: "Europe/Athens",     label: "Athens" },
+    { value: "Europe/Istanbul",   label: "Istanbul" },
+    { value: "Africa/Casablanca", label: "Casablanca" },
+    { value: "Africa/Lagos",      label: "Lagos" },
+    { value: "Africa/Cairo",      label: "Cairo" },
+    { value: "Africa/Dakar",      label: "Dakar" },
+    { value: "Africa/Johannesburg", label: "Johannesburg" },
+  ]},
+  { label: "Middle East / Asia / Pacific", zones: [
+    { value: "Asia/Jerusalem",   label: "Jerusalem / Tel Aviv" },
+    { value: "Asia/Dubai",       label: "Dubai / Abu Dhabi" },
+    { value: "Asia/Karachi",     label: "Karachi" },
+    { value: "Asia/Kolkata",     label: "India (IST — Delhi, Mumbai, Bangalore)" },
+    { value: "Asia/Kathmandu",   label: "Kathmandu" },
+    { value: "Asia/Bangkok",     label: "Bangkok" },
+    { value: "Asia/Singapore",   label: "Singapore" },
+    { value: "Asia/Shanghai",    label: "China (Beijing, Shanghai)" },
+    { value: "Asia/Hong_Kong",   label: "Hong Kong" },
+    { value: "Asia/Manila",      label: "Manila" },
+    { value: "Asia/Tokyo",       label: "Tokyo / Japan" },
+    { value: "Asia/Seoul",       label: "Seoul" },
+    { value: "Australia/Perth",  label: "Perth" },
+    { value: "Australia/Sydney", label: "Sydney / Melbourne" },
+    { value: "Pacific/Auckland", label: "Auckland" },
+    { value: "Pacific/Honolulu", label: "Honolulu" },
+  ]},
 ];
+
+const ALL_TIMEZONES = TIMEZONE_GROUPS.flatMap((g) => g.zones.map((z) => z.value));
 
 const DURATION_OPTIONS = [
   "15 minutes",
@@ -106,12 +167,11 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
     try {
       if (prefill?.timezone) {
         setForm((f) => ({ ...f, timezone: prefill.timezone! }));
-      } else {
-        const ianaZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const parts = new Intl.DateTimeFormat("en", { timeZone: ianaZone, timeZoneName: "shortOffset" }).formatToParts(new Date());
-        const offset = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
-        const gmt = offset.replace("UTC", "GMT+0") || "";
-        if (gmt) setForm((f) => ({ ...f, timezone: gmt }));
+        return;
+      }
+      const detected = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      if (detected && ALL_TIMEZONES.includes(detected)) {
+        setForm((f) => ({ ...f, timezone: detected }));
       }
     } catch { /* ignore */ }
   }, [prefill?.timezone]);
@@ -336,8 +396,12 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
               className={inputClass}
             >
               <option value="">Select timezone</option>
-              {GMT_OFFSETS.map((o) => (
-                <option key={o} value={o}>{o}</option>
+              {TIMEZONE_GROUPS.map((g) => (
+                <optgroup key={g.label} label={g.label}>
+                  {g.zones.map((z) => (
+                    <option key={z.value} value={z.value}>{z.label}</option>
+                  ))}
+                </optgroup>
               ))}
             </select>
             <p className="mt-1 text-xs text-muted/60">Auto-detected — change if incorrect</p>
