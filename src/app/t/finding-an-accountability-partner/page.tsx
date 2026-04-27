@@ -64,7 +64,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "How many filter gates stand between a signup and a match, and where are they?",
-    a: "Eight. The first two are in the SQL of line 74: status must be in ('pending', 'ready'), and unsubscribed must be false. The third is the contact_count >= 2 check at line 81, which removes rows that were already matched twice without sticking. The fourth is the 24-hour cool-off at lines 88 to 90, which holds a fresh signup out of the pool for one day. The fifth is the 7-day retry cool-off at lines 91 to 101 for rows at contact_count = 1. The sixth is the UTC slot build at lines 108 to 122, which silently drops a row if toUtcTime cannot resolve its morning_time plus timezone into an HH:MM string. The seventh is the blockedPairs guard at line 160, which drops the pair when the two people have ever been in a confirmed or still-active match together. The eighth is the 60-minute hard filter at line 164: if timeDiff(a, b) is greater than 60 UTC minutes on the circular clock, the pair is discarded.",
+    a: "Eight. The first two are in the SQL of line 74: status must be in ('pending', 'ready'), and unsubscribed must be false. The third is the contact_count >= 10 check at line 84, which removes rows that have already been matched ten times without sticking; status 'ready' bypasses this. The fourth is the 24-hour cool-off at lines 88 to 90, which holds a fresh signup out of the pool for one day. The fifth is the 7-day retry cool-off at lines 91 to 102 for rows at contact_count between 1 and 9. The sixth is the UTC slot build at lines 108 to 122, which silently drops a row if toUtcTime cannot resolve its morning_time plus timezone into an HH:MM string. The seventh is the blockedPairs guard at line 160, which drops the pair when the two people have ever been in a confirmed or still-active match together. The eighth is the 60-minute hard filter at line 164: if timeDiff(a, b) is greater than 60 UTC minutes on the circular clock, the pair is discarded.",
   },
   {
     q: "Why count the database predicates as gates too?",
@@ -84,7 +84,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "Why call finding the 'inverse' of a gate sequence rather than the output of one?",
-    a: "Because most of the gates are exclusion predicates. contact_count >= 2 removes you. 24-hour cool-off removes you. Unsubscribed removes you. blockedPairs removes the pair. The predicate form is not 'you are findable because X' but 'you are findable unless X'. Writing it that way matches the code: if you list the reasons a row does not survive a tick, you have almost completely described the matcher. Frame the same thing positively and you would write nine conjoined conditions, which reads worse and describes the same behavior.",
+    a: "Because most of the gates are exclusion predicates. contact_count >= 10 removes you. 24-hour cool-off removes you. Unsubscribed removes you. blockedPairs removes the pair. The predicate form is not 'you are findable because X' but 'you are findable unless X'. Writing it that way matches the code: if you list the reasons a row does not survive a tick, you have almost completely described the matcher. Frame the same thing positively and you would write nine conjoined conditions, which reads worse and describes the same behavior.",
   },
   {
     q: "What happens to a row that clears gates 1 through 6 but no partner exists inside the 60-minute window this tick?",
@@ -111,7 +111,7 @@ const gateBento: BentoCard[] = [
   {
     title: "Gate 3 — contact-count cap",
     description:
-      "Line 81. A row with contact_count >= 2 is dropped with no further checks. Two prior matches that did not stick is enough evidence for the cron to stop trying.",
+      "Line 84. A row with contact_count >= 10 is dropped with no further checks. Ten prior matches that did not stick is enough evidence for the cron to stop trying. Status 'ready' bypasses this gate.",
   },
   {
     title: "Gate 4 — 24h cool-off",
@@ -121,7 +121,7 @@ const gateBento: BentoCard[] = [
   {
     title: "Gate 5 — 7d retry cool-off",
     description:
-      "Lines 91 to 101. A row at contact_count = 1 must have a prior match in status 'expired' or 'declined' older than 7 days. Otherwise it stays out of the pool.",
+      "Lines 91 to 102. A row at contact_count between 1 and 9 must have a prior match in status 'expired', 'declined', or 'ended' older than 7 days. Otherwise it stays out of the pool.",
     size: "2x1",
     accent: true,
   },
@@ -168,7 +168,7 @@ const findingVsGateRows: ComparisonRow[] = [
   {
     feature: "Explicit retry policy",
     competitor: "Implicit: 'keep looking', no stop condition.",
-    ours: "At most 2 tries per row (contact_count cap), 7-day wait between.",
+    ours: "At most 10 tries per row (contact_count cap), 7-day wait between each.",
   },
   {
     feature: "How 'findable' is defined",
@@ -194,11 +194,11 @@ const candidates = await sql\`
   ORDER BY CASE status WHEN 'ready' THEN 0 ELSE 1 END, created_at ASC
 \`;
 
-// Gate 3: serial-ghoster cap
-if (c.contact_count >= 2) continue;
-
-// Ready rows bypass the cool-offs (gates 4 and 5 do not apply)
+// Ready rows bypass every other check (motivated users)
 if (c.status === "ready") { eligible.push(c); continue; }
+
+// Gate 3: serial-ghoster cap
+if (c.contact_count >= 10) continue;
 
 // Gate 4: 24-hour cool-off for first-time candidates
 if (c.contact_count === 0) {
@@ -206,17 +206,17 @@ if (c.contact_count === 0) {
   if (now - createdAt > DAY_MS) eligible.push(c);
 }
 
-// Gate 5: 7-day retry cool-off for contact_count = 1
-else if (c.contact_count === 1) {
-  const lastExpiry = await sql\`
+// Gate 5: 7-day retry cool-off for contact_count 1 through 9
+else {
+  const lastTerminal = await sql\`
     SELECT m.created_at FROM matches m
     WHERE (m.person_a_id = \${c.id} OR m.person_b_id = \${c.id})
-      AND m.status IN ('expired', 'declined')
+      AND m.status IN ('expired', 'declined', 'ended')
     ORDER BY m.created_at DESC LIMIT 1
   \`;
-  if (lastExpiry.length > 0) {
-    const expiredAt = new Date(lastExpiry[0].created_at).getTime();
-    if (now - expiredAt > 7 * DAY_MS) eligible.push(c);
+  if (lastTerminal.length > 0) {
+    const closedAt = new Date(lastTerminal[0].created_at).getTime();
+    if (now - closedAt > 7 * DAY_MS) eligible.push(c);
   }
 }`;
 
@@ -239,7 +239,7 @@ const tickLog: { text: string; type?: "command" | "output" | "success" | "error"
   { text: "loaded candidates from waitlist_entries", type: "output" },
   { text: "  gate 1 (status IN pending|ready): passed 58 / 71", type: "output" },
   { text: "  gate 2 (unsubscribed = false):     passed 58 / 58", type: "output" },
-  { text: "  gate 3 (contact_count < 2):         passed 55 / 58", type: "output" },
+  { text: "  gate 3 (contact_count < 10):        passed 55 / 58", type: "output" },
   { text: "  gate 4 (age > 24h when cc=0):       passed 49 / 55", type: "output" },
   { text: "  gate 5 (7d since expire when cc=1): passed 47 / 49", type: "output" },
   { text: "building session slots", type: "info" },
@@ -258,7 +258,7 @@ const gateFlowSteps = [
     detail: "status + unsubscribe predicates",
   },
   {
-    label: "cc < 2",
+    label: "cc < 10",
     detail: "serial-ghoster cap",
   },
   {
@@ -299,9 +299,9 @@ const perGateSteps = [
       "The same SELECT also requires unsubscribed = false. Unsubscribes are soft-deletes; the row is preserved for audit but made invisible to the matcher.",
   },
   {
-    title: "Gate 3 — contact_count below 2",
+    title: "Gate 3 — contact_count below 10",
     description:
-      "Line 81 drops any row whose contact_count has reached 2. Two prior matches that did not stick is the cron's evidence that automated matching is not going to work for this row. Manual operator override at /admin/matching can still pair it.",
+      "Line 84 drops any row whose contact_count has reached 10. Ten prior matches that did not stick is the cron's evidence that automated matching is not going to work for this row. Manual operator override at /admin/matching can still pair it. Status 'ready' bypasses the cap entirely.",
   },
   {
     title: "Gate 4 — first-match cool-off of 24 hours",
@@ -333,7 +333,7 @@ const perGateSteps = [
 const sampleRowChecks = [
   { text: "status = 'pending' — gate 1 passed", checked: true },
   { text: "unsubscribed = false — gate 2 passed", checked: true },
-  { text: "contact_count = 0 — gate 3 passed (below cap of 2)", checked: true },
+  { text: "contact_count = 0 — gate 3 passed (below cap of 10)", checked: true },
   { text: "created 2 days ago — gate 4 passed (> 24h)", checked: true },
   { text: "no prior expire on file — gate 5 not applicable at cc = 0", checked: true },
   { text: "toUtcTime('06:00', 'America/Chicago') = '12:00' — gate 6 passed", checked: true },
@@ -344,7 +344,7 @@ const sampleRowChecks = [
 const sampleRowFails = [
   { text: "status = 'pending' — gate 1 passed", checked: true },
   { text: "unsubscribed = false — gate 2 passed", checked: true },
-  { text: "contact_count = 1 — gate 3 passed (below cap of 2)", checked: true },
+  { text: "contact_count = 1 — gate 3 passed (below cap of 10)", checked: true },
   { text: "last expire was 3 days ago — gate 5 failed (7d cool-off still active)", checked: false },
   { text: "(pipeline does not run gates 6 through 8; row is already out)", checked: false },
 ];
@@ -352,9 +352,9 @@ const sampleRowFails = [
 const gateChips = [
   "gate 1: status IN (pending, ready)",
   "gate 2: unsubscribed = false",
-  "gate 3: contact_count < 2",
+  "gate 3: contact_count < 10",
   "gate 4: age > 24h when cc = 0",
-  "gate 5: 7d since expire when cc = 1",
+  "gate 5: 7d since terminal when cc 1-9",
   "gate 6: toUtcTime resolves morning slot",
   "gate 7: pair not in blockedPairs",
   "gate 8: timeDiff(a,b) <= 60 UTC min",
