@@ -100,7 +100,7 @@ const slotConditions = [
   { text: "Same UTC morning slot, within ±60 minutes (line 164 of src/app/api/auto-match/route.ts)" },
   { text: "Both people are signed up, with status pending or ready" },
   { text: "Neither person is on the other's blocked-pair list" },
-  { text: "Neither person has been contacted twice already without a successful confirm (contact_count < 2)" },
+  { text: "Neither person has been contacted ten times already without a successful match (contact_count < 10); 'ready' status bypasses this cap" },
   { text: "The pair has not already been matched in the current week" },
 ];
 
