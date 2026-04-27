@@ -70,11 +70,11 @@ const faqs: FaqItem[] = [
   },
   {
     q: "How does the matcher know I am the right kind of accountability partner before it pairs me?",
-    a: "Eligibility is a fixed list of filters in the auto-match cron, not a vibes read. From src/app/api/auto-match/route.ts: status is pending or ready, unsubscribed is false, contact_count is less than 2 (two failed partnerships in a row age you out), signup age is greater than 24 hours for new rows, and there is a candidate on the other side whose UTC sit time is within 60 minutes of yours. After the filters, the sort picks a pair on four keys in order: readyScore (both sides confirmed is best), bothOld (both old students of a 10-day Goenka course), sessionMatch (same sit length), and smallest UTC time difference. None of those check a personality profile, a goal statement, or a coaching intake form. The matcher's mental model of 'good partner' is narrow on purpose: two humans who can reliably open the same URL at the same minute.",
+    a: "Eligibility is a fixed list of filters in the auto-match cron, not a vibes read. From src/app/api/auto-match/route.ts: status is pending or ready, unsubscribed is false, contact_count is less than 10 (ten failed partnerships ages you out, with a 7-day cool-off between each retry; status 'ready' bypasses the cap), signup age is greater than 24 hours for new rows, and there is a candidate on the other side whose UTC sit time is within 60 minutes of yours. After the filters, the sort picks a pair on four keys in order: readyScore (both sides confirmed is best), bothOld (both old students of a 10-day Goenka course), sessionMatch (same sit length), and smallest UTC time difference. None of those check a personality profile, a goal statement, or a coaching intake form. The matcher's mental model of 'good partner' is narrow on purpose: two humans who can reliably open the same URL at the same minute.",
   },
   {
     q: "What behaviors does the code actively discourage?",
-    a: "Two. First, ghosting: contact_count is incremented every time a partnership fails to get off the ground, and at contact_count equal to 2 you are skipped by the eligibility filter. The effect is that a repeat ghoster is removed from the pool without a conversation. Second, operator-as-middleman: the reply-all thread's two-address replyTo is deliberate. If either partner tries to loop the operator in to 'resolve' the partnership, the operator will usually redirect the conversation back to the pair, because the pair is the unit. Those are the two behavioral nudges the code ships. Everything else is agreed by the two humans in private.",
+    a: "Two. First, ghosting: contact_count is incremented every time a partnership fails to get off the ground, and at contact_count equal to 10 you are skipped by the eligibility filter. The effect is that a repeat ghoster is removed from the pool without a conversation, after a fair number of attempts. Second, operator-as-middleman: the reply-all thread's two-address replyTo is deliberate. If either partner tries to loop the operator in to 'resolve' the partnership, the operator will usually redirect the conversation back to the pair, because the pair is the unit. Those are the two behavioral nudges the code ships. Everything else is agreed by the two humans in private.",
   },
   {
     q: "If I want to be a great partner, what is the thing the product really wants from me?",
@@ -182,7 +182,7 @@ const minimumRoleCards: BentoCard[] = [
   {
     title: "If it does not work, the pool rebuilds",
     description:
-      "contact_count greater than or equal to 2 removes a serial ghoster from future matches. getPriorMatchedIds prevents re-pairing with the same person. The auto-match cron runs every two hours and re-scores the pool. If a partnership fails, you do not need to do anything except wait. The system is designed to recover without a conversation.",
+      "contact_count greater than or equal to 10 removes a serial ghoster from future matches. getPriorMatchedIds prevents re-pairing with the same person. The auto-match cron runs every 30 minutes and re-scores the pool. If a partnership fails, you do not need to do anything except wait. The system is designed to recover without a conversation.",
   },
 ];
 
