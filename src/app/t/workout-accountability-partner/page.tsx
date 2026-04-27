@@ -240,7 +240,7 @@ const matcherSteps = [
 const beamSources = [
   { label: "Fresh signups", sublabel: "age > 24h, contact_count = 0" },
   { label: "Ready-status rows", sublabel: "bypass the 24h cool-off" },
-  { label: "Retry-eligible", sublabel: "contact_count = 1, prior > 7d" },
+  { label: "Retry-eligible", sublabel: "contact_count 1-9, last terminal > 7d" },
   { label: "Twice-a-day rows", sublabel: "two slots instead of one" },
   { label: "UTC + duration fields", sublabel: "normalised before compare" },
 ];
