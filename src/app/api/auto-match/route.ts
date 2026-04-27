@@ -15,7 +15,7 @@ import {
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl, computeSuggestedMeetUtcMinutes, utcMinutesToHHMM } from "@/lib/emails";
-import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
+import type { SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
 /**
@@ -332,27 +332,29 @@ export async function GET(request: NextRequest) {
         const sessCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone, suggestedUtcMinutes: suggestedMins };
         const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
 
-        for (const [person, other, trackToken, sessCtx] of [
-          [personA, personB, trackTokenA, sessCtxA],
-          [personB, personA, trackTokenB, sessCtxB],
-        ] as [typeof personA, typeof personB, string, SessionContext][]) {
-          const meetInfo: MeetLinkInfo = { trackingUrl: `${baseUrl}/meet/${trackToken}` };
-          const html = buildIntroEmailHtml(person, other, meetInfo, introSessionCtx, buildUnsubscribeUrl(person.unsubscribe_token));
-          const subject = buildIntroSubject(sessCtx);
-          const emailResult = await resend!.emails.send({
-            from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-            to: [person.email],
-            replyTo: [personA.email, personB.email],
-            subject,
-            html,
-            headers: { "X-Entity-Ref-ID": match.id },
-          });
-          await sql`
-            INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
-                    ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
-          `;
-        }
+        const meetLinks = {
+          a: { trackingUrl: `${baseUrl}/meet/${trackTokenA}` },
+          b: { trackingUrl: `${baseUrl}/meet/${trackTokenB}` },
+        };
+        const unsubscribeUrls = {
+          a: buildUnsubscribeUrl(personA.unsubscribe_token),
+          b: buildUnsubscribeUrl(personB.unsubscribe_token),
+        };
+        const html = buildIntroEmailHtml(personA, personB, meetLinks, introSessionCtx, unsubscribeUrls);
+        const subject = buildIntroSubject(sessCtxA, sessCtxB);
+        const emailResult = await resend!.emails.send({
+          from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+          to: [personA.email, personB.email],
+          replyTo: [personA.email, personB.email],
+          subject,
+          html,
+          headers: { "X-Entity-Ref-ID": match.id },
+        });
+        await sql`
+          INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
+                  ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
+        `;
 
         results.push({
           personA: personA.name || personA.email,
