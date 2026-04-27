@@ -8,37 +8,40 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { expiredCount, expiredMatches } = await expireStaleMatches(3);
-  const { endedCount, endedMatches } = await endStalePendingMatches(14);
+  const confirmingResult = await expireStaleMatches(3);
+  const pendingResult = await endStalePendingMatches(14);
 
-  if (expiredCount > 0 || endedCount > 0) {
+  // Stale pending split into 'ended' (someone confirmed) and 'expired' (neither did)
+  const totalExpired = confirmingResult.expiredCount + pendingResult.expiredCount;
+  const totalEnded = pendingResult.endedCount;
+
+  if (totalExpired > 0 || totalEnded > 0) {
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
-      const expiredList = expiredMatches
-        .map((m) => `<li>${m.person_a_name} + ${m.person_b_name}</li>`)
-        .join("");
-      const endedList = endedMatches
-        .map((m) => `<li>${m.person_a_name} + ${m.person_b_name}</li>`)
-        .join("");
+      const renderList = (items: { person_a_name: string | null; person_b_name: string | null }[]) =>
+        items.map((m) => `<li>${m.person_a_name} + ${m.person_b_name}</li>`).join("");
       const subjectParts: string[] = [];
-      if (expiredCount > 0) subjectParts.push(`${expiredCount} expired`);
-      if (endedCount > 0) subjectParts.push(`${endedCount} ended`);
-      const expiredSection = expiredCount > 0
-        ? `<p>${expiredCount} confirming match${expiredCount > 1 ? "es" : ""} expired after 3 days with no response. Both people moved back to pending.</p><ul>${expiredList}</ul>`
+      if (totalExpired > 0) subjectParts.push(`${totalExpired} expired`);
+      if (totalEnded > 0) subjectParts.push(`${totalEnded} ended`);
+      const confirmingSection = confirmingResult.expiredCount > 0
+        ? `<p><strong>${confirmingResult.expiredCount} confirming match${confirmingResult.expiredCount > 1 ? "es" : ""}</strong> expired after 3 days with no response.</p><ul>${renderList(confirmingResult.expiredMatches)}</ul>`
         : "";
-      const endedSection = endedCount > 0
-        ? `<p>${endedCount} pending match${endedCount > 1 ? "es" : ""} ended after 14 days with no email reply. Both people moved back to ready.</p><ul>${endedList}</ul>`
+      const pendingExpiredSection = pendingResult.expiredCount > 0
+        ? `<p><strong>${pendingResult.expiredCount} stale pending match${pendingResult.expiredCount > 1 ? "es" : ""}</strong> swept after 14 days (neither confirmed). Both people moved back to ready, pair released for re-matching.</p><ul>${renderList(pendingResult.expiredMatches)}</ul>`
+        : "";
+      const pendingEndedSection = pendingResult.endedCount > 0
+        ? `<p><strong>${pendingResult.endedCount} pending match${pendingResult.endedCount > 1 ? "es" : ""}</strong> ended after 14 days with no email reply (one or both had confirmed). Both people moved back to ready; pair stays blocked from re-matching.</p><ul>${renderList(pendingResult.endedMatches)}</ul>`
         : "";
       await resend.emails.send({
         from: "Vipassana.cool <hello@vipassana.cool>",
         to: "i@m13v.com",
         subject: `Match cleanup: ${subjectParts.join(", ")}`,
-        html: `${expiredSection}${endedSection}<p><a href="https://vipassana.cool/admin/matching">View dashboard</a></p>`,
+        html: `${confirmingSection}${pendingExpiredSection}${pendingEndedSection}<p><a href="https://vipassana.cool/admin/matching">View dashboard</a></p>`,
       });
     } catch {
       /* non-critical */
     }
   }
 
-  return NextResponse.json({ success: true, expiredCount, expiredMatches, endedCount, endedMatches });
+  return NextResponse.json({ success: true, confirming: confirmingResult, pending: pendingResult });
 }
