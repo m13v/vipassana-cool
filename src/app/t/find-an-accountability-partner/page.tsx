@@ -247,7 +247,7 @@ const scheduleChips = [
   "sort[1]: bothOld (Yes/Yes)",
   "sort[2]: sessionMatch (equal)",
   "sort[3]: |UTC_a - UTC_b| asc",
-  "gate: contact_count < 2",
+  "gate: contact_count < 10",
   "cool-off: 24h for fresh signups",
   "retry: 7 days after expire",
   "greedy: one slot per person per tick",
