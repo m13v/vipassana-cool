@@ -120,7 +120,7 @@ const poolVsChecklistRows: ComparisonRow[] = [
     competitor:
       "Subjective judgement about personality, goals, reliability, shared values.",
     ours:
-      "Predicate evaluation: is_old_student, session_duration, timeDiff() <= 60, contact_count < 2.",
+      "Predicate evaluation: is_old_student, session_duration, timeDiff() <= 60, contact_count < 10.",
   },
   {
     feature: "What fails the match",
@@ -296,7 +296,7 @@ const cronPipelineSteps = [
 const beamSources = [
   { label: "Fresh signups", sublabel: "age > 24h, contact_count = 0" },
   { label: "Ready-status rows", sublabel: "bypass the 24h cool-off" },
-  { label: "Retry-eligible", sublabel: "contact_count = 1, prior > 7d ago" },
+  { label: "Retry-eligible", sublabel: "contact_count 1-9, last terminal > 7d ago" },
   { label: "Twice-a-day rows", sublabel: "contribute 2 slots instead of 1" },
   { label: "Timezone / UTC fields", sublabel: "normalised before compare" },
 ];
