@@ -311,7 +311,7 @@ const perGateSteps = [
   {
     title: "Gate 5 — retry cool-off of 7 days",
     description:
-      "Lines 91 to 101 read the row's most recent match in status 'expired' or 'declined' and require that row to be older than 7 * DAY_MS. No prior expire means no retry; a recent expire means wait. The 7-day floor is the operator's calibration for how long a fresh-start feels fresh.",
+      "Lines 91 to 102 read the row's most recent match in status 'expired', 'declined', or 'ended' and require that row to be older than 7 * DAY_MS. No prior terminal match means no retry; a recent one means wait. The 7-day floor is the operator's calibration for how long a fresh-start feels fresh.",
   },
   {
     title: "Gate 6 — UTC slot resolves",
