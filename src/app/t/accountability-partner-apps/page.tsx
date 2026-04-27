@@ -82,7 +82,7 @@ const faqs = [
     question:
       "What stops bots, ghosters, or people who signed up on a whim?",
     answer:
-      "Three mechanisms, all in the cron. First, a 24-hour cooldown: a pending user is not eligible for auto-matching until they have been in the pool for more than a day, which is enough time for the operator to eyeball the signup and remove anything that looks automated. Second, a serial-ghoster cap: if a person has contact_count greater than or equal to 2 (meaning they have already ignored two confirmation emails), the cron silently excludes them from all future matches. They are not notified and not punished, they are just out of the pool. Third, a prior-pair block: a set of person pairs rebuilt each run prevents two people who have ever matched before (whether it worked or not) from being offered to each other a second time. The combination keeps the pool's signal-to-noise high without any algorithmic spam filter.",
+      "Three mechanisms, all in the cron. First, a 24-hour cooldown: a pending user is not eligible for auto-matching until they have been in the pool for more than a day, which is enough time for the operator to eyeball the signup and remove anything that looks automated. Second, a serial-ghoster cap: if a person has contact_count greater than or equal to 10 (meaning they have already ignored ten confirmation emails, with a 7-day cool-off between each retry), the cron silently excludes them from all future matches. Status 'ready' bypasses the cap. They are not notified and not punished, they are just out of the pool. Third, a prior-pair block: a set of person pairs rebuilt each run prevents two people who have ever matched before (whether it worked or not) from being offered to each other a second time. The combination keeps the pool's signal-to-noise high without any algorithmic spam filter.",
   },
   {
     question:
@@ -121,7 +121,7 @@ ORDER BY CASE status WHEN 'ready' THEN 0 ELSE 1 END,
   },
   {
     title: "Filter by eligibility rules",
-    body: "Drop anyone with contact_count >= 2 (serial ghosters). Pending users with contact_count = 0 must have been in the pool more than 24 hours. Users on their second attempt must be 7+ days past their last expired match.",
+    body: "Drop anyone with contact_count >= 10 (serial ghosters). Pending users with contact_count = 0 must have been in the pool more than 24 hours. Users on a retry attempt (contact_count 1 through 9) must be 7+ days past their last terminal match. Status 'ready' bypasses the contact_count cap.",
   },
   {
     title: "Explode each user into SessionSlots",
