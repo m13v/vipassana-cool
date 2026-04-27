@@ -139,7 +139,7 @@ const scoringSortRows: ComparisonRow[] = [
     competitor:
       "Yes, at least one. Tier, plan, or revenue is almost always in the sort or in the eligibility filter.",
     ours:
-      "No. The only eligibility filters are contact_count < 2, signup age > 24h (for new rows), and the 60-minute UTC reachability window.",
+      "No. The only eligibility filters are contact_count < 10, signup age > 24h (for new rows), and the 60-minute UTC reachability window. Status 'ready' bypasses the contact_count cap.",
   },
   {
     feature: "How a premium feature would be added",
