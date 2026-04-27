@@ -222,7 +222,10 @@ export async function GET(request: NextRequest) {
     flow: string;
     emailHtmlGenerated?: boolean;
   }[] = [];
+  // Real failures: code threw, data missing, external service died.
   const errors: { personA: string; personB: string; error: string }[] = [];
+  // Pairs the guards correctly declined to re-pair. Not failures, just informational.
+  const skipped: { personA: string; personB: string; reason: string }[] = [];
   const resend = dryRun ? null : new Resend(process.env.RESEND_API_KEY);
 
   for (const { slotA, slotB } of pairs) {
@@ -238,19 +241,19 @@ export async function GET(request: NextRequest) {
       // Session-level active match guard (real DB check even in dry run)
       const activeA = await getActiveMatchForSession(personA.id, slotA.session);
       if (activeA) {
-        errors.push({ personA: `${personA.name} (${slotA.session})`, personB: `${personB.name} (${slotB.session})`, error: "Session already matched" });
+        skipped.push({ personA: `${personA.name} (${slotA.session})`, personB: `${personB.name} (${slotB.session})`, reason: "Session already matched" });
         continue;
       }
       const activeB = await getActiveMatchForSession(personB.id, slotB.session);
       if (activeB) {
-        errors.push({ personA: `${personA.name} (${slotA.session})`, personB: `${personB.name} (${slotB.session})`, error: "Session already matched" });
+        skipped.push({ personA: `${personA.name} (${slotA.session})`, personB: `${personB.name} (${slotB.session})`, reason: "Session already matched" });
         continue;
       }
 
       // Re-match guard (real DB check even in dry run)
       const priorIds = await getPriorMatchedIds(personA.id);
       if (priorIds.includes(personB.id)) {
-        errors.push({ personA: personA.name || personA.email, personB: personB.name || personB.email, error: "Prior match exists" });
+        skipped.push({ personA: personA.name || personA.email, personB: personB.name || personB.email, reason: "Prior match exists" });
         continue;
       }
 
@@ -425,7 +428,7 @@ export async function GET(request: NextRequest) {
 
   // Send admin summary (skip in dry run)
   // Always send admin summary (including dry runs so you see what it would do)
-  if (results.length > 0 || errors.length > 0) {
+  if (results.length > 0 || errors.length > 0 || skipped.length > 0) {
     try {
       const reportResend = new Resend(process.env.RESEND_API_KEY);
       const prefix = dryRun ? "[DRY RUN] " : "";
@@ -441,14 +444,24 @@ export async function GET(request: NextRequest) {
             `<li style="color:red">${e.personA} + ${e.personB}: ${e.error}</li>`
         )
         .join("");
+      const skippedList = skipped
+        .map(
+          (s) =>
+            `<li style="color:#6b6b6b">${s.personA} + ${s.personB}: ${s.reason}</li>`
+        )
+        .join("");
+      const subjectParts: string[] = [`${results.length} pair${results.length !== 1 ? "s" : ""} ${dryRun ? "identified" : "matched"}`];
+      if (skipped.length > 0) subjectParts.push(`${skipped.length} skipped`);
+      if (errors.length > 0) subjectParts.push(`${errors.length} error${errors.length !== 1 ? "s" : ""}`);
       await reportResend.emails.send({
         from: "Vipassana.cool <hello@vipassana.cool>",
         to: "i@m13v.com",
-        subject: `${prefix}Auto-match: ${results.length} pair${results.length !== 1 ? "s" : ""} ${dryRun ? "identified" : "matched"}${errors.length > 0 ? `, ${errors.length} error${errors.length !== 1 ? "s" : ""}` : ""}`,
+        subject: `${prefix}Auto-match: ${subjectParts.join(", ")}`,
         html: `
           <p>${dryRun ? "Auto-matching dry run — no emails sent, no matches created." : "Auto-matching cron completed."}</p>
           <p><strong>Pool:</strong> ${candidates.length} people, ${slots.length} sessions, ${eligible.length} eligible people</p>
           ${results.length > 0 ? `<p><strong>${dryRun ? "Would match" : "Matched"} (${results.length}):</strong></p><ul>${matchList}</ul>` : ""}
+          ${skipped.length > 0 ? `<p><strong>Skipped (${skipped.length}):</strong> not failures, just guards correctly declining to re-pair.</p><ul>${skippedList}</ul>` : ""}
           ${errors.length > 0 ? `<p><strong>Errors (${errors.length}):</strong></p><ul>${errorList}</ul>` : ""}
           ${dryRun ? `<p>To send these matches live, trigger: <code>/api/auto-match?live=true&limit=N</code></p>` : ""}
           <p><a href="https://vipassana.cool/admin/matching">View dashboard</a></p>
@@ -481,6 +494,7 @@ export async function GET(request: NextRequest) {
           viablePairs: allViable.length,
           pairsSelected: pairs.length,
           matched: results.length,
+          skipped: skipped.length,
           errors: errors.length,
         })}::jsonb
       )
@@ -498,6 +512,7 @@ export async function GET(request: NextRequest) {
     viablePairs: allViable.length,
     matched: results.length,
     results,
+    skipped,
     errors,
   });
 }
