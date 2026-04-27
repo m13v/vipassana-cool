@@ -173,18 +173,24 @@ export function buildConfirmationSubject(sessionCtx: SessionContext): string {
   return `I found a practice buddy for your ${sessionCtx.session} session at ${formatSessionLocalTime(sessionCtx)}`;
 }
 
-/** Build subject line for intro email. Uses suggested UTC time when available, localized to recipient. */
-export function buildIntroSubject(sessionCtx: SessionContext): string {
-  let timeStr: string;
-  if (sessionCtx.suggestedUtcMinutes != null) {
-    const offset = tzOffsetMinutes(sessionCtx.timezone);
-    const localHHMM = utcMinutesToLocalTime(sessionCtx.suggestedUtcMinutes, offset);
-    const tzLabel = formatTimezone(sessionCtx.timezone);
-    timeStr = `${formatDualTime(localHHMM)}${tzLabel ? ` ${tzLabel}` : ""}`;
-  } else {
-    timeStr = formatSessionLocalTime(sessionCtx);
+/** Build subject line for intro email. Single email, both recipients, so subject must work for both. */
+export function buildIntroSubject(ctxA: SessionContext, ctxB?: SessionContext): string {
+  const formatOne = (ctx: SessionContext): string => {
+    let hhmm: string;
+    if (ctx.suggestedUtcMinutes != null) {
+      const offset = tzOffsetMinutes(ctx.timezone);
+      hhmm = utcMinutesToLocalTime(ctx.suggestedUtcMinutes, offset);
+    } else {
+      hhmm = ctx.localTime;
+    }
+    const tzLabel = formatTimezone(ctx.timezone);
+    const timeStr = formatLocalTime(hhmm);
+    return tzLabel ? `${timeStr} ${tzLabel}` : timeStr;
+  };
+  if (!ctxB || ctxA.timezone === ctxB.timezone) {
+    return `Your Practice Buddy match — ${formatOne(ctxA)}`;
   }
-  return `Your Practice Buddy match, ${sessionCtx.session} session at ${timeStr}`;
+  return `Your Practice Buddy match — ${formatOne(ctxA)} & ${formatOne(ctxB)}`;
 }
 
 export function buildUnsubscribeUrl(token: string | null): string {
@@ -201,9 +207,9 @@ function unsubscribeFooterHtml(unsubscribeUrl: string): string {
 export function buildIntroEmailHtml(
   personA: WaitlistEntry,
   personB: WaitlistEntry,
-  meetLink?: MeetLinkInfo,
+  meetLinks?: { a: MeetLinkInfo; b: MeetLinkInfo },
   sessionCtx?: { sessionA: SessionContext; sessionB: SessionContext },
-  unsubscribeUrl?: string,
+  unsubscribeUrls?: { a: string; b: string },
 ): string {
   const nameA = personA.name?.split(/\s+/)[0] || "fellow meditator";
   const nameB = personB.name?.split(/\s+/)[0] || "fellow meditator";
@@ -279,19 +285,25 @@ export function buildIntroEmailHtml(
     }
   }
 
-  // Build Google Meet section
+  // Build Google Meet section. Two buttons (one per person, each with their own
+  // tracking URL); both open the same room.
   let meetHtml = "";
-  if (meetLink) {
+  if (meetLinks) {
     meetHtml = `
     <div style="background:#e8f5e9;border:1px solid #c8e6c9;border-radius:12px;padding:24px;margin-bottom:24px;">
       <h2 style="font-size:18px;margin:0 0 12px;color:#2e7d32;">Your shared Google Meet link</h2>
-      <p style="font-size:14px;line-height:1.6;margin:0 0 12px;">I've set up a dedicated Google Meet room for you both. This link is permanent &mdash; use it every day, at any time:</p>
-      <div style="text-align:center;margin:16px 0;">
-        <a href="${meetLink.trackingUrl}" style="display:inline-block;background:#2e7d32;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:16px;font-weight:600;">
-          Join your Practice Buddy session &rarr;
+      <p style="font-size:14px;line-height:1.6;margin:0 0 12px;">I've set up a dedicated Google Meet room for you both. The two buttons below open the same room &mdash; each one is your personal link, so we can tell you're both still meditating together. This link is permanent: use it every day, at any time.</p>
+      <div style="text-align:center;margin:16px 0 8px;">
+        <a href="${meetLinks.a.trackingUrl}" style="display:inline-block;background:#2e7d32;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:16px;font-weight:600;">
+          ${nameA}'s link &rarr;
         </a>
       </div>
-      <p style="font-size:14px;line-height:1.6;margin:12px 0 0;color:#555;">Here's how it works: every day at your sit time, you both open this link. When you see your buddy has joined, one of you plays a Goenka recording and shares their screen and audio through the call. You meditate together for the full session, maybe chat a little after, and you're off to start your day.</p>
+      <div style="text-align:center;margin:0 0 16px;">
+        <a href="${meetLinks.b.trackingUrl}" style="display:inline-block;background:#2e7d32;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:16px;font-weight:600;">
+          ${nameB}'s link &rarr;
+        </a>
+      </div>
+      <p style="font-size:14px;line-height:1.6;margin:12px 0 0;color:#555;">Here's how it works: every day at your sit time, you both open your link. When you see your buddy has joined, one of you plays a Goenka recording and shares their screen and audio through the call. You meditate together for the full session, maybe chat a little after, and you're off to start your day.</p>
       <p style="font-size:14px;line-height:1.6;margin:12px 0 0;color:#555;">I've personally been meditating over Google Meet with my buddy for the past three years this way &mdash; it works beautifully. The video, audio, and screen sharing make it feel like you're sitting together in the same room. And since the link never changes, it becomes as natural as brushing your teeth: same time, same link, every day.</p>
     </div>`;
   }
@@ -321,7 +333,7 @@ export function buildIntroEmailHtml(
     <div style="text-align:center;padding:24px 0;border-top:1px solid #e8e4de;">
       <p style="font-size:15px;margin:0 0 8px;">Be happy,<br>Matt</p>
       <p style="font-size:13px;color:#6b6b6b;margin:0;"><a href="https://vipassana.cool" style="color:#8b7355;">vipassana.cool</a></p>
-      ${unsubscribeUrl ? unsubscribeFooterHtml(unsubscribeUrl) : ""}
+      ${unsubscribeUrls && unsubscribeUrls.a && unsubscribeUrls.b ? `<p style="font-size:11px;color:#999;margin:8px 0 0;">${nameA}: <a href="${unsubscribeUrls.a}" style="color:#999;text-decoration:underline;">unsubscribe</a> &middot; ${nameB}: <a href="${unsubscribeUrls.b}" style="color:#999;text-decoration:underline;">unsubscribe</a></p>` : ""}
     </div>
   </div>
 </body></html>`;
