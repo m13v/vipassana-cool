@@ -304,9 +304,9 @@ function isAccountabilityPartner(a, b) {
   // (1) both subscribed to the thread
   if (a.unsubscribed || b.unsubscribed) return false;
 
-  // (2) neither has burned two intros already
-  if (a.contact_count >= 2) return false;
-  if (b.contact_count >= 2) return false;
+  // (2) neither has burned ten intros already
+  if (a.contact_count >= 10) return false;
+  if (b.contact_count >= 10) return false;
 
   // (3) at least 24 hours since signup
   //     (unless status = 'ready')
