@@ -63,6 +63,7 @@ export async function GET(request: NextRequest) {
   const maxPairs = parseInt(request.nextUrl.searchParams.get("limit") || "0") || Infinity;
   const sql = neon(process.env.DATABASE_URL!);
   const now = Date.now();
+  const startedAt = now;
   const DAY_MS = 24 * 60 * 60 * 1000;
 
   // Get all pending/ready people (exclude unsubscribed)
@@ -454,6 +455,36 @@ export async function GET(request: NextRequest) {
     } catch {
       /* non-critical */
     }
+  }
+
+  // Log every cron run (including empty ones) so the operator can tell the
+  // difference between "cron is broken" and "cron ran, found nothing to do".
+  try {
+    const emailsSent = dryRun ? 0 : results.reduce((n, r) => n + (r.flow.startsWith("both-ready") ? 2 : (r.flow === "one-ready" ? 1 : 2)), 0);
+    await sql`
+      INSERT INTO cron_logs (job_name, status, users_synced, users_skipped, emails_sent, emails_failed, duration_ms, details)
+      VALUES (
+        'auto-match',
+        'success',
+        ${results.length},
+        ${candidates.length - eligible.length},
+        ${emailsSent},
+        0,
+        ${Date.now() - startedAt},
+        ${JSON.stringify({
+          dryRun,
+          pool: candidates.length,
+          sessions: slots.length,
+          eligible: eligible.length,
+          viablePairs: allViable.length,
+          pairsSelected: pairs.length,
+          matched: results.length,
+          errors: errors.length,
+        })}::jsonb
+      )
+    `;
+  } catch {
+    /* non-critical */
   }
 
   return NextResponse.json({
