@@ -77,7 +77,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "What does the matching code at src/app/api/auto-match/route.ts actually do?",
-    a: "It runs on a 2-hour cron and looks at the people in the waitlist who have signed up but not yet been matched. For each person, it splits their preferred practice times into one session (once-a-day) or two sessions (morning plus evening). It then pairs sessions whose UTC times fall within plus or minus sixty minutes, excluding prior matches and avoiding pairing anyone who has already missed two matches (contact_count greater than or equal to 2, the serial ghoster case). When a pair is found, it creates a Google Meet event and emails both people an intro with unsubscribe tokens. It is 476 lines, one route file, plus 114 lines of Google Meet helper at src/lib/google-meet.ts. That is the whole 'tool'.",
+    a: "It runs every 30 minutes and looks at the people in the waitlist who have signed up but not yet been matched. For each person, it splits their preferred practice times into one session (once-a-day) or two sessions (morning plus evening). It then pairs sessions whose UTC times fall within plus or minus sixty minutes, excluding prior matches and avoiding pairing anyone who has already missed ten matches (contact_count greater than or equal to 10, the serial ghoster case). When a pair is found, it creates a Google Meet event and emails both people an intro with unsubscribe tokens. It is 476 lines, one route file, plus 114 lines of Google Meet helper at src/lib/google-meet.ts. That is the whole 'tool'.",
   },
   {
     q: "If I want to verify this myself, where do I look?",
@@ -151,7 +151,7 @@ const matchingTimeline = [
   {
     title: "Sessions are split and paired",
     description:
-      "For each eligible person, the code produces a list of SessionSlot objects, one per sit per day. Morning and evening sessions are matched independently. Two slots are eligible to pair if their UTC minute values fall within sixty minutes of each other. Prior matches are excluded, and contact_count greater than or equal to 2 is treated as a serial ghoster and skipped.",
+      "For each eligible person, the code produces a list of SessionSlot objects, one per sit per day. Morning and evening sessions are matched independently. Two slots are eligible to pair if their UTC minute values fall within sixty minutes of each other. Prior matches are excluded, and contact_count greater than or equal to 10 is treated as a serial ghoster and skipped.",
   },
   {
     title: "A Google Meet event is created",
@@ -240,9 +240,10 @@ const routeHeaderSnippet = `// src/app/api/auto-match/route.ts
  * - A person sitting twice can have 2 different buddies
  *
  * Eligibility rules:
+ * - status = 'ready' -> always eligible (bypass cooldown and cap)
  * - contact_count = 0, signed up >24h ago -> auto-match
- * - contact_count = 1, last match expired >7 days ago -> retry
- * - contact_count >= 2 -> skip (serial ghoster)
+ * - contact_count between 1 and 9, last terminal match >7d ago -> retry
+ * - contact_count >= 10 -> skip (serial ghoster)
  */
 type SessionSlot = {
   personId: string;
