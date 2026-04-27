@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title:
       "Accountability Partner Definition: Seven Predicates, One Integer, Sixty Minutes",
     description:
-      "Dictionary says 'a person who supports you.' The algorithm says: not unsubscribed, fewer than 2 prior intros, 24h since signup, no prior match with you, no active session slot, UTC diff within 60 minutes, and the greedy scorer picks the pair.",
+      "Dictionary says 'a person who supports you.' The algorithm says: not unsubscribed, fewer than 10 prior intros, 24h since signup, no prior match with you, no active session slot, UTC diff within 60 minutes, and the greedy scorer picks the pair.",
     url: PAGE_URL,
     type: "article",
   },
@@ -238,7 +238,7 @@ export default function Page() {
             src/app/api/auto-match/route.ts
           </code>{" "}
           says it is whoever clears seven predicates: not unsubscribed,
-          fewer than 2 prior intros, more than 24 hours since signup, no
+          fewer than 10 prior intros, more than 24 hours since signup, no
           prior match with you, no active session slot already taken, UTC
           session time within{" "}
           <code className="rounded bg-card-hover px-1 font-mono text-[11px]">
