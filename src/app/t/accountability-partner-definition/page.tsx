@@ -68,7 +68,7 @@ const faqs = [
     question:
       "What is the serial ghoster threshold, and is it the same across everyone?",
     answer:
-      "Line 81: 'if (c.contact_count >= 2) continue;'. Every waitlist entry carries a contact_count column that increments whenever the matcher sends that person a confirmation email. If the count reaches 2 without a reply, the entry is ejected from the pool. The threshold is the same across everyone. It is a heuristic that says: the matcher will spend exactly two chances on you, and if both times you do not click through the confirmation link, the pool closes. The operator can manually reset the count, but the automated matcher cannot. This is part of the operational definition because it determines whether you are in the candidate set at all. An accountability partner, in this product, is a person the matcher has not already given up on.",
+      "Line 84: 'if (c.contact_count >= 10) continue;'. Every waitlist entry carries a contact_count column that increments whenever the matcher sends that person a confirmation email. If the count reaches 10 without a successful match, the entry is ejected from the pool. The threshold is the same across everyone. It is a heuristic that says: the matcher will spend ten chances on you, with a 7-day cool-off between each retry, and if all ten times you do not click through the confirmation link, the pool closes. Status 'ready' bypasses the cap entirely for users who explicitly tell us they want a match now. The operator can manually reset the count, but the automated matcher cannot. This is part of the operational definition because it determines whether you are in the candidate set at all. An accountability partner, in this product, is a person the matcher has not already given up on.",
   },
   {
     question:
@@ -115,10 +115,10 @@ const timelineSteps = [
     body: "The outer SQL at the top of the handler only selects rows where unsubscribed=false. Every downstream predicate assumes both humans are still talking to the thread. Silence in the inbox stops the relation at the query level.",
   },
   {
-    line: "route.ts:81",
-    title: "Drop anyone who has already burned two intros",
-    body: "contact_count stores how many confirmation emails this row has received. At 2 without a reply, the entry exits the eligible set. The source comment calls this the 'serial ghoster' threshold.",
-    code: "if (c.contact_count >= 2) continue;",
+    line: "route.ts:84",
+    title: "Drop anyone who has already burned ten intros",
+    body: "contact_count stores how many confirmation emails this row has received. At 10 without a successful match, the entry exits the eligible set. The source comment calls this the 'serial ghoster' threshold. Status 'ready' bypasses it.",
+    code: "if (c.contact_count >= 10) continue;",
   },
   {
     line: "route.ts:88-90",
@@ -163,7 +163,7 @@ const tableRows = [
   {
     attribute: "Is there a numeric threshold?",
     dictionary: "None given.",
-    operational: "60 minutes UTC; 2 prior intros; 24 hours since signup; 1 active slot.",
+    operational: "60 minutes UTC; 10 prior intros; 24 hours since signup; 1 active slot.",
   },
   {
     attribute: "Granularity",
@@ -189,7 +189,7 @@ const tableRows = [
 
 const predicateMarqueeItems = [
   "unsubscribed = false",
-  "contact_count < 2",
+  "contact_count < 10",
   "now - created_at > 24h",
   "status IN ('pending','ready')",
   "priorMatchedIds(a) !includes b.id",
