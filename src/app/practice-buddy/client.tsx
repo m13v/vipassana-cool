@@ -50,10 +50,10 @@ export function PracticeBuddyClient() {
           For old students of S.N. Goenka 10-day courses
         </p>
         <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-          Sit every morning with another Vipassana meditator
+          Sit every morning with the same Vipassana buddy
         </h1>
         <p className="mx-auto mb-5 max-w-2xl text-lg text-muted">
-          After a 10-day course, keeping daily practice alive on your own is the hardest part. Get matched with a fellow old student in your time zone, open a permanent Google Meet link, and sit together every day.
+          One matched fellow old student in your time zone. The same person, the same time, the same Google Meet link, every day. Not a group sit. Not an app. No streaks.
         </p>
         <p className="mx-auto mb-7 max-w-2xl text-sm text-muted/80">
           Built by an old student on day <DayCounter /> of daily practice, after 6 courses at 3 centers and 40+ days of dhamma service. Free forever.
@@ -76,7 +76,6 @@ export function PracticeBuddyClient() {
           >
             Find my buddy
           </a>
-          <BookCallButton label="Talk to the founder first" section="hero" />
         </div>
         <p className="mt-4 text-xs text-muted/70">
           Takes 2 minutes. No app to install, no streaks, no fees, ever.
@@ -215,35 +214,6 @@ export function PracticeBuddyClient() {
             practice is commit to another person. Not an app, not a streak counter, not a
             notification, a real human who expects to hear from you.
           </p>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <h2 className="mb-8 text-2xl font-bold">How it works</h2>
-          <div className="space-y-8">
-            <Step
-              number="1"
-              title="Tell us about your practice"
-              description="Fill out a short form — your time zone, when you sit, session duration, and experience level. Takes about 2 minutes."
-            />
-            <Step
-              number="2"
-              title="Get matched"
-              description="We manually review every signup and pair you with someone who sits at a compatible time. You'll get an email with your match and a shared Google Meet link."
-            />
-            <Step
-              number="3"
-              title="Meditate together daily"
-              description="Open the same Meet link at your sit time every day. When your buddy joins, one of you plays a Goenka recording and shares their screen. Meditate together, chat after, and go about your day."
-            />
-            <Step
-              number="4"
-              title="Keep going"
-              description="The link never changes — same time, same link, every day. If life changes, we'll find you a new buddy. Some pairs last months. Some become lifelong Dhamma friends."
-            />
-          </div>
         </div>
       </section>
 
@@ -389,28 +359,6 @@ function StatCard({ number, label }: { number: string; label: string }) {
     <div className="rounded-xl border border-border bg-card p-6">
       <div className="mb-2 text-3xl font-bold text-accent">{number}</div>
       <p className="text-sm text-muted">{label}</p>
-    </div>
-  );
-}
-
-function Step({
-  number,
-  title,
-  description,
-}: {
-  number: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="flex gap-4">
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-accent/30 text-sm font-bold text-accent">
-        {number}
-      </div>
-      <div>
-        <h3 className="mb-1 font-semibold">{title}</h3>
-        <p className="text-sm text-muted">{description}</p>
-      </div>
     </div>
   );
 }
