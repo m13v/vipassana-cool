@@ -177,7 +177,7 @@ export default function Page() {
   const faqJsonLd = faqPageSchema(faqs);
 
   return (
-    <article className="bg-white text-zinc-900">
+    <article className="text-zinc-900">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
