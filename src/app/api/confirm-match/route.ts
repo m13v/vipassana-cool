@@ -97,7 +97,7 @@ export async function GET(request: NextRequest) {
           });
         } catch { /* non-critical */ }
         // Redirect user to success page — from their perspective they confirmed OK
-        return NextResponse.redirect(new URL("/match-confirmed?response=yes", BASE_URL));
+        return NextResponse.redirect(new URL(`/match-confirmed?response=yes&token=${token}`, BASE_URL));
       }
 
       // Create per-person tracking links
