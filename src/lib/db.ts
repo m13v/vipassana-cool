@@ -8,6 +8,7 @@ export type WaitlistEntry = {
   id: string;
   email: string;
   name: string | null;
+  phone: string | null;
   is_old_student: string | null;
   is_goenka_tradition: string | null;
   timezone: string | null;
