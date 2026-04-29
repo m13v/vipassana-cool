@@ -6,6 +6,7 @@ import { posthog } from "@/components/posthog-provider";
 type FormData = {
   name: string;
   email: string;
+  phone: string;
   isOldStudent: string;
   isGoenkatradition: string;
   timezone: string;
@@ -113,6 +114,7 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
   const [form, setForm] = useState<FormData>({
     name: "",
     email: "",
+    phone: "",
     isOldStudent: "",
     isGoenkatradition: "",
     timezone: "",
@@ -145,6 +147,7 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
       setForm((f) => ({
         ...f,
         name: data.name ?? f.name,
+        phone: data.phone ?? f.phone,
         isOldStudent: data.isOldStudent ?? f.isOldStudent,
         isGoenkatradition: data.isGoenkatradition ?? f.isGoenkatradition,
         timezone: data.timezone ?? f.timezone,
@@ -305,6 +308,27 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
               className={inputClass}
             />
           </div>
+        </div>
+
+        {/* Phone (optional, text/WhatsApp) */}
+        <div>
+          <label htmlFor="wb-phone" className={labelClass}>
+            Phone number{" "}
+            <span className="font-normal text-muted">(optional)</span>
+          </label>
+          <input
+            id="wb-phone"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder="+1 415 555 0123"
+            value={form.phone}
+            onChange={(e) => update("phone", e.target.value)}
+            className={inputClass}
+          />
+          <p className="mt-1 text-xs text-muted/70">
+            We&apos;ll text or WhatsApp you about your match. Faster than email — only used to confirm your buddy.
+          </p>
         </div>
 
         {lookupStatus === "returning_pending" && (
