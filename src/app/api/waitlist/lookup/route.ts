@@ -15,6 +15,7 @@ export async function GET(request: NextRequest) {
     status: entry.status,
     name: entry.name,
     phone: entry.phone,
+    phoneMethod: entry.phone_method,
     isOldStudent: entry.is_old_student,
     isGoenkatradition: entry.is_goenka_tradition,
     timezone: entry.timezone,
