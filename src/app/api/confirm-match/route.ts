@@ -166,7 +166,7 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  return NextResponse.redirect(new URL("/match-confirmed?response=yes", BASE_URL));
+  return NextResponse.redirect(new URL(`/match-confirmed?response=yes&token=${token}`, BASE_URL));
 }
 
 /** Parse session duration strings to minutes, take the longer of two. */
