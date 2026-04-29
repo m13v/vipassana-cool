@@ -9,6 +9,7 @@ type WaitlistData = {
   name: string;
   email: string;
   phone?: string;
+  phoneMethod?: string; // 'sms' | 'whatsapp'
   isOldStudent: string;
   isGoenkatradition: string;
   timezone: string;
@@ -62,6 +63,11 @@ export async function POST(request: NextRequest) {
     data.name = trimmedName;
 
     const normalizedPhone = normalizePhone(data.phone);
+    const allowedMethods = new Set(["sms", "whatsapp"]);
+    const normalizedPhoneMethod =
+      normalizedPhone && data.phoneMethod && allowedMethods.has(data.phoneMethod)
+        ? data.phoneMethod
+        : null;
 
     // Split name into first/last for Resend contact
     const nameParts = (data.name || "").trim().split(/\s+/);
@@ -90,6 +96,7 @@ export async function POST(request: NextRequest) {
         name: data.name,
         email: data.email,
         phone: normalizedPhone,
+        phone_method: normalizedPhoneMethod,
         is_old_student: data.isOldStudent,
         is_goenka_tradition: data.isGoenkatradition,
         timezone: data.timezone,
@@ -141,6 +148,7 @@ export async function POST(request: NextRequest) {
       email: data.email,
       name: data.name,
       phone: normalizedPhone,
+      phone_method: normalizedPhoneMethod,
       is_old_student: data.isOldStudent,
       is_goenka_tradition: data.isGoenkatradition,
       timezone: data.timezone,
@@ -183,6 +191,7 @@ export async function POST(request: NextRequest) {
             <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Name</td><td style="padding:4px 0;">${data.name}</td></tr>
             <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Email</td><td style="padding:4px 0;"><a href="mailto:${data.email}">${data.email}</a></td></tr>
             <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Phone</td><td style="padding:4px 0;"><a href="sms:${normalizedPhone!.replace(/[^\d+]/g, "")}">${normalizedPhone}</a> · <a href="https://wa.me/${normalizedPhone!.replace(/[^\d]/g, "")}">WhatsApp</a></td></tr>
+            <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Prefers</td><td style="padding:4px 0;"><strong>${normalizedPhoneMethod === "whatsapp" ? "WhatsApp" : normalizedPhoneMethod === "sms" ? "SMS / text" : "no preference set"}</strong></td></tr>
             <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">City</td><td style="padding:4px 0;">${data.city || "—"} (${data.timezone || "—"})</td></tr>
             <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Schedule</td><td style="padding:4px 0;">${data.frequency || "—"}, ${data.sessionDuration || "—"}${data.morningTime ? ` · AM ${data.morningTime}` : ""}${data.eveningTime ? ` · PM ${data.eveningTime}` : ""}</td></tr>
             <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Old student</td><td style="padding:4px 0;">${data.isOldStudent || "—"} · Goenka: ${data.isGoenkatradition || "—"}</td></tr>
