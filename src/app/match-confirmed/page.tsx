@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Match Confirmation — Vipassana.cool",
+  title: "Match Confirmation | Vipassana.cool",
   robots: { index: false, follow: false },
 };
 
@@ -12,32 +12,255 @@ export default async function MatchConfirmedPage({
 }) {
   const { response } = await searchParams;
 
-  const isYes = response === "yes";
-  const isNo = response === "no";
+  if (response === "yes") {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#faf9f6] px-6 py-12">
+        <div className="w-full max-w-md rounded-2xl border border-[#e8e4de] bg-white p-10 text-center shadow-sm">
+          <p className="mb-4 text-4xl">🙏</p>
+          <h1 className="mb-3 text-2xl font-bold text-[#2c2c2c]">
+            You&apos;re in.
+          </h1>
+          <p className="text-[#6b6b6b] leading-relaxed">
+            Your yes is registered. Nothing else to do on your end.
+          </p>
+
+          <div className="mt-8 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+            <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
+              What happens next
+            </p>
+            <p className="text-sm text-[#6b6b6b] leading-relaxed">
+              If your match has already confirmed, the intro email with a
+              Google Meet link is on its way to both of you within a few
+              minutes. If they haven&apos;t clicked yes yet, they have up to 3
+              days to respond. You&apos;ll get the intro email as soon as they
+              do.
+            </p>
+            <p className="mt-3 text-sm text-[#6b6b6b] leading-relaxed">
+              If they don&apos;t respond in 3 days, no harm done. I&apos;ll put
+              you both back in the pool and find you a new match when a good
+              one comes along.
+            </p>
+          </div>
+
+          <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+            <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
+              Watch your inbox
+            </p>
+            <p className="text-sm text-[#6b6b6b] leading-relaxed">
+              The intro will come from{" "}
+              <span className="font-mono text-[#2c2c2c]">
+                matt@vipassana.cool
+              </span>
+              . If you don&apos;t see it, check spam or promotions, and add
+              that address to your contacts so the next email lands in your
+              primary inbox. When it arrives, hit{" "}
+              <strong>reply all</strong> so your buddy is on the same thread.
+            </p>
+          </div>
+
+          <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+            <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
+              While you wait
+            </p>
+            <p className="mb-3 text-sm text-[#6b6b6b] leading-relaxed">
+              A few things written by one practitioner (6 courses, 3 centers),
+              not a teacher, that pair well with starting a buddy practice:
+            </p>
+            <ul className="space-y-1.5 text-sm text-[#6b6b6b]">
+              <li>
+                <a
+                  href="https://vipassana.cool/guide/daily-practice"
+                  className="text-[#8b7355] hover:underline"
+                >
+                  Daily practice
+                </a>
+                . What kept consistency going past 900 days.
+              </li>
+              <li>
+                <a
+                  href="https://vipassana.cool/guide/restarting-your-practice"
+                  className="text-[#8b7355] hover:underline"
+                >
+                  Restarting your practice
+                </a>
+                . If you&apos;ve fallen off and are circling back.
+              </li>
+              <li>
+                <a
+                  href="https://vipassana.cool/practice-buddy/how-it-works"
+                  className="text-[#8b7355] hover:underline"
+                >
+                  How Practice Buddy works
+                </a>
+                . The full flow, end to end, so the intro email feels
+                familiar.
+              </li>
+            </ul>
+          </div>
+
+          <p className="mt-8 text-xs text-[#8b8b8b] leading-relaxed">
+            Questions before the intro lands?{" "}
+            <a
+              href="mailto:matt@vipassana.cool"
+              className="text-[#8b7355] hover:underline"
+            >
+              matt@vipassana.cool
+            </a>{" "}
+            is read by Matt, not a list.
+          </p>
+        </div>
+      </main>
+    );
+  }
+
+  if (response === "no") {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#faf9f6] px-6 py-12">
+        <div className="w-full max-w-md rounded-2xl border border-[#e8e4de] bg-white p-10 text-center shadow-sm">
+          <p className="mb-4 text-4xl">👍</p>
+          <h1 className="mb-3 text-2xl font-bold text-[#2c2c2c]">
+            No problem.
+          </h1>
+          <p className="text-[#6b6b6b] leading-relaxed">
+            You&apos;re back on the waitlist. The other person was told a new
+            match is on the way. No notes attached to your name, no penalty,
+            no awkwardness.
+          </p>
+
+          <div className="mt-8 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+            <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
+              When does the next match come?
+            </p>
+            <p className="text-sm text-[#6b6b6b] leading-relaxed">
+              It depends on who else is in the queue at a sit time within ±60
+              minutes of yours. Quiet timezones can take a couple weeks, busy
+              ones a few days. You can decline as many matches as you want. I
+              keep looking until something clicks.
+            </p>
+          </div>
+
+          <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+            <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
+              Want to step away entirely?
+            </p>
+            <p className="text-sm text-[#6b6b6b] leading-relaxed">
+              Use the unsubscribe link at the bottom of any email from us.
+              You&apos;ll come off the matching list cleanly and can rejoin
+              any time later from{" "}
+              <a
+                href="https://vipassana.cool/practice-buddy"
+                className="text-[#8b7355] hover:underline"
+              >
+                vipassana.cool/practice-buddy
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+            <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
+              While you&apos;re waiting
+            </p>
+            <ul className="space-y-1.5 text-sm text-[#6b6b6b]">
+              <li>
+                <a
+                  href="https://vipassana.cool/guide"
+                  className="text-[#8b7355] hover:underline"
+                >
+                  Guides
+                </a>{" "}
+                on retreat prep, post-course integration, and daily practice.
+              </li>
+              <li>
+                <a
+                  href="https://vipassana.cool/faq"
+                  className="text-[#8b7355] hover:underline"
+                >
+                  FAQ
+                </a>{" "}
+                covering the matching program in detail.
+              </li>
+              <li>
+                <a
+                  href="https://vipassana.cool/experience"
+                  className="text-[#8b7355] hover:underline"
+                >
+                  One practitioner&apos;s experience
+                </a>{" "}
+                (6 courses, 3 centers, 900+ days of daily sits).
+              </li>
+            </ul>
+          </div>
+
+          <p className="mt-8 text-xs text-[#8b8b8b] leading-relaxed">
+            Need a real person?{" "}
+            <a
+              href="mailto:matt@vipassana.cool"
+              className="text-[#8b7355] hover:underline"
+            >
+              matt@vipassana.cool
+            </a>{" "}
+            is read by Matt, not a list.
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#faf9f6] px-6">
+    <main className="flex min-h-screen items-center justify-center bg-[#faf9f6] px-6 py-12">
       <div className="w-full max-w-md rounded-2xl border border-[#e8e4de] bg-white p-10 text-center shadow-sm">
-        <p className="mb-4 text-4xl">{isYes ? "🙏" : isNo ? "👍" : "🤔"}</p>
-        <h1 className="mb-4 text-2xl font-bold text-[#2c2c2c]">
-          {isYes
-            ? "You're in!"
-            : isNo
-            ? "No problem."
-            : "Something went wrong."}
+        <p className="mb-4 text-4xl">🤔</p>
+        <h1 className="mb-3 text-2xl font-bold text-[#2c2c2c]">
+          This link can&apos;t be used.
         </h1>
         <p className="text-[#6b6b6b] leading-relaxed">
-          {isYes
-            ? "Great — I'll introduce you both as soon as your match also confirms. You'll receive the intro email shortly."
-            : isNo
-            ? "You're back on the waitlist. I'll find you a new match when a good one comes along."
-            : "This link may have already been used or expired. Email matt@vipassana.cool if you need help."}
+          The most common reason is that the link has already been clicked,
+          or the 3-day response window has passed and the match was rolled
+          back into the pool.
         </p>
+
+        <div className="mt-8 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+          <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
+            What you can do
+          </p>
+          <ul className="space-y-1.5 text-sm text-[#6b6b6b]">
+            <li>
+              If you already clicked yes, you&apos;re fine. Watch for the
+              intro email from{" "}
+              <span className="font-mono text-[#2c2c2c]">
+                matt@vipassana.cool
+              </span>
+              .
+            </li>
+            <li>
+              If you never signed up, or want to rejoin the list, head to{" "}
+              <a
+                href="https://vipassana.cool/practice-buddy"
+                className="text-[#8b7355] hover:underline"
+              >
+                vipassana.cool/practice-buddy
+              </a>
+              .
+            </li>
+            <li>
+              Anything else, write to{" "}
+              <a
+                href="mailto:matt@vipassana.cool"
+                className="text-[#8b7355] hover:underline"
+              >
+                matt@vipassana.cool
+              </a>{" "}
+              and I&apos;ll sort it out by hand.
+            </li>
+          </ul>
+        </div>
+
         <a
           href="https://vipassana.cool"
           className="mt-8 inline-block text-sm text-[#8b7355] hover:underline"
         >
-          Back to Vipassana.cool →
+          Back to vipassana.cool →
         </a>
       </div>
     </main>
