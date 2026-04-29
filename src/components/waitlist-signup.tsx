@@ -7,6 +7,7 @@ type FormData = {
   name: string;
   email: string;
   phone: string;
+  phoneMethod: string; // "" | "sms" | "whatsapp"
   isOldStudent: string;
   isGoenkatradition: string;
   timezone: string;
@@ -115,6 +116,7 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
     name: "",
     email: "",
     phone: "",
+    phoneMethod: "",
     isOldStudent: "",
     isGoenkatradition: "",
     timezone: "",
@@ -148,6 +150,7 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
         ...f,
         name: data.name ?? f.name,
         phone: data.phone ?? f.phone,
+        phoneMethod: data.phoneMethod ?? f.phoneMethod,
         isOldStudent: data.isOldStudent ?? f.isOldStudent,
         isGoenkatradition: data.isGoenkatradition ?? f.isGoenkatradition,
         timezone: data.timezone ?? f.timezone,
@@ -327,8 +330,33 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
             className={inputClass}
           />
           <p className="mt-1 text-xs text-muted/70">
-            We&apos;ll text or WhatsApp you about your match. Faster than email — only used to confirm your buddy.
+            Faster than email — only used to confirm your buddy.
           </p>
+          {form.phone.trim().length > 0 && (
+            <fieldset className="mt-3">
+              <legend className="mb-1.5 block text-sm font-medium">
+                Reach me on
+              </legend>
+              <div className={radioGroupClass}>
+                {[
+                  { value: "sms", label: "SMS / text" },
+                  { value: "whatsapp", label: "WhatsApp" },
+                ].map((opt) => (
+                  <label key={opt.value} className={radioLabelClass}>
+                    <input
+                      type="radio"
+                      name="phoneMethod"
+                      value={opt.value}
+                      checked={form.phoneMethod === opt.value}
+                      onChange={(e) => update("phoneMethod", e.target.value)}
+                      className="accent-accent"
+                    />
+                    {opt.label}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          )}
         </div>
 
         {lookupStatus === "returning_pending" && (
