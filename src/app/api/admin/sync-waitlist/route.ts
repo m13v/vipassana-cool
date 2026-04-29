@@ -56,6 +56,7 @@ export async function POST(request: NextRequest) {
         email,
         name: props.name ?? null,
         phone: props.phone ?? null,
+        phone_method: props.phone_method ?? null,
         is_old_student: props.is_old_student ?? null,
         is_goenka_tradition: props.is_goenka_tradition ?? null,
         timezone: props.timezone ?? null,
