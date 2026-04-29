@@ -89,17 +89,51 @@ const schemaData = [
       sameAs: [
         "https://m13v.com",
         "https://twitter.com/MatthewHeartful",
- "https://www..com/in/matthew-diakonov-a84a1911/",
+      "https://www.linkedin.com/in/matthew-diakonov-a84a1911/",
         "https://github.com/matthew-heartful",
         "https://t.me/matthew_ddi",
       ],
     },
     sameAs: [
       "https://twitter.com/MatthewHeartful",
- "https://www..com/in/matthew-diakonov-a84a1911/",
+      "https://www.linkedin.com/in/matthew-diakonov-a84a1911/",
       "https://github.com/matthew-heartful",
       "https://t.me/matthew_ddi",
     ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://vipassana.cool/#service",
+    name: "Vipassana practice buddy matching",
+    url: "https://vipassana.cool",
+    provider: {
+      "@type": "Organization",
+      name: "Vipassana.cool",
+      url: "https://vipassana.cool",
+    },
+    areaServed: "Worldwide",
+    serviceType: "Peer accountability matching for daily Vipassana meditators",
+    description:
+      "Free peer-matching service that pairs Vipassana meditators with a practice buddy for daily sits over Google Meet. Tradition-respectful, no teaching, no lineage authority. For students of S.N. Goenka style Vipassana.",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      description: "Free, peer matching only",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://vipassana.cool/#webpage",
+    url: "https://vipassana.cool",
+    name: "Vipassana.cool — Find a Daily Meditation Practice Buddy",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "#how-it-works", "#faq", "#preparation"],
+    },
   },
 ];
 
