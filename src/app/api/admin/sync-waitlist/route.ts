@@ -55,6 +55,7 @@ export async function POST(request: NextRequest) {
         id: existing?.id ?? crypto.randomUUID(),
         email,
         name: props.name ?? null,
+        phone: props.phone ?? null,
         is_old_student: props.is_old_student ?? null,
         is_goenka_tradition: props.is_goenka_tradition ?? null,
         timezone: props.timezone ?? null,
