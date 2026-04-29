@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
     found: true,
     status: entry.status,
     name: entry.name,
+    phone: entry.phone,
     isOldStudent: entry.is_old_student,
     isGoenkatradition: entry.is_goenka_tradition,
     timezone: entry.timezone,
