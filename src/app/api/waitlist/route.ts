@@ -8,6 +8,7 @@ import { buildUnsubscribeUrl } from "@/lib/emails";
 type WaitlistData = {
   name: string;
   email: string;
+  phone?: string;
   isOldStudent: string;
   isGoenkatradition: string;
   timezone: string;
@@ -21,6 +22,20 @@ type WaitlistData = {
   practiceLength: string;
   requestedMatchId?: string;
 };
+
+// Light-touch phone normalization. We don't validate strictly, just clean up
+// and keep what looks like a phone number so admin can text/WhatsApp easily.
+function normalizePhone(raw: string | undefined | null): string | null {
+  if (!raw) return null;
+  const cleaned = String(raw).trim();
+  if (cleaned.length < 5) return null;
+  // Strip everything except digits, +, spaces, dashes, parens
+  const filtered = cleaned.replace(/[^\d+\s()\-]/g, "").trim();
+  // Must contain at least 5 digits to be a plausible phone
+  const digits = filtered.replace(/\D/g, "");
+  if (digits.length < 5) return null;
+  return filtered;
+}
 
 const posthog = new PostHog("phc_68Zsbot2eLcQQgtNZTXlHrl7SEFwW1lwbzrYxsUuo1P", {
   host: "https://us.i.posthog.com",
@@ -45,6 +60,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Please enter your real name" }, { status: 400 });
     }
     data.name = trimmedName;
+
+    const normalizedPhone = normalizePhone(data.phone);
 
     // Split name into first/last for Resend contact
     const nameParts = (data.name || "").trim().split(/\s+/);
@@ -72,6 +89,7 @@ export async function POST(request: NextRequest) {
       properties: {
         name: data.name,
         email: data.email,
+        phone: normalizedPhone,
         is_old_student: data.isOldStudent,
         is_goenka_tradition: data.isGoenkatradition,
         timezone: data.timezone,
@@ -122,6 +140,7 @@ export async function POST(request: NextRequest) {
       id: entryId,
       email: data.email,
       name: data.name,
+      phone: normalizedPhone,
       is_old_student: data.isOldStudent,
       is_goenka_tradition: data.isGoenkatradition,
       timezone: data.timezone,
@@ -143,6 +162,44 @@ export async function POST(request: NextRequest) {
     if (!isNew && existing?.status === "matched" && matchingFieldsChanged) {
       await endActiveMatches(entryId, "user re-submitted with changed preferences");
       await updateEntryStatus(entryId, "pending");
+    }
+
+    // Notify admin when a phone (text/WhatsApp) is provided so we can
+    // follow up personally — email engagement on Practice Buddy is weak,
+    // and a phone gives us a much better channel to confirm matches.
+    // Fires for new signups and when a returning user adds/changes phone.
+    const phoneIsNewOrChanged =
+      !!normalizedPhone && (isNew || (existing?.phone || null) !== normalizedPhone);
+    if (phoneIsNewOrChanged) {
+      try {
+        const isReturning = !isNew;
+        const adminSubject = isReturning
+          ? `Phone added by ${data.name} — Practice Buddy`
+          : `New signup with phone: ${data.name} — Practice Buddy`;
+        const adminHtml = `
+          <p><strong>${data.name}</strong> ${isReturning ? "updated their" : "registered with a"} phone number on Practice Buddy.</p>
+          <p>You can reach out via text or WhatsApp to confirm their match faster.</p>
+          <table style="font-size:14px;line-height:1.6;border-collapse:collapse;">
+            <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Name</td><td style="padding:4px 0;">${data.name}</td></tr>
+            <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Email</td><td style="padding:4px 0;"><a href="mailto:${data.email}">${data.email}</a></td></tr>
+            <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Phone</td><td style="padding:4px 0;"><a href="sms:${normalizedPhone!.replace(/[^\d+]/g, "")}">${normalizedPhone}</a> · <a href="https://wa.me/${normalizedPhone!.replace(/[^\d]/g, "")}">WhatsApp</a></td></tr>
+            <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">City</td><td style="padding:4px 0;">${data.city || "—"} (${data.timezone || "—"})</td></tr>
+            <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Schedule</td><td style="padding:4px 0;">${data.frequency || "—"}, ${data.sessionDuration || "—"}${data.morningTime ? ` · AM ${data.morningTime}` : ""}${data.eveningTime ? ` · PM ${data.eveningTime}` : ""}</td></tr>
+            <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Old student</td><td style="padding:4px 0;">${data.isOldStudent || "—"} · Goenka: ${data.isGoenkatradition || "—"}</td></tr>
+            <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Practice</td><td style="padding:4px 0;">${data.hasMaintainedPractice || "—"}${data.practiceLength ? ` — ${data.practiceLength}` : ""}</td></tr>
+            <tr><td style="padding:4px 12px 4px 0;color:#6b6b6b;">Status</td><td style="padding:4px 0;">${isReturning ? "returning user — phone " + (existing?.phone ? "changed" : "added") : "new signup"}</td></tr>
+          </table>
+          <p><a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>
+        `;
+        await resend.emails.send({
+          from: "Vipassana.cool <hello@vipassana.cool>",
+          to: ["i@m13v.com"],
+          subject: adminSubject,
+          html: adminHtml,
+        });
+      } catch (adminErr) {
+        console.error("Failed to send admin phone notification:", adminErr);
+      }
     }
 
     // Only send confirmation email for new signups
