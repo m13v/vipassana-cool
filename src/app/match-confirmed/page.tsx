@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getMatchByToken, getEntry } from "@/lib/db";
+import { PhonePreferenceCard } from "@/components/phone-preference-card";
 
 export const metadata: Metadata = {
   title: "Match Confirmation | Vipassana.cool",
@@ -8,9 +10,32 @@ export const metadata: Metadata = {
 export default async function MatchConfirmedPage({
   searchParams,
 }: {
-  searchParams: Promise<{ response?: string }>;
+  searchParams: Promise<{ response?: string; token?: string }>;
 }) {
-  const { response } = await searchParams;
+  const { response, token } = await searchParams;
+
+  // If we have a token (passed through from /api/confirm-match for response=yes),
+  // resolve the person so we can pre-fill their phone form. Failures are silent —
+  // worst case, the user sees an empty form, which is fine.
+  let phoneCardProps: { token: string; initialPhone: string; initialMethod: string } | null = null;
+  if (response === "yes" && token) {
+    try {
+      const match = await getMatchByToken(token);
+      if (match) {
+        const personId = match.person_a_token === token ? match.person_a_id : match.person_b_id;
+        const person = await getEntry(personId);
+        if (person) {
+          phoneCardProps = {
+            token,
+            initialPhone: person.phone || "",
+            initialMethod: person.phone_method || "",
+          };
+        }
+      }
+    } catch {
+      /* silent — if lookup fails we just hide the phone card */
+    }
+  }
 
   if (response === "yes") {
     return (
@@ -41,6 +66,14 @@ export default async function MatchConfirmedPage({
               one comes along.
             </p>
           </div>
+
+          {phoneCardProps && (
+            <PhonePreferenceCard
+              token={phoneCardProps.token}
+              initialPhone={phoneCardProps.initialPhone}
+              initialMethod={phoneCardProps.initialMethod}
+            />
+          )}
 
           <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
             <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
