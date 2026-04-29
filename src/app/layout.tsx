@@ -89,14 +89,14 @@ const schemaData = [
       sameAs: [
         "https://m13v.com",
         "https://twitter.com/MatthewHeartful",
-        "https://www.linkedin.com/in/matthew-diakonov-a84a1911/",
+ "https://www..com/in/matthew-diakonov-a84a1911/",
         "https://github.com/matthew-heartful",
         "https://t.me/matthew_ddi",
       ],
     },
     sameAs: [
       "https://twitter.com/MatthewHeartful",
-      "https://www.linkedin.com/in/matthew-diakonov-a84a1911/",
+ "https://www..com/in/matthew-diakonov-a84a1911/",
       "https://github.com/matthew-heartful",
       "https://t.me/matthew_ddi",
     ],
