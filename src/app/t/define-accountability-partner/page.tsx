@@ -411,7 +411,7 @@ export default function Page() {
           I opened the first page of results for{" "}
           <em>define accountability partner</em> and read each article.
           Wikipedia, BetterUp, Columbia GSAS, WGU, Indeed, Accountable2You,
-          Flow Club, LinkedIn, Psychology Today, Duke Recreation. Different
+ Flow Club, Psychology Today, Duke Recreation. Different
           names, one shape. The shape is: a human who checks in on your
           progress. That shape is true and also complete in the way a
           dictionary entry is complete. It is not useful to a matcher. It
