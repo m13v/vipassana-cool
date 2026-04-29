@@ -9,6 +9,7 @@ export type WaitlistEntry = {
   email: string;
   name: string | null;
   phone: string | null;
+  phone_method: string | null;
   is_old_student: string | null;
   is_goenka_tradition: string | null;
   timezone: string | null;
@@ -117,11 +118,12 @@ export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated
   const eveningUtc = toUtcTime(entry.evening_time, entry.timezone);
   const unsubToken = crypto.randomUUID();
   await sql`
-    INSERT INTO waitlist_entries (id, email, name, phone, is_old_student, is_goenka_tradition, timezone, city, frequency, morning_time, evening_time, days, session_duration, has_maintained_practice, practice_length, requested_match_id, research_notes, morning_utc, evening_utc, status, unsubscribe_token, created_at, updated_at)
-    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.phone}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${entry.morning_time}, ${entry.evening_time}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, ${entry.requested_match_id}, ${entry.research_notes}, ${morningUtc}, ${eveningUtc}, 'pending', ${unsubToken}, ${entry.created_at}, ${now})
+    INSERT INTO waitlist_entries (id, email, name, phone, phone_method, is_old_student, is_goenka_tradition, timezone, city, frequency, morning_time, evening_time, days, session_duration, has_maintained_practice, practice_length, requested_match_id, research_notes, morning_utc, evening_utc, status, unsubscribe_token, created_at, updated_at)
+    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.phone}, ${entry.phone_method}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${entry.morning_time}, ${entry.evening_time}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, ${entry.requested_match_id}, ${entry.research_notes}, ${morningUtc}, ${eveningUtc}, 'pending', ${unsubToken}, ${entry.created_at}, ${now})
     ON CONFLICT(email) DO UPDATE SET
       name = COALESCE(EXCLUDED.name, waitlist_entries.name),
       phone = COALESCE(EXCLUDED.phone, waitlist_entries.phone),
+      phone_method = COALESCE(EXCLUDED.phone_method, waitlist_entries.phone_method),
       is_old_student = COALESCE(EXCLUDED.is_old_student, waitlist_entries.is_old_student),
       is_goenka_tradition = COALESCE(EXCLUDED.is_goenka_tradition, waitlist_entries.is_goenka_tradition),
       timezone = COALESCE(EXCLUDED.timezone, waitlist_entries.timezone),
