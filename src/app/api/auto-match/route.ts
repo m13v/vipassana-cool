@@ -106,40 +106,57 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // Build session slots from eligible people
-  // Compute UTC from local time + timezone on the fly (DST-aware)
-  const slots: SessionSlot[] = [];
-  for (const p of eligible) {
-    const freshMorningUtc = toUtcTime(p.morning_time, p.timezone);
-    const mornMin = utcToMinutes(freshMorningUtc);
-    if (mornMin !== null) {
-      slots.push({ personId: p.id, person: p, session: "morning", utcMinutes: mornMin });
-    }
-    // Only add evening slot if they sit twice and have an evening time
-    if (p.frequency === "Twice a day") {
-      const freshEveningUtc = toUtcTime(p.evening_time, p.timezone);
-      const eveMin = utcToMinutes(freshEveningUtc);
-      if (eveMin !== null) {
-        slots.push({ personId: p.id, person: p, session: "evening", utcMinutes: eveMin });
-      }
-    }
-  }
-
-  // Build blocked pairs set (prior matches where at least one confirmed or still active)
+  // Pre-fetch all matches once. We use this for two pre-filters:
+  //   1. blockedPairs: pairs that should never be re-matched. Kept in sync with
+  //      the per-pair guard `getPriorMatchedIds` so the same dead pairs don't
+  //      get scored as viable every run only to be skipped downstream.
+  //   2. activeSessionSet: (person_id, session) slots already in a non-terminal
+  //      match with someone else. The slot itself is busy and shouldn't enter
+  //      the candidate pool at all.
   const allPairs = await sql`
-    SELECT person_a_id, person_b_id, person_a_confirmed, person_b_confirmed, status
+    SELECT person_a_id, person_b_id, person_a_session, person_b_session,
+           person_a_confirmed, person_b_confirmed, status
     FROM matches
   `;
+  const ACTIVE_STATUSES = ["confirming", "pending", "replied", "scheduling", "active"];
+  const activeSessionSet = new Set<string>();
+  for (const r of allPairs) {
+    if (ACTIVE_STATUSES.includes(r.status as string)) {
+      activeSessionSet.add(`${r.person_a_id}:${r.person_a_session}`);
+      activeSessionSet.add(`${r.person_b_id}:${r.person_b_session}`);
+    }
+  }
   const blockedPairs = new Set(
     allPairs
       .filter(
         (r) =>
           r.person_a_confirmed ||
           r.person_b_confirmed ||
-          !["expired", "declined", "ended"].includes(r.status as string)
+          !["expired", "declined"].includes(r.status as string)
       )
       .map((r) => [r.person_a_id, r.person_b_id].sort().join("|"))
   );
+
+  // Build session slots from eligible people, skipping slots already in an
+  // active match. This is per-session, not per-person, since twice-a-day
+  // people may have one slot busy and one free.
+  // Compute UTC from local time + timezone on the fly (DST-aware)
+  const slots: SessionSlot[] = [];
+  for (const p of eligible) {
+    const freshMorningUtc = toUtcTime(p.morning_time, p.timezone);
+    const mornMin = utcToMinutes(freshMorningUtc);
+    if (mornMin !== null && !activeSessionSet.has(`${p.id}:morning`)) {
+      slots.push({ personId: p.id, person: p, session: "morning", utcMinutes: mornMin });
+    }
+    // Only add evening slot if they sit twice and have an evening time
+    if (p.frequency === "Twice a day") {
+      const freshEveningUtc = toUtcTime(p.evening_time, p.timezone);
+      const eveMin = utcToMinutes(freshEveningUtc);
+      if (eveMin !== null && !activeSessionSet.has(`${p.id}:evening`)) {
+        slots.push({ personId: p.id, person: p, session: "evening", utcMinutes: eveMin });
+      }
+    }
+  }
 
   // Generate all viable session pairs
   type ScoredPair = {
@@ -426,9 +443,11 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // Send admin summary (skip in dry run)
-  // Always send admin summary (including dry runs so you see what it would do)
-  if (results.length > 0 || errors.length > 0 || skipped.length > 0) {
+  // Send admin summary only when there's something actionable (matches made or
+  // real errors). Skipped-only runs are noise: the per-pair guards correctly
+  // declined to re-pair, the cron_logs row already records what happened, and
+  // the dashboard surfaces the same info on demand.
+  if (results.length > 0 || errors.length > 0) {
     try {
       const reportResend = new Resend(process.env.RESEND_API_KEY);
       const prefix = dryRun ? "[DRY RUN] " : "";
