@@ -399,7 +399,7 @@ export default function Page() {
         <ProofBanner
           metric="3 yr"
           quote="I've personally been meditating over Google Meet with my buddy for the past three years this way."
-          source="src/lib/emails.ts line 295, from the intro email every new pair receives"
+          source="src/lib/emails.ts line 359, from the intro email every new pair receives"
         />
       </section>
 
