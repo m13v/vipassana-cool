@@ -374,12 +374,12 @@ export default function Page() {
           numbers on this page can be re-checked at any time. The script and
           the JSON are open in the repo at{" "}
           <a
-            href="https://github.com/m13v/vipassana-cool/tree/main/scripts"
+            href="https://github.com/m13v/vipassana-cool"
             target="_blank"
             rel="noopener noreferrer"
             className="text-teal-700 underline hover:text-teal-900"
           >
-            github.com/m13v/vipassana-cool/scripts
+            github.com/m13v/vipassana-cool
           </a>
           . Output of today&apos;s run:
         </p>
