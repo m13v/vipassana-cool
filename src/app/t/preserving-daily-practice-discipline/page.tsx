@@ -524,7 +524,7 @@ export default function Page() {
 
       <section id="faq" className="max-w-4xl mx-auto px-6 my-14">
         <FaqSection
-          title="Frequently asked questions"
+          heading="Frequently asked questions"
           items={faqs}
         />
       </section>
