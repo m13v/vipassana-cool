@@ -295,22 +295,43 @@ export async function updateMatchStatus(id: string, status: string, triggeredBy 
 // Decline a match: record who said no.
 // Decliner → ready (they engaged by responding — "passed" is about the pair, not the person).
 // Partner → ready if they had confirmed, pending if they hadn't.
-export async function declineMatch(matchId: string, declinerId: string): Promise<void> {
+//
+// Returns true if this call actually performed the decline (first time), false if the
+// match was already declined (idempotent no-op for duplicate "no" clicks from email-link
+// prefetchers / double-click). Callers should use the return value to decide whether
+// to send the admin notification email, preventing duplicate admin spam.
+export async function declineMatch(matchId: string, declinerId: string): Promise<boolean> {
   const sql = getSql();
-  const current = await sql`SELECT status, person_a_id, person_b_id, person_a_confirmed, person_b_confirmed FROM matches WHERE id = ${matchId}`;
-  const oldStatus = current[0]?.status ?? null;
-  await sql`UPDATE matches SET status = 'declined', declined_by_id = ${declinerId} WHERE id = ${matchId}`;
-  await sql`
-    INSERT INTO vipassana_activity_log (match_id, event_type, old_value, new_value, triggered_by)
-    VALUES (${matchId}, 'match_status_change', ${oldStatus}, 'declined', 'user_click')
+  // Atomic claim: only flip to 'declined' if not already declined. Returns the prior
+  // status iff the row was changed, otherwise nothing.
+  const claim = await sql`
+    UPDATE matches
+    SET status = 'declined', declined_by_id = ${declinerId}
+    WHERE id = ${matchId} AND status <> 'declined'
+    RETURNING (SELECT status FROM matches WHERE id = ${matchId}) AS new_status,
+              person_a_id, person_b_id, person_a_confirmed, person_b_confirmed
   `;
-  const match = current[0] as { person_a_id: string; person_b_id: string; person_a_confirmed: boolean; person_b_confirmed: boolean } | undefined;
-  if (!match) return;
+  if (claim.length === 0) {
+    // Already declined — duplicate request, do nothing.
+    return false;
+  }
+  // Look up old status for the activity log. We can't capture it inside the UPDATE
+  // RETURNING because RETURNING reflects post-update values; do a follow-up read of
+  // the activity log's last status_change for this match instead, or just record the
+  // transition with a generic prior label. Keep it simple: log "→ declined" without a
+  // precise old value (the activity log already has the prior state from earlier rows).
+  await sql`
+    INSERT INTO vipassana_activity_log (match_id, event_type, new_value, triggered_by)
+    VALUES (${matchId}, 'match_status_change', 'declined', 'user_click')
+  `;
+  const match = claim[0] as { person_a_id: string; person_b_id: string; person_a_confirmed: boolean; person_b_confirmed: boolean } | undefined;
+  if (!match) return true;
   const isA = match.person_a_id === declinerId;
   const partnerId = isA ? match.person_b_id : match.person_a_id;
   const partnerConfirmed = isA ? match.person_b_confirmed : match.person_a_confirmed;
   await updateEntryStatus(declinerId, "ready", "user_click", matchId, "clicked no on confirmation");
   await updateEntryStatus(partnerId, partnerConfirmed ? "ready" : "pending", "user_click", matchId, "partner declined");
+  return true;
 }
 
 export async function createMatchWithTokens(personAId: string, personBId: string, sessionA = "morning", sessionB = "morning"): Promise<Match> {
