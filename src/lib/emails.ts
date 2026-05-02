@@ -225,6 +225,11 @@ export function buildConfirmationSubject(sessionCtx: SessionContext): string {
   return `I found a practice buddy for your ${sessionCtx.session} session at ${formatSessionLocalTime(sessionCtx)}`;
 }
 
+/** Build subject line for the "your potential match declined" notification. */
+export function buildMatchDeclinedSubject(): string {
+  return "Quick update on your Practice Buddy match";
+}
+
 /** Build subject line for intro email. Single email, both recipients, so subject must work for both. */
 export function buildIntroSubject(ctxA: SessionContext, ctxB?: SessionContext): string {
   const formatOne = (ctx: SessionContext): string => {
@@ -451,6 +456,47 @@ export function buildConfirmationEmailHtml(
       <p style="font-size:15px;margin:0 0 8px;">Be happy,<br>Matt</p>
       <p style="font-size:13px;color:#6b6b6b;margin:0;"><a href="https://vipassana.cool" style="color:#8b7355;">vipassana.cool</a></p>
       <p style="font-size:11px;color:#999;margin:8px 0 0;">P.S. I do a brief web search on name and email to write a more personal intro. Hope that's okay.</p>
+      ${unsubscribeUrl ? unsubscribeFooterHtml(unsubscribeUrl) : ""}
+    </div>
+  </div>
+</body></html>`;
+}
+
+/**
+ * Build the "your potential match decided not to move forward" notification.
+ * Sent to the OTHER person (not the decliner) so they're not left wondering
+ * why their match silently disappeared. Tone: warm, brief, reassuring.
+ *
+ * Privacy note: the recipient already knows the decliner's first name and city
+ * from the confirmation email they previously received, so referencing the
+ * first name here is not a new disclosure.
+ */
+export function buildMatchDeclinedNotificationHtml(
+  recipient: WaitlistEntry,
+  decliner: WaitlistEntry,
+  recipientSession?: "morning" | "evening",
+  unsubscribeUrl?: string,
+): string {
+  const firstName = recipient.name?.split(/\s+/)[0] || "there";
+  const declinerFirstName = decliner.name?.split(/\s+/)[0] || "your potential match";
+  const sessionLabel = recipientSession ? `${recipientSession} session` : "daily practice";
+
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:#faf9f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#2c2c2c;">
+  <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#8b7355;margin:0 0 8px;">Vipassana.cool</p>
+      <h1 style="font-size:26px;font-weight:700;margin:0;line-height:1.3;">A small update on your match</h1>
+    </div>
+    <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
+      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Hi ${firstName},</p>
+      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">A quick note: ${declinerFirstName}, the person I matched you with for your <strong>${sessionLabel}</strong>, decided not to move forward right now. It happens. Sometimes the timing or commitment isn't quite the fit, and that's okay.</p>
+      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">You're still on the waitlist, and I'll keep looking for the right buddy for you. I'll reach out as soon as I find a strong fit.</p>
+      <p style="font-size:15px;line-height:1.7;margin:0;">In the meantime, keep sitting daily.</p>
+    </div>
+    <div style="text-align:center;padding:24px 0;border-top:1px solid #e8e4de;">
+      <p style="font-size:15px;margin:0 0 8px;">Be happy,<br>Matt</p>
+      <p style="font-size:13px;color:#6b6b6b;margin:0;"><a href="https://vipassana.cool" style="color:#8b7355;">vipassana.cool</a></p>
       ${unsubscribeUrl ? unsubscribeFooterHtml(unsubscribeUrl) : ""}
     </div>
   </div>
