@@ -59,6 +59,19 @@ export async function GET(request: NextRequest) {
   const { bothConfirmed } = await confirmMatchPerson(match.id, side);
 
   if (bothConfirmed) {
+    // Atomic idempotency guard: claim exclusive right to create the Meet for this match.
+    // Prevents duplicate Google Calendar events + duplicate intro emails when the
+    // confirmation link is hit twice in quick succession (Gmail link prefetcher,
+    // double-click, browser preview pane, etc.).
+    const claimed = await claimMeetCreation(match.id);
+    if (!claimed) {
+      // Another concurrent request already claimed Meet creation. Treat this as
+      // a successful no-op and send the user to the same success page they would
+      // have seen, without firing any side effects (no Meet, no intro email, no
+      // status updates, no admin email).
+      return NextResponse.redirect(new URL(`/match-confirmed?response=yes&token=${token}`, BASE_URL));
+    }
+
     const personA = await getEntry(match.person_a_id);
     const personB = await getEntry(match.person_b_id);
     if (personA && personB) {
@@ -88,7 +101,9 @@ export async function GET(request: NextRequest) {
         eventId = result.eventId;
       } catch (err) {
         // Meet creation failed — don't send intro, keep match in confirming state,
-        // notify admin to handle manually
+        // notify admin to handle manually. Release the claim so a later retry
+        // (manual admin action or auto-match re-run) can succeed.
+        await releaseMeetCreationClaim(match.id);
         console.error("Failed to create Meet event:", err);
         try {
           await resend.emails.send({
@@ -165,6 +180,10 @@ export async function GET(request: NextRequest) {
           html: `<p><strong>${nameA} & ${nameB}</strong> both confirmed. Intro email sent with Meet link: ${meetUrl}</p><p><a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
         });
       } catch { /* non-critical */ }
+    } else {
+      // Defensive: claimed but couldn't load both entries (data integrity issue).
+      // Release so a later retry can succeed instead of permanently blocking.
+      await releaseMeetCreationClaim(match.id);
     }
   }
 
