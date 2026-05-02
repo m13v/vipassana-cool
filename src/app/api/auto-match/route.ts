@@ -12,6 +12,8 @@ import {
   toUtcTime,
   updateMatchCalendarEvent,
   updateMatchSuggestedUtc,
+  claimMeetCreation,
+  releaseMeetCreationClaim,
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl, computeSuggestedMeetUtcMinutes, utcMinutesToHHMM } from "@/lib/emails";
@@ -317,6 +319,43 @@ export async function GET(request: NextRequest) {
         const bestUtcTime = suggestedMins != null ? utcMinutesToHHMM(suggestedMins) : "06:00";
         const duration = parseDurationMinutes(personA.session_duration, personB.session_duration);
 
+        // Re-check session-active guards immediately before INSERT to narrow the
+        // TOCTOU race window between the earlier check and match creation. Two
+        // parallel auto-match invocations can otherwise both pass the earlier
+        // getActiveMatchForSession check and both proceed to create matches +
+        // Meets for the same pair. This is not bulletproof (true safety needs a
+        // cron-level lock or a unique index on active matches per session), but
+        // it shrinks the race window from ~hundreds of ms to <1ms.
+        const recheckA = await getActiveMatchForSession(personA.id, slotA.session);
+        const recheckB = await getActiveMatchForSession(personB.id, slotB.session);
+        if (recheckA || recheckB) {
+          skipped.push({
+            personA: `${personA.name} (${slotA.session})`,
+            personB: `${personB.name} (${slotB.session})`,
+            reason: "Session active (race-recheck)",
+          });
+          continue;
+        }
+
+        // Create the match record FIRST so we have an ID to claim against.
+        const match = await createMatch(personA.id, personB.id, slotA.session, slotB.session);
+
+        // Atomic idempotency claim on the new match's Meet slot. Brand-new match
+        // records always have NULL calendar_event_id so this normally succeeds;
+        // it's defensive against a re-entry of this code path on the same match.
+        const claimed = await claimMeetCreation(match.id);
+        if (!claimed) {
+          // Another caller is already creating the Meet for this match (shouldn't
+          // happen for a freshly-created match, but covers e.g. retries). Log and
+          // skip — the other caller will send the intro email.
+          skipped.push({
+            personA: personA.name || personA.email,
+            personB: personB.name || personB.email,
+            reason: "Meet creation already claimed",
+          });
+          continue;
+        }
+
         let meetResult: { meetUrl: string; eventId: string };
         try {
           meetResult = await createMeetEvent(
@@ -325,15 +364,16 @@ export async function GET(request: NextRequest) {
             [personA.email, personB.email],
           );
         } catch (err) {
+          // Meet creation failed — release the claim so a manual retry can
+          // succeed, then surface the error.
+          await releaseMeetCreationClaim(match.id);
           errors.push({
             personA: personA.name || personA.email,
             personB: personB.name || personB.email,
             error: `Meet creation failed: ${String(err)}`,
           });
-          continue; // Skip this pair — don't create match or send email
+          continue;
         }
-
-        const match = await createMatch(personA.id, personB.id, slotA.session, slotB.session);
 
         // Create per-person tracking links
         const trackTokenA = crypto.randomUUID();
