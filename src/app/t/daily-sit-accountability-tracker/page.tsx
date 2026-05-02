@@ -574,11 +574,9 @@ export default function Page() {
         description="Free, two-minute waitlist. You get one human paired by time-zone overlap and a recurring Meet URL. No dashboard, no streak, no app."
       />
 
-      <FaqSection
-        title="Common questions"
-        faqs={faqs}
-        anchorId="faq"
-      />
+      <div id="faq">
+        <FaqSection heading="Common questions" items={faqs} />
+      </div>
 
       <section className="max-w-4xl mx-auto px-6 my-14">
         <RelatedPostsGrid
