@@ -4,6 +4,33 @@ function getSql() {
   return neon(process.env.DATABASE_URL!);
 }
 
+// Best-effort cleanup of the Google Calendar event attached to a match when
+// the match transitions to a terminal state (ended/expired/declined). Imports
+// are dynamic to avoid pulling Google API code into modules that don't need it
+// (e.g. test or build-time consumers of db types). Always silenced — calendar
+// API errors must NOT break DB status transitions, and we use sendUpdates=none
+// so users don't get cancellation emails for matches they've already moved past.
+async function silentlyDeleteMatchCalendarEvent(matchId: string): Promise<void> {
+  try {
+    const sql = getSql();
+    const rows = await sql`SELECT calendar_event_id FROM matches WHERE id = ${matchId}`;
+    const eventId = rows[0]?.calendar_event_id as string | null | undefined;
+    if (!eventId || eventId === "__claiming__") return;
+    const { deleteCalendarEvent } = await import("./google-meet");
+    await deleteCalendarEvent(eventId, "none");
+    // Null the column so we don't try to delete the same event twice if the
+    // status transitions through multiple terminal states.
+    await sql`UPDATE matches SET calendar_event_id = NULL WHERE id = ${matchId} AND calendar_event_id = ${eventId}`;
+    await sql`
+      INSERT INTO vipassana_activity_log (match_id, event_type, new_value, triggered_by, note)
+      VALUES (${matchId}, 'meet_deleted', ${eventId}, 'system', 'silent cleanup on terminal status')
+    `;
+  } catch (err) {
+    // Swallow — DB transition must not depend on Google Calendar API health.
+    console.error(`silentlyDeleteMatchCalendarEvent(${matchId}) failed:`, err);
+  }
+}
+
 export type WaitlistEntry = {
   id: string;
   email: string;
@@ -290,6 +317,12 @@ export async function updateMatchStatus(id: string, status: string, triggeredBy 
       await updateEntryStatus(match.person_b_id, "ready", triggeredBy, id, "match ended");
     }
   }
+  // Clean up the Google Calendar event whenever a match enters a terminal
+  // state so users stop seeing daily phantom Meet events with strangers they
+  // already passed on. Silent (sendUpdates=none) — no cancellation emails.
+  if (status === "ended" || status === "expired" || status === "declined") {
+    await silentlyDeleteMatchCalendarEvent(id);
+  }
 }
 
 // Decline a match: record who said no.
@@ -331,6 +364,9 @@ export async function declineMatch(matchId: string, declinerId: string): Promise
   const partnerConfirmed = isA ? match.person_b_confirmed : match.person_a_confirmed;
   await updateEntryStatus(declinerId, "ready", "user_click", matchId, "clicked no on confirmation");
   await updateEntryStatus(partnerId, partnerConfirmed ? "ready" : "pending", "user_click", matchId, "partner declined");
+  // Silent calendar cleanup on decline (no cancellation email; the user already
+  // moved past this match by saying no, and the partner doesn't need to be told).
+  await silentlyDeleteMatchCalendarEvent(matchId);
   return true;
 }
 
