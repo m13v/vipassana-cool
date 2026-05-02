@@ -13,7 +13,7 @@ import {
   claimMeetCreation,
   releaseMeetCreationClaim,
 } from "@/lib/db";
-import { buildIntroEmailHtml, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl, computeSuggestedMeetUtcMinutes, utcMinutesToHHMM } from "@/lib/emails";
+import { buildIntroEmailHtml, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl, computeSuggestedMeetUtcMinutes, utcMinutesToHHMM, buildMatchDeclinedSubject, buildMatchDeclinedNotificationHtml } from "@/lib/emails";
 import type { MeetLinkInfo, SessionContext } from "@/lib/emails";
 import { createMeetEvent } from "@/lib/google-meet";
 
@@ -48,11 +48,35 @@ export async function GET(request: NextRequest) {
         const personA = await getEntry(match.person_a_id);
         const personB = await getEntry(match.person_b_id);
         const decliner = isA ? personA : personB;
+        const recipient = isA ? personB : personA;
+        const recipientSession = (isA ? match.person_b_session : match.person_a_session) as "morning" | "evening" | null;
+
+        // 1. Notify the OTHER participant so they aren't left wondering why
+        //    their match silently disappeared. Best-effort; non-critical.
+        if (recipient && decliner) {
+          try {
+            const declinedHtml = buildMatchDeclinedNotificationHtml(
+              recipient,
+              decliner,
+              recipientSession || undefined,
+              buildUnsubscribeUrl(recipient.unsubscribe_token),
+            );
+            await resend.emails.send({
+              from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+              to: [recipient.email],
+              subject: buildMatchDeclinedSubject(),
+              html: declinedHtml,
+              headers: { "X-Entity-Ref-ID": match.id },
+            });
+          } catch { /* non-critical */ }
+        }
+
+        // 2. Admin notification (existing behavior).
         await resend.emails.send({
           from: "Vipassana.cool <hello@vipassana.cool>",
           to: ["i@m13v.com"],
           subject: `Match declined by ${decliner?.name || "someone"}`,
-          html: `<p><strong>${decliner?.name}</strong> (${decliner?.email}) declined their match with ${isA ? personB?.name : personA?.name}.</p><p>Both are back on the waitlist. <a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
+          html: `<p><strong>${decliner?.name}</strong> (${decliner?.email}) declined their match with ${isA ? personB?.name : personA?.name}.</p><p>Both are back on the waitlist. ${recipient ? `Decline notification sent to <strong>${recipient.name}</strong> (${recipient.email}).` : ""} <a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
         });
       } catch { /* non-critical */ }
     }
