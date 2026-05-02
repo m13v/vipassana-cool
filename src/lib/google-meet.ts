@@ -112,3 +112,36 @@ export async function createMeetEvent(
 
   return { eventId, meetUrl };
 }
+
+/**
+ * Delete a Google Calendar event by ID. Used to clean up phantom recurring
+ * Meet events when a match ends/expires/declines so users stop seeing daily
+ * stranger sessions in their calendar.
+ *
+ * @param eventId - The Google Calendar event ID to delete.
+ * @param sendUpdates - "all" notifies attendees with a cancellation email,
+ *                      "none" deletes silently (default; preferred for cleanup
+ *                      of stale matches where the user has already moved on).
+ *
+ * Returns true if the event was deleted (or was already gone). Returns false
+ * if the eventId was a sentinel placeholder that should be ignored. Throws on
+ * unexpected errors.
+ */
+export async function deleteCalendarEvent(
+  eventId: string,
+  sendUpdates: "all" | "none" = "none",
+): Promise<boolean> {
+  if (!eventId || eventId === "__claiming__") return false;
+  const accessToken = await getAccessToken();
+  const url = `https://www.googleapis.com/calendar/v3/calendars/primary/events/${encodeURIComponent(eventId)}?sendUpdates=${sendUpdates}`;
+  const res = await fetch(url, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  // 200/204 = deleted, 404/410 = already gone (treat as success)
+  if (res.status === 200 || res.status === 204 || res.status === 404 || res.status === 410) {
+    return true;
+  }
+  const text = await res.text();
+  throw new Error(`Failed to delete calendar event ${eventId}: ${res.status} ${text}`);
+}
