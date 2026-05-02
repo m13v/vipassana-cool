@@ -500,6 +500,34 @@ export async function updateMatchCalendarEvent(matchId: string, calendarEventId:
   await sql`UPDATE matches SET calendar_event_id = ${calendarEventId} WHERE id = ${matchId}`;
 }
 
+// Atomically claim the right to create a Google Meet event for this match.
+// Returns true if this caller won the race, false if another concurrent request
+// (e.g. duplicate "yes" clicks from email-link prefetchers) already claimed it.
+// On success, calendar_event_id is set to a sentinel "__claiming__" placeholder
+// which MUST be replaced with the real event ID via updateMatchCalendarEvent
+// after Meet creation succeeds, OR cleared via releaseMeetCreationClaim on failure.
+export async function claimMeetCreation(matchId: string): Promise<boolean> {
+  const sql = getSql();
+  const rows = await sql`
+    UPDATE matches
+    SET calendar_event_id = '__claiming__'
+    WHERE id = ${matchId} AND calendar_event_id IS NULL
+    RETURNING id
+  `;
+  return rows.length > 0;
+}
+
+// Release a Meet-creation claim (used when Meet creation fails so a later retry
+// can succeed). Only clears the placeholder, never overwrites a real event ID.
+export async function releaseMeetCreationClaim(matchId: string): Promise<void> {
+  const sql = getSql();
+  await sql`
+    UPDATE matches
+    SET calendar_event_id = NULL
+    WHERE id = ${matchId} AND calendar_event_id = '__claiming__'
+  `;
+}
+
 export async function updateMatchSuggestedUtc(matchId: string, suggestedUtcTime: string): Promise<void> {
   const sql = getSql();
   await sql`UPDATE matches SET suggested_utc_time = ${suggestedUtcTime} WHERE id = ${matchId}`;
