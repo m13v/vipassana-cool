@@ -37,19 +37,25 @@ export async function GET(request: NextRequest) {
   const confirmerId = isA ? match.person_a_id : match.person_b_id;
 
   if (response === "no") {
-    await declineMatch(match.id, confirmerId);
-    try {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      const personA = await getEntry(match.person_a_id);
-      const personB = await getEntry(match.person_b_id);
-      const decliner = isA ? personA : personB;
-      await resend.emails.send({
-        from: "Vipassana.cool <hello@vipassana.cool>",
-        to: ["i@m13v.com"],
-        subject: `Match declined by ${decliner?.name || "someone"}`,
-        html: `<p><strong>${decliner?.name}</strong> (${decliner?.email}) declined their match with ${isA ? personB?.name : personA?.name}.</p><p>Both are back on the waitlist. <a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
-      });
-    } catch { /* non-critical */ }
+    // declineMatch is now idempotent — returns true on the first call that flips the
+    // status, false on duplicate calls. Only send the admin email on the first call,
+    // otherwise duplicate "no" clicks (email-link prefetchers, double-clicks) would
+    // spam the admin inbox.
+    const declined = await declineMatch(match.id, confirmerId);
+    if (declined) {
+      try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const personA = await getEntry(match.person_a_id);
+        const personB = await getEntry(match.person_b_id);
+        const decliner = isA ? personA : personB;
+        await resend.emails.send({
+          from: "Vipassana.cool <hello@vipassana.cool>",
+          to: ["i@m13v.com"],
+          subject: `Match declined by ${decliner?.name || "someone"}`,
+          html: `<p><strong>${decliner?.name}</strong> (${decliner?.email}) declined their match with ${isA ? personB?.name : personA?.name}.</p><p>Both are back on the waitlist. <a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
+        });
+      } catch { /* non-critical */ }
+    }
     return NextResponse.redirect(new URL("/match-confirmed?response=no", BASE_URL));
   }
 
