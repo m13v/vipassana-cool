@@ -295,6 +295,88 @@ export function PracticeBuddyClient() {
         </div>
       </section>
 
+      {/* Common questions — handles the conversion-killing objections before the final CTA */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-3xl px-6 py-16">
+          <h2 className="mb-2 text-2xl font-bold">Questions people ask before signing up</h2>
+          <p className="mb-8 text-sm text-muted">
+            If something else is on your mind, reply to the confirmation email after you sign up and you&apos;ll hear back from a real person.
+          </p>
+          <div className="divide-y divide-border rounded-xl border border-border bg-card/40">
+            <FaqItem
+              question="What if my buddy stops showing up or goes quiet?"
+              answer={(
+                <>
+                  Send us a note and we&apos;ll re-match you. Your Google Meet link stays the same; only the person on the other side changes. If two people stop showing up, we hold the next pairing until someone with similar consistency lands in your time band.
+                </>
+              )}
+            />
+            <FaqItem
+              question="How long until I get matched?"
+              answer={(
+                <>
+                  Usually within a few days, sometimes the same day if there is already someone in your morning hour. We don&apos;t auto-pair just to clear the queue. If your time zone or sit hour is sparse, we&apos;ll tell you and you stay on the waitlist (free) until a real fit appears.
+                </>
+              )}
+            />
+            <FaqItem
+              question="Do I have to talk during the sit?"
+              answer={(
+                <>
+                  No. Most pairs join the Meet, exchange a brief good morning, mute, play their preferred Goenka recording on their own device, and sit in silence together. Camera optional. Many pairs leave the Meet running with cameras off and never speak.
+                </>
+              )}
+            />
+            <FaqItem
+              question="Is this run by a Vipassana center or an assistant teacher?"
+              answer={(
+                <>
+                  No. This is a peer project built by an old student on day <DayCounter /> of daily practice, after 6 courses and 40+ days of dhamma service. We don&apos;t teach the technique, prescribe a schedule, or interpret instructions. For anything operational about your practice, refer to <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">dhamma.org</a> or speak with an authorized assistant teacher at a 10-day course.
+                </>
+              )}
+            />
+            <FaqItem
+              question="What about my privacy? I see names on the waitlist."
+              answer={(
+                <>
+                  Names and emails on the public waitlist are masked (so &ldquo;Matthew&rdquo; appears as &ldquo;M***w&rdquo; and emails as &ldquo;m***w@gmail.com&rdquo;). Only your matched buddy receives your real first name and time zone, sent in a single intro email. No public profile, no leaderboard, no retargeting.
+                </>
+              )}
+            />
+            <FaqItem
+              question="What if I take a break, travel, or my schedule shifts?"
+              answer={(
+                <>
+                  Tell your buddy and email us. Pauses are normal: courses, work travel, illness, family. You can come back to the same Meet link, or get re-paired if your hour shifts permanently. There are no streaks to break, because we don&apos;t use streaks.
+                </>
+              )}
+            />
+            <FaqItem
+              question="Is it really free? What&apos;s the catch?"
+              answer={(
+                <>
+                  Free forever, in the spirit of Dana. No subscription, no premium tier, no upsell, no paid course recommendations. Operating costs are covered by the founder; if a donation page ever appears it will be optional and matching will stay free.
+                </>
+              )}
+            />
+            <FaqItem
+              question="I haven&apos;t sat a 10-day course yet, can I still apply?"
+              answer={(
+                <>
+                  Practice Buddy matching is reserved for old students of S.N. Goenka 10-day courses, because it relies on shared technique and shared retreat experience. If you haven&apos;t sat one yet, the right next step is to apply for a course at <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">dhamma.org</a>; come back here once you&apos;ve completed it.
+                </>
+              )}
+            />
+          </div>
+          <p className="mt-6 text-center text-sm text-muted">
+            Got the answer you needed?{" "}
+            <a href="#waitlist-form" className="font-medium text-accent hover:underline">
+              Apply to be matched →
+            </a>
+          </p>
+        </div>
+      </section>
+
       {/* Bottom CTA — scrolls back up to the primary form */}
       <section className="border-t border-border bg-card/50">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center">
@@ -415,6 +497,22 @@ function FlowStep({
       <p className="text-sm font-semibold">{title}</p>
       <p className="text-xs text-muted">{subtitle}</p>
     </div>
+  );
+}
+
+function FaqItem({ question, answer }: { question: string; answer: React.ReactNode }) {
+  return (
+    <details className="group p-5 [&_summary::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer items-center justify-between gap-4 text-left text-sm font-semibold sm:text-base">
+        <span>{question}</span>
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border text-muted transition-transform group-open:rotate-45">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </span>
+      </summary>
+      <div className="mt-3 text-sm leading-relaxed text-muted">{answer}</div>
+    </details>
   );
 }
 
