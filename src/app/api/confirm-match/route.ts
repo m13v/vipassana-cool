@@ -61,13 +61,23 @@ export async function GET(request: NextRequest) {
               recipientSession || undefined,
               buildUnsubscribeUrl(recipient.unsubscribe_token),
             );
-            await resend.emails.send({
-              from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+            const declinedSubject = buildMatchDeclinedSubject();
+            const declinedFrom = "Matt from Vipassana.cool <matt@vipassana.cool>";
+            const declinedResult = await resend.emails.send({
+              from: declinedFrom,
               to: [recipient.email],
-              subject: buildMatchDeclinedSubject(),
+              subject: declinedSubject,
               html: declinedHtml,
               headers: { "X-Entity-Ref-ID": match.id },
             });
+            try {
+              const sql = neon(process.env.DATABASE_URL!);
+              await sql`
+                INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+                VALUES (${declinedResult.data?.id || null}, 'outbound', ${declinedFrom},
+                        ${recipient.email}, ${declinedSubject}, ${declinedHtml}, 'sent')
+              `;
+            } catch { /* non-critical */ }
           } catch { /* non-critical */ }
         }
 
