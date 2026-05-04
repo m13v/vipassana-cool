@@ -46,10 +46,20 @@ export default async function MatchConfirmedPage({
             You&apos;re in.
           </h1>
           <p className="text-[#6b6b6b] leading-relaxed">
-            Your yes is registered. Nothing else to do on your end.
+            {phoneCardProps
+              ? "Your yes is registered. One optional thing below, then you can close this tab."
+              : "Your yes is registered. Nothing else to do on your end."}
           </p>
 
-          <div className="mt-8 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+          {phoneCardProps && (
+            <PhonePreferenceCard
+              token={phoneCardProps.token}
+              initialPhone={phoneCardProps.initialPhone}
+              initialMethod={phoneCardProps.initialMethod}
+            />
+          )}
+
+          <div className={`${phoneCardProps ? "mt-5" : "mt-8"} rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left`}>
             <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
               What happens next
             </p>
@@ -66,14 +76,6 @@ export default async function MatchConfirmedPage({
               one comes along.
             </p>
           </div>
-
-          {phoneCardProps && (
-            <PhonePreferenceCard
-              token={phoneCardProps.token}
-              initialPhone={phoneCardProps.initialPhone}
-              initialMethod={phoneCardProps.initialMethod}
-            />
-          )}
 
           <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
             <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
@@ -245,12 +247,12 @@ export default async function MatchConfirmedPage({
       <div className="w-full max-w-md rounded-2xl border border-[#e8e4de] bg-white p-10 text-center shadow-sm">
         <p className="mb-4 text-4xl">🤔</p>
         <h1 className="mb-3 text-2xl font-bold text-[#2c2c2c]">
-          This link can&apos;t be used.
+          This link is no longer active.
         </h1>
         <p className="text-[#6b6b6b] leading-relaxed">
-          The most common reason is that the link has already been clicked,
-          or the 3-day response window has passed and the match was rolled
-          back into the pool.
+          Usually that just means the link was already clicked, or the 3-day
+          response window passed and the match was rolled back into the pool.
+          Nothing is broken on your side.
         </p>
 
         <div className="mt-8 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
