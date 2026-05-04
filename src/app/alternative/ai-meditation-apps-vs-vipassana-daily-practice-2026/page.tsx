@@ -59,7 +59,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "Can an AI generate a real Vipassana session for me?",
-    a: "An LLM can generate a passage of text labelled 'Vipassana session' and a speech model can read it aloud. That is not the same as the technique being transmitted. In the S.N. Goenka tradition, the technique is taught in person by an authorized assistant teacher inside a 10-day residential course, with one-to-one check-ins, a fixed schedule, noble silence, and a community of fellow students on the same arc. The container is treated as part of the practice, not optional packaging. An AI cannot reproduce the container. Anything that ships under the label 'AI Vipassana session' is paraphrasing instructional material that the tradition has not authorized to be published outside the course. Some apps (Metawise advertises 'Goenka Vipassana body scan' on its landing page) do this anyway. That is a transmission rule violation, not a feature.",
+    a: "An LLM can generate a passage of text labelled 'Vipassana session' and a speech model can read it aloud. That is not the same as the technique being transmitted. In the S.N. Goenka tradition, the technique is taught in person by an authorized assistant teacher inside a 10-day residential course, with one-to-one check-ins, a fixed schedule, noble silence, and a community of fellow students on the same arc. The container is treated as part of the practice, not optional packaging. An AI cannot reproduce the container. Anything that ships under the label 'AI Vipassana session' is paraphrasing instructional material that the tradition has not authorized to be published outside the course. Some apps (Metawise lists Goenka Vipassana as a technique preset on its landing page) do this anyway. That is a transmission rule violation, not a feature.",
   },
   {
     q: "Why does the Goenka tradition refuse to publish the technique as an app?",
@@ -158,7 +158,7 @@ const aiApps: IntegrationItem[] = [
   {
     name: "Metawise",
     description:
-      "Mixed. Advertises a 'Goenka Vipassana body scan' on its landing page, which the Goenka tradition does not authorize.",
+      "Mixed. Lists Goenka Vipassana as a technique preset on its landing page, which the Goenka tradition does not authorize for app distribution.",
   },
 ];
 
@@ -410,8 +410,8 @@ export default function Page() {
         </p>
         <p className="text-zinc-700 leading-relaxed mb-4">
           Where the line gets crossed is when an app puts a tradition's name
-          on a generated session. Metawise advertises a &ldquo;Goenka Vipassana
-          body scan&rdquo; on its landing page; the Goenka tradition has not
+          on a generated session. Metawise lists Goenka Vipassana as a
+          technique preset on its landing page; the Goenka tradition has not
           authorized that, and the technique is not licensed for app
           distribution. Other generative apps quietly include &ldquo;Vipassana&rdquo;
           in their list of technique presets and rely on the LLM to draft
