@@ -51,7 +51,7 @@ export function PhonePreferenceCard({
   if (status === "saved") {
     const channelLabel = method === "whatsapp" ? "WhatsApp" : "SMS";
     return (
-      <div className="mt-5 rounded-xl border border-[#cfe3d6] bg-[#f1f7f3] p-5 text-left">
+      <div className="mt-8 rounded-xl border border-[#cfe3d6] bg-[#f1f7f3] p-5 text-left">
         <p className="text-sm font-semibold text-[#2c2c2c]">Got it ✓</p>
         <p className="mt-1.5 text-sm text-[#4a6b54] leading-relaxed">
           We&apos;ll {channelLabel === "WhatsApp" ? "WhatsApp" : "text"} you on{" "}
@@ -62,7 +62,7 @@ export function PhonePreferenceCard({
   }
 
   return (
-    <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+    <div className="mt-8 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-sm font-semibold text-[#2c2c2c]">
