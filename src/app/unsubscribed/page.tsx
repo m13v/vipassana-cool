@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { DayCounter } from "@/components/day-counter";
 
 export const metadata: Metadata = {
-  title: "Unsubscribed — Vipassana.cool",
+  title: "Unsubscribed | Vipassana.cool",
   robots: { index: false, follow: false },
 };
 
@@ -58,46 +59,56 @@ export default async function UnsubscribedPage({
 
         <div className="mt-8 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
           <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
-            Was that a mistake?
+            Changed your mind?
           </p>
           <p className="text-sm text-[#6b6b6b] leading-relaxed">
-            You can rejoin the waitlist any time at{" "}
+            The form is still at{" "}
             <a
-              href="https://vipassana.cool"
+              href="https://vipassana.cool/practice-buddy"
               className="text-[#8b7355] hover:underline"
             >
-              vipassana.cool
+              vipassana.cool/practice-buddy
             </a>
-            . Same matching process, no penalty for coming back.
+            . Re-submitting puts you back in the pool the next time matches go
+            out.
           </p>
         </div>
 
         <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
           <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
-            Stay without the email
+            Things you can read without signing up for anything
           </p>
           <p className="mb-3 text-sm text-[#6b6b6b] leading-relaxed">
-            The site is free to read with no account or subscription. A few
-            things you can keep using:
+            The site is free to read, no account, no list. A few pages people
+            who have stepped back from email tend to come back to:
           </p>
           <ul className="space-y-1.5 text-sm text-[#6b6b6b]">
             <li>
               <a
-                href="https://vipassana.cool/guide"
+                href="https://vipassana.cool/guide/restarting-your-practice"
                 className="text-[#8b7355] hover:underline"
               >
-                Guides
+                Restarting your practice
               </a>{" "}
-              on retreat prep, post-course integration, and daily practice.
+              when you have lapsed.
             </li>
             <li>
               <a
-                href="https://vipassana.cool/faq"
+                href="https://vipassana.cool/guide/daily-practice"
                 className="text-[#8b7355] hover:underline"
               >
-                FAQ
+                Daily practice
               </a>{" "}
-              about the matching program if you ever want to come back.
+              notes from one student, not a teacher.
+            </li>
+            <li>
+              <a
+                href="https://vipassana.cool/guide/after-retreat"
+                className="text-[#8b7355] hover:underline"
+              >
+                After retreat
+              </a>{" "}
+              for the first few weeks back home.
             </li>
             <li>
               <a
@@ -106,9 +117,27 @@ export default async function UnsubscribedPage({
               >
                 One practitioner&apos;s experience
               </a>{" "}
-              (6 courses, 3 centers).
+              across 6 courses at 3 centers.
             </li>
           </ul>
+        </div>
+
+        <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
+          <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
+            Or: a quieter community
+          </p>
+          <p className="text-sm text-[#6b6b6b] leading-relaxed">
+            If you wanted out of email but still want to be near other
+            practitioners, there is a small subreddit at{" "}
+            <a
+              href="https://www.reddit.com/r/vipassana_cool/"
+              className="text-[#8b7355] hover:underline"
+              rel="noopener"
+            >
+              r/vipassana_cool
+            </a>
+            . Read-only is fine. No notifications unless you opt in.
+          </p>
         </div>
 
         <p className="mt-8 text-xs text-[#8b8b8b] leading-relaxed">
@@ -119,7 +148,8 @@ export default async function UnsubscribedPage({
           >
             matt@vipassana.cool
           </a>{" "}
-          is read by Matt, not a list.
+          goes to Matt (<DayCounter /> days into his own daily sit), not a
+          mailing list.
         </p>
       </div>
     </main>
