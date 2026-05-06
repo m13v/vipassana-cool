@@ -1,5 +1,23 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
+import { neon } from "@neondatabase/serverless";
+
+const FROM_EMAIL = "Matt from Vipassana.cool <matt@vipassana.cool>";
+const REPLY_TO = "matt@vipassana.cool";
+const SUBJECT = "Your 10-Day Vipassana Retreat Checklist";
+
+async function logOutbound(email: string, resendId: string | null, html: string) {
+  if (!process.env.DATABASE_URL) return;
+  try {
+    const sql = neon(process.env.DATABASE_URL);
+    await sql`
+      INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+      VALUES (${resendId}, 'outbound', ${FROM_EMAIL}, ${email}, ${SUBJECT}, ${html}, ${resendId ? "sent" : "failed"})
+    `;
+  } catch (err) {
+    console.error("[subscribe] outbound log failed", err);
+  }
+}
 
 export async function POST(request: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -19,13 +37,15 @@ export async function POST(request: NextRequest) {
     });
 
     // Send the checklist email
-    await resend.emails.send({
-      from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-      replyTo: "matt@vipassana.cool",
+    const html = getChecklistEmail();
+    const sendRes = await resend.emails.send({
+      from: FROM_EMAIL,
+      replyTo: REPLY_TO,
       to: email,
-      subject: "Your 10-Day Vipassana Retreat Checklist",
-      html: getChecklistEmail(),
+      subject: SUBJECT,
+      html,
     });
+    await logOutbound(email, sendRes.data?.id ?? null, html);
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
@@ -34,13 +54,15 @@ export async function POST(request: NextRequest) {
     if (message.includes("already exists")) {
       try {
         const { email } = await request.clone().json();
-        await resend.emails.send({
-          from: "Matt from Vipassana.cool <matt@vipassana.cool>",
-      replyTo: "matt@vipassana.cool",
+        const html = getChecklistEmail();
+        const sendRes = await resend.emails.send({
+          from: FROM_EMAIL,
+          replyTo: REPLY_TO,
           to: email,
-          subject: "Your 10-Day Vipassana Retreat Checklist",
-          html: getChecklistEmail(),
+          subject: SUBJECT,
+          html,
         });
+        await logOutbound(email, sendRes.data?.id ?? null, html);
         return NextResponse.json({ success: true });
       } catch {
         return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
