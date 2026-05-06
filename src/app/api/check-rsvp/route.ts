@@ -166,7 +166,7 @@ export async function GET(request: NextRequest) {
       }).join("");
 
       await resend.emails.send({
-        from: "Vipassana.cool <hello@vipassana.cool>",
+        from: "Vipassana.cool <hello@inbound.vipassana.cool>",
         to: ["i@m13v.com"],
         subject: `Calendar RSVP update: ${rsvpChanges.length} match${rsvpChanges.length !== 1 ? "es" : ""} changed${ended > 0 ? ` (${ended} auto-ended)` : ""}`,
         html: `
