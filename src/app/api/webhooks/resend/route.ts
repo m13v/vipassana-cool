@@ -15,19 +15,33 @@ interface ResendWebhookPayload {
   };
 }
 
-const DELIVERY_EVENTS = new Set([
-  "email.sent",
-  "email.delivered",
-  "email.delivery_delayed",
-  "email.bounced",
-  "email.complained",
-  "email.opened",
-  "email.clicked",
-]);
+const EVENT_STATUS_MAP: Record<string, string> = {
+  "email.sent": "sent",
+  "email.delivered": "delivered",
+  "email.opened": "opened",
+  "email.clicked": "clicked",
+  "email.bounced": "bounced",
+  "email.complained": "complained",
+  "email.delivery_delayed": "delayed",
+};
 
-// Map Resend event type to a status string
-function eventToStatus(type: string): string {
-  return type.replace("email.", ""); // e.g. "email.delivered" → "delivered"
+const IGNORED_SENDER_PATTERNS = [
+  /dmarc/i,
+  /^noreply@/i,
+  /^no-reply@/i,
+  /^system@/i,
+  /^postmaster@/i,
+  /^mailer-daemon@/i,
+  /@saashub\.com$/i,
+  /^invoice.*@stripe\.com$/i,
+  /@email\.figma\.com$/i,
+  /@.*\.postmarkapp\.com$/i,
+];
+const IGNORED_SUBJECT_PATTERNS = /\bDMARC\b|Report Domain:|aggregate report/i;
+
+function parseEmail(raw: string): string {
+  const match = raw.match(/<([^>]+)>/) || raw.match(/^([^\s<]+@[^\s>]+)$/);
+  return match ? match[1].toLowerCase() : raw.toLowerCase();
 }
 
 async function fetchInboundContent(emailId: string) {
@@ -54,13 +68,13 @@ export async function POST(request: Request) {
     const sql = neon(process.env.DATABASE_URL!);
 
     // Handle delivery status updates for outbound emails
-    if (DELIVERY_EVENTS.has(payload.type)) {
+    if (EVENT_STATUS_MAP[payload.type]) {
       const { email_id } = payload.data;
-      const status = eventToStatus(payload.type);
+      const status = EVENT_STATUS_MAP[payload.type];
       await sql`
         UPDATE vipassana_emails SET status = ${status} WHERE resend_id = ${email_id}
       `;
-      console.log("[Vipassana Webhook] Updated status", email_id, "→", status);
+      console.log("[Vipassana Webhook] Updated status", email_id, status);
       return NextResponse.json({ success: true, message: `status updated to ${status}` });
     }
 
@@ -73,8 +87,18 @@ export async function POST(request: Request) {
     // Only process emails addressed to @vipassana.cool
     const isForVipassana = data.to.some((addr) => addr.endsWith("@vipassana.cool"));
     if (!isForVipassana) {
-      console.log("[Vipassana Webhook] Ignoring — not addressed to @vipassana.cool:", data.to);
+      console.log("[Vipassana Webhook] Ignoring (not addressed to @vipassana.cool):", data.to);
       return NextResponse.json({ success: true, message: "not for vipassana.cool" });
+    }
+
+    // Filter automated senders / DMARC / noreply
+    const fromEmail = parseEmail(data.from);
+    const isAutomated =
+      IGNORED_SENDER_PATTERNS.some((p) => p.test(fromEmail)) ||
+      (data.subject && IGNORED_SUBJECT_PATTERNS.test(data.subject));
+    if (isAutomated) {
+      console.log("[Vipassana Webhook] Ignoring automated email from:", fromEmail, "subject:", data.subject);
+      return NextResponse.json({ success: true, message: "automated, skipped" });
     }
 
     const content = await fetchInboundContent(data.email_id);
@@ -92,6 +116,25 @@ export async function POST(request: Request) {
 
     if (data.from) {
       await advanceMatchOnReply(data.from, data.subject);
+    }
+
+    // Forward to inbox
+    const apiKey = process.env.RESEND_API_KEY;
+    if (apiKey) {
+      const forwardTo = process.env.VIPASSANA_INBOX_FORWARD || "i@m13v.com";
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: "Vipassana Inbound <matt@vipassana.cool>",
+          to: forwardTo,
+          subject: `[Vipassana Inbound] ${data.subject || "(no subject)"}`,
+          text: `From: ${data.from}\nTo: ${data.to.join(", ")}\n\n${content?.text || data.text || "(no body)"}`,
+        }),
+      });
     }
 
     return NextResponse.json({ success: true });
