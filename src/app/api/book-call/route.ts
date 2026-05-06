@@ -4,7 +4,7 @@ export const POST = createBookCallHandler({
   site: "vipassana",
   // Same audience as /api/newsletter — one Resend audience per client.
   audienceId: process.env.RESEND_AUDIENCE_ID || "",
-  fromEmail: "Matt from Vipassana <matt@vipassana.cool>",
+  fromEmail: "Matt from Vipassana <matt@inbound.vipassana.cool>",
   brand: "Vipassana",
   siteUrl: "https://vipassana.cool",
   redirectBaseUrl: "https://vipassana.cool/go/book",
