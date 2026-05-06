@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
               buildUnsubscribeUrl(recipient.unsubscribe_token),
             );
             const declinedSubject = buildMatchDeclinedSubject();
-            const declinedFrom = "Matt from Vipassana.cool <matt@vipassana.cool>";
+            const declinedFrom = "Matt from Vipassana.cool <matt@inbound.vipassana.cool>";
             const declinedResult = await resend.emails.send({
               from: declinedFrom,
               to: [recipient.email],
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
 
         // 2. Admin notification (existing behavior).
         await resend.emails.send({
-          from: "Vipassana.cool <hello@vipassana.cool>",
+          from: "Vipassana.cool <hello@inbound.vipassana.cool>",
           to: ["i@m13v.com"],
           subject: `Match declined by ${decliner?.name || "someone"}`,
           html: `<p><strong>${decliner?.name}</strong> (${decliner?.email}) declined their match with ${isA ? personB?.name : personA?.name}.</p><p>Both are back on the waitlist. ${recipient ? `Decline notification sent to <strong>${recipient.name}</strong> (${recipient.email}).` : ""} <a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
@@ -147,7 +147,7 @@ export async function GET(request: NextRequest) {
         console.error("Failed to create Meet event:", err);
         try {
           await resend.emails.send({
-            from: "Vipassana.cool <hello@vipassana.cool>",
+            from: "Vipassana.cool <hello@inbound.vipassana.cool>",
             to: ["i@m13v.com"],
             subject: `ALERT: Meet creation failed for ${nameA} & ${nameB}`,
             html: `<p>Both confirmed but Google Meet creation failed. The match is still in <code>confirming</code> state — intro email was NOT sent.</p><p><strong>Error:</strong> ${String(err)}</p><p><strong>Action needed:</strong> Create a Meet link manually and send the intro email.</p><p><a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
@@ -192,7 +192,7 @@ export async function GET(request: NextRequest) {
       const html = buildIntroEmailHtml(personA, personB, meetLinks, introSessionCtx, unsubscribeUrls);
       const subject = buildIntroSubject(sessCtxA, sessCtxB);
       const emailResult = await resend.emails.send({
-        from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+        from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
         to: [personA.email, personB.email],
         replyTo: [personA.email, personB.email],
         subject,
@@ -202,7 +202,7 @@ export async function GET(request: NextRequest) {
       try {
         await sql`
           INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>',
                   ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
         `;
       } catch { /* non-critical */ }
@@ -214,7 +214,7 @@ export async function GET(request: NextRequest) {
       // Notify admin
       try {
         await resend.emails.send({
-          from: "Vipassana.cool <hello@vipassana.cool>",
+          from: "Vipassana.cool <hello@inbound.vipassana.cool>",
           to: ["i@m13v.com"],
           subject: `Both confirmed: ${nameA} & ${nameB} matched!`,
           html: `<p><strong>${nameA} & ${nameB}</strong> both confirmed. Intro email sent with Meet link: ${meetUrl}</p><p><a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>`,
