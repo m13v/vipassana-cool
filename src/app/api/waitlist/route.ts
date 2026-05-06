@@ -201,7 +201,7 @@ export async function POST(request: NextRequest) {
           <p><a href="https://vipassana.cool/admin/matching">View dashboard →</a></p>
         `;
         await resend.emails.send({
-          from: "Vipassana.cool <hello@vipassana.cool>",
+          from: "Vipassana.cool <hello@inbound.vipassana.cool>",
           to: ["i@m13v.com"],
           subject: adminSubject,
           html: adminHtml,
@@ -218,7 +218,7 @@ export async function POST(request: NextRequest) {
       const unsubUrl = buildUnsubscribeUrl(savedEntry?.unsubscribe_token ?? null);
       const emailHtml = getWaitlistEmail(data, unsubUrl);
       const emailResult = await resend.emails.send({
-        from: "Vipassana.cool <hello@vipassana.cool>",
+        from: "Vipassana.cool <hello@inbound.vipassana.cool>",
         to: data.email,
         subject: "You're on the Practice Buddy waitlist",
         html: emailHtml,
@@ -228,7 +228,7 @@ export async function POST(request: NextRequest) {
         const sql = neon(process.env.DATABASE_URL!);
         await sql`
           INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-          VALUES (${emailResult.data?.id || null}, 'outbound', 'Vipassana.cool <hello@vipassana.cool>', ${data.email}, ${"You're on the Practice Buddy waitlist"}, ${emailHtml}, 'sent')
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Vipassana.cool <hello@inbound.vipassana.cool>', ${data.email}, ${"You're on the Practice Buddy waitlist"}, ${emailHtml}, 'sent')
         `;
       } catch (dbErr) {
         console.error("Failed to log outbound email:", dbErr);
