@@ -95,7 +95,7 @@ export async function GET(request: NextRequest) {
       const firstName = partner.name?.split(/\s+/)[0] || "there";
       try {
         await resend.emails.send({
-          from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+          from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
           to: [partner.email],
           subject: "Your meditation buddy is no longer available",
           html: `<p>Hi ${firstName},</p>
@@ -117,7 +117,7 @@ export async function GET(request: NextRequest) {
       .join("");
 
     await resend.emails.send({
-      from: "Vipassana.cool <hello@vipassana.cool>",
+      from: "Vipassana.cool <hello@inbound.vipassana.cool>",
       to: ["i@m13v.com"],
       subject: `Unsubscribed: ${person.name || person.email}`,
       html: `<p><strong>${person.name || "Unknown"}</strong> (${person.email}) unsubscribed.</p>

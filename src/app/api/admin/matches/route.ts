@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
       const html = buildIntroEmailHtml(personA, personB, meetLinks, introSessionCtx, unsubscribeUrls);
       const subject = buildIntroSubject(sessCtxA, sessCtxB);
       const emailResult = await resend.emails.send({
-        from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+        from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
         to: [personA.email, personB.email],
         replyTo: [personA.email, personB.email],
         subject,
@@ -154,7 +154,7 @@ export async function POST(request: NextRequest) {
       try {
         await sql`
           INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
         `;
       } catch (dbErr) {
         console.error("Failed to log intro email:", dbErr);
@@ -189,7 +189,7 @@ export async function POST(request: NextRequest) {
       const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx }, buildUnsubscribeUrl(recipient.unsubscribe_token));
       const subject = buildConfirmationSubject(recipientSessCtx);
       const emailResult = await resend.emails.send({
-        from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+        from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
         to: [recipient.email],
         subject,
         html,
@@ -199,7 +199,7 @@ export async function POST(request: NextRequest) {
       try {
         await sql`
           INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${recipient.email}, ${subject}, ${html}, 'sent')
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>', ${recipient.email}, ${subject}, ${html}, 'sent')
         `;
       } catch (dbErr) {
         console.error("Failed to log confirmation email:", dbErr);
@@ -221,7 +221,7 @@ export async function POST(request: NextRequest) {
     const subject = buildIntroSubject(sessCtxA, sessCtxB);
 
     const emailResult = await resend.emails.send({
-      from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+      from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
       to: [personA.email, personB.email],
       replyTo: [personA.email, personB.email],
       subject,
@@ -233,7 +233,7 @@ export async function POST(request: NextRequest) {
       const sql = neon(process.env.DATABASE_URL!);
       await sql`
         INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-        VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
+        VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
       `;
     } catch (dbErr) {
       console.error("Failed to log outbound email:", dbErr);
