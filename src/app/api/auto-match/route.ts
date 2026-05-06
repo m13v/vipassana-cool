@@ -403,7 +403,7 @@ export async function GET(request: NextRequest) {
         const html = buildIntroEmailHtml(personA, personB, meetLinks, introSessionCtx, unsubscribeUrls);
         const subject = buildIntroSubject(sessCtxA, sessCtxB);
         const emailResult = await resend!.emails.send({
-          from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+          from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
           to: [personA.email, personB.email],
           replyTo: [personA.email, personB.email],
           subject,
@@ -412,7 +412,7 @@ export async function GET(request: NextRequest) {
         });
         await sql`
           INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
+          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>',
                   ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
         `;
 
@@ -447,7 +447,7 @@ export async function GET(request: NextRequest) {
           const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx }, buildUnsubscribeUrl(recipient.unsubscribe_token));
           const subject = buildConfirmationSubject(recipientSessCtx);
           const emailResult = await resend!.emails.send({
-            from: "Matt from Vipassana.cool <matt@vipassana.cool>",
+            from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
             to: [recipient.email],
             subject,
             html,
@@ -456,7 +456,7 @@ export async function GET(request: NextRequest) {
           await updateEntryStatus(recipient.id, "contacted", "auto-match", match.id, "auto-match confirmation email sent");
           await sql`
             INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@vipassana.cool>',
+            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>',
                     ${recipient.email}, ${subject}, ${html}, 'sent')
           `;
         }
@@ -513,7 +513,7 @@ export async function GET(request: NextRequest) {
       if (skipped.length > 0) subjectParts.push(`${skipped.length} skipped`);
       if (errors.length > 0) subjectParts.push(`${errors.length} error${errors.length !== 1 ? "s" : ""}`);
       await reportResend.emails.send({
-        from: "Vipassana.cool <hello@vipassana.cool>",
+        from: "Vipassana.cool <hello@inbound.vipassana.cool>",
         to: "i@m13v.com",
         subject: `${prefix}Auto-match: ${subjectParts.join(", ")}`,
         html: `
