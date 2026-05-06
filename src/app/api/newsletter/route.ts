@@ -1,7 +1,7 @@
 import { createNewsletterHandler } from "@seo/components/server";
 import { neon } from "@neondatabase/serverless";
 
-const FROM_EMAIL = "Matt from Vipassana <matt@vipassana.cool>";
+const FROM_EMAIL = "Matt from Vipassana <matt@inbound.vipassana.cool>";
 const SUBJECT = "Welcome to Vipassana";
 
 export const POST = createNewsletterHandler({
