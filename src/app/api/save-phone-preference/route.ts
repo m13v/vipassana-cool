@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
             : "updated phone preference"
           : "added a phone";
         await resend.emails.send({
-          from: "Vipassana.cool <hello@vipassana.cool>",
+          from: "Vipassana.cool <hello@inbound.vipassana.cool>",
           to: ["i@m13v.com"],
           subject: `${person.name || "Someone"} ${action} from match flow — ${channelLabel}`,
           html: `
