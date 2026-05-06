@@ -184,7 +184,7 @@ export async function GET(request: NextRequest) {
 </html>`;
 
     await resend.emails.send({
-      from: "Vipassana.cool <hello@vipassana.cool>",
+      from: "Vipassana.cool <hello@inbound.vipassana.cool>",
       to: "i@m13v.com",
       subject: `Vipassana.cool Weekly — ${totalPageviews} views, ${subscriberCount} subs, ${waitlistAllTime} waitlist`,
       html,
