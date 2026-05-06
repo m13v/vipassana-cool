@@ -84,10 +84,12 @@ export async function POST(request: Request) {
 
     const { data } = payload;
 
-    // Only process emails addressed to @vipassana.cool
-    const isForVipassana = data.to.some((addr) => addr.endsWith("@vipassana.cool"));
+    // Only process emails addressed to @vipassana.cool or @inbound.vipassana.cool
+    const isForVipassana = data.to.some(
+      (addr) => addr.endsWith("@vipassana.cool") || addr.endsWith("@inbound.vipassana.cool"),
+    );
     if (!isForVipassana) {
-      console.log("[Vipassana Webhook] Ignoring (not addressed to @vipassana.cool):", data.to);
+      console.log("[Vipassana Webhook] Ignoring (not addressed to vipassana.cool):", data.to);
       return NextResponse.json({ success: true, message: "not for vipassana.cool" });
     }
 
@@ -129,7 +131,7 @@ export async function POST(request: Request) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Vipassana Inbound <matt@vipassana.cool>",
+          from: "Vipassana Inbound <matt@inbound.vipassana.cool>",
           to: forwardTo,
           subject: `[Vipassana Inbound] ${data.subject || "(no subject)"}`,
           text: `From: ${data.from}\nTo: ${data.to.join(", ")}\n\n${content?.text || data.text || "(no body)"}`,
