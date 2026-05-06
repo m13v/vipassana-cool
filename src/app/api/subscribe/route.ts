@@ -2,7 +2,7 @@ import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
 
-const FROM_EMAIL = "Matt from Vipassana.cool <matt@vipassana.cool>";
+const FROM_EMAIL = "Matt from Vipassana.cool <matt@inbound.vipassana.cool>";
 const REPLY_TO = "matt@vipassana.cool";
 const SUBJECT = "Your 10-Day Vipassana Retreat Checklist";
 
