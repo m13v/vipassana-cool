@@ -573,7 +573,7 @@ export default function Page() {
       </div>
 
       <div id="faq" className="max-w-4xl mx-auto px-6 my-14">
-        <FaqSection faqs={faqs} />
+        <FaqSection items={faqs} />
       </div>
 
       <BookCallCTA
