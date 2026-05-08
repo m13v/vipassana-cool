@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/t/buddy-practice", destination: "/t/practice-buddy", permanent: true },
+      { source: "/alternative/ai-meditation-apps-vs-daily-vipassana-practice", destination: "/alternative/ai-meditation-apps-vs-vipassana-daily-practice-2026", permanent: true },
     ];
   },
   async headers() {
