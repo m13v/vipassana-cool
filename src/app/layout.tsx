@@ -4,7 +4,7 @@ import "./globals.css";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { PostHogProvider } from "@/components/posthog-provider";
-import { NewsletterSignup, HeadingAnchors } from "@seo/components";
+import { NewsletterSignup, HeadingAnchors, FounderChatPanel } from "@seo/components";
 import { SiteSidebar } from "@/components/site-sidebar";
 import { GuideChat } from "@/components/guide-chat";
 
@@ -162,6 +162,7 @@ export default function RootLayout({
           </div>
         </PostHogProvider>
         <NewsletterSignup />
+        <FounderChatPanel project="Vipassana" />
       </body>
     </html>
   );
