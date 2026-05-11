@@ -11,11 +11,13 @@ export async function GET(request: NextRequest) {
   const confirmingResult = await expireStaleMatches(3);
   const pendingResult = await endStalePendingMatches(14);
 
-  // Stale pending split into 'ended' (someone confirmed) and 'expired' (neither did)
+  // Stale pending split into 'ended' (someone confirmed), 'expired' (neither did),
+  // and 'skipped' (both clicked Meet → genuine engagement, leave the match alone).
   const totalExpired = confirmingResult.expiredCount + pendingResult.expiredCount;
   const totalEnded = pendingResult.endedCount;
+  const totalSkipped = pendingResult.skippedCount;
 
-  if (totalExpired > 0 || totalEnded > 0) {
+  if (totalExpired > 0 || totalEnded > 0 || totalSkipped > 0) {
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
       const renderList = (items: { person_a_name: string | null; person_b_name: string | null }[]) =>
@@ -23,6 +25,7 @@ export async function GET(request: NextRequest) {
       const subjectParts: string[] = [];
       if (totalExpired > 0) subjectParts.push(`${totalExpired} expired`);
       if (totalEnded > 0) subjectParts.push(`${totalEnded} ended`);
+      if (totalSkipped > 0) subjectParts.push(`${totalSkipped} kept (both meeting)`);
       const confirmingSection = confirmingResult.expiredCount > 0
         ? `<p><strong>${confirmingResult.expiredCount} confirming match${confirmingResult.expiredCount > 1 ? "es" : ""}</strong> expired after 3 days with no response.</p><ul>${renderList(confirmingResult.expiredMatches)}</ul>`
         : "";
@@ -32,11 +35,14 @@ export async function GET(request: NextRequest) {
       const pendingEndedSection = pendingResult.endedCount > 0
         ? `<p><strong>${pendingResult.endedCount} pending match${pendingResult.endedCount > 1 ? "es" : ""}</strong> ended after 14 days with no email reply (one or both had confirmed). Both people moved back to ready; pair stays blocked from re-matching.</p><ul>${renderList(pendingResult.endedMatches)}</ul>`
         : "";
+      const skippedSection = pendingResult.skippedCount > 0
+        ? `<p><strong>${pendingResult.skippedCount} pending match${pendingResult.skippedCount > 1 ? "es" : ""}</strong> kept alive past 14 days because both partners have been clicking their Meet links. They're actually meditating together, just not replying to the intro thread.</p><ul>${renderList(pendingResult.skippedMatches)}</ul>`
+        : "";
       await resend.emails.send({
         from: "Vipassana.cool <hello@inbound.vipassana.cool>",
         to: "i@m13v.com",
         subject: `Match cleanup: ${subjectParts.join(", ")}`,
-        html: `${confirmingSection}${pendingExpiredSection}${pendingEndedSection}<p><a href="https://vipassana.cool/admin/matching">View dashboard</a></p>`,
+        html: `${confirmingSection}${pendingExpiredSection}${pendingEndedSection}${skippedSection}<p><a href="https://vipassana.cool/admin/matching">View dashboard</a></p>`,
       });
     } catch {
       /* non-critical */
