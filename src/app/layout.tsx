@@ -7,6 +7,7 @@ import { PostHogProvider } from "@/components/posthog-provider";
 import { NewsletterSignup, HeadingAnchors, FounderChatPanel } from "@seo/components";
 import { SiteSidebar } from "@/components/site-sidebar";
 import { GuideChat } from "@/components/guide-chat";
+import { SeoEngagement } from "./seo-engagement";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -155,7 +156,8 @@ export default function RootLayout({
           <div className="flex min-h-screen">
             <SiteSidebar />
             <div className="flex-1 min-w-0 flex flex-col">
-              <main className="min-h-screen">{children}</main>
+              <main className="min-h-screen">{children}
+              <SeoEngagement /></main>
               <Footer />
             </div>
             <GuideChat />
