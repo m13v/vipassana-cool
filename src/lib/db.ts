@@ -446,16 +446,33 @@ export async function advanceMatchOnReply(fromEmail: string, subject?: string): 
 //   - Neither confirmed: legacy/unengaged row that should not block the pair → 'expired'
 //     (so getPriorMatchedIds and the blockedPairs guard release the two people).
 // In both cases the match closes and both participants return to 'ready'.
+//
+// Engagement protection (added 2026-05-11): if BOTH partners have at least one
+// click on their personal Meet tracking URL (i.e. they're showing up to sit
+// together), skip expiry entirely. Single-side clicks are still a ghost — the
+// click-er is engaged but their partner hasn't shown up. Expire those normally.
 export async function endStalePendingMatches(days: number = 14): Promise<{
   endedCount: number;
   expiredCount: number;
+  skippedCount: number;
   endedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[];
   expiredMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[];
+  skippedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[];
 }> {
   const sql = getSql();
   const rows = await sql`
     SELECT m.id, m.person_a_id, m.person_b_id, m.person_a_confirmed, m.person_b_confirmed,
-           a.name as person_a_name, b.name as person_b_name
+           a.name as person_a_name, b.name as person_b_name,
+           EXISTS(
+             SELECT 1 FROM meet_clicks mc
+             JOIN meet_links ml ON ml.token = mc.token
+             WHERE ml.match_id = m.id AND ml.person_id = m.person_a_id
+           ) AS person_a_clicked_meet,
+           EXISTS(
+             SELECT 1 FROM meet_clicks mc
+             JOIN meet_links ml ON ml.token = mc.token
+             WHERE ml.match_id = m.id AND ml.person_id = m.person_b_id
+           ) AS person_b_clicked_meet
     FROM matches m
     JOIN waitlist_entries a ON a.id = m.person_a_id
     JOIN waitlist_entries b ON b.id = m.person_b_id
@@ -464,7 +481,16 @@ export async function endStalePendingMatches(days: number = 14): Promise<{
   `;
   const endedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] = [];
   const expiredMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] = [];
+  const skippedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] = [];
   for (const row of rows) {
+    const summary = { id: row.id as string, person_a_name: row.person_a_name as string | null, person_b_name: row.person_b_name as string | null };
+    // Skip expiry when both partners clicked their Meet link: they're showing
+    // up to sit together, even if neither replied to the intro thread.
+    const bothClickedMeet = (row.person_a_clicked_meet as boolean) && (row.person_b_clicked_meet as boolean);
+    if (bothClickedMeet) {
+      skippedMatches.push(summary);
+      continue;
+    }
     const eitherConfirmed = (row.person_a_confirmed as boolean) || (row.person_b_confirmed as boolean);
     const newStatus = eitherConfirmed ? "ended" : "expired";
     await updateMatchStatus(row.id as string, newStatus, "cron");
@@ -474,11 +500,10 @@ export async function endStalePendingMatches(days: number = 14): Promise<{
       await updateEntryStatus(row.person_a_id as string, "ready", "cron", row.id as string, "stale pending swept (no engagement)");
       await updateEntryStatus(row.person_b_id as string, "ready", "cron", row.id as string, "stale pending swept (no engagement)");
     }
-    const summary = { id: row.id as string, person_a_name: row.person_a_name as string | null, person_b_name: row.person_b_name as string | null };
     if (eitherConfirmed) endedMatches.push(summary);
     else expiredMatches.push(summary);
   }
-  return { endedCount: endedMatches.length, expiredCount: expiredMatches.length, endedMatches, expiredMatches };
+  return { endedCount: endedMatches.length, expiredCount: expiredMatches.length, skippedCount: skippedMatches.length, endedMatches, expiredMatches, skippedMatches };
 }
 
 // Expire confirming matches older than the given number of days.
@@ -536,16 +561,24 @@ export async function getActiveMatchForSession(personId: string, session: string
   return rows.length > 0 ? (rows[0].id as string) : null;
 }
 
-// Returns person IDs that have had a meaningful prior match with this person.
-// Only blocks re-matching if at least one person confirmed (clicked Yes).
-// If neither confirmed (both ghosted), the pair can be re-matched.
+// Returns person IDs that have had ANY prior match with this person.
+//
+// Updated 2026-05-11: blocks re-pairing for every prior match except explicit
+// declines. Before this change, "both ghosted" pairs (status='expired', neither
+// confirmed) were eligible for retry on the theory that maybe the timing was
+// bad. In practice this caused the same dormant pair to be re-matched every 14
+// days forever (e.g. Matthew + Nahïl re-matched April 27 and again May 11 after
+// both ghosted the first round). If two people didn't engage once, they're not
+// going to engage the second time either. Better to put them with someone new.
+//
+// Still allowed: re-pair after an explicit "no" click on the OTHER pair, since
+// 'declined' represents a specific incompatible match, not a dormant ghost.
 export async function getPriorMatchedIds(personId: string): Promise<string[]> {
   const sql = getSql();
   const rows = await sql`
     SELECT person_a_id, person_b_id FROM matches
     WHERE (person_a_id = ${personId} OR person_b_id = ${personId})
-      AND (person_a_confirmed = true OR person_b_confirmed = true
-           OR status NOT IN ('expired', 'declined'))
+      AND status <> 'declined'
   `;
   return rows.map((r) =>
     r.person_a_id === personId ? r.person_b_id : r.person_a_id
