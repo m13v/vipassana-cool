@@ -2,8 +2,13 @@ import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
 
+// From-address sits on the inbound subdomain (Resend MX) so the apex
+// vipassana.cool MX can stay on Google Workspace. Reply-To MUST also point at
+// the inbound subdomain, otherwise user replies route to the Workspace mailbox
+// at matt@vipassana.cool, which is NOT wired into the Resend webhook and
+// silently drops every reply (broke matching engagement signals 2026-05-06).
 const FROM_EMAIL = "Matt from Vipassana.cool <matt@inbound.vipassana.cool>";
-const REPLY_TO = "matt@vipassana.cool";
+const REPLY_TO = "matt@inbound.vipassana.cool";
 const SUBJECT = "Your 10-Day Vipassana Retreat Checklist";
 
 async function logOutbound(email: string, resendId: string | null, html: string) {
