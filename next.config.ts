@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       { source: "/t/buddy-practice", destination: "/t/practice-buddy", permanent: true },
       { source: "/t/accountability-and-practice-buddies", destination: "/t/practice-buddy", permanent: true },
       { source: "/alternative/ai-meditation-apps-vs-daily-vipassana-practice", destination: "/alternative/ai-meditation-apps-vs-vipassana-daily-practice-2026", permanent: true },
+      { source: "/t/ai-meditation-apps-for-vipassana-practitioners", destination: "/alternative/ai-meditation-apps-vs-vipassana-daily-practice-2026", permanent: true },
       { source: "/t/rebuild-daily-vipassana-practice-after-course", destination: "/t/after-vipassana-daily-practice-rewire-habits", permanent: true },
       { source: "/t/same-time-same-cushion-daily-sit-habit", destination: "/t/preserving-daily-practice-discipline", permanent: true },
     ];
