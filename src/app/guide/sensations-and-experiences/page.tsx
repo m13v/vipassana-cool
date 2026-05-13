@@ -5,15 +5,26 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
 import { FaqSchema } from "@/components/faq-schema";
+import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 const PAGE_URL = "https://vipassana.cool/guide/sensations-and-experiences";
 const PUBLISHED = "2025-09-01";
+const UPDATED = "2026-05-12";
 
 export const metadata: Metadata = {
-  title: "What Students Commonly Report: Sensations and Experiences in Vipassana",
+  title: "Vipassana Sensations and Experiences: What Students Commonly Report",
   description:
-    "A descriptive, non-teaching overview of what students in the Goenka tradition commonly report experiencing at different points in their practice. This page reflects phenomena, it does not tell you how to work with them.",
+    "A descriptive look at the sensations and experiences students in the Goenka tradition commonly report, including gross and subtle sensations, free flow (bhanga), and emotional surfacing. Phenomena only, not instruction.",
   alternates: { canonical: PAGE_URL },
+  openGraph: {
+    title: "Vipassana Sensations and Experiences: What Students Commonly Report",
+    description:
+      "Gross and subtle sensations, free flow (bhanga), emotional surfacing, day-to-day variability. A descriptive reflection, not instruction.",
+    url: PAGE_URL,
+    type: "article",
+    publishedTime: PUBLISHED,
+    modifiedTime: UPDATED,
+  },
 };
 
 const faqs = [
@@ -23,6 +34,16 @@ const faqs = [
       "No. How to work with anything that arises in practice is explained by the teacher at the 10-day course and, afterward, by an assistant teacher in individual interviews or at group sittings. This page only describes, in third person, what students commonly report.",
   },
   {
+    question: "What is free flow (bhanga) in Vipassana?",
+    answer:
+      "Bhanga is a Pali word usually translated as 'dissolution' or 'breaking up.' Students sometimes describe sittings where the felt edges of the body soften into a finer, more uniform field of sensation, and Goenka discourses refer to this as bhanga. The tradition is explicit that bhanga is one experience among many, not a goal or a marker of attainment, and how a student relates to such an experience is taught inside a course.",
+  },
+  {
+    question: "What is the difference between gross (olarika) and subtle (sukhuma) sensations?",
+    answer:
+      "These are Pali terms used in Goenka's discourses to describe two ends of a descriptive spectrum. Olarika sensations are coarse and easy to notice: aches, pressure, heat, itching. Sukhuma sensations are described as finer: tingling, light pulsing, soft flow. The pair is a vocabulary for talking about what students experience, not an instruction about what to look for.",
+  },
+  {
     question: "What do students commonly talk about after a course?",
     answer:
       "Themes that come up constantly in old-student conversation include: how much physical discomfort is present early in a course, how variable each sitting is, the strangeness of unfamiliar bodily phenomena, emotional material surfacing unexpectedly, and how little any particular experience predicts the next one.",
@@ -30,7 +51,17 @@ const faqs = [
   {
     question: "Are strong sensations a sign of progress?",
     answer:
-      "In the tradition's own framing, no particular kind of experience is treated as a marker of progress. Students are consistently warned against evaluating sittings by how they feel. Teachers reiterate this during discourses because it is such a common thing to forget.",
+      "In the tradition's own framing, no particular kind of experience is treated as a marker of progress. Students are consistently warned against evaluating sittings by how they feel. Teachers reiterate this during discourses because it is such a common thing to forget. For more on what deepening actually looks like, see our recognizing-progress guide.",
+  },
+  {
+    question: "I didn't experience free flow during my course. Did I fail?",
+    answer:
+      "This is one of the most common worries shared in old-student conversation, and the tradition's answer is consistent: no particular experience is treated as success or failure. Many students who later describe deep, stable practice never had a dramatic 'free flow' moment on their first course. A teacher will tell you directly that comparing sittings is the opposite of what the practice is pointing at.",
+  },
+  {
+    question: "Is it normal for emotions like grief, anger, or old memories to come up?",
+    answer:
+      "Yes. Emotional material surfacing is one of the most commonly shared themes across old-student conversation, especially during longer sits. How to hold this material inside practice is something teachers address in course discourses and individual interviews. If it is overwhelming, an assistant teacher is the right first contact, and a qualified mental-health professional is the right additional support if distress is clinical.",
   },
   {
     question: "What should I do if something alarming happens during a sitting?",
@@ -40,7 +71,7 @@ const faqs = [
   {
     question: "When should I seek professional (non-meditation) help?",
     answer:
-      "If you are experiencing dissociation, panic attacks, flashbacks, intrusive trauma material, or psychological distress beyond ordinary discomfort, please also seek help from a qualified mental-health professional. See /faq/is-vipassana-safe for more on this.",
+      "If you are experiencing dissociation, panic attacks, flashbacks, intrusive trauma material, or psychological distress beyond ordinary discomfort, please also seek help from a qualified mental-health professional. See our risks-and-safety guide for more on this.",
   },
   {
     question: "Why do experiences vary so much day to day?",
@@ -60,10 +91,11 @@ export default function SensationsExperiencesPage() {
         ]}
       />
       <ArticleSchema
-        title="What Students Commonly Report: Sensations and Experiences"
-        description="A descriptive, non-teaching reflection on what students in the Goenka tradition commonly report during and after courses."
+        title="Vipassana Sensations and Experiences: What Students Commonly Report"
+        description="A descriptive, non-teaching reflection on the sensations and experiences students in the Goenka tradition commonly report, including gross and subtle sensations, free flow (bhanga), and emotional surfacing."
         url={PAGE_URL}
         datePublished={PUBLISHED}
+        dateModified={UPDATED}
       />
       <FaqSchema faqs={faqs} />
       <ArticleHeader
@@ -74,8 +106,9 @@ export default function SensationsExperiencesPage() {
         ]}
         category="Reflections"
         title="What Students Commonly Report"
-        description="A descriptive look at the range of experiences students in the Goenka tradition talk about. What arises, not what to do about it."
+        description="A descriptive look at the range of sensations and experiences students in the Goenka tradition talk about, including gross and subtle sensations, free flow, and emotional material. What arises, not what to do about it."
         datePublished={PUBLISHED}
+        dateUpdated={UPDATED}
       />
 
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
@@ -119,10 +152,36 @@ export default function SensationsExperiencesPage() {
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">Phenomena the tradition names</h2>
           <p>
-            Students often hear specific Pali-rooted words during a course to describe different qualities of experience, for example references to gross (<em>olarika</em>) and subtle (<em>sukhuma</em>) sensations, and to experiences like <em>bhanga</em>, sometimes translated as &quot;dissolution&quot; or &quot;free flow.&quot; These terms come up in Goenka&apos;s evening discourses.
+            Students often hear specific Pali-rooted words during a course to describe different qualities of experience. The notes below are linguistic only. They are not instructions about what to look for, and they are not a guide to what these experiences are supposed to mean inside the practice itself. That is the teacher&apos;s job, inside a course.
           </p>
-          <p>
-            The terms themselves are not the technique. They are a shared vocabulary for discussing what arises. The instructions for how any of these experiences are to be related to in practice are given inside the course, not here.
+          <div className="mt-4 space-y-4">
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground"><em>Olarika</em> &mdash; gross</h3>
+              <p>
+                A Pali word used in discourses for the coarser end of the sensation spectrum: aches, stiffness, pressure, heat, itching, heaviness. The kind of bodily experience that is easy to describe in ordinary language. Almost every student reports plenty of this, especially in the first days of a course.
+              </p>
+            </div>
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground"><em>Sukhuma</em> &mdash; subtle</h3>
+              <p>
+                The corresponding term for the finer end: tingling, light pulsing, soft flow, faint warmth, things at the edge of being noticeable. Some students describe these arriving suddenly; others describe long stretches where they cannot tell whether they are noticing anything at all.
+              </p>
+            </div>
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground"><em>Bhanga</em> &mdash; dissolution / free flow</h3>
+              <p>
+                Literally &quot;breaking up.&quot; In Goenka&apos;s discourses this word is used for sittings where the felt edges of the body soften, and what had seemed solid is described instead as a finer, more uniform field. Old students often shorthand it as &quot;free flow.&quot; The tradition is repeatedly explicit that bhanga is one experience among many, not a stage to be reached, not a measure of progress, and not the point of the practice.
+              </p>
+            </div>
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground"><em>Anicca</em> &mdash; impermanence</h3>
+              <p>
+                Not a sensation but the concept Goenka returns to most often when describing what students will encounter in any of the above. The pronunciation he uses in discourses is roughly &quot;a-nee-cha.&quot; Every experience, however vivid or however dull, is described as arising and passing. This is the framing under which all the other words sit.
+              </p>
+            </div>
+          </div>
+          <p className="mt-4">
+            These terms are a shared vocabulary for discussing what arises. The instructions for how any of these experiences are to be related to in practice are given inside the course, not here.
           </p>
         </section>
 
@@ -155,17 +214,27 @@ export default function SensationsExperiencesPage() {
             That said, this is exactly the kind of question that an assistant teacher is there for. They are experienced with the range of what students report, and they can respond in a way generic writing cannot. If something is troubling you, bring it to them.
           </p>
           <p>
-            If you are experiencing clinical-level distress (dissociation, panic attacks, flashbacks, intrusive trauma responses, or anything that is interfering with your daily functioning), please also consult a qualified mental-health professional. See our <Link href="/faq/is-vipassana-safe" className="text-accent underline hover:text-foreground">safety guide</Link> for more on this.
+            If you are experiencing clinical-level distress (dissociation, panic attacks, flashbacks, intrusive trauma responses, or anything that is interfering with your daily functioning), please also consult a qualified mental-health professional. See our <Link href="/guide/risks-and-safety" className="text-accent underline hover:text-foreground">risks and safety guide</Link> and <Link href="/faq/is-vipassana-safe" className="text-accent underline hover:text-foreground">is Vipassana safe FAQ</Link> for more on this.
           </p>
         </section>
 
         <section>
           <h2 className="mb-3 text-xl font-bold text-foreground">What long-term practitioners tend to report</h2>
           <p>
-            Old students with years of practice rarely describe dramatic breakthroughs when asked about their practice. They more often describe small, gradual shifts in how they relate to difficulty: fewer automatic reactions in ordinary situations, a slightly longer pause before speaking in anger, a little more room around discomfort. None of this is loud. Most of it is only visible over long stretches of time.
+            Old students with years of practice rarely describe dramatic breakthroughs when asked about their practice. They more often describe small, gradual shifts in how they relate to difficulty: fewer automatic reactions in ordinary situations, a slightly longer pause before speaking in anger, a little more room around discomfort. None of this is loud. Most of it is only visible over long stretches of time. The <Link href="/guide/recognizing-progress" className="text-accent underline hover:text-foreground">recognizing-progress guide</Link> covers this pattern in more detail.
           </p>
           <p>
             This is one of the quieter kinds of evidence that something is working. It is also why the tradition emphasizes consistency over any particular experience.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">&quot;Is what I&apos;m experiencing normal?&quot;</h2>
+          <p>
+            This is the most common search-engine question that lands people on pages like this one, and it is the wrong place to ask it. The honest answer is that the range of what students report is extremely wide, far wider than any single page can usefully describe. Almost everything that comes up on a course or in home practice falls inside what other students have also reported. Almost everything has also been seen by assistant teachers. They are the right people to ask.
+          </p>
+          <p>
+            The site that lists every Vipassana center in the Goenka tradition is <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>. Every center has assistant teachers who are available for exactly these questions, by email, by phone, and in person at group sittings. That is the channel built into the tradition for this. Use it.
           </p>
         </section>
 
@@ -182,7 +251,12 @@ export default function SensationsExperiencesPage() {
         </section>
       </div>
 
-      <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
+      <PracticeBuddyCta
+        heading="Daily Practice Is Where the Range Settles"
+        description="The variability described above is easier to sit with when there is another practitioner sitting at the same time. Get matched with a fellow Vipassana meditator for daily sits over Google Meet. Free, peer-only, tradition-respectful."
+      />
+
+      <div className="mt-8 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Experience comes from practice, not reading</h2>
         <p className="mb-6 text-muted">
           None of this can be understood by reading about it. It is understood by sitting a course.
@@ -203,11 +277,14 @@ export default function SensationsExperiencesPage() {
           <Link href="/experience" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Student Experiences
           </Link>
-          <Link href="/guide/scientific-evidence" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            Scientific Evidence
+          <Link href="/guide/recognizing-progress" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Recognizing Progress
           </Link>
-          <Link href="/guide/find-a-retreat" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
-            Find a Retreat
+          <Link href="/guide/how-vipassana-changes-you" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            How Vipassana Changes You
+          </Link>
+          <Link href="/guide/risks-and-safety" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Risks and Safety
           </Link>
           <Link href="/guide/group-sittings" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Group Sittings
