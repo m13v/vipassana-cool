@@ -120,7 +120,7 @@ export default function Page() {
           The words, briefly
         </h2>
         <p className="mb-4 text-muted">
-          Anapana is a Pali term, usually encountered in the compound anapanasati. The rough English gloss is awareness of breath. Ana and apana refer to the natural in-breath and out-breath. The term occurs throughout the Pali canon.
+          Anapana is a Pali term, usually encountered in the compound anapanasati. The rough English gloss is awareness of breath; you will also see it rendered as observation of breath or mindfulness of breathing depending on the translator. Ana and apana refer to the natural in-breath and out-breath. The term occurs throughout the Pali canon.
         </p>
         <p className="text-muted">
           Vipassana is a Pali word often translated as seeing things as they are, or clear seeing. The prefix vi carries a sense of clarifying or distinguishing, and passana comes from the root meaning to see. Like anapana, it is a word with centuries of commentarial use in the Theravada tradition.
