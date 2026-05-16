@@ -5,6 +5,7 @@ import { WaitlistTable } from "@/components/waitlist-table";
 import { WaitlistSignup } from "@/components/waitlist-signup";
 import { BookCallButton } from "@/components/book-call-button";
 import { DayCounter } from "@/components/day-counter";
+import { posthog } from "@/components/posthog-provider";
 
 type QuickSetup = { timezone: string; morningHour: string };
 type SignupPrefill = { timezone?: string; morningTime?: string; frequency?: string };
@@ -378,7 +379,7 @@ export function PracticeBuddyClient() {
       </section>
 
       {/* Bottom CTA — scrolls back up to the primary form */}
-      <section className="border-t border-border bg-card/50">
+      <section id="bottom-cta" className="border-t border-border bg-card/50">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center">
           <h2 className="mb-3 text-2xl font-bold">Ready to sit with someone tomorrow morning?</h2>
           <p className="mx-auto mb-6 max-w-xl text-sm text-muted">
@@ -395,6 +396,9 @@ export function PracticeBuddyClient() {
           </div>
         </div>
       </section>
+
+      {/* Persistent CTA — appears after user scrolls past the hero, hides while the form is in view */}
+      <StickyFindBuddyCTA hideWhenModalOpen={matchRequest !== null} />
 
       {/* Match Request Modal */}
       {matchRequest && (
@@ -522,6 +526,77 @@ function FlowArrow() {
       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
       </svg>
+    </div>
+  );
+}
+
+function StickyFindBuddyCTA({ hideWhenModalOpen }: { hideWhenModalOpen: boolean }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    function update() {
+      // Reveal after the user has scrolled meaningfully past the hero.
+      const scrolledPastHero = window.scrollY > 520;
+      // Suppress while the signup form OR the bottom CTA section is on screen so we
+      // never double up on the same primary action.
+      const suppressors = ["waitlist-form", "bottom-cta"];
+      let anySuppressorInView = false;
+      for (const id of suppressors) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 80 && rect.bottom > 80) {
+          anySuppressorInView = true;
+          break;
+        }
+      }
+      setVisible(scrolledPastHero && !anySuppressorInView);
+    }
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  const shown = visible && !hideWhenModalOpen;
+
+  function handleClick() {
+    try { posthog.capture("primary_cta_clicked", { location: "sticky-cta" }); } catch { /* noop */ }
+  }
+
+  return (
+    <div
+      aria-hidden={!shown}
+      className={`pointer-events-none fixed inset-x-0 bottom-0 z-40 px-3 pb-3 sm:px-4 sm:pb-4 transition-all duration-300 ${
+        shown ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+      }`}
+    >
+      <div className="pointer-events-auto mx-auto flex max-w-md items-stretch overflow-hidden rounded-2xl border border-accent/30 bg-background/95 shadow-lg shadow-black/10 backdrop-blur sm:max-w-lg">
+        <div className="hidden flex-1 items-center gap-3 px-4 py-3 sm:flex">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold text-foreground">Sit with a real person tomorrow</p>
+            <p className="truncate text-xs text-muted">2-minute waitlist. Free forever.</p>
+          </div>
+        </div>
+        <a
+          href="#waitlist-form"
+          onClick={handleClick}
+          className="flex flex-1 items-center justify-center gap-2 bg-accent px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 sm:flex-none sm:px-6"
+        >
+          Find my buddy
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
     </div>
   );
 }
