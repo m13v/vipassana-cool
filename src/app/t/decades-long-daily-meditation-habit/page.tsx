@@ -72,6 +72,18 @@ const faqs: FaqItem[] = [
     q: "What single thing most predicts a habit lasting decades?",
     a: "A cheap, low-shame restart. The practitioners who reach decades are not the ones with the best attendance record. They are the ones for whom returning after a gap became boring: a known, rehearsed move they have made twenty times without drama. If a missed week triggers guilt, a story about being undisciplined, and a multi-day recovery, the restart is expensive and the habit is fragile. If it triggers nothing but tomorrow morning, the habit can absorb almost anything life does to it.",
   },
+  {
+    q: "How long does it take for daily meditation to become a permanent habit?",
+    a: "Honest answer from the tradition: there is no fixed number of days after which the habit is locked in and gap-proof. Popular figures (21 days, 66 days) come from short studies of simple behaviors and do not describe a contemplative practice that someone keeps for thirty years. The more useful frame, and the one the tradition actually uses, is that the habit is permanent the moment a gap stops being an identity event and becomes ordinary logistics. That can happen in month two and be lost again, or arrive only after a second 10-day course. The variable that decides permanence is not elapsed time. It is how the next morning after a missed week feels.",
+  },
+  {
+    q: "Do meditation streak apps actually work for long-term practice?",
+    a: "For the first thirty to ninety days, often yes. A streak app borrows tomorrow's motivation by making today feel expensive to waste, which is exactly what a fragile new habit needs. The trouble shows up later. Once the run is long enough that a single miss erases something psychologically meaningful, the same mechanic that built the habit becomes the most reliable way to lose it. The day a year-long streak resets to zero is the day a sizeable fraction of users quit. A tool whose entire reward structure can punish you out of the activity it is supposed to protect is not built for decades.",
+  },
+  {
+    q: "What percentage of people who start meditating actually stick with it?",
+    a: "Industry data on this is messy because most published numbers describe app retention, not contemplative practice. App data routinely shows that the majority of people who download a meditation app stop opening it within the first month, with single-digit-percent year-one retention common. That is not a statement about whether meditation works. It is a statement about how easy modern tools make it to begin and how brittle they make it to continue. The Goenka tradition's own materials are blunter and probably more useful: most long-term practitioners have had stretches, sometimes years, without daily practice. The honest read is that lifelong practice is normal for people who learn how to restart, not for people who never stop.",
+  },
 ];
 
 const breadcrumbItems = [
@@ -199,11 +211,27 @@ export default function Page() {
           </p>
           <p className="mt-3 text-zinc-800 leading-relaxed">
             Can you keep a daily meditation habit for decades? Yes, and people
-            do. But almost none of them did it as an unbroken streak. The
-            tradition&apos;s own guidance for practitioners treats lapses as
-            essentially universal, and long-term meditators describe a practice
-            they returned to repeatedly after gaps. What makes a habit last
-            decades is a cheap, low-shame way back in, not perfect attendance.
+            do. Almost none of them did it as an unbroken streak.
+          </p>
+          <ul className="mt-4 space-y-2 text-zinc-800 leading-relaxed list-disc pl-5 marker:text-teal-700">
+            <li>
+              A practice that lasts thirty years is a practice that has been
+              restarted, often many times.
+            </li>
+            <li>
+              The Goenka tradition&apos;s own guidance treats lapses as
+              essentially universal, not as failure.
+            </li>
+            <li>
+              At decade scale, a streak counter spends most of its life either
+              reading a small number or quietly lying.
+            </li>
+            <li>
+              What predicts a decades-long habit is not adherence. It is how
+              cheap, low-friction, and low-shame the way back in is.
+            </li>
+          </ul>
+          <p className="mt-4 text-zinc-800 leading-relaxed">
             Verified against the tradition&apos;s{" "}
             <a
               href="https://www.dhamma.org/en/osguide"
@@ -239,6 +267,43 @@ export default function Page() {
             built for decade-scale practice spends most of its life either
             reading a small number or quietly lying about what it measures.
           </p>
+        </div>
+
+        <div className="mt-6 rounded-xl border border-zinc-200 bg-zinc-50 p-5">
+          <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            What a long practice actually adds up to
+          </p>
+          <dl className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <dt className="text-sm text-zinc-500">10 years of daily sits</dt>
+              <dd className="mt-1 text-2xl font-semibold text-zinc-900">
+                ~3,650 sits
+              </dd>
+            </div>
+            <div>
+              <dt className="text-sm text-zinc-500">20 years</dt>
+              <dd className="mt-1 text-2xl font-semibold text-zinc-900">
+                ~7,300 sits
+              </dd>
+            </div>
+            <div>
+              <dt className="text-sm text-zinc-500">40 years</dt>
+              <dd className="mt-1 text-2xl font-semibold text-zinc-900">
+                ~14,600 sits
+              </dd>
+            </div>
+          </dl>
+          <p className="mt-4 text-sm text-zinc-600 leading-relaxed">
+            A senior practitioner in the Goenka tradition who began in their
+            twenties is in this last column by retirement age. The number that
+            represents their practice cannot be a streak. There is no human
+            schedule that makes 14,600 consecutive mornings a realistic target,
+            and trying to make it one is a way to lose the practice in year
+            three.
+          </p>
+        </div>
+
+        <div className="mt-6 space-y-4 text-zinc-700 leading-relaxed">
           <p>
             The deeper problem is not the math, it is what the streak does on
             the day you miss after a long run. It does not say{" "}
