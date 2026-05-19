@@ -115,8 +115,19 @@ export function PracticeBuddyClient() {
               delay={3}
             />
           </div>
+          <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-accent/20 bg-background/60 p-6 sm:p-7">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-accent">
+              What an actual morning looks like
+            </p>
+            <p className="text-base leading-relaxed text-foreground sm:text-[17px]">
+              5:55am in your kitchen. 6:55am in your buddy&apos;s. The same Google Meet link you&apos;ve sat in together for 40 mornings. Cameras off. You hit play on your Goenka recording. 45 minutes pass. You wave; they wave. You close the tab.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted">
+              No scheduling. No app. No streak. Tomorrow at 5:55am, the same link is waiting.
+            </p>
+          </div>
           <p className="mt-6 text-center text-sm text-muted">
-            You get a permanent Google Meet link. Join at your sit time, play a Goenka recording, meditate together. No scheduling, no app &mdash; just show up.{" "}
+            A permanent Google Meet link, a real person on the other side, and the recordings you already trust.{" "}
             <a href="/practice-buddy/how-it-works" className="text-accent hover:underline">
               Learn how it works in detail →
             </a>
