@@ -9,7 +9,7 @@ import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 const PAGE_URL = "https://vipassana.cool/guide/sensations-and-experiences";
 const PUBLISHED = "2025-09-01";
-const UPDATED = "2026-05-12";
+const UPDATED = "2026-05-20";
 
 export const metadata: Metadata = {
   title: "Vipassana Sensations and Experiences: What Students Commonly Report",
@@ -105,17 +105,31 @@ export default function SensationsExperiencesPage() {
           { label: "Sensations and Experiences" },
         ]}
         category="Reflections"
-        title="What Students Commonly Report"
-        description="A descriptive look at the range of sensations and experiences students in the Goenka tradition talk about, including gross and subtle sensations, free flow, and emotional material. What arises, not what to do about it."
+        title="Vipassana Sensations and Experiences: What Students Commonly Report"
+        description="Gross and subtle sensations, free flow (bhanga), emotional surfacing, day-to-day variability. A descriptive look at what students in the Goenka tradition talk about, not a guide on how to respond."
         datePublished={PUBLISHED}
         dateUpdated={UPDATED}
       />
 
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
-        <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
-        <p className="text-sm text-muted">
-          This page describes what students in the Goenka tradition commonly report experiencing, in plainly descriptive terms. It does not explain how to work with any of it. Working with experience in practice is what the 10-day course and the assistant teacher are for. If something unusual or difficult is coming up for you, talk to an assistant teacher.
-        </p>
+        <p className="text-sm font-medium text-accent mb-2">TL;DR</p>
+        <ul className="space-y-2 text-sm text-muted">
+          <li>
+            <strong className="text-foreground">Gross (olarika) and subtle (sukhuma)</strong> are Pali terms used in discourses for the coarser and finer ends of bodily experience. Both are commonly reported.
+          </li>
+          <li>
+            <strong className="text-foreground">Free flow (bhanga)</strong> is one experience among many. The tradition treats it explicitly as not a goal, not a stage, and not a measure of progress.
+          </li>
+          <li>
+            <strong className="text-foreground">Day-to-day variability is the norm</strong>. Sittings differ wildly, even consecutively. Most old students stop trying to grade them.
+          </li>
+          <li>
+            <strong className="text-foreground">Emotional material surfacing</strong> (grief, anger, old memories) is one of the most commonly shared themes after a course.
+          </li>
+          <li>
+            <strong className="text-foreground">How to respond to anything that arises</strong> is what the 10-day course and the assistant teacher are for, not this page. If something is alarming, contact an assistant teacher.
+          </li>
+        </ul>
       </div>
 
       <div className="space-y-8 text-muted">
@@ -126,6 +140,19 @@ export default function SensationsExperiencesPage() {
           </p>
           <p>
             If you are here with a live question about your own practice, the right place to take it is to an assistant teacher at your nearest Vipassana center.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why most of this is hard to describe in advance</h2>
+          <p>
+            Across six 10-day courses at three different centers (Dhammamanda in NorCal, the CYO rental site in the Bay Area, and the North Fork center in Central California), and 40+ days of dhamma service afterward, the most consistent thing I&apos;ve heard students share in the dining hall on day 10 or in the parking lot afterward is some version of: <em>nothing I had been telling myself about what this would feel like was useful.</em>
+          </p>
+          <p>
+            The mind generates expectations. Friends who&apos;ve sat before drop hints. The internet supplies a small ocean of free-flow stories. None of it tends to survive contact with an actual sitting. That gap, between what you expected to experience and what you actually experience, is itself one of the things people end up talking about most. It is also why descriptive writing about sensations is easier said than done: any vocabulary the page hands you risks becoming the next expectation that doesn&apos;t survive contact.
+          </p>
+          <p className="text-sm italic">
+            (I am writing this as a fellow practitioner, not a teacher. The Goenka tradition reserves anything operational, what to do about a sensation, how to relate to a difficulty, how to sit, for assistant teachers inside or alongside a course. Personal reflection on what shows up is fair game; instruction is not.)
           </p>
         </section>
 
