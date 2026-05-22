@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
       { source: "/t/same-time-same-cushion-daily-sit-habit", destination: "/t/preserving-daily-practice-discipline", permanent: true },
       { source: "/t/vipassana-breath-observation-meditation", destination: "/t/anapana-and-vipassana", permanent: true },
       { source: "/t/vipassana-dangers", destination: "/t/vipassana-danger", permanent: true },
+      { source: "/t/vipassana-zagro-enia", destination: "/t/vipassana-danger", permanent: true },
       { source: "/t/vipassana", destination: "/t/vipassana-meditation", permanent: true },
     ];
   },
