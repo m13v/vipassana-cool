@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
       { source: "/t/daily-practice-after-vipassana-course", destination: "/t/after-vipassana-daily-practice-rewire-habits", permanent: true },
       { source: "/t/same-time-same-cushion-daily-sit-habit", destination: "/t/preserving-daily-practice-discipline", permanent: true },
       { source: "/t/vipassana-breath-observation-meditation", destination: "/t/anapana-and-vipassana", permanent: true },
+      { source: "/t/vipassana-dangers", destination: "/t/vipassana-danger", permanent: true },
     ];
   },
   async headers() {
