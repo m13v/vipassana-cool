@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { neon } from "@neondatabase/serverless";
-import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, getActiveMatchForSession, updateEntryStatus, confirmMatchPerson, getMatchEngagement } from "@/lib/db";
+import { getAllMatches, createMatch, createMatchWithTokens, getEntry, getPriorMatchedIds, getActiveMatchForSession, updateEntryStatus, getMatchEngagement } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { SessionContext } from "@/lib/emails";
@@ -116,74 +116,22 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Smart confirmation flow based on user status:
-  // - Both ready: skip confirmation, send intro immediately
-  // - One ready + one pending: only send confirmation to the pending person
-  // - Both pending: send confirmation to both
+  // Confirmation flow: every match always requires fresh confirmation from
+  // BOTH sides. We no longer auto-confirm based on prior `ready`/`engaged`
+  // status; that created cases where users were matched into Meets without an
+  // explicit "yes" on the current pairing.
   if (sendConfirmation) {
-    const aReady = personA.status === "ready" || personA.status === "engaged";
-    const bReady = personB.status === "ready" || personB.status === "engaged";
-
-    // Both ready → direct intro, no confirmation needed
-    if (aReady && bReady) {
-      const match = await createMatch(personAId, personBId, sessionA, sessionB);
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      const sql = neon(process.env.DATABASE_URL!);
-
-      const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", localTime: getSessionLocalTime(personA, sessionA as "morning" | "evening"), timezone: personA.timezone };
-      const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", localTime: getSessionLocalTime(personB, sessionB as "morning" | "evening"), timezone: personB.timezone };
-      const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
-
-      const meetLinks = meetLinkA && meetLinkB
-        ? { a: { trackingUrl: meetLinkA }, b: { trackingUrl: meetLinkB } }
-        : undefined;
-      const unsubscribeUrls = {
-        a: buildUnsubscribeUrl(personA.unsubscribe_token),
-        b: buildUnsubscribeUrl(personB.unsubscribe_token),
-      };
-      const html = buildIntroEmailHtml(personA, personB, meetLinks, introSessionCtx, unsubscribeUrls);
-      const subject = buildIntroSubject(sessCtxA, sessCtxB);
-      const emailResult = await resend.emails.send({
-        from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
-        to: [personA.email, personB.email],
-        replyTo: [personA.email, personB.email],
-        subject,
-        html,
-        headers: { "X-Entity-Ref-ID": match.id },
-      });
-      try {
-        await sql`
-          INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-          VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>', ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
-        `;
-      } catch (dbErr) {
-        console.error("Failed to log intro email:", dbErr);
-      }
-      return NextResponse.json({ success: true, matchId: match.id, status: "matched", flow: "both-ready" });
-    }
-
-    // One or both pending → confirmation flow
     const match = await createMatchWithTokens(personAId, personBId, sessionA, sessionB);
     const resend = new Resend(process.env.RESEND_API_KEY);
     const sql = neon(process.env.DATABASE_URL!);
 
-    // Pre-confirm the ready person (they already said yes before)
-    if (aReady) {
-      await confirmMatchPerson(match.id, "a");
-      await updateEntryStatus(personAId, "engaged", "admin", match.id, "auto-confirmed (ready status)");
-    }
-    if (bReady) {
-      await confirmMatchPerson(match.id, "b");
-      await updateEntryStatus(personBId, "engaged", "admin", match.id, "auto-confirmed (ready status)");
-    }
-
-    // Only send confirmation email to pending person(s)
     const sessCtxA: SessionContext = { session: sessionA as "morning" | "evening", localTime: getSessionLocalTime(personA, sessionA as "morning" | "evening"), timezone: personA.timezone };
     const sessCtxB: SessionContext = { session: sessionB as "morning" | "evening", localTime: getSessionLocalTime(personB, sessionB as "morning" | "evening"), timezone: personB.timezone };
 
-    const toConfirm: [WaitlistEntry, WaitlistEntry, string, "a" | "b", SessionContext, SessionContext][] = [];
-    if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, "a", sessCtxA, sessCtxB]);
-    if (!bReady) toConfirm.push([personB, personA, match.person_b_token!, "b", sessCtxB, sessCtxA]);
+    const toConfirm: [WaitlistEntry, WaitlistEntry, string, "a" | "b", SessionContext, SessionContext][] = [
+      [personA, personB, match.person_a_token!, "a", sessCtxA, sessCtxB],
+      [personB, personA, match.person_b_token!, "b", sessCtxB, sessCtxA],
+    ];
 
     for (const [recipient, matchedWith, token, , recipientSessCtx, matchSessCtx] of toConfirm) {
       const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx }, buildUnsubscribeUrl(recipient.unsubscribe_token));
@@ -206,8 +154,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const flow = aReady || bReady ? "one-ready" : "both-pending";
-    return NextResponse.json({ success: true, matchId: match.id, status: "confirming", flow });
+    return NextResponse.json({ success: true, matchId: match.id, status: "confirming", flow: "confirmation-required" });
   }
 
   // Direct intro flow (existing behavior)
