@@ -4,15 +4,69 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { FaqSchema } from "@/components/faq-schema";
 import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
 
 export const metadata: Metadata = {
   title:
-    "Scientific Evidence for Vipassana Meditation — Research, Brain Changes & Studies",
+    "Scientific Evidence for Vipassana Meditation: Research, Brain Changes & Studies",
   description:
     "What does science say about Vipassana meditation? A balanced review of research on brain changes, anxiety reduction, pain management, addiction recovery, and adverse effects.",
   alternates: { canonical: "https://vipassana.cool/guide/scientific-evidence" },
 };
+
+const faqs = [
+  {
+    question: "What is the difference between Vipassana research and general meditation research?",
+    answer:
+      "Most published meditation research studies mindfulness-based interventions (MBIs) like MBSR or MBCT, which are clinical adaptations of Buddhist practices. Studies on Vipassana specifically, meaning the Goenka tradition's 10-day intensive residential course format, are fewer but growing. A 2025 systematic review in Cureus identified a meaningful body of evidence examining Vipassana's psychological, physiological, and neurobiological effects.",
+  },
+  {
+    question: "What are the psychological benefits of Vipassana meditation?",
+    answer:
+      "The strongest evidence for Vipassana is psychological. In a naturalistic observation study in Muscat, anxiety scores dropped from an average of 10 to 3.29 after a 10-day course. A study at India's Tihar Jail showed substantial drops in both anxiety and depression. Among student participants, those rating high on a standardized mindfulness scale increased from 9.1% before a retreat to 88.6% after. A 2025 systematic review found moderate evidence for reductions in stress and migraine burden alongside gains in mindfulness and well-being.",
+  },
+  {
+    question: "Does Vipassana change the brain?",
+    answer:
+      "Brain imaging studies of Vipassana meditators have found increased cortical thickness in regions tied to auditory, visual, somatosensory, and interoceptive processing, with the strongest effects in the right anterior insula. fMRI studies show experienced practitioners exhibit higher activity in the rostral anterior cingulate cortex and medial prefrontal cortex. A meta-analysis of 21 neuroimaging studies identified eight brain regions consistently altered by meditation, including the insula, sensory cortex, anterior cingulate cortex, and orbitofrontal cortex.",
+  },
+  {
+    question: "Can Vipassana help with chronic pain?",
+    answer:
+      "A study published in the Indian Journal of Palliative Care found significant improvement in sensory, affective, and cognitive measures of chronic low back pain after an 8-week mindfulness program based on Vipassana, with results sustained at one-year follow-up. Broader mindfulness research has found reductions in pain intensity of up to 40%, attributed to changes in how the brain processes pain signals rather than blocking them. The 2025 systematic review also documented reduced migraine burden among Vipassana practitioners.",
+  },
+  {
+    question: "Does Vipassana improve sleep?",
+    answer:
+      "A study in Sleep and Biological Rhythms found senior Vipassana practitioners had significantly enhanced slow-wave sleep (SWS) across all age groups. Meditators aged 50 to 60 showed 10.63% SWS, while non-meditating peers showed only 3.94%. Vipassana practitioners also maintained higher REM percentages and more complete sleep cycles. While non-meditators showed SWS decline with age (from 11.29% to 3.94% between ages 30 and 60), meditators maintained substantially higher levels (17.95% to 10.63%) across the same age range.",
+  },
+  {
+    question: "Does Vipassana help with addiction and recidivism?",
+    answer:
+      "At the Northwest Rehabilitation Facility in Seattle, approximately 56% of inmates who completed a Vipassana course recidivated within two years, compared with 75% in the general prison population. Average bookings declined from 2.9 pre-program to 1.5 post-program. University of Washington researchers found significant reductions in alcohol, marijuana, and crack cocaine use among Vipassana course participants compared to standard treatment. India's Tihar Jail has run one of the largest prison meditation programs in the world since 1993, with reported drops in anxiety and depression.",
+  },
+  {
+    question: "Does Vipassana reduce cortisol and stress?",
+    answer:
+      "Vipassana practice is linked to reduced cortisol levels, with one study reporting significant reductions after 8 weeks. Regular practice is also associated with enhanced parasympathetic nervous system activity, reflected in improved heart rate variability. Long-term practice appears to modulate the hypothalamic-pituitary-adrenal (HPA) axis, the body's central stress response system, leading to more adaptive stress reactions.",
+  },
+  {
+    question: "What are the adverse effects of Vipassana meditation?",
+    answer:
+      "A study on Vipassana retreat participants found that 62.9% reported at least one adverse psychological effect, including anxiety, panic, depression, confusion, or disorientation. A large international cross-sectional study in BJPsych Open found approximately 53% of regular meditators reported at least one unpleasant effect, with 6 to 14% experiencing enduring adverse effects. Risk factors include pre-existing mental health conditions, higher retreat intensity, and longer sessions. For technique-related questions or distress on the cushion, the tradition redirects practitioners to dhamma.org and to an authorized assistant teacher at a 10-day residential course.",
+  },
+  {
+    question: "What are the limitations of Vipassana research?",
+    answer:
+      "Most studies have small samples (dozens, not thousands) which limits statistical power. Self-selection bias is significant because people who sign up for a 10-day silent retreat are already motivated. Double-blind designs are impossible since you cannot give a placebo meditation. The 2025 Cureus systematic review explicitly noted moderate to high risk of bias across included studies. A 10-day retreat also involves dietary changes, technology removal, regulated sleep, and communal living, making it difficult to isolate meditation itself as the active ingredient.",
+  },
+  {
+    question: "How many studies have looked specifically at Vipassana meditation?",
+    answer:
+      "Dozens of peer-reviewed studies have examined Vipassana specifically (the 10-day Goenka tradition format), with a 2025 systematic review in Cureus identifying enough evidence to draw moderate conclusions. Key studies include Lazar et al. (2005) on cortical thickness, Pattanashetty et al. (2010) on slow-wave sleep, Bowen et al. (2006) on substance use reduction in incarcerated populations, Al-Hussaini et al. (2001) on anxiety reduction in Muscat, and Perelman et al. (2012) on prison recidivism. The broader literature on mindfulness and meditation contains thousands of studies, but the Vipassana-specific subset is smaller and growing.",
+  },
+];
 
 export default function ScientificEvidencePage() {
   return (
@@ -29,7 +83,9 @@ export default function ScientificEvidencePage() {
         description="What does science say about Vipassana meditation? A balanced review of research on brain changes, anxiety reduction, pain management, addiction recovery, and adverse effects."
         url="https://vipassana.cool/guide/scientific-evidence"
         datePublished="2025-03-01"
+        dateModified="2026-05-22"
       />
+      <FaqSchema faqs={faqs} />
       <ArticleHeader
         breadcrumbs={[
           { label: "Home", href: "/" },
@@ -38,8 +94,9 @@ export default function ScientificEvidencePage() {
         ]}
         category="Guide"
         title="Scientific Evidence for Vipassana Meditation"
-        description="What does the research actually say about Vipassana — not meditation in general, but this specific technique? A balanced look at the evidence, its limitations, and what it means for practitioners."
+        description="What does the research actually say about Vipassana, not meditation in general, but this specific technique? A balanced look at the evidence, its limitations, and what it means for practitioners."
         datePublished="2025-03-01"
+        dateUpdated="2026-05-22"
       />
 
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
