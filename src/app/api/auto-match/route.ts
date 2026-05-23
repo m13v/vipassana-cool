@@ -6,19 +6,12 @@ import {
   getPriorMatchedIds,
   getActiveMatchForSession,
   createMatchWithTokens,
-  createMatch,
   updateEntryStatus,
-  confirmMatchPerson,
   toUtcTime,
-  updateMatchCalendarEvent,
-  updateMatchSuggestedUtc,
-  claimMeetCreation,
-  releaseMeetCreationClaim,
 } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
-import { buildIntroEmailHtml, buildConfirmationEmailHtml, buildConfirmationSubject, buildIntroSubject, getSessionLocalTime, buildUnsubscribeUrl, computeSuggestedMeetUtcMinutes, utcMinutesToHHMM } from "@/lib/emails";
+import { buildConfirmationEmailHtml, buildConfirmationSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { SessionContext } from "@/lib/emails";
-import { createMeetEvent } from "@/lib/google-meet";
 
 /**
  * Session-based auto-matching cron — runs every 2 hours.
@@ -276,23 +269,21 @@ export async function GET(request: NextRequest) {
         continue;
       }
 
-      const aReady = personA.status === "ready";
-      const bReady = personB.status === "ready";
+      // Every match requires fresh confirmation from BOTH sides. We no longer
+      // auto-confirm based on prior `ready` status, that created cases where
+      // users were matched into Meets without an explicit "yes" on the current
+      // pairing. The persistent `ready` status still bypasses cooldown and
+      // prioritizes ordering (see line ~87 above), but it no longer skips the
+      // confirmation email here.
 
       if (dryRun) {
         // Dry run: generate email HTML to verify templates work, but don't send or write DB
-        const flow = aReady && bReady
-          ? "both-ready (instant intro)"
-          : aReady || bReady ? "one-ready" : "both-pending";
         const dryCtxA: SessionContext = { session: slotA.session, localTime: getSessionLocalTime(personA, slotA.session), timezone: personA.timezone };
         const dryCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone };
         let htmlOk = false;
         try {
-          if (aReady && bReady) {
-            buildIntroEmailHtml(personA, personB, undefined, { sessionA: dryCtxA, sessionB: dryCtxB });
-          } else {
-            buildConfirmationEmailHtml(personA, personB, "dry-run-token", { recipientSession: dryCtxA, matchSession: dryCtxB });
-          }
+          buildConfirmationEmailHtml(personA, personB, "dry-run-token", { recipientSession: dryCtxA, matchSession: dryCtxB });
+          buildConfirmationEmailHtml(personB, personA, "dry-run-token", { recipientSession: dryCtxB, matchSession: dryCtxA });
           htmlOk = true;
         } catch {
           htmlOk = false;
@@ -303,174 +294,49 @@ export async function GET(request: NextRequest) {
           personB: personB.name || personB.email,
           sessionB: slotB.session,
           matchId: "dry-run",
-          flow,
+          flow: "confirmation-required",
           emailHtmlGenerated: htmlOk,
         });
         continue;
       }
 
-      // --- LIVE MODE: create matches, send emails ---
-      if (aReady && bReady) {
-        // Both ready → instant intro. Must create Meet link first.
-        const nameA = personA.name?.split(/\s+/)[0] || "A";
-        const nameB = personB.name?.split(/\s+/)[0] || "B";
-        const slug = `${nameA}-${nameB}`.toLowerCase().replace(/[^a-z0-9-]/g, "");
-        const suggestedMins = computeSuggestedMeetUtcMinutes(personA, personB);
-        const bestUtcTime = suggestedMins != null ? utcMinutesToHHMM(suggestedMins) : "06:00";
-        const duration = parseDurationMinutes(personA.session_duration, personB.session_duration);
+      // --- LIVE MODE: create match with confirmation tokens, email both sides ---
+      const match = await createMatchWithTokens(personA.id, personB.id, slotA.session, slotB.session);
 
-        // Re-check session-active guards immediately before INSERT to narrow the
-        // TOCTOU race window between the earlier check and match creation. Two
-        // parallel auto-match invocations can otherwise both pass the earlier
-        // getActiveMatchForSession check and both proceed to create matches +
-        // Meets for the same pair. This is not bulletproof (true safety needs a
-        // cron-level lock or a unique index on active matches per session), but
-        // it shrinks the race window from ~hundreds of ms to <1ms.
-        const recheckA = await getActiveMatchForSession(personA.id, slotA.session);
-        const recheckB = await getActiveMatchForSession(personB.id, slotB.session);
-        if (recheckA || recheckB) {
-          skipped.push({
-            personA: `${personA.name} (${slotA.session})`,
-            personB: `${personB.name} (${slotB.session})`,
-            reason: "Session active (race-recheck)",
-          });
-          continue;
-        }
+      const sessCtxA: SessionContext = { session: slotA.session, localTime: getSessionLocalTime(personA, slotA.session), timezone: personA.timezone };
+      const sessCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone };
 
-        // Create the match record FIRST so we have an ID to claim against.
-        const match = await createMatch(personA.id, personB.id, slotA.session, slotB.session);
+      const toConfirm: [WaitlistEntry, WaitlistEntry, string, SessionContext, SessionContext][] = [
+        [personA, personB, match.person_a_token!, sessCtxA, sessCtxB],
+        [personB, personA, match.person_b_token!, sessCtxB, sessCtxA],
+      ];
 
-        // Atomic idempotency claim on the new match's Meet slot. Brand-new match
-        // records always have NULL calendar_event_id so this normally succeeds;
-        // it's defensive against a re-entry of this code path on the same match.
-        const claimed = await claimMeetCreation(match.id);
-        if (!claimed) {
-          // Another caller is already creating the Meet for this match (shouldn't
-          // happen for a freshly-created match, but covers e.g. retries). Log and
-          // skip — the other caller will send the intro email.
-          skipped.push({
-            personA: personA.name || personA.email,
-            personB: personB.name || personB.email,
-            reason: "Meet creation already claimed",
-          });
-          continue;
-        }
-
-        let meetResult: { meetUrl: string; eventId: string };
-        try {
-          meetResult = await createMeetEvent(
-            `Vipassana Practice Buddy – ${nameA} & ${nameB}`,
-            bestUtcTime, duration, slug,
-            [personA.email, personB.email],
-          );
-        } catch (err) {
-          // Meet creation failed — release the claim so a manual retry can
-          // succeed, then surface the error.
-          await releaseMeetCreationClaim(match.id);
-          errors.push({
-            personA: personA.name || personA.email,
-            personB: personB.name || personB.email,
-            error: `Meet creation failed: ${String(err)}`,
-          });
-          continue;
-        }
-
-        // Create per-person tracking links
-        const trackTokenA = crypto.randomUUID();
-        const trackTokenB = crypto.randomUUID();
-        await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${trackTokenA}, ${match.id}, ${personA.id}, ${meetResult.meetUrl})`;
-        await sql`INSERT INTO meet_links (id, token, match_id, person_id, meet_url) VALUES (${crypto.randomUUID()}, ${trackTokenB}, ${match.id}, ${personB.id}, ${meetResult.meetUrl})`;
-        await updateMatchCalendarEvent(match.id, meetResult.eventId);
-        await updateMatchSuggestedUtc(match.id, bestUtcTime);
-        await sql`
-          INSERT INTO vipassana_activity_log (match_id, event_type, new_value, triggered_by, note)
-          VALUES (${match.id}, 'meet_created', ${meetResult.meetUrl}, 'auto-match', ${`eventId=${meetResult.eventId}`})
-        `;
-
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://vipassana.cool";
-        const sessCtxA: SessionContext = { session: slotA.session, localTime: getSessionLocalTime(personA, slotA.session), timezone: personA.timezone, suggestedUtcMinutes: suggestedMins };
-        const sessCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone, suggestedUtcMinutes: suggestedMins };
-        const introSessionCtx = { sessionA: sessCtxA, sessionB: sessCtxB };
-
-        const meetLinks = {
-          a: { trackingUrl: `${baseUrl}/meet/${trackTokenA}` },
-          b: { trackingUrl: `${baseUrl}/meet/${trackTokenB}` },
-        };
-        const unsubscribeUrls = {
-          a: buildUnsubscribeUrl(personA.unsubscribe_token),
-          b: buildUnsubscribeUrl(personB.unsubscribe_token),
-        };
-        const html = buildIntroEmailHtml(personA, personB, meetLinks, introSessionCtx, unsubscribeUrls);
-        const subject = buildIntroSubject(sessCtxA, sessCtxB);
+      for (const [recipient, matchedWith, token, recipientSessCtx, matchSessCtx] of toConfirm) {
+        const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx }, buildUnsubscribeUrl(recipient.unsubscribe_token));
+        const subject = buildConfirmationSubject(recipientSessCtx);
         const emailResult = await resend!.emails.send({
           from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
-          to: [personA.email, personB.email],
-          replyTo: [personA.email, personB.email],
+          to: [recipient.email],
           subject,
           html,
           headers: { "X-Entity-Ref-ID": match.id },
         });
+        await updateEntryStatus(recipient.id, "contacted", "auto-match", match.id, "auto-match confirmation email sent");
         await sql`
           INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
           VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>',
-                  ${[personA.email, personB.email].join(", ")}, ${subject}, ${html}, 'sent')
+                  ${recipient.email}, ${subject}, ${html}, 'sent')
         `;
-
-        results.push({
-          personA: personA.name || personA.email,
-          sessionA: slotA.session,
-          personB: personB.name || personB.email,
-          sessionB: slotB.session,
-          matchId: match.id,
-          flow: "both-ready (instant intro + Meet)",
-        });
-      } else {
-        const match = await createMatchWithTokens(personA.id, personB.id, slotA.session, slotB.session);
-
-        if (aReady) {
-          await confirmMatchPerson(match.id, "a");
-          await updateEntryStatus(personA.id, "engaged", "auto-match", match.id, "auto-confirmed (ready status)");
-        }
-        if (bReady) {
-          await confirmMatchPerson(match.id, "b");
-          await updateEntryStatus(personB.id, "engaged", "auto-match", match.id, "auto-confirmed (ready status)");
-        }
-
-        const sessCtxA: SessionContext = { session: slotA.session, localTime: getSessionLocalTime(personA, slotA.session), timezone: personA.timezone };
-        const sessCtxB: SessionContext = { session: slotB.session, localTime: getSessionLocalTime(personB, slotB.session), timezone: personB.timezone };
-
-        const toConfirm: [WaitlistEntry, WaitlistEntry, string, SessionContext, SessionContext][] = [];
-        if (!aReady) toConfirm.push([personA, personB, match.person_a_token!, sessCtxA, sessCtxB]);
-        if (!bReady) toConfirm.push([personB, personA, match.person_b_token!, sessCtxB, sessCtxA]);
-
-        for (const [recipient, matchedWith, token, recipientSessCtx, matchSessCtx] of toConfirm) {
-          const html = buildConfirmationEmailHtml(recipient, matchedWith, token, { recipientSession: recipientSessCtx, matchSession: matchSessCtx }, buildUnsubscribeUrl(recipient.unsubscribe_token));
-          const subject = buildConfirmationSubject(recipientSessCtx);
-          const emailResult = await resend!.emails.send({
-            from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
-            to: [recipient.email],
-            subject,
-            html,
-            headers: { "X-Entity-Ref-ID": match.id },
-          });
-          await updateEntryStatus(recipient.id, "contacted", "auto-match", match.id, "auto-match confirmation email sent");
-          await sql`
-            INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
-            VALUES (${emailResult.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>',
-                    ${recipient.email}, ${subject}, ${html}, 'sent')
-          `;
-        }
-
-        const flow = aReady || bReady ? "one-ready" : "both-pending";
-        results.push({
-          personA: personA.name || personA.email,
-          sessionA: slotA.session,
-          personB: personB.name || personB.email,
-          sessionB: slotB.session,
-          matchId: match.id,
-          flow,
-        });
       }
+
+      results.push({
+        personA: personA.name || personA.email,
+        sessionA: slotA.session,
+        personB: personB.name || personB.email,
+        sessionB: slotB.session,
+        matchId: match.id,
+        flow: "confirmation-required",
+      });
 
       // Rate limit between sends
       await new Promise((r) => setTimeout(r, 2000));
@@ -534,7 +400,7 @@ export async function GET(request: NextRequest) {
   // Log every cron run (including empty ones) so the operator can tell the
   // difference between "cron is broken" and "cron ran, found nothing to do".
   try {
-    const emailsSent = dryRun ? 0 : results.reduce((n, r) => n + (r.flow.startsWith("both-ready") ? 2 : (r.flow === "one-ready" ? 1 : 2)), 0);
+    const emailsSent = dryRun ? 0 : results.length * 2;
     await sql`
       INSERT INTO cron_logs (job_name, status, users_synced, users_skipped, emails_sent, emails_failed, duration_ms, details)
       VALUES (
@@ -576,17 +442,3 @@ export async function GET(request: NextRequest) {
   });
 }
 
-/** Parse session duration strings to minutes, take the longer of two. */
-function parseDurationMinutes(a: string | null, b: string | null): number {
-  function parse(s: string | null): number {
-    if (!s) return 60;
-    const lower = s.toLowerCase();
-    if (lower.includes("30")) return 30;
-    if (lower.includes("20")) return 20;
-    if (lower.includes("15")) return 15;
-    if (lower.includes("45")) return 45;
-    if (lower.includes("2")) return 120;
-    return 60;
-  }
-  return Math.max(parse(a), parse(b));
-}
