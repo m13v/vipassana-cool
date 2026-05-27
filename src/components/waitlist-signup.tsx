@@ -133,6 +133,18 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
   const [errorMsg, setErrorMsg] = useState("");
   const [lookupStatus, setLookupStatus] = useState<LookupStatus>("idle");
   const [rematching, setRematching] = useState(false);
+  const [step, setStep] = useState<1 | 2>(1);
+  const [step1Error, setStep1Error] = useState("");
+
+  function goToStep2() {
+    if (form.name.trim().length < 2) { setStep1Error("Please enter your name so your buddy knows who they're sitting with."); return; }
+    if (!form.email.includes("@")) { setStep1Error("Please enter a valid email."); return; }
+    if (!form.isOldStudent) { setStep1Error("Let us know whether you've completed a 10-day course."); return; }
+    if (!form.isGoenkatradition) { setStep1Error("Let us know whether you sat in this tradition."); return; }
+    setStep1Error("");
+    try { posthog.capture("waitlist_step_completed", { step: 1, location }); } catch { /* noop */ }
+    setStep(2);
+  }
 
   async function handleEmailBlur() {
     const email = form.email.trim();
@@ -269,14 +281,25 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
 
   return (
     <div id="waitlist-form" className="rounded-xl border border-border bg-card p-8">
-      <div className="mb-8 text-center">
+      <div className="mb-6 text-center">
         <h3 className="mb-2 text-xl font-bold">
           {requestedMatchName ? `Request to match with ${requestedMatchName}` : "Apply to Be Matched"}
         </h3>
         <p className="text-sm text-muted">
-          Tell us about your practice so we can find the right match for you.
+          {step === 1
+            ? "Two quick steps, about a minute. Start with the basics."
+            : "Last step: your schedule, so we can find someone who sits when you do."}
         </p>
       </div>
+
+      {/* Step progress */}
+      <div className="mb-6 flex items-center gap-2" aria-hidden="true">
+        <div className={`h-1.5 flex-1 rounded-full ${step >= 1 ? "bg-accent" : "bg-border"}`} />
+        <div className={`h-1.5 flex-1 rounded-full ${step >= 2 ? "bg-accent" : "bg-border"}`} />
+      </div>
+      <p className="mb-6 text-center text-xs font-medium uppercase tracking-wider text-muted/70">
+        Step {step} of 2
+      </p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name & Email */}
