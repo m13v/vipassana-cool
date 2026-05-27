@@ -399,6 +399,80 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
           </div>
         </fieldset>
 
+        {step1Error && (
+          <p className="text-sm text-red-500">{step1Error}</p>
+        )}
+
+        <button
+          type="button"
+          onClick={goToStep2}
+          className="w-full rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          Continue to schedule →
+        </button>
+
+        <p className="text-center text-xs text-muted/60">
+          Step 2 is just your sit times. No spam, ever.
+        </p>
+        </>
+        )}
+
+        {step === 2 && (
+        <>
+        <button
+          type="button"
+          onClick={() => setStep(1)}
+          className="-mt-2 inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-foreground"
+        >
+          ← Back
+        </button>
+
+        {/* Phone (optional, text/WhatsApp) */}
+        <div>
+          <label htmlFor="wb-phone" className={labelClass}>
+            Phone number{" "}
+            <span className="font-normal text-muted">(optional)</span>
+          </label>
+          <input
+            id="wb-phone"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder="+1 415 555 0123"
+            value={form.phone}
+            onChange={(e) => update("phone", e.target.value)}
+            className={inputClass}
+          />
+          <p className="mt-1 text-xs text-muted/70">
+            Faster than email, only used to confirm your buddy.
+          </p>
+          {form.phone.trim().length > 0 && (
+            <fieldset className="mt-3">
+              <legend className="mb-1.5 block text-sm font-medium">
+                Reach me on
+              </legend>
+              <div className={radioGroupClass}>
+                {[
+                  { value: "sms", label: "SMS / text" },
+                  { value: "whatsapp", label: "WhatsApp" },
+                ].map((opt) => (
+                  <label key={opt.value} className={radioLabelClass}>
+                    <input
+                      type="radio"
+                      name="phoneMethod"
+                      value={opt.value}
+                      checked={form.phoneMethod === opt.value}
+                      onChange={(e) => update("phoneMethod", e.target.value)}
+                      className="accent-accent"
+                    />
+                    {opt.label}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          )}
+        </div>
+
         {/* Location */}
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
@@ -603,6 +677,8 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
         <p className="text-center text-xs text-muted/60">
           No spam. We&apos;ll only email you about Practice Buddy.
         </p>
+        </>
+        )}
       </form>
     </div>
   );
