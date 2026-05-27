@@ -302,6 +302,8 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {step === 1 && (
+        <>
         {/* Name & Email */}
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
@@ -334,52 +336,6 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
               className={inputClass}
             />
           </div>
-        </div>
-
-        {/* Phone (optional, text/WhatsApp) */}
-        <div>
-          <label htmlFor="wb-phone" className={labelClass}>
-            Phone number{" "}
-            <span className="font-normal text-muted">(optional)</span>
-          </label>
-          <input
-            id="wb-phone"
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel"
-            placeholder="+1 415 555 0123"
-            value={form.phone}
-            onChange={(e) => update("phone", e.target.value)}
-            className={inputClass}
-          />
-          <p className="mt-1 text-xs text-muted/70">
-            Faster than email — only used to confirm your buddy.
-          </p>
-          {form.phone.trim().length > 0 && (
-            <fieldset className="mt-3">
-              <legend className="mb-1.5 block text-sm font-medium">
-                Reach me on
-              </legend>
-              <div className={radioGroupClass}>
-                {[
-                  { value: "sms", label: "SMS / text" },
-                  { value: "whatsapp", label: "WhatsApp" },
-                ].map((opt) => (
-                  <label key={opt.value} className={radioLabelClass}>
-                    <input
-                      type="radio"
-                      name="phoneMethod"
-                      value={opt.value}
-                      checked={form.phoneMethod === opt.value}
-                      onChange={(e) => update("phoneMethod", e.target.value)}
-                      className="accent-accent"
-                    />
-                    {opt.label}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-          )}
         </div>
 
         {lookupStatus === "returning_pending" && (
