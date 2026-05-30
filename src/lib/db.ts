@@ -114,6 +114,21 @@ export function toUtcTime(localTime: string | null, timezone: string | null): st
   return `${String(Math.floor(utcMins / 60)).padStart(2, "0")}:${String(utcMins % 60).padStart(2, "0")}`;
 }
 
+/**
+ * Reverse of toUtcTime: convert a stored UTC "HH:MM" back to the person's local
+ * clock time. Used when the local-time column is blank but the UTC column is set
+ * (legacy rows where a re-sync wiped morning_time/evening_time but the derived
+ * morning_utc/evening_utc stuck). Lets us recover the true local time-of-day so
+ * emails and the "morning/afternoon/evening" label reflect reality.
+ */
+export function utcToLocalTime(utcTime: string | null, timezone: string | null): string | null {
+  if (!utcTime || !timezone) return null;
+  const [h, m] = utcTime.split(":").map(Number);
+  if (isNaN(h)) return null;
+  const localMins = (((h * 60 + (m || 0)) + tzOffsetMinutes(timezone)) % 1440 + 1440) % 1440;
+  return `${String(Math.floor(localMins / 60)).padStart(2, "0")}:${String(localMins % 60).padStart(2, "0")}`;
+}
+
 export async function getAllEntries(): Promise<WaitlistEntry[]> {
   const sql = getSql();
   const rows = await sql`SELECT * FROM waitlist_entries WHERE unsubscribed = false ORDER BY created_at DESC`;
