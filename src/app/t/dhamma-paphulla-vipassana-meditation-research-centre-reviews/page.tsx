@@ -44,39 +44,32 @@ export const metadata: Metadata = {
 
 const faqs: FaqItem[] = [
   {
-    question: "What is Dhamma Paphulla's rating?",
-    answer:
-      "Public listings put it at 4.7 out of 5 across roughly 1,157 ratings on JustDial, with similarly high marks on other directory sites. Ratings for Goenka-tradition centres skew very high almost everywhere, because people are mostly rating the 10-day course itself, which is standardized worldwide, rather than this specific venue. Treat the number as a signal that the experience is well run, not as a comparison against the centre down the road.",
+    q: "What is Dhamma Paphulla's rating?",
+    a: "Public listings put it at 4.7 out of 5 across roughly 1,157 ratings on JustDial, with similarly high marks on other directory sites. Ratings for Goenka-tradition centres skew very high almost everywhere, because people are mostly rating the 10-day course itself, which is standardized worldwide, rather than this specific venue. Treat the number as a signal that the experience is well run, not as a comparison against the centre down the road.",
   },
   {
-    question: "Where exactly is Dhamma Paphulla and how do you get there?",
-    answer:
-      "It is at Alur Village, Dasanapura Hobli, Bangalore North Taluk, Karnataka 562123, on the north-western edge of Bengaluru. The centre's own travel page lists it as about 30 km from the city, roughly 23 km from Bangalore City Railway Station and 16 km from Yeshwantpur Railway Station, and reachable by city bus. Some aggregator listings mislabel the area (you will see 'Nelamangala' or 'Hessarghatta Road'); the address above is the one the centre publishes.",
+    q: "Where exactly is Dhamma Paphulla and how do you get there?",
+    a: "It is at Alur Village, Dasanapura Hobli, Bangalore North Taluk, Karnataka 562123, on the north-western edge of Bengaluru. The centre's own travel page lists it as about 30 km from the city, roughly 23 km from Bangalore City Railway Station and 16 km from Yeshwantpur Railway Station, and reachable by city bus. Some aggregator listings mislabel the area (you will see 'Nelamangala' or 'Hessarghatta Road'); the address above is the one the centre publishes.",
   },
   {
-    question: "How much does a course at Dhamma Paphulla cost?",
-    answer:
-      "Nothing. There is no charge for the course, the food, or the accommodation. The entire centre runs on voluntary donations, and only people who have already completed a 10-day course are allowed to give. This is the single most misread thing in reviews: 'free' here does not mean budget or low-effort, it means the place is funded by gratitude rather than fees.",
+    q: "How much does a course at Dhamma Paphulla cost?",
+    a: "Nothing. There is no charge for the course, the food, or the accommodation. The entire centre runs on voluntary donations, and only people who have already completed a 10-day course are allowed to give. This is the single most misread thing in reviews: 'free' here does not mean budget or low-effort, it means the place is funded by gratitude rather than fees.",
   },
   {
-    question: "Will I get my own room at Paphulla?",
-    answer:
-      "It depends on which residential block you are in, and the centre's own facilities page is unusually specific about this. The men's block has 48 single rooms with attached bathrooms plus 2 twin-sharing rooms. The women's block has 26 twin-sharing rooms with attached facilities. So a single room with a private bathroom is the norm on the men's side and less guaranteed on the women's side. Allocation also depends on how full a given course is. This is the kind of detail a star rating will never surface.",
+    q: "Will I get my own room at Paphulla?",
+    a: "It depends on which residential block you are in, and the centre's own facilities page is unusually specific about this. The men's block has 48 single rooms with attached bathrooms plus 2 twin-sharing rooms. The women's block has 26 twin-sharing rooms with attached facilities. So a single room with a private bathroom is the norm on the men's side and less guaranteed on the women's side. Allocation also depends on how full a given course is. This is the kind of detail a star rating will never surface.",
   },
   {
-    question: "What do reviewers most often complain about?",
-    answer:
-      "Two honest, recurring notes. First, the food is simple, vegetarian and deliberately non-spicy, which some people find bland. Second, the course itself is demanding: long days, noble silence, and emotional ups and downs, especially in the first few days. Neither is a flaw in Paphulla specifically; both are true of the format. If a review frames these as dealbreakers, it is usually a mismatch with the format rather than a problem with this centre.",
+    q: "What do reviewers most often complain about?",
+    a: "Two honest, recurring notes. First, the food is simple, vegetarian and deliberately non-spicy, which some people find bland. Second, the course itself is demanding: long days, noble silence, and emotional ups and downs, especially in the first few days. Neither is a flaw in Paphulla specifically; both are true of the format. If a review frames these as dealbreakers, it is usually a mismatch with the format rather than a problem with this centre.",
   },
   {
-    question: "How often do courses run, and are there short courses for old students?",
-    answer:
-      "Ten-day courses typically begin on the 1st and 3rd Wednesday of every month, with more than twenty 10-day courses a year plus special formats like Satipatthana, 2-day and 3-day courses for old students. There is also a 1-day course every Sunday for old students, roughly 10am to 4pm, with no prior registration. Always confirm dates and apply through the official schedule, since this changes.",
+    q: "How often do courses run, and are there short courses for old students?",
+    a: "Ten-day courses typically begin on the 1st and 3rd Wednesday of every month, with more than twenty 10-day courses a year plus special formats like Satipatthana, 2-day and 3-day courses for old students. There is also a 1-day course every Sunday for old students, roughly 10am to 4pm, with no prior registration. Always confirm dates and apply through the official schedule, since this changes.",
   },
   {
-    question: "Is Dhamma Paphulla good for a first course?",
-    answer:
-      "Reviewers regularly describe it as well maintained, clean and calm, which makes it a reasonable place to sit your first 10 days if you live in or near Bengaluru. That said, I am a fellow practitioner sharing experience, not a teacher. For anything about whether you are ready, how to apply, or how to handle the practice itself, the right sources are dhamma.org and an authorized assistant teacher at the centre.",
+    q: "Is Dhamma Paphulla good for a first course?",
+    a: "Reviewers regularly describe it as well maintained, clean and calm, which makes it a reasonable place to sit your first 10 days if you live in or near Bengaluru. That said, I am a fellow practitioner sharing experience, not a teacher. For anything about whether you are ready, how to apply, or how to handle the practice itself, the right sources are dhamma.org and an authorized assistant teacher at the centre.",
   },
 ];
 
@@ -144,10 +137,10 @@ export default function Page() {
         <section className="mt-12">
           <MetricsRow
             metrics={[
-              { value: "4.7", label: "average public rating", sub: "out of 5, ~1,157 ratings" },
-              { value: "120", label: "seats in the Dhamma hall", sub: "single main hall" },
-              { value: "10", label: "acres of grounds", sub: "farmland and forest on two sides" },
-              { value: "0", label: "cost to attend", sub: "donation-funded, by old students" },
+              { value: 4.7, decimals: 1, label: "average rating, ~1,157 reviews" },
+              { value: 120, label: "seats in the Dhamma hall" },
+              { value: 10, suffix: " acres", label: "of grounds at Alur village" },
+              { value: 0, prefix: "₹", label: "cost to attend, donation funded" },
             ]}
           />
         </section>
@@ -223,7 +216,7 @@ export default function Page() {
             way worth knowing before you apply.
           </p>
 
-          <GlowCard glowColor="#0d9488" size="lg">
+          <GlowCard glowColor="rgba(13, 148, 136, 0.18)">
             <div className="p-2">
               <p className="text-xs font-semibold uppercase tracking-wide text-teal-700">
                 Verified from paphulla.dhamma.org, facilities page, 2026-05-30
@@ -323,14 +316,7 @@ export default function Page() {
           description="I run a free practice-buddy matching program that pairs meditators for daily accountability. Grab a slot and I'll help you find someone to sit with."
         />
 
-        <section className="mt-14">
-          <h2 className="text-2xl font-bold text-zinc-900 sm:text-3xl">
-            Common questions about Dhamma Paphulla
-          </h2>
-          <div className="mt-6">
-            <FaqSection faqs={faqs} />
-          </div>
-        </section>
+        <FaqSection items={faqs} heading="Common questions about Dhamma Paphulla" />
 
         <section className="mt-14">
           <RelatedPostsGrid
@@ -383,6 +369,8 @@ export default function Page() {
               dateModified: MODIFIED,
               author: "Matthew Diakonov",
               authorUrl: "https://m13v.com",
+              publisherName: "Vipassana.cool",
+              publisherUrl: "https://vipassana.cool",
             }),
           ),
         }}
