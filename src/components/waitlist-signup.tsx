@@ -574,7 +574,7 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="wb-morning" className={labelClass}>
-              Morning sit time
+              {form.frequency === "Twice a day" ? "Morning sit time" : "Your daily sit time"}
             </label>
             <input
               id="wb-morning"
