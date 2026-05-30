@@ -59,17 +59,29 @@ export function PracticeBuddyClient() {
         <p className="mx-auto mb-7 max-w-2xl text-sm text-muted/80">
           Built by an old student on day <DayCounter /> of daily practice, after 6 courses at 3 centers and 40+ days of dhamma service. Free forever.
         </p>
-        {((matchedCount !== null && matchedCount > 0) || (pendingCount !== null && pendingCount > 0)) && (
-          <p className="mb-6 text-sm text-muted">
-            {matchedCount !== null && matchedCount > 0 && (
-              <span className="font-semibold text-accent">{matchedCount} matched</span>
-            )}
-            {matchedCount !== null && matchedCount > 0 && pendingCount !== null && pendingCount > 0 && ", "}
-            {pendingCount !== null && pendingCount > 0 && (
-              <span><span className="font-semibold text-foreground">{pendingCount} waiting</span> for a buddy right now</span>
-            )}
-          </p>
-        )}
+        {/* Above-the-fold proof. Research (LaunchList, MailerLite, SaaS Hero) shows a real,
+            named, specific testimonial placed near the hero CTA is the single highest-leverage
+            trust element; these are the same real quotes shown further down the page, surfaced
+            where ~57% of viewing time happens. */}
+        <figure className="mx-auto mb-5 max-w-xl">
+          <blockquote className="text-[15px] italic leading-relaxed text-foreground">
+            &ldquo;Having an accountability partner in meditation goes a long way in ensuring you continue on this journey.&rdquo;
+          </blockquote>
+          <figcaption className="mt-1.5 text-xs text-muted">— Vikas, Delhi</figcaption>
+        </figure>
+        <p className="mb-6 text-sm text-muted">
+          {matchedCount !== null && matchedCount > 0 ? (
+            <>
+              <span className="font-semibold text-accent">{matchedCount} meditators matched</span>
+              {pendingCount !== null && pendingCount > 0 && (
+                <>, <span className="font-semibold text-foreground">{pendingCount} waiting</span></>
+              )}
+              {" "}— sitting together from Paris to Delhi to San Diego
+            </>
+          ) : (
+            <>Meditators sitting together every morning, from Paris to Delhi to San Diego</>
+          )}
+        </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <a
             href="#waitlist-form"
