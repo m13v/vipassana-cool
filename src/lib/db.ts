@@ -156,12 +156,18 @@ export async function getEntryByEmail(email: string): Promise<WaitlistEntry | un
 export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated_at" | "pass_count" | "contact_count" | "morning_utc" | "evening_utc" | "unsubscribed" | "unsubscribe_token">): Promise<void> {
   const sql = getSql();
   const now = new Date().toISOString();
-  const morningUtc = toUtcTime(entry.morning_time, entry.timezone);
-  const eveningUtc = toUtcTime(entry.evening_time, entry.timezone);
+  // Normalize blank time strings to NULL so a re-sync that omits a sit time can't
+  // overwrite an existing good value: COALESCE only treats NULL (not "") as
+  // "missing". This is what corrupted morning_time for legacy rows while the
+  // derived morning_utc stuck around.
+  const morningTime = entry.morning_time || null;
+  const eveningTime = entry.evening_time || null;
+  const morningUtc = toUtcTime(morningTime, entry.timezone);
+  const eveningUtc = toUtcTime(eveningTime, entry.timezone);
   const unsubToken = crypto.randomUUID();
   await sql`
     INSERT INTO waitlist_entries (id, email, name, phone, phone_method, is_old_student, is_goenka_tradition, timezone, city, frequency, morning_time, evening_time, days, session_duration, has_maintained_practice, practice_length, requested_match_id, research_notes, morning_utc, evening_utc, status, unsubscribe_token, created_at, updated_at)
-    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.phone}, ${entry.phone_method}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${entry.morning_time}, ${entry.evening_time}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, ${entry.requested_match_id}, ${entry.research_notes}, ${morningUtc}, ${eveningUtc}, 'pending', ${unsubToken}, ${entry.created_at}, ${now})
+    VALUES (${entry.id}, ${entry.email}, ${entry.name}, ${entry.phone}, ${entry.phone_method}, ${entry.is_old_student}, ${entry.is_goenka_tradition}, ${entry.timezone}, ${entry.city}, ${entry.frequency}, ${morningTime}, ${eveningTime}, ${entry.days}, ${entry.session_duration}, ${entry.has_maintained_practice}, ${entry.practice_length}, ${entry.requested_match_id}, ${entry.research_notes}, ${morningUtc}, ${eveningUtc}, 'pending', ${unsubToken}, ${entry.created_at}, ${now})
     ON CONFLICT(email) DO UPDATE SET
       name = COALESCE(EXCLUDED.name, waitlist_entries.name),
       phone = COALESCE(EXCLUDED.phone, waitlist_entries.phone),
