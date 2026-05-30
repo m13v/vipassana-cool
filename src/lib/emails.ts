@@ -1,4 +1,4 @@
-import { toUtcTime } from "@/lib/db";
+import { toUtcTime, utcToLocalTime } from "@/lib/db";
 import type { WaitlistEntry } from "@/lib/db";
 
 export function buildCommonTraits(personA: WaitlistEntry, personB: WaitlistEntry): string[] {
@@ -215,14 +215,44 @@ function formatSessionLocalTime(ctx: SessionContext): string {
   return `${formatDualTime(ctx.localTime)}${tzLabel ? ` ${tzLabel}` : ""}`;
 }
 
-/** Get the local time for a person's session slot (their original intended time) */
+/**
+ * Time-of-day word derived from the ACTUAL local clock time, not the internal
+ * slot name. The matcher labels a person's two slots "morning"/"evening" purely
+ * by which field they filled, but a once-a-day sitter who practices at 4pm still
+ * gets filed under the "morning" slot. Telling them "your morning session at
+ * 4:00pm" is contradictory, so user-facing copy uses this instead.
+ */
+function timeOfDayWord(localTime: string | null): string {
+  if (!localTime) return "daily";
+  const [h] = localTime.split(":").map(Number);
+  if (isNaN(h)) return "daily";
+  if (h >= 4 && h < 12) return "morning";
+  if (h >= 12 && h < 17) return "afternoon";
+  if (h >= 17 && h < 21) return "evening";
+  return "late-night";
+}
+
+/** The accurate time-of-day word for a session context, based on real local time. */
+function sessionWord(ctx: SessionContext): string {
+  return timeOfDayWord(ctx.localTime);
+}
+
+/**
+ * Get the local time for a person's session slot (their original intended time).
+ * If the local-time column is blank (legacy rows wiped by a re-sync), recover it
+ * from the stored UTC column + timezone instead of guessing "06:00", which would
+ * show the user a time they never picked.
+ */
 export function getSessionLocalTime(person: WaitlistEntry, session: "morning" | "evening"): string {
-  return (session === "evening" ? person.evening_time : person.morning_time) || "06:00";
+  const local = session === "evening" ? person.evening_time : person.morning_time;
+  if (local) return local;
+  const utc = session === "evening" ? person.evening_utc : person.morning_utc;
+  return utcToLocalTime(utc, person.timezone) || "06:00";
 }
 
 /** Build subject line for confirmation email */
 export function buildConfirmationSubject(sessionCtx: SessionContext): string {
-  return `I found a practice buddy for your ${sessionCtx.session} session at ${formatSessionLocalTime(sessionCtx)}`;
+  return `I found a practice buddy for your ${sessionWord(sessionCtx)} session at ${formatSessionLocalTime(sessionCtx)}`;
 }
 
 /** Build subject line for the "your potential match declined" notification. */
@@ -282,8 +312,8 @@ export function buildIntroEmailHtml(
     const timeB = formatSessionLocalTime(sessionCtx.sessionB);
     sessionInfoHtml = `
       <div style="background:#f0ebe3;border:1px solid #e8e4de;border-radius:8px;padding:16px;margin:0 0 16px;">
-        <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>${nameA}'s ${sessionCtx.sessionA.session} session:</strong> ${timeA}</p>
-        <p style="font-size:15px;line-height:1.7;margin:0;"><strong>${nameB}'s ${sessionCtx.sessionB.session} session:</strong> ${timeB}</p>
+        <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>${nameA}'s ${sessionWord(sessionCtx.sessionA)} session:</strong> ${timeA}</p>
+        <p style="font-size:15px;line-height:1.7;margin:0;"><strong>${nameB}'s ${sessionWord(sessionCtx.sessionB)} session:</strong> ${timeB}</p>
       </div>`;
   }
 
@@ -370,11 +400,11 @@ export function buildIntroEmailHtml(
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
     <div style="text-align:center;margin-bottom:32px;">
       <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#8b7355;margin:0 0 8px;">Vipassana.cool</p>
-      <h1 style="font-size:28px;font-weight:700;margin:0;line-height:1.3;">Your Practice Buddy match is here${sessionCtx ? ` – ${sessionCtx.sessionA.session} session` : ""}</h1>
+      <h1 style="font-size:28px;font-weight:700;margin:0;line-height:1.3;">Your Practice Buddy match is here${sessionCtx ? ` – ${sessionWord(sessionCtx.sessionA)} session` : ""}</h1>
     </div>
     <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
       <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Hi both,</p>
-      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">I'm Matt from Vipassana.cool. You both signed up for Practice Buddy, and I think you're a great match${sessionCtx ? ` for your <strong>${sessionCtx.sessionA.session}</strong> session` : ""}.</p>
+      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">I'm Matt from Vipassana.cool. You both signed up for Practice Buddy, and I think you're a great match${sessionCtx ? ` for your <strong>${sessionWord(sessionCtx.sessionA)}</strong> session` : ""}.</p>
       ${traitsHtml}
       ${sessionInfoHtml}
       ${timeHtml}
@@ -433,11 +463,11 @@ export function buildConfirmationEmailHtml(
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
     <div style="text-align:center;margin-bottom:32px;">
       <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#8b7355;margin:0 0 8px;">Vipassana.cool</p>
-      <h1 style="font-size:28px;font-weight:700;margin:0;line-height:1.3;">I found a match for your ${sessionCtx ? sessionCtx.recipientSession.session : "daily"} session</h1>
+      <h1 style="font-size:28px;font-weight:700;margin:0;line-height:1.3;">I found a match for your ${sessionCtx ? sessionWord(sessionCtx.recipientSession) : "daily"} session</h1>
     </div>
     <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
       <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">Hi ${firstName},</p>
-      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">I'm Matt from Vipassana.cool. I've been reviewing the Practice Buddy waitlist and I think I've found a great match for your <strong>${sessionCtx ? sessionCtx.recipientSession.session + " session" : "daily practice"}</strong>.</p>
+      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;">I'm Matt from Vipassana.cool. I've been reviewing the Practice Buddy waitlist and I think I've found a great match for your <strong>${sessionCtx ? sessionWord(sessionCtx.recipientSession) + " session" : "daily practice"}</strong>.</p>
       ${sessionHtml}
       <p style="font-size:15px;line-height:1.7;margin:0 0 8px;">Your potential match is <strong>${matchFirstName}</strong> from ${matchedWith.city || "somewhere nice"}. They sit ${matchedWith.frequency?.toLowerCase() || "regularly"}, ${matchedWith.session_duration || ""} per session${matchedWith.has_maintained_practice ? `, ${matchedWith.has_maintained_practice.toLowerCase()} maintained practice` : ""}.</p>
       ${traitsHtml}
