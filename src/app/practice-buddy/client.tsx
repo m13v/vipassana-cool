@@ -46,7 +46,7 @@ export function PracticeBuddyClient() {
   return (
     <>
       {/* Hero */}
-      <section id="practice-buddy" className="mx-auto max-w-4xl px-6 pb-16 pt-20 text-center">
+      <section id="practice-buddy" className="mx-auto max-w-4xl px-6 pb-16 pt-12 text-center">
         <p className="mb-5 inline-block rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-xs font-medium text-accent">
           For old students of S.N. Goenka 10-day courses
         </p>
@@ -63,13 +63,13 @@ export function PracticeBuddyClient() {
             named, specific testimonial placed near the hero CTA is the single highest-leverage
             trust element; these are the same real quotes shown further down the page, surfaced
             where ~57% of viewing time happens. */}
-        <figure className="mx-auto mb-5 max-w-xl">
-          <blockquote className="text-[15px] italic leading-relaxed text-foreground">
+        <figure className="mx-auto mb-4 max-w-xl">
+          <blockquote className="text-sm italic leading-relaxed text-foreground">
             &ldquo;Having an accountability partner in meditation goes a long way in ensuring you continue on this journey.&rdquo;
           </blockquote>
           <figcaption className="mt-1.5 text-xs text-muted">— Vikas, Delhi</figcaption>
         </figure>
-        <p className="mb-6 text-sm text-muted">
+        <p className="mb-5 text-sm text-muted">
           {matchedCount !== null && matchedCount > 0 ? (
             <>
               <span className="font-semibold text-accent">{matchedCount} meditators matched</span>
