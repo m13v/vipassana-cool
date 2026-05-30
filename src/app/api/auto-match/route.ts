@@ -138,14 +138,18 @@ export async function GET(request: NextRequest) {
   // Compute UTC from local time + timezone on the fly (DST-aware)
   const slots: SessionSlot[] = [];
   for (const p of eligible) {
-    const freshMorningUtc = toUtcTime(p.morning_time, p.timezone);
+    // Prefer recomputing from local time + timezone (DST-aware). Fall back to the
+    // stored *_utc column for legacy rows whose local-time field was blanked by a
+    // re-sync but whose UTC value is still correct — otherwise those people are
+    // silently invisible to the matcher.
+    const freshMorningUtc = toUtcTime(p.morning_time, p.timezone) ?? p.morning_utc;
     const mornMin = utcToMinutes(freshMorningUtc);
     if (mornMin !== null && !activeSessionSet.has(`${p.id}:morning`)) {
       slots.push({ personId: p.id, person: p, session: "morning", utcMinutes: mornMin });
     }
     // Only add evening slot if they sit twice and have an evening time
     if (p.frequency === "Twice a day") {
-      const freshEveningUtc = toUtcTime(p.evening_time, p.timezone);
+      const freshEveningUtc = toUtcTime(p.evening_time, p.timezone) ?? p.evening_utc;
       const eveMin = utcToMinutes(freshEveningUtc);
       if (eveMin !== null && !activeSessionSet.has(`${p.id}:evening`)) {
         slots.push({ personId: p.id, person: p, session: "evening", utcMinutes: eveMin });
