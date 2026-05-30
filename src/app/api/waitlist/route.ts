@@ -63,6 +63,9 @@ export async function POST(request: NextRequest) {
     data.name = trimmedName;
 
     const normalizedPhone = normalizePhone(data.phone);
+    if (!normalizedPhone) {
+      return NextResponse.json({ error: "A valid phone number is required" }, { status: 400 });
+    }
     const allowedMethods = new Set(["sms", "whatsapp"]);
     const normalizedPhoneMethod =
       normalizedPhone && data.phoneMethod && allowedMethods.has(data.phoneMethod)
