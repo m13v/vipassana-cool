@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       { source: "/t/is-vipassana-safe", destination: "/t/vipassana-danger", permanent: true },
       { source: "/t/vipassana-zagro-enia", destination: "/t/vipassana-danger", permanent: true },
       { source: "/t/vipassana", destination: "/t/vipassana-meditation", permanent: true },
+      { source: "/t/what-is-vipassana-meditation", destination: "/t/vipassana-meditation", permanent: true },
     ];
   },
   async headers() {
