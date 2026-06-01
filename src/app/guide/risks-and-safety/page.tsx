@@ -3,7 +3,51 @@ import Link from "next/link";
 import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
+import { FaqSchema } from "@/components/faq-schema";
 import { ArticleHeader } from "@/components/article-header";
+
+const faqs = [
+  {
+    question: "What does the research say about Vipassana meditation risks?",
+    answer:
+      "Peer-reviewed data is more nuanced than either extreme. A large international study found 53% of meditators reported at least one adverse effect, but only 6 to 14% experienced enduring issues, rates comparable to psychotherapy's 5 to 13%. A prospective study on intensive Vipassana retreats found 62.9% of participants reported at least one adverse psychological effect such as anxiety, panic, or disorientation, yet only about 7% had symptoms severe enough to stop meditating. The Brown University Varieties of Contemplative Experience study (Lindahl et al., 2017) catalogued 59 types of challenging experiences across seven domains. The takeaway: difficulty during intensive practice is common and usually temporary; enduring harm is the rarer exception.",
+  },
+  {
+    question: "What is the Dark Night in Vipassana meditation?",
+    answer:
+      "In Theravada Buddhist meditation theory, the dukkha nanas (literally knowledges of suffering) are a documented set of difficult stages a practitioner can pass through as insight deepens, sometimes called the Dark Night of the Soul in Western contexts. They include phases described as dissolution, fear, misery, disgust, and a desire for deliverance, in which one's usual sense of solidity and meaning feels destabilized. Within the contemplative framework these are considered natural rather than pathological. They become a problem mainly when someone gets stuck in them without adequate guidance or when the states spill into daily life and impair functioning.",
+  },
+  {
+    question: "Who is most at risk during Vipassana meditation?",
+    answer:
+      "Vulnerability is not evenly distributed. Higher-risk factors include a history of psychosis, bipolar disorder, severe depression, or PTSD; unresolved trauma, which can surface forcefully during intensive practice; self-directed intensive practice without access to an experienced teacher; and greater retreat intensity, since longer retreats and more daily hours correlate with more adverse effects. Personality factors such as high neuroticism or high absorption, and a lack of integration support after a course, also raise the odds of a difficult experience. The application screening exists partly to flag these factors, which is why honesty on the form matters.",
+  },
+  {
+    question: "How can you tell if a difficult meditation experience is harmful?",
+    answer:
+      "Hard is not the same as harmful. Difficult-but-productive experiences arise during a course and resolve within days to weeks, you can still function, and you come away with greater self-understanding. Genuinely harmful experiences persist for weeks or months after the retreat, prevent you from working or relating to others, leave you worse off with no improvement trajectory, or involve psychotic symptoms or suicidal thoughts. If your experience falls into the second category it does not mean you failed; it means you need support beyond the meditation technique itself.",
+  },
+  {
+    question: "What are the warning signs after a Vipassana retreat?",
+    answer:
+      "Take it seriously if, after returning home, someone shows persistent inability to sleep beyond the first few days, hallucinations or auditory and visual disturbances that do not resolve, paranoid or delusional thinking, severe depersonalization (a persistent feeling that you or the world is not real), suicidal ideation or self-harm urges, emotional flooding that prevents functioning, severe dissociation, mania or euphoria that does not subside, or panic attacks continuing for weeks. These are not normal post-retreat adjustment; they signal that the nervous system needs professional support.",
+  },
+  {
+    question: "What should you do if you are struggling after Vipassana?",
+    answer:
+      "For an immediate crisis in the US, call or text the 988 Suicide and Crisis Lifeline, text HOME to 741741, or call 911 if someone is in danger. For meditation-specific support, Cheetah House (cheetahhouse.org), a nonprofit founded by Dr. Willoughby Britton at Brown University, offers sliding-scale Zoom consultations and support groups for meditators experiencing adverse effects, though not acute crisis management. You can also contact the assistant teacher or center from your course, or find a therapist trained in trauma-informed or somatic care. Practically, it is okay to scale back intensive practice temporarily, stay grounded through movement and routine, avoid isolating, and resist blaming yourself.",
+  },
+  {
+    question: "How does the Goenka tradition handle safety?",
+    answer:
+      "The Goenka organization has structural safeguards: an application that screens for psychiatric history and medications, a gradual introduction of the technique across the course, designated interview times to raise difficulties with the assistant teacher, nightly discourses that normalize each day's common challenges, non-teaching course managers for personal concerns, and the option to leave. The limitations are worth naming honestly: assistant teachers are trained volunteers rather than mental health professionals, screening relies on self-reporting, the emphasis on completing all ten days can pressure some students to stay, and formal follow-up support after the course is limited.",
+  },
+  {
+    question: "How risky is Vipassana meditation, honestly?",
+    answer:
+      "For the overwhelming majority of mentally healthy adults the risk-benefit ratio is strongly positive, but the risk of genuine harm is not zero. A small percentage of practitioners experience effects that go beyond productive difficulty, which is why accurate information, serious screening, and available support matter. If a first course is making you anxious, going in with eyes open and being honest on the application is the responsible path. If you have already had a difficult experience, you are not alone, you did not fail, and help is available through the crisis and meditation-specific resources above.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Vipassana Risks & Safety — Adverse Effects, Dark Night, Crisis Resources",
@@ -28,6 +72,7 @@ export default function RisksAndSafetyPage() {
         url="https://vipassana.cool/guide/risks-and-safety"
         datePublished="2025-03-01"
       />
+      <FaqSchema faqs={faqs} />
       <ArticleHeader
         breadcrumbs={[
           { label: "Home", href: "/" },
