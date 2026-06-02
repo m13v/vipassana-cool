@@ -4,6 +4,51 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { FaqSchema } from "@/components/faq-schema";
+import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
+
+const faqs = [
+  {
+    question: "What is Vipassana Dhamma service (seva)?",
+    answer:
+      "Dhamma service, also called seva, is the tradition of volunteering at a Vipassana course. Servers cook meals, clean facilities, manage logistics, and support students so the course can run. In the Goenka tradition it is considered a core part of the practice, not just unpaid help: a chance to carry what is learned on the cushion into real work and real interactions. Every course runs entirely on donations and volunteer service, with no paid staff at course sites.",
+  },
+  {
+    question: "Who can serve at a Vipassana course?",
+    answer:
+      "You must have completed at least one 10-day Vipassana course in the tradition of S.N. Goenka. Servers are also expected to be maintaining a daily meditation practice, not practicing other meditation techniques since their last course, and observing the five precepts. You do not need years of experience or multiple courses to serve.",
+  },
+  {
+    question: "Do servers get paid for Dhamma service?",
+    answer:
+      "No. Dhamma service is entirely voluntary, with no payment, stipend, or compensation of any kind. Service is offered as dana (generosity), the same way the teaching itself is offered freely. Servers do receive free accommodation and the same meals students eat, though they typically eat after students have finished.",
+  },
+  {
+    question: "How much do servers meditate during a course?",
+    answer:
+      "Servers attend the three daily group sittings, roughly three hours of formal meditation, compared to the 10-plus hours that sitting students do. The rest of the day goes to work. Many servers report that those group sittings feel unusually deep, since the body is tired from physical work while the mind stays alert.",
+  },
+  {
+    question: "How do you apply for Dhamma service?",
+    answer:
+      "Find your preferred center through the directory at dhamma.org, look for its Service or Dhamma Seva section, select the course dates you want to serve, and fill out the service application (shorter than a sitting application). Service positions fill up, so applying early helps. Some centers also accept part-time servers for a few days rather than the full course.",
+  },
+  {
+    question: "Can I serve right after my first 10-day course?",
+    answer:
+      "Yes. Many people serve for the first time at their second visit to a center, and serving early is encouraged. Willingness and a good attitude matter more than meditation experience, so you do not need to be an advanced meditator to contribute meaningfully.",
+  },
+  {
+    question: "Is Dhamma service physically demanding?",
+    answer:
+      "It depends on the role. Kitchen work involves standing for long periods, lifting pots, and a hot environment; cleaning and maintenance are also physical. Registration and admin roles are lighter and busiest on arrival and departure days. If you have physical limitations, mention them in your application and the center will try to assign an appropriate role.",
+  },
+  {
+    question: "Is Dhamma service required for longer Vipassana courses?",
+    answer:
+      "Yes. Dhamma service is a prerequisite for Special 10-day courses, 20-day courses, and all longer courses. Beyond meeting the formal requirement, serving builds resilience for demanding long courses and helps build the relationships with Assistant Teachers that longer courses require.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Vipassana Dhamma Service (Seva) — What It's Like to Volunteer",
@@ -39,6 +84,7 @@ export default function DhammaServicePage() {
         description="Serving at a Vipassana course is one of the most underrated ways to deepen your practice. Here's what it actually involves, what to expect, and why so many experienced meditators say serving changed their practice more than sitting did."
         datePublished="2025-06-01"
       />
+      <FaqSchema faqs={faqs} />
 
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
@@ -470,6 +516,11 @@ export default function DhammaServicePage() {
           Find a Course
         </a>
       </div>
+
+      <PracticeBuddyCta
+        heading="Keeping Your Practice Alive Between Courses?"
+        description="Serving requires a maintained daily practice, and that's the hard part for most old students. Get matched with a fellow Vipassana meditator for daily sits over Google Meet. Free, peer-led, and built on real accountability."
+      />
 
       <div className="mt-12 rounded-xl border border-border bg-card p-6">
         <h2 className="mb-4 font-semibold text-foreground">Related</h2>
