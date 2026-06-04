@@ -1,7 +1,40 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
+import { neon } from "@neondatabase/serverless";
 
 const POSTHOG_HOST = "https://us.i.posthog.com";
+
+// Pull the last 7 days of matching activity from the activity log so the admin
+// gets one weekly digest instead of a per-cron-run email from auto-match (every
+// 30 min) and expire-matches (daily). Those crons still run on their own
+// schedule, they just no longer email on success — only on error.
+async function getMatchingStats() {
+  const sql = neon(process.env.DATABASE_URL!);
+  const [newMatchesRow, transitionRows, activeRow] = await Promise.all([
+    sql`SELECT count(DISTINCT match_id) AS n
+        FROM vipassana_activity_log
+        WHERE event_type = 'match_created'
+          AND created_at > now() - interval '7 days'`,
+    sql`SELECT new_value, count(*) AS n
+        FROM vipassana_activity_log
+        WHERE event_type = 'match_status_change'
+          AND created_at > now() - interval '7 days'
+        GROUP BY new_value`,
+    sql`SELECT count(*) AS n FROM matches
+        WHERE status IN ('confirming', 'pending', 'replied', 'scheduling', 'active')`,
+  ]);
+  const transitions: Record<string, number> = {};
+  for (const r of transitionRows as { new_value: string; n: number }[]) {
+    transitions[r.new_value] = Number(r.n);
+  }
+  return {
+    newMatches: Number((newMatchesRow as { n: number }[])[0]?.n ?? 0),
+    expired: transitions["expired"] ?? 0,
+    ended: transitions["ended"] ?? 0,
+    declined: transitions["declined"] ?? 0,
+    activeNow: Number((activeRow as { n: number }[])[0]?.n ?? 0),
+  };
+}
 
 export async function GET(request: NextRequest) {
   // Verify cron secret
@@ -18,7 +51,7 @@ export async function GET(request: NextRequest) {
 
   try {
     // Fetch stats in parallel
-    const [pageviewStats, topPages, subscriberData, eventBreakdown, waitlistWeek, waitlistTotal] =
+    const [pageviewStats, topPages, subscriberData, eventBreakdown, waitlistWeek, waitlistTotal, matchingStats] =
       await Promise.all([
         hogqlQuery(projectId, phKey, `
           SELECT
@@ -67,6 +100,7 @@ export async function GET(request: NextRequest) {
           WHERE event = 'waitlist_signup'
              OR (event = 'newsletter_subscribed' AND properties.source = 'waitlist')
         `),
+        getMatchingStats(),
       ]);
 
     const totalPageviews = pageviewStats.results?.[0]?.[0] ?? 0;
@@ -140,6 +174,33 @@ export async function GET(request: NextRequest) {
           <span style="font-size:13px;color:#6b6b6b;margin-left:6px;">total all-time</span>
         </div>
       </div>
+    </div>
+
+    <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:20px;margin-bottom:24px;">
+      <h2 style="font-size:16px;margin:0 0 12px;color:#8b7355;">Matching (last 7 days)</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;">
+        <div>
+          <span style="font-size:24px;font-weight:700;color:#8b7355;">${matchingStats.newMatches}</span>
+          <span style="font-size:13px;color:#6b6b6b;margin-left:6px;">new matches</span>
+        </div>
+        <div>
+          <span style="font-size:24px;font-weight:700;color:#8b7355;">${matchingStats.expired}</span>
+          <span style="font-size:13px;color:#6b6b6b;margin-left:6px;">expired</span>
+        </div>
+        <div>
+          <span style="font-size:24px;font-weight:700;color:#8b7355;">${matchingStats.ended}</span>
+          <span style="font-size:13px;color:#6b6b6b;margin-left:6px;">ended</span>
+        </div>
+        <div>
+          <span style="font-size:24px;font-weight:700;color:#8b7355;">${matchingStats.declined}</span>
+          <span style="font-size:13px;color:#6b6b6b;margin-left:6px;">declined</span>
+        </div>
+        <div>
+          <span style="font-size:24px;font-weight:700;color:#8b7355;">${matchingStats.activeNow}</span>
+          <span style="font-size:13px;color:#6b6b6b;margin-left:6px;">active now</span>
+        </div>
+      </div>
+      <p style="margin:14px 0 0;font-size:12px;"><a href="https://vipassana.cool/admin/matching" style="color:#8b7355;">Open matching dashboard</a></p>
     </div>
 
     <div style="background:#ffffff;border:1px solid #e8e4de;border-radius:12px;padding:20px;margin-bottom:24px;">
