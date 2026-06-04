@@ -353,14 +353,15 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // Send admin summary only when there's something actionable (matches made or
-  // real errors). Skipped-only runs are noise: the per-pair guards correctly
-  // declined to re-pair, the cron_logs row already records what happened, and
-  // the dashboard surfaces the same info on demand.
-  if (results.length > 0 || errors.length > 0) {
+  // Email the admin ONLY when there's a real error. Successful matches are no
+  // longer emailed per-run (this cron fires every 30 min); their counts roll up
+  // into the weekly report (/api/weekly-report). The cron_logs row below still
+  // records every run, and the dashboard surfaces matches on demand. A failing
+  // cron still pings immediately so problems aren't hidden for a week.
+  if (errors.length > 0) {
     try {
       const reportResend = new Resend(process.env.RESEND_API_KEY);
-      const prefix = dryRun ? "[DRY RUN] " : "";
+      const prefix = dryRun ? "[DRY RUN] " : "⚠️ ";
       const matchList = results
         .map(
           (r) =>
@@ -379,9 +380,9 @@ export async function GET(request: NextRequest) {
             `<li style="color:#6b6b6b">${s.personA} + ${s.personB}: ${s.reason}</li>`
         )
         .join("");
-      const subjectParts: string[] = [`${results.length} pair${results.length !== 1 ? "s" : ""} ${dryRun ? "identified" : "matched"}`];
+      const subjectParts: string[] = [`${errors.length} error${errors.length !== 1 ? "s" : ""}`];
+      subjectParts.push(`${results.length} pair${results.length !== 1 ? "s" : ""} ${dryRun ? "identified" : "matched"}`);
       if (skipped.length > 0) subjectParts.push(`${skipped.length} skipped`);
-      if (errors.length > 0) subjectParts.push(`${errors.length} error${errors.length !== 1 ? "s" : ""}`);
       await reportResend.emails.send({
         from: "Vipassana.cool <hello@inbound.vipassana.cool>",
         to: "i@m13v.com",
