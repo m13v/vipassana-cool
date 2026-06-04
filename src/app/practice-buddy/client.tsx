@@ -196,6 +196,34 @@ export function PracticeBuddyClient() {
       {/* Signup Form — moved up so visitors don't have to scroll past all the educational content */}
       <section className="border-t border-border bg-accent/5">
         <div ref={formRef} className="mx-auto max-w-3xl px-6 py-16">
+          {/* Reassurance band — the #1 objection for a matching service is "will I actually
+              get matched, or is this a dead waitlist?". Research (Growbo, Habi/Supporti) says
+              put the matching-speed + fit signal right at the form, not buried in the FAQ. */}
+          <div className="mx-auto mb-10 max-w-2xl">
+            <p className="mb-5 text-center text-xs font-semibold uppercase tracking-wider text-accent">
+              What happens after you apply
+            </p>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <div className="rounded-xl border border-border bg-background/60 p-5">
+                <p className="mb-1.5 text-sm font-semibold">Matched in days, not months</p>
+                <p className="text-xs leading-relaxed text-muted">
+                  Usually within a few days, sometimes the same day if someone already sits your hour.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border bg-background/60 p-5">
+                <p className="mb-1.5 text-sm font-semibold">No dead waitlist</p>
+                <p className="text-xs leading-relaxed text-muted">
+                  We never auto-pair to clear a queue. If your hour is sparse you stay on, free, until a real fit lands in your time band.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border bg-background/60 p-5">
+                <p className="mb-1.5 text-sm font-semibold">Same link, no streak to lose</p>
+                <p className="text-xs leading-relaxed text-muted">
+                  Your Google Meet link stays the same. If your buddy goes quiet, tell us and we re-match you.
+                </p>
+              </div>
+            </div>
+          </div>
           <WaitlistSignup location="primary-cta" prefill={prefill ?? undefined} />
         </div>
       </section>
