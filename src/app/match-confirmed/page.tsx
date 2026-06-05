@@ -15,16 +15,27 @@ export default async function MatchConfirmedPage({
   const { response, token } = await searchParams;
 
   // If we have a token (passed through from /api/confirm-match for response=yes),
-  // resolve the person so we can pre-fill their phone form. Failures are silent —
-  // worst case, the user sees an empty form, which is fine.
+  // resolve the match so we can (a) tell whether the buddy has already confirmed
+  // and (b) pre-fill the phone form. Failures are silent — worst case, the user
+  // sees the generic "nothing else to do" copy, which is fine.
+  //
+  // bothConfirmed: the partner already clicked yes, so the intro email with the
+  // Meet link is already on its way to both of you. In that state the phone
+  // heads-up form has nothing left to notify about, so we hide it and show the
+  // accurate "you're both in" copy instead. We only offer the phone form while
+  // we're genuinely still waiting on the buddy.
   let phoneCardProps: { token: string; initialPhone: string; initialMethod: string } | null = null;
+  let bothConfirmed = false;
   if (response === "yes" && token) {
     try {
       const match = await getMatchByToken(token);
       if (match) {
-        const personId = match.person_a_token === token ? match.person_a_id : match.person_b_id;
+        const isA = match.person_a_token === token;
+        const partnerConfirmed = isA ? match.person_b_confirmed : match.person_a_confirmed;
+        bothConfirmed = partnerConfirmed;
+        const personId = isA ? match.person_a_id : match.person_b_id;
         const person = await getEntry(personId);
-        if (person) {
+        if (person && !partnerConfirmed) {
           phoneCardProps = {
             token,
             initialPhone: person.phone || "",
@@ -43,12 +54,14 @@ export default async function MatchConfirmedPage({
         <div className="w-full max-w-md rounded-2xl border border-[#e8e4de] bg-white p-10 text-center shadow-sm">
           <p className="mb-4 text-4xl">🙏</p>
           <h1 className="mb-3 text-2xl font-bold text-[#2c2c2c]">
-            You&apos;re in.
+            {bothConfirmed ? "You’re both in." : "You’re in."}
           </h1>
           <p className="text-[#6b6b6b] leading-relaxed">
-            {phoneCardProps
-              ? "Your yes is registered. One optional thing below, then you can close this tab."
-              : "Your yes is registered. Nothing else to do on your end."}
+            {bothConfirmed
+              ? "You both said yes. Your intro email with the Google Meet link is on its way to both of you now."
+              : phoneCardProps
+                ? "Your yes is registered. One optional thing below, then you can close this tab."
+                : "Your yes is registered. Nothing else to do on your end."}
           </p>
 
           {phoneCardProps && (
@@ -63,18 +76,28 @@ export default async function MatchConfirmedPage({
             <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
               What happens next
             </p>
-            <p className="text-sm text-[#6b6b6b] leading-relaxed">
-              If your match has already confirmed, the intro email with a
-              Google Meet link is on its way to both of you within a few
-              minutes. If they haven&apos;t clicked yes yet, they have up to 3
-              days to respond. You&apos;ll get the intro email as soon as they
-              do.
-            </p>
-            <p className="mt-3 text-sm text-[#6b6b6b] leading-relaxed">
-              If they don&apos;t respond in 3 days, no harm done. I&apos;ll put
-              you both back in the pool and find you a new match when a good
-              one comes along.
-            </p>
+            {bothConfirmed ? (
+              <p className="text-sm text-[#6b6b6b] leading-relaxed">
+                The intro email with your Google Meet link is on its way to
+                both of you now, usually within a few minutes. It has the link
+                and a suggested time that fits both your sit schedules. When it
+                lands, hit <strong>reply all</strong> and say hello so
+                you&apos;re both on the same thread.
+              </p>
+            ) : (
+              <>
+                <p className="text-sm text-[#6b6b6b] leading-relaxed">
+                  Your buddy has up to 3 days to click yes. The moment they do,
+                  you&apos;ll both get the intro email with a Google Meet link
+                  and a suggested time that fits both your sit schedules.
+                </p>
+                <p className="mt-3 text-sm text-[#6b6b6b] leading-relaxed">
+                  If they don&apos;t respond in 3 days, no harm done. I&apos;ll
+                  put you both back in the pool and find you a new match when a
+                  good one comes along.
+                </p>
+              </>
+            )}
           </div>
 
           <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
