@@ -69,8 +69,9 @@ export function PhonePreferenceCard({
             Want a faster heads-up?
           </p>
           <p className="mt-1 text-sm text-[#6b6b6b] leading-relaxed">
-            Drop your number and we&apos;ll text or WhatsApp you the second
-            your buddy confirms, instead of (only) email.
+            Your buddy hasn&apos;t clicked yes yet, and that can take up to 3
+            days. Drop your number and we&apos;ll text or WhatsApp you the
+            moment they do, so you&apos;re not refreshing your inbox.
           </p>
         </div>
         <button
