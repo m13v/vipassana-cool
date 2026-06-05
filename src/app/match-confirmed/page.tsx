@@ -54,7 +54,7 @@ export default async function MatchConfirmedPage({
         <div className="w-full max-w-md rounded-2xl border border-[#e8e4de] bg-white p-10 text-center shadow-sm">
           <p className="mb-4 text-4xl">🙏</p>
           <h1 className="mb-3 text-2xl font-bold text-[#2c2c2c]">
-            {bothConfirmed ? "You&apos;re both in." : "You&apos;re in."}
+            {bothConfirmed ? "You're both in." : "You're in."}
           </h1>
           <p className="text-[#6b6b6b] leading-relaxed">
             {bothConfirmed
