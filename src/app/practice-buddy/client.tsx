@@ -8,13 +8,14 @@ import { DayCounter } from "@/components/day-counter";
 import { posthog } from "@/components/posthog-provider";
 
 type QuickSetup = { timezone: string; morningHour: string };
-type SignupPrefill = { timezone?: string; morningTime?: string; frequency?: string };
+type SignupPrefill = { timezone?: string; morningTime?: string; frequency?: string; email?: string };
 
 export function PracticeBuddyClient() {
   const [matchRequest, setMatchRequest] = useState<{ id: string; name: string } | null>(null);
   const [prefill, setPrefill] = useState<SignupPrefill | null>(null);
   const [matchedCount, setMatchedCount] = useState<number | null>(null);
   const [pendingCount, setPendingCount] = useState<number | null>(null);
+  const [heroEmail, setHeroEmail] = useState("");
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,6 +36,17 @@ export function PracticeBuddyClient() {
 
   function clearMatchRequest() {
     setMatchRequest(null);
+  }
+
+  function handleHeroSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const email = heroEmail.trim();
+    // Carry the typed email straight into the real form and jump there. Capturing
+    // the email at peak intent (the hero) and prefilling it uses the foot-in-the-door
+    // effect to lift completion vs. a bare "scroll down to a blank form" button.
+    setPrefill((p) => ({ ...(p ?? {}), email: email || undefined }));
+    try { posthog.capture("primary_cta_clicked", { location: "hero-inline", has_email: email.length > 0 }); } catch { /* noop */ }
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function handleSetup(setup: QuickSetup) {
@@ -82,14 +94,28 @@ export function PracticeBuddyClient() {
             <>Meditators sitting together every morning, from Paris to Delhi to San Diego</>
           )}
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="#waitlist-form"
-            className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        <form
+          onSubmit={handleHeroSubmit}
+          className="mx-auto flex w-full max-w-md flex-col gap-3 sm:flex-row"
+        >
+          <label htmlFor="hero-email" className="sr-only">Your email</label>
+          <input
+            id="hero-email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            placeholder="your@email.com"
+            value={heroEmail}
+            onChange={(e) => setHeroEmail(e.target.value)}
+            className="w-full flex-1 rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/60 focus:border-accent"
+          />
+          <button
+            type="submit"
+            className="shrink-0 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             Find my buddy
-          </a>
-        </div>
+          </button>
+        </form>
         <p className="mt-4 text-xs text-muted/70">
           Takes 2 minutes. No app to install, no streaks, no fees, ever.
         </p>
