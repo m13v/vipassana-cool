@@ -108,13 +108,13 @@ const DURATION_OPTIONS = [
   "1 hour",
 ];
 
-type Prefill = { timezone?: string; morningTime?: string; frequency?: string };
+type Prefill = { timezone?: string; morningTime?: string; frequency?: string; email?: string };
 type LookupStatus = "idle" | "checking" | "new" | "returning_pending" | "returning_matched";
 
 export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, requestedMatchName, prefill }: { location?: string; requestedMatchId?: string; requestedMatchName?: string; prefill?: Prefill }) {
   const [form, setForm] = useState<FormData>({
     name: "",
-    email: "",
+    email: prefill?.email ?? "",
     phone: "",
     phoneMethod: "",
     isOldStudent: "",
@@ -180,6 +180,14 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
       setLookupStatus("new");
     }
   }
+
+  // The hero email-capture sets prefill.email after this component has mounted, so
+  // sync it into form state when it arrives (initial useState only runs once).
+  useEffect(() => {
+    if (prefill?.email) {
+      setForm((f) => ({ ...f, email: prefill.email! }));
+    }
+  }, [prefill?.email]);
 
   useEffect(() => {
     try {
