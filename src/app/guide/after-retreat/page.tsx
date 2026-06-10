@@ -5,6 +5,40 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
 import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
+import { FaqSchema } from "@/components/faq-schema";
+
+const faqs = [
+  {
+    question: "What is re-entry shock after a Vipassana retreat?",
+    answer:
+      "Re-entry shock is the jarring transition from ten days of silence back into a world of notifications, traffic, small talk, and screens. Senses are heightened, so sounds seem louder, lights brighter, and food more intense. It is normal and does not mean anything went wrong; it usually eases over days to a couple of weeks.",
+  },
+  {
+    question: "What emotional arc do people go through after a Vipassana course?",
+    answer:
+      "Most people report a predictable pattern: roughly Days 1 to 3 of euphoria, then a crash as old habits resurface, a period of heightened irritability or sensitivity over Weeks 2 to 4, and finally a gradual integration from Month 2 onward if daily practice continues. Knowing the arc helps you ride it out instead of being blindsided.",
+  },
+  {
+    question: "Is post-retreat depression normal after Vipassana?",
+    answer:
+      "Low mood after a course is real and more common than people admit. Contributing factors include the contrast between the retreat's simplicity and daily life, neurochemical adjustment, unfinished emotional processing, and the loss of the center's structure. It typically passes. If it lasts beyond three to four weeks or feels severe, seek professional help.",
+  },
+  {
+    question: "How do you maintain Vipassana practice at home after a retreat?",
+    answer:
+      "Continuity is the thing that fades fastest, so old students protect a consistent daily sit, attend weekly group sittings, take a course roughly once a year, and some pair with a Practice Buddy for accountability. Technique itself is given only inside a 10-day course; this page is about habit and continuity, not instruction.",
+  },
+  {
+    question: "When should you be concerned after a Vipassana retreat?",
+    answer:
+      "Normal adjustment includes mood swings, heightened sensitivity, some sadness, and brief difficulty concentrating, all improving over days to weeks. Seek professional help for persistent depressed mood beyond three to four weeks, intrusive thoughts or dissociation that won't resolve, inability to function, any suicidal ideation, or paranoia and hallucinations.",
+  },
+  {
+    question: "When should you take your next Vipassana course?",
+    answer:
+      "The tradition suggests sitting at least one 10-day course per year. Signs you are ready include having maintained some daily practice, feeling stable rather than seeking the retreat as an escape, and a willingness to work hard again. Course logistics and dates live on dhamma.org.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "After Vipassana: Day 11 Survival, Post-Retreat Depression & Integration",
@@ -36,6 +70,7 @@ export default function AfterRetreatPage() {
         url="https://vipassana.cool/guide/after-retreat"
         datePublished="2025-03-01"
       />
+      <FaqSchema faqs={faqs} />
       <ArticleHeader
         breadcrumbs={[
           { label: "Home", href: "/" },
