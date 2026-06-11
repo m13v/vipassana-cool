@@ -65,35 +65,13 @@ export function PracticeBuddyClient() {
         <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
           Sit every morning with the same Vipassana buddy
         </h1>
-        <p className="mx-auto mb-5 max-w-2xl text-lg text-muted">
+        <p className="mx-auto mb-7 max-w-2xl text-lg text-muted">
           One matched fellow old student in your time zone. The same person, the same time, the same Google Meet link, every day. Not a group sit. Not an app. No streaks.
         </p>
-        <p className="mx-auto mb-7 max-w-2xl text-sm text-muted/80">
-          Built by an old student on day <DayCounter /> of daily practice, after 6 courses at 3 centers and 40+ days of dhamma service. Free forever.
-        </p>
-        {/* Above-the-fold proof. Research (LaunchList, MailerLite, SaaS Hero) shows a real,
-            named, specific testimonial placed near the hero CTA is the single highest-leverage
-            trust element; these are the same real quotes shown further down the page, surfaced
-            where ~57% of viewing time happens. */}
-        <figure className="mx-auto mb-4 max-w-xl">
-          <blockquote className="text-sm italic leading-relaxed text-foreground">
-            &ldquo;Having an accountability partner in meditation goes a long way in ensuring you continue on this journey.&rdquo;
-          </blockquote>
-          <figcaption className="mt-1.5 text-xs text-muted">— Vikas, Delhi</figcaption>
-        </figure>
-        <p className="mb-5 text-sm text-muted">
-          {matchedCount !== null && matchedCount > 0 ? (
-            <>
-              <span className="font-semibold text-accent">{matchedCount} meditators matched</span>
-              {pendingCount !== null && pendingCount > 0 && (
-                <>, <span className="font-semibold text-foreground">{pendingCount} waiting</span></>
-              )}
-              {" "}— sitting together from Paris to Delhi to San Diego
-            </>
-          ) : (
-            <>Meditators sitting together every morning, from Paris to Delhi to San Diego</>
-          )}
-        </p>
+        {/* Primary action, above the fold. Research (LaunchList, NN/g, Landingi 2026): the
+            above-fold zone gets ~84% more attention, and the one thing to place there is the
+            email input + button. Proof and credibility sit immediately below so they still
+            flank the CTA without pushing the actual input under the fold on mobile. */}
         <form
           onSubmit={handleHeroSubmit}
           className="mx-auto flex w-full max-w-md flex-col gap-3 sm:flex-row"
@@ -116,8 +94,31 @@ export function PracticeBuddyClient() {
             Find my buddy
           </button>
         </form>
-        <p className="mt-4 text-xs text-muted/70">
+        <p className="mb-8 mt-4 text-xs text-muted/70">
           Takes 2 minutes. No app to install, no streaks, no fees, ever.
+        </p>
+        {/* Proof + credibility, directly under the CTA. Same real quote shown further down. */}
+        <figure className="mx-auto mb-4 max-w-xl">
+          <blockquote className="text-sm italic leading-relaxed text-foreground">
+            &ldquo;Having an accountability partner in meditation goes a long way in ensuring you continue on this journey.&rdquo;
+          </blockquote>
+          <figcaption className="mt-1.5 text-xs text-muted">— Vikas, Delhi</figcaption>
+        </figure>
+        <p className="mb-3 text-sm text-muted">
+          {matchedCount !== null && matchedCount > 0 ? (
+            <>
+              <span className="font-semibold text-accent">{matchedCount} meditators matched</span>
+              {pendingCount !== null && pendingCount > 0 && (
+                <>, <span className="font-semibold text-foreground">{pendingCount} waiting</span></>
+              )}
+              {" "}— sitting together from Paris to Delhi to San Diego
+            </>
+          ) : (
+            <>Meditators sitting together every morning, from Paris to Delhi to San Diego</>
+          )}
+        </p>
+        <p className="mx-auto max-w-2xl text-sm text-muted/80">
+          Built by an old student on day <DayCounter /> of daily practice, after 6 courses at 3 centers and 40+ days of dhamma service. Free forever.
         </p>
       </section>
 
