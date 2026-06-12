@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { FaqDetailPage } from "@/components/faq-detail-page";
 
 export const metadata: Metadata = {
   title: "Why Is Vipassana Free? The Donation Model Explained",
   description:
-    "How Vipassana courses are completely free: the dana (donation) model, why there are no fees, and how the chain of generosity works.",
+    "Vipassana courses are 100% free, no fees for teaching, food, or lodging. How the dana (donation) model works, what a course actually costs to run ($250-$375 vs $1,000-$5,000+ for paid retreats), and how much to give.",
   alternates: { canonical: "https://vipassana.cool/faq/why-is-vipassana-free" },
 };
 
@@ -30,10 +31,16 @@ export default function WhyIsVipassanaFreePage() {
           answer:
             "There is no catch. No upselling, no mandatory donations, no required memberships. The entire operation runs on voluntary contributions from people who found the courses valuable.",
         },
+        {
+          question: "How much does a 10-day Vipassana course cost?",
+          answer:
+            "Nothing. A 10-day Vipassana course is completely free of charge, including teaching, accommodation, and all meals. The center's own cost to host one student is roughly $250 to $375, but you pay none of it; your seat was funded by a past student's donation. By comparison, commercial silent retreats of similar length typically charge $1,000 to $5,000 or more.",
+        },
       ]}
       relatedLinks={[
         { href: "/faq/is-vipassana-a-cult", label: "Is Vipassana a Cult?" },
-        { href: "/guide", label: "Guide to dhamma.org" },
+        { href: "/faq/is-vipassana-worth-it", label: "Is It Worth It?" },
+        { href: "/experience", label: "The 10-Day Experience" },
         { href: "/faq/can-i-leave-early", label: "Can I Leave Early?" },
       ]}
     >
@@ -47,7 +54,7 @@ export default function WhyIsVipassanaFreePage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">Genuinely, Completely Free</h2>
         <p>
-          When people hear that Vipassana courses are free, the immediate reaction is skepticism. Ten days of accommodation, food, and instruction, for free? What&apos;s the catch?
+          When people hear that Vipassana courses are free, the immediate reaction is skepticism. <Link href="/experience" className="text-accent underline hover:text-foreground">Ten days</Link> of accommodation, food, and instruction, for free? What&apos;s the catch?
         </p>
         <p>
           There is no catch. No fees, no suggested donations, no upselling, no membership requirements, no mailing list you can&apos;t unsubscribe from. You arrive, you practice, you leave. If you want to donate, you can. If you don&apos;t, that&apos;s fine too.
@@ -70,7 +77,7 @@ export default function WhyIsVipassanaFreePage() {
       <section>
         <h2 className="mb-3 text-xl font-bold text-foreground">Why Not Just Charge a Fee?</h2>
         <p>
-          The reasoning behind the dana model is not just practical; it is philosophical. S.N. Goenka believed that the Dhamma (the teaching) should never be commercialized. Charging fees would:
+          The reasoning behind the dana model is not just practical; it is philosophical. S.N. Goenka believed that the Dhamma (the teaching) should never be commercialized. This is also one of the reasons the tradition is sometimes <Link href="/faq/is-vipassana-a-cult" className="text-accent underline hover:text-foreground">mistaken for a cult</Link> and just as often cleared of the charge: nobody is profiting. Charging fees would:
         </p>
         <ul className="mt-3 list-disc space-y-2 pl-6">
           <li><strong>Create a barrier to access.</strong> People who can&apos;t afford the fee would be excluded from a practice that could benefit them most.</li>
@@ -104,6 +111,45 @@ export default function WhyIsVipassanaFreePage() {
         <p>
           For context, commercial meditation retreats charge $1,000 to $5,000 or more for a similar duration, and they don&apos;t come with the depth of instruction or the lineage that Vipassana offers. Vipassana centers provide all of this at no cost to the student.
         </p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full border-collapse text-left text-sm">
+            <caption className="sr-only">Vipassana cost compared to a commercial silent retreat</caption>
+            <thead>
+              <tr className="border-b border-border">
+                <th className="py-2 pr-4 font-semibold text-foreground"></th>
+                <th className="py-2 pr-4 font-semibold text-foreground">10-Day Vipassana</th>
+                <th className="py-2 font-semibold text-foreground">Commercial silent retreat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 text-muted">Price to attend</td>
+                <td className="py-2 pr-4 font-semibold text-accent">$0</td>
+                <td className="py-2 text-foreground">$1,000 to $5,000+</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 text-muted">Actual cost per seat</td>
+                <td className="py-2 pr-4 text-foreground">~$250 to $375</td>
+                <td className="py-2 text-foreground">Built into the fee</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 text-muted">Who pays for it</td>
+                <td className="py-2 pr-4 text-foreground">A past student&apos;s donation</td>
+                <td className="py-2 text-foreground">You, upfront</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 text-muted">Can you attend if you have no money?</td>
+                <td className="py-2 pr-4 text-foreground">Yes</td>
+                <td className="py-2 text-foreground">No</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 text-muted">When you can donate</td>
+                <td className="py-2 pr-4 text-foreground">Only after finishing a course</td>
+                <td className="py-2 text-foreground">Before you arrive</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
           What do people actually donate? The range varies enormously. Some donate $50. Some donate $500. Some donate nothing. All of these are fine. There is no receipt checking, no judgment, no tiered access based on donation amount.
         </p>
