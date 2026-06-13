@@ -4,12 +4,54 @@ import { PageComments } from "@/components/comments";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { ArticleSchema } from "@/components/article-schema";
 import { ArticleHeader } from "@/components/article-header";
+import { FaqSchema } from "@/components/faq-schema";
+import { PracticeBuddyCta } from "@/components/practice-buddy-cta";
+
+const faqs = [
+  {
+    question: "How does Vipassana affect your relationships?",
+    answer:
+      "It tends to change them slowly rather than overnight. In the first weeks after a course there is often friction, because you have shifted and the people around you have not. Over months, less reactivity and more patience usually register with partners, family, and friends as a calmer, more present version of you. The honest accounting is that the practice does not make relationships easy; it makes them more honest.",
+  },
+  {
+    question: "What do you do when your partner doesn't understand Vipassana?",
+    answer:
+      "Don't evangelize, and share the practical rather than the mystical. A partner who hasn't sat a course is not obligated to be fascinated by it, and words about the experience tend to fall flat. The changes that actually register, less reactivity and better listening, take months to become visible. Let your behavior carry the message instead of explanation.",
+  },
+  {
+    question: "Can Vipassana make you emotionally detached from your partner?",
+    answer:
+      "It can look that way, and the complaint is worth taking seriously rather than dismissing. There is a real difference between balance, which means feeling everything fully while staying steady, and withdrawal, which means retreating from feeling altogether. If a partner says you have become distant, it is worth checking honestly whether practice is being used as a shield against intimacy. Healthy practice generally makes people more present in relationships, not less.",
+  },
+  {
+    question: "Should you make big relationship decisions right after a Vipassana course?",
+    answer:
+      "Better to wait. The first weeks after a course are a raw, sensitive, sometimes idealistic state, and that is a poor moment for major decisions. Deep introspection can clarify what you have been avoiding, but give yourself time to settle back into daily life before acting. If a particular clarity is still there after a month of daily practice, it is more likely to be real.",
+  },
+  {
+    question: "Can couples attend a Vipassana course together?",
+    answer:
+      "Yes, many courses accept couples, but you will be completely separated for the full ten days, with men and women in different areas and no contact until the course ends. Some couples value having separate experiences and sharing them afterward; others find the separation hard. Many people prefer to sit their first course alone so they can focus entirely on themselves. Course logistics and dates live on dhamma.org.",
+  },
+  {
+    question: "How long does it take for Vipassana to change your relationships?",
+    answer:
+      "Years, not weeks. Short term you may create friction by changing the dynamic; over the medium term the people around you adapt to the calmer version of you; over the long term the quality of the relationships shifts. Less reactivity means fewer unnecessary conflicts, and more space for the other person to simply be who they are.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Vipassana & Relationships — How Meditation Changes Your Connections",
   description:
-    "How Vipassana meditation affects your relationships: coming home different, when your partner doesn't get it, equanimity in conflicts, and attending together.",
+    "How Vipassana meditation affects your relationships: coming home different, when your partner doesn't get it, staying steady in conflict, and attending as a couple.",
   alternates: { canonical: "https://vipassana.cool/guide/vipassana-and-relationships" },
+  openGraph: {
+    title: "Vipassana & Relationships: Coming Home Different",
+    description:
+      "The growth, the friction, and the things no one tells you about returning from a 10-day course to people who didn't change. Notes from 6 courses and 945+ days of daily practice.",
+    url: "https://vipassana.cool/guide/vipassana-and-relationships",
+    type: "article",
+  },
 };
 
 export default function VipassanaRelationshipsPage() {
@@ -28,6 +70,7 @@ export default function VipassanaRelationshipsPage() {
         url="https://vipassana.cool/guide/vipassana-and-relationships"
         datePublished="2025-09-01"
       />
+      <FaqSchema faqs={faqs} />
       <ArticleHeader
         breadcrumbs={[
           { label: "Home", href: "/" },
@@ -67,7 +110,7 @@ export default function VipassanaRelationshipsPage() {
             This is the most common relationship challenge meditators face. You&apos;ve had a profound experience. You want to share it. But your partner hasn&apos;t been through it, and words fall short.
           </p>
           <p>
-            You say: &quot;I observed my sensations with equanimity.&quot; They hear: &quot;I sat still for 10 days.&quot; You describe the dissolution of body boundaries. They nod politely and change the subject.
+            You say: &quot;Something shifted in how I relate to my own mind.&quot; They hear: &quot;I sat still for 10 days.&quot; You try to describe how strange and vivid the last few days felt. They nod politely and change the subject.
           </p>
           <p>
             <strong>What helps:</strong>
@@ -86,10 +129,10 @@ export default function VipassanaRelationshipsPage() {
             One of the most tangible relationship benefits of Vipassana is a changed relationship with anger and conflict. Before the practice, an argument triggers an automatic chain: your partner says something, you feel a flash of anger, you react. The reaction escalates.
           </p>
           <p>
-            With practice, a gap opens between the trigger and the response. Your partner says the same thing, the anger still arises as a sensation in your body — maybe tightness in the chest, heat in the face — but you <em>observe</em> the sensation instead of being swept away by it. The reaction doesn&apos;t disappear, but it loses its automatic quality.
+            With practice, old students often describe a gap opening up between the trigger and the response. Your partner says the same thing, the anger still registers, but it no longer hijacks the moment automatically. The reaction doesn&apos;t disappear; it loses its grip.
           </p>
           <p>
-            This is not suppression. Suppression is pushing the anger down. Equanimity is observing the anger fully while choosing not to act from it reactively. The anger is felt, acknowledged, and allowed to pass — rather than being fed by escalating words and actions.
+            This is not suppression. Suppression pushes the anger down and pretends it isn&apos;t there. What people commonly report is different: the anger is felt and allowed to pass, rather than being fed by escalating words and actions.
           </p>
           <p>
             In practice, this might look like: taking a breath before responding, choosing to listen rather than defend, recognizing your own contribution to the conflict. Small shifts that compound over time into a fundamentally different way of being in relationship.
@@ -167,6 +210,11 @@ export default function VipassanaRelationshipsPage() {
           </p>
         </section>
       </div>
+
+      <PracticeBuddyCta
+        heading="The Practice Is What Your Partner Actually Sees"
+        description="The changes that register at home — more patience, less reactivity — come from keeping a daily sit alive after the course. Get matched with a fellow meditator for daily accountability over Google Meet. Free and tradition-respectful."
+      />
 
       <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
         <h2 className="mb-3 text-xl font-bold">Ready to Begin?</h2>
