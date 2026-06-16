@@ -80,7 +80,7 @@ const faqs: FaqItem[] = [
 
 const breadcrumbItems = [
   { label: "Home", href: "/" },
-  { label: "Alternatives", href: "/alternative" },
+  { label: "Alternatives" },
   { label: "Vipassana vs Mindfulness" },
 ];
 
