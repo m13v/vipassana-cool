@@ -218,13 +218,17 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
+    // Phone is optional. We confirm matches by email; phone just makes the hand-off
+    // faster for those who want it. Gating signup on a required phone number is a
+    // well-known completion killer, so only validate it when the visitor actually
+    // chose to provide one.
     const phoneDigits = form.phone.replace(/\D/g, "");
-    if (phoneDigits.length < 5) {
+    if (phoneDigits.length > 0 && phoneDigits.length < 5) {
       setStatus("error");
-      setErrorMsg("Please enter a valid phone number so we can confirm your match.");
+      setErrorMsg("That phone number looks too short. Leave it blank or enter a full number.");
       return;
     }
-    if (!form.phoneMethod) {
+    if (phoneDigits.length > 0 && !form.phoneMethod) {
       setStatus("error");
       setErrorMsg("Please choose how we should reach you — SMS or WhatsApp.");
       return;
@@ -450,21 +454,21 @@ export function WaitlistSignup({ location = "practice-buddy", requestedMatchId, 
         {/* Phone (required, text/WhatsApp) */}
         <div>
           <label htmlFor="wb-phone" className={labelClass}>
-            Phone number
+            Phone number{" "}
+            <span className="font-normal text-muted">(optional)</span>
           </label>
           <input
             id="wb-phone"
             type="tel"
             inputMode="tel"
             autoComplete="tel"
-            required
             placeholder="+1 415 555 0123"
             value={form.phone}
             onChange={(e) => update("phone", e.target.value)}
             className={inputClass}
           />
           <p className="mt-1 text-xs text-muted/70">
-            Faster than email, only used to confirm your buddy. Matches confirm far more often by text.
+            We confirm every match by email. Adding a phone is optional, but pairs who text connect far faster. Only ever used to confirm your buddy.
           </p>
           {form.phone.trim().length > 0 && (
             <fieldset className="mt-3">
