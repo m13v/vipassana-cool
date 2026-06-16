@@ -62,9 +62,13 @@ export async function POST(request: NextRequest) {
     }
     data.name = trimmedName;
 
+    // Phone is optional. We confirm matches by email; phone is just a faster
+    // hand-off channel for those who want it. Only reject when the visitor
+    // actually typed something that does not look like a phone number.
     const normalizedPhone = normalizePhone(data.phone);
-    if (!normalizedPhone) {
-      return NextResponse.json({ error: "A valid phone number is required" }, { status: 400 });
+    const phoneProvided = !!(data.phone && String(data.phone).trim().length > 0);
+    if (phoneProvided && !normalizedPhone) {
+      return NextResponse.json({ error: "That phone number looks off. Leave it blank or enter a full number." }, { status: 400 });
     }
     const allowedMethods = new Set(["sms", "whatsapp"]);
     const normalizedPhoneMethod =
