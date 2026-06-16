@@ -17,6 +17,11 @@ export default function WhyIsVipassanaFreePage() {
       description="Understanding the donation-based model that makes Vipassana courses completely free for all students."
       schemaFaqs={[
         {
+          question: "Is Vipassana free?",
+          answer:
+            "Yes. Vipassana courses in the S.N. Goenka tradition are completely free, including teaching, accommodation, and all meals, at every one of the 200+ centers worldwide. There are no tuition fees, no hidden charges, and no suggested donation amounts. Your seat is funded by a past student's voluntary donation, and you can only donate after completing your first course.",
+        },
+        {
           question: "Why is Vipassana meditation free?",
           answer:
             "Vipassana courses are free because they are funded entirely by donations from previous students. This dana (generosity) model ensures the teaching remains pure and accessible to everyone regardless of financial situation.",
