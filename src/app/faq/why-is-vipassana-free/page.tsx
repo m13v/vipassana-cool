@@ -41,6 +41,11 @@ export default function WhyIsVipassanaFreePage() {
           answer:
             "Nothing. A 10-day Vipassana course is completely free of charge, including teaching, accommodation, and all meals. The center's own cost to host one student is roughly $250 to $375, but you pay none of it; your seat was funded by a past student's donation. By comparison, commercial silent retreats of similar length typically charge $1,000 to $5,000 or more.",
         },
+        {
+          question: "Are there any hidden costs to a Vipassana course?",
+          answer:
+            "No. Everything at the center is covered: teaching, a place to sleep, and all meals. The only expenses you cover yourself are getting to and from the center (your own transport) and the ten days you take away from work. A few centers offer shuttle pickups from the nearest town, but travel is not guaranteed and is not part of the course. There are no registration fees, deposits, materials charges, or 'optional' add-ons.",
+        },
       ]}
       relatedLinks={[
         { href: "/faq/is-vipassana-a-cult", label: "Is Vipassana a Cult?" },
