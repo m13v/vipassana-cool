@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
       { source: "/t/is-vipassana-free", destination: "/faq/why-is-vipassana-free", permanent: true },
       { source: "/t/vipassana-10-day-course-registration", destination: "/guide/course-application-tips", permanent: true },
       { source: "/t/vipassana-centre", destination: "/t/vipassana-meditation-centre", permanent: true },
+      { source: "/t/vipassana-group-sitting", destination: "/guide/group-sittings", permanent: true },
     ];
   },
   async headers() {
