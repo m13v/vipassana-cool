@@ -28,6 +28,7 @@ export default function GroupSittingsPage() {
         description="Everything about Vipassana group sittings: what they are, how to find one near you, what to expect, etiquette, online options, and how to start your own."
         url="https://vipassana.cool/guide/group-sittings"
         datePublished="2025-09-01"
+        dateModified="2026-06-17"
       />
       <ArticleHeader
         breadcrumbs={[
@@ -82,6 +83,13 @@ export default function GroupSittingsPage() {
           </p>
 
           <div className="mt-4 space-y-6">
+            <div className="border-l-2 border-accent/30 pl-4">
+              <h3 className="mb-1 font-semibold text-foreground">Why &quot;group sitting near me&quot; searches come up short</h3>
+              <p>
+                If you typed &quot;Vipassana group sitting near me&quot; into a map or a search box and got nothing useful, that&apos;s expected, not a failure on your part. Group sittings in this tradition are deliberately kept off Google Maps, Meetup, Eventbrite, and meditation apps. Many run out of private homes that organizers do not list publicly, and centers advertise them only to old students through their own pages and mailing lists. So a generic local search will almost always miss them. The list below is the actual path that works.
+              </p>
+            </div>
+
             <div className="border-l-2 border-accent/30 pl-4">
               <h3 className="mb-1 font-semibold text-foreground">Check your nearest center&apos;s website</h3>
               <p>
