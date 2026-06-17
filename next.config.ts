@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
       { source: "/t/vipassana-centre", destination: "/t/vipassana-meditation-centre", permanent: true },
       { source: "/t/vipassana-group-sitting", destination: "/guide/group-sittings", permanent: true },
       { source: "/t/vipassana-group-sitting-near-me", destination: "/guide/group-sittings", permanent: true },
+      { source: "/t/vipassana-meditation-benefits-scientific-evidence", destination: "/guide/scientific-evidence", permanent: true },
     ];
   },
   async headers() {
