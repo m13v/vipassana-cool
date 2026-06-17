@@ -83,7 +83,7 @@ export default function ScientificEvidencePage() {
         description="What does science say about Vipassana meditation? A balanced review of research on brain changes, anxiety reduction, pain management, addiction recovery, and adverse effects."
         url="https://vipassana.cool/guide/scientific-evidence"
         datePublished="2025-03-01"
-        dateModified="2026-05-22"
+        dateModified="2026-06-17"
       />
       <FaqSchema faqs={faqs} />
       <ArticleHeader
@@ -96,13 +96,32 @@ export default function ScientificEvidencePage() {
         title="Scientific Evidence for Vipassana Meditation"
         description="What does the research actually say about Vipassana, not meditation in general, but this specific technique? A balanced look at the evidence, its limitations, and what it means for practitioners."
         datePublished="2025-03-01"
-        dateUpdated="2026-05-22"
+        dateUpdated="2026-06-17"
       />
 
       <div className="mb-8 rounded-lg border border-accent/20 bg-accent/5 p-4">
         <p className="text-sm font-medium text-accent mb-1">TL;DR</p>
         <p className="text-sm text-muted">
           Vipassana-specific research shows anxiety scores dropping from 10 to 3.29 after a 10-day course, increased cortical thickness in brain regions tied to body awareness, enhanced slow-wave sleep (10.63% vs 3.94% in non-meditators aged 50-60), and reduced recidivism in prison programs (56% vs 75%). A meta-analysis identified 8 brain regions consistently altered by meditation. Limitations include small sample sizes, self-selection bias, and moderate risk of bias across studies. The evidence is encouraging but not yet definitive.
+        </p>
+      </div>
+
+      <div className="mb-8 rounded-lg border border-border bg-card p-4">
+        <p className="text-sm text-muted">
+          Want the most recent papers? Four peer-reviewed Vipassana studies
+          landed between August 2025 and April 2026, including a Cureus
+          systematic review of 11 studies (792 participants) reporting a
+          moderate-to-large effect size for stress (d = 0.79), and a Frontiers
+          school study showing Cohen&apos;s d = 0.61 for sustained attention.
+          See the{" "}
+          <Link
+            href="/t/vipassana-meditation-research-roundup-april-2026"
+            className="text-accent underline hover:text-foreground"
+          >
+            April 2026 research roundup
+          </Link>{" "}
+          for sample sizes, effect sizes, and the limitations each paper names
+          about itself.
         </p>
       </div>
 
