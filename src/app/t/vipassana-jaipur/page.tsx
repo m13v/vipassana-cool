@@ -117,34 +117,28 @@ const registrationSteps = [
 
 const faqs: FaqItem[] = [
   {
-    question: "Where exactly is the Vipassana centre in Jaipur?",
-    answer:
-      "Dhamma Thali, the main Jaipur centre, sits via Sisodiya Rani Baug and Ghat ke Balaji, just half a kilometre before the Galtaji Temple, on the Jaipur-Agra side of the city. It is about 12 km from Jaipur Railway Station and 18 km from the airport. A practical note from the centre: Galta Gate and Galta Temple are in opposite directions, so when you take an auto-rickshaw, say 'via Sisodiya Rani Baug' to avoid being driven to the wrong side.",
+    q: "Where exactly is the Vipassana centre in Jaipur?",
+    a: "Dhamma Thali, the main Jaipur centre, sits via Sisodiya Rani Baug and Ghat ke Balaji, just half a kilometre before the Galtaji Temple, on the Jaipur-Agra side of the city. It is about 12 km from Jaipur Railway Station and 18 km from the airport. A practical note from the centre: Galta Gate and Galta Temple are in opposite directions, so when you take an auto-rickshaw, say 'via Sisodiya Rani Baug' to avoid being driven to the wrong side.",
   },
   {
-    question: "How much does a 10-day course in Jaipur cost?",
-    answer:
-      "Nothing. Courses at all three centres run solely on donations, freely offered, and no charge is made even to cover food and accommodation. Donations come only from people who have completed at least one course, so a first course is fully covered by those who sat before you.",
+    q: "How much does a 10-day course in Jaipur cost?",
+    a: "Nothing. Courses at all three centres run solely on donations, freely offered, and no charge is made even to cover food and accommodation. Donations come only from people who have completed at least one course, so a first course is fully covered by those who sat before you.",
   },
   {
-    question: "How do I register, and can I just walk in?",
-    answer:
-      "No walk-ins. Registration is online only. Find a dated course on the centre's schedule (for Dhamma Thali, schedule.vridhamma.org/courses/thali), submit the application, and wait for an emailed confirmation. Only confirmed students and servers may enter the premises, so the confirmation is the load-bearing piece, not optional paperwork.",
+    q: "How do I register, and can I just walk in?",
+    a: "No walk-ins. Registration is online only. Find a dated course on the centre's schedule (for Dhamma Thali, schedule.vridhamma.org/courses/thali), submit the application, and wait for an emailed confirmation. Only confirmed students and servers may enter the premises, so the confirmation is the load-bearing piece, not optional paperwork.",
   },
   {
-    question: "There are three centres near Jaipur. Which one is for me?",
-    answer:
-      "Dhamma Thali is the default for an adult sitting a 10-day course, and it is also the only one of the three that holds the long 20 to 60-day courses. Dhamma Nilaya, 8 km away in Jamdoli, exists for children's Anapana, 7-day teenager courses, and short old-student courses. Dhamma Aranya, about 50 km out at Chaksu, is a smaller second option for 3-day and 10-day courses, and can be easier to reach if you are coming from the Tonk or Kota road south of the city.",
+    q: "There are three centres near Jaipur. Which one is for me?",
+    a: "Dhamma Thali is the default for an adult sitting a 10-day course, and it is also the only one of the three that holds the long 20 to 60-day courses. Dhamma Nilaya, 8 km away in Jamdoli, exists for children's Anapana, 7-day teenager courses, and short old-student courses. Dhamma Aranya, about 50 km out at Chaksu, is a smaller second option for 3-day and 10-day courses, and can be easier to reach if you are coming from the Tonk or Kota road south of the city.",
   },
   {
-    question: "Is the Jaipur 10-day course suitable for a complete beginner?",
-    answer:
-      "Yes. The 10-day course is the introductory format, open to anyone in reasonable physical and mental health, and the technique is taught step by step across the days by an authorized teacher inside the course. We do not teach the technique on this site. For anything about how to sit or how to work with a difficulty, the right sources are dhamma.org and the assistant teacher at your course.",
+    q: "Is the Jaipur 10-day course suitable for a complete beginner?",
+    a: "Yes. The 10-day course is the introductory format, open to anyone in reasonable physical and mental health, and the technique is taught step by step across the days by an authorized teacher inside the course. We do not teach the technique on this site. For anything about how to sit or how to work with a difficulty, the right sources are dhamma.org and the assistant teacher at your course.",
   },
   {
-    question: "How often do courses run at Dhamma Thali?",
-    answer:
-      "Frequently. The Dhamma Thali schedule shows 10-day courses roughly every 5 to 10 days through 2026 and into 2027, alongside the periodic long courses and special sittings. Popular dates fill, and each course opens applications a month or two ahead, so booking early helps.",
+    q: "How often do courses run at Dhamma Thali?",
+    a: "Frequently. The Dhamma Thali schedule shows 10-day courses roughly every 5 to 10 days through 2026 and into 2027, alongside the periodic long courses and special sittings. Popular dates fill, and each course opens applications a month or two ahead, so booking early helps.",
   },
 ];
 
@@ -188,6 +182,8 @@ export default function Page() {
               datePublished: PUBLISHED,
               author: "Matthew Diakonov",
               authorUrl: "https://m13v.com",
+              publisherName: "Vipassana.cool",
+              publisherUrl: "https://vipassana.cool",
             })
           ),
         }}
