@@ -5,7 +5,7 @@ import { FaqDetailPage } from "@/components/faq-detail-page";
 export const metadata: Metadata = {
   title: "Why Is Vipassana Free? The Donation Model Explained",
   description:
-    "Vipassana courses are 100% free, no fees for teaching, food, or lodging. How the dana (donation) model works, what a course actually costs to run ($250-$375 vs $1,000-$5,000+ for paid retreats), and how much to give.",
+    "Vipassana courses are 100% free, no fees for teaching, food, or lodging, and no hidden costs (the only thing you cover is getting there). How the dana (donation) model works, what a course actually costs to run ($250-$375 vs $1,000-$5,000+ for paid retreats), and how much to give.",
   alternates: { canonical: "https://vipassana.cool/faq/why-is-vipassana-free" },
 };
 
@@ -68,6 +68,45 @@ export default function WhyIsVipassanaFreePage() {
         </p>
         <p>
           There is no catch. No fees, no suggested donations, no upselling, no membership requirements, no mailing list you can&apos;t unsubscribe from. You arrive, you practice, you leave. If you want to donate, you can. If you don&apos;t, that&apos;s fine too.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="mb-3 text-xl font-bold text-foreground">What&apos;s Free vs What You Cover Yourself</h2>
+        <p>
+          &quot;Completely free&quot; is true for everything that happens at the center, but it&apos;s worth being precise so nothing surprises you. Here is the honest breakdown.
+        </p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full border-collapse text-left text-sm">
+            <caption className="sr-only">What a Vipassana course covers and what you pay for yourself</caption>
+            <thead>
+              <tr className="border-b border-border">
+                <th className="py-2 pr-4 font-semibold text-foreground">Covered by the center (free)</th>
+                <th className="py-2 font-semibold text-foreground">Your own cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 text-foreground">All teaching and group sittings</td>
+                <td className="py-2 text-muted">Travel to and from the center</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 text-foreground">A bed for all ten nights</td>
+                <td className="py-2 text-muted">The ten days you take off work</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 text-foreground">Every meal, plus the 5pm tea</td>
+                <td className="py-2 text-muted">Anything you choose to pack (a pillow, earplugs)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          There are no registration fees, no deposits, no materials charges, and no &quot;optional&quot; add-ons that quietly become expected. The two real costs are getting yourself there and clearing your calendar. Some centers offer a shuttle from the nearest town, but transport isn&apos;t guaranteed and isn&apos;t part of the course; check the specific center&apos;s page on{" "}
+          <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>.
+        </p>
+        <p>
+          For my own first course I drove a couple of hours to a rented camp and that gas was the only money that left my account the entire ten days. Everything inside the gate, down to the tea, was already paid for by someone I&apos;ll never meet.
         </p>
       </section>
 
