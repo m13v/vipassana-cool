@@ -45,38 +45,38 @@ export const metadata: Metadata = {
 
 const faqs: FaqItem[] = [
   {
-    question: "Does Vipassana help depression?",
-    answer:
+    q: "Does Vipassana help depression?",
+    a:
       "There is no solid evidence that the 10-day Goenka residential Vipassana course treats clinical depression, and it is not a substitute for professional care. The strong relapse-prevention numbers people quote, roughly a third fewer relapses, come from Mindfulness-Based Cognitive Therapy (MBCT), a separate 8-week therapist-led clinical program, not the retreat. Studies on the Goenka course itself show only indirect, secondary signals: in a prison program at Tihar Jail both anxiety and depression dropped, and a small naturalistic study saw anxiety scores fall from about 10 to 3.29 after a course. At the same time, a study of Vipassana retreat participants found 62.9% reported at least one adverse psychological effect, including depression, anxiety, panic, or confusion. What sustained practice can change over time, many practitioners report, is the relationship they have with a low mood, not the presence of clinical depression.",
   },
   {
-    question: "Is MBCT the same thing as Vipassana?",
-    answer:
+    q: "Is MBCT the same thing as Vipassana?",
+    a:
       "No, and conflating the two is the single biggest mistake in answers to this question. MBCT (Mindfulness-Based Cognitive Therapy) and MBSR (Mindfulness-Based Stress Reduction) are secular 8-week clinical programs designed in the West, delivered by trained therapists in weekly group sessions, with structured cognitive-therapy elements and homework. They borrow attentional ideas from Buddhist practice but are not the Goenka tradition. Vipassana in the sense most people mean it, the one this site is about, is a 10-day silent residential course taught by authorized assistant teachers in the lineage of S.N. Goenka. Most of the research that gets cited as proof that meditation prevents depression relapse was run on MBCT, not on the 10-day course.",
   },
   {
-    question: "What is the actual depression-specific evidence for the Goenka 10-day course?",
-    answer:
+    q: "What is the actual depression-specific evidence for the Goenka 10-day course?",
+    a:
       "It is thin and mostly indirect. Depression has typically been measured as a secondary outcome rather than the main thing a study was designed to test. The most-cited example is the prison meditation program at India's Tihar Jail, which has run since 1993 and reported drops in both anxiety and depression among participants. A naturalistic study in Muscat saw anxiety scores fall from an average of 10 to 3.29 after a 10-day course. A 2025 systematic review in Cureus found moderate evidence for reductions in stress and gains in mindfulness and well-being, while explicitly flagging moderate-to-high risk of bias across the included studies. None of these were designed as depression-treatment trials.",
   },
   {
-    question: "Can a Vipassana retreat make depression worse?",
-    answer:
+    q: "Can a Vipassana retreat make depression worse?",
+    a:
       "For some people, yes, especially during an acute episode. A study of Vipassana retreat participants found 62.9% reported at least one adverse psychological effect, including anxiety, panic, depression, confusion, or disorientation. A large international cross-sectional study in BJPsych Open found roughly 53% of regular meditators reported at least one unpleasant effect, with 6 to 14% experiencing enduring adverse effects. Risk factors include pre-existing mental health conditions, higher retreat intensity, and longer sessions. The intense introspection, silence, and isolation of a 10-day course can amplify symptoms in someone who is not stable. This does not mean the course is dangerous for most people; it means the honest answer includes a downside that most articles leave out.",
   },
   {
-    question: "If MBCT works for depression, why not just call Vipassana a depression treatment?",
-    answer:
+    q: "If MBCT works for depression, why not just call Vipassana a depression treatment?",
+    a:
       "Because the things that make MBCT a measurable depression intervention are exactly the things the 10-day course is not. MBCT is delivered to a clinical population, screened and recruited for recurrent depression, by trained therapists, with a defined dose, in an outpatient setting where someone can go home each night. The Goenka course is a residential retreat for the general public, run by volunteers and authorized assistant teachers, with no clinical screening for efficacy and an explicit policy of not positioning itself as therapy. Transferring an effect size from one to the other is not science, it is a category error.",
   },
   {
-    question: "Should I go to a course instead of seeing a therapist or taking medication?",
-    answer:
+    q: "Should I go to a course instead of seeing a therapist or taking medication?",
+    a:
       "No. Nothing on this site is medical advice, and a 10-day course is not a replacement for professional mental health care. If you have clinical depression, your psychiatrist or therapist should be part of any decision about attending. Do not stop prescribed medication to attend; you can continue medication during a course, and the application form asks about it. For an honest read on attending with depression, see the FAQ on Vipassana and depression. For questions about how to practice or how to work with a difficulty, the tradition redirects to dhamma.org and an authorized assistant teacher inside a 10-day course.",
   },
   {
-    question: "Where can I get help if a retreat left me feeling worse?",
-    answer:
+    q: "Where can I get help if a retreat left me feeling worse?",
+    a:
       "Cheetah House (cheetahhouse.org), founded by Dr. Willoughby Britton at Brown University, exists specifically to support meditators who experience adverse effects. If you are in crisis in the US, call or text 988. The point of naming this is not to scare anyone off; it is that a complete answer to whether Vipassana helps depression has to include the people for whom intensive practice was the wrong thing at the wrong time.",
   },
 ];
@@ -118,7 +118,7 @@ const relatedPosts = [
 
 const breadcrumbItems = [
   { label: "Home", href: "/" },
-  { label: "Topics", href: "/t/scientific-evidence" },
+  { label: "Evidence", href: "/guide/scientific-evidence" },
   { label: "Does Vipassana help depression?" },
 ];
 
