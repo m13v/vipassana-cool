@@ -252,6 +252,40 @@ export default function Page() {
         </div>
       </section>
 
+      {/* The literal "how much" question, both intents */}
+      <section className="max-w-3xl mx-auto px-6 my-14">
+        <h2 className="text-3xl font-bold text-zinc-900 mb-4">
+          How much does it cost, and how much should you give?
+        </h2>
+        <p className="text-zinc-700 leading-relaxed mb-4">
+          People search how much in two different moods, and the two answers are
+          not the same number. If you mean how much does it cost to attend a
+          course, the answer is nothing. Zero. There is no course fee, no lodging
+          charge, and no food charge, for anyone, anywhere in this tradition. A
+          first-time student is not even allowed to donate before or during the
+          course, so as a newcomer there is literally no amount you can pay to
+          get in. Budget for travel and your time off work, and that is it.
+        </p>
+        <p className="text-zinc-700 leading-relaxed mb-4">
+          If you mean how much should I give once I have sat, there is no set
+          amount, no suggested amount, and no minimum. The centers deliberately
+          never publish a number, because a published number turns a donation into
+          a fee and breaks the whole model. You give according to your own means
+          and your own volition. Some old students give nothing one year and a
+          larger gift another year as their circumstances change, and both are
+          completely fine.
+        </p>
+        <p className="text-zinc-700 leading-relaxed">
+          The honest way to anchor it, if you want one, is the question the
+          tradition itself frames for returning students: my own course was paid
+          for by the generosity of past students, so what can I give toward the
+          cost of a future course. Think in terms of helping cover one more
+          person&apos;s ten days rather than paying a bill for your own. And
+          remember the second currency below: a week of Dhamma service is a
+          donation too, and for many people it is the larger one.
+        </p>
+      </section>
+
       <section className="max-w-3xl mx-auto px-6 my-14">
         <h2 className="text-3xl font-bold text-zinc-900 mb-4">
           The one rule almost every guide skips
