@@ -145,10 +145,10 @@ const related = [
     tag: "Preparation",
   },
   {
-    title: "Noble silence and the 5 PM tea cutoff",
-    href: "/t/vipassana-tea-cutoff-tests-resolve",
+    title: "What to expect on a Vipassana retreat",
+    href: "/t/vipassana-meditation-retreat-what-to-expect",
     excerpt:
-      "The small daily test that surfaces more than it seems, and how it changed across my courses.",
+      "The wider picture beyond Day 1: conditions, silence, food, and what the ten days ask of you.",
     tag: "Experience",
   },
 ];
@@ -170,6 +170,8 @@ export default function VipassanaDay1Page() {
               dateModified: PUBLISHED,
               author: "Matthew Diakonov",
               authorUrl: "https://m13v.com",
+              publisherName: "Vipassana.cool",
+              publisherUrl: "https://vipassana.cool",
             }),
           ),
         }}
