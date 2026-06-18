@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@seo/components", "@m13v/seo-components"],
   async redirects() {
     return [
+      { source: "/t/vipassana-donation-how-much", destination: "/t/vipassana-donation", permanent: true },
       { source: "/t/vipassana-registration-form-online-2026", destination: "/t/vipassana-registration-form-online", permanent: true },
       { source: "/t/buddy-practice", destination: "/t/practice-buddy", permanent: true },
       { source: "/t/accountability-and-practice-buddies", destination: "/t/practice-buddy", permanent: true },
