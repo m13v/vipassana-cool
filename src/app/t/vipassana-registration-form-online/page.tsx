@@ -117,6 +117,10 @@ const faqs: FaqItem[] = [
     a: "The detailed health and mental-health sections. The form asks directly about depression, anxiety, panic attacks, and similar history, plus alcohol, drug, and prescribed-medication use within the past two years. This is logistics and care, not a filter to exclude you. It also asks whether you are a new student or an old student, which routes you to a different block of questions.",
   },
   {
+    q: "Is there a special registration form or window for 2026 courses?",
+    a: "No. The form is the same one used every year, and there is no single annual window that opens all 2026 courses at once. To register for a 2026 course you filter the course search at dhamma.org to the months and region you want, then click Apply on a dated course that shows open availability. A date typically becomes applyable roughly two to three months before it starts, and popular centers can fill within days, so the reliable approach is to check the search regularly and apply as soon as a workable date appears.",
+  },
+  {
     q: "I am an old student, is my form different?",
     a: "It is the same form, but you complete a different middle block. New students fill the For New Students block (prior meditation experience, how you heard about Vipassana). Old students fill the For Old Students block (first course, most recent course, total number of courses sat and served, whether you have maintained daily practice). Everyone completes the shared top block and the For All Students health block.",
   },
@@ -403,6 +407,42 @@ export default function Page() {
           useful for most people, as a way to read every question calmly before
           a course date opens, so when you do click Apply you already know what
           you will write for the health, experience, and commitment sections.
+        </p>
+      </section>
+
+      {/* 2026 timing */}
+      <section className="max-w-3xl mx-auto px-6 pt-12">
+        <h2 className="text-2xl font-bold text-zinc-900">
+          Finding the form for a 2026 course
+        </h2>
+        <p className="mt-3 text-zinc-700">
+          The form itself does not change year to year. What changes is which
+          dated courses are visible to apply to. For 2026 dates, the only thing
+          you do differently is filter the{" "}
+          <a
+            href={COURSE_SEARCH}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-teal-700 underline hover:text-zinc-900"
+          >
+            course search
+          </a>{" "}
+          to the months you want and look for a course that shows open
+          availability. There is no separate &quot;2026 form&quot; and no annual
+          registration window that opens everything at once.
+        </p>
+        <p className="mt-3 text-zinc-700">
+          Centers publish and open their schedules on their own cadence. As a
+          rough pattern, a given course date tends to become applyable roughly
+          two to three months before it starts, and popular centers can fill
+          within days of a date opening. So the practical move for a 2026 course
+          is not to wait for a launch date, it is to check the course search
+          periodically for the region and month you want, and to apply the day a
+          workable date appears. Because the questions never change, having your
+          health, experience, and commitment answers drafted in advance is what
+          lets you submit before a spot is gone. The authoritative, always-current
+          list of open 2026 dates lives in the course search above, not on this
+          page.
         </p>
       </section>
 
