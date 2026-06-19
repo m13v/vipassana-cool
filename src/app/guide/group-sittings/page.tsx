@@ -28,7 +28,7 @@ export default function GroupSittingsPage() {
         description="Everything about Vipassana group sittings: what they are, how to find one near you, what to expect, etiquette, online options, and how to start your own."
         url="https://vipassana.cool/guide/group-sittings"
         datePublished="2025-09-01"
-        dateModified="2026-06-17"
+        dateModified="2026-06-19"
       />
       <ArticleHeader
         breadcrumbs={[
@@ -60,6 +60,18 @@ export default function GroupSittingsPage() {
           </p>
           <p>
             Group sittings are exclusively for old students — people who have completed at least one 10-day course. If you haven&apos;t done a course yet, this isn&apos;t available to you. Once you have, it becomes one of the most valuable supports for your daily practice.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">Why is a group sitting one hour long?</h2>
+          <p>
+            The one-hour length is the convention across the Goenka tradition, and it isn&apos;t arbitrary. One hour is the same length as the formal group sittings inside a 10-day course, so the weekly sitting mirrors the rhythm students already know. An hour is long enough for the mind to settle past the initial restlessness, yet short enough that working old students can fit it into an evening after work.
+          </p>
+          <p>
+            In practice the hour is usually a single continuous sitting framed by a short Goenka audio recording at the start and a few minutes of metta at the end, rather than two thirty-minute blocks. Some groups run slightly shorter (around 45 minutes) and a few add an optional discourse excerpt afterward, but if you see &quot;group sitting&quot; on a center schedule, an hour is the safe assumption. None of this is a prescription for how long you should sit at home: home practice length is a personal matter, and for anything about how to actually practice during that hour, the right sources are{" "}
+            <a href="https://www.dhamma.org" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:text-foreground">dhamma.org</a>{" "}
+            and an authorized assistant teacher at a course.
           </p>
         </section>
 
