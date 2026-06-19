@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
       { source: "/t/group-sitting", destination: "/guide/group-sittings", permanent: true },
       { source: "/t/vipassana-group-sitting", destination: "/guide/group-sittings", permanent: true },
       { source: "/t/vipassana-group-sitting-near-me", destination: "/guide/group-sittings", permanent: true },
+      { source: "/t/vipassana-meditation-1-hour-group-sitting", destination: "/guide/group-sittings", permanent: true },
       { source: "/t/vipassana-meditation-benefits-scientific-evidence", destination: "/guide/scientific-evidence", permanent: true },
     ];
   },
