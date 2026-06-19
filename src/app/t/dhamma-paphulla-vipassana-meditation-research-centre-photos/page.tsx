@@ -359,10 +359,7 @@ export default function Page() {
         </div>
 
         <section className="mt-14">
-          <h2 className="text-2xl font-bold tracking-tight text-zinc-900">
-            Frequently asked questions
-          </h2>
-          <FaqSection faqs={faqs} />
+          <FaqSection heading="Frequently asked questions" items={faqs} />
         </section>
 
         <div className="mt-14">
