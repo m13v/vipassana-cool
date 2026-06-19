@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@seo/components", "@m13v/seo-components"],
   async redirects() {
     return [
+      { source: "/t/igatpuri-vipassana-centre", destination: "/t/igatpuri-vipassana", permanent: true },
       { source: "/alternative/transcendental-meditation-vs-vipassana", destination: "/alternative/vipassana-vs-transcendental-meditation", permanent: true },
       { source: "/t/vipassana-donation-how-much", destination: "/t/vipassana-donation", permanent: true },
       { source: "/t/vipassana-registration-form-online-2026", destination: "/t/vipassana-registration-form-online", permanent: true },
