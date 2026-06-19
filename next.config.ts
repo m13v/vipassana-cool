@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       { source: "/t/igatpuri-vipassana-center", destination: "/t/igatpuri-vipassana", permanent: true },
       { source: "/alternative/transcendental-meditation-vs-vipassana", destination: "/alternative/vipassana-vs-transcendental-meditation", permanent: true },
       { source: "/t/vipassana-donation-how-much", destination: "/t/vipassana-donation", permanent: true },
+      { source: "/t/vipassana-10-day-course-fee", destination: "/t/vipassana-donation", permanent: true },
       { source: "/t/vipassana-registration-form-online-2026", destination: "/t/vipassana-registration-form-online", permanent: true },
       { source: "/t/buddy-practice", destination: "/t/practice-buddy", permanent: true },
       { source: "/t/accountability-and-practice-buddies", destination: "/t/practice-buddy", permanent: true },

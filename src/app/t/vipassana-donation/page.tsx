@@ -264,7 +264,12 @@ export default function Page() {
           charge, and no food charge, for anyone, anywhere in this tradition. A
           first-time student is not even allowed to donate before or during the
           course, so as a newcomer there is literally no amount you can pay to
-          get in. Budget for travel and your time off work, and that is it.
+          get in. Budget for travel and your time off work, and that is it. If
+          you arrived here looking for the 10-day course fee, that is the whole
+          answer: there is none. Many other silent retreats charge anywhere from
+          a few hundred to a few thousand dollars for ten days; a 10-day course
+          in this tradition charges nothing, and the donation that funds it can
+          only come from people who have already finished sitting.
         </p>
         <p className="text-zinc-700 leading-relaxed mb-4">
           If you mean how much should I give once I have sat, there is no set
