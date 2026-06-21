@@ -264,16 +264,17 @@ export default function Page() {
             au sens d&apos;une dérive.
           </p>
           <p className="mt-3 text-sm text-zinc-500">
-            Sources publiques : la{" "}
+            Source publique : la{" "}
             <a
-              href="https://www.miviludes.interieur.gouv.fr/comprendre-et-prevenir/que-dit-loi"
+              href="https://fr.wikipedia.org/wiki/Loi_tendant_%C3%A0_renforcer_la_pr%C3%A9vention_et_la_r%C3%A9pression_des_mouvements_sectaires"
               className="text-teal-600 underline hover:text-zinc-900"
               target="_blank"
               rel="noopener noreferrer"
             >
-              MIVILUDES (ministère de l&apos;Intérieur)
-            </a>{" "}
-            et la loi n°2001-504 dite About-Picard.
+              loi n°2001-504 dite About-Picard
+            </a>
+            , appliquée par la MIVILUDES (mission du ministère de
+            l&apos;Intérieur).
           </p>
         </div>
 
