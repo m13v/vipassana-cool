@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
       { source: "/t/vipassana-10-day-course-registration-igatpuri", destination: "/t/vipassana-igatpuri-registration", permanent: true },
       { source: "/t/vipassana-igatpuri-apply-online", destination: "/t/vipassana-igatpuri-registration", permanent: true },
       { source: "/t/igatpuri-meditation-centre-registration", destination: "/t/vipassana-igatpuri-registration", permanent: true },
+      { source: "/t/igatpuri-vipassana-centre-registration", destination: "/t/vipassana-igatpuri-registration", permanent: true },
       { source: "/t/vipassana-centre", destination: "/t/vipassana-meditation-centre", permanent: true },
       { source: "/t/sitting-group", destination: "/guide/group-sittings", permanent: true },
       { source: "/t/group-sitting", destination: "/guide/group-sittings", permanent: true },
