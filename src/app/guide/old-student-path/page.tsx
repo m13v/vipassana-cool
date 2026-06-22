@@ -27,6 +27,7 @@ export default function OldStudentPathPage() {
         description="What it means to be a Vipassana old student: expectations, what unlocks, building community, resources on dhamma.org, common challenges, and the long game."
         url="https://vipassana.cool/guide/old-student-path"
         datePublished="2025-09-01"
+        dateModified="2026-06-22"
       />
       <ArticleHeader
         breadcrumbs={[
@@ -143,6 +144,16 @@ export default function OldStudentPathPage() {
           </ul>
           <p>
             If you feel isolated in your practice, group sittings and service are the remedy. The community exists — you just have to show up.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-xl font-bold text-foreground">How do you stay accountable to daily practice as an old student?</h2>
+          <p>
+            The single hardest part of being an old student is not the course. It is the morning after, and the morning after that, sitting alone with no group, no teacher, and nobody to notice whether you showed up. The two-hour daily commitment is easy to keep for a week and surprisingly easy to lose over a few months.
+          </p>
+          <p>
+            One thing that helps is having another old student who knows whether you sat today. That is why we run a free <Link href="/practice-buddy" className="text-accent underline hover:text-foreground">Practice Buddy matching program</Link> on this site: it pairs you with another old student for daily-practice accountability, so the question &quot;did you sit this morning?&quot; comes from a peer rather than from willpower alone. It is run by a fellow practitioner, not a teacher, and it never touches technique. If keeping the daily sit is your bottleneck, see the <Link href="/guide/daily-practice" className="text-accent underline hover:text-foreground">daily practice guide</Link> and consider requesting a buddy.
           </p>
         </section>
 
