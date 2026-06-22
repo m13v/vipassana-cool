@@ -16,6 +16,7 @@ import {
 
 const PAGE_URL = "https://vipassana.cool/t/vipassana-igatpuri-registration";
 const PUBLISHED = "2026-06-19";
+const MODIFIED = "2026-06-22";
 const BOOKING_LINK = "https://cal.com/team/mediar/vipassana";
 const SCHEDULE_URL = "https://schedule.vridhamma.org/courses/giri";
 
@@ -104,6 +105,10 @@ const faqs: FaqItem[] = [
     a: "Dhamma Giri. Igatpuri also has Dhamma Tapovana-1 and Dhamma Tapovana-2, but those run long courses for old students only and require a completed 10-day course first. If you have never sat a course, your only registration path in Igatpuri is a 10-day course at Dhamma Giri through schedule.vridhamma.org/courses/giri.",
   },
   {
+    q: "Is there a booking fee or deposit to reserve a seat at Igatpuri?",
+    a: "No. There is no booking fee, no deposit, and no payment of any kind to reserve a place at Dhamma Giri. People often search for 'booking' expecting a paid reservation, like a hotel or a retreat package, but registration here works differently: you apply, you get accepted, and you confirm, all for free. Dhamma Giri runs purely on donations, and even those can only be given by people who have already completed a 10-day course. So 'booking' and 'registration' mean the same thing at Igatpuri, and neither one costs anything. Your seat is held by your confirmation email, not by money.",
+  },
+  {
     q: "What if every Igatpuri course is full when I look?",
     a: "Two practical moves. First, keep checking, because confirmed students do drop out and seats reopen, sometimes days before a course. Second, widen your search. Dhamma Giri is the busiest center in the tradition precisely because it is the original, and there are many other Goenka-tradition centers across India and the world using the exact same application system, often with more availability. Registering at a quieter center gets you the identical 10-day course sooner.",
   },
@@ -117,7 +122,7 @@ export default function Page() {
       "Registration for Vipassana at Igatpuri is online only and two steps. Apply for one dated course at Dhamma Giri, wait for the email decision, then confirm. The per-category seat rule, the rolling application windows, and which of Igatpuri's centers a new student registers at.",
     url: PAGE_URL,
     datePublished: PUBLISHED,
-    dateModified: PUBLISHED,
+    dateModified: MODIFIED,
     author: "Matthew Diakonov",
     authorUrl: "https://m13v.com",
     publisherName: "Vipassana.cool",
