@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       { source: "/t/vipassana-volunteer", destination: "/guide/dhamma-service", permanent: true },
       { source: "/t/igatpuri-vipassana-centre", destination: "/t/igatpuri-vipassana", permanent: true },
       { source: "/t/igatpuri-vipassana-center", destination: "/t/igatpuri-vipassana", permanent: true },
+      { source: "/t/igatpuri-meditation-centre", destination: "/t/igatpuri-vipassana", permanent: true },
       { source: "/alternative/transcendental-meditation-vs-vipassana", destination: "/alternative/vipassana-vs-transcendental-meditation", permanent: true },
       { source: "/t/vipassana-donation-how-much", destination: "/t/vipassana-donation", permanent: true },
       { source: "/t/vipassana-10-day-course-fee", destination: "/t/vipassana-donation", permanent: true },

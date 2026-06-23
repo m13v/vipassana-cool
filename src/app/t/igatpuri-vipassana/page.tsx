@@ -85,6 +85,10 @@ const vriOutputs = [
 const referenceRows: { k: string; v: React.ReactNode }[] = [
   { k: "Center name", v: "Dhamma Giri, Vipassana International Academy (VIA)" },
   { k: "Meaning", v: "Dhamma Giri translates as “Hill of Dhamma”" },
+  {
+    k: "Scale",
+    v: "The center describes itself as one of the world’s largest meditation centres (source: giri.vridhamma.org)",
+  },
   { k: "Founded", v: "1976, by S.N. Goenka" },
   {
     k: "Location",
