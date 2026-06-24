@@ -137,38 +137,38 @@ const notReviewableItems = [
 
 const faqs: FaqItem[] = [
   {
-    question: "What is Dhamma Suttama's rating?",
-    answer:
+    q: "What is Dhamma Suttama's rating?",
+    a:
       "As of June 2026, the Quebec Vipassana Meditation Centre (Dhamma Suttama) carries roughly 4.8 out of 5 across more than 300 Google reviews, and similar high scores on third-party directories. Ratings drift over time, so check Google Maps for the current number. The authoritative source for the centre itself is suttama.dhamma.org.",
   },
   {
-    question: "Where is Dhamma Suttama and how do I contact it?",
-    answer:
+    q: "Where is Dhamma Suttama and how do I contact it?",
+    a:
       "It is at 810 Cote Azelie, Montebello, QC J0V 1L0, on a quiet road north of Montebello, accessible from Highway 50 between Montreal and Ottawa/Gatineau. Registration, dates, and contact details are all on the official site at suttama.dhamma.org. Courses are booked through that site, not through a review platform or third-party booking service.",
   },
   {
-    question: "Why are there no reviews on the official site?",
-    answer:
+    q: "Why are there no reviews on the official site?",
+    a:
       "The tradition does not market or sell courses, so there is no ratings widget on dhamma.org. Courses are free and run entirely on donations from former students. That is also why you find reviews on Google, Yelp, and directory sites instead: those are visitors writing on their own, not the centre collecting testimonials.",
   },
   {
-    question: "Are the negative reviews a reason not to go?",
-    answer:
+    q: "Are the negative reviews a reason not to go?",
+    a:
       "Read what the negative review is actually about. If it criticizes the technique, the silence, or the strictness of the rules, that is true of every centre in the tradition and is not specific to Dhamma Suttama. If it criticizes the food, a cold room, a long wait at registration, or how a particular volunteer handled something, that is genuine centre-and-staff feedback worth weighing. The split matters because the course is identical everywhere; only the place and the people running it change.",
   },
   {
-    question: "Is Dhamma Suttama a cult? Some reviews use that word.",
-    answer:
+    q: "Is Dhamma Suttama a cult? Some reviews use that word.",
+    a:
       "A handful of reviews describe the strictness as off-putting. The rules (silence, no phones, no leaving, separation of men and women, surrendering the practice you arrived with for ten days) feel intense if you are not expecting them. Whether that reads as discipline or as control is a personal call, and it applies to the tradition as a whole rather than to this centre. We have a separate write-up on that question; the short version is that the structure is demanding by design, fully voluntary, and free.",
   },
   {
-    question: "How does Dhamma Suttama compare to other Vipassana centres?",
-    answer:
+    q: "How does Dhamma Suttama compare to other Vipassana centres?",
+    a:
       "The course is the same. I have sat six courses across three other centres in the tradition and the schedule, the discourses, and the technique did not change between them. What changed was the building, the food, the bunk situation, and how the local volunteers ran things. So comparing centres really means comparing facilities, location, capacity, and travel logistics, which is exactly what the centre-specific part of a review captures.",
   },
   {
-    question: "Can you teach me the technique before I read reviews and decide?",
-    answer:
+    q: "Can you teach me the technique before I read reviews and decide?",
+    a:
       "No, and that is on purpose. The technique is transmitted only inside a 10-day residential course by an authorized assistant teacher. This site does not teach or describe it. For anything operational (how to practice, how to handle a difficulty, what happens on a given day), go to dhamma.org and to a teacher at a course. Reviews can tell you whether the place and the logistics suit you; they cannot substitute for sitting the course.",
   },
 ];
