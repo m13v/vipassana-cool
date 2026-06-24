@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@seo/components", "@m13v/seo-components"],
   async redirects() {
     return [
+      { source: "/t/vipassana-meditation-delhi", destination: "/t/vipassana-meditation-centre-delhi", permanent: true },
       { source: "/t/vipassana-hyderabad", destination: "/t/vipassana-meditation-hyderabad", permanent: true },
       { source: "/t/vipassana-near-me", destination: "/t/vipassana-meditation-centre-near-me", permanent: true },
       { source: "/t/vipassana-old-student", destination: "/guide/old-student-path", permanent: true },
