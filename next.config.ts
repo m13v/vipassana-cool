@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/t/vipassana-meditation-delhi", destination: "/t/vipassana-meditation-centre-delhi", permanent: true },
+      { source: "/t/delhi-vipassana-centre", destination: "/t/vipassana-centre-in-delhi", permanent: true },
       { source: "/t/vipassana-hyderabad", destination: "/t/vipassana-meditation-hyderabad", permanent: true },
       { source: "/t/vipassana-meditation-centre-hyderabad", destination: "/t/vipassana-meditation-center-hyderabad", permanent: true },
       { source: "/t/vipassana-near-me", destination: "/t/vipassana-meditation-centre-near-me", permanent: true },
