@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       { source: "/t/delhi-vipassana-centre", destination: "/t/vipassana-centre-in-delhi", permanent: true },
       { source: "/t/vipassana-hyderabad", destination: "/t/vipassana-meditation-hyderabad", permanent: true },
       { source: "/t/vipassana-meditation-centre-hyderabad", destination: "/t/vipassana-meditation-center-hyderabad", permanent: true },
+      { source: "/t/vipassana-meditation-centre-in-hyderabad", destination: "/t/vipassana-meditation-center-hyderabad", permanent: true },
       { source: "/t/vipassana-centre-hyderabad", destination: "/t/vipassana-meditation-center-hyderabad", permanent: true },
       { source: "/t/hyderabad-vipassana-centre", destination: "/t/vipassana-meditation-center-hyderabad", permanent: true },
       { source: "/t/vipassana-near-me", destination: "/t/vipassana-meditation-centre-near-me", permanent: true },
