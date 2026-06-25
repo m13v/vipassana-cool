@@ -71,34 +71,28 @@ const costRows: ComparisonRow[] = [
 
 const faqs: FaqItem[] = [
   {
-    question: "How much does a 10-day Vipassana course cost?",
-    answer:
-      "Nothing. There is no charge for tuition, food, or lodging at a 10-day Goenka course. When you register you are not asked for a card. The course is offered free of charge and funded by voluntary donations from people who have completed a course in the past.",
+    q: "How much does a 10-day Vipassana course cost?",
+    a: "Nothing. There is no charge for tuition, food, or lodging at a 10-day Goenka course. When you register you are not asked for a card. The course is offered free of charge and funded by voluntary donations from people who have completed a course in the past.",
   },
   {
-    question: "Is it really free, or is there a hidden fee?",
-    answer:
-      "There is no hidden fee. The financial policy is published on dhamma.org and it is unusually strict: the tradition does not accept any payment from new students, not even a contribution toward expenses. The reasoning is that a course given for a fee would not be a pure gift, and the practice is meant to be passed forward without commercial exchange.",
+    q: "Is it really free, or is there a hidden fee?",
+    a: "There is no hidden fee. The financial policy is published on dhamma.org and it is unusually strict: the tradition does not accept any payment from new students, not even a contribution toward expenses. The reasoning is that a course given for a fee would not be a pure gift, and the practice is meant to be passed forward without commercial exchange.",
   },
   {
-    question: "Can I donate when I register or before the course?",
-    answer:
-      "No. Only students who have completed at least one full 10-day course are allowed to give, and donations are typically received at or after the end of a course, not at registration. A first-time student who tries to pay will be told their gift cannot be accepted yet.",
+    q: "Can I donate when I register or before the course?",
+    a: "No. Only students who have completed at least one full 10-day course are allowed to give, and donations are typically received at or after the end of a course, not at registration. A first-time student who tries to pay will be told their gift cannot be accepted yet.",
   },
   {
-    question: "So what does it actually cost me to sit a course?",
-    answer:
-      "The course itself is $0. Your real cost is time and travel: ten days plus the two registration and departure days away from work and family, transport to the center, and whatever you would otherwise have earned in that window. For most people the binding cost is the twelve days, not money.",
+    q: "So what does it actually cost me to sit a course?",
+    a: "The course itself is $0. Your real cost is time and travel: ten days plus the two registration and departure days away from work and family, transport to the center, and whatever you would otherwise have earned in that window. For most people the binding cost is the twelve days, not money.",
   },
   {
-    question: "If new students cannot pay, who keeps the lights on?",
-    answer:
-      "Old students. Once you finish a course you understand what you received, and many people give so the next person can sit for free the way they did. This is the dana model: the course you sit was paid for by strangers who came before you, and if you give, you are paying for a stranger who comes after you.",
+    q: "If new students cannot pay, who keeps the lights on?",
+    a: "Old students. Once you finish a course you understand what you received, and many people give so the next person can sit for free the way they did. This is the dana model: the course you sit was paid for by strangers who came before you, and if you give, you are paying for a stranger who comes after you.",
   },
   {
-    question: "Is the end-of-course donation tax deductible?",
-    answer:
-      "Often not in the way people assume, because you just received lodging, meals, and instruction with real value. The deductible giving paths in the United States are separate entities and funds. There is a full breakdown on the retreat tax deduction guide on this site.",
+    q: "Is the end-of-course donation tax deductible?",
+    a: "Often not in the way people assume, because you just received lodging, meals, and instruction with real value. The deductible giving paths in the United States are separate entities and funds. There is a full breakdown on the retreat tax deduction guide on this site.",
   },
 ];
 
@@ -108,6 +102,7 @@ export default function Page() {
     { name: "Guides", url: "https://vipassana.cool/t/vipassana-retreat" },
     { name: "Vipassana cost", url: PAGE_URL },
   ];
+  const crumbItems = breadcrumbs.map((b) => ({ label: b.name, href: b.url }));
 
   return (
     <article className="min-h-screen">
@@ -124,6 +119,8 @@ export default function Page() {
               datePublished: PUBLISHED,
               author: "Matthew Diakonov",
               authorUrl: "https://m13v.com",
+              publisherName: "Vipassana.cool",
+              publisherUrl: "https://vipassana.cool",
             })
           ),
         }}
@@ -142,7 +139,7 @@ export default function Page() {
       />
 
       <div className="mx-auto max-w-3xl px-5 py-10">
-        <Breadcrumbs items={breadcrumbs} />
+        <Breadcrumbs items={crumbItems} />
 
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl">
           What a Vipassana course actually costs
