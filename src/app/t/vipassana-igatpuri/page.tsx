@@ -325,7 +325,8 @@ export default function Page() {
             The three parts of the hill
           </h2>
           <p className="mt-4 leading-relaxed text-zinc-700">
-            &quot;Dhamma Giri&quot; means &quot;Hill of Dhamma.&quot; What sits on that hill,
+            &quot;Dhamma Giri&quot; means &quot;Hill of Dhamma,&quot; and it is the same place
+            people write as one word, &quot;Dhammagiri.&quot; What sits on that hill,
             and the land just south of it, is not one building but three
             distinct operations that grew up over almost thirty years.
           </p>
