@@ -26,6 +26,7 @@ const nextConfig: NextConfig = {
       { source: "/t/vipassana-10-day-course-fee", destination: "/t/vipassana-donation", permanent: true },
       { source: "/t/vipassana-registration-form-online-2026", destination: "/t/vipassana-registration-form-online", permanent: true },
       { source: "/t/vipassana-registration-online", destination: "/t/vipassana-registration-form-online", permanent: true },
+      { source: "/t/vipassana-meditation-registration", destination: "/t/vipassana-registration-form-online", permanent: true },
       { source: "/t/buddy-practice", destination: "/t/practice-buddy", permanent: true },
       { source: "/t/accountability-and-practice-buddies", destination: "/t/practice-buddy", permanent: true },
       { source: "/alternative/ai-meditation-apps-vs-daily-vipassana-practice", destination: "/alternative/ai-meditation-apps-vs-vipassana-daily-practice-2026", permanent: true },
