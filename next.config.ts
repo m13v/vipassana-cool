@@ -62,6 +62,7 @@ const nextConfig: NextConfig = {
       { source: "/t/vipassana-meditation-benefits-scientific-evidence", destination: "/guide/scientific-evidence", permanent: true },
       { source: "/t/vipassana-and-adhd", destination: "/t/vipassana-adhd", permanent: true },
       { source: "/t/dhammagiri", destination: "/t/vipassana-igatpuri", permanent: true },
+      { source: "/t/vipassana-meditation-igatpuri", destination: "/t/vipassana-igatpuri", permanent: true },
     ];
   },
   async headers() {
