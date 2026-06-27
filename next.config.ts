@@ -64,6 +64,7 @@ const nextConfig: NextConfig = {
       { source: "/t/vipassana-and-adhd", destination: "/t/vipassana-adhd", permanent: true },
       { source: "/t/dhammagiri", destination: "/t/vipassana-igatpuri", permanent: true },
       { source: "/t/vipassana-meditation-igatpuri", destination: "/t/vipassana-igatpuri", permanent: true },
+      { source: "/t/vipassana-meditation-centre-buddha-smriti-park", destination: "/t/vipassana-centre-patna", permanent: true },
     ];
   },
   async headers() {

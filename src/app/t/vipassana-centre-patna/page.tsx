@@ -90,6 +90,10 @@ const faqs: FaqItem[] = [
     a: "You apply online through the centre site at patliputta.dhamma.org by opening the schedule, choosing a course date, and filling out the full application. Because demand is high, it can take up to two weeks to hear back, and accepted students must confirm to hold their seat. All operational questions about dates, accommodation, and eligibility belong to the centre and to dhamma.org, not to this site.",
   },
   {
+    q: "Is the Vipassana centre the same as Buddha Smriti Park itself?",
+    a: "No. Buddha Smriti Park is a public memorial park opposite Patna Junction, inaugurated by the Dalai Lama on 27 May 2010, and its centrepiece is the Patliputra Karuna Stupa, which enshrines a relic of the Buddha from Vaishali. The Vipassana centre, Dhamma Pāṭaliputta, is a separate residential course facility in the park's Meditation Block, offered to the public from 3 July 2018. The park you visit on a ticket during opening hours; the centre you apply to in advance for a full 10-day residential course. The authoritative source for the centre is patliputta.dhamma.org.",
+  },
+  {
     q: "Can I just walk into Buddha Smriti Park and start meditating?",
     a: "Buddha Smriti Park is a public park, but the Vipassana centre inside it runs structured residential 10-day courses you have to apply and be accepted for. It is not a drop-in hall. For old students (people who have sat a full 10-day course) the centre also holds group sittings; the centre publishes those times, so check with them directly rather than turning up unannounced.",
   },
@@ -115,6 +119,7 @@ export default function Page() {
       "The Patna Vipassana centre is Dhamma Pāṭaliputta in the Meditation Block of Buddha Smriti Park next to Patna Junction, built by the Government of Bihar and opened 3 July 2018. Where it is, how courses work, and what it takes to keep a daily practice alive in Patna afterward.",
     url: PAGE_URL,
     datePublished: PUBLISHED,
+    dateModified: "2026-06-27",
     author: "Matthew Diakonov",
     authorUrl: "https://m13v.com",
     publisherName: "Vipassana.cool",
@@ -227,6 +232,61 @@ export default function Page() {
           is one of the rare ones dropped straight into a public city park, next
           to a railway junction, paid for by a state government. Easy to reach.
           Harder to leave behind.
+        </p>
+      </section>
+
+      {/* PARK VS CENTRE DISAMBIGUATION */}
+      <section className="max-w-3xl mx-auto px-6 py-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900">
+          Buddha Smriti Park and the Vipassana centre are two different things
+        </h2>
+        <p className="mt-3 text-zinc-600 leading-relaxed">
+          This trips people up, so it is worth stating plainly. The phrase
+          &ldquo;Vipassana meditation centre, Buddha Smriti Park&rdquo; points at
+          a residential course centre that happens to sit inside a public city
+          park. The park and the centre are not the same place, and you visit
+          them in completely different ways.
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+              The park
+            </p>
+            <p className="mt-2 font-semibold text-zinc-900">Buddha Smriti Park</p>
+            <p className="mt-3 text-sm text-zinc-700 leading-relaxed">
+              A public memorial park opposite Patna Junction, inaugurated by the
+              Dalai Lama on 27 May 2010. Its centrepiece is the Patliputra Karuna
+              Stupa, which enshrines a relic of the Buddha excavated from
+              Vaishali. You buy a ticket, walk in during opening hours, and look
+              around like any other visitor.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-teal-200 bg-teal-50 p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-teal-700">
+              The centre inside it
+            </p>
+            <p className="mt-2 font-semibold text-zinc-900">Dhamma Pāṭaliputta</p>
+            <p className="mt-3 text-sm text-zinc-700 leading-relaxed">
+              A separate residential Vipassana centre in the park&apos;s
+              Meditation Block, offered to the public from 3 July 2018. You do not
+              wander in. You apply online for a specific 10-day course, get
+              accepted, and stay on site for the full ten days. It is free, run on
+              old-student donations, and managed by the Patliputra Vipassana
+              Trust.
+            </p>
+          </div>
+        </div>
+        <p className="mt-4 text-sm text-zinc-500 leading-relaxed">
+          So if you came here picturing a quiet hall you could drop into for an
+          hour between trains, that is the park&apos;s stupa, not the course
+          centre. The Vipassana centre is a ten-day commitment you book ahead at{" "}
+          <a
+            href={`${CENTRE_URL}/en/the-centre/`}
+            className="text-teal-600 underline underline-offset-2"
+          >
+            patliputta.dhamma.org
+          </a>
+          .
         </p>
       </section>
 
