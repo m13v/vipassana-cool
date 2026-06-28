@@ -108,8 +108,8 @@ const relatedPosts = [
     tag: "Before you go",
   },
   {
-    title: "Daily practice after a Vipassana course",
-    href: "/t/daily-practice-after-vipassana-course",
+    title: "Rebuilding daily practice after a Vipassana course",
+    href: "/t/after-vipassana-daily-practice-rewire-habits",
     excerpt:
       "The course ends and the hard part starts: keeping a sit going back home in Navsari or Surat once the schedule is gone.",
     tag: "After the course",
