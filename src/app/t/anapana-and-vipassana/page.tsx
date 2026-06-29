@@ -38,6 +38,11 @@ const faqs = [
       "Anapana (sometimes Anapana sati) is a Pali term. The rough gloss in English is awareness of breath. The compound is usually broken as ana plus apana, referring to the natural in-breath and out-breath. It appears across the Pali canon in the standard form anapanasati.",
   },
   {
+    question: "Is 'ana pana meditation' the same as Anapana?",
+    answer:
+      "Yes. Ana pana, anapana, and anapana sati are spellings of the same Pali term, sometimes written with a space because ana plus apana are the two parts of the compound (the natural in-breath and out-breath). All of them point to the same thing: awareness of breath as it appears in the Pali canon. This page treats the word as a linguistic and historical note. It does not describe how to practice; for that the only route in this tradition is the 10-day residential course, with information at dhamma.org.",
+  },
+  {
     question: "What does Vipassana mean?",
     answer:
       "Vipassana is a Pali term that translates as something like seeing things as they are, or clear seeing. The prefix vi is often read as a strengthening or clarifying sense, and passana comes from the root meaning to see.",
