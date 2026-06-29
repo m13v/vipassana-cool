@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       { source: "/t/dhamma-paphulla", destination: "/t/dhamma-paphulla-vipassana-meditation-research-centre", permanent: true },
       { source: "/t/vipassana-meditation-adhd", destination: "/t/vipassana-adhd", permanent: true },
       { source: "/t/vipassana-meditation-delhi", destination: "/t/vipassana-meditation-centre-delhi", permanent: true },
+      { source: "/t/vipassana-meditation-centre-delhi-fees", destination: "/t/vipassana-meditation-centre-delhi", permanent: true },
       { source: "/t/delhi-vipassana-centre", destination: "/t/vipassana-centre-in-delhi", permanent: true },
       { source: "/t/vipassana-delhi", destination: "/t/vipassana-centre-in-delhi", permanent: true },
       { source: "/t/vipassana-hyderabad", destination: "/t/vipassana-meditation-hyderabad", permanent: true },
