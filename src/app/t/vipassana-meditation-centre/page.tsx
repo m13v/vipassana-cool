@@ -123,6 +123,11 @@ const faqs: FaqItem[] = [
     a:
       "Go to the course search on dhamma.org, pick your region, find a course with open dates, and fill out the application. You will answer questions about your physical and mental health and your reasons for coming. For help with the search and the near-me problem, read our centre locator guide, and for the application itself, our course application notes.",
   },
+  {
+    q: "Is it spelled vipasana centre or vipassana centre?",
+    a:
+      "The standard English spelling is vipassana, with two s's, from the Pali vipassana. \"Vipasana centre\" with a single s is a common way people type it, and it points to exactly the same thing described on this page: a donation-funded, volunteer-run place that hosts free 10-day courses. Nobody at a centre will misunderstand which one you mean. If you want the full note on why the double-s form is the correct one, we cover it in our piece on the vipasana versus vipassana spelling.",
+  },
 ];
 
 const relatedPosts: RelatedPost[] = [
@@ -146,6 +151,13 @@ const relatedPosts: RelatedPost[] = [
     excerpt:
       "What the twelve days at a centre actually look like, and the three sittings that carry the most weight.",
     tag: "What to expect",
+  },
+  {
+    title: "Vipasana or vipassana?",
+    href: "/t/vipasana",
+    excerpt:
+      "Why the double-s form is the standard spelling, and every variant people type when they mean the same practice.",
+    tag: "Reference",
   },
 ];
 
