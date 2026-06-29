@@ -25,6 +25,7 @@ const nextConfig: NextConfig = {
       { source: "/t/igatpuri-vipassana-centre", destination: "/t/igatpuri-vipassana", permanent: true },
       { source: "/t/igatpuri-vipassana-center", destination: "/t/igatpuri-vipassana", permanent: true },
       { source: "/t/igatpuri-meditation-centre", destination: "/t/igatpuri-vipassana", permanent: true },
+      { source: "/t/vipassana-igatpuri-10-day-course", destination: "/t/vipassana-igatpuri", permanent: true },
       { source: "/alternative/transcendental-meditation-vs-vipassana", destination: "/alternative/vipassana-vs-transcendental-meditation", permanent: true },
       { source: "/alternative/vipassana-meditation-vs-transcendental-meditation", destination: "/alternative/vipassana-vs-transcendental-meditation", permanent: true },
       { source: "/alternative/m-ditation-transcendantale-vs-vipassana", destination: "/alternative/vipassana-vs-transcendental-meditation", permanent: true },
