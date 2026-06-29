@@ -205,6 +205,7 @@ export default function Page() {
                 "There is no 10-day Vipassana residential centre inside Delhi city. The official Goenka-tradition centre serving Delhi NCR is Dhamma Sota in Sohna, Haryana, about 70 km out, with a registration office at Nehru Place and weekly group sittings inside Delhi.",
               url: PAGE_URL,
               datePublished: PUBLISHED,
+              dateModified: "2026-06-29",
               author: "Matthew Diakonov",
               authorUrl: "https://m13v.com",
               publisherName: "Vipassana.cool",
@@ -268,6 +269,15 @@ export default function Page() {
             <strong>Nehru Place</strong> and a set of weekly{" "}
             <strong>group sittings</strong> for people who have already
             completed a course.
+          </p>
+          <p className="mt-3 text-zinc-900 text-lg leading-relaxed">
+            On <strong>fees</strong>: there are none. A 10-day course at Dhamma
+            Sota (or any centre in this tradition) costs{" "}
+            <strong>&#8377;0</strong>. No tuition, no charge for the room, no
+            charge for the food. The whole thing runs on voluntary donations,
+            and donations are accepted only from people who have already
+            completed a course. As a new student you are not asked to pay, and a
+            payment would not be accepted even if you offered one.
           </p>
           <p className="mt-3 text-sm text-zinc-600">
             Source:{" "}
