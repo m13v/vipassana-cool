@@ -58,39 +58,32 @@ const breadcrumbSchemaItems = [
 
 const faqs: FaqItem[] = [
   {
-    question: "Where exactly is the Vipassana center near Dharamshala?",
-    answer:
-      "It is Dhamma Sikhara, in Dharamkot, above McLeod Ganj, postal area 176219, Kangra district, Himachal Pradesh. It sits in the deodar and pine forest of the Dhauladhar range at roughly 2000 metres. From McLeod Ganj it is about a 30 minute walk uphill. So the place almost everyone types as 'vipassana dharamshala' is not in Dharamshala town proper, it is a climb above it.",
+    q: "Where exactly is the Vipassana center near Dharamshala?",
+    a: "It is Dhamma Sikhara, in Dharamkot, above McLeod Ganj, postal area 176219, Kangra district, Himachal Pradesh. It sits in the deodar and pine forest of the Dhauladhar range at roughly 2000 metres. From McLeod Ganj it is about a 30 minute walk uphill. So the place almost everyone types as 'vipassana dharamshala' is not in Dharamshala town proper, it is a climb above it.",
   },
   {
-    question: "How much does a 10-day course at Dhamma Sikhara cost?",
-    answer:
-      "Nothing. There is no charge for the course, the food, or the accommodation. The centers in this tradition run entirely on donations from old students who have already finished a course and want to give others the same chance. A first-time student is not allowed to pay. You can read the policy on the official network site at dhamma.org.",
+    q: "How much does a 10-day course at Dhamma Sikhara cost?",
+    a: "Nothing. There is no charge for the course, the food, or the accommodation. The centers in this tradition run entirely on donations from old students who have already finished a course and want to give others the same chance. A first-time student is not allowed to pay. You can read the policy on the official network site at dhamma.org.",
   },
   {
-    question: "How do I register for a course at Dhamma Sikhara?",
-    answer:
-      "Applications are made online through the course schedule at schedule.vridhamma.org/courses/sikhara. The center notes that applications open 60 days before each course at 00:00 hrs IST, and that seats fill fast. The phone numbers you see in directory listings are enquiry lines, not a booking system. The application is the only path to a seat.",
+    q: "How do I register for a course at Dhamma Sikhara?",
+    a: "Applications are made online through the course schedule at schedule.vridhamma.org/courses/sikhara. The center notes that applications open 60 days before each course at 00:00 hrs IST, and that seats fill fast. The phone numbers you see in directory listings are enquiry lines, not a booking system. The application is the only path to a seat.",
   },
   {
-    question: "When do courses run, and is the center open in winter?",
-    answer:
-      "The published schedule runs roughly from March through November, with 10-day courses about twice a month in season, plus occasional 3-day and Satipatthana Sutta courses for old students. There are no courses in the deep winter months, which fits the altitude and cold of a Himalayan ridge. Always check the live schedule before you plan travel.",
+    q: "When do courses run, and is the center open in winter?",
+    a: "The published schedule runs roughly from March through November, with 10-day courses about twice a month in season, plus occasional 3-day and Satipatthana Sutta courses for old students. There are no courses in the deep winter months, which fits the altitude and cold of a Himalayan ridge. Always check the live schedule before you plan travel.",
   },
   {
-    question: "What is the nearest airport and station to Dhamma Sikhara?",
-    answer:
-      "The nearest airport is Kangra Airport at Gaggal (code DHM), about 12 to 15 km from Dharamshala and roughly a 20 km, 23 minute drive from McLeod Ganj. The usual railheads are Pathankot or Chakki Bank on the Jammu Tawi line, about 90 km away. Many people instead take an overnight bus from Delhi (ISBT Kashmiri Gate) to McLeod Ganj, then go up to Dharamkot.",
+    q: "What is the nearest airport and station to Dhamma Sikhara?",
+    a: "The nearest airport is Kangra Airport at Gaggal (code DHM), about 12 to 15 km from Dharamshala and roughly a 20 km, 23 minute drive from McLeod Ganj. The usual railheads are Pathankot or Chakki Bank on the Jammu Tawi line, about 90 km away. Many people instead take an overnight bus from Delhi (ISBT Kashmiri Gate) to McLeod Ganj, then go up to Dharamkot.",
   },
   {
-    question: "Is the Dharamshala course different from courses elsewhere?",
-    answer:
-      "The format is the same everywhere in this tradition. I sat six courses at three centers in California and never at Sikhara, but the daily timetable, the code of discipline, the noble silence, and the 10-day arc are identical worldwide. What changes is the setting: a small Himalayan center with capacity around 35 to 40 per gender, deodar forest, and thin mountain air.",
+    q: "Is the Dharamshala course different from courses elsewhere?",
+    a: "The format is the same everywhere in this tradition. I sat six courses at three centers in California and never at Sikhara, but the daily timetable, the code of discipline, the noble silence, and the 10-day arc are identical worldwide. What changes is the setting: a small Himalayan center with capacity around 35 to 40 per gender, deodar forest, and thin mountain air.",
   },
   {
-    question: "Can the site here teach me the technique before I go?",
-    answer:
-      "No, and on purpose. The technique is only transmitted inside a 10-day residential course by an authorized teacher. For anything about how to practice or how to handle a difficulty on the cushion, the right place is dhamma.org and an assistant teacher at a course. This page is about location, logistics, and language, not instruction.",
+    q: "Can the site here teach me the technique before I go?",
+    a: "No, and on purpose. The technique is only transmitted inside a 10-day residential course by an authorized teacher. For anything about how to practice or how to handle a difficulty on the cushion, the right place is dhamma.org and an assistant teacher at a course. This page is about location, logistics, and language, not instruction.",
   },
 ];
 
