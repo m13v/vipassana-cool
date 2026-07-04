@@ -128,6 +128,13 @@ export const searchEntries: SearchEntry[] = [
     keywords: ["science", "research", "studies", "evidence", "brain", "neuroscience", "proof", "benefits"],
   },
   {
+    href: "/guide/sensation-and-craving-science",
+    title: "Sensation & Craving Science",
+    description: "The research behind vedana: does craving track a bodily sensation rather than the object?",
+    section: "Guide",
+    keywords: ["vedana", "craving", "sensation", "interoception", "insula", "addiction", "somatic", "urge surfing", "constructed emotion", "non-reactivity", "neuroscience"],
+  },
+  {
     href: "/guide/risks-and-safety",
     title: "Risks & Safety",
     description: "Potential risks, challenges, and safety considerations for Vipassana retreats",
