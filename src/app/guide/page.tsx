@@ -88,6 +88,11 @@ export default function GuidePage() {
             desc: "How Vipassana compares to other techniques.",
           },
           {
+            href: "/guide/sensation-and-craving-science",
+            title: "Sensation & Craving Science",
+            desc: "The research behind vedana and non-reactivity.",
+          },
+          {
             href: "/guide/risks-and-safety",
             title: "Risks & Safety",
             desc: "What to know about safety and side effects.",
