@@ -405,6 +405,9 @@ export default function VipassanaForAddictionPage() {
           <Link href="/guide/scientific-evidence" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Scientific Evidence
           </Link>
+          <Link href="/guide/sensation-and-craving-science" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Sensation &amp; Craving Science
+          </Link>
           <Link href="/guide/risks-and-safety" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Risks &amp; Safety
           </Link>
