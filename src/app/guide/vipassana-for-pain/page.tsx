@@ -426,6 +426,9 @@ export default function VipassanaForPainPage() {
           <Link href="/guide/scientific-evidence" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Scientific Evidence
           </Link>
+          <Link href="/guide/sensation-and-craving-science" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Sensation &amp; Craving Science
+          </Link>
           <Link href="/guide/first-course-tips" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             First Course Tips
           </Link>
