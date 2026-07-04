@@ -301,6 +301,9 @@ export default function SensationsExperiencesPage() {
       <div className="mt-12 rounded-xl border border-border bg-card p-6">
         <h2 className="mb-4 font-semibold text-foreground">Related</h2>
         <div className="flex flex-wrap gap-3">
+          <Link href="/guide/sensation-and-craving-science" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
+            Sensation &amp; Craving Science
+          </Link>
           <Link href="/experience" className="rounded-lg border border-border px-4 py-2 text-sm text-muted transition-colors hover:border-accent hover:text-accent">
             Student Experiences
           </Link>
