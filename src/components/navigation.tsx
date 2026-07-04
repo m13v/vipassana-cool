@@ -25,6 +25,7 @@ const links: NavLink[] = [
       { href: "/guide/dhamma-service", label: "Dhamma Service" },
       { href: "/guide/vipassana-vs-other-meditation", label: "Vipassana vs Others" },
       { href: "/guide/scientific-evidence", label: "Scientific Evidence" },
+      { href: "/guide/sensation-and-craving-science", label: "Sensation & Craving Science" },
       { href: "/guide/risks-and-safety", label: "Risks & Safety" },
       { href: "/guide/first-course-tips", label: "First Course Tips" },
       { href: "/guide/anapana-and-vipassana-explained", label: "Anapana & Vipassana" },
