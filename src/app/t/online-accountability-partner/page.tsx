@@ -315,7 +315,7 @@ const matchVisibilityItems = [
   { text: "Your preferred session duration (20 to 120 min)", done: true },
   { text: "Your first name and city, in the intro email", done: true },
   { text: "Your exact street address (NOT STORED, NOT SHARED)", done: false },
-  { text: "Your phone number (NOT STORED, NOT SHARED)", done: false },
+  { text: "Your phone number, optional, shared with your matched buddy only if you provide it", done: true },
   { text: "A chat history with the model (NO MODEL EXISTS IN THE MATCHER)", done: false },
   { text: "Your other apps' data or screen time (NOT REQUESTED)", done: false },
 ];
@@ -780,8 +780,11 @@ export default function Page() {
           meeting them at 6 AM every day) that survives on surprisingly
           thin data. The fields we ask for at /practice-buddy are the ones
           below, in their entirety. Everything else that a more ambitious
-          &ldquo;profile&rdquo; would want — address, phone, workplace,
-          personality quiz results — never enters the system.
+          &ldquo;profile&rdquo; would want — address, workplace, personality
+          quiz results — never enters the system. Phone number is the one
+          exception: it&apos;s optional, asked for only after you confirm a
+          match, and shared with that specific buddy (and only that buddy)
+          in the intro email so you can reach each other directly.
         </p>
         <AnimatedChecklist
           title="Partner visibility"
