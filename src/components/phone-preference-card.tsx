@@ -148,7 +148,8 @@ export function PhonePreferenceCard({
         </button>
 
         <p className="text-[11px] leading-snug text-[#8b8b8b]">
-          Only used to confirm your match. We won&apos;t share or text marketing.
+          Shared with your buddy in the intro email once you&apos;re both confirmed,
+          so they can reach you directly. Never used for marketing.
         </p>
       </form>
     </div>
