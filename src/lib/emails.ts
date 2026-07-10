@@ -291,6 +291,16 @@ function unsubscribeFooterHtml(unsubscribeUrl: string): string {
   return `<p style="font-size:11px;color:#999;margin:8px 0 0;"><a href="${unsubscribeUrl}" style="color:#999;text-decoration:underline;">Unsubscribe</a> from Practice Buddy emails</p>`;
 }
 
+// Renders " — reachable on <phone> (prefers WhatsApp/SMS)." for the intro email
+// when a person opted in via the post-confirmation phone-preference card.
+// Returns "" when they didn't share a number, so the bio line degrades
+// gracefully to email + reply-all only (the pre-existing behavior).
+function formatPhoneLine(person: WaitlistEntry): string {
+  if (!person.phone) return "";
+  const channelLabel = person.phone_method === "whatsapp" ? "WhatsApp" : person.phone_method === "sms" ? "SMS/text" : null;
+  return ` Reachable at <strong>${person.phone}</strong>${channelLabel ? ` (prefers ${channelLabel})` : ""}.`;
+}
+
 export function buildIntroEmailHtml(
   personA: WaitlistEntry,
   personB: WaitlistEntry,
@@ -408,8 +418,8 @@ export function buildIntroEmailHtml(
       ${traitsHtml}
       ${sessionInfoHtml}
       ${timeHtml}
-      <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>${nameA}</strong> &mdash; ${personA.city || "location unknown"}${personA.has_maintained_practice ? `, ${personA.has_maintained_practice.toLowerCase()} maintained practice` : ""}${personA.practice_length ? ` for ${personA.practice_length}` : ""}.</p>
-      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;"><strong>${nameB}</strong> &mdash; ${personB.city || "location unknown"}${personB.has_maintained_practice ? `, ${personB.has_maintained_practice.toLowerCase()} maintained practice` : ""}${personB.practice_length ? ` for ${personB.practice_length}` : ""}.</p>
+      <p style="font-size:15px;line-height:1.7;margin:0 0 8px;"><strong>${nameA}</strong> &mdash; ${personA.city || "location unknown"}${personA.has_maintained_practice ? `, ${personA.has_maintained_practice.toLowerCase()} maintained practice` : ""}${personA.practice_length ? ` for ${personA.practice_length}` : ""}.${formatPhoneLine(personA)}</p>
+      <p style="font-size:15px;line-height:1.7;margin:0 0 16px;"><strong>${nameB}</strong> &mdash; ${personB.city || "location unknown"}${personB.has_maintained_practice ? `, ${personB.has_maintained_practice.toLowerCase()} maintained practice` : ""}${personB.practice_length ? ` for ${personB.practice_length}` : ""}.${formatPhoneLine(personB)}</p>
     </div>
     ${meetHtml}
     <div style="background:#f5f2ed;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
