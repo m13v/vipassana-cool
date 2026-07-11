@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
 import { Resend } from "resend";
 import { getMatchByToken, getEntry } from "@/lib/db";
+import { buildPhoneSharedSubject, buildPhoneSharedNotificationHtml, buildUnsubscribeUrl } from "@/lib/emails";
 
 // Light-touch phone normalization (mirrors /api/waitlist).
 function normalizePhone(raw: string | undefined | null): string | null {
@@ -70,6 +71,54 @@ export async function POST(request: NextRequest) {
       INSERT INTO vipassana_activity_log (person_id, match_id, event_type, old_value, new_value, triggered_by, note)
       VALUES (${personId}, ${match.id}, 'phone_preference_set', ${previousMethod}, ${method}, 'user_click', ${`phone ${previousPhone ? "updated" : "added"}`})
     `;
+
+    // Share with the matched partner if this is a brand-new number and the
+    // one-time combined intro email already went out (both sides confirmed).
+    // If the match hasn't both-confirmed yet, buildIntroEmailHtml will just
+    // pick this phone up naturally when that email fires — no follow-up needed.
+    // Gated on previousPhone being null so we don't re-notify on every edit,
+    // and on a 'phone_shared' log check so retries/double-submits don't spam.
+    if (!previousPhone && match.person_a_confirmed && match.person_b_confirmed) {
+      try {
+        const alreadyShared = await sql`
+          SELECT 1 FROM vipassana_activity_log
+          WHERE person_id = ${personId} AND match_id = ${match.id} AND event_type = 'phone_shared'
+          LIMIT 1
+        `;
+        if (alreadyShared.length === 0) {
+          const otherPersonId = personId === match.person_a_id ? match.person_b_id : match.person_a_id;
+          const otherPerson = await getEntry(otherPersonId);
+          if (otherPerson) {
+            const resend = new Resend(process.env.RESEND_API_KEY);
+            const subject = buildPhoneSharedSubject(person.name?.split(/\s+/)[0] || "Your buddy");
+            const html = buildPhoneSharedNotificationHtml(otherPerson, person, buildUnsubscribeUrl(otherPerson.unsubscribe_token));
+            const result = await resend.emails.send({
+              from: "Matt from Vipassana.cool <matt@inbound.vipassana.cool>",
+              to: [otherPerson.email],
+              replyTo: [person.email],
+              subject,
+              html,
+              headers: { "X-Entity-Ref-ID": match.id },
+            });
+            try {
+              await sql`
+                INSERT INTO vipassana_emails (resend_id, direction, from_email, to_email, subject, body_html, status)
+                VALUES (${result.data?.id || null}, 'outbound', 'Matt from Vipassana.cool <matt@inbound.vipassana.cool>',
+                        ${otherPerson.email}, ${subject}, ${html}, 'sent')
+              `;
+            } catch { /* non-critical */ }
+            await sql`
+              INSERT INTO vipassana_activity_log (person_id, match_id, event_type, new_value, triggered_by, note)
+              VALUES (${personId}, ${match.id}, 'phone_shared', ${phone}, 'system', 'notified partner of newly-added phone post-intro')
+            `;
+          }
+        }
+      } catch (err) {
+        // Non-critical: the phone is saved either way, worst case is the
+        // partner has to be told manually. Never fail the request over this.
+        console.error("[save-phone-preference] partner phone-share notify failed:", err);
+      }
+    }
 
     // Notify admin so we know to actually use the channel. Only fire when the
     // phone or method actually changed (avoids spam if the user re-opens the
