@@ -511,6 +511,46 @@ export function buildConfirmationEmailHtml(
  * from the confirmation email they previously received, so referencing the
  * first name here is not a new disclosure.
  */
+// Subject for the standalone "buddy shared their phone" follow-up, sent when
+// someone adds a phone number AFTER the combined intro email already went out
+// (so their number never made it into that one-time email).
+export function buildPhoneSharedSubject(sharerFirstName: string): string {
+  return `${sharerFirstName} shared their phone number`;
+}
+
+// Lightweight one-directional notification: tells `recipient` that `sharer`
+// (their already-confirmed practice buddy) just added a phone number, and
+// gives it to them. Deliberately does NOT resend the whole intro email —
+// recipient already has that, they just need the new contact info.
+export function buildPhoneSharedNotificationHtml(
+  recipient: WaitlistEntry,
+  sharer: WaitlistEntry,
+  unsubscribeUrl?: string,
+): string {
+  const recipientName = recipient.name?.split(/\s+/)[0] || "there";
+  const sharerName = sharer.name?.split(/\s+/)[0] || "your practice buddy";
+  const phoneLine = formatPhoneLine(sharer);
+
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:#faf9f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#2c2c2c;">
+  <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#8b7355;margin:0 0 8px;">Vipassana.cool</p>
+      <h1 style="font-size:26px;font-weight:700;margin:0;line-height:1.3;">${sharerName} shared their phone number</h1>
+    </div>
+    <div style="background:#f5f2ed;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
+      <p style="font-size:15px;line-height:1.7;margin:0;">Hi ${recipientName},</p>
+      <p style="font-size:15px;line-height:1.7;margin:12px 0 0;"><strong>${sharerName}</strong> just added a phone number.${phoneLine}</p>
+    </div>
+    <div style="text-align:center;padding:24px 0;border-top:1px solid #e8e4de;">
+      <p style="font-size:15px;margin:0 0 8px;">Be happy,<br>Matt</p>
+      <p style="font-size:13px;color:#6b6b6b;margin:0;"><a href="https://vipassana.cool" style="color:#8b7355;">vipassana.cool</a></p>
+      ${unsubscribeUrl ? unsubscribeFooterHtml(unsubscribeUrl) : ""}
+    </div>
+  </div>
+</body></html>`;
+}
+
 export function buildMatchDeclinedNotificationHtml(
   recipient: WaitlistEntry,
   decliner: WaitlistEntry,
