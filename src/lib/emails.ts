@@ -540,6 +540,7 @@ export function buildPhoneSharedNotificationHtml(
     </div>
     <div style="background:#f5f2ed;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
       <p style="font-size:15px;line-height:1.7;margin:0;">Hi ${recipientName},</p>
+      <p style="font-size:15px;line-height:1.7;margin:12px 0 0;">Quick reminder: you're matched with <strong>${sharerName}</strong> to practice together.</p>
       <p style="font-size:15px;line-height:1.7;margin:12px 0 0;"><strong>${sharerName}</strong> just added a phone number.${phoneLine}</p>
     </div>
     <div style="text-align:center;padding:24px 0;border-top:1px solid #e8e4de;">
