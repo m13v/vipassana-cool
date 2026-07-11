@@ -531,6 +531,19 @@ export function buildPhoneSharedNotificationHtml(
   const sharerName = sharer.name?.split(/\s+/)[0] || "your practice buddy";
   const phoneLine = formatPhoneLine(sharer);
 
+  // Pull whatever the sharer filled in on their signup form, same fields the
+  // intro email uses, so the reminder feels like it's about a real person.
+  const sharerDetailBits: string[] = [];
+  if (sharer.city) sharerDetailBits.push(`from ${sharer.city}`);
+  if (sharer.frequency) sharerDetailBits.push(`sits ${sharer.frequency.toLowerCase()}`);
+  if (sharer.session_duration) sharerDetailBits.push(`${sharer.session_duration} per session`);
+  if (sharer.has_maintained_practice) {
+    sharerDetailBits.push(
+      `${sharer.has_maintained_practice.toLowerCase()} maintained practice${sharer.practice_length ? ` for ${sharer.practice_length}` : ""}`,
+    );
+  }
+  const sharerDetailLine = sharerDetailBits.length > 0 ? ` (${sharerDetailBits.join(", ")})` : "";
+
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="margin:0;padding:0;background-color:#faf9f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#2c2c2c;">
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
@@ -538,11 +551,11 @@ export function buildPhoneSharedNotificationHtml(
       <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#8b7355;margin:0 0 8px;">Vipassana.cool</p>
       <h1 style="font-size:26px;font-weight:700;margin:0;line-height:1.3;">${sharerName} shared their phone number</h1>
     </div>
-    <div style="background:#f5f2ed;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:24px;">
+    <div style="background:#f5f2ed;border:1px solid #e8e4de;border-radius:12px;padding:24px;margin-bottom:16px;">
       <p style="font-size:15px;line-height:1.7;margin:0;">Hi ${recipientName},</p>
-      <p style="font-size:15px;line-height:1.7;margin:12px 0 0;">Quick reminder: you're matched with <strong>${sharerName}</strong> to practice together.</p>
       <p style="font-size:15px;line-height:1.7;margin:12px 0 0;"><strong>${sharerName}</strong> just added a phone number.${phoneLine}</p>
     </div>
+    <p style="font-size:13px;line-height:1.6;color:#8a8a8a;margin:0 0 24px;">Reminder: you're matched with <strong>${sharerName}</strong>${sharerDetailLine} to practice together.</p>
     <div style="text-align:center;padding:24px 0;border-top:1px solid #e8e4de;">
       <p style="font-size:15px;margin:0 0 8px;">Be happy,<br>Matt</p>
       <p style="font-size:13px;color:#6b6b6b;margin:0;"><a href="https://vipassana.cool" style="color:#8b7355;">vipassana.cool</a></p>
