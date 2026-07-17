@@ -36,6 +36,23 @@ async function getMatchingStats() {
   };
 }
 
+// Practice Buddy waitlist counts come from the waitlist_entries table (the
+// source of truth for the full-form signups), not PostHog events. The
+// waitlist_signup PostHog event was never logged reliably, so the old
+// hogql-based all-time count reported 0 even with real signups in the DB.
+async function getWaitlistStats() {
+  const sql = neon(process.env.DATABASE_URL!);
+  const [weekRow, totalRow] = await Promise.all([
+    sql`SELECT count(*) AS n FROM waitlist_entries
+        WHERE created_at > now() - interval '7 days'`,
+    sql`SELECT count(*) AS n FROM waitlist_entries`,
+  ]);
+  return {
+    week: Number((weekRow as { n: number }[])[0]?.n ?? 0),
+    total: Number((totalRow as { n: number }[])[0]?.n ?? 0),
+  };
+}
+
 export async function GET(request: NextRequest) {
   // Verify cron secret
   const authHeader = request.headers.get("authorization");
@@ -51,7 +68,7 @@ export async function GET(request: NextRequest) {
 
   try {
     // Fetch stats in parallel
-    const [pageviewStats, topPages, subscriberData, eventBreakdown, waitlistWeek, waitlistTotal, matchingStats] =
+    const [pageviewStats, topPages, subscriberData, eventBreakdown, waitlistStats, matchingStats] =
       await Promise.all([
         hogqlQuery(projectId, phKey, `
           SELECT
@@ -87,27 +104,15 @@ export async function GET(request: NextRequest) {
           ORDER BY total DESC
           LIMIT 10
         `),
-        hogqlQuery(projectId, phKey, `
-          SELECT count() as signups
-          FROM events
-          WHERE timestamp > now() - interval 7 day
-            AND (event = 'waitlist_signup'
-                 OR (event = 'newsletter_subscribed' AND properties.source = 'waitlist'))
-        `),
-        hogqlQuery(projectId, phKey, `
-          SELECT count() as signups
-          FROM events
-          WHERE event = 'waitlist_signup'
-             OR (event = 'newsletter_subscribed' AND properties.source = 'waitlist')
-        `),
+        getWaitlistStats(),
         getMatchingStats(),
       ]);
 
     const totalPageviews = pageviewStats.results?.[0]?.[0] ?? 0;
     const uniqueVisitors = pageviewStats.results?.[0]?.[1] ?? 0;
     const subscriberCount = subscriberData?.data?.length ?? 0;
-    const waitlistNewThisWeek = waitlistWeek.results?.[0]?.[0] ?? 0;
-    const waitlistAllTime = waitlistTotal.results?.[0]?.[0] ?? 0;
+    const waitlistNewThisWeek = waitlistStats.week;
+    const waitlistAllTime = waitlistStats.total;
 
     // Format top pages
     const topPagesRows = (topPages.results ?? [])
