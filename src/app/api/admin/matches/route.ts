@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Block re-matching people who have been paired before (unless neither confirmed)
+  // Block every historical pairing, including explicit declines.
   const priorIds = await getPriorMatchedIds(personAId);
   if (priorIds.includes(personBId)) {
     return NextResponse.json(
