@@ -191,12 +191,19 @@ export async function upsertEntry(entry: Omit<WaitlistEntry, "status" | "updated
   `;
 }
 
-export async function updateEntryStatus(id: string, status: string, triggeredBy = "system", matchId?: string, note?: string): Promise<void> {
+export async function updateEntryStatus(
+  id: string,
+  status: string,
+  triggeredBy = "system",
+  matchId?: string,
+  note?: string,
+  incrementPassCount = false,
+): Promise<void> {
   const sql = getSql();
   const current = await sql`SELECT status FROM waitlist_entries WHERE id = ${id}`;
   const oldStatus = current[0]?.status ?? null;
-  if (status === "passed") {
-    await sql`UPDATE waitlist_entries SET status = ${status}, pass_count = pass_count + 1, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
+  if (incrementPassCount || status === "passed") {
+    await sql`UPDATE waitlist_entries SET status = ${status}, pass_count = COALESCE(pass_count, 0) + 1, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
   } else if (status === "contacted") {
     await sql`UPDATE waitlist_entries SET status = ${status}, contact_count = contact_count + 1, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
   } else {
@@ -293,7 +300,21 @@ export async function getMatchEngagement(
   return byMatch;
 }
 
+async function assertPairHasNoHistory(personAId: string, personBId: string): Promise<void> {
+  const sql = getSql();
+  const prior = await sql`
+    SELECT 1 FROM matches
+    WHERE (person_a_id = ${personAId} AND person_b_id = ${personBId})
+       OR (person_a_id = ${personBId} AND person_b_id = ${personAId})
+    LIMIT 1
+  `;
+  if (prior.length > 0) {
+    throw new Error("This pair has been matched before. Choose different partners.");
+  }
+}
+
 export async function createMatch(personAId: string, personBId: string, sessionA = "morning", sessionB = "morning"): Promise<Match> {
+  await assertPairHasNoHistory(personAId, personBId);
   const sql = getSql();
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
@@ -383,7 +404,7 @@ export async function declineMatch(matchId: string, declinerId: string): Promise
   const isA = match.person_a_id === declinerId;
   const partnerId = isA ? match.person_b_id : match.person_a_id;
   const partnerConfirmed = isA ? match.person_b_confirmed : match.person_a_confirmed;
-  await updateEntryStatus(declinerId, "ready", "user_click", matchId, "clicked no on confirmation");
+  await updateEntryStatus(declinerId, "ready", "user_click", matchId, "clicked no on confirmation", true);
   await updateEntryStatus(partnerId, partnerConfirmed ? "ready" : "pending", "user_click", matchId, "partner declined");
   // Silent calendar cleanup on decline (no cancellation email; the user already
   // moved past this match by saying no, and the partner doesn't need to be told).
@@ -392,6 +413,7 @@ export async function declineMatch(matchId: string, declinerId: string): Promise
 }
 
 export async function createMatchWithTokens(personAId: string, personBId: string, sessionA = "morning", sessionB = "morning"): Promise<Match> {
+  await assertPairHasNoHistory(personAId, personBId);
   const sql = getSql();
   const id = crypto.randomUUID();
   const tokenA = crypto.randomUUID();
@@ -464,8 +486,8 @@ export async function advanceMatchOnReply(fromEmail: string, subject?: string): 
 // Sweep stale 'pending' matches that never advanced via email reply.
 // Distinguishes by whether either side ever confirmed:
 //   - Both confirmed: real bond that didn't take off → 'ended' (still blocks re-pairing).
-//   - Neither confirmed: legacy/unengaged row that should not block the pair → 'expired'
-//     (so getPriorMatchedIds and the blockedPairs guard release the two people).
+//   - Neither confirmed: legacy/unengaged row → 'expired'. The people return
+//     to the pool for fresh candidates, but this specific pair remains blocked.
 // In both cases the match closes and both participants return to 'ready'.
 //
 // Engagement protection (added 2026-05-11): if BOTH partners have at least one
@@ -582,24 +604,14 @@ export async function getActiveMatchForSession(personId: string, session: string
   return rows.length > 0 ? (rows[0].id as string) : null;
 }
 
-// Returns person IDs that have had ANY prior match with this person.
-//
-// Updated 2026-05-11: blocks re-pairing for every prior match except explicit
-// declines. Before this change, "both ghosted" pairs (status='expired', neither
-// confirmed) were eligible for retry on the theory that maybe the timing was
-// bad. In practice this caused the same dormant pair to be re-matched every 14
-// days forever (e.g. Matthew + Nahïl re-matched April 27 and again May 11 after
-// both ghosted the first round). If two people didn't engage once, they're not
-// going to engage the second time either. Better to put them with someone new.
-//
-// Still allowed: re-pair after an explicit "no" click on the OTHER pair, since
-// 'declined' represents a specific incompatible match, not a dormant ghost.
+// Returns person IDs that have had ANY prior match with this person, regardless
+// of status or confirmation state. Pairing is one-shot: an expiry should get a
+// fresh candidate, and an explicit decline must never recreate the same pair.
 export async function getPriorMatchedIds(personId: string): Promise<string[]> {
   const sql = getSql();
   const rows = await sql`
     SELECT person_a_id, person_b_id FROM matches
     WHERE (person_a_id = ${personId} OR person_b_id = ${personId})
-      AND status <> 'declined'
   `;
   return rows.map((r) =>
     r.person_a_id === personId ? r.person_b_id : r.person_a_id
