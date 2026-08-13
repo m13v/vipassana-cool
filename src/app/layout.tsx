@@ -164,7 +164,7 @@ export default function RootLayout({
           </div>
         </PostHogProvider>
         <NewsletterSignup />
-        <FounderChatPanel project="Vipassana" />
+        <FounderChatPanel project="Vipassana" apiOrigin="https://s4l.ai" />
       </body>
     </html>
   );
