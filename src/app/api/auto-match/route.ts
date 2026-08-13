@@ -12,6 +12,7 @@ import {
 import type { WaitlistEntry } from "@/lib/db";
 import { buildConfirmationEmailHtml, buildConfirmationSubject, getSessionLocalTime, buildUnsubscribeUrl } from "@/lib/emails";
 import type { SessionContext } from "@/lib/emails";
+import { buildBlockedPairSet, pairKey } from "@/lib/matching-guards";
 
 /**
  * Session-based auto-matching cron — runs every 2 hours.
@@ -109,8 +110,7 @@ export async function GET(request: NextRequest) {
   //      match with someone else. The slot itself is busy and shouldn't enter
   //      the candidate pool at all.
   const allPairs = await sql`
-    SELECT person_a_id, person_b_id, person_a_session, person_b_session,
-           person_a_confirmed, person_b_confirmed, status
+    SELECT person_a_id, person_b_id, person_a_session, person_b_session, status
     FROM matches
   `;
   const ACTIVE_STATUSES = ["confirming", "pending", "replied", "scheduling", "active"];
@@ -121,15 +121,10 @@ export async function GET(request: NextRequest) {
       activeSessionSet.add(`${r.person_b_id}:${r.person_b_session}`);
     }
   }
-  const blockedPairs = new Set(
-    allPairs
-      .filter(
-        (r) =>
-          r.person_a_confirmed ||
-          r.person_b_confirmed ||
-          !["expired", "declined"].includes(r.status as string)
-      )
-      .map((r) => [r.person_a_id, r.person_b_id].sort().join("|"))
+  // A prior pairing is never retried, including when either person clicked No.
+  // A decline is explicit incompatibility, so both people should get someone new.
+  const blockedPairs = buildBlockedPairSet(
+    allPairs as { person_a_id: string; person_b_id: string }[]
   );
 
   // Build session slots from eligible people, skipping slots already in an
@@ -177,7 +172,7 @@ export async function GET(request: NextRequest) {
       if (sa.personId === sb.personId) continue;
 
       // Check blocked pairs (person-level, not session-level)
-      if (blockedPairs.has([sa.personId, sb.personId].sort().join("|"))) continue;
+      if (blockedPairs.has(pairKey(sa.personId, sb.personId))) continue;
 
       // ±60 min UTC hard filter
       const diff = timeDiff(sa.utcMinutes, sb.utcMinutes);
@@ -220,7 +215,7 @@ export async function GET(request: NextRequest) {
     const keyA = `${p.slotA.personId}:${p.slotA.session}`;
     const keyB = `${p.slotB.personId}:${p.slotB.session}`;
     if (usedSlots.has(keyA) || usedSlots.has(keyB)) continue;
-    const personPairKey = [p.slotA.personId, p.slotB.personId].sort().join("|");
+    const personPairKey = pairKey(p.slotA.personId, p.slotB.personId);
     if (usedPersonPairs.has(personPairKey)) continue;
     pairs.push({ slotA: p.slotA, slotB: p.slotB, diff: p.diff });
     usedSlots.add(keyA);
@@ -446,4 +441,3 @@ export async function GET(request: NextRequest) {
     errors,
   });
 }
-
