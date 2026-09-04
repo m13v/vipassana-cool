@@ -202,6 +202,14 @@ export async function updateEntryStatus(
   const sql = getSql();
   const current = await sql`SELECT status FROM waitlist_entries WHERE id = ${id}`;
   const oldStatus = current[0]?.status ?? null;
+  // 'settled' is a sticky, explicit "I already have a buddy — stop matching me"
+  // state. Automated recyclers (cron sweeps, a partner's decline, match-ended
+  // transitions) must NOT drag a settled person back into the matching pool.
+  // Only an explicit admin action can move them out of 'settled'.
+  const RECYCLE_STATUSES = new Set(["ready", "pending", "contacted"]);
+  if (oldStatus === "settled" && RECYCLE_STATUSES.has(status) && triggeredBy !== "admin") {
+    return;
+  }
   if (incrementPassCount || status === "passed") {
     await sql`UPDATE waitlist_entries SET status = ${status}, pass_count = COALESCE(pass_count, 0) + 1, updated_at = ${new Date().toISOString()} WHERE id = ${id}`;
   } else if (status === "contacted") {
@@ -213,6 +221,16 @@ export async function updateEntryStatus(
     INSERT INTO vipassana_activity_log (person_id, match_id, event_type, old_value, new_value, triggered_by, note)
     VALUES (${id}, ${matchId ?? null}, 'status_change', ${oldStatus}, ${status}, ${triggeredBy}, ${note ?? null})
   `;
+}
+
+// Explicit "I already have a buddy — stop matching me" off-switch. Sets the
+// person to the sticky 'settled' status, which the auto-match candidate pool
+// (status IN 'pending','ready') excludes, so they get no new proposals. Unlike
+// 'unsubscribed', their email keeps working (weekly digest, admin replies).
+// Use this for people who tell us in plain words they're set with a partner
+// (on-platform or off), e.g. Tim + Philippe sitting off-platform at 6am.
+export async function markSettled(personId: string, note = "settled: already has a buddy"): Promise<void> {
+  await updateEntryStatus(personId, "settled", "admin", undefined, note);
 }
 
 export async function getAllMatches(): Promise<(Match & { person_a: WaitlistEntry; person_b: WaitlistEntry })[]> {
