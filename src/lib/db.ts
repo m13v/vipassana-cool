@@ -404,29 +404,7 @@ export async function declineMatch(matchId: string, declinerId: string): Promise
   const isA = match.person_a_id === declinerId;
   const partnerId = isA ? match.person_b_id : match.person_a_id;
   const partnerConfirmed = isA ? match.person_b_confirmed : match.person_a_confirmed;
-  // "Already sitting with someone" off-switch. If the decliner has ALREADY gone
-  // through a full double-confirm with a DIFFERENT partner, a "no" on a fresh
-  // proposal means "I've found my buddy, stop matching me" — not "find me
-  // another". Park them in 'settled', which the auto-match candidate pool
-  // (status IN 'pending','ready') excludes, instead of 'ready' (always eligible).
-  // This keeps their email working (unlike unsubscribe) while ending the
-  // decline → ready → re-proposed → decline loop.
-  const priorConfirmed = await sql`
-    SELECT 1 FROM matches
-    WHERE id <> ${matchId}
-      AND (person_a_id = ${declinerId} OR person_b_id = ${declinerId})
-      AND person_a_confirmed = true AND person_b_confirmed = true
-    LIMIT 1
-  `;
-  const declinerSettled = priorConfirmed.length > 0;
-  await updateEntryStatus(
-    declinerId,
-    declinerSettled ? "settled" : "ready",
-    "user_click",
-    matchId,
-    declinerSettled ? "clicked no; already has a confirmed buddy → settled (out of pool)" : "clicked no on confirmation",
-    !declinerSettled,
-  );
+  await updateEntryStatus(declinerId, "ready", "user_click", matchId, "clicked no on confirmation", true);
   await updateEntryStatus(partnerId, partnerConfirmed ? "ready" : "pending", "user_click", matchId, "partner declined");
   // Silent calendar cleanup on decline (no cancellation email; the user already
   // moved past this match by saying no, and the partner doesn't need to be told).
@@ -549,23 +527,18 @@ export async function endStalePendingMatches(days: number = 14): Promise<{
   const skippedMatches: { id: string; person_a_name: string | null; person_b_name: string | null }[] = [];
   for (const row of rows) {
     const summary = { id: row.id as string, person_a_name: row.person_a_name as string | null, person_b_name: row.person_b_name as string | null };
-    // Trust the double-confirm. When BOTH people clicked "yes" this is a real,
-    // settled bond — many pairs then just show up and sit together entirely
-    // off-platform (no Meet-link clicks, no reply to the intro thread). Absence
-    // of on-platform activity is therefore NOT evidence the match died, and
-    // sweeping it back into the pool re-queues two people who are already set,
-    // then re-proposes them strangers they have to decline (the Tim/Philippe bug).
-    // A both-confirmed match is only closed by an explicit decline or unsubscribe.
-    const bothConfirmed = (row.person_a_confirmed as boolean) && (row.person_b_confirmed as boolean);
-    // Skip expiry when both partners clicked their Meet link: they're showing
-    // up to sit together, even if neither replied to the intro thread.
+    // Skip expiry ONLY when both partners clicked their Meet link: that's the one
+    // reliable on-platform signal that they're actually showing up to sit together.
+    // NOTE: "both confirmed" (clicked yes on the proposal) is NOT sufficient — the
+    // majority of both-confirmed pairs then never engage (one or both ghost), so
+    // confirmation alone can't protect a match from recycling. Genuinely-settled
+    // off-platform pairs (who confirm but never click Meet) must instead use the
+    // explicit 'settled' off-switch on the person record; see markSettled.
     const bothClickedMeet = (row.person_a_clicked_meet as boolean) && (row.person_b_clicked_meet as boolean);
-    if (bothConfirmed || bothClickedMeet) {
+    if (bothClickedMeet) {
       skippedMatches.push(summary);
       continue;
     }
-    // At this point at most one side confirmed. "eitherConfirmed" now means
-    // exactly one side engaged while the other ghosted.
     const eitherConfirmed = (row.person_a_confirmed as boolean) || (row.person_b_confirmed as boolean);
     const newStatus = eitherConfirmed ? "ended" : "expired";
     await updateMatchStatus(row.id as string, newStatus, "cron");
