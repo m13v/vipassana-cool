@@ -229,8 +229,8 @@ export async function updateEntryStatus(
 // 'unsubscribed', their email keeps working (weekly digest, admin replies).
 // Use this for people who tell us in plain words they're set with a partner
 // (on-platform or off), e.g. Tim + Philippe sitting off-platform at 6am.
-export async function markSettled(personId: string, note = "settled: already has a buddy"): Promise<void> {
-  await updateEntryStatus(personId, "settled", "admin", undefined, note);
+export async function markSettled(personId: string, note = "settled: already has a buddy", triggeredBy = "admin"): Promise<void> {
+  await updateEntryStatus(personId, "settled", triggeredBy, undefined, note);
 }
 
 export async function getAllMatches(): Promise<(Match & { person_a: WaitlistEntry; person_b: WaitlistEntry })[]> {
