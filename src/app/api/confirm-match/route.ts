@@ -90,7 +90,9 @@ export async function GET(request: NextRequest) {
         });
       } catch { /* non-critical */ }
     }
-    return NextResponse.redirect(new URL("/match-confirmed?response=no", BASE_URL));
+    // Pass the token through so the decline page can offer the "I already have
+    // a buddy — stop matching me" off-switch, which needs to identify the person.
+    return NextResponse.redirect(new URL(`/match-confirmed?response=no&token=${token}`, BASE_URL));
   }
 
   // response === "yes" — mark this person as engaged
