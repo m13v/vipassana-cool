@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getMatchByToken, getEntry } from "@/lib/db";
 import { PhonePreferenceCard } from "@/components/phone-preference-card";
+import { SettleBuddyCard } from "@/components/settle-buddy-card";
 
 export const metadata: Metadata = {
   title: "Match Confirmation | Vipassana.cool",
@@ -45,6 +46,26 @@ export default async function MatchConfirmedPage({
       }
     } catch {
       /* silent — if lookup fails we just hide the phone card */
+    }
+  }
+
+  // On the decline page, offer the "I already have a buddy — stop matching me"
+  // off-switch. We resolve the person from the (post-decline) token and only
+  // show the card if they aren't already settled/unsubscribed. Silent on failure.
+  let settleToken: string | null = null;
+  if (response === "no" && token) {
+    try {
+      const match = await getMatchByToken(token);
+      if (match) {
+        const isA = match.person_a_token === token;
+        const personId = isA ? match.person_a_id : match.person_b_id;
+        const person = await getEntry(personId);
+        if (person && person.status !== "settled" && !person.unsubscribed) {
+          settleToken = token;
+        }
+      }
+    } catch {
+      /* silent — if lookup fails we just hide the settle card */
     }
   }
 
@@ -196,6 +217,8 @@ export default async function MatchConfirmedPage({
               keep looking until something clicks.
             </p>
           </div>
+
+          {settleToken && <SettleBuddyCard token={settleToken} />}
 
           <div className="mt-5 rounded-xl border border-[#e8e4de] bg-[#faf9f6] p-5 text-left">
             <p className="mb-2 text-sm font-semibold text-[#2c2c2c]">
