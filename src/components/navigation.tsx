@@ -54,6 +54,7 @@ const links: NavLink[] = [
   },
   { href: "/prepare", label: "Preparation" },
   { href: "/resources", label: "Resources" },
+  { href: "/timer", label: "Timer" },
   {
     href: "/",
     label: "Practice Buddy",
