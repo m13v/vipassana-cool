@@ -112,7 +112,7 @@ export function TimerClient() {
     lastTickRef.current = null;
   }, []);
 
-  const start = useCallback(() => {
+  const start = () => {
     ensureCtx();
     setActiveSegments(buildSegments(meditationMin, marker, metta));
     segIndexRef.current = -1;
@@ -125,15 +125,15 @@ export function TimerClient() {
       metta,
       total_seconds: totalSeconds,
     });
-  }, [ensureCtx, meditationMin, marker, metta, totalSeconds]);
+  };
 
-  const reset = useCallback(() => {
+  const reset = () => {
     cleanup();
     setPhase("setup");
     setElapsed(0);
     setPaused(false);
     segIndexRef.current = -1;
-  }, [cleanup]);
+  };
 
   // ticking loop
   useEffect(() => {
