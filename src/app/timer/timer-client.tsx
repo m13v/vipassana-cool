@@ -63,23 +63,15 @@ export function TimerClient() {
   const [metta, setMetta] = useState(false);
   const [paused, setPaused] = useState(false);
   const [elapsed, setElapsed] = useState(0);
+  const [activeSegments, setActiveSegments] = useState<Segment[]>([]);
 
   const audioCtxRef = useRef<AudioContext | null>(null);
   const rafRef = useRef<number | null>(null);
   const lastTickRef = useRef<number | null>(null);
   const segIndexRef = useRef<number>(-1);
-  const segmentsRef = useRef<Segment[]>([]);
 
   const segments = buildSegments(meditationMin, marker, metta);
   const totalSeconds = segments.reduce((a, s) => a + s.seconds, 0);
-
-  // cumulative segment boundaries
-  const boundaries: number[] = [];
-  segments.reduce((acc, s) => {
-    const end = acc + s.seconds;
-    boundaries.push(end);
-    return end;
-  }, 0);
 
   const ensureCtx = useCallback(() => {
     if (!audioCtxRef.current) {
@@ -122,7 +114,7 @@ export function TimerClient() {
 
   const start = useCallback(() => {
     ensureCtx();
-    segmentsRef.current = buildSegments(meditationMin, marker, metta);
+    setActiveSegments(buildSegments(meditationMin, marker, metta));
     segIndexRef.current = -1;
     setElapsed(0);
     setPaused(false);
@@ -145,11 +137,11 @@ export function TimerClient() {
 
   // ticking loop
   useEffect(() => {
-    if (phase !== "running" || paused) {
+    if (phase !== "running" || paused || activeSegments.length === 0) {
       cleanup();
       return;
     }
-    const segs = segmentsRef.current;
+    const segs = activeSegments;
     const bnds: number[] = [];
     segs.reduce((acc, s) => {
       const end = acc + s.seconds;
@@ -185,7 +177,7 @@ export function TimerClient() {
     };
     rafRef.current = requestAnimationFrame(loop);
     return cleanup;
-  }, [phase, paused, cleanup, playGong]);
+  }, [phase, paused, activeSegments, cleanup, playGong]);
 
   useEffect(() => () => cleanup(), [cleanup]);
 
@@ -203,7 +195,7 @@ export function TimerClient() {
 
   // ---- Running / done view ----
   if (phase === "running" || phase === "done") {
-    const segs = segmentsRef.current;
+    const segs = activeSegments;
     const total = segs.reduce((a, s) => a + s.seconds, 0);
     const remaining = total - elapsed;
     const bnds: number[] = [];
