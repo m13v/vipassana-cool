@@ -395,6 +395,7 @@ export default function Resources() {
               { href: "https://www.meditatehappier.com/our-story", title: "10% Happier (Happier Meditation)", description: "App by Dan Harris based on Vipassana principles. Guided courses with major Vipassana teachers." },
               { href: "https://insighttimer.com/meditation-topics/vipassana", title: "Insight Timer — Vipassana", description: "Free meditation timer and community with Vipassana-specific content." },
               { href: "https://blog.cogitactive.com/news/insight-timer-free-vs-medito/", title: "Medito", description: "Free, ad-free, no-signup meditation app by a volunteer-run foundation. Simple timer for Vipassana practitioners." },
+              { href: "https://vipassana-daily-meditation.pages.dev/", title: "Vipassana Daily Meditation Timer", description: "Free, open-source meditation timer with the Goenka opening and closing chants built in. Preset 20/30/45 minute sits for daily home practice." },
             ]}
           />
         </SubSection>
