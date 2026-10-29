@@ -128,9 +128,11 @@ export async function GET(request: NextRequest) {
         updated++;
       }
 
-      // If either person declined the calendar invite, auto-end the match
+      // Only auto-end when BOTH people declined. A single decline is often a
+      // misclick (people decline the recurring invite without realizing it
+      // ends the pair), so it is only flagged in the admin email below.
       let autoEnded = false;
-      if (rsvpA === "declined" || rsvpB === "declined") {
+      if (rsvpA === "declined" && rsvpB === "declined") {
         await updateMatchStatus(match.id, "ended", "cron");
         ended++;
         autoEnded = true;
@@ -161,7 +163,7 @@ export async function GET(request: NextRequest) {
           <td>${flag(c.oldA)} ${c.oldA} &rarr; ${flag(c.newA)} <strong>${c.newA}</strong></td>
           <td>${c.nameB}</td>
           <td>${flag(c.oldB)} ${c.oldB} &rarr; ${flag(c.newB)} <strong>${c.newB}</strong></td>
-          <td>${c.autoEnded ? "<strong style='color:red'>Auto-ended</strong>" : ""}</td>
+          <td>${c.autoEnded ? "<strong style='color:red'>Auto-ended</strong>" : c.newA === "declined" || c.newB === "declined" ? "<strong>One side declined, match kept. Check with them.</strong>" : ""}</td>
         </tr>`;
       }).join("");
 
